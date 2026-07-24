@@ -29,6 +29,16 @@
     }
   },
 
+  "mcp": {
+    "drizzle": {
+      "type": "local",
+      "command": ["npx", "drizzle-kit", "mcp"],
+      "env": {
+        "DATABASE_URL": "${DATABASE_URL}"
+      }
+    }
+  },
+
   "formatter": {
     "biome": {
       "command": ["bunx", "@biomejs/biome", "check", "--write"],
