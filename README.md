@@ -127,12 +127,12 @@ The `.ai/` directory enables AI-assisted development:
 | Phase | Status | Description |
 |-------|--------|-------------|
 | 1 | ✅ | Repository Bootstrap |
-| 2 | 🔄 | Knowledge Repository Standards |
+| 2 | ✅ | Knowledge Repository Standards |
 | 3 | ⏳ | AI Operating System |
 | 4 | ⏳ | Engineering Documentation |
 | 5 | ⏳ | Package Documentation |
-| 6 | ⏳ | Prompt Library |
-| 7 | ⏳ | Templates |
+| 6 | ✅ | Prompt Library |
+| 7 | ✅ | Templates |
 | 8 | ⏳ | Quality Gates & Validation |
 
 ---
