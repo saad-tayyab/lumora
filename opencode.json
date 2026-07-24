@@ -30,8 +30,10 @@
   },
 
   "formatter": {
-    "command": ["bunx", "@biomejs/biome", "check", "--write"],
-    "extensions": ["ts", "tsx", "js", "jsx", "svelte", "json", "jsonc"]
+    "biome": {
+      "command": ["bunx", "@biomejs/biome", "check", "--write"],
+      "extensions": ["ts", "tsx", "js", "jsx", "svelte", "json", "jsonc"]
+    }
   },
 
   "lsp": {
