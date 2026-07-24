@@ -146,7 +146,7 @@ The `.ai/` directory enables AI-assisted development:
 | Frontend | Svelte 5 + SvelteKit |
 | Backend | Encore.ts |
 | Database | Neon PostgreSQL |
-| ORM | Drizzle ORM v1 |
+| ORM | Drizzle ORM 1.0.0-rc.4 (beta) |
 | Auth | Better Auth |
 | UI | Tailwind CSS v4 + Bits UI + shadcn-svelte |
 | Storage | Cloudflare R2 |

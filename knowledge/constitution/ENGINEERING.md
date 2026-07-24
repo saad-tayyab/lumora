@@ -1,7 +1,7 @@
 # Engineering Constitution
 
 > **Status:** Active  
-> **Version:** 1.0.0  
+> **Version:** 1.1.0  
 > **Last Updated:** 2026-07-24  
 > **Owner:** Principal Software Architect + Staff Software Engineer  
 > **Review Cycle:** Quarterly
@@ -18,21 +18,22 @@ This constitution defines the **permanent engineering rules** for the Lumora ERP
 
 | Technology | Choice | Version | Rationale |
 |-----------|--------|---------|-----------|
-| Runtime | Bun | Latest | Fast, all-in-one, native TypeScript |
-| Monorepo | Turborepo | Latest | Incremental builds, task orchestration |
-| Frontend | Svelte 5 + SvelteKit | Latest | Reactivity without runtime overhead |
-| Backend | Encore.ts | Latest | Type-safe APIs, built-in infra |
-| Database | Neon PostgreSQL | Latest | Serverless Postgres, branching |
-| ORM | Drizzle ORM | v1 | Type-safe, SQL-like, lightweight |
-| Auth | Better Auth | Latest | Flexible, self-hosted |
-| UI | Tailwind CSS v4 + Bits UI + shadcn-svelte | Latest | Accessible, composable |
-| Storage | Cloudflare R2 | Latest | S3-compatible, no egress fees |
-| Email | Resend | Latest | Developer-friendly, reliable |
-| Payments | Stripe | Latest | Industry standard, API-first |
-| Testing | Vitest + Playwright | Latest | Fast unit tests, real E2E |
-| Linting/Formatting | Biome | Latest | Fast, unified linter + formatter |
+| Runtime | Bun | 1.3.14 | Fast, all-in-one, native TypeScript |
+| Monorepo | Turborepo | 2.10.6 | Incremental builds, task orchestration |
+| Frontend | Svelte 5 + SvelteKit | 5.56.7 / 2.70.1 | Reactivity without runtime overhead |
+| Backend | Encore.ts | 1.57.13 | Type-safe APIs, built-in infra |
+| Database | Neon PostgreSQL | 1.1.0 (serverless driver) | Serverless Postgres, branching |
+| ORM | Drizzle ORM | 1.0.0-rc.4 (beta) | Type-safe, SQL-like, lightweight |
+| Auth | Better Auth | 1.6.25 | Flexible, self-hosted |
+| UI | Tailwind CSS v4 + Bits UI + shadcn-svelte | 4.3.3 / 2.18.1 / 1.4.2 | Accessible, composable |
+| Storage | Cloudflare R2 | @aws-sdk/client-s3 3.1094.0 | S3-compatible, no egress fees |
+| Email | Resend | 6.18.0 | Developer-friendly, reliable |
+| Payments | Stripe | 22.3.2 | Industry standard, API-first |
+| Testing | Vitest + Playwright | 4.1.10 / 1.61.1 | Fast unit tests, real E2E |
+| Linting/Formatting | Biome | 2.5.5 | Fast, unified linter + formatter |
 | Containers | Docker | Latest | Reproducible environments |
 | CI/CD | GitHub Actions | Latest | Native GitHub integration |
+| Validation | Zod | 4.4.3 | Type-safe schema validation |
 
 ---
 

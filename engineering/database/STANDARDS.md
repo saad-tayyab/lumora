@@ -19,7 +19,7 @@ This document defines database engineering standards for the Lumora ERP system. 
 | Technology | Version | Purpose |
 |-----------|---------|---------|
 | Neon PostgreSQL | Latest | Database |
-| Drizzle ORM | v1 | ORM |
+| Drizzle ORM | 1.0.0-rc.4 | ORM |
 | Drizzle Kit | Latest | Migration tool |
 
 ---

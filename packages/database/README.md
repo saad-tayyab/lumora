@@ -2,7 +2,7 @@
 
 > **Status:** Active  
 > **Version:** 0.0.1  
-> **Stack:** Drizzle ORM + Neon PostgreSQL
+> **Stack:** Drizzle ORM 1.0.0-rc.4 + Neon PostgreSQL
 
 ---
 

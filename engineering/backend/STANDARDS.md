@@ -20,7 +20,7 @@ This document defines backend engineering standards for the Lumora ERP system. A
 |-----------|---------|---------|
 | Encore.ts | Latest | API framework |
 | Bun | Latest | Runtime |
-| Drizzle ORM | v1 | Database access |
+| Drizzle ORM | 1.0.0-rc.4 | Database access |
 | Neon PostgreSQL | Latest | Database |
 
 ---
