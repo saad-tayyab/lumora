@@ -1,0 +1,50 @@
+---
+title: Lumora ERP Knowledge Graph
+---
+graph TB
+    subgraph BC-FIN[Financial Management]
+        subgraph Concepts[Ontology Concepts - 624]
+            CON-FIN-001[Accounting Equation]
+            CON-FIN-002[Asset]
+            CON-FIN-003[Liability]
+            CON-FIN-004[Owner's Equity]
+            CON-FIN-005[Revenue]
+            CON-FIN-006[Expense]
+            CON-FIN-011[Journal Entry]
+            CON-FIN-013[General Ledger]
+            CON-FIN-056[Chart of Accounts]
+        end
+        
+        subgraph Rules[Business Rules - 595]
+            BR-001[Accounting Equation Must Balance]
+            BR-002[Rules of Debit and Credit]
+            BR-003[Double-Entry Bookkeeping]
+            BR-005[Revenue Recognition Principle]
+            BR-006[Matching Principle]
+            BR-071[Straight-Line Depreciation]
+        end
+        
+        subgraph Glossary[Glossary Terms - 614]
+            GLOS-account[Account]
+            GLOS-asset[Asset]
+            GLOS-liability[Liability]
+            GLOS-equity[Equity]
+            GLOS-revenue[Revenue]
+            GLOS-expense[Expense]
+        end
+    end
+    
+    CON-FIN-002 -->|defines| GLOS-asset
+    CON-FIN-003 -->|defines| GLOS-liability
+    CON-FIN-004 -->|defines| GLOS-equity
+    CON-FIN-005 -->|defines| GLOS-revenue
+    CON-FIN-006 -->|defines| GLOS-expense
+    
+    BR-001 -->|validates| CON-FIN-001
+    BR-002 -->|applies to| CON-FIN-009
+    BR-003 -->|implements| CON-FIN-092
+    
+    style BC-FIN fill:#e1f5fe
+    style Concepts fill:#f3e5f5
+    style Rules fill:#e8f5e8
+    style Glossary fill:#fff3e0

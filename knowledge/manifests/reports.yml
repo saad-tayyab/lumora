@@ -2,12 +2,19 @@
 manifest: reports
 version: 1.0.0
 last_updated: 2026-07-24
-total: 0
-by_context: {}
+total: 1
+by_context:
+  BC-FIN: 1
 by_type:
   financial: 0
   operational: 0
   analytical: 0
   regulatory: 0
-  management: 0
-reports: []
+  management: 1
+reports:
+  - id: RPT-001
+    name: Ingestion Report
+    context: BC-FIN
+    type: management
+    status: active
+    file: knowledge/reports/ingestion-report.md

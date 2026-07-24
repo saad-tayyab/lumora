@@ -1,0 +1,42 @@
+---
+manifest: duplicates
+version: 1.0.0
+last_updated: 2026-07-24
+
+# Duplicate Detection Results
+duplicate_concepts: []
+
+duplicate_rules:
+  - name: Accounting Equation Must Balance
+    files:
+      - BR-001.accounting-equation-must-balance.md
+      - BR-029.accounting-equation-must-balance.md
+  - name: Horizontal Analysis Formula
+    files:
+      - BR-047.horizontal-analysis-formula.md
+      - BR-323.horizontal-analysis-formula.md
+  - name: LCM Valuation Rule
+    files:
+      - BR-136.lcm-valuation-rule.md
+      - BR-580.lcm-valuation-rule.md
+  - name: Land Is Not Depreciated
+    files:
+      - BR-063.land-is-not-depreciated.md
+      - BR-200.land-is-not-depreciated.md
+  - name: Matching Principle
+    files:
+      - BR-006.matching-principle.md
+      - BR-030.matching-principle.md
+  - name: Working Capital Positive Indicator
+    files:
+      - BR-011.working-capital-positive-indicator.md
+      - BR-082.working-capital-positive-indicator.md
+
+duplicate_glossary: []
+
+summary:
+  duplicate_concepts: 0
+  duplicate_rules: 6
+  duplicate_glossary: 0
+  status: REVIEW_REQUIRED
+  recommendation: "6 duplicate rules detected with same names but different IDs. Review and consolidate."

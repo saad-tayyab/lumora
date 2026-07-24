@@ -2,8 +2,20 @@
 manifest: links
 version: 1.0.0
 last_updated: 2026-07-24
-total_edges: 531
-broken_links: 0
-broken:
-  []
----
+
+# Link Validation Results
+cross_references:
+  concept_ids:
+    total_validated: 624
+    broken: 0
+  rule_ids:
+    total_validated: 595
+    broken: 0
+  glossary_terms:
+    total_validated: 614
+    broken: 0
+
+summary:
+  total_cross_references: 1833
+  broken: 0
+  status: PASS

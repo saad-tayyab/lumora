@@ -4,7 +4,7 @@ version: 1.0.0
 last_updated: 2026-07-24
 total: 595
 by_context:
-  BC-FIN: 0
+  BC-FIN: 595
   BC-AR: 0
   BC-AP: 0
   BC-CASH: 0
@@ -15,14 +15,4179 @@ by_context:
 by_priority:
   critical: 0
   high: 0
-  medium: 0
+  medium: 595
   low: 0
 by_type:
-  invariant: 0
-  constraint: 0
-  validation: 0
-  business_process: 0
-  computational: 0
-  temporal: 0
+  invariant: 120
+  constraint: 137
+  validation: 27
+  business_process: 116
+  computational: 155
+  temporal: 14
   access_control: 0
-rules: []
+rules:
+  - id: BR-001
+    name: Accounting Equation Must Balance
+    context: BC-FIN
+    priority: medium
+    type: invariant
+    status: active
+    file: knowledge/rules/active/BR-001.accounting-equation-must-balance.md
+  - id: BR-002
+    name: Rules of Debit and Credit
+    context: BC-FIN
+    priority: medium
+    type: invariant
+    status: active
+    file: knowledge/rules/active/BR-002.rules-of-debit-and-credit.md
+  - id: BR-003
+    name: Double-Entry Bookkeeping
+    context: BC-FIN
+    priority: medium
+    type: invariant
+    status: active
+    file: knowledge/rules/active/BR-003.double-entry-bookkeeping.md
+  - id: BR-004
+    name: Trial Balance Equality
+    context: BC-FIN
+    priority: medium
+    type: invariant
+    status: active
+    file: knowledge/rules/active/BR-004.trial-balance-equality.md
+  - id: BR-005
+    name: Revenue Recognition Principle
+    context: BC-FIN
+    priority: medium
+    type: invariant
+    status: active
+    file: knowledge/rules/active/BR-005.revenue-recognition-principle.md
+  - id: BR-006
+    name: Matching Principle
+    context: BC-FIN
+    priority: medium
+    type: invariant
+    status: active
+    file: knowledge/rules/active/BR-006.matching-principle.md
+  - id: BR-007
+    name: Periodic Trial Balance Preparation
+    context: BC-FIN
+    priority: medium
+    type: process
+    status: active
+    file: knowledge/rules/active/BR-007.periodic-trial-balance-preparation.md
+  - id: BR-008
+    name: Closing Entries Zero Out Temporary Accounts
+    context: BC-FIN
+    priority: medium
+    type: process
+    status: active
+    file: knowledge/rules/active/BR-008.closing-entries-zero-out-temporary-accounts.md
+  - id: BR-009
+    name: Depreciation Methods Consistency
+    context: BC-FIN
+    priority: medium
+    type: constraint
+    status: active
+    file: knowledge/rules/active/BR-009.depreciation-methods-consistency.md
+  - id: BR-010
+    name: Bank Reconciliation Journal Entries Required
+    context: BC-FIN
+    priority: medium
+    type: process
+    status: active
+    file: knowledge/rules/active/BR-010.bank-reconciliation-journal-entries-required.md
+  - id: BR-011
+    name: Working Capital Positive Indicator
+    context: BC-FIN
+    priority: medium
+    type: constraint
+    status: active
+    file: knowledge/rules/active/BR-011.working-capital-positive-indicator.md
+  - id: BR-012
+    name: GAAP Requires Accrual Accounting
+    context: BC-FIN
+    priority: medium
+    type: invariant
+    status: active
+    file: knowledge/rules/active/BR-012.gaap-requires-accrual-accounting.md
+  - id: BR-013
+    name: Accrual Basis Better Matches Revenue and Expenses
+    context: BC-FIN
+    priority: medium
+    type: computational
+    status: active
+    file: knowledge/rules/active/BR-013.accrual-basis-better-matches-revenue-and-expenses.md
+  - id: BR-014
+    name: Liquidity Ratios Evaluate Short-Term Ability to Pay
+    context: BC-FIN
+    priority: medium
+    type: constraint
+    status: active
+    file: knowledge/rules/active/BR-014.liquidity-ratios-evaluate-short-term-ability-to-pay.md
+  - id: BR-015
+    name: Ratio Analysis Requires Comparison
+    context: BC-FIN
+    priority: medium
+    type: constraint
+    status: active
+    file: knowledge/rules/active/BR-015.ratio-analysis-requires-comparison.md
+  - id: BR-016
+    name: Fixed Asset Turnover Measures Efficiency
+    context: BC-FIN
+    priority: medium
+    type: computational
+    status: active
+    file: knowledge/rules/active/BR-016.fixed-asset-turnover-measures-efficiency.md
+  - id: BR-017
+    name: Consistency in Financial Reporting
+    context: BC-FIN
+    priority: medium
+    type: constraint
+    status: active
+    file: knowledge/rules/active/BR-017.consistency-in-financial-reporting.md
+  - id: BR-018
+    name: Full Disclosure Principle
+    context: BC-FIN
+    priority: medium
+    type: constraint
+    status: active
+    file: knowledge/rules/active/BR-018.full-disclosure-principle.md
+  - id: BR-019
+    name: Management Discussion and Analysis Required
+    context: BC-FIN
+    priority: medium
+    type: constraint
+    status: active
+    file: knowledge/rules/active/BR-019.management-discussion-and-analysis-required.md
+  - id: BR-020
+    name: Adjusting Entries Must Balance
+    context: BC-FIN
+    priority: medium
+    type: invariant
+    status: active
+    file: knowledge/rules/active/BR-020.adjusting-entries-must-balance.md
+  - id: BR-021
+    name: Four Types of Adjusting Entries
+    context: BC-FIN
+    priority: medium
+    type: constraint
+    status: active
+    file: knowledge/rules/active/BR-021.four-types-of-adjusting-entries.md
+  - id: BR-022
+    name: Worksheet Not a Financial Statement
+    context: BC-FIN
+    priority: medium
+    type: constraint
+    status: active
+    file: knowledge/rules/active/BR-022.worksheet-not-a-financial-statement.md
+  - id: BR-023
+    name: Post-Closing Trial Balance Contains Only Permanent Accounts
+    context: BC-FIN
+    priority: medium
+    type: validation
+    status: active
+    file: knowledge/rules/active/BR-023.post-closing-trial-balance-contains-only-permanent-accounts.md
+  - id: BR-024
+    name: Retained Earnings Updates Each Period
+    context: BC-FIN
+    priority: medium
+    type: computational
+    status: active
+    file: knowledge/rules/active/BR-024.retained-earnings-updates-each-period.md
+  - id: BR-025
+    name: Dividends Reduce Retained Earnings
+    context: BC-FIN
+    priority: medium
+    type: constraint
+    status: active
+    file: knowledge/rules/active/BR-025.dividends-reduce-retained-earnings.md
+  - id: BR-026
+    name: Financial Statement Preparation Order
+    context: BC-FIN
+    priority: medium
+    type: process
+    status: active
+    file: knowledge/rules/active/BR-026.financial-statement-preparation-order.md
+  - id: BR-027
+    name: Adjustments for Depreciation at Period End
+    context: BC-FIN
+    priority: medium
+    type: process
+    status: active
+    file: knowledge/rules/active/BR-027.adjustments-for-depreciation-at-period-end.md
+  - id: BR-028
+    name: Reversing Entries for Accruals
+    context: BC-FIN
+    priority: medium
+    type: process
+    status: active
+    file: knowledge/rules/active/BR-028.reversing-entries-for-accruals.md
+  - id: BR-029
+    name: Accounting Equation Must Balance
+    context: BC-FIN
+    priority: medium
+    type: invariant
+    status: active
+    file: knowledge/rules/active/BR-029.accounting-equation-must-balance.md
+  - id: BR-030
+    name: Matching Principle
+    context: BC-FIN
+    priority: medium
+    type: invariant
+    status: active
+    file: knowledge/rules/active/BR-030.matching-principle.md
+  - id: BR-031
+    name: Cost Principle
+    context: BC-FIN
+    priority: medium
+    type: invariant
+    status: active
+    file: knowledge/rules/active/BR-031.cost-principle.md
+  - id: BR-032
+    name: Business Entity Assumption
+    context: BC-FIN
+    priority: medium
+    type: invariant
+    status: active
+    file: knowledge/rules/active/BR-032.business-entity-assumption.md
+  - id: BR-033
+    name: Net Income Increases Owner's Equity
+    context: BC-FIN
+    priority: medium
+    type: invariant
+    status: active
+    file: knowledge/rules/active/BR-033.net-income-increases-owner-s-equity.md
+  - id: BR-034
+    name: Owner's Drawing Reduces Equity
+    context: BC-FIN
+    priority: medium
+    type: invariant
+    status: active
+    file: knowledge/rules/active/BR-034.owner-s-drawing-reduces-equity.md
+  - id: BR-035
+    name: Expense Ordering on Income Statement
+    context: BC-FIN
+    priority: medium
+    type: constraint
+    status: active
+    file: knowledge/rules/active/BR-035.expense-ordering-on-income-statement.md
+  - id: BR-036
+    name: Accounting Equation Balance Check
+    context: BC-FIN
+    priority: medium
+    type: invariant
+    status: active
+    file: knowledge/rules/active/BR-036.accounting-equation-balance-check.md
+  - id: BR-037
+    name: Business Entity Transaction Classification
+    context: BC-FIN
+    priority: medium
+    type: invariant
+    status: active
+    file: knowledge/rules/active/BR-037.business-entity-transaction-classification.md
+  - id: BR-038
+    name: Equity Changes from Transactions
+    context: BC-FIN
+    priority: medium
+    type: invariant
+    status: active
+    file: knowledge/rules/active/BR-038.equity-changes-from-transactions.md
+  - id: BR-039
+    name: Creditor Risk Increases with Higher Leverage
+    context: BC-FIN
+    priority: medium
+    type: computational
+    status: active
+    file: knowledge/rules/active/BR-039.creditor-risk-increases-with-higher-leverage.md
+  - id: BR-040
+    name: Credit Decreases Assets
+    context: BC-FIN
+    priority: medium
+    type: invariant
+    status: active
+    file: knowledge/rules/active/BR-040.credit-decreases-assets.md
+  - id: BR-041
+    name: Credit Increases Liabilities and Equity
+    context: BC-FIN
+    priority: medium
+    type: invariant
+    status: active
+    file: knowledge/rules/active/BR-041.credit-increases-liabilities-and-equity.md
+  - id: BR-042
+    name: Credit Increases Revenue
+    context: BC-FIN
+    priority: medium
+    type: invariant
+    status: active
+    file: knowledge/rules/active/BR-042.credit-increases-revenue.md
+  - id: BR-043
+    name: Debit Increases Drawing
+    context: BC-FIN
+    priority: medium
+    type: invariant
+    status: active
+    file: knowledge/rules/active/BR-043.debit-increases-drawing.md
+  - id: BR-044
+    name: Double-Entry Equality
+    context: BC-FIN
+    priority: medium
+    type: invariant
+    status: active
+    file: knowledge/rules/active/BR-044.double-entry-equality.md
+  - id: BR-045
+    name: Posting Preserves Journal Entry Reference
+    context: BC-FIN
+    priority: medium
+    type: process
+    status: active
+    file: knowledge/rules/active/BR-045.posting-preserves-journal-entry-reference.md
+  - id: BR-046
+    name: Errors Do Not Always Cause Trial Balance Imbalance
+    context: BC-FIN
+    priority: medium
+    type: constraint
+    status: active
+    file: knowledge/rules/active/BR-046.errors-do-not-always-cause-trial-balance-imbalance.md
+  - id: BR-047
+    name: Horizontal Analysis Formula
+    context: BC-FIN
+    priority: medium
+    type: computational
+    status: active
+    file: knowledge/rules/active/BR-047.horizontal-analysis-formula.md
+  - id: BR-048
+    name: Prepaid Expenses Are Assets Initially
+    context: BC-FIN
+    priority: medium
+    type: process
+    status: active
+    file: knowledge/rules/active/BR-048.prepaid-expenses-are-assets-initially.md
+  - id: BR-049
+    name: Unearned Revenue Is a Liability Initially
+    context: BC-FIN
+    priority: medium
+    type: process
+    status: active
+    file: knowledge/rules/active/BR-049.unearned-revenue-is-a-liability-initially.md
+  - id: BR-050
+    name: Normal Balance Convention
+    context: BC-FIN
+    priority: medium
+    type: constraint
+    status: active
+    file: knowledge/rules/active/BR-050.normal-balance-convention.md
+  - id: BR-051
+    name: Journal Before Ledger
+    context: BC-FIN
+    priority: medium
+    type: process
+    status: active
+    file: knowledge/rules/active/BR-051.journal-before-ledger.md
+  - id: BR-052
+    name: Balanced Trial Balance Does Not Guarantee Error-Free Records
+    context: BC-FIN
+    priority: medium
+    type: validation
+    status: active
+    file: knowledge/rules/active/BR-052.balanced-trial-balance-does-not-guarantee-error-free-records.md
+  - id: BR-053
+    name: Trial Balance Detects Mathematical Errors Only
+    context: BC-FIN
+    priority: medium
+    type: validation
+    status: active
+    file: knowledge/rules/active/BR-053.trial-balance-detects-mathematical-errors-only.md
+  - id: BR-054
+    name: Error Correction Requires Identifying Root Cause
+    context: BC-FIN
+    priority: medium
+    type: process
+    status: active
+    file: knowledge/rules/active/BR-054.error-correction-requires-identifying-root-cause.md
+  - id: BR-055
+    name: Cash Receipts Increase Cash Account
+    context: BC-FIN
+    priority: medium
+    type: invariant
+    status: active
+    file: knowledge/rules/active/BR-055.cash-receipts-increase-cash-account.md
+  - id: BR-056
+    name: Owner Withdrawals Reduce Owner Equity
+    context: BC-FIN
+    priority: medium
+    type: invariant
+    status: active
+    file: knowledge/rules/active/BR-056.owner-withdrawals-reduce-owner-equity.md
+  - id: BR-057
+    name: Owner Investments Increase Owner Equity
+    context: BC-FIN
+    priority: medium
+    type: invariant
+    status: active
+    file: knowledge/rules/active/BR-057.owner-investments-increase-owner-equity.md
+  - id: BR-058
+    name: Revenue Recognition on Earning
+    context: BC-FIN
+    priority: medium
+    type: temporal
+    status: active
+    file: knowledge/rules/active/BR-058.revenue-recognition-on-earning.md
+  - id: BR-059
+    name: Expense Recognition on Incurrence
+    context: BC-FIN
+    priority: medium
+    type: temporal
+    status: active
+    file: knowledge/rules/active/BR-059.expense-recognition-on-incurrence.md
+  - id: BR-060
+    name: Supplies Recorded as Asset When Purchased
+    context: BC-FIN
+    priority: medium
+    type: process
+    status: active
+    file: knowledge/rules/active/BR-060.supplies-recorded-as-asset-when-purchased.md
+  - id: BR-061
+    name: Prepaid Insurance Recorded as Asset
+    context: BC-FIN
+    priority: medium
+    type: process
+    status: active
+    file: knowledge/rules/active/BR-061.prepaid-insurance-recorded-as-asset.md
+  - id: BR-062
+    name: Depreciation Does Not Reduce the Asset Account Directly
+    context: BC-FIN
+    priority: medium
+    type: invariant
+    status: active
+    file: knowledge/rules/active/BR-062.depreciation-does-not-reduce-the-asset-account-directly.md
+  - id: BR-063
+    name: Land Is Not Depreciated
+    context: BC-FIN
+    priority: medium
+    type: invariant
+    status: active
+    file: knowledge/rules/active/BR-063.land-is-not-depreciated.md
+  - id: BR-064
+    name: Contra Account Balance Is Opposite to Related Account
+    context: BC-FIN
+    priority: medium
+    type: constraint
+    status: active
+    file: knowledge/rules/active/BR-064.contra-account-balance-is-opposite-to-related-account.md
+  - id: BR-065
+    name: Adjusting Entries Are Made at Period End Only
+    context: BC-FIN
+    priority: medium
+    type: temporal
+    status: active
+    file: knowledge/rules/active/BR-065.adjusting-entries-are-made-at-period-end-only.md
+  - id: BR-066
+    name: Adjusting Entries Never Involve Cash
+    context: BC-FIN
+    priority: medium
+    type: constraint
+    status: active
+    file: knowledge/rules/active/BR-066.adjusting-entries-never-involve-cash.md
+  - id: BR-067
+    name: Prepaid Expenses Must Be Adjusted
+    context: BC-FIN
+    priority: medium
+    type: process
+    status: active
+    file: knowledge/rules/active/BR-067.prepaid-expenses-must-be-adjusted.md
+  - id: BR-068
+    name: Unearned Revenue Must Be Adjusted
+    context: BC-FIN
+    priority: medium
+    type: process
+    status: active
+    file: knowledge/rules/active/BR-068.unearned-revenue-must-be-adjusted.md
+  - id: BR-069
+    name: Accrued Revenues Must Be Recorded
+    context: BC-FIN
+    priority: medium
+    type: process
+    status: active
+    file: knowledge/rules/active/BR-069.accrued-revenues-must-be-recorded.md
+  - id: BR-070
+    name: Adjusted Trial Balance Precedes Financial Statements
+    context: BC-FIN
+    priority: medium
+    type: process
+    status: active
+    file: knowledge/rules/active/BR-070.adjusted-trial-balance-precedes-financial-statements.md
+  - id: BR-071
+    name: Straight-Line Depreciation
+    context: BC-FIN
+    priority: medium
+    type: computational
+    status: active
+    file: knowledge/rules/active/BR-071.straight-line-depreciation.md
+  - id: BR-072
+    name: Accrual Matching Principle
+    context: BC-FIN
+    priority: medium
+    type: invariant
+    status: active
+    file: knowledge/rules/active/BR-072.accrual-matching-principle.md
+  - id: BR-073
+    name: Depreciation Allocation
+    context: BC-FIN
+    priority: medium
+    type: computational
+    status: active
+    file: knowledge/rules/active/BR-073.depreciation-allocation.md
+  - id: BR-074
+    name: Book Value Not Market Value
+    context: BC-FIN
+    priority: medium
+    type: constraint
+    status: active
+    file: knowledge/rules/active/BR-074.book-value-not-market-value.md
+  - id: BR-075
+    name: Unearned Revenue Recognition
+    context: BC-FIN
+    priority: medium
+    type: process
+    status: active
+    file: knowledge/rules/active/BR-075.unearned-revenue-recognition.md
+  - id: BR-076
+    name: Accrued Revenue Recording
+    context: BC-FIN
+    priority: medium
+    type: process
+    status: active
+    file: knowledge/rules/active/BR-076.accrued-revenue-recording.md
+  - id: BR-077
+    name: Property Tax Accrual
+    context: BC-FIN
+    priority: medium
+    type: computational
+    status: active
+    file: knowledge/rules/active/BR-077.property-tax-accrual.md
+  - id: BR-078
+    name: Closing Process
+    context: BC-FIN
+    priority: medium
+    type: process
+    status: active
+    file: knowledge/rules/active/BR-078.closing-process.md
+  - id: BR-079
+    name: Post-Closing Trial Balance Verification
+    context: BC-FIN
+    priority: medium
+    type: validation
+    status: active
+    file: knowledge/rules/active/BR-079.post-closing-trial-balance-verification.md
+  - id: BR-080
+    name: Capital Account Continuity
+    context: BC-FIN
+    priority: medium
+    type: temporal
+    status: active
+    file: knowledge/rules/active/BR-080.capital-account-continuity.md
+  - id: BR-081
+    name: Accrual Basis Requirement
+    context: BC-FIN
+    priority: medium
+    type: invariant
+    status: active
+    file: knowledge/rules/active/BR-081.accrual-basis-requirement.md
+  - id: BR-082
+    name: Working Capital Positive Indicator
+    context: BC-FIN
+    priority: medium
+    type: constraint
+    status: active
+    file: knowledge/rules/active/BR-082.working-capital-positive-indicator.md
+  - id: BR-083
+    name: Current Ratio Threshold
+    context: BC-FIN
+    priority: medium
+    type: constraint
+    status: active
+    file: knowledge/rules/active/BR-083.current-ratio-threshold.md
+  - id: BR-084
+    name: Balance Sheet Date Reporting
+    context: BC-FIN
+    priority: medium
+    type: constraint
+    status: active
+    file: knowledge/rules/active/BR-084.balance-sheet-date-reporting.md
+  - id: BR-085
+    name: Mortgage Payable Classification
+    context: BC-FIN
+    priority: medium
+    type: constraint
+    status: active
+    file: knowledge/rules/active/BR-085.mortgage-payable-classification.md
+  - id: BR-086
+    name: Accrual vs Cash Performance Difference
+    context: BC-FIN
+    priority: medium
+    type: constraint
+    status: active
+    file: knowledge/rules/active/BR-086.accrual-vs-cash-performance-difference.md
+  - id: BR-087
+    name: Closing Entries Sequence
+    context: BC-FIN
+    priority: medium
+    type: process
+    status: active
+    file: knowledge/rules/active/BR-087.closing-entries-sequence.md
+  - id: BR-088
+    name: Permanent vs. Temporary Accounts Distinction
+    context: BC-FIN
+    priority: medium
+    type: invariant
+    status: active
+    file: knowledge/rules/active/BR-088.permanent-vs-temporary-accounts-distinction.md
+  - id: BR-089
+    name: Post-Closing Trial Balance Equality
+    context: BC-FIN
+    priority: medium
+    type: validation
+    status: active
+    file: knowledge/rules/active/BR-089.post-closing-trial-balance-equality.md
+  - id: BR-090
+    name: Balance Sheet Account Classification
+    context: BC-FIN
+    priority: medium
+    type: invariant
+    status: active
+    file: knowledge/rules/active/BR-090.balance-sheet-account-classification.md
+  - id: BR-091
+    name: Accrual Over Cash Basis
+    context: BC-FIN
+    priority: medium
+    type: process
+    status: active
+    file: knowledge/rules/active/BR-091.accrual-over-cash-basis.md
+  - id: BR-092
+    name: Ethical Financial Reporting
+    context: BC-FIN
+    priority: medium
+    type: constraint
+    status: active
+    file: knowledge/rules/active/BR-092.ethical-financial-reporting.md
+  - id: BR-093
+    name: Adjusted Trial Balance Equality
+    context: BC-FIN
+    priority: medium
+    type: validation
+    status: active
+    file: knowledge/rules/active/BR-093.adjusted-trial-balance-equality.md
+  - id: BR-094
+    name: Spreadsheet Column Equality
+    context: BC-FIN
+    priority: medium
+    type: validation
+    status: active
+    file: knowledge/rules/active/BR-094.spreadsheet-column-equality.md
+  - id: BR-095
+    name: Working Capital Interpretation
+    context: BC-FIN
+    priority: medium
+    type: computational
+    status: active
+    file: knowledge/rules/active/BR-095.working-capital-interpretation.md
+  - id: BR-096
+    name: Current Ratio Comparison
+    context: BC-FIN
+    priority: medium
+    type: computational
+    status: active
+    file: knowledge/rules/active/BR-096.current-ratio-comparison.md
+  - id: BR-097
+    name: Cash Flows Classification
+    context: BC-FIN
+    priority: medium
+    type: process
+    status: active
+    file: knowledge/rules/active/BR-097.cash-flows-classification.md
+  - id: BR-098
+    name: Inventory Purchased Debits Inventory Account
+    context: BC-FIN
+    priority: medium
+    type: invariant
+    status: active
+    file: knowledge/rules/active/BR-098.inventory-purchased-debits-inventory-account.md
+  - id: BR-099
+    name: COGS Recorded at Each Sale
+    context: BC-FIN
+    priority: medium
+    type: invariant
+    status: active
+    file: knowledge/rules/active/BR-099.cogs-recorded-at-each-sale.md
+  - id: BR-100
+    name: Purchase Discount Reduces Inventory Cost
+    context: BC-FIN
+    priority: medium
+    type: invariant
+    status: active
+    file: knowledge/rules/active/BR-100.purchase-discount-reduces-inventory-cost.md
+  - id: BR-101
+    name: Purchase Returns and Allowances Reduce Inventory
+    context: BC-FIN
+    priority: medium
+    type: invariant
+    status: active
+    file: knowledge/rules/active/BR-101.purchase-returns-and-allowances-reduce-inventory.md
+  - id: BR-102
+    name: Debit Memorandum for Returns
+    context: BC-FIN
+    priority: medium
+    type: process
+    status: active
+    file: knowledge/rules/active/BR-102.debit-memorandum-for-returns.md
+  - id: BR-103
+    name: Taking Purchase Discounts is Advantageous
+    context: BC-FIN
+    priority: medium
+    type: computational
+    status: active
+    file: knowledge/rules/active/BR-103.taking-purchase-discounts-is-advantageous.md
+  - id: BR-104
+    name: Subsidiary Ledger Must Match Controlling Account
+    context: BC-FIN
+    priority: medium
+    type: validation
+    status: active
+    file: knowledge/rules/active/BR-104.subsidiary-ledger-must-match-controlling-account.md
+  - id: BR-105
+    name: Credit Card Sales Recorded as Cash
+    context: BC-FIN
+    priority: medium
+    type: process
+    status: active
+    file: knowledge/rules/active/BR-105.credit-card-sales-recorded-as-cash.md
+  - id: BR-106
+    name: Credit Card Fees are Period Expenses
+    context: BC-FIN
+    priority: medium
+    type: process
+    status: active
+    file: knowledge/rules/active/BR-106.credit-card-fees-are-period-expenses.md
+  - id: BR-107
+    name: Operating Cycle Differs by Industry
+    context: BC-FIN
+    priority: medium
+    type: constraint
+    status: active
+    file: knowledge/rules/active/BR-107.operating-cycle-differs-by-industry.md
+  - id: BR-108
+    name: B2B vs B2C Transactions
+    context: BC-FIN
+    priority: medium
+    type: constraint
+    status: active
+    file: knowledge/rules/active/BR-108.b2b-vs-b2c-transactions.md
+  - id: BR-109
+    name: Estimate Customer Returns at Period End
+    context: BC-FIN
+    priority: medium
+    type: invariant
+    status: active
+    file: knowledge/rules/active/BR-109.estimate-customer-returns-at-period-end.md
+  - id: BR-110
+    name: FOB Shipping Point - Buyer Pays Freight
+    context: BC-FIN
+    priority: medium
+    type: invariant
+    status: active
+    file: knowledge/rules/active/BR-110.fob-shipping-point-buyer-pays-freight.md
+  - id: BR-111
+    name: FOB Destination - Seller Pays Freight
+    context: BC-FIN
+    priority: medium
+    type: invariant
+    status: active
+    file: knowledge/rules/active/BR-111.fob-destination-seller-pays-freight.md
+  - id: BR-112
+    name: Inventory Shrinkage Adjustment
+    context: BC-FIN
+    priority: medium
+    type: process
+    status: active
+    file: knowledge/rules/active/BR-112.inventory-shrinkage-adjustment.md
+  - id: BR-113
+    name: Gross Profit Computation
+    context: BC-FIN
+    priority: medium
+    type: computational
+    status: active
+    file: knowledge/rules/active/BR-113.gross-profit-computation.md
+  - id: BR-114
+    name: Multiple-Step Income Statement Classification
+    context: BC-FIN
+    priority: medium
+    type: invariant
+    status: active
+    file: knowledge/rules/active/BR-114.multiple-step-income-statement-classification.md
+  - id: BR-115
+    name: Closing Entries for Retail Business
+    context: BC-FIN
+    priority: medium
+    type: process
+    status: active
+    file: knowledge/rules/active/BR-115.closing-entries-for-retail-business.md
+  - id: BR-116
+    name: Sales Discounts GAAP Requirement
+    context: BC-FIN
+    priority: medium
+    type: constraint
+    status: active
+    file: knowledge/rules/active/BR-116.sales-discounts-gaap-requirement.md
+  - id: BR-117
+    name: Net Method Preferred Under GAAP
+    context: BC-FIN
+    priority: medium
+    type: process
+    status: active
+    file: knowledge/rules/active/BR-117.net-method-preferred-under-gaap.md
+  - id: BR-118
+    name: Asset Turnover Ratio Interpretation
+    context: BC-FIN
+    priority: medium
+    type: computational
+    status: active
+    file: knowledge/rules/active/BR-118.asset-turnover-ratio-interpretation.md
+  - id: BR-119
+    name: Trade Discounts Not Recorded
+    context: BC-FIN
+    priority: medium
+    type: invariant
+    status: active
+    file: knowledge/rules/active/BR-119.trade-discounts-not-recorded.md
+  - id: BR-120
+    name: Sales Taxes Collected as Liability
+    context: BC-FIN
+    priority: medium
+    type: invariant
+    status: active
+    file: knowledge/rules/active/BR-120.sales-taxes-collected-as-liability.md
+  - id: BR-121
+    name: Freight In Recording Rule
+    context: BC-FIN
+    priority: medium
+    type: invariant
+    status: active
+    file: knowledge/rules/active/BR-121.freight-in-recording-rule.md
+  - id: BR-122
+    name: Periodic Inventory Cost of Goods Sold Computation
+    context: BC-FIN
+    priority: medium
+    type: computational
+    status: active
+    file: knowledge/rules/active/BR-122.periodic-inventory-cost-of-goods-sold-computation.md
+  - id: BR-123
+    name: Inventory Shrinkage Detection - Perpetual vs Periodic
+    context: BC-FIN
+    priority: medium
+    type: constraint
+    status: active
+    file: knowledge/rules/active/BR-123.inventory-shrinkage-detection-perpetual-vs-periodic.md
+  - id: BR-124
+    name: Purchases Account Debit Rule
+    context: BC-FIN
+    priority: medium
+    type: invariant
+    status: active
+    file: knowledge/rules/active/BR-124.purchases-account-debit-rule.md
+  - id: BR-125
+    name: Contra-Purchases Account Credit Rule
+    context: BC-FIN
+    priority: medium
+    type: invariant
+    status: active
+    file: knowledge/rules/active/BR-125.contra-purchases-account-credit-rule.md
+  - id: BR-126
+    name: Perpetual Inventory Purchase Recording
+    context: BC-FIN
+    priority: medium
+    type: invariant
+    status: active
+    file: knowledge/rules/active/BR-126.perpetual-inventory-purchase-recording.md
+  - id: BR-127
+    name: Perpetual Inventory Sale Recording
+    context: BC-FIN
+    priority: medium
+    type: process
+    status: active
+    file: knowledge/rules/active/BR-127.perpetual-inventory-sale-recording.md
+  - id: BR-128
+    name: Credit Card Sale Recording
+    context: BC-FIN
+    priority: medium
+    type: process
+    status: active
+    file: knowledge/rules/active/BR-128.credit-card-sale-recording.md
+  - id: BR-129
+    name: Sales Discount - Gross Method
+    context: BC-FIN
+    priority: medium
+    type: process
+    status: active
+    file: knowledge/rules/active/BR-129.sales-discount-gross-method.md
+  - id: BR-130
+    name: Sales Discount - Net Method
+    context: BC-FIN
+    priority: medium
+    type: process
+    status: active
+    file: knowledge/rules/active/BR-130.sales-discount-net-method.md
+  - id: BR-131
+    name: Customer Refund Adjustment
+    context: BC-FIN
+    priority: medium
+    type: process
+    status: active
+    file: knowledge/rules/active/BR-131.customer-refund-adjustment.md
+  - id: BR-132
+    name: Sales Tax Collection Liability
+    context: BC-FIN
+    priority: medium
+    type: invariant
+    status: active
+    file: knowledge/rules/active/BR-132.sales-tax-collection-liability.md
+  - id: BR-133
+    name: Asset Turnover Ratio Computation
+    context: BC-FIN
+    priority: medium
+    type: computational
+    status: active
+    file: knowledge/rules/active/BR-133.asset-turnover-ratio-computation.md
+  - id: BR-134
+    name: FIFO Cost Flow Rule
+    context: BC-FIN
+    priority: medium
+    type: computational
+    status: active
+    file: knowledge/rules/active/BR-134.fifo-cost-flow-rule.md
+  - id: BR-135
+    name: Weighted Average Cost Computation
+    context: BC-FIN
+    priority: medium
+    type: computational
+    status: active
+    file: knowledge/rules/active/BR-135.weighted-average-cost-computation.md
+  - id: BR-136
+    name: LCM Valuation Rule
+    context: BC-FIN
+    priority: medium
+    type: constraint
+    status: active
+    file: knowledge/rules/active/BR-136.lcm-valuation-rule.md
+  - id: BR-137
+    name: LCM Application Methods
+    context: BC-FIN
+    priority: medium
+    type: constraint
+    status: active
+    file: knowledge/rules/active/BR-137.lcm-application-methods.md
+  - id: BR-138
+    name: Inventory Physical Count Requirement
+    context: BC-FIN
+    priority: medium
+    type: invariant
+    status: active
+    file: knowledge/rules/active/BR-138.inventory-physical-count-requirement.md
+  - id: BR-139
+    name: Inventory Costing Method Consistency
+    context: BC-FIN
+    priority: medium
+    type: constraint
+    status: active
+    file: knowledge/rules/active/BR-139.inventory-costing-method-consistency.md
+  - id: BR-140
+    name: LIFO Reserve Disclosure
+    context: BC-FIN
+    priority: medium
+    type: invariant
+    status: active
+    file: knowledge/rules/active/BR-140.lifo-reserve-disclosure.md
+  - id: BR-141
+    name: Inventory Turnover Analysis
+    context: BC-FIN
+    priority: medium
+    type: computational
+    status: active
+    file: knowledge/rules/active/BR-141.inventory-turnover-analysis.md
+  - id: BR-142
+    name: Three-Way Match for Inventory Control
+    context: BC-FIN
+    priority: medium
+    type: validation
+    status: active
+    file: knowledge/rules/active/BR-142.three-way-match-for-inventory-control.md
+  - id: BR-143
+    name: Inventory Security Controls
+    context: BC-FIN
+    priority: medium
+    type: access
+    status: active
+    file: knowledge/rules/active/BR-143.inventory-security-controls.md
+  - id: BR-144
+    name: Inventory Error Self-Correction Rule
+    context: BC-FIN
+    priority: medium
+    type: temporal
+    status: active
+    file: knowledge/rules/active/BR-144.inventory-error-self-correction-rule.md
+  - id: BR-145
+    name: Inventory Error Effects Rule
+    context: BC-FIN
+    priority: medium
+    type: computational
+    status: active
+    file: knowledge/rules/active/BR-145.inventory-error-effects-rule.md
+  - id: BR-146
+    name: Inventory Turnover Interpretation Rule
+    context: BC-FIN
+    priority: medium
+    type: computational
+    status: active
+    file: knowledge/rules/active/BR-146.inventory-turnover-interpretation-rule.md
+  - id: BR-147
+    name: Consigned Inventory Ownership Rule
+    context: BC-FIN
+    priority: medium
+    type: invariant
+    status: active
+    file: knowledge/rules/active/BR-147.consigned-inventory-ownership-rule.md
+  - id: BR-148
+    name: Three Methods Yield Different Results Rule
+    context: BC-FIN
+    priority: medium
+    type: computational
+    status: active
+    file: knowledge/rules/active/BR-148.three-methods-yield-different-results-rule.md
+  - id: BR-149
+    name: Inventory Balance Sheet Presentation Rule
+    context: BC-FIN
+    priority: medium
+    type: constraint
+    status: active
+    file: knowledge/rules/active/BR-149.inventory-balance-sheet-presentation-rule.md
+  - id: BR-150
+    name: Perpetual System Still Requires Physical Count
+    context: BC-FIN
+    priority: medium
+    type: validation
+    status: active
+    file: knowledge/rules/active/BR-150.perpetual-system-still-requires-physical-count.md
+  - id: BR-151
+    name: Separation of Duties Rule
+    context: BC-FIN
+    priority: medium
+    type: invariant
+    status: active
+    file: knowledge/rules/active/BR-151.separation-of-duties-rule.md
+  - id: BR-152
+    name: Separate Related Operations Rule
+    context: BC-FIN
+    priority: medium
+    type: invariant
+    status: active
+    file: knowledge/rules/active/BR-152.separate-related-operations-rule.md
+  - id: BR-153
+    name: Competent Personnel and Mandatory Vacations Rule
+    context: BC-FIN
+    priority: medium
+    type: access
+    status: active
+    file: knowledge/rules/active/BR-153.competent-personnel-and-mandatory-vacations-rule.md
+  - id: BR-154
+    name: Prenumbered Documents Rule
+    context: BC-FIN
+    priority: medium
+    type: validation
+    status: active
+    file: knowledge/rules/active/BR-154.prenumbered-documents-rule.md
+  - id: BR-155
+    name: Internal Control Limitations Rule
+    context: BC-FIN
+    priority: medium
+    type: constraint
+    status: active
+    file: knowledge/rules/active/BR-155.internal-control-limitations-rule.md
+  - id: BR-156
+    name: Cash Register Daily Count Rule
+    context: BC-FIN
+    priority: medium
+    type: validation
+    status: active
+    file: knowledge/rules/active/BR-156.cash-register-daily-count-rule.md
+  - id: BR-157
+    name: Bank Deposit Verification Rule
+    context: BC-FIN
+    priority: medium
+    type: validation
+    status: active
+    file: knowledge/rules/active/BR-157.bank-deposit-verification-rule.md
+  - id: BR-158
+    name: Separate Cashier and Accounting Rule
+    context: BC-FIN
+    priority: medium
+    type: invariant
+    status: active
+    file: knowledge/rules/active/BR-158.separate-cashier-and-accounting-rule.md
+  - id: BR-159
+    name: Remittance Advice Control Rule
+    context: BC-FIN
+    priority: medium
+    type: validation
+    status: active
+    file: knowledge/rules/active/BR-159.remittance-advice-control-rule.md
+  - id: BR-160
+    name: Voucher System Documentation Rule
+    context: BC-FIN
+    priority: medium
+    type: validation
+    status: active
+    file: knowledge/rules/active/BR-160.voucher-system-documentation-rule.md
+  - id: BR-161
+    name: Cash Receipts Safeguard Rule
+    context: BC-FIN
+    priority: medium
+    type: access
+    status: active
+    file: knowledge/rules/active/BR-161.cash-receipts-safeguard-rule.md
+  - id: BR-162
+    name: Bank Reconciliation Independent Preparation Rule
+    context: BC-FIN
+    priority: medium
+    type: access
+    status: active
+    file: knowledge/rules/active/BR-162.bank-reconciliation-independent-preparation-rule.md
+  - id: BR-163
+    name: Warning Signs of Control Problems Rule
+    context: BC-FIN
+    priority: medium
+    type: validation
+    status: active
+    file: knowledge/rules/active/BR-163.warning-signs-of-control-problems-rule.md
+  - id: BR-164
+    name: Cash Payments Authorization Rule
+    context: BC-FIN
+    priority: medium
+    type: constraint
+    status: active
+    file: knowledge/rules/active/BR-164.cash-payments-authorization-rule.md
+  - id: BR-165
+    name: FOB Shipping Point Sale Recording Rule
+    context: BC-FIN
+    priority: medium
+    type: process
+    status: active
+    file: knowledge/rules/active/BR-165.fob-shipping-point-sale-recording-rule.md
+  - id: BR-166
+    name: Bank Reconciliation Equality Rule
+    context: BC-FIN
+    priority: medium
+    type: invariant
+    status: active
+    file: knowledge/rules/active/BR-166.bank-reconciliation-equality-rule.md
+  - id: BR-167
+    name: Bank Reconciliation Journal Entry Rule
+    context: BC-FIN
+    priority: medium
+    type: process
+    status: active
+    file: knowledge/rules/active/BR-167.bank-reconciliation-journal-entry-rule.md
+  - id: BR-168
+    name: Bank Error Correction Rule
+    context: BC-FIN
+    priority: medium
+    type: process
+    status: active
+    file: knowledge/rules/active/BR-168.bank-error-correction-rule.md
+  - id: BR-169
+    name: Company Error Correction Rule
+    context: BC-FIN
+    priority: medium
+    type: process
+    status: active
+    file: knowledge/rules/active/BR-169.company-error-correction-rule.md
+  - id: BR-170
+    name: Petty Cash Fund Establishment Rule
+    context: BC-FIN
+    priority: medium
+    type: process
+    status: active
+    file: knowledge/rules/active/BR-170.petty-cash-fund-establishment-rule.md
+  - id: BR-171
+    name: Petty Cash Replenishment Rule
+    context: BC-FIN
+    priority: medium
+    type: process
+    status: active
+    file: knowledge/rules/active/BR-171.petty-cash-replenishment-rule.md
+  - id: BR-172
+    name: Petty Cash Short and Over Rule
+    context: BC-FIN
+    priority: medium
+    type: computational
+    status: active
+    file: knowledge/rules/active/BR-172.petty-cash-short-and-over-rule.md
+  - id: BR-173
+    name: Cash Equivalents Maturity Rule
+    context: BC-FIN
+    priority: medium
+    type: constraint
+    status: active
+    file: knowledge/rules/active/BR-173.cash-equivalents-maturity-rule.md
+  - id: BR-174
+    name: Compensating Balance Disclosure Rule
+    context: BC-FIN
+    priority: medium
+    type: constraint
+    status: active
+    file: knowledge/rules/active/BR-174.compensating-balance-disclosure-rule.md
+  - id: BR-175
+    name: Days' Cash on Hand Adequacy Rule
+    context: BC-FIN
+    priority: medium
+    type: computational
+    status: active
+    file: knowledge/rules/active/BR-175.days-cash-on-hand-adequacy-rule.md
+  - id: BR-176
+    name: Cash Balance Sheet Presentation Rule
+    context: BC-FIN
+    priority: medium
+    type: constraint
+    status: active
+    file: knowledge/rules/active/BR-176.cash-balance-sheet-presentation-rule.md
+  - id: BR-177
+    name: Petty Cash Fund Limitations Rule
+    context: BC-FIN
+    priority: medium
+    type: access
+    status: active
+    file: knowledge/rules/active/BR-177.petty-cash-fund-limitations-rule.md
+  - id: BR-178
+    name: Days' Cash on Hand Nonprofit Use Rule
+    context: BC-FIN
+    priority: medium
+    type: computational
+    status: active
+    file: knowledge/rules/active/BR-178.days-cash-on-hand-nonprofit-use-rule.md
+  - id: BR-179
+    name: Petty Cash Replenishment
+    context: BC-FIN
+    priority: medium
+    type: invariant
+    status: active
+    file: knowledge/rules/active/BR-179.petty-cash-replenishment.md
+  - id: BR-180
+    name: Daily Cash Deposit
+    context: BC-FIN
+    priority: medium
+    type: constraint
+    status: active
+    file: knowledge/rules/active/BR-180.daily-cash-deposit.md
+  - id: BR-181
+    name: Separation of Cash Duties
+    context: BC-FIN
+    priority: medium
+    type: constraint
+    status: active
+    file: knowledge/rules/active/BR-181.separation-of-cash-duties.md
+  - id: BR-182
+    name: Write-Off Against Allowance
+    context: BC-FIN
+    priority: medium
+    type: invariant
+    status: active
+    file: knowledge/rules/active/BR-182.write-off-against-allowance.md
+  - id: BR-183
+    name: Recovery Requires Two Entries
+    context: BC-FIN
+    priority: medium
+    type: process
+    status: active
+    file: knowledge/rules/active/BR-183.recovery-requires-two-entries.md
+  - id: BR-184
+    name: Percent of Sales Independent of Allowance Balance
+    context: BC-FIN
+    priority: medium
+    type: computational
+    status: active
+    file: knowledge/rules/active/BR-184.percent-of-sales-independent-of-allowance-balance.md
+  - id: BR-185
+    name: Aging Method Targets Ending Allowance Balance
+    context: BC-FIN
+    priority: medium
+    type: computational
+    status: active
+    file: knowledge/rules/active/BR-185.aging-method-targets-ending-allowance-balance.md
+  - id: BR-186
+    name: Postdated Checks Not Permitted in Petty Cash
+    context: BC-FIN
+    priority: medium
+    type: constraint
+    status: active
+    file: knowledge/rules/active/BR-186.postdated-checks-not-permitted-in-petty-cash.md
+  - id: BR-187
+    name: Aging Days Calculation
+    context: BC-FIN
+    priority: medium
+    type: computational
+    status: active
+    file: knowledge/rules/active/BR-187.aging-days-calculation.md
+  - id: BR-188
+    name: Aging Method Adjusting Entry with Credit Allowance Balance
+    context: BC-FIN
+    priority: medium
+    type: computational
+    status: active
+    file: knowledge/rules/active/BR-188.aging-method-adjusting-entry-with-credit-allowance-balance.md
+  - id: BR-189
+    name: Recovery Entry Sequence
+    context: BC-FIN
+    priority: medium
+    type: process
+    status: active
+    file: knowledge/rules/active/BR-189.recovery-entry-sequence.md
+  - id: BR-190
+    name: Direct Write-Off Recovery Entries
+    context: BC-FIN
+    priority: medium
+    type: process
+    status: active
+    file: knowledge/rules/active/BR-190.direct-write-off-recovery-entries.md
+  - id: BR-191
+    name: AR Turnover Favorable Trend
+    context: BC-FIN
+    priority: medium
+    type: constraint
+    status: active
+    file: knowledge/rules/active/BR-191.ar-turnover-favorable-trend.md
+  - id: BR-192
+    name: Direct Write-Off Does Not Match Revenue
+    context: BC-FIN
+    priority: medium
+    type: constraint
+    status: active
+    file: knowledge/rules/active/BR-192.direct-write-off-does-not-match-revenue.md
+  - id: BR-193
+    name: Asset Classification Three-Step Test
+    context: BC-FIN
+    priority: medium
+    type: process
+    status: active
+    file: knowledge/rules/active/BR-193.asset-classification-three-step-test.md
+  - id: BR-194
+    name: Capitalize Only Necessary Costs
+    context: BC-FIN
+    priority: medium
+    type: constraint
+    status: active
+    file: knowledge/rules/active/BR-194.capitalize-only-necessary-costs.md
+  - id: BR-195
+    name: Standby Equipment Classification
+    context: BC-FIN
+    priority: medium
+    type: constraint
+    status: active
+    file: knowledge/rules/active/BR-195.standby-equipment-classification.md
+  - id: BR-196
+    name: Abandoned Assets Not Classified as Fixed
+    context: BC-FIN
+    priority: medium
+    type: constraint
+    status: active
+    file: knowledge/rules/active/BR-196.abandoned-assets-not-classified-as-fixed.md
+  - id: BR-197
+    name: Construction in Progress Reclassification
+    context: BC-FIN
+    priority: medium
+    type: process
+    status: active
+    file: knowledge/rules/active/BR-197.construction-in-progress-reclassification.md
+  - id: BR-198
+    name: Goods Held for Sale Are Not Fixed Assets
+    context: BC-FIN
+    priority: medium
+    type: constraint
+    status: active
+    file: knowledge/rules/active/BR-198.goods-held-for-sale-are-not-fixed-assets.md
+  - id: BR-199
+    name: Lease Advantage — No Upfront Capital
+    context: BC-FIN
+    priority: medium
+    type: process
+    status: active
+    file: knowledge/rules/active/BR-199.lease-advantage-no-upfront-capital.md
+  - id: BR-200
+    name: Land Is Not Depreciated
+    context: BC-FIN
+    priority: medium
+    type: invariant
+    status: active
+    file: knowledge/rules/active/BR-200.land-is-not-depreciated.md
+  - id: BR-201
+    name: Depreciation Does Not Measure Market Value Decline
+    context: BC-FIN
+    priority: medium
+    type: invariant
+    status: active
+    file: knowledge/rules/active/BR-201.depreciation-does-not-measure-market-value-decline.md
+  - id: BR-202
+    name: Depreciation Does Not Provide Cash for Replacement
+    context: BC-FIN
+    priority: medium
+    type: invariant
+    status: active
+    file: knowledge/rules/active/BR-202.depreciation-does-not-provide-cash-for-replacement.md
+  - id: BR-203
+    name: Cannot Depreciate Below Residual Value
+    context: BC-FIN
+    priority: medium
+    type: invariant
+    status: active
+    file: knowledge/rules/active/BR-203.cannot-depreciate-below-residual-value.md
+  - id: BR-204
+    name: Partial-Year Depreciation Proration
+    context: BC-FIN
+    priority: medium
+    type: process
+    status: active
+    file: knowledge/rules/active/BR-204.partial-year-depreciation-proration.md
+  - id: BR-205
+    name: Revision of Depreciation Estimates Is Prospective
+    context: BC-FIN
+    priority: medium
+    type: process
+    status: active
+    file: knowledge/rules/active/BR-205.revision-of-depreciation-estimates-is-prospective.md
+  - id: BR-206
+    name: Ordinary Repairs Are Revenue Expenditures
+    context: BC-FIN
+    priority: medium
+    type: constraint
+    status: active
+    file: knowledge/rules/active/BR-206.ordinary-repairs-are-revenue-expenditures.md
+  - id: BR-207
+    name: Extraordinary Repairs Reduce Accumulated Depreciation
+    context: BC-FIN
+    priority: medium
+    type: constraint
+    status: active
+    file: knowledge/rules/active/BR-207.extraordinary-repairs-reduce-accumulated-depreciation.md
+  - id: BR-208
+    name: Asset Improvements Increase Asset Account
+    context: BC-FIN
+    priority: medium
+    type: constraint
+    status: active
+    file: knowledge/rules/active/BR-208.asset-improvements-increase-asset-account.md
+  - id: BR-209
+    name: Fully Depreciated Assets Remain in Ledger
+    context: BC-FIN
+    priority: medium
+    type: constraint
+    status: active
+    file: knowledge/rules/active/BR-209.fully-depreciated-assets-remain-in-ledger.md
+  - id: BR-210
+    name: Depletion Is Computed Using Units-of-Activity Method
+    context: BC-FIN
+    priority: medium
+    type: computational
+    status: active
+    file: knowledge/rules/active/BR-210.depletion-is-computed-using-units-of-activity-method.md
+  - id: BR-211
+    name: Goodwill Is Not Amortized
+    context: BC-FIN
+    priority: medium
+    type: invariant
+    status: active
+    file: knowledge/rules/active/BR-211.goodwill-is-not-amortized.md
+  - id: BR-212
+    name: Trademarks Are Not Amortized
+    context: BC-FIN
+    priority: medium
+    type: invariant
+    status: active
+    file: knowledge/rules/active/BR-212.trademarks-are-not-amortized.md
+  - id: BR-213
+    name: Patent and Copyright Amortization
+    context: BC-FIN
+    priority: medium
+    type: process
+    status: active
+    file: knowledge/rules/active/BR-213.patent-and-copyright-amortization.md
+  - id: BR-214
+    name: Depreciation Methods Can Differ by Asset Class
+    context: BC-FIN
+    priority: medium
+    type: constraint
+    status: active
+    file: knowledge/rules/active/BR-214.depreciation-methods-can-differ-by-asset-class.md
+  - id: BR-215
+    name: Losses on Disposal Reported in Other Revenue and Expense
+    context: BC-FIN
+    priority: medium
+    type: constraint
+    status: active
+    file: knowledge/rules/active/BR-215.losses-on-disposal-reported-in-other-revenue-and-expense.md
+  - id: BR-216
+    name: Update Depreciation Before Disposal
+    context: BC-FIN
+    priority: medium
+    type: process
+    status: active
+    file: knowledge/rules/active/BR-216.update-depreciation-before-disposal.md
+  - id: BR-217
+    name: Gain Recognized When Exchange Has Commercial Substance
+    context: BC-FIN
+    priority: medium
+    type: invariant
+    status: active
+    file: knowledge/rules/active/BR-217.gain-recognized-when-exchange-has-commercial-substance.md
+  - id: BR-218
+    name: Loss Recognized Regardless of Commercial Substance
+    context: BC-FIN
+    priority: medium
+    type: invariant
+    status: active
+    file: knowledge/rules/active/BR-218.loss-recognized-regardless-of-commercial-substance.md
+  - id: BR-219
+    name: No Gain Recognized Without Commercial Substance
+    context: BC-FIN
+    priority: medium
+    type: constraint
+    status: active
+    file: knowledge/rules/active/BR-219.no-gain-recognized-without-commercial-substance.md
+  - id: BR-220
+    name: Gain Can Be Computed Two Ways
+    context: BC-FIN
+    priority: medium
+    type: computational
+    status: active
+    file: knowledge/rules/active/BR-220.gain-can-be-computed-two-ways.md
+  - id: BR-221
+    name: Remove Old Asset and Record New Asset
+    context: BC-FIN
+    priority: medium
+    type: process
+    status: active
+    file: knowledge/rules/active/BR-221.remove-old-asset-and-record-new-asset.md
+  - id: BR-222
+    name: Interest-Bearing Note Interest Computation
+    context: BC-FIN
+    priority: medium
+    type: computational
+    status: active
+    file: knowledge/rules/active/BR-222.interest-bearing-note-interest-computation.md
+  - id: BR-223
+    name: Discounted Note Proceeds Computation
+    context: BC-FIN
+    priority: medium
+    type: computational
+    status: active
+    file: knowledge/rules/active/BR-223.discounted-note-proceeds-computation.md
+  - id: BR-224
+    name: Installment Note Payment Allocation
+    context: BC-FIN
+    priority: medium
+    type: computational
+    status: active
+    file: knowledge/rules/active/BR-224.installment-note-payment-allocation.md
+  - id: BR-225
+    name: Employer Must Match FICA Tax
+    context: BC-FIN
+    priority: medium
+    type: invariant
+    status: active
+    file: knowledge/rules/active/BR-225.employer-must-match-fica-tax.md
+  - id: BR-226
+    name: Employer Pays FUTA and SUTA
+    context: BC-FIN
+    priority: medium
+    type: invariant
+    status: active
+    file: knowledge/rules/active/BR-226.employer-pays-futa-and-suta.md
+  - id: BR-227
+    name: Gross Pay Less Deductions Equals Net Pay
+    context: BC-FIN
+    priority: medium
+    type: computational
+    status: active
+    file: knowledge/rules/active/BR-227.gross-pay-less-deductions-equals-net-pay.md
+  - id: BR-228
+    name: Vacation Pay Is Accrued as Earned
+    context: BC-FIN
+    priority: medium
+    type: process
+    status: active
+    file: knowledge/rules/active/BR-228.vacation-pay-is-accrued-as-earned.md
+  - id: BR-229
+    name: Current Portion of Long-Term Debt Is Current Liability
+    context: BC-FIN
+    priority: medium
+    type: constraint
+    status: active
+    file: knowledge/rules/active/BR-229.current-portion-of-long-term-debt-is-current-liability.md
+  - id: BR-230
+    name: Interest Expense Reported Separately
+    context: BC-FIN
+    priority: medium
+    type: constraint
+    status: active
+    file: knowledge/rules/active/BR-230.interest-expense-reported-separately.md
+  - id: BR-231
+    name: Discounted Note Interest May Use Discount Account
+    context: BC-FIN
+    priority: medium
+    type: constraint
+    status: active
+    file: knowledge/rules/active/BR-231.discounted-note-interest-may-use-discount-account.md
+  - id: BR-232
+    name: Separation of Duties in Payroll
+    context: BC-FIN
+    priority: medium
+    type: access
+    status: active
+    file: knowledge/rules/active/BR-232.separation-of-duties-in-payroll.md
+  - id: BR-233
+    name: Contingent Liability Recognition
+    context: BC-FIN
+    priority: medium
+    type: invariant
+    status: active
+    file: knowledge/rules/active/BR-233.contingent-liability-recognition.md
+  - id: BR-234
+    name: Interest-Bearing Note Accounting
+    context: BC-FIN
+    priority: medium
+    type: computational
+    status: active
+    file: knowledge/rules/active/BR-234.interest-bearing-note-accounting.md
+  - id: BR-235
+    name: Discounted Note Proceeds
+    context: BC-FIN
+    priority: medium
+    type: computational
+    status: active
+    file: knowledge/rules/active/BR-235.discounted-note-proceeds.md
+  - id: BR-236
+    name: Employee Withholding Requirements
+    context: BC-FIN
+    priority: medium
+    type: constraint
+    status: active
+    file: knowledge/rules/active/BR-236.employee-withholding-requirements.md
+  - id: BR-237
+    name: Employer Payroll Tax Obligation
+    context: BC-FIN
+    priority: medium
+    type: constraint
+    status: active
+    file: knowledge/rules/active/BR-237.employer-payroll-tax-obligation.md
+  - id: BR-238
+    name: Vacation Pay Accrual
+    context: BC-FIN
+    priority: medium
+    type: temporal
+    status: active
+    file: knowledge/rules/active/BR-238.vacation-pay-accrual.md
+  - id: BR-239
+    name: Pension Expense Recognition
+    context: BC-FIN
+    priority: medium
+    type: temporal
+    status: active
+    file: knowledge/rules/active/BR-239.pension-expense-recognition.md
+  - id: BR-240
+    name: Warranty Expense Matching
+    context: BC-FIN
+    priority: medium
+    type: temporal
+    status: active
+    file: knowledge/rules/active/BR-240.warranty-expense-matching.md
+  - id: BR-241
+    name: Overtime Premium Rate
+    context: BC-FIN
+    priority: medium
+    type: constraint
+    status: active
+    file: knowledge/rules/active/BR-241.overtime-premium-rate.md
+  - id: BR-242
+    name: Payroll Check Sequential Numbering
+    context: BC-FIN
+    priority: medium
+    type: constraint
+    status: active
+    file: knowledge/rules/active/BR-242.payroll-check-sequential-numbering.md
+  - id: BR-243
+    name: Employer FICA Matching
+    context: BC-FIN
+    priority: medium
+    type: invariant
+    status: active
+    file: knowledge/rules/active/BR-243.employer-fica-matching.md
+  - id: BR-244
+    name: Unemployment Tax Wage Base
+    context: BC-FIN
+    priority: medium
+    type: constraint
+    status: active
+    file: knowledge/rules/active/BR-244.unemployment-tax-wage-base.md
+  - id: BR-245
+    name: Internal Control Over Payroll
+    context: BC-FIN
+    priority: medium
+    type: access
+    status: active
+    file: knowledge/rules/active/BR-245.internal-control-over-payroll.md
+  - id: BR-246
+    name: Warranty vs. Recall Distinction
+    context: BC-FIN
+    priority: medium
+    type: invariant
+    status: active
+    file: knowledge/rules/active/BR-246.warranty-vs-recall-distinction.md
+  - id: BR-247
+    name: Present Value Bond Pricing
+    context: BC-FIN
+    priority: medium
+    type: computational
+    status: active
+    file: knowledge/rules/active/BR-247.present-value-bond-pricing.md
+  - id: BR-248
+    name: Contract Rate vs. Market Rate
+    context: BC-FIN
+    priority: medium
+    type: computational
+    status: active
+    file: knowledge/rules/active/BR-248.contract-rate-vs-market-rate.md
+  - id: BR-249
+    name: Bond Discount
+    context: BC-FIN
+    priority: medium
+    type: invariant
+    status: active
+    file: knowledge/rules/active/BR-249.bond-discount.md
+  - id: BR-250
+    name: Times Interest Earned Analysis
+    context: BC-FIN
+    priority: medium
+    type: constraint
+    status: active
+    file: knowledge/rules/active/BR-250.times-interest-earned-analysis.md
+  - id: BR-251
+    name: Straight-Line Amortization Equal Allocation
+    context: BC-FIN
+    priority: medium
+    type: computational
+    status: active
+    file: knowledge/rules/active/BR-251.straight-line-amortization-equal-allocation.md
+  - id: BR-252
+    name: Effective Interest Rate Method Requirement
+    context: BC-FIN
+    priority: medium
+    type: constraint
+    status: active
+    file: knowledge/rules/active/BR-252.effective-interest-rate-method-requirement.md
+  - id: BR-253
+    name: Premium Amortization Decreases Interest Expense
+    context: BC-FIN
+    priority: medium
+    type: computational
+    status: active
+    file: knowledge/rules/active/BR-253.premium-amortization-decreases-interest-expense.md
+  - id: BR-254
+    name: Carrying Amount Converges to Face Amount
+    context: BC-FIN
+    priority: medium
+    type: temporal
+    status: active
+    file: knowledge/rules/active/BR-254.carrying-amount-converges-to-face-amount.md
+  - id: BR-255
+    name: Bond Redemption Gain/Loss Computation
+    context: BC-FIN
+    priority: medium
+    type: computational
+    status: active
+    file: knowledge/rules/active/BR-255.bond-redemption-gain-loss-computation.md
+  - id: BR-256
+    name: Bond Face Amount Repayment at Maturity
+    context: BC-FIN
+    priority: medium
+    type: invariant
+    status: active
+    file: knowledge/rules/active/BR-256.bond-face-amount-repayment-at-maturity.md
+  - id: BR-257
+    name: Bond Interest Payment Frequency
+    context: BC-FIN
+    priority: medium
+    type: temporal
+    status: active
+    file: knowledge/rules/active/BR-257.bond-interest-payment-frequency.md
+  - id: BR-258
+    name: Balance Sheet Presentation of Bonds
+    context: BC-FIN
+    priority: medium
+    type: process
+    status: active
+    file: knowledge/rules/active/BR-258.balance-sheet-presentation-of-bonds.md
+  - id: BR-259
+    name: Present Value Factor Selection
+    context: BC-FIN
+    priority: medium
+    type: computational
+    status: active
+    file: knowledge/rules/active/BR-259.present-value-factor-selection.md
+  - id: BR-260
+    name: Effective Interest Method Discount Amortization
+    context: BC-FIN
+    priority: medium
+    type: computational
+    status: active
+    file: knowledge/rules/active/BR-260.effective-interest-method-discount-amortization.md
+  - id: BR-261
+    name: Bonds Issued at Discount When Contract Rate < Market Rate
+    context: BC-FIN
+    priority: medium
+    type: computational
+    status: active
+    file: knowledge/rules/active/BR-261.bonds-issued-at-discount-when-contract-rate-market-rate.md
+  - id: BR-262
+    name: Bond Discount Amortization Increases Interest Expense
+    context: BC-FIN
+    priority: medium
+    type: computational
+    status: active
+    file: knowledge/rules/active/BR-262.bond-discount-amortization-increases-interest-expense.md
+  - id: BR-263
+    name: Carrying Amount Approaches Face Value at Maturity
+    context: BC-FIN
+    priority: medium
+    type: temporal
+    status: active
+    file: knowledge/rules/active/BR-263.carrying-amount-approaches-face-value-at-maturity.md
+  - id: BR-264
+    name: Bond Redemption Gain or Loss Recognition
+    context: BC-FIN
+    priority: medium
+    type: computational
+    status: active
+    file: knowledge/rules/active/BR-264.bond-redemption-gain-or-loss-recognition.md
+  - id: BR-265
+    name: Times Interest Earned Indicates Solvency
+    context: BC-FIN
+    priority: medium
+    type: constraint
+    status: active
+    file: knowledge/rules/active/BR-265.times-interest-earned-indicates-solvency.md
+  - id: BR-266
+    name: Bond Interest Paid Semiannually
+    context: BC-FIN
+    priority: medium
+    type: process
+    status: active
+    file: knowledge/rules/active/BR-266.bond-interest-paid-semiannually.md
+  - id: BR-267
+    name: Convertible Bonds Require Allocation Between Debt and Equity
+    context: BC-FIN
+    priority: medium
+    type: constraint
+    status: active
+    file: knowledge/rules/active/BR-267.convertible-bonds-require-allocation-between-debt-and-equity.md
+  - id: BR-268
+    name: Noncash Assets Recorded at Market Value
+    context: BC-FIN
+    priority: medium
+    type: invariant
+    status: active
+    file: knowledge/rules/active/BR-268.noncash-assets-recorded-at-market-value.md
+  - id: BR-269
+    name: Liabilities Assumed Reduce Capital Credit
+    context: BC-FIN
+    priority: medium
+    type: computational
+    status: active
+    file: knowledge/rules/active/BR-269.liabilities-assumed-reduce-capital-credit.md
+  - id: BR-270
+    name: Income Divided Equally Without Agreement
+    context: BC-FIN
+    priority: medium
+    type: constraint
+    status: active
+    file: knowledge/rules/active/BR-270.income-divided-equally-without-agreement.md
+  - id: BR-271
+    name: Salary Allowances Are Not Expenses
+    context: BC-FIN
+    priority: medium
+    type: invariant
+    status: active
+    file: knowledge/rules/active/BR-271.salary-allowances-are-not-expenses.md
+  - id: BR-272
+    name: Income Division Formula Application
+    context: BC-FIN
+    priority: medium
+    type: process
+    status: active
+    file: knowledge/rules/active/BR-272.income-division-formula-application.md
+  - id: BR-273
+    name: Allowances May Exceed Net Income
+    context: BC-FIN
+    priority: medium
+    type: constraint
+    status: active
+    file: knowledge/rules/active/BR-273.allowances-may-exceed-net-income.md
+  - id: BR-274
+    name: Partner Withdrawals Close to Capital
+    context: BC-FIN
+    priority: medium
+    type: process
+    status: active
+    file: knowledge/rules/active/BR-274.partner-withdrawals-close-to-capital.md
+  - id: BR-275
+    name: Revenues and Expenses Close to Capital
+    context: BC-FIN
+    priority: medium
+    type: process
+    status: active
+    file: knowledge/rules/active/BR-275.revenues-and-expenses-close-to-capital.md
+  - id: BR-276
+    name: New Partner Purchase Price Goes to Selling Partner
+    context: BC-FIN
+    priority: medium
+    type: constraint
+    status: active
+    file: knowledge/rules/active/BR-276.new-partner-purchase-price-goes-to-selling-partner.md
+  - id: BR-277
+    name: Partner Bonus Method for Admission
+    context: BC-FIN
+    priority: medium
+    type: computational
+    status: active
+    file: knowledge/rules/active/BR-277.partner-bonus-method-for-admission.md
+  - id: BR-278
+    name: LLC Uses Member Equity Instead of Capital
+    context: BC-FIN
+    priority: medium
+    type: constraint
+    status: active
+    file: knowledge/rules/active/BR-278.llc-uses-member-equity-instead-of-capital.md
+  - id: BR-279
+    name: Cash Distributed Based on Capital Balances
+    context: BC-FIN
+    priority: medium
+    type: invariant
+    status: active
+    file: knowledge/rules/active/BR-279.cash-distributed-based-on-capital-balances.md
+  - id: BR-280
+    name: Liabilities Paid Before Partners
+    context: BC-FIN
+    priority: medium
+    type: constraint
+    status: active
+    file: knowledge/rules/active/BR-280.liabilities-paid-before-partners.md
+  - id: BR-281
+    name: Gain or Loss Allocated by Income-Sharing Ratio
+    context: BC-FIN
+    priority: medium
+    type: computational
+    status: active
+    file: knowledge/rules/active/BR-281.gain-or-loss-allocated-by-income-sharing-ratio.md
+  - id: BR-282
+    name: Capital Deficiency Partner Must Pay Partnership
+    context: BC-FIN
+    priority: medium
+    type: constraint
+    status: active
+    file: knowledge/rules/active/BR-282.capital-deficiency-partner-must-pay-partnership.md
+  - id: BR-283
+    name: Deficiency Allocated to Other Partners If Unpaid
+    context: BC-FIN
+    priority: medium
+    type: process
+    status: active
+    file: knowledge/rules/active/BR-283.deficiency-allocated-to-other-partners-if-unpaid.md
+  - id: BR-284
+    name: Four-Step Liquidation Process
+    context: BC-FIN
+    priority: medium
+    type: process
+    status: active
+    file: knowledge/rules/active/BR-284.four-step-liquidation-process.md
+  - id: BR-285
+    name: Income-Sharing Ratio Not Used for Cash Distribution
+    context: BC-FIN
+    priority: medium
+    type: constraint
+    status: active
+    file: knowledge/rules/active/BR-285.income-sharing-ratio-not-used-for-cash-distribution.md
+  - id: BR-286
+    name: LLC Liquidation Uses Member Equity Titles
+    context: BC-FIN
+    priority: medium
+    type: constraint
+    status: active
+    file: knowledge/rules/active/BR-286.llc-liquidation-uses-member-equity-titles.md
+  - id: BR-287
+    name: Revenue Per Employee Measures Efficiency
+    context: BC-FIN
+    priority: medium
+    type: computational
+    status: active
+    file: knowledge/rules/active/BR-287.revenue-per-employee-measures-efficiency.md
+  - id: BR-288
+    name: Cash Dividend Declaration Creates Liability
+    context: BC-FIN
+    priority: medium
+    type: invariant
+    status: active
+    file: knowledge/rules/active/BR-288.cash-dividend-declaration-creates-liability.md
+  - id: BR-289
+    name: Stock Dividend Capitalizes Retained Earnings at Market Value
+    context: BC-FIN
+    priority: medium
+    type: computational
+    status: active
+    file: knowledge/rules/active/BR-289.stock-dividend-capitalizes-retained-earnings-at-market-value.md
+  - id: BR-290
+    name: Stock Split Requires No Journal Entry
+    context: BC-FIN
+    priority: medium
+    type: invariant
+    status: active
+    file: knowledge/rules/active/BR-290.stock-split-requires-no-journal-entry.md
+  - id: BR-291
+    name: Dividends Not Paid on Treasury Stock
+    context: BC-FIN
+    priority: medium
+    type: constraint
+    status: active
+    file: knowledge/rules/active/BR-291.dividends-not-paid-on-treasury-stock.md
+  - id: BR-292
+    name: Preferred Stock Dividend Preference
+    context: BC-FIN
+    priority: medium
+    type: constraint
+    status: active
+    file: knowledge/rules/active/BR-292.preferred-stock-dividend-preference.md
+  - id: BR-293
+    name: Cumulative Preferred Dividends in Arrears
+    context: BC-FIN
+    priority: medium
+    type: temporal
+    status: active
+    file: knowledge/rules/active/BR-293.cumulative-preferred-dividends-in-arrears.md
+  - id: BR-294
+    name: Stock Issued for Non-Cash Consideration
+    context: BC-FIN
+    priority: medium
+    type: validation
+    status: active
+    file: knowledge/rules/active/BR-294.stock-issued-for-non-cash-consideration.md
+  - id: BR-295
+    name: No Par Stock with Stated Value
+    context: BC-FIN
+    priority: medium
+    type: validation
+    status: active
+    file: knowledge/rules/active/BR-295.no-par-stock-with-stated-value.md
+  - id: BR-296
+    name: Treasury Stock Recorded at Cost
+    context: BC-FIN
+    priority: medium
+    type: invariant
+    status: active
+    file: knowledge/rules/active/BR-296.treasury-stock-recorded-at-cost.md
+  - id: BR-297
+    name: Treasury Stock Resale Loss Limited to Paid-In Capital
+    context: BC-FIN
+    priority: medium
+    type: constraint
+    status: active
+    file: knowledge/rules/active/BR-297.treasury-stock-resale-loss-limited-to-paid-in-capital.md
+  - id: BR-298
+    name: Retained Earnings Restrictions Disclosure
+    context: BC-FIN
+    priority: medium
+    type: access
+    status: active
+    file: knowledge/rules/active/BR-298.retained-earnings-restrictions-disclosure.md
+  - id: BR-299
+    name: Prior Period Adjustment Reported Net of Tax
+    context: BC-FIN
+    priority: medium
+    type: validation
+    status: active
+    file: knowledge/rules/active/BR-299.prior-period-adjustment-reported-net-of-tax.md
+  - id: BR-300
+    name: EPS Formula
+    context: BC-FIN
+    priority: medium
+    type: computational
+    status: active
+    file: knowledge/rules/active/BR-300.eps-formula.md
+  - id: BR-301
+    name: Treasury Stock Purchase Increases EPS
+    context: BC-FIN
+    priority: medium
+    type: computational
+    status: active
+    file: knowledge/rules/active/BR-301.treasury-stock-purchase-increases-eps.md
+  - id: BR-302
+    name: Stockholders' Equity Reporting Methods
+    context: BC-FIN
+    priority: medium
+    type: validation
+    status: active
+    file: knowledge/rules/active/BR-302.stockholders-equity-reporting-methods.md
+  - id: BR-303
+    name: Cash Flows Classified into Three Activities
+    context: BC-FIN
+    priority: medium
+    type: invariant
+    status: active
+    file: knowledge/rules/active/BR-303.cash-flows-classified-into-three-activities.md
+  - id: BR-304
+    name: Ending Cash Must Match Balance Sheet
+    context: BC-FIN
+    priority: medium
+    type: invariant
+    status: active
+    file: knowledge/rules/active/BR-304.ending-cash-must-match-balance-sheet.md
+  - id: BR-305
+    name: Indirect Method Adjusts Net Income to Cash Basis
+    context: BC-FIN
+    priority: medium
+    type: computational
+    status: active
+    file: knowledge/rules/active/BR-305.indirect-method-adjusts-net-income-to-cash-basis.md
+  - id: BR-306
+    name: Increase in Current Liability Increases Operating Cash Flow
+    context: BC-FIN
+    priority: medium
+    type: computational
+    status: active
+    file: knowledge/rules/active/BR-306.increase-in-current-liability-increases-operating-cash-flow.md
+  - id: BR-307
+    name: Preferred Dividends Deducted for EPS
+    context: BC-FIN
+    priority: medium
+    type: computational
+    status: active
+    file: knowledge/rules/active/BR-307.preferred-dividends-deducted-for-eps.md
+  - id: BR-308
+    name: Direct and Indirect Methods Produce Same Result
+    context: BC-FIN
+    priority: medium
+    type: invariant
+    status: active
+    file: knowledge/rules/active/BR-308.direct-and-indirect-methods-produce-same-result.md
+  - id: BR-309
+    name: Statement of Cash Flows Order
+    context: BC-FIN
+    priority: medium
+    type: invariant
+    status: active
+    file: knowledge/rules/active/BR-309.statement-of-cash-flows-order.md
+  - id: BR-310
+    name: Depreciation Add-Back
+    context: BC-FIN
+    priority: medium
+    type: computational
+    status: active
+    file: knowledge/rules/active/BR-310.depreciation-add-back.md
+  - id: BR-311
+    name: Gain/Loss on Sale Adjustment
+    context: BC-FIN
+    priority: medium
+    type: computational
+    status: active
+    file: knowledge/rules/active/BR-311.gain-loss-on-sale-adjustment.md
+  - id: BR-312
+    name: Changes in Current Operating Assets and Liabilities
+    context: BC-FIN
+    priority: medium
+    type: computational
+    status: active
+    file: knowledge/rules/active/BR-312.changes-in-current-operating-assets-and-liabilities.md
+  - id: BR-313
+    name: No Cash Flow per Share
+    context: BC-FIN
+    priority: medium
+    type: constraint
+    status: active
+    file: knowledge/rules/active/BR-313.no-cash-flow-per-share.md
+  - id: BR-314
+    name: Free Cash Flow Computation
+    context: BC-FIN
+    priority: medium
+    type: computational
+    status: active
+    file: knowledge/rules/active/BR-314.free-cash-flow-computation.md
+  - id: BR-315
+    name: Ending Cash Reconciliation
+    context: BC-FIN
+    priority: medium
+    type: invariant
+    status: active
+    file: knowledge/rules/active/BR-315.ending-cash-reconciliation.md
+  - id: BR-316
+    name: Spreadsheet Totals Must Equal
+    context: BC-FIN
+    priority: medium
+    type: invariant
+    status: active
+    file: knowledge/rules/active/BR-316.spreadsheet-totals-must-equal.md
+  - id: BR-317
+    name: Direct Method Cash Flow Components
+    context: BC-FIN
+    priority: medium
+    type: invariant
+    status: active
+    file: knowledge/rules/active/BR-317.direct-method-cash-flow-components.md
+  - id: BR-318
+    name: Direct Method Requires Reconciliation
+    context: BC-FIN
+    priority: medium
+    type: invariant
+    status: active
+    file: knowledge/rules/active/BR-318.direct-method-requires-reconciliation.md
+  - id: BR-319
+    name: Investing and Financing Sections Identical
+    context: BC-FIN
+    priority: medium
+    type: invariant
+    status: active
+    file: knowledge/rules/active/BR-319.investing-and-financing-sections-identical.md
+  - id: BR-320
+    name: Depreciation Not in Direct Method
+    context: BC-FIN
+    priority: medium
+    type: constraint
+    status: active
+    file: knowledge/rules/active/BR-320.depreciation-not-in-direct-method.md
+  - id: BR-321
+    name: Cash Received from Customers Formula
+    context: BC-FIN
+    priority: medium
+    type: computational
+    status: active
+    file: knowledge/rules/active/BR-321.cash-received-from-customers-formula.md
+  - id: BR-322
+    name: Cash Paid for Operating Expenses Formula
+    context: BC-FIN
+    priority: medium
+    type: computational
+    status: active
+    file: knowledge/rules/active/BR-322.cash-paid-for-operating-expenses-formula.md
+  - id: BR-323
+    name: Horizontal Analysis Formula
+    context: BC-FIN
+    priority: medium
+    type: computational
+    status: active
+    file: knowledge/rules/active/BR-323.horizontal-analysis-formula.md
+  - id: BR-324
+    name: Vertical Analysis Balance Sheet
+    context: BC-FIN
+    priority: medium
+    type: computational
+    status: active
+    file: knowledge/rules/active/BR-324.vertical-analysis-balance-sheet.md
+  - id: BR-325
+    name: Vertical Analysis Income Statement
+    context: BC-FIN
+    priority: medium
+    type: computational
+    status: active
+    file: knowledge/rules/active/BR-325.vertical-analysis-income-statement.md
+  - id: BR-326
+    name: Working Capital Formula
+    context: BC-FIN
+    priority: medium
+    type: computational
+    status: active
+    file: knowledge/rules/active/BR-326.working-capital-formula.md
+  - id: BR-327
+    name: Current Ratio Formula
+    context: BC-FIN
+    priority: medium
+    type: computational
+    status: active
+    file: knowledge/rules/active/BR-327.current-ratio-formula.md
+  - id: BR-328
+    name: Quick Ratio Formula
+    context: BC-FIN
+    priority: medium
+    type: computational
+    status: active
+    file: knowledge/rules/active/BR-328.quick-ratio-formula.md
+  - id: BR-329
+    name: Small Percentage Large Dollar Effect
+    context: BC-FIN
+    priority: medium
+    type: constraint
+    status: active
+    file: knowledge/rules/active/BR-329.small-percentage-large-dollar-effect.md
+  - id: BR-330
+    name: Common-Sized Comparison
+    context: BC-FIN
+    priority: medium
+    type: process
+    status: active
+    file: knowledge/rules/active/BR-330.common-sized-comparison.md
+  - id: BR-331
+    name: Working Capital Limitation
+    context: BC-FIN
+    priority: medium
+    type: constraint
+    status: active
+    file: knowledge/rules/active/BR-331.working-capital-limitation.md
+  - id: BR-332
+    name: Quick Assets Exclusion
+    context: BC-FIN
+    priority: medium
+    type: invariant
+    status: active
+    file: knowledge/rules/active/BR-332.quick-assets-exclusion.md
+  - id: BR-333
+    name: Long-Term Investments Exclusion from Asset Turnover
+    context: BC-FIN
+    priority: medium
+    type: invariant
+    status: active
+    file: knowledge/rules/active/BR-333.long-term-investments-exclusion-from-asset-turnover.md
+  - id: BR-334
+    name: Interest Expense Add-Back for Return on Assets
+    context: BC-FIN
+    priority: medium
+    type: computational
+    status: active
+    file: knowledge/rules/active/BR-334.interest-expense-add-back-for-return-on-assets.md
+  - id: BR-335
+    name: Preferred Dividends Deduction
+    context: BC-FIN
+    priority: medium
+    type: computational
+    status: active
+    file: knowledge/rules/active/BR-335.preferred-dividends-deduction.md
+  - id: BR-336
+    name: Days' Sales Comparison to Credit Terms
+    context: BC-FIN
+    priority: medium
+    type: validation
+    status: active
+    file: knowledge/rules/active/BR-336.days-sales-comparison-to-credit-terms.md
+  - id: BR-337
+    name: Inventory Turnover Industry Variation
+    context: BC-FIN
+    priority: medium
+    type: constraint
+    status: active
+    file: knowledge/rules/active/BR-337.inventory-turnover-industry-variation.md
+  - id: BR-338
+    name: Average Accounts Receivable for Seasonal Companies
+    context: BC-FIN
+    priority: medium
+    type: process
+    status: active
+    file: knowledge/rules/active/BR-338.average-accounts-receivable-for-seasonal-companies.md
+  - id: BR-339
+    name: Comparative Statement Base Year Selection
+    context: BC-FIN
+    priority: medium
+    type: process
+    status: active
+    file: knowledge/rules/active/BR-339.comparative-statement-base-year-selection.md
+  - id: BR-340
+    name: Vertical Analysis Base Amount
+    context: BC-FIN
+    priority: medium
+    type: process
+    status: active
+    file: knowledge/rules/active/BR-340.vertical-analysis-base-amount.md
+  - id: BR-341
+    name: Effect of Transactions on Current Position
+    context: BC-FIN
+    priority: medium
+    type: process
+    status: active
+    file: knowledge/rules/active/BR-341.effect-of-transactions-on-current-position.md
+  - id: BR-342
+    name: Debt vs Equity Financing Trade-off
+    context: BC-FIN
+    priority: medium
+    type: constraint
+    status: active
+    file: knowledge/rules/active/BR-342.debt-vs-equity-financing-trade-off.md
+  - id: BR-343
+    name: Internal Control Disclosure Requirement
+    context: BC-FIN
+    priority: medium
+    type: access
+    status: active
+    file: knowledge/rules/active/BR-343.internal-control-disclosure-requirement.md
+  - id: BR-344
+    name: Bond Indenture Ratio Compliance
+    context: BC-FIN
+    priority: medium
+    type: constraint
+    status: active
+    file: knowledge/rules/active/BR-344.bond-indenture-ratio-compliance.md
+  - id: BR-345
+    name: Industry-Specific Profitability Measures
+    context: BC-FIN
+    priority: medium
+    type: constraint
+    status: active
+    file: knowledge/rules/active/BR-345.industry-specific-profitability-measures.md
+  - id: BR-346
+    name: Non-GAAP Reporting Requirements
+    context: BC-FIN
+    priority: medium
+    type: constraint
+    status: active
+    file: knowledge/rules/active/BR-346.non-gaap-reporting-requirements.md
+  - id: BR-347
+    name: Direct vs Indirect Cost Classification
+    context: BC-FIN
+    priority: medium
+    type: constraint
+    status: active
+    file: knowledge/rules/active/BR-347.direct-vs-indirect-cost-classification.md
+  - id: BR-348
+    name: Product Costs Flow Through Inventory
+    context: BC-FIN
+    priority: medium
+    type: process
+    status: active
+    file: knowledge/rules/active/BR-348.product-costs-flow-through-inventory.md
+  - id: BR-349
+    name: Period Costs Expensed Immediately
+    context: BC-FIN
+    priority: medium
+    type: process
+    status: active
+    file: knowledge/rules/active/BR-349.period-costs-expensed-immediately.md
+  - id: BR-350
+    name: Indirect Costs Become Manufacturing Overhead
+    context: BC-FIN
+    priority: medium
+    type: process
+    status: active
+    file: knowledge/rules/active/BR-350.indirect-costs-become-manufacturing-overhead.md
+  - id: BR-351
+    name: Managerial Accounting Not Bound by GAAP
+    context: BC-FIN
+    priority: medium
+    type: constraint
+    status: active
+    file: knowledge/rules/active/BR-351.managerial-accounting-not-bound-by-gaap.md
+  - id: BR-352
+    name: Sustainability Reporting Trend
+    context: BC-FIN
+    priority: medium
+    type: process
+    status: active
+    file: knowledge/rules/active/BR-352.sustainability-reporting-trend.md
+  - id: BR-353
+    name: Manufacturing Costs Three-Step Calculation
+    context: BC-FIN
+    priority: medium
+    type: process
+    status: active
+    file: knowledge/rules/active/BR-353.manufacturing-costs-three-step-calculation.md
+  - id: BR-354
+    name: Product Cost vs Period Cost Classification
+    context: BC-FIN
+    priority: medium
+    type: invariant
+    status: active
+    file: knowledge/rules/active/BR-354.product-cost-vs-period-cost-classification.md
+  - id: BR-355
+    name: Direct vs Indirect Cost Tracing
+    context: BC-FIN
+    priority: medium
+    type: constraint
+    status: active
+    file: knowledge/rules/active/BR-355.direct-vs-indirect-cost-tracing.md
+  - id: BR-356
+    name: Manufacturing Costs Flow
+    context: BC-FIN
+    priority: medium
+    type: process
+    status: active
+    file: knowledge/rules/active/BR-356.manufacturing-costs-flow.md
+  - id: BR-357
+    name: Manufacturing Overhead Components
+    context: BC-FIN
+    priority: medium
+    type: invariant
+    status: active
+    file: knowledge/rules/active/BR-357.manufacturing-overhead-components.md
+  - id: BR-358
+    name: Prime Cost and Conversion Cost Formulas
+    context: BC-FIN
+    priority: medium
+    type: computational
+    status: active
+    file: knowledge/rules/active/BR-358.prime-cost-and-conversion-cost-formulas.md
+  - id: BR-359
+    name: Cost of Goods Manufactured Calculation
+    context: BC-FIN
+    priority: medium
+    type: computational
+    status: active
+    file: knowledge/rules/active/BR-359.cost-of-goods-manufactured-calculation.md
+  - id: BR-360
+    name: Manufacturing Income Statement COGS Section
+    context: BC-FIN
+    priority: medium
+    type: computational
+    status: active
+    file: knowledge/rules/active/BR-360.manufacturing-income-statement-cogs-section.md
+  - id: BR-361
+    name: Selling and Administrative Expense Classification
+    context: BC-FIN
+    priority: medium
+    type: constraint
+    status: active
+    file: knowledge/rules/active/BR-361.selling-and-administrative-expense-classification.md
+  - id: BR-362
+    name: Occupancy Rate Calculation
+    context: BC-FIN
+    priority: medium
+    type: computational
+    status: active
+    file: knowledge/rules/active/BR-362.occupancy-rate-calculation.md
+  - id: BR-363
+    name: Job Order Costing Applicability
+    context: BC-FIN
+    priority: medium
+    type: constraint
+    status: active
+    file: knowledge/rules/active/BR-363.job-order-costing-applicability.md
+  - id: BR-364
+    name: Materials Requisition Requirement
+    context: BC-FIN
+    priority: medium
+    type: invariant
+    status: active
+    file: knowledge/rules/active/BR-364.materials-requisition-requirement.md
+  - id: BR-365
+    name: Costs Recorded by Job
+    context: BC-FIN
+    priority: medium
+    type: invariant
+    status: active
+    file: knowledge/rules/active/BR-365.costs-recorded-by-job.md
+  - id: BR-366
+    name: Predetermined Overhead Rate Application
+    context: BC-FIN
+    priority: medium
+    type: process
+    status: active
+    file: knowledge/rules/active/BR-366.predetermined-overhead-rate-application.md
+  - id: BR-367
+    name: Year-End Disposal of Overhead Balance
+    context: BC-FIN
+    priority: medium
+    type: process
+    status: active
+    file: knowledge/rules/active/BR-367.year-end-disposal-of-overhead-balance.md
+  - id: BR-368
+    name: Underapplied Overhead Disposal
+    context: BC-FIN
+    priority: medium
+    type: process
+    status: active
+    file: knowledge/rules/active/BR-368.underapplied-overhead-disposal.md
+  - id: BR-369
+    name: Work in Process Debits
+    context: BC-FIN
+    priority: medium
+    type: invariant
+    status: active
+    file: knowledge/rules/active/BR-369.work-in-process-debits.md
+  - id: BR-370
+    name: Work in Process Credits
+    context: BC-FIN
+    priority: medium
+    type: process
+    status: active
+    file: knowledge/rules/active/BR-370.work-in-process-credits.md
+  - id: BR-371
+    name: Overhead Balance Investigation
+    context: BC-FIN
+    priority: medium
+    type: constraint
+    status: active
+    file: knowledge/rules/active/BR-371.overhead-balance-investigation.md
+  - id: BR-372
+    name: Service Business Job Costing
+    context: BC-FIN
+    priority: medium
+    type: process
+    status: active
+    file: knowledge/rules/active/BR-372.service-business-job-costing.md
+  - id: BR-373
+    name: Job Cost Comparison for Analysis
+    context: BC-FIN
+    priority: medium
+    type: process
+    status: active
+    file: knowledge/rules/active/BR-373.job-cost-comparison-for-analysis.md
+  - id: BR-374
+    name: Service Business Overhead Allocation
+    context: BC-FIN
+    priority: medium
+    type: process
+    status: active
+    file: knowledge/rules/active/BR-374.service-business-overhead-allocation.md
+  - id: BR-375
+    name: Service Job Completion and Billing
+    context: BC-FIN
+    priority: medium
+    type: process
+    status: active
+    file: knowledge/rules/active/BR-375.service-job-completion-and-billing.md
+  - id: BR-376
+    name: Investigating Cost Variances
+    context: BC-FIN
+    priority: medium
+    type: constraint
+    status: active
+    file: knowledge/rules/active/BR-376.investigating-cost-variances.md
+  - id: BR-377
+    name: Materials Quantity Investigation
+    context: BC-FIN
+    priority: medium
+    type: constraint
+    status: active
+    file: knowledge/rules/active/BR-377.materials-quantity-investigation.md
+  - id: BR-378
+    name: Service Business Overhead Application Methods
+    context: BC-FIN
+    priority: medium
+    type: constraint
+    status: active
+    file: knowledge/rules/active/BR-378.service-business-overhead-application-methods.md
+  - id: BR-379
+    name: Job Cost Sheet Completeness
+    context: BC-FIN
+    priority: medium
+    type: invariant
+    status: active
+    file: knowledge/rules/active/BR-379.job-cost-sheet-completeness.md
+  - id: BR-380
+    name: Direct Materials Traced to Jobs
+    context: BC-FIN
+    priority: medium
+    type: invariant
+    status: active
+    file: knowledge/rules/active/BR-380.direct-materials-traced-to-jobs.md
+  - id: BR-381
+    name: Overhead Applied Using Predetermined Rate
+    context: BC-FIN
+    priority: medium
+    type: computational
+    status: active
+    file: knowledge/rules/active/BR-381.overhead-applied-using-predetermined-rate.md
+  - id: BR-382
+    name: Cost Flow Through Inventory Accounts
+    context: BC-FIN
+    priority: medium
+    type: process
+    status: active
+    file: knowledge/rules/active/BR-382.cost-flow-through-inventory-accounts.md
+  - id: BR-383
+    name: Jobs Completed Transfer to Finished Goods
+    context: BC-FIN
+    priority: medium
+    type: process
+    status: active
+    file: knowledge/rules/active/BR-383.jobs-completed-transfer-to-finished-goods.md
+  - id: BR-384
+    name: Sale Triggers COGS Recognition
+    context: BC-FIN
+    priority: medium
+    type: process
+    status: active
+    file: knowledge/rules/active/BR-384.sale-triggers-cogs-recognition.md
+  - id: BR-385
+    name: Over/Under Applied Overhead Disposition
+    context: BC-FIN
+    priority: medium
+    type: process
+    status: active
+    file: knowledge/rules/active/BR-385.over-under-applied-overhead-disposition.md
+  - id: BR-386
+    name: Depreciation Classified by Function
+    context: BC-FIN
+    priority: medium
+    type: constraint
+    status: active
+    file: knowledge/rules/active/BR-386.depreciation-classified-by-function.md
+  - id: BR-387
+    name: Equivalent Units for Materials at Beginning of Process
+    context: BC-FIN
+    priority: medium
+    type: computational
+    status: active
+    file: knowledge/rules/active/BR-387.equivalent-units-for-materials-at-beginning-of-process.md
+  - id: BR-388
+    name: Equivalent Units for Conversion in Beginning WIP
+    context: BC-FIN
+    priority: medium
+    type: computational
+    status: active
+    file: knowledge/rules/active/BR-388.equivalent-units-for-conversion-in-beginning-wip.md
+  - id: BR-389
+    name: Units Started and Completed Formula
+    context: BC-FIN
+    priority: medium
+    type: computational
+    status: active
+    file: knowledge/rules/active/BR-389.units-started-and-completed-formula.md
+  - id: BR-390
+    name: Ending WIP Equivalent Units
+    context: BC-FIN
+    priority: medium
+    type: computational
+    status: active
+    file: knowledge/rules/active/BR-390.ending-wip-equivalent-units.md
+  - id: BR-391
+    name: Cost Per Equivalent Unit Computation
+    context: BC-FIN
+    priority: medium
+    type: computational
+    status: active
+    file: knowledge/rules/active/BR-391.cost-per-equivalent-unit-computation.md
+  - id: BR-392
+    name: Assign Costs to Completed Units
+    context: BC-FIN
+    priority: medium
+    type: computational
+    status: active
+    file: knowledge/rules/active/BR-392.assign-costs-to-completed-units.md
+  - id: BR-393
+    name: Assign Costs to Ending WIP
+    context: BC-FIN
+    priority: medium
+    type: computational
+    status: active
+    file: knowledge/rules/active/BR-393.assign-costs-to-ending-wip.md
+  - id: BR-394
+    name: Cost Reconciliation in Process Costing
+    context: BC-FIN
+    priority: medium
+    type: invariant
+    status: active
+    file: knowledge/rules/active/BR-394.cost-reconciliation-in-process-costing.md
+  - id: BR-395
+    name: Materials and Conversion Computed Separately
+    context: BC-FIN
+    priority: medium
+    type: constraint
+    status: active
+    file: knowledge/rules/active/BR-395.materials-and-conversion-computed-separately.md
+  - id: BR-396
+    name: Process Costing vs Job Order Costing
+    context: BC-FIN
+    priority: medium
+    type: constraint
+    status: active
+    file: knowledge/rules/active/BR-396.process-costing-vs-job-order-costing.md
+  - id: BR-397
+    name: Weighted Average Equivalent Units Include Beginning WIP
+    context: BC-FIN
+    priority: medium
+    type: computational
+    status: active
+    file: knowledge/rules/active/BR-397.weighted-average-equivalent-units-include-beginning-wip.md
+  - id: BR-398
+    name: Weighted Average Cost Includes Beginning WIP Costs
+    context: BC-FIN
+    priority: medium
+    type: computational
+    status: active
+    file: knowledge/rules/active/BR-398.weighted-average-cost-includes-beginning-wip-costs.md
+  - id: BR-399
+    name: Units Reconciliation Formula
+    context: BC-FIN
+    priority: medium
+    type: invariant
+    status: active
+    file: knowledge/rules/active/BR-399.units-reconciliation-formula.md
+  - id: BR-400
+    name: Lean Manufacturing Pull Production
+    context: BC-FIN
+    priority: medium
+    type: policy
+    status: active
+    file: knowledge/rules/active/BR-400.lean-manufacturing-pull-production.md
+  - id: BR-401
+    name: Flavor Changeover Cost Allocation
+    context: BC-FIN
+    priority: medium
+    type: computational
+    status: active
+    file: knowledge/rules/active/BR-401.flavor-changeover-cost-allocation.md
+  - id: BR-402
+    name: Process Costing for Continuous Production
+    context: BC-FIN
+    priority: medium
+    type: constraint
+    status: active
+    file: knowledge/rules/active/BR-402.process-costing-for-continuous-production.md
+  - id: BR-403
+    name: Cost Per Unit Trend Analysis
+    context: BC-FIN
+    priority: medium
+    type: validation
+    status: active
+    file: knowledge/rules/active/BR-403.cost-per-unit-trend-analysis.md
+  - id: BR-404
+    name: Scrap and Waste in Process Costing
+    context: BC-FIN
+    priority: medium
+    type: computational
+    status: active
+    file: knowledge/rules/active/BR-404.scrap-and-waste-in-process-costing.md
+  - id: BR-405
+    name: Activity Rate Computation
+    context: BC-FIN
+    priority: medium
+    type: computational
+    status: active
+    file: knowledge/rules/active/BR-405.activity-rate-computation.md
+  - id: BR-406
+    name: Overhead Allocation per Product
+    context: BC-FIN
+    priority: medium
+    type: computational
+    status: active
+    file: knowledge/rules/active/BR-406.overhead-allocation-per-product.md
+  - id: BR-407
+    name: Manufacturing Overhead Cost per Unit
+    context: BC-FIN
+    priority: medium
+    type: computational
+    status: active
+    file: knowledge/rules/active/BR-407.manufacturing-overhead-cost-per-unit.md
+  - id: BR-408
+    name: ABC Over Single Plantwide Rate
+    context: BC-FIN
+    priority: medium
+    type: constraint
+    status: active
+    file: knowledge/rules/active/BR-408.abc-over-single-plantwide-rate.md
+  - id: BR-409
+    name: GAAP Period Expense Rule
+    context: BC-FIN
+    priority: medium
+    type: invariant
+    status: active
+    file: knowledge/rules/active/BR-409.gaap-period-expense-rule.md
+  - id: BR-410
+    name: Selling/Admin ABC for Internal Use
+    context: BC-FIN
+    priority: medium
+    type: process
+    status: active
+    file: knowledge/rules/active/BR-410.selling-admin-abc-for-internal-use.md
+  - id: BR-411
+    name: Cost Distortion Causes Pricing Errors
+    context: BC-FIN
+    priority: medium
+    type: constraint
+    status: active
+    file: knowledge/rules/active/BR-411.cost-distortion-causes-pricing-errors.md
+  - id: BR-412
+    name: Variable Cost Behavior Rule
+    context: BC-FIN
+    priority: medium
+    type: invariant
+    status: active
+    file: knowledge/rules/active/BR-412.variable-cost-behavior-rule.md
+  - id: BR-413
+    name: Fixed Cost Behavior Rule
+    context: BC-FIN
+    priority: medium
+    type: invariant
+    status: active
+    file: knowledge/rules/active/BR-413.fixed-cost-behavior-rule.md
+  - id: BR-414
+    name: Break-Even Point Formula
+    context: BC-FIN
+    priority: medium
+    type: computational
+    status: active
+    file: knowledge/rules/active/BR-414.break-even-point-formula.md
+  - id: BR-415
+    name: Target Profit Formula
+    context: BC-FIN
+    priority: medium
+    type: computational
+    status: active
+    file: knowledge/rules/active/BR-415.target-profit-formula.md
+  - id: BR-416
+    name: Contribution Margin Formula
+    context: BC-FIN
+    priority: medium
+    type: computational
+    status: active
+    file: knowledge/rules/active/BR-416.contribution-margin-formula.md
+  - id: BR-417
+    name: Sales Mix Break-Even
+    context: BC-FIN
+    priority: medium
+    type: computational
+    status: active
+    file: knowledge/rules/active/BR-417.sales-mix-break-even.md
+  - id: BR-418
+    name: Operating Leverage Effect
+    context: BC-FIN
+    priority: medium
+    type: computational
+    status: active
+    file: knowledge/rules/active/BR-418.operating-leverage-effect.md
+  - id: BR-419
+    name: Margin of Safety Rule
+    context: BC-FIN
+    priority: medium
+    type: computational
+    status: active
+    file: knowledge/rules/active/BR-419.margin-of-safety-rule.md
+  - id: BR-420
+    name: Relevant Range Constraint
+    context: BC-FIN
+    priority: medium
+    type: constraint
+    status: active
+    file: knowledge/rules/active/BR-420.relevant-range-constraint.md
+  - id: BR-421
+    name: Absorption vs Variable Costing Income
+    context: BC-FIN
+    priority: medium
+    type: invariant
+    status: active
+    file: knowledge/rules/active/BR-421.absorption-vs-variable-costing-income.md
+  - id: BR-422
+    name: Appropriate Allocation Base Selection
+    context: BC-FIN
+    priority: medium
+    type: constraint
+    status: active
+    file: knowledge/rules/active/BR-422.appropriate-allocation-base-selection.md
+  - id: BR-423
+    name: Sales-Based Allocation Inaccuracy
+    context: BC-FIN
+    priority: medium
+    type: constraint
+    status: active
+    file: knowledge/rules/active/BR-423.sales-based-allocation-inaccuracy.md
+  - id: BR-424
+    name: CVP Analysis Application to Services
+    context: BC-FIN
+    priority: medium
+    type: process
+    status: active
+    file: knowledge/rules/active/BR-424.cvp-analysis-application-to-services.md
+  - id: BR-425
+    name: Process Costing Cost Per Unit
+    context: BC-FIN
+    priority: medium
+    type: computational
+    status: active
+    file: knowledge/rules/active/BR-425.process-costing-cost-per-unit.md
+  - id: BR-426
+    name: Multiple Allocation Methods Comparison
+    context: BC-FIN
+    priority: medium
+    type: constraint
+    status: active
+    file: knowledge/rules/active/BR-426.multiple-allocation-methods-comparison.md
+  - id: BR-427
+    name: Selling/Admin ABC Activity Identification
+    context: BC-FIN
+    priority: medium
+    type: process
+    status: active
+    file: knowledge/rules/active/BR-427.selling-admin-abc-activity-identification.md
+  - id: BR-428
+    name: Mixed Cost Decomposition
+    context: BC-FIN
+    priority: medium
+    type: computational
+    status: active
+    file: knowledge/rules/active/BR-428.mixed-cost-decomposition.md
+  - id: BR-429
+    name: Break-Even Equality
+    context: BC-FIN
+    priority: medium
+    type: invariant
+    status: active
+    file: knowledge/rules/active/BR-429.break-even-equality.md
+  - id: BR-430
+    name: Sales Mix Constancy Assumption
+    context: BC-FIN
+    priority: medium
+    type: constraint
+    status: active
+    file: knowledge/rules/active/BR-430.sales-mix-constancy-assumption.md
+  - id: BR-431
+    name: Operating Leverage Interpretation
+    context: BC-FIN
+    priority: medium
+    type: computational
+    status: active
+    file: knowledge/rules/active/BR-431.operating-leverage-interpretation.md
+  - id: BR-432
+    name: Margin of Safety as Risk Indicator
+    context: BC-FIN
+    priority: medium
+    type: computational
+    status: active
+    file: knowledge/rules/active/BR-432.margin-of-safety-as-risk-indicator.md
+  - id: BR-433
+    name: Break-Even for Service Companies
+    context: BC-FIN
+    priority: medium
+    type: computational
+    status: active
+    file: knowledge/rules/active/BR-433.break-even-for-service-companies.md
+  - id: BR-434
+    name: Margin of Safety Cannot Be Negative
+    context: BC-FIN
+    priority: medium
+    type: constraint
+    status: active
+    file: knowledge/rules/active/BR-434.margin-of-safety-cannot-be-negative.md
+  - id: BR-435
+    name: Operating Leverage Inverse Relationship
+    context: BC-FIN
+    priority: medium
+    type: computational
+    status: active
+    file: knowledge/rules/active/BR-435.operating-leverage-inverse-relationship.md
+  - id: BR-436
+    name: Validity Check on Margin of Safety Data
+    context: BC-FIN
+    priority: medium
+    type: validation
+    status: active
+    file: knowledge/rules/active/BR-436.validity-check-on-margin-of-safety-data.md
+  - id: BR-437
+    name: Static Budget Limitation
+    context: BC-FIN
+    priority: medium
+    type: constraint
+    status: active
+    file: knowledge/rules/active/BR-437.static-budget-limitation.md
+  - id: BR-438
+    name: Flexible Budget Construction
+    context: BC-FIN
+    priority: medium
+    type: process
+    status: active
+    file: knowledge/rules/active/BR-438.flexible-budget-construction.md
+  - id: BR-439
+    name: Budget Gaming Prevention
+    context: BC-FIN
+    priority: medium
+    type: policy
+    status: active
+    file: knowledge/rules/active/BR-439.budget-gaming-prevention.md
+  - id: BR-440
+    name: Flexible Budget Comparison Rule
+    context: BC-FIN
+    priority: medium
+    type: process
+    status: active
+    file: knowledge/rules/active/BR-440.flexible-budget-comparison-rule.md
+  - id: BR-441
+    name: Continuous Budget Update
+    context: BC-FIN
+    priority: medium
+    type: process
+    status: active
+    file: knowledge/rules/active/BR-441.continuous-budget-update.md
+  - id: BR-442
+    name: Production Budget Coordination Rule
+    context: BC-FIN
+    priority: medium
+    type: constraint
+    status: active
+    file: knowledge/rules/active/BR-442.production-budget-coordination-rule.md
+  - id: BR-443
+    name: Desired Ending Inventory Policy Rule
+    context: BC-FIN
+    priority: medium
+    type: policy
+    status: active
+    file: knowledge/rules/active/BR-443.desired-ending-inventory-policy-rule.md
+  - id: BR-444
+    name: Direct Materials Inventory Coordination Rule
+    context: BC-FIN
+    priority: medium
+    type: process
+    status: active
+    file: knowledge/rules/active/BR-444.direct-materials-inventory-coordination-rule.md
+  - id: BR-445
+    name: Cash Budget Minimum Balance Rule
+    context: BC-FIN
+    priority: medium
+    type: constraint
+    status: active
+    file: knowledge/rules/active/BR-445.cash-budget-minimum-balance-rule.md
+  - id: BR-446
+    name: Cash Collections Timing Rule
+    context: BC-FIN
+    priority: medium
+    type: computational
+    status: active
+    file: knowledge/rules/active/BR-446.cash-collections-timing-rule.md
+  - id: BR-447
+    name: Staffing Budget Variability Rule
+    context: BC-FIN
+    priority: medium
+    type: process
+    status: active
+    file: knowledge/rules/active/BR-447.staffing-budget-variability-rule.md
+  - id: BR-448
+    name: Multiperiod Budget Dependency Rule
+    context: BC-FIN
+    priority: medium
+    type: constraint
+    status: active
+    file: knowledge/rules/active/BR-448.multiperiod-budget-dependency-rule.md
+  - id: BR-449
+    name: Selling and Administrative Expense Payment Rule
+    context: BC-FIN
+    priority: medium
+    type: computational
+    status: active
+    file: knowledge/rules/active/BR-449.selling-and-administrative-expense-payment-rule.md
+  - id: BR-450
+    name: Budget Goal Setting Behavioral Rule
+    context: BC-FIN
+    priority: medium
+    type: policy
+    status: active
+    file: knowledge/rules/active/BR-450.budget-goal-setting-behavioral-rule.md
+  - id: BR-451
+    name: Sales Forecast Based on Historical Trend Rule
+    context: BC-FIN
+    priority: medium
+    type: computational
+    status: active
+    file: knowledge/rules/active/BR-451.sales-forecast-based-on-historical-trend-rule.md
+  - id: BR-452
+    name: Ending Inventory Percentage Rule
+    context: BC-FIN
+    priority: medium
+    type: policy
+    status: active
+    file: knowledge/rules/active/BR-452.ending-inventory-percentage-rule.md
+  - id: BR-453
+    name: Work in Process Inventory Assumption Rule
+    context: BC-FIN
+    priority: medium
+    type: constraint
+    status: active
+    file: knowledge/rules/active/BR-453.work-in-process-inventory-assumption-rule.md
+  - id: BR-454
+    name: Multi-Department Labor Rate Differentiation Rule
+    context: BC-FIN
+    priority: medium
+    type: computational
+    status: active
+    file: knowledge/rules/active/BR-454.multi-department-labor-rate-differentiation-rule.md
+  - id: BR-455
+    name: Manufacturing Cost Payment Timing Rule
+    context: BC-FIN
+    priority: medium
+    type: computational
+    status: active
+    file: knowledge/rules/active/BR-455.manufacturing-cost-payment-timing-rule.md
+  - id: BR-456
+    name: Accounts Receivable Collection Pattern Rule
+    context: BC-FIN
+    priority: medium
+    type: computational
+    status: active
+    file: knowledge/rules/active/BR-456.accounts-receivable-collection-pattern-rule.md
+  - id: BR-457
+    name: Dividend Payment Timing Rule
+    context: BC-FIN
+    priority: medium
+    type: temporal
+    status: active
+    file: knowledge/rules/active/BR-457.dividend-payment-timing-rule.md
+  - id: BR-458
+    name: Staffing Ratio Per Activity Unit Rule
+    context: BC-FIN
+    priority: medium
+    type: computational
+    status: active
+    file: knowledge/rules/active/BR-458.staffing-ratio-per-activity-unit-rule.md
+  - id: BR-459
+    name: Weekday vs Weekend Staffing Differentiation Rule
+    context: BC-FIN
+    priority: medium
+    type: process
+    status: active
+    file: knowledge/rules/active/BR-459.weekday-vs-weekend-staffing-differentiation-rule.md
+  - id: BR-460
+    name: Gross Profit Staffing Justification Rule
+    context: BC-FIN
+    priority: medium
+    type: constraint
+    status: active
+    file: knowledge/rules/active/BR-460.gross-profit-staffing-justification-rule.md
+  - id: BR-461
+    name: Standard Cost Computation Rule
+    context: BC-FIN
+    priority: medium
+    type: computational
+    status: active
+    file: knowledge/rules/active/BR-461.standard-cost-computation-rule.md
+  - id: BR-462
+    name: Budget Performance Report Basis Rule
+    context: BC-FIN
+    priority: medium
+    type: process
+    status: active
+    file: knowledge/rules/active/BR-462.budget-performance-report-basis-rule.md
+  - id: BR-463
+    name: Direct Materials Quantity Variance Computation Rule
+    context: BC-FIN
+    priority: medium
+    type: computational
+    status: active
+    file: knowledge/rules/active/BR-463.direct-materials-quantity-variance-computation-rule.md
+  - id: BR-464
+    name: Direct Labor Time Variance Computation Rule
+    context: BC-FIN
+    priority: medium
+    type: computational
+    status: active
+    file: knowledge/rules/active/BR-464.direct-labor-time-variance-computation-rule.md
+  - id: BR-465
+    name: Favorable vs Unfavorable Variance Classification Rule
+    context: BC-FIN
+    priority: medium
+    type: process
+    status: active
+    file: knowledge/rules/active/BR-465.favorable-vs-unfavorable-variance-classification-rule.md
+  - id: BR-466
+    name: Manufacturing Overhead Variance Decomposition Rule
+    context: BC-FIN
+    priority: medium
+    type: process
+    status: active
+    file: knowledge/rules/active/BR-466.manufacturing-overhead-variance-decomposition-rule.md
+  - id: BR-467
+    name: Departmental Responsibility for Variances Rule
+    context: BC-FIN
+    priority: medium
+    type: access
+    status: active
+    file: knowledge/rules/active/BR-467.departmental-responsibility-for-variances-rule.md
+  - id: BR-468
+    name: Standard Cost Assumption of No Inventory Change Rule
+    context: BC-FIN
+    priority: medium
+    type: constraint
+    status: active
+    file: knowledge/rules/active/BR-468.standard-cost-assumption-of-no-inventory-change-rule.md
+  - id: BR-469
+    name: Variance Sign Convention
+    context: BC-FIN
+    priority: medium
+    type: computational
+    status: active
+    file: knowledge/rules/active/BR-469.variance-sign-convention.md
+  - id: BR-470
+    name: Materials Price Variance Responsibility
+    context: BC-FIN
+    priority: medium
+    type: access
+    status: active
+    file: knowledge/rules/active/BR-470.materials-price-variance-responsibility.md
+  - id: BR-471
+    name: Materials Quantity Variance Responsibility
+    context: BC-FIN
+    priority: medium
+    type: access
+    status: active
+    file: knowledge/rules/active/BR-471.materials-quantity-variance-responsibility.md
+  - id: BR-472
+    name: Labor Rate Variance Responsibility
+    context: BC-FIN
+    priority: medium
+    type: access
+    status: active
+    file: knowledge/rules/active/BR-472.labor-rate-variance-responsibility.md
+  - id: BR-473
+    name: Labor Time Variance Responsibility
+    context: BC-FIN
+    priority: medium
+    type: access
+    status: active
+    file: knowledge/rules/active/BR-473.labor-time-variance-responsibility.md
+  - id: BR-474
+    name: Controllable Variance Responsibility
+    context: BC-FIN
+    priority: medium
+    type: access
+    status: active
+    file: knowledge/rules/active/BR-474.controllable-variance-responsibility.md
+  - id: BR-475
+    name: Volume Variance Interpretation
+    context: BC-FIN
+    priority: medium
+    type: computational
+    status: active
+    file: knowledge/rules/active/BR-475.volume-variance-interpretation.md
+  - id: BR-476
+    name: Work in Process Standard Costing
+    context: BC-FIN
+    priority: medium
+    type: process
+    status: active
+    file: knowledge/rules/active/BR-476.work-in-process-standard-costing.md
+  - id: BR-477
+    name: Overapplied and Underapplied Overhead
+    context: BC-FIN
+    priority: medium
+    type: computational
+    status: active
+    file: knowledge/rules/active/BR-477.overapplied-and-underapplied-overhead.md
+  - id: BR-478
+    name: Exchange Rate Variance Isolation
+    context: BC-FIN
+    priority: medium
+    type: process
+    status: active
+    file: knowledge/rules/active/BR-478.exchange-rate-variance-isolation.md
+  - id: BR-479
+    name: Standard Quantity Based on Actual Production
+    context: BC-FIN
+    priority: medium
+    type: computational
+    status: active
+    file: knowledge/rules/active/BR-479.standard-quantity-based-on-actual-production.md
+  - id: BR-480
+    name: Revenue Variance Relationship
+    context: BC-FIN
+    priority: medium
+    type: computational
+    status: active
+    file: knowledge/rules/active/BR-480.revenue-variance-relationship.md
+  - id: BR-481
+    name: Standards for Nonmanufacturing Activities
+    context: BC-FIN
+    priority: medium
+    type: process
+    status: active
+    file: knowledge/rules/active/BR-481.standards-for-nonmanufacturing-activities.md
+  - id: BR-482
+    name: Principle of Exceptions
+    context: BC-FIN
+    priority: medium
+    type: access
+    status: active
+    file: knowledge/rules/active/BR-482.principle-of-exceptions.md
+  - id: BR-483
+    name: Investigate Controllable Variances
+    context: BC-FIN
+    priority: medium
+    type: access
+    status: active
+    file: knowledge/rules/active/BR-483.investigate-controllable-variances.md
+  - id: BR-484
+    name: Exclude Sunk Costs from Analysis
+    context: BC-FIN
+    priority: medium
+    type: invariant
+    status: active
+    file: knowledge/rules/active/BR-484.exclude-sunk-costs-from-analysis.md
+  - id: BR-485
+    name: Include Only Relevant Costs
+    context: BC-FIN
+    priority: medium
+    type: invariant
+    status: active
+    file: knowledge/rules/active/BR-485.include-only-relevant-costs.md
+  - id: BR-486
+    name: Fixed Costs May Persist
+    context: BC-FIN
+    priority: medium
+    type: constraint
+    status: active
+    file: knowledge/rules/active/BR-486.fixed-costs-may-persist.md
+  - id: BR-487
+    name: Capacity Utilization Affects Costs
+    context: BC-FIN
+    priority: medium
+    type: computational
+    status: active
+    file: knowledge/rules/active/BR-487.capacity-utilization-affects-costs.md
+  - id: BR-488
+    name: Normal Selling Price Must Cover All Costs
+    context: BC-FIN
+    priority: medium
+    type: computational
+    status: active
+    file: knowledge/rules/active/BR-488.normal-selling-price-must-cover-all-costs.md
+  - id: BR-489
+    name: Markup Percentage Calculation
+    context: BC-FIN
+    priority: medium
+    type: computational
+    status: active
+    file: knowledge/rules/active/BR-489.markup-percentage-calculation.md
+  - id: BR-490
+    name: Target Cost Reduction
+    context: BC-FIN
+    priority: medium
+    type: process
+    status: active
+    file: knowledge/rules/active/BR-490.target-cost-reduction.md
+  - id: BR-491
+    name: Price Fixing Prohibition
+    context: BC-FIN
+    priority: medium
+    type: access
+    status: active
+    file: knowledge/rules/active/BR-491.price-fixing-prohibition.md
+  - id: BR-492
+    name: Special Price Acceptance Criteria
+    context: BC-FIN
+    priority: medium
+    type: constraint
+    status: active
+    file: knowledge/rules/active/BR-492.special-price-acceptance-criteria.md
+  - id: BR-493
+    name: Bottleneck Profitability Rule
+    context: BC-FIN
+    priority: medium
+    type: computational
+    status: active
+    file: knowledge/rules/active/BR-493.bottleneck-profitability-rule.md
+  - id: BR-494
+    name: Sunk Cost Irrelevance Rule
+    context: BC-FIN
+    priority: medium
+    type: constraint
+    status: active
+    file: knowledge/rules/active/BR-494.sunk-cost-irrelevance-rule.md
+  - id: BR-495
+    name: Opportunity Cost Inclusion Rule
+    context: BC-FIN
+    priority: medium
+    type: constraint
+    status: active
+    file: knowledge/rules/active/BR-495.opportunity-cost-inclusion-rule.md
+  - id: BR-496
+    name: Cost-Plus Pricing Markup Rule
+    context: BC-FIN
+    priority: medium
+    type: computational
+    status: active
+    file: knowledge/rules/active/BR-496.cost-plus-pricing-markup-rule.md
+  - id: BR-497
+    name: Target Costing Market-Driven Rule
+    context: BC-FIN
+    priority: medium
+    type: process
+    status: active
+    file: knowledge/rules/active/BR-497.target-costing-market-driven-rule.md
+  - id: BR-498
+    name: Yield Pricing Demand-Based Rule
+    context: BC-FIN
+    priority: medium
+    type: policy
+    status: active
+    file: knowledge/rules/active/BR-498.yield-pricing-demand-based-rule.md
+  - id: BR-499
+    name: Break-Even for Yield Pricing Rule
+    context: BC-FIN
+    priority: medium
+    type: computational
+    status: active
+    file: knowledge/rules/active/BR-499.break-even-for-yield-pricing-rule.md
+  - id: BR-500
+    name: Process Further Decision Rule
+    context: BC-FIN
+    priority: medium
+    type: computational
+    status: active
+    file: knowledge/rules/active/BR-500.process-further-decision-rule.md
+  - id: BR-501
+    name: Special Order Acceptance Rule
+    context: BC-FIN
+    priority: medium
+    type: constraint
+    status: active
+    file: knowledge/rules/active/BR-501.special-order-acceptance-rule.md
+  - id: BR-502
+    name: Fixed Cost Irrelevance in Short-Term Decisions
+    context: BC-FIN
+    priority: medium
+    type: constraint
+    status: active
+    file: knowledge/rules/active/BR-502.fixed-cost-irrelevance-in-short-term-decisions.md
+  - id: BR-503
+    name: Internal Rate of Return Acceptance Rule
+    context: BC-FIN
+    priority: medium
+    type: validation
+    status: active
+    file: knowledge/rules/active/BR-503.internal-rate-of-return-acceptance-rule.md
+  - id: BR-504
+    name: Cash Payback Desirability Rule
+    context: BC-FIN
+    priority: medium
+    type: constraint
+    status: active
+    file: knowledge/rules/active/BR-504.cash-payback-desirability-rule.md
+  - id: BR-505
+    name: Depreciation Exclusion from Cash Flow
+    context: BC-FIN
+    priority: medium
+    type: constraint
+    status: active
+    file: knowledge/rules/active/BR-505.depreciation-exclusion-from-cash-flow.md
+  - id: BR-506
+    name: Unequal Cash Flows Payback Calculation
+    context: BC-FIN
+    priority: medium
+    type: computational
+    status: active
+    file: knowledge/rules/active/BR-506.unequal-cash-flows-payback-calculation.md
+  - id: BR-507
+    name: Average Investment Computation Rule
+    context: BC-FIN
+    priority: medium
+    type: computational
+    status: active
+    file: knowledge/rules/active/BR-507.average-investment-computation-rule.md
+  - id: BR-508
+    name: Present Value Compounding Rule
+    context: BC-FIN
+    priority: medium
+    type: computational
+    status: active
+    file: knowledge/rules/active/BR-508.present-value-compounding-rule.md
+  - id: BR-509
+    name: Compounding Interest Calculation Rule
+    context: BC-FIN
+    priority: medium
+    type: computational
+    status: active
+    file: knowledge/rules/active/BR-509.compounding-interest-calculation-rule.md
+  - id: BR-510
+    name: Net Present Value Acceptance Rule
+    context: BC-FIN
+    priority: medium
+    type: validation
+    status: active
+    file: knowledge/rules/active/BR-510.net-present-value-acceptance-rule.md
+  - id: BR-511
+    name: Present Value Index Ranking Rule
+    context: BC-FIN
+    priority: medium
+    type: computational
+    status: active
+    file: knowledge/rules/active/BR-511.present-value-index-ranking-rule.md
+  - id: BR-512
+    name: IRR Factor Computation Rule
+    context: BC-FIN
+    priority: medium
+    type: computational
+    status: active
+    file: knowledge/rules/active/BR-512.irr-factor-computation-rule.md
+  - id: BR-513
+    name: Unequal Lives Equalization Rule
+    context: BC-FIN
+    priority: medium
+    type: process
+    status: active
+    file: knowledge/rules/active/BR-513.unequal-lives-equalization-rule.md
+  - id: BR-514
+    name: Capital Rationing Screening Rule
+    context: BC-FIN
+    priority: medium
+    type: process
+    status: active
+    file: knowledge/rules/active/BR-514.capital-rationing-screening-rule.md
+  - id: BR-515
+    name: Sensitivity Analysis Threshold Rule
+    context: BC-FIN
+    priority: medium
+    type: computational
+    status: active
+    file: knowledge/rules/active/BR-515.sensitivity-analysis-threshold-rule.md
+  - id: BR-516
+    name: Expected Value Probability Rule
+    context: BC-FIN
+    priority: medium
+    type: computational
+    status: active
+    file: knowledge/rules/active/BR-516.expected-value-probability-rule.md
+  - id: BR-517
+    name: Assumption Fudging Prohibition
+    context: BC-FIN
+    priority: medium
+    type: access
+    status: active
+    file: knowledge/rules/active/BR-517.assumption-fudging-prohibition.md
+  - id: BR-518
+    name: NPV Decision Rule
+    context: BC-FIN
+    priority: medium
+    type: computational
+    status: active
+    file: knowledge/rules/active/BR-518.npv-decision-rule.md
+  - id: BR-519
+    name: Average Rate of Return Calculation
+    context: BC-FIN
+    priority: medium
+    type: computational
+    status: active
+    file: knowledge/rules/active/BR-519.average-rate-of-return-calculation.md
+  - id: BR-520
+    name: Cash Payback Period Calculation
+    context: BC-FIN
+    priority: medium
+    type: computational
+    status: active
+    file: knowledge/rules/active/BR-520.cash-payback-period-calculation.md
+  - id: BR-521
+    name: Present Value Index Decision Rule
+    context: BC-FIN
+    priority: medium
+    type: computational
+    status: active
+    file: knowledge/rules/active/BR-521.present-value-index-decision-rule.md
+  - id: BR-522
+    name: NPV vs Average Rate of Return Conflict
+    context: BC-FIN
+    priority: medium
+    type: constraint
+    status: active
+    file: knowledge/rules/active/BR-522.npv-vs-average-rate-of-return-conflict.md
+  - id: BR-523
+    name: Sensitivity Analysis for Key Assumptions
+    context: BC-FIN
+    priority: medium
+    type: process
+    status: active
+    file: knowledge/rules/active/BR-523.sensitivity-analysis-for-key-assumptions.md
+  - id: BR-524
+    name: Multi-Phase Revenue NPV Calculation
+    context: BC-FIN
+    priority: medium
+    type: computational
+    status: active
+    file: knowledge/rules/active/BR-524.multi-phase-revenue-npv-calculation.md
+  - id: BR-525
+    name: Financial Success Threshold
+    context: BC-FIN
+    priority: medium
+    type: constraint
+    status: active
+    file: knowledge/rules/active/BR-525.financial-success-threshold.md
+  - id: BR-526
+    name: Currency Risk on International Investments
+    context: BC-FIN
+    priority: medium
+    type: constraint
+    status: active
+    file: knowledge/rules/active/BR-526.currency-risk-on-international-investments.md
+  - id: BR-527
+    name: Role of Qualitative Factors in Capital Budgeting
+    context: BC-FIN
+    priority: medium
+    type: process
+    status: active
+    file: knowledge/rules/active/BR-527.role-of-qualitative-factors-in-capital-budgeting.md
+  - id: BR-528
+    name: Payback Period as Supplementary Metric
+    context: BC-FIN
+    priority: medium
+    type: constraint
+    status: active
+    file: knowledge/rules/active/BR-528.payback-period-as-supplementary-metric.md
+  - id: BR-529
+    name: Ownership Threshold Determines Accounting Method
+    context: BC-FIN
+    priority: medium
+    type: constraint
+    status: active
+    file: knowledge/rules/active/BR-529.ownership-threshold-determines-accounting-method.md
+  - id: BR-530
+    name: Fair Value Method - Purchase Recording
+    context: BC-FIN
+    priority: medium
+    type: invariant
+    status: active
+    file: knowledge/rules/active/BR-530.fair-value-method-purchase-recording.md
+  - id: BR-531
+    name: Fair Value Method - Dividend Revenue
+    context: BC-FIN
+    priority: medium
+    type: invariant
+    status: active
+    file: knowledge/rules/active/BR-531.fair-value-method-dividend-revenue.md
+  - id: BR-532
+    name: Fair Value Method - Sale of Stock
+    context: BC-FIN
+    priority: medium
+    type: computational
+    status: active
+    file: knowledge/rules/active/BR-532.fair-value-method-sale-of-stock.md
+  - id: BR-533
+    name: Fair Value Method - Year-End Adjustment
+    context: BC-FIN
+    priority: medium
+    type: invariant
+    status: active
+    file: knowledge/rules/active/BR-533.fair-value-method-year-end-adjustment.md
+  - id: BR-534
+    name: Equity Method - Income Recognition
+    context: BC-FIN
+    priority: medium
+    type: invariant
+    status: active
+    file: knowledge/rules/active/BR-534.equity-method-income-recognition.md
+  - id: BR-535
+    name: Equity Method - Dividend Treatment
+    context: BC-FIN
+    priority: medium
+    type: invariant
+    status: active
+    file: knowledge/rules/active/BR-535.equity-method-dividend-treatment.md
+  - id: BR-536
+    name: Support Department Allocation Rate Calculation
+    context: BC-FIN
+    priority: medium
+    type: computational
+    status: active
+    file: knowledge/rules/active/BR-536.support-department-allocation-rate-calculation.md
+  - id: BR-537
+    name: ROI Computation
+    context: BC-FIN
+    priority: medium
+    type: computational
+    status: active
+    file: knowledge/rules/active/BR-537.roi-computation.md
+  - id: BR-538
+    name: Residual Income Computation
+    context: BC-FIN
+    priority: medium
+    type: computational
+    status: active
+    file: knowledge/rules/active/BR-538.residual-income-computation.md
+  - id: BR-539
+    name: Profit Center Evaluation Across Divisions
+    context: BC-FIN
+    priority: medium
+    type: constraint
+    status: active
+    file: knowledge/rules/active/BR-539.profit-center-evaluation-across-divisions.md
+  - id: BR-540
+    name: ROI Calculation
+    context: BC-FIN
+    priority: medium
+    type: computational
+    status: active
+    file: knowledge/rules/active/BR-540.roi-calculation.md
+  - id: BR-541
+    name: DuPont Formula Decomposition
+    context: BC-FIN
+    priority: medium
+    type: computational
+    status: active
+    file: knowledge/rules/active/BR-541.dupont-formula-decomposition.md
+  - id: BR-542
+    name: Residual Income Calculation
+    context: BC-FIN
+    priority: medium
+    type: computational
+    status: active
+    file: knowledge/rules/active/BR-542.residual-income-calculation.md
+  - id: BR-543
+    name: Balanced Scorecard Completeness
+    context: BC-FIN
+    priority: medium
+    type: invariant
+    status: active
+    file: knowledge/rules/active/BR-543.balanced-scorecard-completeness.md
+  - id: BR-544
+    name: Strategic Objective to Metric Linkage
+    context: BC-FIN
+    priority: medium
+    type: constraint
+    status: active
+    file: knowledge/rules/active/BR-544.strategic-objective-to-metric-linkage.md
+  - id: BR-545
+    name: Performance Metric Types
+    context: BC-FIN
+    priority: medium
+    type: constraint
+    status: active
+    file: knowledge/rules/active/BR-545.performance-metric-types.md
+  - id: BR-546
+    name: Strategy Map Causality
+    context: BC-FIN
+    priority: medium
+    type: process
+    status: active
+    file: knowledge/rules/active/BR-546.strategy-map-causality.md
+  - id: BR-547
+    name: Residual Income vs ROI Decision Rule
+    context: BC-FIN
+    priority: medium
+    type: computational
+    status: active
+    file: knowledge/rules/active/BR-547.residual-income-vs-roi-decision-rule.md
+  - id: BR-548
+    name: Department-Specific Scorecards
+    context: BC-FIN
+    priority: medium
+    type: process
+    status: active
+    file: knowledge/rules/active/BR-548.department-specific-scorecards.md
+  - id: BR-549
+    name: Accounting Equation Equality
+    context: BC-FIN
+    priority: medium
+    type: invariant
+    status: active
+    file: knowledge/rules/active/BR-549.accounting-equation-equality.md
+  - id: BR-550
+    name: Revenue Recognition on Control Transfer
+    context: BC-FIN
+    priority: medium
+    type: process
+    status: active
+    file: knowledge/rules/active/BR-550.revenue-recognition-on-control-transfer.md
+  - id: BR-551
+    name: Sales Returns and Discounts Estimation
+    context: BC-FIN
+    priority: medium
+    type: constraint
+    status: active
+    file: knowledge/rules/active/BR-551.sales-returns-and-discounts-estimation.md
+  - id: BR-552
+    name: Depreciation of Property, Plant and Equipment
+    context: BC-FIN
+    priority: medium
+    type: process
+    status: active
+    file: knowledge/rules/active/BR-552.depreciation-of-property-plant-and-equipment.md
+  - id: BR-553
+    name: Supplier Finance Program Disclosure
+    context: BC-FIN
+    priority: medium
+    type: constraint
+    status: active
+    file: knowledge/rules/active/BR-553.supplier-finance-program-disclosure.md
+  - id: BR-554
+    name: Consolidation of Subsidiaries
+    context: BC-FIN
+    priority: medium
+    type: invariant
+    status: active
+    file: knowledge/rules/active/BR-554.consolidation-of-subsidiaries.md
+  - id: BR-555
+    name: Internal Control Effectiveness Assessment
+    context: BC-FIN
+    priority: medium
+    type: process
+    status: active
+    file: knowledge/rules/active/BR-555.internal-control-effectiveness-assessment.md
+  - id: BR-556
+    name: Net Income vs. Cash Flow Reconciliation
+    context: BC-FIN
+    priority: medium
+    type: computational
+    status: active
+    file: knowledge/rules/active/BR-556.net-income-vs-cash-flow-reconciliation.md
+  - id: BR-557
+    name: Fiscal Year Selection
+    context: BC-FIN
+    priority: medium
+    type: process
+    status: active
+    file: knowledge/rules/active/BR-557.fiscal-year-selection.md
+  - id: BR-558
+    name: Closing Entries to Retained Earnings
+    context: BC-FIN
+    priority: medium
+    type: process
+    status: active
+    file: knowledge/rules/active/BR-558.closing-entries-to-retained-earnings.md
+  - id: BR-559
+    name: Year-End Adjusting Entries
+    context: BC-FIN
+    priority: medium
+    type: process
+    status: active
+    file: knowledge/rules/active/BR-559.year-end-adjusting-entries.md
+  - id: BR-560
+    name: Balanced Scorecard Perspective Alignment
+    context: BC-FIN
+    priority: medium
+    type: process
+    status: active
+    file: knowledge/rules/active/BR-560.balanced-scorecard-perspective-alignment.md
+  - id: BR-561
+    name: Shipping Error Impact on Customer Retention
+    context: BC-FIN
+    priority: medium
+    type: computational
+    status: active
+    file: knowledge/rules/active/BR-561.shipping-error-impact-on-customer-retention.md
+  - id: BR-562
+    name: EPS Calculation Rule
+    context: BC-FIN
+    priority: medium
+    type: computational
+    status: active
+    file: knowledge/rules/active/BR-562.eps-calculation-rule.md
+  - id: BR-563
+    name: Free Cash Flow Calculation Rule
+    context: BC-FIN
+    priority: medium
+    type: computational
+    status: active
+    file: knowledge/rules/active/BR-563.free-cash-flow-calculation-rule.md
+  - id: BR-564
+    name: P/E Ratio Interpretation Rule
+    context: BC-FIN
+    priority: medium
+    type: constraint
+    status: active
+    file: knowledge/rules/active/BR-564.p-e-ratio-interpretation-rule.md
+  - id: BR-565
+    name: Times Interest Earned Interpretation Rule
+    context: BC-FIN
+    priority: medium
+    type: constraint
+    status: active
+    file: knowledge/rules/active/BR-565.times-interest-earned-interpretation-rule.md
+  - id: BR-566
+    name: Horizontal Analysis Rule
+    context: BC-FIN
+    priority: medium
+    type: process
+    status: active
+    file: knowledge/rules/active/BR-566.horizontal-analysis-rule.md
+  - id: BR-567
+    name: Inventory Valuation Consistency Rule
+    context: BC-FIN
+    priority: medium
+    type: invariant
+    status: active
+    file: knowledge/rules/active/BR-567.inventory-valuation-consistency-rule.md
+  - id: BR-568
+    name: Accrual Basis Recognition Rule
+    context: BC-FIN
+    priority: medium
+    type: invariant
+    status: active
+    file: knowledge/rules/active/BR-568.accrual-basis-recognition-rule.md
+  - id: BR-569
+    name: Double-Entry Accounting Rule
+    context: BC-FIN
+    priority: medium
+    type: invariant
+    status: active
+    file: knowledge/rules/active/BR-569.double-entry-accounting-rule.md
+  - id: BR-570
+    name: Allowance Method for Uncollectibles
+    context: BC-FIN
+    priority: medium
+    type: invariant
+    status: active
+    file: knowledge/rules/active/BR-570.allowance-method-for-uncollectibles.md
+  - id: BR-571
+    name: Revenue Recognition Timing
+    context: BC-FIN
+    priority: medium
+    type: invariant
+    status: active
+    file: knowledge/rules/active/BR-571.revenue-recognition-timing.md
+  - id: BR-572
+    name: Inventory System Selection
+    context: BC-FIN
+    priority: medium
+    type: constraint
+    status: active
+    file: knowledge/rules/active/BR-572.inventory-system-selection.md
+  - id: BR-573
+    name: Bond Premium Amortization
+    context: BC-FIN
+    priority: medium
+    type: process
+    status: active
+    file: knowledge/rules/active/BR-573.bond-premium-amortization.md
+  - id: BR-574
+    name: Quick Ratio Interpretation
+    context: BC-FIN
+    priority: medium
+    type: validation
+    status: active
+    file: knowledge/rules/active/BR-574.quick-ratio-interpretation.md
+  - id: BR-575
+    name: Sales Discount Terms
+    context: BC-FIN
+    priority: medium
+    type: constraint
+    status: active
+    file: knowledge/rules/active/BR-575.sales-discount-terms.md
+  - id: BR-576
+    name: Present Value Concepts
+    context: BC-FIN
+    priority: medium
+    type: invariant
+    status: active
+    file: knowledge/rules/active/BR-576.present-value-concepts.md
+  - id: BR-577
+    name: Separation of Duties
+    context: BC-FIN
+    priority: medium
+    type: invariant
+    status: active
+    file: knowledge/rules/active/BR-577.separation-of-duties.md
+  - id: BR-578
+    name: LIFO Conformity Rule
+    context: BC-FIN
+    priority: medium
+    type: constraint
+    status: active
+    file: knowledge/rules/active/BR-578.lifo-conformity-rule.md
+  - id: BR-579
+    name: Break-Even Analysis Formula
+    context: BC-FIN
+    priority: medium
+    type: computational
+    status: active
+    file: knowledge/rules/active/BR-579.break-even-analysis-formula.md
+  - id: BR-580
+    name: LCM Valuation Rule
+    context: BC-FIN
+    priority: medium
+    type: constraint
+    status: active
+    file: knowledge/rules/active/BR-580.lcm-valuation-rule.md
+  - id: BR-581
+    name: EPS Disclosure Requirement
+    context: BC-FIN
+    priority: medium
+    type: constraint
+    status: active
+    file: knowledge/rules/active/BR-581.eps-disclosure-requirement.md
+  - id: BR-582
+    name: Differential Analysis for Decision Making
+    context: BC-FIN
+    priority: medium
+    type: process
+    status: active
+    file: knowledge/rules/active/BR-582.differential-analysis-for-decision-making.md
+  - id: BR-583
+    name: Flexible Budget Adjustment
+    context: BC-FIN
+    priority: medium
+    type: process
+    status: active
+    file: knowledge/rules/active/BR-583.flexible-budget-adjustment.md
+  - id: BR-584
+    name: Prime Costs Definition
+    context: BC-FIN
+    priority: medium
+    type: computational
+    status: active
+    file: knowledge/rules/active/BR-584.prime-costs-definition.md
+  - id: BR-585
+    name: Conversion Costs Definition
+    context: BC-FIN
+    priority: medium
+    type: computational
+    status: active
+    file: knowledge/rules/active/BR-585.conversion-costs-definition.md
+  - id: BR-586
+    name: Probable and Estimable Contingent Liability Recognition
+    context: BC-FIN
+    priority: medium
+    type: invariant
+    status: active
+    file: knowledge/rules/active/BR-586.probable-and-estimable-contingent-liability-recognition.md
+  - id: BR-587
+    name: Probable but Not Estimable Contingent Liability Disclosure
+    context: BC-FIN
+    priority: medium
+    type: constraint
+    status: active
+    file: knowledge/rules/active/BR-587.probable-but-not-estimable-contingent-liability-disclosure.md
+  - id: BR-588
+    name: Prior Period Adjustment Treatment
+    context: BC-FIN
+    priority: medium
+    type: invariant
+    status: active
+    file: knowledge/rules/active/BR-588.prior-period-adjustment-treatment.md
+  - id: BR-589
+    name: Principle of Exceptions Application
+    context: BC-FIN
+    priority: medium
+    type: policy
+    status: active
+    file: knowledge/rules/active/BR-589.principle-of-exceptions-application.md
+  - id: BR-590
+    name: Period Cost Recognition
+    context: BC-FIN
+    priority: medium
+    type: temporal
+    status: active
+    file: knowledge/rules/active/BR-590.period-cost-recognition.md
+  - id: BR-591
+    name: Process or Sell Differential Analysis
+    context: BC-FIN
+    priority: medium
+    type: computational
+    status: active
+    file: knowledge/rules/active/BR-591.process-or-sell-differential-analysis.md
+  - id: BR-592
+    name: Price Variance Calculation
+    context: BC-FIN
+    priority: medium
+    type: computational
+    status: active
+    file: knowledge/rules/active/BR-592.price-variance-calculation.md
+  - id: BR-593
+    name: P/E Ratio Calculation
+    context: BC-FIN
+    priority: medium
+    type: computational
+    status: active
+    file: knowledge/rules/active/BR-593.p-e-ratio-calculation.md
+  - id: BR-594
+    name: Bond Proceeds Calculation
+    context: BC-FIN
+    priority: medium
+    type: computational
+    status: active
+    file: knowledge/rules/active/BR-594.bond-proceeds-calculation.md
+  - id: BR-595
+    name: Product Cost Distortion Prevention
+    context: BC-FIN
+    priority: medium
+    type: validation
+    status: active
+    file: knowledge/rules/active/BR-595.product-cost-distortion-prevention.md

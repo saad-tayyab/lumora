@@ -13,2456 +13,3069 @@ terms:
     category: technical
     context: BC-FIN
     status: active
+    file: knowledge/glossary/10-k.md
   - term: 401k Plan
     category: technical
     context: BC-FIN
     status: active
+    file: knowledge/glossary/401k-plan.md
   - term: Absorption Costing
     category: domain
     context: BC-FIN
     status: active
+    file: knowledge/glossary/absorption-costing.md
   - term: Accelerated Depreciation
     category: domain
     context: BC-FIN
     status: active
+    file: knowledge/glossary/accelerated-depreciation.md
   - term: Account
     category: domain
     context: BC-FIN
     status: active
+    file: knowledge/glossary/account.md
   - term: Accounting Equation
     category: domain
     context: BC-FIN
     status: active
+    file: knowledge/glossary/accounting-equation.md
   - term: Accounting
     category: domain
     context: BC-FIN
     status: active
+    file: knowledge/glossary/accounting.md
   - term: Accounts Payable
     category: accounting
     context: BC-FIN
     status: active
+    file: knowledge/glossary/accounts-payable.md
   - term: Accounts Receivable Turnover
     category: domain
     context: BC-FIN
     status: active
+    file: knowledge/glossary/accounts-receivable-turnover.md
   - term: Accrual Basis Accounting
     category: domain
     context: BC-FIN
     status: active
+    file: knowledge/glossary/accrual-basis-accounting.md
   - term: Accrued Expense
     category: accounting
     context: BC-FIN
     status: active
+    file: knowledge/glossary/accrued-expense.md
   - term: Accrued Liability
     category: domain
     context: BC-FIN
     status: active
+    file: knowledge/glossary/accrued-liability.md
   - term: Accrued Revenue
     category: accounting
     context: BC-FIN
     status: active
+    file: knowledge/glossary/accrued-revenue.md
   - term: Accumulated Depreciation
     category: accounting
     context: BC-FIN
     status: active
+    file: knowledge/glossary/accumulated-depreciation.md
   - term: ACH
     category: technical
     context: BC-FIN
     status: active
+    file: knowledge/glossary/ach.md
   - term: Activity Base
     category: domain
     context: BC-FIN
     status: active
+    file: knowledge/glossary/activity-base.md
   - term: Activity-Based Costing
     category: domain
     context: BC-FIN
     status: active
+    file: knowledge/glossary/activity-based-costing.md
   - term: Activity-Based Selling/Admin Allocation
     category: domain
     context: BC-FIN
     status: active
+    file: knowledge/glossary/activity-based-selling-admin-allocation.md
   - term: Activity Pool
     category: domain
     context: BC-FIN
     status: active
+    file: knowledge/glossary/activity-pool.md
   - term: Activity Rate
     category: domain
     context: BC-FIN
     status: active
+    file: knowledge/glossary/activity-rate.md
   - term: Actual Costing
     category: domain
     context: BC-FIN
     status: active
+    file: knowledge/glossary/actual-costing.md
   - term: Additional Investment
     category: domain
     context: BC-FIN
     status: active
+    file: knowledge/glossary/additional-investment.md
   - term: Adjusting Entry
     category: accounting
     context: BC-FIN
     status: active
+    file: knowledge/glossary/adjusting-entry.md
   - term: Administrative Expenses
     category: domain
     context: BC-FIN
     status: active
+    file: knowledge/glossary/administrative-expenses.md
   - term: Aging of Receivables
     category: domain
     context: BC-FIN
     status: active
+    file: knowledge/glossary/aging-of-receivables.md
   - term: Aging Schedule
     category: domain
     context: BC-FIN
     status: active
+    file: knowledge/glossary/aging-schedule.md
   - term: Allowance for Doubtful Accounts
     category: domain
     context: BC-FIN
     status: active
+    file: knowledge/glossary/allowance-for-doubtful-accounts.md
   - term: Allowance Method
     category: domain
     context: BC-FIN
     status: active
+    file: knowledge/glossary/allowance-method.md
   - term: Amortization
     category: domain
     context: BC-FIN
     status: active
+    file: knowledge/glossary/amortization.md
   - term: Analysis of Receivables Method
     category: domain
     context: BC-FIN
     status: active
+    file: knowledge/glossary/analysis-of-receivables-method.md
   - term: Annual Report
     category: domain
     context: BC-FIN
     status: active
+    file: knowledge/glossary/annual-report.md
   - term: Annuity Factor
     category: domain
     context: BC-FIN
     status: active
+    file: knowledge/glossary/annuity-factor.md
   - term: Annuity
     category: domain
     context: BC-FIN
     status: active
+    file: knowledge/glossary/annuity.md
   - term: AOCI
     category: acronym
     context: BC-FIN
     status: active
+    file: knowledge/glossary/aoci.md
   - term: Applied Manufacturing Overhead
     category: domain
     context: BC-FIN
     status: active
+    file: knowledge/glossary/applied-manufacturing-overhead.md
   - term: Articles of Incorporation
     category: domain
     context: BC-FIN
     status: active
+    file: knowledge/glossary/articles-of-incorporation.md
   - term: Asset Turnover
     category: domain
     context: BC-FIN
     status: active
+    file: knowledge/glossary/asset-turnover.md
   - term: Assets
     category: domain
     context: BC-FIN
     status: active
+    file: knowledge/glossary/assets.md
   - term: Authorized Stock
     category: domain
     context: BC-FIN
     status: active
+    file: knowledge/glossary/authorized-stock.md
   - term: Available-for-Sale Securities
     category: domain
     context: BC-FIN
     status: active
+    file: knowledge/glossary/available-for-sale-securities.md
   - term: Average Common Shares Outstanding
     category: domain
     context: BC-FIN
     status: active
+    file: knowledge/glossary/average-common-shares-outstanding.md
   - term: Average Investment
     category: domain
     context: BC-FIN
     status: active
+    file: knowledge/glossary/average-investment.md
   - term: Average Rate of Return
     category: domain
     context: BC-FIN
     status: active
+    file: knowledge/glossary/average-rate-of-return.md
   - term: B2B
     category: acronym
     context: BC-FIN
     status: active
+    file: knowledge/glossary/b2b.md
   - term: B2C
     category: acronym
     context: BC-FIN
     status: active
+    file: knowledge/glossary/b2c.md
   - term: Bad Debt Expense
     category: domain
     context: BC-FIN
     status: active
+    file: knowledge/glossary/bad-debt-expense.md
   - term: Balanced Scorecard
     category: domain
     context: BC-FIN
     status: active
+    file: knowledge/glossary/balanced-scorecard.md
   - term: Bank Reconciliation
     category: domain
     context: BC-FIN
     status: active
+    file: knowledge/glossary/bank-reconciliation.md
   - term: Bank Statement
     category: domain
     context: BC-FIN
     status: active
+    file: knowledge/glossary/bank-statement.md
   - term: Bankruptcy
     category: domain
     context: BC-FIN
     status: active
+    file: knowledge/glossary/bankruptcy.md
   - term: Base Year
     category: domain
     context: BC-FIN
     status: active
+    file: knowledge/glossary/base-year.md
   - term: Board of Directors
     category: domain
     context: BC-FIN
     status: active
+    file: knowledge/glossary/board-of-directors.md
   - term: Bond Indenture
     category: domain
     context: BC-FIN
     status: active
+    file: knowledge/glossary/bond-indenture.md
   - term: Bond
     category: domain
     context: BC-FIN
     status: active
+    file: knowledge/glossary/bond.md
   - term: Bonus Method
     category: domain
     context: BC-FIN
     status: active
+    file: knowledge/glossary/bonus-method.md
   - term: Book Value
     category: accounting
     context: BC-FIN
     status: active
+    file: knowledge/glossary/book-value.md
   - term: Boot
     category: domain
     context: BC-FIN
     status: active
+    file: knowledge/glossary/boot.md
   - term: Break-Even Point
     category: domain
     context: BC-FIN
     status: active
+    file: knowledge/glossary/break-even-point.md
   - term: Budget Committee
     category: domain
     context: BC-FIN
     status: active
+    file: knowledge/glossary/budget-committee.md
   - term: Budget Padding
     category: domain
     context: BC-FIN
     status: active
+    file: knowledge/glossary/budget-padding.md
   - term: Budget Performance Report
     category: domain
     context: BC-FIN
     status: active
+    file: knowledge/glossary/budget-performance-report.md
   - term: Budget
     category: domain
     context: BC-FIN
     status: active
+    file: knowledge/glossary/budget.md
   - term: Budgetary Performance Evaluation
     category: domain
     context: BC-FIN
     status: active
+    file: knowledge/glossary/budgetary-performance-evaluation.md
   - term: Buildings
     category: accounting
     context: BC-FIN
     status: active
+    file: knowledge/glossary/buildings.md
   - term: Business Entity
     category: domain
     context: BC-FIN
     status: active
+    file: knowledge/glossary/business-entity.md
   - term: Bylaws
     category: domain
     context: BC-FIN
     status: active
+    file: knowledge/glossary/bylaws.md
   - term: Call Price
     category: domain
     context: BC-FIN
     status: active
+    file: knowledge/glossary/call-price.md
   - term: Callable Bonds
     category: domain
     context: BC-FIN
     status: active
+    file: knowledge/glossary/callable-bonds.md
   - term: Capital Account
     category: domain
     context: BC-FIN
     status: active
+    file: knowledge/glossary/capital-account.md
   - term: Capital Deficiency
     category: domain
     context: BC-FIN
     status: active
+    file: knowledge/glossary/capital-deficiency.md
   - term: Capital Expenditure
     category: domain
     context: BC-FIN
     status: active
+    file: knowledge/glossary/capital-expenditure.md
   - term: Capital Expenditures Budget
     category: domain
     context: BC-FIN
     status: active
+    file: knowledge/glossary/capital-expenditures-budget.md
   - term: Capital Investment Analysis
     category: domain
     context: BC-FIN
     status: active
+    file: knowledge/glossary/capital-investment-analysis.md
   - term: Capital Rationing
     category: domain
     context: BC-FIN
     status: active
+    file: knowledge/glossary/capital-rationing.md
   - term: Capital
     category: domain
     context: BC-FIN
     status: active
+    file: knowledge/glossary/capital.md
   - term: Carrying Amount
     category: domain
     context: BC-FIN
     status: active
+    file: knowledge/glossary/carrying-amount.md
   - term: Cash Basis Accounting
     category: domain
     context: BC-FIN
     status: active
+    file: knowledge/glossary/cash-basis-accounting.md
   - term: Cash Budget
     category: domain
     context: BC-FIN
     status: active
+    file: knowledge/glossary/cash-budget.md
   - term: Cash Disbursements Schedule
     category: domain
     context: BC-FIN
     status: active
+    file: knowledge/glossary/cash-disbursements-schedule.md
   - term: Cash Dividend
     category: domain
     context: BC-FIN
     status: active
+    file: knowledge/glossary/cash-dividend.md
   - term: Cash Equivalents
     category: domain
     context: BC-FIN
     status: active
+    file: knowledge/glossary/cash-equivalents.md
   - term: Cash Flow per Share
     category: domain
     context: BC-FIN
     status: active
+    file: knowledge/glossary/cash-flow-per-share.md
   - term: Cash Outflow
     category: domain
     context: BC-FIN
     status: active
+    file: knowledge/glossary/cash-outflow.md
   - term: Cash Paid for Income Taxes
     category: domain
     context: BC-FIN
     status: active
+    file: knowledge/glossary/cash-paid-for-income-taxes.md
   - term: Cash Paid for Interest
     category: domain
     context: BC-FIN
     status: active
+    file: knowledge/glossary/cash-paid-for-interest.md
   - term: Cash Paid for Merchandise
     category: domain
     context: BC-FIN
     status: active
+    file: knowledge/glossary/cash-paid-for-merchandise.md
   - term: Cash Paid for Operating Expenses
     category: domain
     context: BC-FIN
     status: active
+    file: knowledge/glossary/cash-paid-for-operating-expenses.md
   - term: Cash Payback Period
     category: domain
     context: BC-FIN
     status: active
+    file: knowledge/glossary/cash-payback-period.md
   - term: Cash Receipts Schedule
     category: domain
     context: BC-FIN
     status: active
+    file: knowledge/glossary/cash-receipts-schedule.md
   - term: Cash Received from Customers
     category: domain
     context: BC-FIN
     status: active
+    file: knowledge/glossary/cash-received-from-customers.md
   - term: Cash Register
     category: technical
     context: BC-FIN
     status: active
+    file: knowledge/glossary/cash-register.md
   - term: Cash Short and Over
     category: domain
     context: BC-FIN
     status: active
+    file: knowledge/glossary/cash-short-and-over.md
   - term: Chart of Accounts
     category: accounting
     context: BC-FIN
     status: active
+    file: knowledge/glossary/chart-of-accounts.md
   - term: Classified Balance Sheet
     category: domain
     context: BC-FIN
     status: active
+    file: knowledge/glossary/classified-balance-sheet.md
   - term: Closing Entries
     category: domain
     context: BC-FIN
     status: active
+    file: knowledge/glossary/closing-entries.md
   - term: Commercial Substance
     category: domain
     context: BC-FIN
     status: active
+    file: knowledge/glossary/commercial-substance.md
   - term: Common-Sized Statement
     category: domain
     context: BC-FIN
     status: active
+    file: knowledge/glossary/common-sized-statement.md
   - term: Common Stock
     category: domain
     context: BC-FIN
     status: active
+    file: knowledge/glossary/common-stock.md
   - term: Compensating Balance
     category: domain
     context: BC-FIN
     status: active
+    file: knowledge/glossary/compensating-balance.md
   - term: Compensating Error
     category: accounting
     context: BC-FIN
     status: active
+    file: knowledge/glossary/compensating-error.md
   - term: Compounding
     category: domain
     context: BC-FIN
     status: active
+    file: knowledge/glossary/compounding.md
   - term: Consigned Inventory
     category: domain
     context: BC-FIN
     status: active
+    file: knowledge/glossary/consigned-inventory.md
   - term: Consignee
     category: domain
     context: BC-FIN
     status: active
+    file: knowledge/glossary/consignee.md
   - term: Consignment
     category: domain
     context: BC-FIN
     status: active
+    file: knowledge/glossary/consignment.md
   - term: Consignor
     category: domain
     context: BC-FIN
     status: active
+    file: knowledge/glossary/consignor.md
   - term: Construction in Progress
     category: domain
     context: BC-FIN
     status: active
+    file: knowledge/glossary/construction-in-progress.md
   - term: Contingent Liability
     category: domain
     context: BC-FIN
     status: active
+    file: knowledge/glossary/contingent-liability.md
   - term: Continuous Budget
     category: domain
     context: BC-FIN
     status: active
+    file: knowledge/glossary/continuous-budget.md
   - term: Contra Account
     category: accounting
     context: BC-FIN
     status: active
+    file: knowledge/glossary/contra-account.md
   - term: Contract Rate
     category: domain
     context: BC-FIN
     status: active
+    file: knowledge/glossary/contract-rate.md
   - term: Contractual Restriction
     category: domain
     context: BC-FIN
     status: active
+    file: knowledge/glossary/contractual-restriction.md
   - term: Contribution Margin
     category: domain
     context: BC-FIN
     status: active
+    file: knowledge/glossary/contribution-margin.md
   - term: Control Environment
     category: domain
     context: BC-FIN
     status: active
+    file: knowledge/glossary/control-environment.md
   - term: Control Procedures
     category: domain
     context: BC-FIN
     status: active
+    file: knowledge/glossary/control-procedures.md
   - term: Controllable Variance
     category: domain
     context: BC-FIN
     status: active
+    file: knowledge/glossary/controllable-variance.md
   - term: Controller
     category: domain
     context: BC-FIN
     status: active
+    file: knowledge/glossary/controller.md
   - term: Controlling Account
     category: domain
     context: BC-FIN
     status: active
+    file: knowledge/glossary/controlling-account.md
   - term: Conversion Cost
     category: domain
     context: BC-FIN
     status: active
+    file: knowledge/glossary/conversion-cost.md
   - term: Conversion Costs
     category: domain
     context: BC-FIN
     status: active
+    file: knowledge/glossary/conversion-costs.md
   - term: Convertible Bonds
     category: domain
     context: BC-FIN
     status: active
+    file: knowledge/glossary/convertible-bonds.md
   - term: Corporate Finance
     category: domain
     context: BC-FIN
     status: active
+    file: knowledge/glossary/corporate-finance.md
   - term: Corporation
     category: domain
     context: BC-FIN
     status: active
+    file: knowledge/glossary/corporation.md
   - term: Correcting Entry
     category: accounting
     context: BC-FIN
     status: active
+    file: knowledge/glossary/correcting-entry.md
   - term: COSO
     category: acronym
     context: BC-FIN
     status: active
+    file: knowledge/glossary/coso.md
   - term: Cost Allocation
     category: domain
     context: BC-FIN
     status: active
+    file: knowledge/glossary/cost-allocation.md
   - term: Cost Behavior
     category: domain
     context: BC-FIN
     status: active
+    file: knowledge/glossary/cost-behavior.md
   - term: Cost Center
     category: domain
     context: BC-FIN
     status: active
+    file: knowledge/glossary/cost-center.md
   - term: Cost Centers
     category: domain
     context: BC-FIN
     status: active
+    file: knowledge/glossary/cost-centers.md
   - term: Cost Flow Assumption
     category: domain
     context: BC-FIN
     status: active
+    file: knowledge/glossary/cost-flow-assumption.md
   - term: Cost Object
     category: domain
     context: BC-FIN
     status: active
+    file: knowledge/glossary/cost-object.md
   - term: Cost of Direct Materials Available for Use
     category: domain
     context: BC-FIN
     status: active
+    file: knowledge/glossary/cost-of-direct-materials-available-for-use.md
   - term: Cost of Direct Materials Placed in Production
     category: domain
     context: BC-FIN
     status: active
+    file: knowledge/glossary/cost-of-direct-materials-placed-in-production.md
   - term: Cost of Finished Goods Available for Sale
     category: domain
     context: BC-FIN
     status: active
+    file: knowledge/glossary/cost-of-finished-goods-available-for-sale.md
   - term: Cost of Goods Manufactured
     category: domain
     context: BC-FIN
     status: active
+    file: knowledge/glossary/cost-of-goods-manufactured.md
   - term: Cost of Goods Sold
     category: domain
     context: BC-FIN
     status: active
+    file: knowledge/glossary/cost-of-goods-sold.md
   - term: Cost of Merchandise Purchased
     category: domain
     context: BC-FIN
     status: active
+    file: knowledge/glossary/cost-of-merchandise-purchased.md
   - term: Cost of Production Report
     category: domain
     context: BC-FIN
     status: active
+    file: knowledge/glossary/cost-of-production-report.md
   - term: Cost of Services
     category: domain
     context: BC-FIN
     status: active
+    file: knowledge/glossary/cost-of-services.md
   - term: Cost-Plus Methods
     category: domain
     context: BC-FIN
     status: active
+    file: knowledge/glossary/cost-plus-methods.md
   - term: Cost-Plus Pricing
     category: domain
     context: BC-FIN
     status: active
+    file: knowledge/glossary/cost-plus-pricing.md
   - term: Cost Principle
     category: domain
     context: BC-FIN
     status: active
+    file: knowledge/glossary/cost-principle.md
   - term: Cost Variance Analysis
     category: domain
     context: BC-FIN
     status: active
+    file: knowledge/glossary/cost-variance-analysis.md
   - term: Cost-Volume-Profit Analysis
     category: domain
     context: BC-FIN
     status: active
+    file: knowledge/glossary/cost-volume-profit-analysis.md
   - term: Cost-Volume-Profit Chart
     category: domain
     context: BC-FIN
     status: active
+    file: knowledge/glossary/cost-volume-profit-chart.md
   - term: Cost
     category: domain
     context: BC-FIN
     status: active
+    file: knowledge/glossary/cost.md
   - term: Credit Card Clearinghouse
     category: technical
     context: BC-FIN
     status: active
+    file: knowledge/glossary/credit-card-clearinghouse.md
   - term: Credit Memo
     category: domain
     context: BC-FIN
     status: active
+    file: knowledge/glossary/credit-memo.md
   - term: Credit Memorandum
     category: domain
     context: BC-FIN
     status: active
+    file: knowledge/glossary/credit-memorandum.md
   - term: Credit Terms
     category: domain
     context: BC-FIN
     status: active
+    file: knowledge/glossary/credit-terms.md
   - term: Credit
     category: accounting
     context: BC-FIN
     status: active
+    file: knowledge/glossary/credit.md
   - term: Creditor Risk
     category: domain
     context: BC-FIN
     status: active
+    file: knowledge/glossary/creditor-risk.md
   - term: Creditor
     category: domain
     context: BC-FIN
     status: active
+    file: knowledge/glossary/creditor.md
   - term: Critical Audit Matter
     category: domain
     context: BC-FIN
     status: active
+    file: knowledge/glossary/critical-audit-matter.md
   - term: Currency Exchange Rates
     category: domain
     context: BC-FIN
     status: active
+    file: knowledge/glossary/currency-exchange-rates.md
   - term: Current Assets
     category: domain
     context: BC-FIN
     status: active
+    file: knowledge/glossary/current-assets.md
   - term: Current Liabilities
     category: domain
     context: BC-FIN
     status: active
+    file: knowledge/glossary/current-liabilities.md
   - term: Current Liability
     category: domain
     context: BC-FIN
     status: active
+    file: knowledge/glossary/current-liability.md
   - term: Current Position Analysis
     category: domain
     context: BC-FIN
     status: active
+    file: knowledge/glossary/current-position-analysis.md
   - term: Current Ratio
     category: domain
     context: BC-FIN
     status: active
+    file: knowledge/glossary/current-ratio.md
   - term: Customer Lifetime Value
     category: domain
     context: BC-FIN
     status: active
+    file: knowledge/glossary/customer-lifetime-value.md
   - term: Customer Refunds Payable
     category: domain
     context: BC-FIN
     status: active
+    file: knowledge/glossary/customer-refunds-payable.md
   - term: CVP Analysis
     category: domain
     context: BC-FIN
     status: active
+    file: knowledge/glossary/cvp-analysis.md
   - term: Days' Cash on Hand
     category: domain
     context: BC-FIN
     status: active
+    file: knowledge/glossary/days-cash-on-hand.md
   - term: Days' Sales in Inventory
     category: domain
     context: BC-FIN
     status: active
+    file: knowledge/glossary/days-sales-in-inventory.md
   - term: Days' Sales in Receivables
     category: domain
     context: BC-FIN
     status: active
+    file: knowledge/glossary/days-sales-in-receivables.md
   - term: DDB Method
     category: domain
     context: BC-FIN
     status: active
+    file: knowledge/glossary/ddb-method.md
   - term: Debit Memo
     category: domain
     context: BC-FIN
     status: active
+    file: knowledge/glossary/debit-memo.md
   - term: Debit Memorandum
     category: domain
     context: BC-FIN
     status: active
+    file: knowledge/glossary/debit-memorandum.md
   - term: Debit
     category: accounting
     context: BC-FIN
     status: active
+    file: knowledge/glossary/debit.md
   - term: Debtor
     category: domain
     context: BC-FIN
     status: active
+    file: knowledge/glossary/debtor.md
   - term: Decentralized Operations
     category: domain
     context: BC-FIN
     status: active
+    file: knowledge/glossary/decentralized-operations.md
   - term: Deferred Expense
     category: domain
     context: BC-FIN
     status: active
+    file: knowledge/glossary/deferred-expense.md
   - term: Deferred Income Taxes
     category: domain
     context: BC-FIN
     status: active
+    file: knowledge/glossary/deferred-income-taxes.md
   - term: Deferred Revenue
     category: domain
     context: BC-FIN
     status: active
+    file: knowledge/glossary/deferred-revenue.md
   - term: Defined Benefit Pension Plan
     category: domain
     context: BC-FIN
     status: active
+    file: knowledge/glossary/defined-benefit-pension-plan.md
   - term: Defined Contribution Pension Plan
     category: domain
     context: BC-FIN
     status: active
+    file: knowledge/glossary/defined-contribution-pension-plan.md
   - term: Delivery Expense
     category: domain
     context: BC-FIN
     status: active
+    file: knowledge/glossary/delivery-expense.md
   - term: Depletion
     category: domain
     context: BC-FIN
     status: active
+    file: knowledge/glossary/depletion.md
   - term: Deposit in Transit
     category: domain
     context: BC-FIN
     status: active
+    file: knowledge/glossary/deposit-in-transit.md
   - term: Depreciable Cost
     category: domain
     context: BC-FIN
     status: active
+    file: knowledge/glossary/depreciable-cost.md
   - term: Depreciation Expense
     category: domain
     context: BC-FIN
     status: active
+    file: knowledge/glossary/depreciation-expense.md
   - term: Depreciation
     category: accounting
     context: BC-FIN
     status: active
+    file: knowledge/glossary/depreciation.md
   - term: Desired Rate of Return
     category: domain
     context: BC-FIN
     status: active
+    file: knowledge/glossary/desired-rate-of-return.md
   - term: Differential Analysis
     category: domain
     context: BC-FIN
     status: active
+    file: knowledge/glossary/differential-analysis.md
   - term: Differential Cost
     category: domain
     context: BC-FIN
     status: active
+    file: knowledge/glossary/differential-cost.md
   - term: Differential Profit (Loss)
     category: domain
     context: BC-FIN
     status: active
+    file: knowledge/glossary/differential-profit-loss.md
   - term: Differential Revenue
     category: domain
     context: BC-FIN
     status: active
+    file: knowledge/glossary/differential-revenue.md
   - term: Diluted Earnings per Share
     category: domain
     context: BC-FIN
     status: active
+    file: knowledge/glossary/diluted-earnings-per-share.md
   - term: Direct Labor Cost Budget
     category: domain
     context: BC-FIN
     status: active
+    file: knowledge/glossary/direct-labor-cost-budget.md
   - term: Direct Labor Rate Variance
     category: domain
     context: BC-FIN
     status: active
+    file: knowledge/glossary/direct-labor-rate-variance.md
   - term: Direct Labor Time Variance
     category: domain
     context: BC-FIN
     status: active
+    file: knowledge/glossary/direct-labor-time-variance.md
   - term: Direct Labor
     category: domain
     context: BC-FIN
     status: active
+    file: knowledge/glossary/direct-labor.md
   - term: Direct Materials Price Variance
     category: domain
     context: BC-FIN
     status: active
+    file: knowledge/glossary/direct-materials-price-variance.md
   - term: Direct Materials Purchases Budget
     category: domain
     context: BC-FIN
     status: active
+    file: knowledge/glossary/direct-materials-purchases-budget.md
   - term: Direct Materials Quantity Variance
     category: domain
     context: BC-FIN
     status: active
+    file: knowledge/glossary/direct-materials-quantity-variance.md
   - term: Direct Materials
     category: domain
     context: BC-FIN
     status: active
+    file: knowledge/glossary/direct-materials.md
   - term: Direct Method
     category: domain
     context: BC-FIN
     status: active
+    file: knowledge/glossary/direct-method.md
   - term: Discount on Bonds Payable
     category: domain
     context: BC-FIN
     status: active
+    file: knowledge/glossary/discount-on-bonds-payable.md
   - term: Discount Rate
     category: domain
     context: BC-FIN
     status: active
+    file: knowledge/glossary/discount-rate.md
   - term: Discount
     category: domain
     context: BC-FIN
     status: active
+    file: knowledge/glossary/discount.md
   - term: Discounted Cash Flow
     category: domain
     context: BC-FIN
     status: active
+    file: knowledge/glossary/discounted-cash-flow.md
   - term: Discounting
     category: domain
     context: BC-FIN
     status: active
+    file: knowledge/glossary/discounting.md
   - term: Discretionary Restriction
     category: domain
     context: BC-FIN
     status: active
+    file: knowledge/glossary/discretionary-restriction.md
   - term: Dividend Yield
     category: domain
     context: BC-FIN
     status: active
+    file: knowledge/glossary/dividend-yield.md
   - term: Dividends in Arrears
     category: domain
     context: BC-FIN
     status: active
+    file: knowledge/glossary/dividends-in-arrears.md
   - term: Dividends
     category: domain
     context: BC-FIN
     status: active
+    file: knowledge/glossary/dividends.md
   - term: Double-Declining-Balance Depreciation
     category: domain
     context: BC-FIN
     status: active
+    file: knowledge/glossary/double-declining-balance-depreciation.md
   - term: Double-Entry Accounting
     category: domain
     context: BC-FIN
     status: active
+    file: knowledge/glossary/double-entry-accounting.md
   - term: Drawing Account
     category: domain
     context: BC-FIN
     status: active
+    file: knowledge/glossary/drawing-account.md
   - term: Drawing
     category: domain
     context: BC-FIN
     status: active
+    file: knowledge/glossary/drawing.md
   - term: Due Date
     category: domain
     context: BC-FIN
     status: active
+    file: knowledge/glossary/due-date.md
   - term: DuPont Formula
     category: domain
     context: BC-FIN
     status: active
+    file: knowledge/glossary/dupont-formula.md
   - term: Dynamic Pricing
     category: domain
     context: BC-FIN
     status: active
+    file: knowledge/glossary/dynamic-pricing.md
   - term: EDGAR
     category: acronym
     context: BC-FIN
     status: active
+    file: knowledge/glossary/edgar.md
   - term: Effective Interest Rate Method
     category: domain
     context: BC-FIN
     status: active
+    file: knowledge/glossary/effective-interest-rate-method.md
   - term: Electronic Funds Transfer
     category: technical
     context: BC-FIN
     status: active
+    file: knowledge/glossary/electronic-funds-transfer.md
   - term: Employee Fraud
     category: domain
     context: BC-FIN
     status: active
+    file: knowledge/glossary/employee-fraud.md
   - term: End-of-Period Spreadsheet
     category: domain
     context: BC-FIN
     status: active
+    file: knowledge/glossary/end-of-period-spreadsheet.md
   - term: Engineering Change Order
     category: domain
     context: BC-FIN
     status: active
+    file: knowledge/glossary/engineering-change-order.md
   - term: EPS
     category: domain
     context: BC-FIN
     status: active
+    file: knowledge/glossary/eps.md
   - term: Equity Method
     category: domain
     context: BC-FIN
     status: active
+    file: knowledge/glossary/equity-method.md
   - term: Equivalent Units of Production
     category: domain
     context: BC-FIN
     status: active
+    file: knowledge/glossary/equivalent-units-of-production.md
   - term: Equivalent Units
     category: domain
     context: BC-FIN
     status: active
+    file: knowledge/glossary/equivalent-units.md
   - term: ESG
     category: acronym
     context: BC-FIN
     status: active
+    file: knowledge/glossary/esg.md
   - term: Estimated Coupons Payable
     category: domain
     context: BC-FIN
     status: active
+    file: knowledge/glossary/estimated-coupons-payable.md
   - term: Estimated Returns Inventory
     category: domain
     context: BC-FIN
     status: active
+    file: knowledge/glossary/estimated-returns-inventory.md
   - term: Exchange of Similar Assets
     category: domain
     context: BC-FIN
     status: active
+    file: knowledge/glossary/exchange-of-similar-assets.md
   - term: Exchange Rate
     category: domain
     context: BC-FIN
     status: active
+    file: knowledge/glossary/exchange-rate.md
   - term: Expected Value
     category: domain
     context: BC-FIN
     status: active
+    file: knowledge/glossary/expected-value.md
   - term: Expense Recognition Principle
     category: domain
     context: BC-FIN
     status: active
+    file: knowledge/glossary/expense-recognition-principle.md
   - term: Expense
     category: domain
     context: BC-FIN
     status: active
+    file: knowledge/glossary/expense.md
   - term: Expenses
     category: domain
     context: BC-FIN
     status: active
+    file: knowledge/glossary/expenses.md
   - term: Face Amount
     category: domain
     context: BC-FIN
     status: active
+    file: knowledge/glossary/face-amount.md
   - term: Face Value
     category: domain
     context: BC-FIN
     status: active
+    file: knowledge/glossary/face-value.md
   - term: Factory Burden
     category: domain
     context: BC-FIN
     status: active
+    file: knowledge/glossary/factory-burden.md
   - term: Fair Market Value
     category: domain
     context: BC-FIN
     status: active
+    file: knowledge/glossary/fair-market-value.md
   - term: Fair Value Method
     category: domain
     context: BC-FIN
     status: active
+    file: knowledge/glossary/fair-value-method.md
   - term: FASB
     category: acronym
     context: BC-FIN
     status: active
+    file: knowledge/glossary/fasb.md
   - term: Favorable Variance
     category: domain
     context: BC-FIN
     status: active
+    file: knowledge/glossary/favorable-variance.md
   - term: Fees Earned
     category: accounting
     context: BC-FIN
     status: active
+    file: knowledge/glossary/fees-earned.md
   - term: FICA
     category: acronym
     context: BC-FIN
     status: active
+    file: knowledge/glossary/fica.md
   - term: FIFO Method
     category: domain
     context: BC-FIN
     status: active
+    file: knowledge/glossary/fifo-method.md
   - term: FIFO
     category: domain
     context: BC-FIN
     status: active
+    file: knowledge/glossary/fifo.md
   - term: Financial Gearing
     category: domain
     context: BC-FIN
     status: active
+    file: knowledge/glossary/financial-gearing.md
   - term: Financial Statements
     category: domain
     context: BC-FIN
     status: active
+    file: knowledge/glossary/financial-statements.md
   - term: Financing Activities
     category: domain
     context: BC-FIN
     status: active
+    file: knowledge/glossary/financing-activities.md
   - term: Finished Goods Ledger
     category: domain
     context: BC-FIN
     status: active
+    file: knowledge/glossary/finished-goods-ledger.md
   - term: Fiscal Year
     category: domain
     context: BC-FIN
     status: active
+    file: knowledge/glossary/fiscal-year.md
   - term: Fixed Asset
     category: accounting
     context: BC-FIN
     status: active
+    file: knowledge/glossary/fixed-asset.md
   - term: Fixed Assets
     category: domain
     context: BC-FIN
     status: active
+    file: knowledge/glossary/fixed-assets.md
   - term: Fixed Cost per Account
     category: domain
     context: BC-FIN
     status: active
+    file: knowledge/glossary/fixed-cost-per-account.md
   - term: Fixed Cost
     category: domain
     context: BC-FIN
     status: active
+    file: knowledge/glossary/fixed-cost.md
   - term: Fixed Manufacturing Overhead Volume Variance
     category: domain
     context: BC-FIN
     status: active
+    file: knowledge/glossary/fixed-manufacturing-overhead-volume-variance.md
   - term: Flavor Changeover Cost
     category: domain
     context: BC-FIN
     status: active
+    file: knowledge/glossary/flavor-changeover-cost.md
   - term: Flexible Budget
     category: domain
     context: BC-FIN
     status: active
+    file: knowledge/glossary/flexible-budget.md
   - term: FOB Destination
     category: domain
     context: BC-FIN
     status: active
+    file: knowledge/glossary/fob-destination.md
   - term: FOB Shipping Point
     category: domain
     context: BC-FIN
     status: active
+    file: knowledge/glossary/fob-shipping-point.md
   - term: FOB
     category: acronym
     context: BC-FIN
     status: active
+    file: knowledge/glossary/fob.md
   - term: Force Majeure
     category: domain
     context: BC-FIN
     status: active
+    file: knowledge/glossary/force-majeure.md
   - term: Form 10-K
     category: domain
     context: BC-FIN
     status: active
+    file: knowledge/glossary/form-10-k.md
   - term: Form 941
     category: domain
     context: BC-FIN
     status: active
+    file: knowledge/glossary/form-941.md
   - term: Form W-2
     category: domain
     context: BC-FIN
     status: active
+    file: knowledge/glossary/form-w-2.md
   - term: Four-Column Account
     category: domain
     context: BC-FIN
     status: active
+    file: knowledge/glossary/four-column-account.md
   - term: Four-Step Process
     category: domain
     context: BC-FIN
     status: active
+    file: knowledge/glossary/four-step-process.md
   - term: Free Cash Flow
     category: domain
     context: BC-FIN
     status: active
+    file: knowledge/glossary/free-cash-flow.md
   - term: Freight In
     category: domain
     context: BC-FIN
     status: active
+    file: knowledge/glossary/freight-in.md
   - term: FUTA
     category: acronym
     context: BC-FIN
     status: active
+    file: knowledge/glossary/futa.md
   - term: GAAP
     category: acronym
     context: BC-FIN
     status: active
+    file: knowledge/glossary/gaap.md
   - term: Gain on Realization
     category: domain
     context: BC-FIN
     status: active
+    file: knowledge/glossary/gain-on-realization.md
   - term: Gain on Sale of Asset
     category: domain
     context: BC-FIN
     status: active
+    file: knowledge/glossary/gain-on-sale-of-asset.md
   - term: Goodwill
     category: domain
     context: BC-FIN
     status: active
+    file: knowledge/glossary/goodwill.md
   - term: Gross Pay
     category: domain
     context: BC-FIN
     status: active
+    file: knowledge/glossary/gross-pay.md
   - term: Gross Profit Method
     category: domain
     context: BC-FIN
     status: active
+    file: knowledge/glossary/gross-profit-method.md
   - term: Guest Nights
     category: domain
     context: BC-FIN
     status: active
+    file: knowledge/glossary/guest-nights.md
   - term: Historical Cost
     category: accounting
     context: BC-FIN
     status: active
+    file: knowledge/glossary/historical-cost.md
   - term: Horizontal Analysis
     category: domain
     context: BC-FIN
     status: active
+    file: knowledge/glossary/horizontal-analysis.md
   - term: Hurdle Rate
     category: domain
     context: BC-FIN
     status: active
+    file: knowledge/glossary/hurdle-rate.md
   - term: Hybrid Costing
     category: domain
     context: BC-FIN
     status: active
+    file: knowledge/glossary/hybrid-costing.md
   - term: Ideal Standards
     category: domain
     context: BC-FIN
     status: active
+    file: knowledge/glossary/ideal-standards.md
   - term: Income-Sharing Ratio
     category: domain
     context: BC-FIN
     status: active
+    file: knowledge/glossary/income-sharing-ratio.md
   - term: Income Summary
     category: domain
     context: BC-FIN
     status: active
+    file: knowledge/glossary/income-summary.md
   - term: Incremental Budgeting
     category: domain
     context: BC-FIN
     status: active
+    file: knowledge/glossary/incremental-budgeting.md
   - term: Indirect Labor
     category: domain
     context: BC-FIN
     status: active
+    file: knowledge/glossary/indirect-labor.md
   - term: Indirect Materials
     category: domain
     context: BC-FIN
     status: active
+    file: knowledge/glossary/indirect-materials.md
   - term: Indirect Method
     category: domain
     context: BC-FIN
     status: active
+    file: knowledge/glossary/indirect-method.md
   - term: Inflation
     category: domain
     context: BC-FIN
     status: active
+    file: knowledge/glossary/inflation.md
   - term: Information and Communication
     category: domain
     context: BC-FIN
     status: active
+    file: knowledge/glossary/information-and-communication.md
   - term: Installment Note
     category: domain
     context: BC-FIN
     status: active
+    file: knowledge/glossary/installment-note.md
   - term: Intangible Asset
     category: domain
     context: BC-FIN
     status: active
+    file: knowledge/glossary/intangible-asset.md
   - term: Intangible Assets
     category: domain
     context: BC-FIN
     status: active
+    file: knowledge/glossary/intangible-assets.md
   - term: Interest Allowance
     category: domain
     context: BC-FIN
     status: active
+    file: knowledge/glossary/interest-allowance.md
   - term: Interest Expense
     category: domain
     context: BC-FIN
     status: active
+    file: knowledge/glossary/interest-expense.md
   - term: Internal Control
     category: domain
     context: BC-FIN
     status: active
+    file: knowledge/glossary/internal-control.md
   - term: Internal Rate of Return
     category: domain
     context: BC-FIN
     status: active
+    file: knowledge/glossary/internal-rate-of-return.md
   - term: Inventory Profits
     category: domain
     context: BC-FIN
     status: active
+    file: knowledge/glossary/inventory-profits.md
   - term: Inventory Shrinkage
     category: domain
     context: BC-FIN
     status: active
+    file: knowledge/glossary/inventory-shrinkage.md
   - term: Inventory Turnover
     category: domain
     context: BC-FIN
     status: active
+    file: knowledge/glossary/inventory-turnover.md
   - term: Invested Assets
     category: domain
     context: BC-FIN
     status: active
+    file: knowledge/glossary/invested-assets.md
   - term: Investee
     category: domain
     context: BC-FIN
     status: active
+    file: knowledge/glossary/investee.md
   - term: Investing Activities
     category: domain
     context: BC-FIN
     status: active
+    file: knowledge/glossary/investing-activities.md
   - term: Investment Center
     category: domain
     context: BC-FIN
     status: active
+    file: knowledge/glossary/investment-center.md
   - term: Investment Turnover
     category: domain
     context: BC-FIN
     status: active
+    file: knowledge/glossary/investment-turnover.md
   - term: Investor
     category: domain
     context: BC-FIN
     status: active
+    file: knowledge/glossary/investor.md
   - term: Issued Stock
     category: domain
     context: BC-FIN
     status: active
+    file: knowledge/glossary/issued-stock.md
   - term: Job Cost Analysis
     category: domain
     context: BC-FIN
     status: active
+    file: knowledge/glossary/job-cost-analysis.md
   - term: Job Cost Sheet
     category: domain
     context: BC-FIN
     status: active
+    file: knowledge/glossary/job-cost-sheet.md
   - term: Job Order Costing
     category: domain
     context: BC-FIN
     status: active
+    file: knowledge/glossary/job-order-costing.md
   - term: Job
     category: domain
     context: BC-FIN
     status: active
+    file: knowledge/glossary/job.md
   - term: Journal Entry
     category: domain
     context: BC-FIN
     status: active
+    file: knowledge/glossary/journal-entry.md
   - term: Journal
     category: accounting
     context: BC-FIN
     status: active
+    file: knowledge/glossary/journal.md
   - term: Journalizing
     category: domain
     context: BC-FIN
     status: active
+    file: knowledge/glossary/journalizing.md
   - term: Lagging Indicator
     category: domain
     context: BC-FIN
     status: active
+    file: knowledge/glossary/lagging-indicator.md
   - term: Land Improvements
     category: domain
     context: BC-FIN
     status: active
+    file: knowledge/glossary/land-improvements.md
   - term: Land
     category: accounting
     context: BC-FIN
     status: active
+    file: knowledge/glossary/land.md
   - term: LCM
     category: domain
     context: BC-FIN
     status: active
+    file: knowledge/glossary/lcm.md
   - term: Leading Indicator
     category: domain
     context: BC-FIN
     status: active
+    file: knowledge/glossary/leading-indicator.md
   - term: Lean Manufacturing
     category: domain
     context: BC-FIN
     status: active
+    file: knowledge/glossary/lean-manufacturing.md
   - term: Lease
     category: domain
     context: BC-FIN
     status: active
+    file: knowledge/glossary/lease.md
   - term: Ledger
     category: accounting
     context: BC-FIN
     status: active
+    file: knowledge/glossary/ledger.md
   - term: Legal Capital
     category: domain
     context: BC-FIN
     status: active
+    file: knowledge/glossary/legal-capital.md
   - term: Legal Restriction
     category: domain
     context: BC-FIN
     status: active
+    file: knowledge/glossary/legal-restriction.md
   - term: Lessee
     category: domain
     context: BC-FIN
     status: active
+    file: knowledge/glossary/lessee.md
   - term: Lessor
     category: domain
     context: BC-FIN
     status: active
+    file: knowledge/glossary/lessor.md
   - term: Liabilities
     category: domain
     context: BC-FIN
     status: active
+    file: knowledge/glossary/liabilities.md
   - term: LIFO
     category: domain
     context: BC-FIN
     status: active
+    file: knowledge/glossary/lifo.md
   - term: Limited Liability Company (LLC)
     category: domain
     context: BC-FIN
     status: active
+    file: knowledge/glossary/limited-liability-company-llc.md
   - term: Line of Credit
     category: domain
     context: BC-FIN
     status: active
+    file: knowledge/glossary/line-of-credit.md
   - term: Liquidation
     category: domain
     context: BC-FIN
     status: active
+    file: knowledge/glossary/liquidation.md
   - term: Liquidity
     category: domain
     context: BC-FIN
     status: active
+    file: knowledge/glossary/liquidity.md
   - term: LLC
     category: acronym
     context: BC-FIN
     status: active
+    file: knowledge/glossary/llc.md
   - term: Long-Term Liabilities
     category: domain
     context: BC-FIN
     status: active
+    file: knowledge/glossary/long-term-liabilities.md
   - term: Long-Term Liability
     category: domain
     context: BC-FIN
     status: active
+    file: knowledge/glossary/long-term-liability.md
   - term: Loss on Realization
     category: domain
     context: BC-FIN
     status: active
+    file: knowledge/glossary/loss-on-realization.md
   - term: Lower of Cost or Market
     category: domain
     context: BC-FIN
     status: active
+    file: knowledge/glossary/lower-of-cost-or-market.md
   - term: MACRS
     category: technical
     context: BC-FIN
     status: active
+    file: knowledge/glossary/macrs.md
   - term: Mail-In Rebate
     category: domain
     context: BC-FIN
     status: active
+    file: knowledge/glossary/mail-in-rebate.md
   - term: Management by Exception
     category: domain
     context: BC-FIN
     status: active
+    file: knowledge/glossary/management-by-exception.md
   - term: Managerial Accounting
     category: domain
     context: BC-FIN
     status: active
+    file: knowledge/glossary/managerial-accounting.md
   - term: Manufacturing Overhead Controllable Variance
     category: domain
     context: BC-FIN
     status: active
+    file: knowledge/glossary/manufacturing-overhead-controllable-variance.md
   - term: Margin of Safety
     category: domain
     context: BC-FIN
     status: active
+    file: knowledge/glossary/margin-of-safety.md
   - term: Market Rate
     category: domain
     context: BC-FIN
     status: active
+    file: knowledge/glossary/market-rate.md
   - term: Marketable Securities
     category: domain
     context: BC-FIN
     status: active
+    file: knowledge/glossary/marketable-securities.md
   - term: Markup Percentage
     category: domain
     context: BC-FIN
     status: active
+    file: knowledge/glossary/markup-percentage.md
   - term: Master Budget
     category: domain
     context: BC-FIN
     status: active
+    file: knowledge/glossary/master-budget.md
   - term: Matching Principle
     category: domain
     context: BC-FIN
     status: active
+    file: knowledge/glossary/matching-principle.md
   - term: Material Weakness
     category: domain
     context: BC-FIN
     status: active
+    file: knowledge/glossary/material-weakness.md
   - term: Materials Addition Point
     category: domain
     context: BC-FIN
     status: active
+    file: knowledge/glossary/materials-addition-point.md
   - term: Materials Ledger
     category: domain
     context: BC-FIN
     status: active
+    file: knowledge/glossary/materials-ledger.md
   - term: Materials Requisition
     category: domain
     context: BC-FIN
     status: active
+    file: knowledge/glossary/materials-requisition.md
   - term: MD&A
     category: acronym
     context: BC-FIN
     status: active
+    file: knowledge/glossary/md-a.md
   - term: Measure Map
     category: domain
     context: BC-FIN
     status: active
+    file: knowledge/glossary/measure-map.md
   - term: Medicare Tax
     category: domain
     context: BC-FIN
     status: active
+    file: knowledge/glossary/medicare-tax.md
   - term: Member Equity
     category: domain
     context: BC-FIN
     status: active
+    file: knowledge/glossary/member-equity.md
   - term: Merchandising Business
     category: domain
     context: BC-FIN
     status: active
+    file: knowledge/glossary/merchandising-business.md
   - term: Mixed Cost
     category: domain
     context: BC-FIN
     status: active
+    file: knowledge/glossary/mixed-cost.md
   - term: Monitoring
     category: domain
     context: BC-FIN
     status: active
+    file: knowledge/glossary/monitoring.md
   - term: Mortgage Note
     category: domain
     context: BC-FIN
     status: active
+    file: knowledge/glossary/mortgage-note.md
   - term: Multiperiod Budget
     category: domain
     context: BC-FIN
     status: active
+    file: knowledge/glossary/multiperiod-budget.md
   - term: Multiple Production Department Overhead Rate
     category: domain
     context: BC-FIN
     status: active
+    file: knowledge/glossary/multiple-production-department-overhead-rate.md
   - term: Multiple-Step Income Statement
     category: domain
     context: BC-FIN
     status: active
+    file: knowledge/glossary/multiple-step-income-statement.md
   - term: Mutual Agency
     category: domain
     context: BC-FIN
     status: active
+    file: knowledge/glossary/mutual-agency.md
   - term: Net Advantage of Graduate Degree
     category: domain
     context: BC-FIN
     status: active
+    file: knowledge/glossary/net-advantage-of-graduate-degree.md
   - term: Net Cash Inflow
     category: domain
     context: BC-FIN
     status: active
+    file: knowledge/glossary/net-cash-inflow.md
   - term: Net Income
     category: domain
     context: BC-FIN
     status: active
+    file: knowledge/glossary/net-income.md
   - term: Net Loss
     category: domain
     context: BC-FIN
     status: active
+    file: knowledge/glossary/net-loss.md
   - term: Net Pay
     category: domain
     context: BC-FIN
     status: active
+    file: knowledge/glossary/net-pay.md
   - term: Net Present Value
     category: domain
     context: BC-FIN
     status: active
+    file: knowledge/glossary/net-present-value.md
   - term: Net Purchases
     category: domain
     context: BC-FIN
     status: active
+    file: knowledge/glossary/net-purchases.md
   - term: Net Realizable Value
     category: domain
     context: BC-FIN
     status: active
+    file: knowledge/glossary/net-realizable-value.md
   - term: No-Par Stock
     category: domain
     context: BC-FIN
     status: active
+    file: knowledge/glossary/no-par-stock.md
   - term: Non-Cash Adjustment
     category: domain
     context: BC-FIN
     status: active
+    file: knowledge/glossary/non-cash-adjustment.md
   - term: Non-GAAP
     category: domain
     context: BC-FIN
     status: active
+    file: knowledge/glossary/non-gaap.md
   - term: Noncash Investing and Financing Activities
     category: domain
     context: BC-FIN
     status: active
+    file: knowledge/glossary/noncash-investing-and-financing-activities.md
   - term: Normal Balance
     category: accounting
     context: BC-FIN
     status: active
+    file: knowledge/glossary/normal-balance.md
   - term: Normal Capacity
     category: domain
     context: BC-FIN
     status: active
+    file: knowledge/glossary/normal-capacity.md
   - term: Normal Costing
     category: domain
     context: BC-FIN
     status: active
+    file: knowledge/glossary/normal-costing.md
   - term: Normal Standards
     category: domain
     context: BC-FIN
     status: active
+    file: knowledge/glossary/normal-standards.md
   - term: Notes Payable
     category: accounting
     context: BC-FIN
     status: active
+    file: knowledge/glossary/notes-payable.md
   - term: NRV
     category: domain
     context: BC-FIN
     status: active
+    file: knowledge/glossary/nrv.md
   - term: NSF Check
     category: domain
     context: BC-FIN
     status: active
+    file: knowledge/glossary/nsf-check.md
   - term: Number of Days Past Due
     category: domain
     context: BC-FIN
     status: active
+    file: knowledge/glossary/number-of-days-past-due.md
   - term: Occupancy Rate
     category: domain
     context: BC-FIN
     status: active
+    file: knowledge/glossary/occupancy-rate.md
   - term: Office Equipment
     category: accounting
     context: BC-FIN
     status: active
+    file: knowledge/glossary/office-equipment.md
   - term: Omission
     category: accounting
     context: BC-FIN
     status: active
+    file: knowledge/glossary/omission.md
   - term: Operating Activities
     category: domain
     context: BC-FIN
     status: active
+    file: knowledge/glossary/operating-activities.md
   - term: Operating Budget
     category: domain
     context: BC-FIN
     status: active
+    file: knowledge/glossary/operating-budget.md
   - term: Operating Cycle
     category: domain
     context: BC-FIN
     status: active
+    file: knowledge/glossary/operating-cycle.md
   - term: Operating Income
     category: domain
     context: BC-FIN
     status: active
+    file: knowledge/glossary/operating-income.md
   - term: Operating Leverage
     category: domain
     context: BC-FIN
     status: active
+    file: knowledge/glossary/operating-leverage.md
   - term: Operations Finance
     category: domain
     context: BC-FIN
     status: active
+    file: knowledge/glossary/operations-finance.md
   - term: Opportunity Cost
     category: domain
     context: BC-FIN
     status: active
+    file: knowledge/glossary/opportunity-cost.md
   - term: Other Revenue and Expense
     category: domain
     context: BC-FIN
     status: active
+    file: knowledge/glossary/other-revenue-and-expense.md
   - term: Outstanding Checks
     category: domain
     context: BC-FIN
     status: active
+    file: knowledge/glossary/outstanding-checks.md
   - term: Outstanding Stock
     category: domain
     context: BC-FIN
     status: active
+    file: knowledge/glossary/outstanding-stock.md
   - term: Over-Applied Overhead
     category: domain
     context: BC-FIN
     status: active
+    file: knowledge/glossary/over-applied-overhead.md
   - term: Overhead Rate for Services
     category: domain
     context: BC-FIN
     status: active
+    file: knowledge/glossary/overhead-rate-for-services.md
   - term: Overstatement
     category: accounting
     context: BC-FIN
     status: active
+    file: knowledge/glossary/overstatement.md
   - term: Overtime Pay
     category: domain
     context: BC-FIN
     status: active
+    file: knowledge/glossary/overtime-pay.md
   - term: Owner Investment
     category: accounting
     context: BC-FIN
     status: active
+    file: knowledge/glossary/owner-investment.md
   - term: Owner's Capital
     category: domain
     context: BC-FIN
     status: active
+    file: knowledge/glossary/owner-s-capital.md
   - term: Owner's Drawing
     category: domain
     context: BC-FIN
     status: active
+    file: knowledge/glossary/owner-s-drawing.md
   - term: Owner's Equity
     category: domain
     context: BC-FIN
     status: active
+    file: knowledge/glossary/owner-s-equity.md
   - term: Owner Withdrawal
     category: accounting
     context: BC-FIN
     status: active
+    file: knowledge/glossary/owner-withdrawal.md
   - term: Paid-In Capital from Sale of Treasury Stock
     category: domain
     context: BC-FIN
     status: active
+    file: knowledge/glossary/paid-in-capital-from-sale-of-treasury-stock.md
   - term: Paid-In Capital
     category: domain
     context: BC-FIN
     status: active
+    file: knowledge/glossary/paid-in-capital.md
   - term: Par Value
     category: domain
     context: BC-FIN
     status: active
+    file: knowledge/glossary/par-value.md
   - term: Participative Budgeting
     category: domain
     context: BC-FIN
     status: active
+    file: knowledge/glossary/participative-budgeting.md
   - term: Partnership Agreement
     category: domain
     context: BC-FIN
     status: active
+    file: knowledge/glossary/partnership-agreement.md
   - term: Partnership
     category: domain
     context: BC-FIN
     status: active
+    file: knowledge/glossary/partnership.md
   - term: Payroll Register
     category: domain
     context: BC-FIN
     status: active
+    file: knowledge/glossary/payroll-register.md
   - term: Payroll Summary
     category: domain
     context: BC-FIN
     status: active
+    file: knowledge/glossary/payroll-summary.md
   - term: Payroll
     category: domain
     context: BC-FIN
     status: active
+    file: knowledge/glossary/payroll.md
   - term: Pension
     category: domain
     context: BC-FIN
     status: active
+    file: knowledge/glossary/pension.md
   - term: Percent of Sales Method
     category: domain
     context: BC-FIN
     status: active
+    file: knowledge/glossary/percent-of-sales-method.md
   - term: Performance Metric
     category: domain
     context: BC-FIN
     status: active
+    file: knowledge/glossary/performance-metric.md
   - term: Performance Perspective
     category: domain
     context: BC-FIN
     status: active
+    file: knowledge/glossary/performance-perspective.md
   - term: Performance Target
     category: domain
     context: BC-FIN
     status: active
+    file: knowledge/glossary/performance-target.md
   - term: Period Cost
     category: domain
     context: BC-FIN
     status: active
+    file: knowledge/glossary/period-cost.md
   - term: Period Costs
     category: domain
     context: BC-FIN
     status: active
+    file: knowledge/glossary/period-costs.md
   - term: Periodic Inventory System
     category: domain
     context: BC-FIN
     status: active
+    file: knowledge/glossary/periodic-inventory-system.md
   - term: Permanent Account
     category: domain
     context: BC-FIN
     status: active
+    file: knowledge/glossary/permanent-account.md
   - term: Perpetual Inventory System
     category: domain
     context: BC-FIN
     status: active
+    file: knowledge/glossary/perpetual-inventory-system.md
   - term: Petty Cash Custodian
     category: domain
     context: BC-FIN
     status: active
+    file: knowledge/glossary/petty-cash-custodian.md
   - term: Petty Cash Fund
     category: domain
     context: BC-FIN
     status: active
+    file: knowledge/glossary/petty-cash-fund.md
   - term: Physical Inventory
     category: domain
     context: BC-FIN
     status: active
+    file: knowledge/glossary/physical-inventory.md
   - term: Point-of-Sale Coupon
     category: domain
     context: BC-FIN
     status: active
+    file: knowledge/glossary/point-of-sale-coupon.md
   - term: Post-Closing Trial Balance
     category: domain
     context: BC-FIN
     status: active
+    file: knowledge/glossary/post-closing-trial-balance.md
   - term: Posting Error
     category: accounting
     context: BC-FIN
     status: active
+    file: knowledge/glossary/posting-error.md
   - term: Posting
     category: accounting
     context: BC-FIN
     status: active
+    file: knowledge/glossary/posting.md
   - term: PP&E
     category: acronym
     context: BC-FIN
     status: active
+    file: knowledge/glossary/pp-e.md
   - term: Predetermined Overhead Rate
     category: domain
     context: BC-FIN
     status: active
+    file: knowledge/glossary/predetermined-overhead-rate.md
   - term: Preferred Stock
     category: domain
     context: BC-FIN
     status: active
+    file: knowledge/glossary/preferred-stock.md
   - term: Premium on Bonds Payable
     category: domain
     context: BC-FIN
     status: active
+    file: knowledge/glossary/premium-on-bonds-payable.md
   - term: Premium
     category: domain
     context: BC-FIN
     status: active
+    file: knowledge/glossary/premium.md
   - term: Prepaid Expense
     category: accounting
     context: BC-FIN
     status: active
+    file: knowledge/glossary/prepaid-expense.md
   - term: Prepaid Expenses
     category: domain
     context: BC-FIN
     status: active
+    file: knowledge/glossary/prepaid-expenses.md
   - term: Present Value of $1
     category: domain
     context: BC-FIN
     status: active
+    file: knowledge/glossary/present-value-of-1.md
   - term: Present Value of an Annuity
     category: domain
     context: BC-FIN
     status: active
+    file: knowledge/glossary/present-value-of-an-annuity.md
   - term: Price-Earnings Ratio
     category: domain
     context: BC-FIN
     status: active
+    file: knowledge/glossary/price-earnings-ratio.md
   - term: Prime Cost
     category: domain
     context: BC-FIN
     status: active
+    file: knowledge/glossary/prime-cost.md
   - term: Prime Costs
     category: domain
     context: BC-FIN
     status: active
+    file: knowledge/glossary/prime-costs.md
   - term: Principle of Exceptions
     category: domain
     context: BC-FIN
     status: active
+    file: knowledge/glossary/principle-of-exceptions.md
   - term: Prior Period Adjustment
     category: domain
     context: BC-FIN
     status: active
+    file: knowledge/glossary/prior-period-adjustment.md
   - term: Private Accounting
     category: domain
     context: BC-FIN
     status: active
+    file: knowledge/glossary/private-accounting.md
   - term: Pro Forma Balance Sheet
     category: domain
     context: BC-FIN
     status: active
+    file: knowledge/glossary/pro-forma-balance-sheet.md
   - term: Pro Forma Financial Statements
     category: domain
     context: BC-FIN
     status: active
+    file: knowledge/glossary/pro-forma-financial-statements.md
   - term: Pro Forma Income Statement
     category: domain
     context: BC-FIN
     status: active
+    file: knowledge/glossary/pro-forma-income-statement.md
   - term: Proceeds
     category: domain
     context: BC-FIN
     status: active
+    file: knowledge/glossary/proceeds.md
   - term: Process Costing
     category: domain
     context: BC-FIN
     status: active
+    file: knowledge/glossary/process-costing.md
   - term: Process Manufacturer
     category: domain
     context: BC-FIN
     status: active
+    file: knowledge/glossary/process-manufacturer.md
   - term: Process or Sell Decision
     category: domain
     context: BC-FIN
     status: active
+    file: knowledge/glossary/process-or-sell-decision.md
   - term: Product Cost Distortion
     category: domain
     context: BC-FIN
     status: active
+    file: knowledge/glossary/product-cost-distortion.md
   - term: Product Cost Method
     category: domain
     context: BC-FIN
     status: active
+    file: knowledge/glossary/product-cost-method.md
   - term: Product Costing Allocation Methods
     category: domain
     context: BC-FIN
     status: active
+    file: knowledge/glossary/product-costing-allocation-methods.md
   - term: Product Costs
     category: domain
     context: BC-FIN
     status: active
+    file: knowledge/glossary/product-costs.md
   - term: Product Profitability Report
     category: domain
     context: BC-FIN
     status: active
+    file: knowledge/glossary/product-profitability-report.md
   - term: Product Warranty
     category: domain
     context: BC-FIN
     status: active
+    file: knowledge/glossary/product-warranty.md
   - term: Production Bottleneck
     category: domain
     context: BC-FIN
     status: active
+    file: knowledge/glossary/production-bottleneck.md
   - term: Production Requirements
     category: domain
     context: BC-FIN
     status: active
+    file: knowledge/glossary/production-requirements.md
   - term: Profit Center
     category: domain
     context: BC-FIN
     status: active
+    file: knowledge/glossary/profit-center.md
   - term: Profit Margin
     category: domain
     context: BC-FIN
     status: active
+    file: knowledge/glossary/profit-margin.md
   - term: Profit-Volume Chart
     category: domain
     context: BC-FIN
     status: active
+    file: knowledge/glossary/profit-volume-chart.md
   - term: Profit
     category: domain
     context: BC-FIN
     status: active
+    file: knowledge/glossary/profit.md
   - term: Profitability
     category: domain
     context: BC-FIN
     status: active
+    file: knowledge/glossary/profitability.md
   - term: Property Plant and Equipment
     category: domain
     context: BC-FIN
     status: active
+    file: knowledge/glossary/property-plant-and-equipment.md
   - term: Property Tax
     category: domain
     context: BC-FIN
     status: active
+    file: knowledge/glossary/property-tax.md
   - term: Proprietorship
     category: domain
     context: BC-FIN
     status: active
+    file: knowledge/glossary/proprietorship.md
   - term: Pull Manufacturing
     category: domain
     context: BC-FIN
     status: active
+    file: knowledge/glossary/pull-manufacturing.md
   - term: Purchase Discount
     category: domain
     context: BC-FIN
     status: active
+    file: knowledge/glossary/purchase-discount.md
   - term: Purchase Order
     category: domain
     context: BC-FIN
     status: active
+    file: knowledge/glossary/purchase-order.md
   - term: Purchase Returns and Allowances
     category: domain
     context: BC-FIN
     status: active
+    file: knowledge/glossary/purchase-returns-and-allowances.md
   - term: Push Manufacturing
     category: domain
     context: BC-FIN
     status: active
+    file: knowledge/glossary/push-manufacturing.md
   - term: Quick Assets
     category: domain
     context: BC-FIN
     status: active
+    file: knowledge/glossary/quick-assets.md
   - term: Quick Ratio
     category: domain
     context: BC-FIN
     status: active
+    file: knowledge/glossary/quick-ratio.md
   - term: Ratio of Liabilities to Stockholders' Equity
     category: domain
     context: BC-FIN
     status: active
+    file: knowledge/glossary/ratio-of-liabilities-to-stockholders-equity.md
   - term: Realization
     category: domain
     context: BC-FIN
     status: active
+    file: knowledge/glossary/realization.md
   - term: Receivables
     category: domain
     context: BC-FIN
     status: active
+    file: knowledge/glossary/receivables.md
   - term: Receiving Report
     category: domain
     context: BC-FIN
     status: active
+    file: knowledge/glossary/receiving-report.md
   - term: Reconciliation Schedule
     category: domain
     context: BC-FIN
     status: active
+    file: knowledge/glossary/reconciliation-schedule.md
   - term: Recovery
     category: domain
     context: BC-FIN
     status: active
+    file: knowledge/glossary/recovery.md
   - term: Redemption
     category: domain
     context: BC-FIN
     status: active
+    file: knowledge/glossary/redemption.md
   - term: Relevant Range
     category: domain
     context: BC-FIN
     status: active
+    file: knowledge/glossary/relevant-range.md
   - term: Remittance Advice
     category: domain
     context: BC-FIN
     status: active
+    file: knowledge/glossary/remittance-advice.md
   - term: Residual Income
     category: domain
     context: BC-FIN
     status: active
+    file: knowledge/glossary/residual-income.md
   - term: Residual Value
     category: accounting
     context: BC-FIN
     status: active
+    file: knowledge/glossary/residual-value.md
   - term: Responsibility Accounting
     category: domain
     context: BC-FIN
     status: active
+    file: knowledge/glossary/responsibility-accounting.md
   - term: Responsibility Center
     category: domain
     context: BC-FIN
     status: active
+    file: knowledge/glossary/responsibility-center.md
   - term: Restriction
     category: domain
     context: BC-FIN
     status: active
+    file: knowledge/glossary/restriction.md
   - term: Retail Inventory Method
     category: domain
     context: BC-FIN
     status: active
+    file: knowledge/glossary/retail-inventory-method.md
   - term: Retained Earnings
     category: domain
     context: BC-FIN
     status: active
+    file: knowledge/glossary/retained-earnings.md
   - term: Return on Investment (ROI)
     category: domain
     context: BC-FIN
     status: active
+    file: knowledge/glossary/return-on-investment-roi.md
   - term: Return on Stockholders' Equity
     category: domain
     context: BC-FIN
     status: active
+    file: knowledge/glossary/return-on-stockholders-equity.md
   - term: Return on Total Assets
     category: domain
     context: BC-FIN
     status: active
+    file: knowledge/glossary/return-on-total-assets.md
   - term: Revaluation
     category: domain
     context: BC-FIN
     status: active
+    file: knowledge/glossary/revaluation.md
   - term: Revenue Expenditure
     category: domain
     context: BC-FIN
     status: active
+    file: knowledge/glossary/revenue-expenditure.md
   - term: Revenue per Employee
     category: domain
     context: BC-FIN
     status: active
+    file: knowledge/glossary/revenue-per-employee.md
   - term: Revenue Price Variance
     category: domain
     context: BC-FIN
     status: active
+    file: knowledge/glossary/revenue-price-variance.md
   - term: Revenue Recognition
     category: domain
     context: BC-FIN
     status: active
+    file: knowledge/glossary/revenue-recognition.md
   - term: Revenue
     category: domain
     context: BC-FIN
     status: active
+    file: knowledge/glossary/revenue.md
   - term: Reversing Entry
     category: domain
     context: BC-FIN
     status: active
+    file: knowledge/glossary/reversing-entry.md
   - term: Risk Assessment
     category: domain
     context: BC-FIN
     status: active
+    file: knowledge/glossary/risk-assessment.md
   - term: Robinson-Patman Act
     category: domain
     context: BC-FIN
     status: active
+    file: knowledge/glossary/robinson-patman-act.md
   - term: RVU
     category: domain
     context: BC-FIN
     status: active
+    file: knowledge/glossary/rvu.md
   - term: Safe Payment
     category: domain
     context: BC-FIN
     status: active
+    file: knowledge/glossary/safe-payment.md
   - term: Salaries Payable
     category: domain
     context: BC-FIN
     status: active
+    file: knowledge/glossary/salaries-payable.md
   - term: Salary Allowance
     category: domain
     context: BC-FIN
     status: active
+    file: knowledge/glossary/salary-allowance.md
   - term: Sales-Based Expense Allocation
     category: domain
     context: BC-FIN
     status: active
+    file: knowledge/glossary/sales-based-expense-allocation.md
   - term: Sales Discount
     category: domain
     context: BC-FIN
     status: active
+    file: knowledge/glossary/sales-discount.md
   - term: Sales Discounts (Gross Method)
     category: domain
     context: BC-FIN
     status: active
+    file: knowledge/glossary/sales-discounts-gross-method.md
   - term: Sales Discounts (Net Method)
     category: domain
     context: BC-FIN
     status: active
+    file: knowledge/glossary/sales-discounts-net-method.md
   - term: Sales Discounts
     category: domain
     context: BC-FIN
     status: active
+    file: knowledge/glossary/sales-discounts.md
   - term: Sales Forecast
     category: domain
     context: BC-FIN
     status: active
+    file: knowledge/glossary/sales-forecast.md
   - term: Sales Mix
     category: domain
     context: BC-FIN
     status: active
+    file: knowledge/glossary/sales-mix.md
   - term: Sales Tax Payable
     category: domain
     context: BC-FIN
     status: active
+    file: knowledge/glossary/sales-tax-payable.md
   - term: Sales
     category: domain
     context: BC-FIN
     status: active
+    file: knowledge/glossary/sales.md
   - term: Sarbanes-Oxley Act
     category: domain
     context: BC-FIN
     status: active
+    file: knowledge/glossary/sarbanes-oxley-act.md
   - term: Securities and Exchange Commission
     category: technical
     context: BC-FIN
     status: active
+    file: knowledge/glossary/securities-and-exchange-commission.md
   - term: Selling and Administrative Expenses Budget
     category: domain
     context: BC-FIN
     status: active
+    file: knowledge/glossary/selling-and-administrative-expenses-budget.md
   - term: Selling Expenses
     category: domain
     context: BC-FIN
     status: active
+    file: knowledge/glossary/selling-expenses.md
   - term: Semiannual Interest
     category: domain
     context: BC-FIN
     status: active
+    file: knowledge/glossary/semiannual-interest.md
   - term: Semiannual
     category: domain
     context: BC-FIN
     status: active
+    file: knowledge/glossary/semiannual.md
   - term: Sensitivity Analysis
     category: domain
     context: BC-FIN
     status: active
+    file: knowledge/glossary/sensitivity-analysis.md
   - term: Sequential Revenue Channels
     category: domain
     context: BC-FIN
     status: active
+    file: knowledge/glossary/sequential-revenue-channels.md
   - term: Service Business CVP
     category: domain
     context: BC-FIN
     status: active
+    file: knowledge/glossary/service-business-cvp.md
   - term: Service Fee
     category: domain
     context: BC-FIN
     status: active
+    file: knowledge/glossary/service-fee.md
   - term: Service Staffing Variance
     category: domain
     context: BC-FIN
     status: active
+    file: knowledge/glossary/service-staffing-variance.md
   - term: Single Plantwide Overhead Rate
     category: domain
     context: BC-FIN
     status: active
+    file: knowledge/glossary/single-plantwide-overhead-rate.md
   - term: Social Security Tax
     category: domain
     context: BC-FIN
     status: active
+    file: knowledge/glossary/social-security-tax.md
   - term: Solvency
     category: domain
     context: BC-FIN
     status: active
+    file: knowledge/glossary/solvency.md
   - term: Specific Identification
     category: domain
     context: BC-FIN
     status: active
+    file: knowledge/glossary/specific-identification.md
   - term: Spreadsheet Method
     category: technical
     context: BC-FIN
     status: active
+    file: knowledge/glossary/spreadsheet-method.md
   - term: Standard Cost System
     category: technical
     context: BC-FIN
     status: active
+    file: knowledge/glossary/standard-cost-system.md
   - term: Standard Costing
     category: domain
     context: BC-FIN
     status: active
+    file: knowledge/glossary/standard-costing.md
   - term: Standard Price
     category: domain
     context: BC-FIN
     status: active
+    file: knowledge/glossary/standard-price.md
   - term: Standard Quantity
     category: domain
     context: BC-FIN
     status: active
+    file: knowledge/glossary/standard-quantity.md
   - term: Started and Completed
     category: domain
     context: BC-FIN
     status: active
+    file: knowledge/glossary/started-and-completed.md
   - term: Stated Value
     category: domain
     context: BC-FIN
     status: active
+    file: knowledge/glossary/stated-value.md
   - term: Statement of Cash Flows
     category: domain
     context: BC-FIN
     status: active
+    file: knowledge/glossary/statement-of-cash-flows.md
   - term: Statement of Owner's Equity
     category: domain
     context: BC-FIN
     status: active
+    file: knowledge/glossary/statement-of-owner-s-equity.md
   - term: Statement of Partnership Liquidation
     category: domain
     context: BC-FIN
     status: active
+    file: knowledge/glossary/statement-of-partnership-liquidation.md
   - term: Statement of Stockholders' Equity
     category: domain
     context: BC-FIN
     status: active
+    file: knowledge/glossary/statement-of-stockholders-equity.md
   - term: Static Budget
     category: domain
     context: BC-FIN
     status: active
+    file: knowledge/glossary/static-budget.md
   - term: Stock-Based Compensation
     category: domain
     context: BC-FIN
     status: active
+    file: knowledge/glossary/stock-based-compensation.md
   - term: Stock Dividend
     category: domain
     context: BC-FIN
     status: active
+    file: knowledge/glossary/stock-dividend.md
   - term: Stock Split
     category: domain
     context: BC-FIN
     status: active
+    file: knowledge/glossary/stock-split.md
   - term: Stock
     category: domain
     context: BC-FIN
     status: active
+    file: knowledge/glossary/stock.md
   - term: Stockholder
     category: domain
     context: BC-FIN
     status: active
+    file: knowledge/glossary/stockholder.md
   - term: Stockholders' Equity
     category: domain
     context: BC-FIN
     status: active
+    file: knowledge/glossary/stockholders-equity.md
   - term: Store Equipment
     category: accounting
     context: BC-FIN
     status: active
+    file: knowledge/glossary/store-equipment.md
   - term: Straight-Line Depreciation
     category: accounting
     context: BC-FIN
     status: active
+    file: knowledge/glossary/straight-line-depreciation.md
   - term: Straight-Line Method
     category: domain
     context: BC-FIN
     status: active
+    file: knowledge/glossary/straight-line-method.md
   - term: Straight-Line Rate
     category: technical
     context: BC-FIN
     status: active
+    file: knowledge/glossary/straight-line-rate.md
   - term: Strategic Initiative
     category: domain
     context: BC-FIN
     status: active
+    file: knowledge/glossary/strategic-initiative.md
   - term: Strategic Objective
     category: domain
     context: BC-FIN
     status: active
+    file: knowledge/glossary/strategic-objective.md
   - term: Strategy Map
     category: domain
     context: BC-FIN
     status: active
+    file: knowledge/glossary/strategy-map.md
   - term: Subsequent Events
     category: domain
     context: BC-FIN
     status: active
+    file: knowledge/glossary/subsequent-events.md
   - term: Subsidiary Ledger
     category: domain
     context: BC-FIN
     status: active
+    file: knowledge/glossary/subsidiary-ledger.md
   - term: Sunk Cost
     category: domain
     context: BC-FIN
     status: active
+    file: knowledge/glossary/sunk-cost.md
   - term: Supplier Finance Program
     category: domain
     context: BC-FIN
     status: active
+    file: knowledge/glossary/supplier-finance-program.md
   - term: Support Department Allocation Rate
     category: domain
     context: BC-FIN
     status: active
+    file: knowledge/glossary/support-department-allocation-rate.md
   - term: Support Department
     category: domain
     context: BC-FIN
     status: active
+    file: knowledge/glossary/support-department.md
   - term: Sustainability
     category: domain
     context: BC-FIN
     status: active
+    file: knowledge/glossary/sustainability.md
   - term: SUTA
     category: acronym
     context: BC-FIN
     status: active
+    file: knowledge/glossary/suta.md
   - term: Syndication
     category: domain
     context: BC-FIN
     status: active
+    file: knowledge/glossary/syndication.md
   - term: T-Account
     category: accounting
     context: BC-FIN
     status: active
+    file: knowledge/glossary/t-account.md
   - term: Target Cost Drift
     category: domain
     context: BC-FIN
     status: active
+    file: knowledge/glossary/target-cost-drift.md
   - term: Target Costing
     category: domain
     context: BC-FIN
     status: active
+    file: knowledge/glossary/target-costing.md
   - term: Target Profit
     category: domain
     context: BC-FIN
     status: active
+    file: knowledge/glossary/target-profit.md
   - term: Temporary Account
     category: domain
     context: BC-FIN
     status: active
+    file: knowledge/glossary/temporary-account.md
   - term: Temporary Investments
     category: domain
     context: BC-FIN
     status: active
+    file: knowledge/glossary/temporary-investments.md
   - term: Theatrical Release
     category: domain
     context: BC-FIN
     status: active
+    file: knowledge/glossary/theatrical-release.md
   - term: Theory of Constraints
     category: domain
     context: BC-FIN
     status: active
+    file: knowledge/glossary/theory-of-constraints.md
   - term: Time Value of Money
     category: domain
     context: BC-FIN
     status: active
+    file: knowledge/glossary/time-value-of-money.md
   - term: Times Interest Earned
     category: domain
     context: BC-FIN
     status: active
+    file: knowledge/glossary/times-interest-earned.md
   - term: Total Manufacturing Cost Variance
     category: domain
     context: BC-FIN
     status: active
+    file: knowledge/glossary/total-manufacturing-cost-variance.md
   - term: Total Manufacturing Costs
     category: domain
     context: BC-FIN
     status: active
+    file: knowledge/glossary/total-manufacturing-costs.md
   - term: Total Work in Process During Period
     category: domain
     context: BC-FIN
     status: active
+    file: knowledge/glossary/total-work-in-process-during-period.md
   - term: Trade Discount
     category: domain
     context: BC-FIN
     status: active
+    file: knowledge/glossary/trade-discount.md
   - term: Trade-In Allowance
     category: domain
     context: BC-FIN
     status: active
+    file: knowledge/glossary/trade-in-allowance.md
   - term: Trading Securities
     category: domain
     context: BC-FIN
     status: active
+    file: knowledge/glossary/trading-securities.md
   - term: Transaction Analysis
     category: domain
     context: BC-FIN
     status: active
+    file: knowledge/glossary/transaction-analysis.md
   - term: Transaction
     category: domain
     context: BC-FIN
     status: active
+    file: knowledge/glossary/transaction.md
   - term: Transferred-In Costs
     category: domain
     context: BC-FIN
     status: active
+    file: knowledge/glossary/transferred-in-costs.md
   - term: Transposition Error
     category: accounting
     context: BC-FIN
     status: active
+    file: knowledge/glossary/transposition-error.md
   - term: Treasury Stock
     category: domain
     context: BC-FIN
     status: active
+    file: knowledge/glossary/treasury-stock.md
   - term: Trial Balance
     category: accounting
     context: BC-FIN
     status: active
+    file: knowledge/glossary/trial-balance.md
   - term: Unadjusted Trial Balance
     category: domain
     context: BC-FIN
     status: active
+    file: knowledge/glossary/unadjusted-trial-balance.md
   - term: Under-Applied Overhead
     category: domain
     context: BC-FIN
     status: active
+    file: knowledge/glossary/under-applied-overhead.md
   - term: Unearned Revenue
     category: accounting
     context: BC-FIN
     status: active
+    file: knowledge/glossary/unearned-revenue.md
   - term: Unfavorable Variance
     category: domain
     context: BC-FIN
     status: active
+    file: knowledge/glossary/unfavorable-variance.md
   - term: Unit Cost
     category: domain
     context: BC-FIN
     status: active
+    file: knowledge/glossary/unit-cost.md
   - term: Units-of-Activity Depreciation
     category: domain
     context: BC-FIN
     status: active
+    file: knowledge/glossary/units-of-activity-depreciation.md
   - term: Unlimited Liability
     category: domain
     context: BC-FIN
     status: active
+    file: knowledge/glossary/unlimited-liability.md
   - term: Unrealized Gain or Loss
     category: domain
     context: BC-FIN
     status: active
+    file: knowledge/glossary/unrealized-gain-or-loss.md
   - term: Useful Life
     category: accounting
     context: BC-FIN
     status: active
+    file: knowledge/glossary/useful-life.md
   - term: Vacation Pay
     category: domain
     context: BC-FIN
     status: active
+    file: knowledge/glossary/vacation-pay.md
   - term: Valuation Allowance
     category: domain
     context: BC-FIN
     status: active
+    file: knowledge/glossary/valuation-allowance.md
   - term: Variable Cost
     category: domain
     context: BC-FIN
     status: active
+    file: knowledge/glossary/variable-cost.md
   - term: Variable Costing
     category: domain
     context: BC-FIN
     status: active
+    file: knowledge/glossary/variable-costing.md
   - term: Vertical Analysis
     category: domain
     context: BC-FIN
     status: active
+    file: knowledge/glossary/vertical-analysis.md
   - term: Volume Variance
     category: domain
     context: BC-FIN
     status: active
+    file: knowledge/glossary/volume-variance.md
   - term: Voucher System
     category: domain
     context: BC-FIN
     status: active
+    file: knowledge/glossary/voucher-system.md
   - term: W-4
     category: technical
     context: BC-FIN
     status: active
+    file: knowledge/glossary/w-4.md
   - term: Weighted Average Contribution Margin
     category: domain
     context: BC-FIN
     status: active
+    file: knowledge/glossary/weighted-average-contribution-margin.md
   - term: Weighted Average Cost
     category: domain
     context: BC-FIN
     status: active
+    file: knowledge/glossary/weighted-average-cost.md
   - term: Weighted Average Method
     category: domain
     context: BC-FIN
     status: active
+    file: knowledge/glossary/weighted-average-method.md
   - term: Whole Units
     category: domain
     context: BC-FIN
     status: active
+    file: knowledge/glossary/whole-units.md
   - term: Work in Process Ledger
     category: domain
     context: BC-FIN
     status: active
+    file: knowledge/glossary/work-in-process-ledger.md
   - term: Working Capital
     category: domain
     context: BC-FIN
     status: active
+    file: knowledge/glossary/working-capital.md
   - term: Worksheet
     category: domain
     context: BC-FIN
     status: active
+    file: knowledge/glossary/worksheet.md
   - term: Write-Off
     category: domain
     context: BC-FIN
     status: active
+    file: knowledge/glossary/write-off.md
   - term: Yield Pricing
     category: domain
     context: BC-FIN
     status: active
+    file: knowledge/glossary/yield-pricing.md
   - term: Yield Ratio
     category: domain
     context: BC-FIN
     status: active
+    file: knowledge/glossary/yield-ratio.md
   - term: Zero-Based Budgeting
     category: domain
     context: BC-FIN
     status: active
----
+    file: knowledge/glossary/zero-based-budgeting.md

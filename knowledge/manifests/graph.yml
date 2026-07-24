@@ -2,9 +2,24 @@
 manifest: graph
 version: 1.0.0
 last_updated: 2026-07-24
-stats:
-  nodes: 624
-  edges: 531
-  connected_nodes: 488
-  orphan_nodes: 136
----
+statistics:
+  total_nodes: 1834
+  total_edges: 0
+  by_type:
+    concepts: 624
+    rules: 595
+    glossary: 614
+    workflows: 0
+    reports: 1
+  by_context:
+    BC-FIN: 1834
+    BC-AUTH: 0
+    BC-AR: 0
+    BC-AP: 0
+    BC-CASH: 0
+    BC-INV: 0
+    BC-PROC: 0
+    BC-SALES: 0
+    BC-HR: 0
+    BC-REPORT: 0
+    BC-AI: 0

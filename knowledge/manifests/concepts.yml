@@ -5,7 +5,7 @@ last_updated: 2026-07-24
 total: 624
 by_context:
   BC-AUTH: 0
-  BC-FIN: 0
+  BC-FIN: 624
   BC-AR: 0
   BC-AP: 0
   BC-CASH: 0
@@ -15,4 +15,3748 @@ by_context:
   BC-HR: 0
   BC-REPORT: 0
   BC-AI: 0
-concepts: []
+concepts:
+  - id: CON-FIN-001
+    name: Accounting Equation Solving
+    context: BC-FIN
+    type: value_object
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-001.accounting-equation-solving.md
+  - id: CON-FIN-002
+    name: Asset
+    context: BC-FIN
+    type: entity
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-002.asset.md
+  - id: CON-FIN-003
+    name: Liability
+    context: BC-FIN
+    type: entity
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-003.liability.md
+  - id: CON-FIN-004
+    name: Owner's Equity
+    context: BC-FIN
+    type: entity
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-004.owner-s-equity.md
+  - id: CON-FIN-005
+    name: Revenue
+    context: BC-FIN
+    type: entity
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-005.revenue.md
+  - id: CON-FIN-006
+    name: Expense
+    context: BC-FIN
+    type: entity
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-006.expense.md
+  - id: CON-FIN-007
+    name: Business Transaction
+    context: BC-FIN
+    type: event
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-007.business-transaction.md
+  - id: CON-FIN-008
+    name: T Account
+    context: BC-FIN
+    type: value_object
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-008.t-account.md
+  - id: CON-FIN-009
+    name: Debit
+    context: BC-FIN
+    type: value_object
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-009.debit.md
+  - id: CON-FIN-010
+    name: Credit
+    context: BC-FIN
+    type: value_object
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-010.credit.md
+  - id: CON-FIN-011
+    name: Journal Entry
+    context: BC-FIN
+    type: entity
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-011.journal-entry.md
+  - id: CON-FIN-012
+    name: General Journal
+    context: BC-FIN
+    type: entity
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-012.general-journal.md
+  - id: CON-FIN-013
+    name: General Ledger
+    context: BC-FIN
+    type: aggregate
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-013.general-ledger.md
+  - id: CON-FIN-014
+    name: Adjusted Trial Balance
+    context: BC-FIN
+    type: value_object
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-014.adjusted-trial-balance.md
+  - id: CON-FIN-015
+    name: Income Statement
+    context: BC-FIN
+    type: entity
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-015.income-statement.md
+  - id: CON-FIN-016
+    name: Statement of Owner's Equity
+    context: BC-FIN
+    type: entity
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-016.statement-of-owner-s-equity.md
+  - id: CON-FIN-017
+    name: Consolidated Balance Sheet
+    context: BC-FIN
+    type: entity
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-017.consolidated-balance-sheet.md
+  - id: CON-FIN-018
+    name: Statement of Cash Flows
+    context: BC-FIN
+    type: entity
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-018.statement-of-cash-flows.md
+  - id: CON-FIN-019
+    name: Accounting Cycle Steps
+    context: BC-FIN
+    type: policy
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-019.accounting-cycle-steps.md
+  - id: CON-FIN-020
+    name: Adjusting Entry
+    context: BC-FIN
+    type: command
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-020.adjusting-entry.md
+  - id: CON-FIN-021
+    name: Closing Entry
+    context: BC-FIN
+    type: command
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-021.closing-entry.md
+  - id: CON-FIN-022
+    name: Proprietorship
+    context: BC-FIN
+    type: entity
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-022.proprietorship.md
+  - id: CON-FIN-023
+    name: Depreciation
+    context: BC-FIN
+    type: value_object
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-023.depreciation.md
+  - id: CON-FIN-024
+    name: Bank Reconciliation
+    context: BC-FIN
+    type: aggregate
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-024.bank-reconciliation.md
+  - id: CON-FIN-025
+    name: Inventory Costing Methods
+    context: BC-FIN
+    type: policy
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-025.inventory-costing-methods.md
+  - id: CON-FIN-026
+    name: Accrual Basis Accounting
+    context: BC-FIN
+    type: policy
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-026.accrual-basis-accounting.md
+  - id: CON-FIN-027
+    name: Cash Basis Accounting
+    context: BC-FIN
+    type: policy
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-027.cash-basis-accounting.md
+  - id: CON-FIN-028
+    name: GAAP
+    context: BC-FIN
+    type: policy
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-028.gaap.md
+  - id: CON-FIN-029
+    name: Matching Principle
+    context: BC-FIN
+    type: policy
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-029.matching-principle.md
+  - id: CON-FIN-030
+    name: Liquidity Analysis
+    context: BC-FIN
+    type: value_object
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-030.liquidity-analysis.md
+  - id: CON-FIN-031
+    name: Solvency Analysis
+    context: BC-FIN
+    type: value_object
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-031.solvency-analysis.md
+  - id: CON-FIN-032
+    name: Profitability Analysis
+    context: BC-FIN
+    type: value_object
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-032.profitability-analysis.md
+  - id: CON-FIN-033
+    name: Accounts Receivable
+    context: BC-FIN
+    type: entity
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-033.accounts-receivable.md
+  - id: CON-FIN-034
+    name: Inventory Turnover Ratio
+    context: BC-FIN
+    type: value_object
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-034.inventory-turnover-ratio.md
+  - id: CON-FIN-035
+    name: Current Ratio
+    context: BC-FIN
+    type: value_object
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-035.current-ratio.md
+  - id: CON-FIN-036
+    name: Working Capital
+    context: BC-FIN
+    type: value_object
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-036.working-capital.md
+  - id: CON-FIN-037
+    name: Times Interest Earned Ratio
+    context: BC-FIN
+    type: value_object
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-037.times-interest-earned-ratio.md
+  - id: CON-FIN-038
+    name: Return on Total Assets
+    context: BC-FIN
+    type: value_object
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-038.return-on-total-assets.md
+  - id: CON-FIN-039
+    name: Return on Common Stockholders' Equity
+    context: BC-FIN
+    type: value_object
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-039.return-on-common-stockholders-equity.md
+  - id: CON-FIN-040
+    name: Earnings Per Share (EPS)
+    context: BC-FIN
+    type: value_object
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-040.earnings-per-share-eps.md
+  - id: CON-FIN-041
+    name: Price-Earnings (P/E) Ratio
+    context: BC-FIN
+    type: value_object
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-041.price-earnings-p-e-ratio.md
+  - id: CON-FIN-042
+    name: Dividend Yield
+    context: BC-FIN
+    type: value_object
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-042.dividend-yield.md
+  - id: CON-FIN-043
+    name: Corporate Annual Report
+    context: BC-FIN
+    type: entity
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-043.corporate-annual-report.md
+  - id: CON-FIN-044
+    name: ESG Reporting
+    context: BC-FIN
+    type: entity
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-044.esg-reporting.md
+  - id: CON-FIN-045
+    name: Worksheet
+    context: BC-FIN
+    type: value_object
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-045.worksheet.md
+  - id: CON-FIN-046
+    name: Accrued Revenue Adjustment
+    context: BC-FIN
+    type: command
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-046.accrued-revenue-adjustment.md
+  - id: CON-FIN-047
+    name: Accrued Expense Adjustment
+    context: BC-FIN
+    type: command
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-047.accrued-expense-adjustment.md
+  - id: CON-FIN-048
+    name: Deferred Revenue
+    context: BC-FIN
+    type: event
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-048.deferred-revenue.md
+  - id: CON-FIN-049
+    name: Deferred Expense
+    context: BC-FIN
+    type: event
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-049.deferred-expense.md
+  - id: CON-FIN-050
+    name: Depreciation Expense
+    context: BC-FIN
+    type: entity
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-050.depreciation-expense.md
+  - id: CON-FIN-051
+    name: Accumulated Depreciation
+    context: BC-FIN
+    type: entity
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-051.accumulated-depreciation.md
+  - id: CON-FIN-052
+    name: Permanent Account
+    context: BC-FIN
+    type: entity
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-052.permanent-account.md
+  - id: CON-FIN-053
+    name: Temporary Account
+    context: BC-FIN
+    type: entity
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-053.temporary-account.md
+  - id: CON-FIN-054
+    name: Reversing Entry
+    context: BC-FIN
+    type: command
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-054.reversing-entry.md
+  - id: CON-FIN-055
+    name: Fiscal Year
+    context: BC-FIN
+    type: value_object
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-055.fiscal-year.md
+  - id: CON-FIN-056
+    name: Chart of Accounts
+    context: BC-FIN
+    type: aggregate
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-056.chart-of-accounts.md
+  - id: CON-FIN-057
+    name: Corporation
+    context: BC-FIN
+    type: entity
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-057.corporation.md
+  - id: CON-FIN-058
+    name: Stockholders' Equity
+    context: BC-FIN
+    type: entity
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-058.stockholders-equity.md
+  - id: CON-FIN-059
+    name: Retained Earnings Statement
+    context: BC-FIN
+    type: entity
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-059.retained-earnings-statement.md
+  - id: CON-FIN-060
+    name: Dividends
+    context: BC-FIN
+    type: event
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-060.dividends.md
+  - id: CON-FIN-061
+    name: Financial Statement Preparation Order
+    context: BC-FIN
+    type: policy
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-061.financial-statement-preparation-order.md
+  - id: CON-FIN-062
+    name: Accounting
+    context: BC-FIN
+    type: entity
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-062.accounting.md
+  - id: CON-FIN-063
+    name: Financial Statements
+    context: BC-FIN
+    type: aggregate
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-063.financial-statements.md
+  - id: CON-FIN-064
+    name: Assets
+    context: BC-FIN
+    type: entity
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-064.assets.md
+  - id: CON-FIN-065
+    name: Liabilities
+    context: BC-FIN
+    type: entity
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-065.liabilities.md
+  - id: CON-FIN-066
+    name: Expenses
+    context: BC-FIN
+    type: entity
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-066.expenses.md
+  - id: CON-FIN-067
+    name: Net Income Percentage
+    context: BC-FIN
+    type: value_object
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-067.net-income-percentage.md
+  - id: CON-FIN-068
+    name: Net Loss
+    context: BC-FIN
+    type: value_object
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-068.net-loss.md
+  - id: CON-FIN-069
+    name: Partnership
+    context: BC-FIN
+    type: aggregate
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-069.partnership.md
+  - id: CON-FIN-070
+    name: Limited Liability Company (LLC)
+    context: BC-FIN
+    type: aggregate
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-070.limited-liability-company-llc.md
+  - id: CON-FIN-071
+    name: Service Business
+    context: BC-FIN
+    type: entity
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-071.service-business.md
+  - id: CON-FIN-072
+    name: Merchandising Business
+    context: BC-FIN
+    type: entity
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-072.merchandising-business.md
+  - id: CON-FIN-073
+    name: Manufacturing Business
+    context: BC-FIN
+    type: entity
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-073.manufacturing-business.md
+  - id: CON-FIN-074
+    name: Cost Principle
+    context: BC-FIN
+    type: policy
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-074.cost-principle.md
+  - id: CON-FIN-075
+    name: Business Entity Assumption
+    context: BC-FIN
+    type: policy
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-075.business-entity-assumption.md
+  - id: CON-FIN-076
+    name: Revenue Recognition
+    context: BC-FIN
+    type: policy
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-076.revenue-recognition.md
+  - id: CON-FIN-077
+    name: Owner's Drawing
+    context: BC-FIN
+    type: entity
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-077.owner-s-drawing.md
+  - id: CON-FIN-078
+    name: Accounts Payable
+    context: BC-FIN
+    type: entity
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-078.accounts-payable.md
+  - id: CON-FIN-079
+    name: Horizontal Analysis
+    context: BC-FIN
+    type: value_object
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-079.horizontal-analysis.md
+  - id: CON-FIN-080
+    name: Ratio of Liabilities to Stockholders' Equity
+    context: BC-FIN
+    type: value_object
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-080.ratio-of-liabilities-to-stockholders-equity.md
+  - id: CON-FIN-081
+    name: Business Entity Identification
+    context: BC-FIN
+    type: value_object
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-081.business-entity-identification.md
+  - id: CON-FIN-082
+    name: Transaction Analysis
+    context: BC-FIN
+    type: value_object
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-082.transaction-analysis.md
+  - id: CON-FIN-083
+    name: Capital Balance Computation
+    context: BC-FIN
+    type: value_object
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-083.capital-balance-computation.md
+  - id: CON-FIN-084
+    name: Risk Assessment
+    context: BC-FIN
+    type: policy
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-084.risk-assessment.md
+  - id: CON-FIN-085
+    name: Account
+    context: BC-FIN
+    type: entity
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-085.account.md
+  - id: CON-FIN-086
+    name: Rules of Debit and Credit
+    context: BC-FIN
+    type: policy
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-086.rules-of-debit-and-credit.md
+  - id: CON-FIN-087
+    name: Normal Balance
+    context: BC-FIN
+    type: value_object
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-087.normal-balance.md
+  - id: CON-FIN-088
+    name: Journal
+    context: BC-FIN
+    type: entity
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-088.journal.md
+  - id: CON-FIN-089
+    name: Journalizing
+    context: BC-FIN
+    type: entity
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-089.journalizing.md
+  - id: CON-FIN-090
+    name: Ledger
+    context: BC-FIN
+    type: entity
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-090.ledger.md
+  - id: CON-FIN-091
+    name: Posting
+    context: BC-FIN
+    type: entity
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-091.posting.md
+  - id: CON-FIN-092
+    name: Double-Entry Accounting System
+    context: BC-FIN
+    type: policy
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-092.double-entry-accounting-system.md
+  - id: CON-FIN-093
+    name: Four-Column Account
+    context: BC-FIN
+    type: entity
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-093.four-column-account.md
+  - id: CON-FIN-094
+    name: Prepaid Expenses
+    context: BC-FIN
+    type: entity
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-094.prepaid-expenses.md
+  - id: CON-FIN-095
+    name: Unearned Revenue Adjustment
+    context: BC-FIN
+    type: command
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-095.unearned-revenue-adjustment.md
+  - id: CON-FIN-096
+    name: Account Receivable
+    context: BC-FIN
+    type: entity
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-096.account-receivable.md
+  - id: CON-FIN-097
+    name: Overstatement Error
+    context: BC-FIN
+    type: event
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-097.overstatement-error.md
+  - id: CON-FIN-098
+    name: Omission Error
+    context: BC-FIN
+    type: event
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-098.omission-error.md
+  - id: CON-FIN-099
+    name: Posting Error
+    context: BC-FIN
+    type: event
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-099.posting-error.md
+  - id: CON-FIN-100
+    name: Cash Receipt
+    context: BC-FIN
+    type: command
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-100.cash-receipt.md
+  - id: CON-FIN-101
+    name: Cash Payment
+    context: BC-FIN
+    type: command
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-101.cash-payment.md
+  - id: CON-FIN-102
+    name: Owner Withdrawal
+    context: BC-FIN
+    type: command
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-102.owner-withdrawal.md
+  - id: CON-FIN-103
+    name: Owner Investment
+    context: BC-FIN
+    type: command
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-103.owner-investment.md
+  - id: CON-FIN-104
+    name: Fees Earned
+    context: BC-FIN
+    type: entity
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-104.fees-earned.md
+  - id: CON-FIN-105
+    name: Prepaid Expense Adjustment
+    context: BC-FIN
+    type: command
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-105.prepaid-expense-adjustment.md
+  - id: CON-FIN-106
+    name: Notes Payable
+    context: BC-FIN
+    type: entity
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-106.notes-payable.md
+  - id: CON-FIN-107
+    name: Fixed Asset
+    context: BC-FIN
+    type: entity
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-107.fixed-asset.md
+  - id: CON-FIN-108
+    name: Contra Account
+    context: BC-FIN
+    type: value_object
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-108.contra-account.md
+  - id: CON-FIN-109
+    name: Book Value
+    context: BC-FIN
+    type: value_object
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-109.book-value.md
+  - id: CON-FIN-110
+    name: Land
+    context: BC-FIN
+    type: entity
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-110.land.md
+  - id: CON-FIN-111
+    name: Buildings
+    context: BC-FIN
+    type: entity
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-111.buildings.md
+  - id: CON-FIN-112
+    name: Store Equipment
+    context: BC-FIN
+    type: entity
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-112.store-equipment.md
+  - id: CON-FIN-113
+    name: Office Equipment
+    context: BC-FIN
+    type: entity
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-113.office-equipment.md
+  - id: CON-FIN-114
+    name: Property Tax
+    context: BC-FIN
+    type: entity
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-114.property-tax.md
+  - id: CON-FIN-115
+    name: Vertical Analysis
+    context: BC-FIN
+    type: value_object
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-115.vertical-analysis.md
+  - id: CON-FIN-116
+    name: End-of-Period Spreadsheet
+    context: BC-FIN
+    type: aggregate
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-116.end-of-period-spreadsheet.md
+  - id: CON-FIN-117
+    name: Partner Drawing Account
+    context: BC-FIN
+    type: entity
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-117.partner-drawing-account.md
+  - id: CON-FIN-118
+    name: Liquidity
+    context: BC-FIN
+    type: value_object
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-118.liquidity.md
+  - id: CON-FIN-119
+    name: Current Asset
+    context: BC-FIN
+    type: entity
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-119.current-asset.md
+  - id: CON-FIN-120
+    name: Property Plant and Equipment
+    context: BC-FIN
+    type: entity
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-120.property-plant-and-equipment.md
+  - id: CON-FIN-121
+    name: Current Liability
+    context: BC-FIN
+    type: aggregate
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-121.current-liability.md
+  - id: CON-FIN-122
+    name: Long-Term Liability
+    context: BC-FIN
+    type: aggregate
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-122.long-term-liability.md
+  - id: CON-FIN-123
+    name: Expense Recognition Principle
+    context: BC-FIN
+    type: policy
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-123.expense-recognition-principle.md
+  - id: CON-FIN-124
+    name: Closing Entries
+    context: BC-FIN
+    type: command
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-124.closing-entries.md
+  - id: CON-FIN-125
+    name: Permanent Accounts
+    context: BC-FIN
+    type: entity
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-125.permanent-accounts.md
+  - id: CON-FIN-126
+    name: Temporary Accounts
+    context: BC-FIN
+    type: entity
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-126.temporary-accounts.md
+  - id: CON-FIN-127
+    name: Subsequent Events
+    context: BC-FIN
+    type: event
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-127.subsequent-events.md
+  - id: CON-FIN-128
+    name: Operating Cycle
+    context: BC-FIN
+    type: aggregate
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-128.operating-cycle.md
+  - id: CON-FIN-129
+    name: Perpetual Inventory System
+    context: BC-FIN
+    type: policy
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-129.perpetual-inventory-system.md
+  - id: CON-FIN-130
+    name: Periodic Inventory System
+    context: BC-FIN
+    type: aggregate
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-130.periodic-inventory-system.md
+  - id: CON-FIN-131
+    name: Subsidiary Inventory Ledger
+    context: BC-FIN
+    type: aggregate
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-131.subsidiary-inventory-ledger.md
+  - id: CON-FIN-132
+    name: Credit Terms
+    context: BC-FIN
+    type: value_object
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-132.credit-terms.md
+  - id: CON-FIN-133
+    name: Purchase Discount
+    context: BC-FIN
+    type: value_object
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-133.purchase-discount.md
+  - id: CON-FIN-134
+    name: Purchase Returns and Allowances
+    context: BC-FIN
+    type: event
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-134.purchase-returns-and-allowances.md
+  - id: CON-FIN-135
+    name: Debit Memorandum
+    context: BC-FIN
+    type: entity
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-135.debit-memorandum.md
+  - id: CON-FIN-136
+    name: Inventory
+    context: BC-FIN
+    type: entity
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-136.inventory.md
+  - id: CON-FIN-137
+    name: Cost of Goods Sold - Periodic
+    context: BC-FIN
+    type: value_object
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-137.cost-of-goods-sold-periodic.md
+  - id: CON-FIN-138
+    name: Gross Profit Method
+    context: BC-FIN
+    type: policy
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-138.gross-profit-method.md
+  - id: CON-FIN-139
+    name: Chart of Accounts for Retail Business
+    context: BC-FIN
+    type: aggregate
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-139.chart-of-accounts-for-retail-business.md
+  - id: CON-FIN-140
+    name: Wholesaler
+    context: BC-FIN
+    type: entity
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-140.wholesaler.md
+  - id: CON-FIN-141
+    name: Retailer
+    context: BC-FIN
+    type: entity
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-141.retailer.md
+  - id: CON-FIN-142
+    name: Sales (Revenue)
+    context: BC-FIN
+    type: entity
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-142.sales-revenue.md
+  - id: CON-FIN-143
+    name: Credit Card Expense
+    context: BC-FIN
+    type: entity
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-143.credit-card-expense.md
+  - id: CON-FIN-144
+    name: Sales Discount (from Buyer Perspective: Purchase Discount)
+    context: BC-FIN
+    type: value_object
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-144.sales-discount-from-buyer-perspective-purchase-discount.md
+  - id: CON-FIN-145
+    name: Sales Returns, Refunds, and Allowances
+    context: BC-FIN
+    type: event
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-145.sales-returns-refunds-and-allowances.md
+  - id: CON-FIN-146
+    name: Customer Refunds Payable
+    context: BC-FIN
+    type: entity
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-146.customer-refunds-payable.md
+  - id: CON-FIN-147
+    name: Estimated Returns Inventory
+    context: BC-FIN
+    type: entity
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-147.estimated-returns-inventory.md
+  - id: CON-FIN-148
+    name: Credit Memorandum
+    context: BC-FIN
+    type: entity
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-148.credit-memorandum.md
+  - id: CON-FIN-149
+    name: FOB Shipping Point
+    context: BC-FIN
+    type: value_object
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-149.fob-shipping-point.md
+  - id: CON-FIN-150
+    name: FOB Destination
+    context: BC-FIN
+    type: value_object
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-150.fob-destination.md
+  - id: CON-FIN-151
+    name: Inventory Shrinkage
+    context: BC-FIN
+    type: event
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-151.inventory-shrinkage.md
+  - id: CON-FIN-152
+    name: Selling Expenses
+    context: BC-FIN
+    type: entity
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-152.selling-expenses.md
+  - id: CON-FIN-153
+    name: Administrative Expenses
+    context: BC-FIN
+    type: entity
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-153.administrative-expenses.md
+  - id: CON-FIN-154
+    name: Other Revenue and Expense
+    context: BC-FIN
+    type: entity
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-154.other-revenue-and-expense.md
+  - id: CON-FIN-155
+    name: Fixed Asset Turnover Ratio
+    context: BC-FIN
+    type: value_object
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-155.fixed-asset-turnover-ratio.md
+  - id: CON-FIN-156
+    name: Sales Discount (Gross Method)
+    context: BC-FIN
+    type: value_object
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-156.sales-discount-gross-method.md
+  - id: CON-FIN-157
+    name: Sales Discount (Net Method)
+    context: BC-FIN
+    type: value_object
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-157.sales-discount-net-method.md
+  - id: CON-FIN-158
+    name: Sales Taxes
+    context: BC-FIN
+    type: entity
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-158.sales-taxes.md
+  - id: CON-FIN-159
+    name: Trade Discounts
+    context: BC-FIN
+    type: value_object
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-159.trade-discounts.md
+  - id: CON-FIN-160
+    name: Coupon (Point-of-Sale)
+    context: BC-FIN
+    type: event
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-160.coupon-point-of-sale.md
+  - id: CON-FIN-161
+    name: Coupon (Future Redemption)
+    context: BC-FIN
+    type: event
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-161.coupon-future-redemption.md
+  - id: CON-FIN-162
+    name: Estimated Coupons Payable
+    context: BC-FIN
+    type: entity
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-162.estimated-coupons-payable.md
+  - id: CON-FIN-163
+    name: Rebate (Mail-In)
+    context: BC-FIN
+    type: event
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-163.rebate-mail-in.md
+  - id: CON-FIN-164
+    name: Delivery Expense
+    context: BC-FIN
+    type: entity
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-164.delivery-expense.md
+  - id: CON-FIN-165
+    name: Freight In Account
+    context: BC-FIN
+    type: entity
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-165.freight-in-account.md
+  - id: CON-FIN-166
+    name: Income Summary
+    context: BC-FIN
+    type: entity
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-166.income-summary.md
+  - id: CON-FIN-167
+    name: Purchases Discounts Account
+    context: BC-FIN
+    type: entity
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-167.purchases-discounts-account.md
+  - id: CON-FIN-168
+    name: Purchases Returns and Allowances Account
+    context: BC-FIN
+    type: entity
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-168.purchases-returns-and-allowances-account.md
+  - id: CON-FIN-169
+    name: Purchase-Related Transaction
+    context: BC-FIN
+    type: event
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-169.purchase-related-transaction.md
+  - id: CON-FIN-170
+    name: Sales-Related Transaction
+    context: BC-FIN
+    type: event
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-170.sales-related-transaction.md
+  - id: CON-FIN-171
+    name: Credit Card Sale
+    context: BC-FIN
+    type: event
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-171.credit-card-sale.md
+  - id: CON-FIN-172
+    name: Customer Refunds and Allowances
+    context: BC-FIN
+    type: event
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-172.customer-refunds-and-allowances.md
+  - id: CON-FIN-173
+    name: Sales Tax Collection
+    context: BC-FIN
+    type: entity
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-173.sales-tax-collection.md
+  - id: CON-FIN-174
+    name: Debit Memo
+    context: BC-FIN
+    type: entity
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-174.debit-memo.md
+  - id: CON-FIN-175
+    name: Credit Memo
+    context: BC-FIN
+    type: event
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-175.credit-memo.md
+  - id: CON-FIN-176
+    name: Inventory Cost Flow Assumption
+    context: BC-FIN
+    type: value_object
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-176.inventory-cost-flow-assumption.md
+  - id: CON-FIN-177
+    name: First-In, First-Out (FIFO)
+    context: BC-FIN
+    type: policy
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-177.first-in-first-out-fifo.md
+  - id: CON-FIN-178
+    name: Last-In, First-Out (LIFO)
+    context: BC-FIN
+    type: policy
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-178.last-in-first-out-lifo.md
+  - id: CON-FIN-179
+    name: Weighted Average Cost Method
+    context: BC-FIN
+    type: policy
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-179.weighted-average-cost-method.md
+  - id: CON-FIN-180
+    name: Specific Identification Method
+    context: BC-FIN
+    type: value_object
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-180.specific-identification-method.md
+  - id: CON-FIN-181
+    name: Lower of Cost or Market (LCM)
+    context: BC-FIN
+    type: policy
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-181.lower-of-cost-or-market-lcm.md
+  - id: CON-FIN-182
+    name: Net Realizable Value
+    context: BC-FIN
+    type: value_object
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-182.net-realizable-value.md
+  - id: CON-FIN-183
+    name: Days' Sales in Inventory
+    context: BC-FIN
+    type: value_object
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-183.days-sales-in-inventory.md
+  - id: CON-FIN-184
+    name: Inventory Control
+    context: BC-FIN
+    type: policy
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-184.inventory-control.md
+  - id: CON-FIN-185
+    name: Retail Method of Inventory Costing
+    context: BC-FIN
+    type: value_object
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-185.retail-method-of-inventory-costing.md
+  - id: CON-FIN-186
+    name: Gross Profit Method of Inventory Costing
+    context: BC-FIN
+    type: value_object
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-186.gross-profit-method-of-inventory-costing.md
+  - id: CON-FIN-187
+    name: Purchase Order
+    context: BC-FIN
+    type: entity
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-187.purchase-order.md
+  - id: CON-FIN-188
+    name: Receiving Report
+    context: BC-FIN
+    type: entity
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-188.receiving-report.md
+  - id: CON-FIN-189
+    name: Vendor's Invoice
+    context: BC-FIN
+    type: entity
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-189.vendor-s-invoice.md
+  - id: CON-FIN-190
+    name: Inventory Profits (Illusory Profits)
+    context: BC-FIN
+    type: value_object
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-190.inventory-profits-illusory-profits.md
+  - id: CON-FIN-191
+    name: Consigned Inventory
+    context: BC-FIN
+    type: aggregate
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-191.consigned-inventory.md
+  - id: CON-FIN-192
+    name: Retail Inventory Method
+    context: BC-FIN
+    type: policy
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-192.retail-inventory-method.md
+  - id: CON-FIN-193
+    name: Sarbanes-Oxley Act
+    context: BC-FIN
+    type: policy
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-193.sarbanes-oxley-act.md
+  - id: CON-FIN-194
+    name: Internal Control
+    context: BC-FIN
+    type: policy
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-194.internal-control.md
+  - id: CON-FIN-195
+    name: Control Environment
+    context: BC-FIN
+    type: policy
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-195.control-environment.md
+  - id: CON-FIN-196
+    name: Control Procedures
+    context: BC-FIN
+    type: policy
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-196.control-procedures.md
+  - id: CON-FIN-197
+    name: Monitoring
+    context: BC-FIN
+    type: policy
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-197.monitoring.md
+  - id: CON-FIN-198
+    name: Information and Communication
+    context: BC-FIN
+    type: policy
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-198.information-and-communication.md
+  - id: CON-FIN-199
+    name: Employee Fraud
+    context: BC-FIN
+    type: event
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-199.employee-fraud.md
+  - id: CON-FIN-200
+    name: Cash Register Control
+    context: BC-FIN
+    type: policy
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-200.cash-register-control.md
+  - id: CON-FIN-201
+    name: Remittance Advice
+    context: BC-FIN
+    type: event
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-201.remittance-advice.md
+  - id: CON-FIN-202
+    name: Voucher System
+    context: BC-FIN
+    type: policy
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-202.voucher-system.md
+  - id: CON-FIN-203
+    name: Electronic Funds Transfer (EFT)
+    context: BC-FIN
+    type: command
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-203.electronic-funds-transfer-eft.md
+  - id: CON-FIN-204
+    name: Cash Short and Over Account
+    context: BC-FIN
+    type: value_object
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-204.cash-short-and-over-account.md
+  - id: CON-FIN-205
+    name: Inventory Ethics - LCM Application
+    context: BC-FIN
+    type: policy
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-205.inventory-ethics-lcm-application.md
+  - id: CON-FIN-206
+    name: Bank Statement
+    context: BC-FIN
+    type: aggregate
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-206.bank-statement.md
+  - id: CON-FIN-207
+    name: Deposit in Transit
+    context: BC-FIN
+    type: event
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-207.deposit-in-transit.md
+  - id: CON-FIN-208
+    name: Outstanding Checks
+    context: BC-FIN
+    type: event
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-208.outstanding-checks.md
+  - id: CON-FIN-209
+    name: NSF Check
+    context: BC-FIN
+    type: event
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-209.nsf-check.md
+  - id: CON-FIN-210
+    name: Petty Cash Fund
+    context: BC-FIN
+    type: entity
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-210.petty-cash-fund.md
+  - id: CON-FIN-211
+    name: Cash Equivalents
+    context: BC-FIN
+    type: value_object
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-211.cash-equivalents.md
+  - id: CON-FIN-212
+    name: Compensating Balance
+    context: BC-FIN
+    type: value_object
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-212.compensating-balance.md
+  - id: CON-FIN-213
+    name: Days' Cash on Hand
+    context: BC-FIN
+    type: value_object
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-213.days-cash-on-hand.md
+  - id: CON-FIN-214
+    name: Petty Cash Custodian
+    context: BC-FIN
+    type: role
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-214.petty-cash-custodian.md
+  - id: CON-FIN-215
+    name: Special-Purpose Funds
+    context: BC-FIN
+    type: aggregate
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-215.special-purpose-funds.md
+  - id: CON-FIN-216
+    name: Internal Control over Cash
+    context: BC-FIN
+    type: policy
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-216.internal-control-over-cash.md
+  - id: CON-FIN-217
+    name: Allowance for Doubtful Accounts
+    context: BC-FIN
+    type: entity
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-217.allowance-for-doubtful-accounts.md
+  - id: CON-FIN-218
+    name: Bad Debt Expense
+    context: BC-FIN
+    type: entity
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-218.bad-debt-expense.md
+  - id: CON-FIN-219
+    name: Direct Method
+    context: BC-FIN
+    type: value_object
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-219.direct-method.md
+  - id: CON-FIN-220
+    name: Allowance Method
+    context: BC-FIN
+    type: policy
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-220.allowance-method.md
+  - id: CON-FIN-221
+    name: Percent of Sales Method
+    context: BC-FIN
+    type: policy
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-221.percent-of-sales-method.md
+  - id: CON-FIN-222
+    name: Analysis of Receivables Method
+    context: BC-FIN
+    type: policy
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-222.analysis-of-receivables-method.md
+  - id: CON-FIN-223
+    name: Aging Schedule
+    context: BC-FIN
+    type: entity
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-223.aging-schedule.md
+  - id: CON-FIN-224
+    name: Write-Off
+    context: BC-FIN
+    type: command
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-224.write-off.md
+  - id: CON-FIN-225
+    name: Recovery of Bad Debt
+    context: BC-FIN
+    type: command
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-225.recovery-of-bad-debt.md
+  - id: CON-FIN-226
+    name: Aging of Receivables Schedule
+    context: BC-FIN
+    type: entity
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-226.aging-of-receivables-schedule.md
+  - id: CON-FIN-227
+    name: Days' Sales in Receivables
+    context: BC-FIN
+    type: value_object
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-227.days-sales-in-receivables.md
+  - id: CON-FIN-228
+    name: Number of Days Past Due
+    context: BC-FIN
+    type: value_object
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-228.number-of-days-past-due.md
+  - id: CON-FIN-229
+    name: Debit Balance in Allowance for Doubtful Accounts
+    context: BC-FIN
+    type: value_object
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-229.debit-balance-in-allowance-for-doubtful-accounts.md
+  - id: CON-FIN-230
+    name: Fixed Assets
+    context: BC-FIN
+    type: aggregate
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-230.fixed-assets.md
+  - id: CON-FIN-231
+    name: Property, Plant, and Equipment
+    context: BC-FIN
+    type: aggregate
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-231.property-plant-and-equipment.md
+  - id: CON-FIN-232
+    name: Intangible Assets
+    context: BC-FIN
+    type: aggregate
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-232.intangible-assets.md
+  - id: CON-FIN-233
+    name: Investment (Long-Term Asset)
+    context: BC-FIN
+    type: entity
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-233.investment-long-term-asset.md
+  - id: CON-FIN-234
+    name: Cost Principle for Fixed Assets
+    context: BC-FIN
+    type: policy
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-234.cost-principle-for-fixed-assets.md
+  - id: CON-FIN-235
+    name: Capital Expenditure
+    context: BC-FIN
+    type: value_object
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-235.capital-expenditure.md
+  - id: CON-FIN-236
+    name: Revenue Expenditure
+    context: BC-FIN
+    type: value_object
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-236.revenue-expenditure.md
+  - id: CON-FIN-237
+    name: Construction in Progress
+    context: BC-FIN
+    type: entity
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-237.construction-in-progress.md
+  - id: CON-FIN-238
+    name: Lease
+    context: BC-FIN
+    type: entity
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-238.lease.md
+  - id: CON-FIN-239
+    name: Lessor
+    context: BC-FIN
+    type: role
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-239.lessor.md
+  - id: CON-FIN-240
+    name: Lessee
+    context: BC-FIN
+    type: role
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-240.lessee.md
+  - id: CON-FIN-241
+    name: Residual Value
+    context: BC-FIN
+    type: value_object
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-241.residual-value.md
+  - id: CON-FIN-242
+    name: Depreciable Cost
+    context: BC-FIN
+    type: value_object
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-242.depreciable-cost.md
+  - id: CON-FIN-243
+    name: Straight-Line Depreciation
+    context: BC-FIN
+    type: value_object
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-243.straight-line-depreciation.md
+  - id: CON-FIN-244
+    name: Units-of-Activity Depreciation
+    context: BC-FIN
+    type: value_object
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-244.units-of-activity-depreciation.md
+  - id: CON-FIN-245
+    name: Double-Declining-Balance Depreciation
+    context: BC-FIN
+    type: value_object
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-245.double-declining-balance-depreciation.md
+  - id: CON-FIN-246
+    name: Natural Resources
+    context: BC-FIN
+    type: entity
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-246.natural-resources.md
+  - id: CON-FIN-247
+    name: Depletion
+    context: BC-FIN
+    type: value_object
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-247.depletion.md
+  - id: CON-FIN-248
+    name: Accumulated Depletion
+    context: BC-FIN
+    type: entity
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-248.accumulated-depletion.md
+  - id: CON-FIN-249
+    name: Patent
+    context: BC-FIN
+    type: entity
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-249.patent.md
+  - id: CON-FIN-250
+    name: Copyright
+    context: BC-FIN
+    type: entity
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-250.copyright.md
+  - id: CON-FIN-251
+    name: Trademark
+    context: BC-FIN
+    type: entity
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-251.trademark.md
+  - id: CON-FIN-252
+    name: Goodwill
+    context: BC-FIN
+    type: entity
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-252.goodwill.md
+  - id: CON-FIN-253
+    name: Amortization
+    context: BC-FIN
+    type: value_object
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-253.amortization.md
+  - id: CON-FIN-254
+    name: Trade-In Allowance
+    context: BC-FIN
+    type: value_object
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-254.trade-in-allowance.md
+  - id: CON-FIN-255
+    name: Boot
+    context: BC-FIN
+    type: value_object
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-255.boot.md
+  - id: CON-FIN-256
+    name: Commercial Substance
+    context: BC-FIN
+    type: value_object
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-256.commercial-substance.md
+  - id: CON-FIN-257
+    name: Gain on Exchange
+    context: BC-FIN
+    type: event
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-257.gain-on-exchange.md
+  - id: CON-FIN-258
+    name: Loss on Exchange
+    context: BC-FIN
+    type: event
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-258.loss-on-exchange.md
+  - id: CON-FIN-259
+    name: Exchange of Similar Assets
+    context: BC-FIN
+    type: command
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-259.exchange-of-similar-assets.md
+  - id: CON-FIN-260
+    name: Accrued Liability
+    context: BC-FIN
+    type: entity
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-260.accrued-liability.md
+  - id: CON-FIN-261
+    name: Interest-Bearing Note
+    context: BC-FIN
+    type: entity
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-261.interest-bearing-note.md
+  - id: CON-FIN-262
+    name: Discounted Note
+    context: BC-FIN
+    type: entity
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-262.discounted-note.md
+  - id: CON-FIN-263
+    name: Current Portion of Long-Term Debt
+    context: BC-FIN
+    type: entity
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-263.current-portion-of-long-term-debt.md
+  - id: CON-FIN-264
+    name: Payroll
+    context: BC-FIN
+    type: aggregate
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-264.payroll.md
+  - id: CON-FIN-265
+    name: Gross Pay
+    context: BC-FIN
+    type: value_object
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-265.gross-pay.md
+  - id: CON-FIN-266
+    name: Net Pay
+    context: BC-FIN
+    type: value_object
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-266.net-pay.md
+  - id: CON-FIN-267
+    name: FICA Tax
+    context: BC-FIN
+    type: entity
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-267.fica-tax.md
+  - id: CON-FIN-268
+    name: Federal Unemployment Tax (FUTA)
+    context: BC-FIN
+    type: entity
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-268.federal-unemployment-tax-futa.md
+  - id: CON-FIN-269
+    name: State Unemployment Tax (SUTA)
+    context: BC-FIN
+    type: entity
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-269.state-unemployment-tax-suta.md
+  - id: CON-FIN-270
+    name: Payroll Tax
+    context: BC-FIN
+    type: entity
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-270.payroll-tax.md
+  - id: CON-FIN-271
+    name: Vacation Pay
+    context: BC-FIN
+    type: entity
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-271.vacation-pay.md
+  - id: CON-FIN-272
+    name: Pension
+    context: BC-FIN
+    type: aggregate
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-272.pension.md
+  - id: CON-FIN-273
+    name: Defined Contribution Plan
+    context: BC-FIN
+    type: entity
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-273.defined-contribution-plan.md
+  - id: CON-FIN-274
+    name: Defined Benefit Plan
+    context: BC-FIN
+    type: entity
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-274.defined-benefit-plan.md
+  - id: CON-FIN-275
+    name: Installment Note
+    context: BC-FIN
+    type: entity
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-275.installment-note.md
+  - id: CON-FIN-276
+    name: Mortgage Note
+    context: BC-FIN
+    type: entity
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-276.mortgage-note.md
+  - id: CON-FIN-277
+    name: Creditor
+    context: BC-FIN
+    type: role
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-277.creditor.md
+  - id: CON-FIN-278
+    name: Debtor
+    context: BC-FIN
+    type: role
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-278.debtor.md
+  - id: CON-FIN-279
+    name: Contingent Liability
+    context: BC-FIN
+    type: entity
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-279.contingent-liability.md
+  - id: CON-FIN-280
+    name: Maturity Value
+    context: BC-FIN
+    type: value_object
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-280.maturity-value.md
+  - id: CON-FIN-281
+    name: Quick Ratio
+    context: BC-FIN
+    type: value_object
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-281.quick-ratio.md
+  - id: CON-FIN-282
+    name: Payroll Register
+    context: BC-FIN
+    type: entity
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-282.payroll-register.md
+  - id: CON-FIN-283
+    name: Payroll Summary
+    context: BC-FIN
+    type: entity
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-283.payroll-summary.md
+  - id: CON-FIN-284
+    name: Salaries Payable
+    context: BC-FIN
+    type: entity
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-284.salaries-payable.md
+  - id: CON-FIN-285
+    name: Bond Payable
+    context: BC-FIN
+    type: entity
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-285.bond-payable.md
+  - id: CON-FIN-286
+    name: Bond Indenture
+    context: BC-FIN
+    type: entity
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-286.bond-indenture.md
+  - id: CON-FIN-287
+    name: Term Bonds
+    context: BC-FIN
+    type: entity
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-287.term-bonds.md
+  - id: CON-FIN-288
+    name: Serial Bonds
+    context: BC-FIN
+    type: entity
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-288.serial-bonds.md
+  - id: CON-FIN-289
+    name: Convertible Bond
+    context: BC-FIN
+    type: entity
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-289.convertible-bond.md
+  - id: CON-FIN-290
+    name: Callable Bond
+    context: BC-FIN
+    type: entity
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-290.callable-bond.md
+  - id: CON-FIN-291
+    name: Bond Discount
+    context: BC-FIN
+    type: value_object
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-291.bond-discount.md
+  - id: CON-FIN-292
+    name: Bond Premium
+    context: BC-FIN
+    type: value_object
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-292.bond-premium.md
+  - id: CON-FIN-293
+    name: Straight-Line Amortization Method
+    context: BC-FIN
+    type: policy
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-293.straight-line-amortization-method.md
+  - id: CON-FIN-294
+    name: Effective Interest Method
+    context: BC-FIN
+    type: policy
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-294.effective-interest-method.md
+  - id: CON-FIN-295
+    name: Bond Redemption
+    context: BC-FIN
+    type: command
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-295.bond-redemption.md
+  - id: CON-FIN-296
+    name: Gain on Bond Redemption
+    context: BC-FIN
+    type: event
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-296.gain-on-bond-redemption.md
+  - id: CON-FIN-297
+    name: Loss on Bond Redemption
+    context: BC-FIN
+    type: event
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-297.loss-on-bond-redemption.md
+  - id: CON-FIN-298
+    name: Present Value of $1
+    context: BC-FIN
+    type: value_object
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-298.present-value-of-1.md
+  - id: CON-FIN-299
+    name: Present Value of an Amount
+    context: BC-FIN
+    type: value_object
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-299.present-value-of-an-amount.md
+  - id: CON-FIN-300
+    name: Bond Carrying Amount (Book Value)
+    context: BC-FIN
+    type: value_object
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-300.bond-carrying-amount-book-value.md
+  - id: CON-FIN-301
+    name: Interest Expense
+    context: BC-FIN
+    type: entity
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-301.interest-expense.md
+  - id: CON-FIN-302
+    name: Bonds Payable
+    context: BC-FIN
+    type: entity
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-302.bonds-payable.md
+  - id: CON-FIN-303
+    name: Convertible Bonds
+    context: BC-FIN
+    type: entity
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-303.convertible-bonds.md
+  - id: CON-FIN-304
+    name: Carrying Amount of Bonds
+    context: BC-FIN
+    type: value_object
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-304.carrying-amount-of-bonds.md
+  - id: CON-FIN-305
+    name: Semiannual Interest Payment
+    context: BC-FIN
+    type: event
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-305.semiannual-interest-payment.md
+  - id: CON-FIN-306
+    name: Partner Capital Account
+    context: BC-FIN
+    type: entity
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-306.partner-capital-account.md
+  - id: CON-FIN-307
+    name: Partnership Agreement
+    context: BC-FIN
+    type: entity
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-307.partnership-agreement.md
+  - id: CON-FIN-308
+    name: Salary Allowance
+    context: BC-FIN
+    type: value_object
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-308.salary-allowance.md
+  - id: CON-FIN-309
+    name: Interest Allowance
+    context: BC-FIN
+    type: value_object
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-309.interest-allowance.md
+  - id: CON-FIN-310
+    name: Partnership Formation
+    context: BC-FIN
+    type: command
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-310.partnership-formation.md
+  - id: CON-FIN-311
+    name: Statement of Partnership Equity
+    context: BC-FIN
+    type: entity
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-311.statement-of-partnership-equity.md
+  - id: CON-FIN-312
+    name: Admission of New Partner by Investment
+    context: BC-FIN
+    type: command
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-312.admission-of-new-partner-by-investment.md
+  - id: CON-FIN-313
+    name: Asset Revaluation
+    context: BC-FIN
+    type: command
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-313.asset-revaluation.md
+  - id: CON-FIN-314
+    name: Partnership Liquidation
+    context: BC-FIN
+    type: command
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-314.partnership-liquidation.md
+  - id: CON-FIN-315
+    name: Realization
+    context: BC-FIN
+    type: event
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-315.realization.md
+  - id: CON-FIN-316
+    name: Gain on Realization
+    context: BC-FIN
+    type: event
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-316.gain-on-realization.md
+  - id: CON-FIN-317
+    name: Loss on Realization
+    context: BC-FIN
+    type: event
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-317.loss-on-realization.md
+  - id: CON-FIN-318
+    name: Capital Deficiency
+    context: BC-FIN
+    type: value_object
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-318.capital-deficiency.md
+  - id: CON-FIN-319
+    name: Statement of Partnership Liquidation
+    context: BC-FIN
+    type: entity
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-319.statement-of-partnership-liquidation.md
+  - id: CON-FIN-320
+    name: Installment Liquidation
+    context: BC-FIN
+    type: command
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-320.installment-liquidation.md
+  - id: CON-FIN-321
+    name: Statement of LLC Liquidation
+    context: BC-FIN
+    type: entity
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-321.statement-of-llc-liquidation.md
+  - id: CON-FIN-322
+    name: Revenue per Employee
+    context: BC-FIN
+    type: value_object
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-322.revenue-per-employee.md
+  - id: CON-FIN-323
+    name: Stock
+    context: BC-FIN
+    type: entity
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-323.stock.md
+  - id: CON-FIN-324
+    name: Common Stock
+    context: BC-FIN
+    type: entity
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-324.common-stock.md
+  - id: CON-FIN-325
+    name: Cumulative Preferred Stock
+    context: BC-FIN
+    type: entity
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-325.cumulative-preferred-stock.md
+  - id: CON-FIN-326
+    name: Paid-In Capital
+    context: BC-FIN
+    type: aggregate
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-326.paid-in-capital.md
+  - id: CON-FIN-327
+    name: Cash Dividend
+    context: BC-FIN
+    type: event
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-327.cash-dividend.md
+  - id: CON-FIN-328
+    name: Stock Dividend
+    context: BC-FIN
+    type: event
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-328.stock-dividend.md
+  - id: CON-FIN-329
+    name: Stock Split
+    context: BC-FIN
+    type: event
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-329.stock-split.md
+  - id: CON-FIN-330
+    name: Legal Capital
+    context: BC-FIN
+    type: value_object
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-330.legal-capital.md
+  - id: CON-FIN-331
+    name: Discount on Stock
+    context: BC-FIN
+    type: value_object
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-331.discount-on-stock.md
+  - id: CON-FIN-332
+    name: Premium on Stock
+    context: BC-FIN
+    type: value_object
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-332.premium-on-stock.md
+  - id: CON-FIN-333
+    name: Treasury Stock
+    context: BC-FIN
+    type: entity
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-333.treasury-stock.md
+  - id: CON-FIN-334
+    name: Paid-In Capital from Sale of Treasury Stock
+    context: BC-FIN
+    type: entity
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-334.paid-in-capital-from-sale-of-treasury-stock.md
+  - id: CON-FIN-335
+    name: Statement of Stockholders' Equity
+    context: BC-FIN
+    type: entity
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-335.statement-of-stockholders-equity.md
+  - id: CON-FIN-336
+    name: Prior Period Adjustment
+    context: BC-FIN
+    type: event
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-336.prior-period-adjustment.md
+  - id: CON-FIN-337
+    name: Restriction on Retained Earnings
+    context: BC-FIN
+    type: policy
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-337.restriction-on-retained-earnings.md
+  - id: CON-FIN-338
+    name: Dividends Per Share
+    context: BC-FIN
+    type: value_object
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-338.dividends-per-share.md
+  - id: CON-FIN-339
+    name: Operating Activities
+    context: BC-FIN
+    type: value_object
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-339.operating-activities.md
+  - id: CON-FIN-340
+    name: Investing Activities
+    context: BC-FIN
+    type: value_object
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-340.investing-activities.md
+  - id: CON-FIN-341
+    name: Financing Activities
+    context: BC-FIN
+    type: value_object
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-341.financing-activities.md
+  - id: CON-FIN-342
+    name: Indirect Method
+    context: BC-FIN
+    type: value_object
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-342.indirect-method.md
+  - id: CON-FIN-343
+    name: Net Cash Inflow
+    context: BC-FIN
+    type: value_object
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-343.net-cash-inflow.md
+  - id: CON-FIN-344
+    name: Cash Outflow
+    context: BC-FIN
+    type: event
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-344.cash-outflow.md
+  - id: CON-FIN-345
+    name: Non-Cash Adjustment
+    context: BC-FIN
+    type: value_object
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-345.non-cash-adjustment.md
+  - id: CON-FIN-346
+    name: Working Capital Change Adjustment
+    context: BC-FIN
+    type: value_object
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-346.working-capital-change-adjustment.md
+  - id: CON-FIN-347
+    name: Noncash Investing and Financing Activities
+    context: BC-FIN
+    type: value_object
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-347.noncash-investing-and-financing-activities.md
+  - id: CON-FIN-348
+    name: Free Cash Flow
+    context: BC-FIN
+    type: value_object
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-348.free-cash-flow.md
+  - id: CON-FIN-349
+    name: Spreadsheet Method
+    context: BC-FIN
+    type: value_object
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-349.spreadsheet-method.md
+  - id: CON-FIN-350
+    name: Financial Distress Signal
+    context: BC-FIN
+    type: policy
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-350.financial-distress-signal.md
+  - id: CON-FIN-351
+    name: Reconciliation Schedule
+    context: BC-FIN
+    type: value_object
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-351.reconciliation-schedule.md
+  - id: CON-FIN-352
+    name: Cash Received from Customers
+    context: BC-FIN
+    type: value_object
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-352.cash-received-from-customers.md
+  - id: CON-FIN-353
+    name: Cash Paid for Merchandise
+    context: BC-FIN
+    type: value_object
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-353.cash-paid-for-merchandise.md
+  - id: CON-FIN-354
+    name: Cash Paid for Operating Expenses
+    context: BC-FIN
+    type: value_object
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-354.cash-paid-for-operating-expenses.md
+  - id: CON-FIN-355
+    name: Cash Paid for Interest
+    context: BC-FIN
+    type: value_object
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-355.cash-paid-for-interest.md
+  - id: CON-FIN-356
+    name: Cash Paid for Income Taxes
+    context: BC-FIN
+    type: value_object
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-356.cash-paid-for-income-taxes.md
+  - id: CON-FIN-357
+    name: Gain on Sale of Land
+    context: BC-FIN
+    type: value_object
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-357.gain-on-sale-of-land.md
+  - id: CON-FIN-358
+    name: Depreciation Exclusion
+    context: BC-FIN
+    type: policy
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-358.depreciation-exclusion.md
+  - id: CON-FIN-359
+    name: Common-Sized Statement
+    context: BC-FIN
+    type: value_object
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-359.common-sized-statement.md
+  - id: CON-FIN-360
+    name: Current Position Analysis
+    context: BC-FIN
+    type: aggregate
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-360.current-position-analysis.md
+  - id: CON-FIN-361
+    name: Operating Income Percentage
+    context: BC-FIN
+    type: value_object
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-361.operating-income-percentage.md
+  - id: CON-FIN-362
+    name: Data Analytics Databases
+    context: BC-FIN
+    type: entity
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-362.data-analytics-databases.md
+  - id: CON-FIN-363
+    name: Ratio of Fixed Assets to Long-Term Liabilities
+    context: BC-FIN
+    type: value_object
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-363.ratio-of-fixed-assets-to-long-term-liabilities.md
+  - id: CON-FIN-364
+    name: Leverage
+    context: BC-FIN
+    type: value_object
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-364.leverage.md
+  - id: CON-FIN-365
+    name: Managerial Accounting
+    context: BC-FIN
+    type: aggregate
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-365.managerial-accounting.md
+  - id: CON-FIN-366
+    name: Financial Accounting
+    context: BC-FIN
+    type: aggregate
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-366.financial-accounting.md
+  - id: CON-FIN-367
+    name: Strategic Planning
+    context: BC-FIN
+    type: policy
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-367.strategic-planning.md
+  - id: CON-FIN-368
+    name: Operational Planning
+    context: BC-FIN
+    type: policy
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-368.operational-planning.md
+  - id: CON-FIN-369
+    name: Measurement
+    context: BC-FIN
+    type: policy
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-369.measurement.md
+  - id: CON-FIN-370
+    name: Evaluation
+    context: BC-FIN
+    type: policy
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-370.evaluation.md
+  - id: CON-FIN-371
+    name: Control
+    context: BC-FIN
+    type: policy
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-371.control.md
+  - id: CON-FIN-372
+    name: Cost Object
+    context: BC-FIN
+    type: entity
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-372.cost-object.md
+  - id: CON-FIN-373
+    name: Direct Materials
+    context: BC-FIN
+    type: entity
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-373.direct-materials.md
+  - id: CON-FIN-374
+    name: Indirect Cost
+    context: BC-FIN
+    type: value_object
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-374.indirect-cost.md
+  - id: CON-FIN-375
+    name: Manufacturing Overhead
+    context: BC-FIN
+    type: aggregate
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-375.manufacturing-overhead.md
+  - id: CON-FIN-376
+    name: Prime Costs
+    context: BC-FIN
+    type: value_object
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-376.prime-costs.md
+  - id: CON-FIN-377
+    name: Conversion Costs
+    context: BC-FIN
+    type: value_object
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-377.conversion-costs.md
+  - id: CON-FIN-378
+    name: Product Costs
+    context: BC-FIN
+    type: value_object
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-378.product-costs.md
+  - id: CON-FIN-379
+    name: Period Costs
+    context: BC-FIN
+    type: value_object
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-379.period-costs.md
+  - id: CON-FIN-380
+    name: Sustainability
+    context: BC-FIN
+    type: policy
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-380.sustainability.md
+  - id: CON-FIN-381
+    name: Eco-Efficiency Measures
+    context: BC-FIN
+    type: value_object
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-381.eco-efficiency-measures.md
+  - id: CON-FIN-382
+    name: Materials Inventory
+    context: BC-FIN
+    type: entity
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-382.materials-inventory.md
+  - id: CON-FIN-383
+    name: Work in Process Inventory
+    context: BC-FIN
+    type: entity
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-383.work-in-process-inventory.md
+  - id: CON-FIN-384
+    name: Finished Goods Inventory
+    context: BC-FIN
+    type: entity
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-384.finished-goods-inventory.md
+  - id: CON-FIN-385
+    name: Statement of Cost of Goods Manufactured
+    context: BC-FIN
+    type: entity
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-385.statement-of-cost-of-goods-manufactured.md
+  - id: CON-FIN-386
+    name: Verticals
+    context: BC-FIN
+    type: entity
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-386.verticals.md
+  - id: CON-FIN-387
+    name: Horizontals
+    context: BC-FIN
+    type: entity
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-387.horizontals.md
+  - id: CON-FIN-388
+    name: Certified Management Accountant
+    context: BC-FIN
+    type: entity
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-388.certified-management-accountant.md
+  - id: CON-FIN-389
+    name: Product Cost Distortion
+    context: BC-FIN
+    type: event
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-389.product-cost-distortion.md
+  - id: CON-FIN-390
+    name: Period Cost
+    context: BC-FIN
+    type: value_object
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-390.period-cost.md
+  - id: CON-FIN-391
+    name: Indirect Materials
+    context: BC-FIN
+    type: entity
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-391.indirect-materials.md
+  - id: CON-FIN-392
+    name: Indirect Labor
+    context: BC-FIN
+    type: entity
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-392.indirect-labor.md
+  - id: CON-FIN-393
+    name: Prime Cost
+    context: BC-FIN
+    type: value_object
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-393.prime-cost.md
+  - id: CON-FIN-394
+    name: Conversion Cost
+    context: BC-FIN
+    type: value_object
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-394.conversion-cost.md
+  - id: CON-FIN-395
+    name: Occupancy Rate
+    context: BC-FIN
+    type: value_object
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-395.occupancy-rate.md
+  - id: CON-FIN-396
+    name: Guest Nights
+    context: BC-FIN
+    type: value_object
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-396.guest-nights.md
+  - id: CON-FIN-397
+    name: Available Room Nights
+    context: BC-FIN
+    type: value_object
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-397.available-room-nights.md
+  - id: CON-FIN-398
+    name: Manufacturing Costs
+    context: BC-FIN
+    type: value_object
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-398.manufacturing-costs.md
+  - id: CON-FIN-399
+    name: Cost of Finished Goods Available for Sale
+    context: BC-FIN
+    type: value_object
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-399.cost-of-finished-goods-available-for-sale.md
+  - id: CON-FIN-400
+    name: Cost System
+    context: BC-FIN
+    type: entity
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-400.cost-system.md
+  - id: CON-FIN-401
+    name: Job Order Costing
+    context: BC-FIN
+    type: aggregate
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-401.job-order-costing.md
+  - id: CON-FIN-402
+    name: Multi-Department Process Costing
+    context: BC-FIN
+    type: aggregate
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-402.multi-department-process-costing.md
+  - id: CON-FIN-403
+    name: Hybrid Costing
+    context: BC-FIN
+    type: entity
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-403.hybrid-costing.md
+  - id: CON-FIN-404
+    name: Job
+    context: BC-FIN
+    type: entity
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-404.job.md
+  - id: CON-FIN-405
+    name: Job Cost Sheet
+    context: BC-FIN
+    type: entity
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-405.job-cost-sheet.md
+  - id: CON-FIN-406
+    name: Materials Requisition
+    context: BC-FIN
+    type: command
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-406.materials-requisition.md
+  - id: CON-FIN-407
+    name: Materials Ledger
+    context: BC-FIN
+    type: entity
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-407.materials-ledger.md
+  - id: CON-FIN-408
+    name: Work in Process Ledger
+    context: BC-FIN
+    type: entity
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-408.work-in-process-ledger.md
+  - id: CON-FIN-409
+    name: Finished Goods Ledger
+    context: BC-FIN
+    type: entity
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-409.finished-goods-ledger.md
+  - id: CON-FIN-410
+    name: Predetermined Overhead Rate
+    context: BC-FIN
+    type: value_object
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-410.predetermined-overhead-rate.md
+  - id: CON-FIN-411
+    name: Activity Base
+    context: BC-FIN
+    type: value_object
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-411.activity-base.md
+  - id: CON-FIN-412
+    name: Cost Allocation Base
+    context: BC-FIN
+    type: value_object
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-412.cost-allocation-base.md
+  - id: CON-FIN-413
+    name: Normal Costing
+    context: BC-FIN
+    type: policy
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-413.normal-costing.md
+  - id: CON-FIN-414
+    name: Actual Costing
+    context: BC-FIN
+    type: policy
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-414.actual-costing.md
+  - id: CON-FIN-415
+    name: Standard Costing
+    context: BC-FIN
+    type: policy
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-415.standard-costing.md
+  - id: CON-FIN-416
+    name: Job Order Service Business
+    context: BC-FIN
+    type: entity
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-416.job-order-service-business.md
+  - id: CON-FIN-417
+    name: Cost of Services Account
+    context: BC-FIN
+    type: entity
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-417.cost-of-services-account.md
+  - id: CON-FIN-418
+    name: Cost Variance Analysis
+    context: BC-FIN
+    type: value_object
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-418.cost-variance-analysis.md
+  - id: CON-FIN-419
+    name: Unit Cost
+    context: BC-FIN
+    type: value_object
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-419.unit-cost.md
+  - id: CON-FIN-420
+    name: Cost Comparison
+    context: BC-FIN
+    type: process
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-420.cost-comparison.md
+  - id: CON-FIN-421
+    name: Service Business Job Costing
+    context: BC-FIN
+    type: entity
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-421.service-business-job-costing.md
+  - id: CON-FIN-422
+    name: Direct Labor Rate for Services
+    context: BC-FIN
+    type: value_object
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-422.direct-labor-rate-for-services.md
+  - id: CON-FIN-423
+    name: Overhead Rate for Services
+    context: BC-FIN
+    type: value_object
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-423.overhead-rate-for-services.md
+  - id: CON-FIN-424
+    name: Gross Profit for Services
+    context: BC-FIN
+    type: value_object
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-424.gross-profit-for-services.md
+  - id: CON-FIN-425
+    name: Job Order Costing Decision Making
+    context: BC-FIN
+    type: process
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-425.job-order-costing-decision-making.md
+  - id: CON-FIN-426
+    name: Factory Labor
+    context: BC-FIN
+    type: value_object
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-426.factory-labor.md
+  - id: CON-FIN-427
+    name: Over-Applied Overhead
+    context: BC-FIN
+    type: value_object
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-427.over-applied-overhead.md
+  - id: CON-FIN-428
+    name: Under-Applied Overhead
+    context: BC-FIN
+    type: value_object
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-428.under-applied-overhead.md
+  - id: CON-FIN-429
+    name: Equivalent Units of Production
+    context: BC-FIN
+    type: value_object
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-429.equivalent-units-of-production.md
+  - id: CON-FIN-430
+    name: Whole Units
+    context: BC-FIN
+    type: value_object
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-430.whole-units.md
+  - id: CON-FIN-431
+    name: Direct Materials Equivalent Units
+    context: BC-FIN
+    type: value_object
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-431.direct-materials-equivalent-units.md
+  - id: CON-FIN-432
+    name: Conversion Equivalent Units
+    context: BC-FIN
+    type: value_object
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-432.conversion-equivalent-units.md
+  - id: CON-FIN-433
+    name: Cost of Production Report
+    context: BC-FIN
+    type: entity
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-433.cost-of-production-report.md
+  - id: CON-FIN-434
+    name: Started and Completed Units
+    context: BC-FIN
+    type: value_object
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-434.started-and-completed-units.md
+  - id: CON-FIN-435
+    name: Transferred-In Costs
+    context: BC-FIN
+    type: value_object
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-435.transferred-in-costs.md
+  - id: CON-FIN-436
+    name: Three Groups of Units
+    context: BC-FIN
+    type: value_object
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-436.three-groups-of-units.md
+  - id: CON-FIN-437
+    name: Materials Addition Point
+    context: BC-FIN
+    type: value_object
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-437.materials-addition-point.md
+  - id: CON-FIN-438
+    name: Cost Per Equivalent Unit
+    context: BC-FIN
+    type: value_object
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-438.cost-per-equivalent-unit.md
+  - id: CON-FIN-439
+    name: FIFO Method
+    context: BC-FIN
+    type: value_object
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-439.fifo-method.md
+  - id: CON-FIN-440
+    name: Weighted Average Method in Process Costing
+    context: BC-FIN
+    type: value_object
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-440.weighted-average-method-in-process-costing.md
+  - id: CON-FIN-441
+    name: Lean Manufacturing
+    context: BC-FIN
+    type: policy
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-441.lean-manufacturing.md
+  - id: CON-FIN-442
+    name: Pull Manufacturing
+    context: BC-FIN
+    type: policy
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-442.pull-manufacturing.md
+  - id: CON-FIN-443
+    name: Push Manufacturing
+    context: BC-FIN
+    type: policy
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-443.push-manufacturing.md
+  - id: CON-FIN-444
+    name: Transferred-In Costs Between Departments
+    context: BC-FIN
+    type: event
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-444.transferred-in-costs-between-departments.md
+  - id: CON-FIN-445
+    name: Yield Ratio
+    context: BC-FIN
+    type: value_object
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-445.yield-ratio.md
+  - id: CON-FIN-446
+    name: Flavor Changeover Cost
+    context: BC-FIN
+    type: value_object
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-446.flavor-changeover-cost.md
+  - id: CON-FIN-447
+    name: Process Costing Journal Entries
+    context: BC-FIN
+    type: command
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-447.process-costing-journal-entries.md
+  - id: CON-FIN-448
+    name: Activity-Based Costing (ABC)
+    context: BC-FIN
+    type: policy
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-448.activity-based-costing-abc.md
+  - id: CON-FIN-449
+    name: Activity Rate
+    context: BC-FIN
+    type: value_object
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-449.activity-rate.md
+  - id: CON-FIN-450
+    name: Activity Pool
+    context: BC-FIN
+    type: aggregate
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-450.activity-pool.md
+  - id: CON-FIN-451
+    name: Activity Base (Activity Driver)
+    context: BC-FIN
+    type: value_object
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-451.activity-base-activity-driver.md
+  - id: CON-FIN-452
+    name: Single Plantwide Overhead Rate
+    context: BC-FIN
+    type: policy
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-452.single-plantwide-overhead-rate.md
+  - id: CON-FIN-453
+    name: Multiple Production Department Overhead Rate
+    context: BC-FIN
+    type: policy
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-453.multiple-production-department-overhead-rate.md
+  - id: CON-FIN-454
+    name: ABC Selling and Administrative Expense Allocation
+    context: BC-FIN
+    type: policy
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-454.abc-selling-and-administrative-expense-allocation.md
+  - id: CON-FIN-455
+    name: Cost Pool
+    context: BC-FIN
+    type: aggregate
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-455.cost-pool.md
+  - id: CON-FIN-456
+    name: Direct Labor Hour (dlh)
+    context: BC-FIN
+    type: value_object
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-456.direct-labor-hour-dlh.md
+  - id: CON-FIN-457
+    name: Engineering Change Order (ECO)
+    context: BC-FIN
+    type: entity
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-457.engineering-change-order-eco.md
+  - id: CON-FIN-458
+    name: Cost Behavior
+    context: BC-FIN
+    type: value_object
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-458.cost-behavior.md
+  - id: CON-FIN-459
+    name: Variable Cost Method
+    context: BC-FIN
+    type: value_object
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-459.variable-cost-method.md
+  - id: CON-FIN-460
+    name: Fixed Cost
+    context: BC-FIN
+    type: entity
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-460.fixed-cost.md
+  - id: CON-FIN-461
+    name: Mixed Cost
+    context: BC-FIN
+    type: value_object
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-461.mixed-cost.md
+  - id: CON-FIN-462
+    name: Relevant Range
+    context: BC-FIN
+    type: value_object
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-462.relevant-range.md
+  - id: CON-FIN-463
+    name: Contribution Margin Ratio
+    context: BC-FIN
+    type: value_object
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-463.contribution-margin-ratio.md
+  - id: CON-FIN-464
+    name: Break-Even Point
+    context: BC-FIN
+    type: value_object
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-464.break-even-point.md
+  - id: CON-FIN-465
+    name: Target Profit Sales
+    context: BC-FIN
+    type: value_object
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-465.target-profit-sales.md
+  - id: CON-FIN-466
+    name: Cost-Volume-Profit Chart
+    context: BC-FIN
+    type: value_object
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-466.cost-volume-profit-chart.md
+  - id: CON-FIN-467
+    name: Profit-Volume Chart
+    context: BC-FIN
+    type: value_object
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-467.profit-volume-chart.md
+  - id: CON-FIN-468
+    name: Sales Mix
+    context: BC-FIN
+    type: value_object
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-468.sales-mix.md
+  - id: CON-FIN-469
+    name: Operating Leverage
+    context: BC-FIN
+    type: value_object
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-469.operating-leverage.md
+  - id: CON-FIN-470
+    name: Margin of Safety
+    context: BC-FIN
+    type: value_object
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-470.margin-of-safety.md
+  - id: CON-FIN-471
+    name: Absorption Costing
+    context: BC-FIN
+    type: policy
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-471.absorption-costing.md
+  - id: CON-FIN-472
+    name: Variable Costing
+    context: BC-FIN
+    type: policy
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-472.variable-costing.md
+  - id: CON-FIN-473
+    name: Cost-Volume-Profit Analysis for Service Businesses
+    context: BC-FIN
+    type: policy
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-473.cost-volume-profit-analysis-for-service-businesses.md
+  - id: CON-FIN-474
+    name: Product Profitability Report
+    context: BC-FIN
+    type: entity
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-474.product-profitability-report.md
+  - id: CON-FIN-475
+    name: Sales-Based Expense Allocation
+    context: BC-FIN
+    type: policy
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-475.sales-based-expense-allocation.md
+  - id: CON-FIN-476
+    name: Manufacturing Overhead Cost per Unit Comparison
+    context: BC-FIN
+    type: entity
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-476.manufacturing-overhead-cost-per-unit-comparison.md
+  - id: CON-FIN-477
+    name: Break-Even Analysis for Service Business
+    context: BC-FIN
+    type: policy
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-477.break-even-analysis-for-service-business.md
+  - id: CON-FIN-478
+    name: Weighted Average Contribution Margin
+    context: BC-FIN
+    type: value_object
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-478.weighted-average-contribution-margin.md
+  - id: CON-FIN-479
+    name: Service Company Break-Even
+    context: BC-FIN
+    type: value_object
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-479.service-company-break-even.md
+  - id: CON-FIN-480
+    name: Promotional Campaign Break-Even
+    context: BC-FIN
+    type: value_object
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-480.promotional-campaign-break-even.md
+  - id: CON-FIN-481
+    name: Budget
+    context: BC-FIN
+    type: aggregate
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-481.budget.md
+  - id: CON-FIN-482
+    name: Static Budget
+    context: BC-FIN
+    type: entity
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-482.static-budget.md
+  - id: CON-FIN-483
+    name: Flexible Budget
+    context: BC-FIN
+    type: entity
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-483.flexible-budget.md
+  - id: CON-FIN-484
+    name: Continuous Budget
+    context: BC-FIN
+    type: entity
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-484.continuous-budget.md
+  - id: CON-FIN-485
+    name: Zero-Based Budgeting
+    context: BC-FIN
+    type: policy
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-485.zero-based-budgeting.md
+  - id: CON-FIN-486
+    name: Incremental Budgeting
+    context: BC-FIN
+    type: policy
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-486.incremental-budgeting.md
+  - id: CON-FIN-487
+    name: Budget Committee
+    context: BC-FIN
+    type: role
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-487.budget-committee.md
+  - id: CON-FIN-488
+    name: Budget Gaming
+    context: BC-FIN
+    type: policy
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-488.budget-gaming.md
+  - id: CON-FIN-489
+    name: Nonmanufacturing Staffing Budget Scenario
+    context: BC-FIN
+    type: aggregate
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-489.nonmanufacturing-staffing-budget-scenario.md
+  - id: CON-FIN-490
+    name: Multiperiod Budget
+    context: BC-FIN
+    type: aggregate
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-490.multiperiod-budget.md
+  - id: CON-FIN-491
+    name: Sales Budget Forecasting
+    context: BC-FIN
+    type: aggregate
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-491.sales-budget-forecasting.md
+  - id: CON-FIN-492
+    name: Production Budget
+    context: BC-FIN
+    type: aggregate
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-492.production-budget.md
+  - id: CON-FIN-493
+    name: Direct Materials Purchases Budget
+    context: BC-FIN
+    type: aggregate
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-493.direct-materials-purchases-budget.md
+  - id: CON-FIN-494
+    name: Manufacturing Overhead Cost Budget
+    context: BC-FIN
+    type: aggregate
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-494.manufacturing-overhead-cost-budget.md
+  - id: CON-FIN-495
+    name: Selling and Administrative Expenses Budget
+    context: BC-FIN
+    type: aggregate
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-495.selling-and-administrative-expenses-budget.md
+  - id: CON-FIN-496
+    name: Cash Budget
+    context: BC-FIN
+    type: aggregate
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-496.cash-budget.md
+  - id: CON-FIN-497
+    name: Capital Expenditures Budget
+    context: BC-FIN
+    type: aggregate
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-497.capital-expenditures-budget.md
+  - id: CON-FIN-498
+    name: Production Budget with Ending Inventory Percentage
+    context: BC-FIN
+    type: aggregate
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-498.production-budget-with-ending-inventory-percentage.md
+  - id: CON-FIN-499
+    name: Multi-Product Direct Materials Budget
+    context: BC-FIN
+    type: aggregate
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-499.multi-product-direct-materials-budget.md
+  - id: CON-FIN-500
+    name: Multi-Department Direct Labor Budget
+    context: BC-FIN
+    type: aggregate
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-500.multi-department-direct-labor-budget.md
+  - id: CON-FIN-501
+    name: Cash Receipts Schedule
+    context: BC-FIN
+    type: aggregate
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-501.cash-receipts-schedule.md
+  - id: CON-FIN-502
+    name: Cash Disbursements Schedule
+    context: BC-FIN
+    type: aggregate
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-502.cash-disbursements-schedule.md
+  - id: CON-FIN-503
+    name: Standard Cost
+    context: BC-FIN
+    type: value_object
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-503.standard-cost.md
+  - id: CON-FIN-504
+    name: Budget Performance Report
+    context: BC-FIN
+    type: entity
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-504.budget-performance-report.md
+  - id: CON-FIN-505
+    name: Total Manufacturing Cost Variance
+    context: BC-FIN
+    type: value_object
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-505.total-manufacturing-cost-variance.md
+  - id: CON-FIN-506
+    name: Direct Materials Price Variance
+    context: BC-FIN
+    type: value_object
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-506.direct-materials-price-variance.md
+  - id: CON-FIN-507
+    name: Direct Materials Quantity Variance
+    context: BC-FIN
+    type: value_object
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-507.direct-materials-quantity-variance.md
+  - id: CON-FIN-508
+    name: Direct Labor Rate Variance
+    context: BC-FIN
+    type: value_object
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-508.direct-labor-rate-variance.md
+  - id: CON-FIN-509
+    name: Direct Labor Time Variance
+    context: BC-FIN
+    type: value_object
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-509.direct-labor-time-variance.md
+  - id: CON-FIN-510
+    name: Manufacturing Overhead Cost Variance Report
+    context: BC-FIN
+    type: entity
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-510.manufacturing-overhead-cost-variance-report.md
+  - id: CON-FIN-511
+    name: Variable Manufacturing Overhead Controllable Variance
+    context: BC-FIN
+    type: value_object
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-511.variable-manufacturing-overhead-controllable-variance.md
+  - id: CON-FIN-512
+    name: Fixed Manufacturing Overhead Volume Variance
+    context: BC-FIN
+    type: value_object
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-512.fixed-manufacturing-overhead-volume-variance.md
+  - id: CON-FIN-513
+    name: Favorable Cost Variance
+    context: BC-FIN
+    type: value_object
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-513.favorable-cost-variance.md
+  - id: CON-FIN-514
+    name: Unfavorable Cost Variance
+    context: BC-FIN
+    type: value_object
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-514.unfavorable-cost-variance.md
+  - id: CON-FIN-515
+    name: Revenue Price Variance
+    context: BC-FIN
+    type: value_object
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-515.revenue-price-variance.md
+  - id: CON-FIN-516
+    name: Revenue Volume Variance
+    context: BC-FIN
+    type: value_object
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-516.revenue-volume-variance.md
+  - id: CON-FIN-517
+    name: Standard Hours for Actual Production
+    context: BC-FIN
+    type: value_object
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-517.standard-hours-for-actual-production.md
+  - id: CON-FIN-518
+    name: Ideal Standards
+    context: BC-FIN
+    type: value_object
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-518.ideal-standards.md
+  - id: CON-FIN-519
+    name: Normal Standards
+    context: BC-FIN
+    type: value_object
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-519.normal-standards.md
+  - id: CON-FIN-520
+    name: Differential Analysis
+    context: BC-FIN
+    type: value_object
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-520.differential-analysis.md
+  - id: CON-FIN-521
+    name: Differential Revenue
+    context: BC-FIN
+    type: value_object
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-521.differential-revenue.md
+  - id: CON-FIN-522
+    name: Differential Cost
+    context: BC-FIN
+    type: value_object
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-522.differential-cost.md
+  - id: CON-FIN-523
+    name: Differential Profit
+    context: BC-FIN
+    type: value_object
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-523.differential-profit.md
+  - id: CON-FIN-524
+    name: Sunk Cost
+    context: BC-FIN
+    type: value_object
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-524.sunk-cost.md
+  - id: CON-FIN-525
+    name: Opportunity Cost
+    context: BC-FIN
+    type: value_object
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-525.opportunity-cost.md
+  - id: CON-FIN-526
+    name: Target Costing
+    context: BC-FIN
+    type: policy
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-526.target-costing.md
+  - id: CON-FIN-527
+    name: Total Cost Method
+    context: BC-FIN
+    type: policy
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-527.total-cost-method.md
+  - id: CON-FIN-528
+    name: Production Bottleneck
+    context: BC-FIN
+    type: entity
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-528.production-bottleneck.md
+  - id: CON-FIN-529
+    name: Theory of Constraints
+    context: BC-FIN
+    type: policy
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-529.theory-of-constraints.md
+  - id: CON-FIN-530
+    name: Unit Contribution Margin per Bottleneck Hour
+    context: BC-FIN
+    type: value_object
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-530.unit-contribution-margin-per-bottleneck-hour.md
+  - id: CON-FIN-531
+    name: Yield Pricing
+    context: BC-FIN
+    type: policy
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-531.yield-pricing.md
+  - id: CON-FIN-532
+    name: Cost-Plus Pricing
+    context: BC-FIN
+    type: policy
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-532.cost-plus-pricing.md
+  - id: CON-FIN-533
+    name: Desired Profit
+    context: BC-FIN
+    type: value_object
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-533.desired-profit.md
+  - id: CON-FIN-534
+    name: Target Cost
+    context: BC-FIN
+    type: value_object
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-534.target-cost.md
+  - id: CON-FIN-535
+    name: Capital Investment Analysis
+    context: BC-FIN
+    type: policy
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-535.capital-investment-analysis.md
+  - id: CON-FIN-536
+    name: Average Rate of Return
+    context: BC-FIN
+    type: value_object
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-536.average-rate-of-return.md
+  - id: CON-FIN-537
+    name: Cash Payback Period
+    context: BC-FIN
+    type: value_object
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-537.cash-payback-period.md
+  - id: CON-FIN-538
+    name: Time Value of Money
+    context: BC-FIN
+    type: value_object
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-538.time-value-of-money.md
+  - id: CON-FIN-539
+    name: Annuity
+    context: BC-FIN
+    type: value_object
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-539.annuity.md
+  - id: CON-FIN-540
+    name: Net Present Value Method
+    context: BC-FIN
+    type: value_object
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-540.net-present-value-method.md
+  - id: CON-FIN-541
+    name: Present Value Index
+    context: BC-FIN
+    type: value_object
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-541.present-value-index.md
+  - id: CON-FIN-542
+    name: Internal Rate of Return Method
+    context: BC-FIN
+    type: value_object
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-542.internal-rate-of-return-method.md
+  - id: CON-FIN-543
+    name: Hurdle Rate
+    context: BC-FIN
+    type: value_object
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-543.hurdle-rate.md
+  - id: CON-FIN-544
+    name: Capital Rationing
+    context: BC-FIN
+    type: policy
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-544.capital-rationing.md
+  - id: CON-FIN-545
+    name: Sensitivity Analysis
+    context: BC-FIN
+    type: policy
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-545.sensitivity-analysis.md
+  - id: CON-FIN-546
+    name: Expected Value Analysis
+    context: BC-FIN
+    type: policy
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-546.expected-value-analysis.md
+  - id: CON-FIN-547
+    name: Complicating Factor — Income Tax
+    context: BC-FIN
+    type: policy
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-547.complicating-factor-income-tax.md
+  - id: CON-FIN-548
+    name: Complicating Factor — Unequal Lives
+    context: BC-FIN
+    type: policy
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-548.complicating-factor-unequal-lives.md
+  - id: CON-FIN-549
+    name: Complicating Factor — Lease vs. Purchase
+    context: BC-FIN
+    type: policy
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-549.complicating-factor-lease-vs-purchase.md
+  - id: CON-FIN-550
+    name: Complicating Factor — Sustainability
+    context: BC-FIN
+    type: policy
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-550.complicating-factor-sustainability.md
+  - id: CON-FIN-551
+    name: Net Present Value (NPV)
+    context: BC-FIN
+    type: value_object
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-551.net-present-value-npv.md
+  - id: CON-FIN-552
+    name: Capital Investment Project
+    context: BC-FIN
+    type: aggregate
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-552.capital-investment-project.md
+  - id: CON-FIN-553
+    name: Net Present Value of Sequential Revenue Streams
+    context: BC-FIN
+    type: value_object
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-553.net-present-value-of-sequential-revenue-streams.md
+  - id: CON-FIN-554
+    name: Forecast vs Actual Investment Performance
+    context: BC-FIN
+    type: value_object
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-554.forecast-vs-actual-investment-performance.md
+  - id: CON-FIN-555
+    name: Qualitative Investment Factors
+    context: BC-FIN
+    type: value_object
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-555.qualitative-investment-factors.md
+  - id: CON-FIN-556
+    name: Currency Exchange Rate Impact
+    context: BC-FIN
+    type: value_object
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-556.currency-exchange-rate-impact.md
+  - id: CON-FIN-557
+    name: Personal Investment Analysis
+    context: BC-FIN
+    type: value_object
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-557.personal-investment-analysis.md
+  - id: CON-FIN-558
+    name: Equity Investment
+    context: BC-FIN
+    type: aggregate
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-558.equity-investment.md
+  - id: CON-FIN-559
+    name: Fair Value Method
+    context: BC-FIN
+    type: policy
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-559.fair-value-method.md
+  - id: CON-FIN-560
+    name: Equity Method
+    context: BC-FIN
+    type: policy
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-560.equity-method.md
+  - id: CON-FIN-561
+    name: Trading Securities
+    context: BC-FIN
+    type: entity
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-561.trading-securities.md
+  - id: CON-FIN-562
+    name: Available-for-Sale Securities
+    context: BC-FIN
+    type: entity
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-562.available-for-sale-securities.md
+  - id: CON-FIN-563
+    name: Valuation Allowance for Available-for-Sale Investments
+    context: BC-FIN
+    type: entity
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-563.valuation-allowance-for-available-for-sale-investments.md
+  - id: CON-FIN-564
+    name: Decentralized Operations
+    context: BC-FIN
+    type: aggregate
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-564.decentralized-operations.md
+  - id: CON-FIN-565
+    name: Cost Center
+    context: BC-FIN
+    type: entity
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-565.cost-center.md
+  - id: CON-FIN-566
+    name: Profit Center
+    context: BC-FIN
+    type: entity
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-566.profit-center.md
+  - id: CON-FIN-567
+    name: Investment Center
+    context: BC-FIN
+    type: entity
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-567.investment-center.md
+  - id: CON-FIN-568
+    name: Return on Investment
+    context: BC-FIN
+    type: value_object
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-568.return-on-investment.md
+  - id: CON-FIN-569
+    name: Residual Income
+    context: BC-FIN
+    type: value_object
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-569.residual-income.md
+  - id: CON-FIN-570
+    name: Support Department Allocation
+    context: BC-FIN
+    type: process
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-570.support-department-allocation.md
+  - id: CON-FIN-571
+    name: DuPont Formula
+    context: BC-FIN
+    type: value_object
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-571.dupont-formula.md
+  - id: CON-FIN-572
+    name: Balanced Scorecard
+    context: BC-FIN
+    type: aggregate
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-572.balanced-scorecard.md
+  - id: CON-FIN-573
+    name: Performance Perspective
+    context: BC-FIN
+    type: value_object
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-573.performance-perspective.md
+  - id: CON-FIN-574
+    name: Strategic Objective
+    context: BC-FIN
+    type: value_object
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-574.strategic-objective.md
+  - id: CON-FIN-575
+    name: Performance Metric
+    context: BC-FIN
+    type: value_object
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-575.performance-metric.md
+  - id: CON-FIN-576
+    name: Leading Indicator
+    context: BC-FIN
+    type: value_object
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-576.leading-indicator.md
+  - id: CON-FIN-577
+    name: Lagging Indicator
+    context: BC-FIN
+    type: value_object
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-577.lagging-indicator.md
+  - id: CON-FIN-578
+    name: Strategy Map
+    context: BC-FIN
+    type: value_object
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-578.strategy-map.md
+  - id: CON-FIN-579
+    name: Measure Map
+    context: BC-FIN
+    type: value_object
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-579.measure-map.md
+  - id: CON-FIN-580
+    name: Profit Margin
+    context: BC-FIN
+    type: value_object
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-580.profit-margin.md
+  - id: CON-FIN-581
+    name: Investment Turnover
+    context: BC-FIN
+    type: value_object
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-581.investment-turnover.md
+  - id: CON-FIN-582
+    name: Consolidated Statement of Shareholders' Equity
+    context: BC-FIN
+    type: entity
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-582.consolidated-statement-of-shareholders-equity.md
+  - id: CON-FIN-583
+    name: Sales-Related Reserves
+    context: BC-FIN
+    type: value_object
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-583.sales-related-reserves.md
+  - id: CON-FIN-584
+    name: Property, Plant and Equipment
+    context: BC-FIN
+    type: aggregate
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-584.property-plant-and-equipment.md
+  - id: CON-FIN-585
+    name: Accrued Liabilities
+    context: BC-FIN
+    type: entity
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-585.accrued-liabilities.md
+  - id: CON-FIN-586
+    name: Supplier Finance Program
+    context: BC-FIN
+    type: value_object
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-586.supplier-finance-program.md
+  - id: CON-FIN-587
+    name: Internal Control over Financial Reporting
+    context: BC-FIN
+    type: policy
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-587.internal-control-over-financial-reporting.md
+  - id: CON-FIN-588
+    name: Earnings Per Share (EPS) on Common Stock
+    context: BC-FIN
+    type: value_object
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-588.earnings-per-share-eps-on-common-stock.md
+  - id: CON-FIN-589
+    name: Profit
+    context: BC-FIN
+    type: value_object
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-589.profit.md
+  - id: CON-FIN-590
+    name: Performance Measurement Systems
+    context: BC-FIN
+    type: entity
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-590.performance-measurement-systems.md
+  - id: CON-FIN-591
+    name: Performance Metrics
+    context: BC-FIN
+    type: value_object
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-591.performance-metrics.md
+  - id: CON-FIN-592
+    name: Physical Inventory
+    context: BC-FIN
+    type: entity
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-592.physical-inventory.md
+  - id: CON-FIN-593
+    name: Premium (Bonds)
+    context: BC-FIN
+    type: value_object
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-593.premium-bonds.md
+  - id: CON-FIN-594
+    name: Quick Assets
+    context: BC-FIN
+    type: value_object
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-594.quick-assets.md
+  - id: CON-FIN-595
+    name: Receivables
+    context: BC-FIN
+    type: aggregate
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-595.receivables.md
+  - id: CON-FIN-596
+    name: Sales Discount
+    context: BC-FIN
+    type: value_object
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-596.sales-discount.md
+  - id: CON-FIN-597
+    name: Securities and Exchange Commission (SEC)
+    context: BC-FIN
+    type: entity
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-597.securities-and-exchange-commission-sec.md
+  - id: CON-FIN-598
+    name: Straight-Line Method (Depreciation)
+    context: BC-FIN
+    type: policy
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-598.straight-line-method-depreciation.md
+  - id: CON-FIN-599
+    name: Controllable Expenses
+    context: BC-FIN
+    type: value_object
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-599.controllable-expenses.md
+  - id: CON-FIN-600
+    name: Controller
+    context: BC-FIN
+    type: role
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-600.controller.md
+  - id: CON-FIN-601
+    name: Cost Centers
+    context: BC-FIN
+    type: aggregate
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-601.cost-centers.md
+  - id: CON-FIN-602
+    name: Cost-Volume-Profit Analysis
+    context: BC-FIN
+    type: command
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-602.cost-volume-profit-analysis.md
+  - id: CON-FIN-603
+    name: Current Assets
+    context: BC-FIN
+    type: aggregate
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-603.current-assets.md
+  - id: CON-FIN-604
+    name: Current Liabilities
+    context: BC-FIN
+    type: aggregate
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-604.current-liabilities.md
+  - id: CON-FIN-605
+    name: Direct Costs
+    context: BC-FIN
+    type: value_object
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-605.direct-costs.md
+  - id: CON-FIN-606
+    name: Double-Declining-Balance Method
+    context: BC-FIN
+    type: policy
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-606.double-declining-balance-method.md
+  - id: CON-FIN-607
+    name: Equity
+    context: BC-FIN
+    type: aggregate
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-607.equity.md
+  - id: CON-FIN-608
+    name: Fixed Costs
+    context: BC-FIN
+    type: value_object
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-608.fixed-costs.md
+  - id: CON-FIN-609
+    name: FIFO (First-In, First-Out)
+    context: BC-FIN
+    type: policy
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-609.fifo-first-in-first-out.md
+  - id: CON-FIN-610
+    name: LIFO (Last-In, First-Out)
+    context: BC-FIN
+    type: policy
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-610.lifo-last-in-first-out.md
+  - id: CON-FIN-611
+    name: Process Manufacturer
+    context: BC-FIN
+    type: role
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-611.process-manufacturer.md
+  - id: CON-FIN-612
+    name: Prior Period Adjustments
+    context: BC-FIN
+    type: event
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-612.prior-period-adjustments.md
+  - id: CON-FIN-613
+    name: Private Accounting
+    context: BC-FIN
+    type: role
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-613.private-accounting.md
+  - id: CON-FIN-614
+    name: Pro Forma Financial Statements
+    context: BC-FIN
+    type: aggregate
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-614.pro-forma-financial-statements.md
+  - id: CON-FIN-615
+    name: Pro Forma Balance Sheet
+    context: BC-FIN
+    type: aggregate
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-615.pro-forma-balance-sheet.md
+  - id: CON-FIN-616
+    name: Pro Forma Income Statement
+    context: BC-FIN
+    type: aggregate
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-616.pro-forma-income-statement.md
+  - id: CON-FIN-617
+    name: Contingent Liability - Probable and Estimable
+    context: BC-FIN
+    type: entity
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-617.contingent-liability-probable-and-estimable.md
+  - id: CON-FIN-618
+    name: Proceeds from Issuing Bonds
+    context: BC-FIN
+    type: value_object
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-618.proceeds-from-issuing-bonds.md
+  - id: CON-FIN-619
+    name: Principle of Exceptions
+    context: BC-FIN
+    type: policy
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-619.principle-of-exceptions.md
+  - id: CON-FIN-620
+    name: Price Variances
+    context: BC-FIN
+    type: value_object
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-620.price-variances.md
+  - id: CON-FIN-621
+    name: Product Costing Allocation Methods
+    context: BC-FIN
+    type: policy
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-621.product-costing-allocation-methods.md
+  - id: CON-FIN-622
+    name: Product Cost Method (for Pricing)
+    context: BC-FIN
+    type: policy
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-622.product-cost-method-for-pricing.md
+  - id: CON-FIN-623
+    name: Process or Sell Decision
+    context: BC-FIN
+    type: command
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-623.process-or-sell-decision.md
+  - id: CON-FIN-624
+    name: Dynamic Pricing
+    context: BC-FIN
+    type: policy
+    status: active
+    file: knowledge/ontology/contexts/BC-FIN/CON-FIN-624.dynamic-pricing.md

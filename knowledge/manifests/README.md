@@ -24,6 +24,15 @@ Metadata catalogs that index all knowledge artifacts. Manifests enable discovery
 | `graph.yml` | Knowledge graph statistics |
 | `orphans.yml` | Orphan detection results |
 | `links.yml` | Cross-reference integrity |
+| `duplicates.yml` | Duplicate detection results |
+
+---
+
+## Last Consolidated
+
+- **Date:** 2026-07-24
+- **Total Artifacts:** 1,834
+- **Status:** ✅ Complete
 
 ---
 
