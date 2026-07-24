@@ -186,16 +186,29 @@ export const stockMovements = pgTable(
 
 // ─── Zod Schemas ──────────────────────────────────────────────────────────────
 
-export const insertUnitOfMeasureSchema = createInsertSchema(unitOfMeasures);
+export const insertUnitOfMeasureSchema = createInsertSchema(unitOfMeasures, {
+  code: (schema) => schema.min(1).max(10),
+  name: (schema) => schema.min(1).max(50),
+});
 export const selectUnitOfMeasureSchema = createSelectSchema(unitOfMeasures);
 
-export const insertItemCategorySchema = createInsertSchema(itemCategories);
+export const insertItemCategorySchema = createInsertSchema(itemCategories, {
+  name: (schema) => schema.min(1).max(100),
+  code: (schema) => schema.min(1).max(20),
+});
 export const selectItemCategorySchema = createSelectSchema(itemCategories);
 
-export const insertItemSchema = createInsertSchema(items);
+export const insertItemSchema = createInsertSchema(items, {
+  sku: (schema) => schema.min(1).max(50),
+  name: (schema) => schema.min(1).max(200),
+  barcode: (schema) => schema.max(100).optional(),
+});
 export const selectItemSchema = createSelectSchema(items);
 
-export const insertWarehouseSchema = createInsertSchema(warehouses);
+export const insertWarehouseSchema = createInsertSchema(warehouses, {
+  name: (schema) => schema.min(1).max(100),
+  code: (schema) => schema.min(1).max(20),
+});
 export const selectWarehouseSchema = createSelectSchema(warehouses);
 
 export const insertStockLevelSchema = createInsertSchema(stockLevels);

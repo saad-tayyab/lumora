@@ -175,22 +175,32 @@ export const creditNotes = pgTable(
 
 // ─── Zod Schemas ──────────────────────────────────────────────────────────────
 
-export const insertCustomerSchema = createInsertSchema(customers);
+export const insertCustomerSchema = createInsertSchema(customers, {
+  name: (schema) => schema.min(1).max(200),
+  email: (schema) => schema.email().optional(),
+});
 export const selectCustomerSchema = createSelectSchema(customers);
 
-export const insertInvoiceSchema = createInsertSchema(invoices);
+export const insertInvoiceSchema = createInsertSchema(invoices, {
+  invoiceNumber: (schema) => schema.min(1).max(50),
+});
 export const selectInvoiceSchema = createSelectSchema(invoices);
 
 export const insertInvoiceLineItemSchema = createInsertSchema(invoiceLineItems);
 export const selectInvoiceLineItemSchema = createSelectSchema(invoiceLineItems);
 
-export const insertPaymentSchema = createInsertSchema(payments);
+export const insertPaymentSchema = createInsertSchema(payments, {
+  paymentNumber: (schema) => schema.min(1).max(50),
+});
 export const selectPaymentSchema = createSelectSchema(payments);
 
 export const insertPaymentApplicationSchema = createInsertSchema(paymentApplications);
 export const selectPaymentApplicationSchema = createSelectSchema(paymentApplications);
 
-export const insertCreditNoteSchema = createInsertSchema(creditNotes);
+export const insertCreditNoteSchema = createInsertSchema(creditNotes, {
+  creditNoteNumber: (schema) => schema.min(1).max(50),
+  reason: (schema) => schema.min(1).max(500),
+});
 export const selectCreditNoteSchema = createSelectSchema(creditNotes);
 
 export const updateCustomerSchema = createUpdateSchema(customers);

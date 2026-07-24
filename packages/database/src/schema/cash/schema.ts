@@ -246,7 +246,11 @@ export const bankConnections = pgTable(
 
 // ─── Zod Schemas ──────────────────────────────────────────────────────────────
 
-export const insertBankAccountSchema = createInsertSchema(bankAccounts);
+export const insertBankAccountSchema = createInsertSchema(bankAccounts, {
+  bankName: (schema) => schema.min(1).max(100),
+  accountName: (schema) => schema.min(1).max(100),
+  accountNumber: (schema) => schema.min(1).max(50),
+});
 export const selectBankAccountSchema = createSelectSchema(bankAccounts);
 
 export const insertBankTransferSchema = createInsertSchema(bankTransfers);

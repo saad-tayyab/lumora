@@ -105,8 +105,14 @@ export const billLineItems = pgTable(
 // Zod Schemas — Insert
 // =============================================================================
 
-export const insertVendorSchema = createInsertSchema(vendors);
-export const insertBillSchema = createInsertSchema(bills);
+export const insertVendorSchema = createInsertSchema(vendors, {
+  name: (schema) => schema.min(1).max(200),
+  code: (schema) => schema.min(1).max(20),
+  email: (schema) => schema.email().optional(),
+});
+export const insertBillSchema = createInsertSchema(bills, {
+  billNumber: (schema) => schema.min(1).max(50),
+});
 export const insertBillLineItemSchema = createInsertSchema(billLineItems);
 
 // =============================================================================

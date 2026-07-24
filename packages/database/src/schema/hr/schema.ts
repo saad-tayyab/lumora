@@ -225,19 +225,32 @@ export const payroll = pgTable(
 
 // ─── Zod Schemas ──────────────────────────────────────────────────────────────
 
-export const insertDepartmentSchema = createInsertSchema(departments);
+export const insertDepartmentSchema = createInsertSchema(departments, {
+  name: (schema) => schema.min(1).max(100),
+  code: (schema) => schema.min(1).max(20),
+});
 export const selectDepartmentSchema = createSelectSchema(departments);
 
-export const insertDesignationSchema = createInsertSchema(designations);
+export const insertDesignationSchema = createInsertSchema(designations, {
+  name: (schema) => schema.min(1).max(100),
+  code: (schema) => schema.min(1).max(20),
+});
 export const selectDesignationSchema = createSelectSchema(designations);
 
-export const insertEmployeeSchema = createInsertSchema(employees);
+export const insertEmployeeSchema = createInsertSchema(employees, {
+  firstName: (schema) => schema.min(1).max(100),
+  lastName: (schema) => schema.min(1).max(100),
+  email: (schema) => schema.email(),
+});
 export const selectEmployeeSchema = createSelectSchema(employees);
 
 export const insertAttendanceSchema = createInsertSchema(attendance);
 export const selectAttendanceSchema = createSelectSchema(attendance);
 
-export const insertLeaveTypeSchema = createInsertSchema(leaveTypes);
+export const insertLeaveTypeSchema = createInsertSchema(leaveTypes, {
+  name: (schema) => schema.min(1).max(50),
+  code: (schema) => schema.min(1).max(20),
+});
 export const selectLeaveTypeSchema = createSelectSchema(leaveTypes);
 
 export const insertLeaveRequestSchema = createInsertSchema(leaveRequests);

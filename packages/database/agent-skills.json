@@ -1,0 +1,49 @@
+{
+  "name": "drizzle-kit",
+  "version": "1.0.0-rc.4",
+  "description": "Drizzle Kit Agent Skills for AI-assisted database management",
+  "skills": [
+    {
+      "name": "drizzle-generate",
+      "description": "Generate Drizzle ORM schemas from ontology concepts",
+      "trigger": "Generate Drizzle schemas",
+      "command": "drizzle-kit generate",
+      "args": ["--config", "drizzle.config.ts"]
+    },
+    {
+      "name": "drizzle-migrate",
+      "description": "Run database migrations",
+      "trigger": "Run migrations",
+      "command": "drizzle-kit migrate",
+      "args": ["--config", "drizzle.config.ts"]
+    },
+    {
+      "name": "drizzle-check",
+      "description": "Check for migration conflicts and commutativity",
+      "trigger": "Check migrations",
+      "command": "drizzle-kit check",
+      "args": ["--config", "drizzle.config.ts"]
+    },
+    {
+      "name": "drizzle-push",
+      "description": "Push schema changes directly to database",
+      "trigger": "Push schema",
+      "command": "drizzle-kit push",
+      "args": ["--config", "drizzle.config.ts"]
+    },
+    {
+      "name": "drizzle-pull",
+      "description": "Pull schema from database",
+      "trigger": "Pull schema",
+      "command": "drizzle-kit pull",
+      "args": ["--config", "drizzle.config.ts"]
+    },
+    {
+      "name": "drizzle-studio",
+      "description": "Open Drizzle Studio for database browsing",
+      "trigger": "Open studio",
+      "command": "drizzle-kit studio",
+      "args": ["--config", "drizzle.config.ts"]
+    }
+  ]
+}

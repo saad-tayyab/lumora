@@ -172,19 +172,29 @@ export const reportExports = pgTable(
 
 // ─── Zod Schemas ──────────────────────────────────────────────────────────────
 
-export const insertReportTemplateSchema = createInsertSchema(reportTemplates);
+export const insertReportTemplateSchema = createInsertSchema(reportTemplates, {
+  name: (schema) => schema.min(1).max(200),
+});
 export const selectReportTemplateSchema = createSelectSchema(reportTemplates);
 
-export const insertReportSchema = createInsertSchema(reports);
+export const insertReportSchema = createInsertSchema(reports, {
+  name: (schema) => schema.min(1).max(200),
+});
 export const selectReportSchema = createSelectSchema(reports);
 
-export const insertDashboardSchema = createInsertSchema(dashboards);
+export const insertDashboardSchema = createInsertSchema(dashboards, {
+  title: (schema) => schema.min(1).max(200),
+});
 export const selectDashboardSchema = createSelectSchema(dashboards);
 
-export const insertKpiSchema = createInsertSchema(kpis);
+export const insertKpiSchema = createInsertSchema(kpis, {
+  name: (schema) => schema.min(1).max(200),
+});
 export const selectKpiSchema = createSelectSchema(kpis);
 
-export const insertDataSourceSchema = createInsertSchema(dataSources);
+export const insertDataSourceSchema = createInsertSchema(dataSources, {
+  name: (schema) => schema.min(1).max(200),
+});
 export const selectDataSourceSchema = createSelectSchema(dataSources);
 
 export const insertReportScheduleSchema = createInsertSchema(reportSchedules);

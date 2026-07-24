@@ -58,8 +58,17 @@ export const userRoles = pgTable(
 // Zod Schemas — Insert
 // =============================================================================
 
-export const insertUserSchema = createInsertSchema(users);
-export const insertRoleSchema = createInsertSchema(roles);
+export const insertUserSchema = createInsertSchema(users, {
+  email: (schema) => schema.email(),
+  name: (schema) => schema.min(1).max(100),
+  username: (schema) => schema.min(1).max(50),
+});
+
+export const insertRoleSchema = createInsertSchema(roles, {
+  name: (schema) => schema.min(1).max(50),
+  description: (schema) => schema.max(255).optional(),
+});
+
 export const insertUserRoleSchema = createInsertSchema(userRoles);
 
 // =============================================================================

@@ -148,11 +148,21 @@ export const discountPolicies = pgTable(
   ],
 );
 
-export const insertSalesOrderSchema = createInsertSchema(salesOrders);
+export const insertSalesOrderSchema = createInsertSchema(salesOrders, {
+  orderNumber: (schema) => schema.min(1).max(50),
+});
+
 export const insertSalesOrderLineItemSchema = createInsertSchema(salesOrderLineItems);
-export const insertQuotationSchema = createInsertSchema(quotations);
+
+export const insertQuotationSchema = createInsertSchema(quotations, {
+  quotationNumber: (schema) => schema.min(1).max(50),
+});
+
 export const insertQuotationLineItemSchema = createInsertSchema(quotationLineItems);
-export const insertDiscountPolicySchema = createInsertSchema(discountPolicies);
+
+export const insertDiscountPolicySchema = createInsertSchema(discountPolicies, {
+  name: (schema) => schema.min(1).max(100),
+});
 
 export const selectSalesOrderSchema = createSelectSchema(salesOrders);
 export const selectSalesOrderLineItemSchema = createSelectSchema(salesOrderLineItems);

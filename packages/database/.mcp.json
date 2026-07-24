@@ -1,0 +1,11 @@
+{
+  "mcpServers": {
+    "drizzle-kit": {
+      "command": "npx",
+      "args": ["drizzle-kit", "mcp"],
+      "env": {
+        "DATABASE_URL": "${DATABASE_URL}"
+      }
+    }
+  }
+}

@@ -172,13 +172,20 @@ export const anomalyDetections = pgTable(
 
 // ─── Zod Schemas ──────────────────────────────────────────────────────────────
 
-export const insertWorkflowSchema = createInsertSchema(workflows);
+export const insertWorkflowSchema = createInsertSchema(workflows, {
+  name: (schema) => schema.min(1).max(200),
+});
 export const selectWorkflowSchema = createSelectSchema(workflows);
 
-export const insertWorkflowStepSchema = createInsertSchema(workflowSteps);
+export const insertWorkflowStepSchema = createInsertSchema(workflowSteps, {
+  name: (schema) => schema.min(1).max(200),
+});
 export const selectWorkflowStepSchema = createSelectSchema(workflowSteps);
 
-export const insertAiModelSchema = createInsertSchema(aiModels);
+export const insertAiModelSchema = createInsertSchema(aiModels, {
+  name: (schema) => schema.min(1).max(200),
+  version: (schema) => schema.min(1).max(50),
+});
 export const selectAiModelSchema = createSelectSchema(aiModels);
 
 export const insertTrainingDataSchema = createInsertSchema(trainingData);

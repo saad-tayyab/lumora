@@ -140,9 +140,16 @@ export const vendorCatalogItems = pgTable(
 
 // ─── Zod Schemas — Insert ─────────────────────────────────────────────────────
 
-export const insertPurchaseOrderSchema = createInsertSchema(purchaseOrders);
+export const insertPurchaseOrderSchema = createInsertSchema(purchaseOrders, {
+  poNumber: (schema) => schema.min(1).max(30),
+});
+
 export const insertPoLineItemSchema = createInsertSchema(poLineItems);
-export const insertReceivingReportSchema = createInsertSchema(receivingReports);
+
+export const insertReceivingReportSchema = createInsertSchema(receivingReports, {
+  rrNumber: (schema) => schema.min(1).max(30),
+});
+
 export const insertVendorCatalogItemSchema = createInsertSchema(vendorCatalogItems);
 
 // ─── Zod Schemas — Select ─────────────────────────────────────────────────────

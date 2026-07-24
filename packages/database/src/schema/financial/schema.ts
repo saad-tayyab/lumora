@@ -84,7 +84,11 @@ export const journalEntryLines = pgTable(
 
 // ─── Zod Schemas ──────────────────────────────────────────────────────────────
 
-export const insertAccountSchema = createInsertSchema(accounts);
+export const insertAccountSchema = createInsertSchema(accounts, {
+  code: (schema) => schema.min(1).max(20),
+  name: (schema) => schema.min(1).max(100),
+});
+
 export const selectAccountSchema = createSelectSchema(accounts);
 
 export const insertJournalEntrySchema = createInsertSchema(journalEntries);
