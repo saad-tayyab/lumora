@@ -1,0 +1,21 @@
+graph TD
+    A[Leave Request] --> B[Validate Request]
+    B -->|Invalid| ERR1[Return Error]
+    B -->|Valid| C[Check Leave Balance]
+    C -->|Insufficient| ERR2[Return Error]
+    C -->|Sufficient| D[Create Request]
+    D -->|Error| ERR3[Return Error]
+    D -->|Success| E[Route to Manager]
+    E -->|No Manager| ERR4[Escalate to HR]
+    E -->|Manager Found| F[Manager Review]
+    F -->|Approved| G[Update Status]
+    F -->|Rejected| G
+    G -->|Error| W1[Log Warning]
+    G -->|Success| DONE[Request Complete]
+
+    style ERR1 fill:#f96
+    style ERR2 fill:#f96
+    style ERR3 fill:#f96
+    style ERR4 fill:#f96
+    style W1 fill:#ff9
+    style DONE fill:#9f9

@@ -1,0 +1,19 @@
+graph TD
+    A[Stock Level] --> B[Detect Low Stock]
+    B -->|Normal| DONE1[No Action]
+    B -->|Low| C[Calculate Reorder Quantity]
+    C -->|Error| D1[Use Default Quantity]
+    C -->|Success| E[Check Vendor Availability]
+    D1 --> E
+    E -->|Unavailable| F1[Flag for Manual Review]
+    E -->|Available| F[Create Purchase Suggestion]
+    F -->|Error| G1[Queue for Retry]
+    F -->|Success| G[Notify Inventory Manager]
+    G -->|Error| W1[Log Warning]
+    G -->|Success| DONE2[Suggestion Created]
+
+    style DONE1 fill:#9f9
+    style F1 fill:#ff9
+    style G1 fill:#ff9
+    style W1 fill:#ff9
+    style DONE2 fill:#9f9

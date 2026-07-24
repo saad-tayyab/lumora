@@ -1,0 +1,24 @@
+graph TD
+    A[PO Details] --> B[Validate Vendor]
+    B -->|Invalid| ERR1[Return Error]
+    B -->|Valid| C[Validate Items]
+    C -->|Invalid| ERR2[Return Error]
+    C -->|Valid| D[Calculate Totals]
+    D -->|Error| ERR3[Return Error]
+    D -->|Success| E[Create Purchase Order]
+    E -->|Error| ERR4[Return Error]
+    E -->|Success| F{Approval Required?}
+    F -->|Yes| G[Submit for Approval]
+    F -->|No| H[Send to Vendor]
+    G -->|Approved| H
+    G -->|Rejected| I[Return to Draft]
+    H -->|Error| W1[Log Warning]
+    H -->|Success| DONE[PO Sent]
+
+    style ERR1 fill:#f96
+    style ERR2 fill:#f96
+    style ERR3 fill:#f96
+    style ERR4 fill:#f96
+    style I fill:#ff9
+    style W1 fill:#ff9
+    style DONE fill:#9f9

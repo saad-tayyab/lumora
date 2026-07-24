@@ -1,0 +1,21 @@
+graph TD
+    A[Bill Details] --> B[Validate Bill]
+    B -->|Invalid| ERR1[Return Error]
+    B -->|Valid| C[Three-Way Match]
+    C -->|Mismatch| F1[Manual Review]
+    C -->|Matched| D[Create Bill Record]
+    D -->|Error| ERR2[Return Error]
+    D -->|Success| E{Approval Required?}
+    E -->|Yes| F[Approve Bill]
+    E -->|No| G[Schedule Payment]
+    F -->|Rejected| H[Return to Draft]
+    F -->|Approved| G
+    G -->|Error| ERR3[Return Error]
+    G -->|Success| DONE[Bill Processed]
+
+    style ERR1 fill:#f96
+    style ERR2 fill:#f96
+    style ERR3 fill:#f96
+    style F1 fill:#ff9
+    style H fill:#ff9
+    style DONE fill:#9f9

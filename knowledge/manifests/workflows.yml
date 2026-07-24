@@ -2,12 +2,115 @@
 manifest: workflows
 version: 1.0.0
 last_updated: 2026-07-24
-total: 0
-by_context: {}
+total: 7
+by_context:
+  BC-FIN: 1
+  BC-AR: 2
+  BC-AP: 1
+  BC-INV: 1
+  BC-PROC: 1
+  BC-HR: 1
 by_type:
-  process: 0
-  automation: 0
-  approval: 0
+  process: 4
+  automation: 1
+  approval: 1
   integration: 0
   validation: 0
-workflows: []
+workflows:
+  - id: WF-AR-001
+    name: Invoice Creation Workflow
+    context: BC-AR
+    type: process
+    status: active
+    version: 1.0.0
+    file: active/WF-AR-001.invoice-creation.md
+    diagram: diagrams/invoice-creation.mermaid
+    related_rules:
+      - BR-002
+      - BR-044
+    related_workflows:
+      - WF-AR-002
+      - WF-FIN-001
+
+  - id: WF-AR-002
+    name: Payment Receipt Workflow
+    context: BC-AR
+    type: process
+    status: active
+    version: 1.0.0
+    file: active/WF-AR-002.payment-receipt.md
+    diagram: diagrams/payment-receipt.mermaid
+    related_rules:
+      - BR-002
+      - BR-044
+    related_workflows:
+      - WF-AR-001
+      - WF-FIN-001
+
+  - id: WF-FIN-001
+    name: Journal Entry Posting Workflow
+    context: BC-FIN
+    type: process
+    status: active
+    version: 1.0.0
+    file: active/WF-FIN-001.journal-posting.md
+    diagram: diagrams/journal-posting.mermaid
+    related_rules:
+      - BR-002
+      - BR-044
+      - BR-051
+    related_workflows:
+      - WF-AR-001
+      - WF-AR-002
+
+  - id: WF-INV-001
+    name: Stock Reorder Automation
+    context: BC-INV
+    type: automation
+    status: active
+    version: 1.0.0
+    file: active/WF-INV-001.stock-reorder.md
+    diagram: diagrams/stock-reorder.mermaid
+    related_rules:
+      - BR-005
+    related_workflows:
+      - WF-PROC-001
+
+  - id: WF-PROC-001
+    name: Purchase Order Workflow
+    context: BC-PROC
+    type: process
+    status: active
+    version: 1.0.0
+    file: active/WF-PROC-001.purchase-order.md
+    diagram: diagrams/purchase-order.mermaid
+    related_rules: []
+    related_workflows:
+      - WF-INV-001
+      - WF-AP-001
+
+  - id: WF-AP-001
+    name: Bill Processing Workflow
+    context: BC-AP
+    type: process
+    status: active
+    version: 1.0.0
+    file: active/WF-AP-001.bill-processing.md
+    diagram: diagrams/bill-processing.mermaid
+    related_rules:
+      - BR-004
+    related_workflows:
+      - WF-PROC-001
+      - WF-FIN-001
+
+  - id: WF-HR-001
+    name: Leave Request Approval Workflow
+    context: BC-HR
+    type: approval
+    status: active
+    version: 1.0.0
+    file: active/WF-HR-001.leave-request.md
+    diagram: diagrams/leave-request.mermaid
+    related_rules:
+      - BR-623
+    related_workflows: []

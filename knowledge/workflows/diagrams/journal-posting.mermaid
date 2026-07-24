@@ -1,0 +1,19 @@
+graph TD
+    A[Entry Details] --> B[Validate Entry]
+    B -->|Invalid| ERR1[Return Error]
+    B -->|Valid| C[Check Balance]
+    C -->|Unbalanced| ERR2[Return Error]
+    C -->|Balanced| D[Check Period]
+    D -->|Closed| ERR3[Return Error]
+    D -->|Open| E[Post Entry]
+    E -->|Error| ERR4[Return Error]
+    E -->|Success| F[Update Balances]
+    F -->|Error| R1[Rollback Entry]
+    F -->|Success| DONE[Entry Posted]
+
+    style ERR1 fill:#f96
+    style ERR2 fill:#f96
+    style ERR3 fill:#f96
+    style ERR4 fill:#f96
+    style R1 fill:#f96
+    style DONE fill:#9f9

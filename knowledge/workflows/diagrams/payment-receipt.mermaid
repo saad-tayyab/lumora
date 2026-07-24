@@ -1,0 +1,19 @@
+graph TD
+    A[Payment Details] --> B[Validate Payment]
+    B -->|Invalid| ERR1[Return Error]
+    B -->|Valid| C[Match to Invoices]
+    C -->|No Match| ERR2[Return Error]
+    C -->|Matched| D[Apply Payment]
+    D -->|Error| ERR3[Return Error]
+    D -->|Success| E[Post to Ledger]
+    E -->|Error| R1[Rollback Payment]
+    E -->|Success| F[Generate Receipt]
+    F -->|Error| W1[Log Warning]
+    F -->|Success| DONE[Payment Complete]
+
+    style ERR1 fill:#f96
+    style ERR2 fill:#f96
+    style ERR3 fill:#f96
+    style R1 fill:#f96
+    style W1 fill:#ff9
+    style DONE fill:#9f9

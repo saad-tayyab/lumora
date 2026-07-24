@@ -1,0 +1,35 @@
+graph TD
+    subgraph Order to Cash
+        A[Sales Order] -->|WF-AR-001| B[Invoice Created]
+        B -->|WF-AR-002| C[Payment Received]
+        C --> D[Cash Applied]
+    end
+
+    subgraph Procure to Pay
+        E[Stock Low]| WF-INV-001| F[PO Created]
+        F -->|WF-PROC-001| G[PO Approved]
+        G --> H[Goods Received]
+        H -->|WF-AP-001| I[Bill Processed]
+        I --> J[Payment Sent]
+    end
+
+    subgraph HR Processes
+        K[Leave Request]| WF-HR-001| L[Manager Approval]
+        L --> M[Leave Recorded]
+    end
+
+    subgraph Financial Core
+        N[All Transactions]| WF-FIN-001| O[Journal Posted]
+        O --> P[Ledger Updated]
+    end
+
+    B --> N
+    C --> N
+    I --> N
+    D --> N
+    J --> N
+
+    style A fill:#4a9
+    style E fill:#4a9
+    style K fill:#4a9
+    style N fill:#4a9

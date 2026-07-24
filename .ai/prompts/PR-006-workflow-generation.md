@@ -50,13 +50,29 @@ The workflows must follow knowledge/workflows/STANDARDS.md.
 - Always create Mermaid diagram
 - Always link to business rules
 - Always follow naming conventions
+- Always reference ontology concepts in metadata (concepts field)
+- Always reference event IDs from Event Catalog in "Events Emitted"
+- Actor names use PascalCase (e.g., AccountsReceivable, InventoryManager)
+- Bump minor version when updating existing workflows
+
+# TRIGGER TYPES
+- command: Manual user action (e.g., CreateInvoice)
+- event: System-triggered from domain event (e.g., StockAdjusted)
+- schedule: Time-based cron trigger (e.g., DailyReconciliation)
+
+# WORKFLOW TYPES
+- process: Multi-step business process requiring human involvement
+- automation: System-triggered action with no human gate
+- approval: Human approval gate before proceeding
+- integration: External system synchronization
+- validation: Pre-submission data checks
 
 # OUTPUT FORMAT
 - Workflow file in knowledge/workflows/active/
 - Mermaid diagram in knowledge/workflows/diagrams/
 - Updated INDEX.md
-- Updated manifests
-- Validation report
+- Updated manifests/workflows.yml
+- Validation report saved to knowledge/workflows/VALIDATION.md
 ```
 
 ---
