@@ -1,0 +1,23 @@
+---
+manifest: glossary
+version: 1.0.0
+last_updated: 2026-07-24
+total: 0
+by_category:
+  accounting: 0
+  inventory: 0
+  sales: 0
+  procurement: 0
+  hr: 0
+  technical: 0
+  general: 0
+by_context:
+  BC-FIN: 0
+  BC-AR: 0
+  BC-AP: 0
+  BC-CASH: 0
+  BC-INV: 0
+  BC-PROC: 0
+  BC-SALES: 0
+  BC-HR: 0
+terms: []

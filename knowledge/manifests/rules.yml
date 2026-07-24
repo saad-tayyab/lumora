@@ -1,0 +1,28 @@
+---
+manifest: rules
+version: 1.0.0
+last_updated: 2026-07-24
+total: 0
+by_context:
+  BC-FIN: 0
+  BC-AR: 0
+  BC-AP: 0
+  BC-CASH: 0
+  BC-INV: 0
+  BC-PROC: 0
+  BC-SALES: 0
+  BC-HR: 0
+by_priority:
+  critical: 0
+  high: 0
+  medium: 0
+  low: 0
+by_type:
+  invariant: 0
+  constraint: 0
+  validation: 0
+  business_process: 0
+  computational: 0
+  temporal: 0
+  access_control: 0
+rules: []

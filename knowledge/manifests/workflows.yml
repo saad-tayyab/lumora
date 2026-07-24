@@ -1,0 +1,13 @@
+---
+manifest: workflows
+version: 1.0.0
+last_updated: 2026-07-24
+total: 0
+by_context: {}
+by_type:
+  process: 0
+  automation: 0
+  approval: 0
+  integration: 0
+  validation: 0
+workflows: []

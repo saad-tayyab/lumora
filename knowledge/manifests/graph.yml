@@ -1,0 +1,14 @@
+---
+manifest: graph
+version: 1.0.0
+last_updated: 2026-07-24
+total_nodes: 0
+total_edges: 0
+by_type:
+  concept: 0
+  rule: 0
+  workflow: 0
+  decision: 0
+  context: 0
+  external: 0
+diagrams: []

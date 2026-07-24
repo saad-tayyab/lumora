@@ -1,0 +1,29 @@
+{
+  "compilerOptions": {
+    "target": "ESNext",
+    "module": "ESNext",
+    "moduleResolution": "bundler",
+    "lib": ["ESNext", "DOM", "DOM.Iterable"],
+    "strict": true,
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true,
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "noEmit": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "noFallthroughCasesInSwitch": true,
+    "exactOptionalPropertyTypes": false,
+    "noUncheckedIndexedAccess": true,
+    "paths": {
+      "@lumora/ui": ["./packages/ui/src"],
+      "@lumora/database": ["./packages/database/src"],
+      "@lumora/auth": ["./packages/auth/src"],
+      "@lumora/shared": ["./packages/shared/src"],
+      "@lumora/config": ["./packages/config/src"],
+      "@lumora/validation": ["./packages/validation/src"]
+    }
+  },
+  "exclude": ["node_modules", "dist", ".turbo", ".svelte-kit"]
+}

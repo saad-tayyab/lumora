@@ -1,0 +1,18 @@
+---
+manifest: concepts
+version: 1.0.0
+last_updated: 2026-07-24
+total: 0
+by_context:
+  BC-AUTH: 0
+  BC-FIN: 0
+  BC-AR: 0
+  BC-AP: 0
+  BC-CASH: 0
+  BC-INV: 0
+  BC-PROC: 0
+  BC-SALES: 0
+  BC-HR: 0
+  BC-REPORT: 0
+  BC-AI: 0
+concepts: []

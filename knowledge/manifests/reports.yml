@@ -1,0 +1,13 @@
+---
+manifest: reports
+version: 1.0.0
+last_updated: 2026-07-24
+total: 0
+by_context: {}
+by_type:
+  financial: 0
+  operational: 0
+  analytical: 0
+  regulatory: 0
+  management: 0
+reports: []

@@ -1,0 +1,15 @@
+---
+graph_id: KG-001
+name: Lumora ERP Knowledge Graph
+version: 1.0.0
+last_updated: 2026-07-24
+owner: Knowledge Engineer
+description: >
+  Master knowledge graph for the Lumora ERP system.
+  Captures relationships between concepts, rules, workflows, and decisions.
+  Source of truth for Mermaid and JSON representations.
+---
+
+nodes: []
+
+edges: []

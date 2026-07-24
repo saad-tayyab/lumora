@@ -1,0 +1,29 @@
+graph TD
+    subgraph Domains["Lumora ERP Domains"]
+        BC-AUTH["Authentication & Identity"]
+        BC-FIN["Financial Management"]
+        BC-AR["Accounts Receivable"]
+        BC-AP["Accounts Payable"]
+        BC-CASH["Cash & Treasury"]
+        BC-INV["Inventory Management"]
+        BC-PROC["Procurement"]
+        BC-SALES["Sales & Orders"]
+        BC-HR["Human Resources"]
+        BC-REPORT["Reporting & Analytics"]
+        BC-AI["AI & Automation"]
+    end
+
+    BC-AR -->|"triggers"| BC-FIN
+    BC-AP -->|"triggers"| BC-FIN
+    BC-INV -->|"triggers"| BC-FIN
+    BC-PROC -->|"triggers"| BC-INV
+    BC-SALES -->|"triggers"| BC-AR
+    BC-HR -->|"triggers"| BC-FIN
+    BC-REPORT -->|"reads"| BC-FIN
+    BC-AI -->|"automates"| BC-FIN
+    BC-AI -->|"automates"| BC-INV
+    BC-AI -->|"automates"| BC-AR
+    BC-CASH -->|"reconciles"| BC-FIN
+```
+
+*This diagram will be populated as concepts are defined.*
