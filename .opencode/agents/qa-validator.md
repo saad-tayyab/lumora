@@ -1,7 +1,7 @@
 ---
 description: Validates knowledge repository consistency and runs quality gates
 mode: subagent
-model: opencode-go/mimo-v2-5
+model: opencode-go/mimo-v2.5
 steps: 50
 permission:
   edit: allow

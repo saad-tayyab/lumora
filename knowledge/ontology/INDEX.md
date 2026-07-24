@@ -1,44 +1,1232 @@
-# Ontology Index
-
-> **Last Updated:** 2026-07-24  
-> **Total Concepts:** 0  
-> **Total Relationships:** 0  
-> **Total Constraints:** 0
-
+---
+title: Financial Ontology Index
+version: 1.0.0
+status: active
 ---
 
-## Concepts by Context
+# Financial Ontology
 
-| Context | Count | Status |
-|---------|-------|--------|
-| BC-AUTH | 0 | Pending |
-| BC-FIN | 0 | Pending |
-| BC-AR | 0 | Pending |
-| BC-AP | 0 | Pending |
-| BC-CASH | 0 | Pending |
-| BC-INV | 0 | Pending |
-| BC-PROC | 0 | Pending |
-| BC-SALES | 0 | Pending |
-| BC-HR | 0 | Pending |
-| BC-REPORT | 0 | Pending |
-| BC-AI | 0 | Pending |
+## Concepts (624)
 
----
+- [Accounting Equation Solving](contexts/BC-FIN/CON-FIN-001.accounting-equation-solving.md) — CON-FIN-001
+- [Asset](contexts/BC-FIN/CON-FIN-002.asset.md) — CON-FIN-002
+- [Liability](contexts/BC-FIN/CON-FIN-003.liability.md) — CON-FIN-003
+- [Owner's Equity](contexts/BC-FIN/CON-FIN-004.owner-s-equity.md) — CON-FIN-004
+- [Revenue](contexts/BC-FIN/CON-FIN-005.revenue.md) — CON-FIN-005
+- [Expense](contexts/BC-FIN/CON-FIN-006.expense.md) — CON-FIN-006
+- [Business Transaction](contexts/BC-FIN/CON-FIN-007.business-transaction.md) — CON-FIN-007
+- [T Account](contexts/BC-FIN/CON-FIN-008.t-account.md) — CON-FIN-008
+- [Debit](contexts/BC-FIN/CON-FIN-009.debit.md) — CON-FIN-009
+- [Credit](contexts/BC-FIN/CON-FIN-010.credit.md) — CON-FIN-010
+- [Journal Entry](contexts/BC-FIN/CON-FIN-011.journal-entry.md) — CON-FIN-011
+- [General Journal](contexts/BC-FIN/CON-FIN-012.general-journal.md) — CON-FIN-012
+- [General Ledger](contexts/BC-FIN/CON-FIN-013.general-ledger.md) — CON-FIN-013
+- [Adjusted Trial Balance](contexts/BC-FIN/CON-FIN-014.adjusted-trial-balance.md) — CON-FIN-014
+- [Income Statement](contexts/BC-FIN/CON-FIN-015.income-statement.md) — CON-FIN-015
+- [Statement of Owner's Equity](contexts/BC-FIN/CON-FIN-016.statement-of-owner-s-equity.md) — CON-FIN-016
+- [Consolidated Balance Sheet](contexts/BC-FIN/CON-FIN-017.consolidated-balance-sheet.md) — CON-FIN-017
+- [Statement of Cash Flows](contexts/BC-FIN/CON-FIN-018.statement-of-cash-flows.md) — CON-FIN-018
+- [Accounting Cycle Steps](contexts/BC-FIN/CON-FIN-019.accounting-cycle-steps.md) — CON-FIN-019
+- [Adjusting Entry](contexts/BC-FIN/CON-FIN-020.adjusting-entry.md) — CON-FIN-020
+- [Closing Entry](contexts/BC-FIN/CON-FIN-021.closing-entry.md) — CON-FIN-021
+- [Proprietorship](contexts/BC-FIN/CON-FIN-022.proprietorship.md) — CON-FIN-022
+- [Depreciation](contexts/BC-FIN/CON-FIN-023.depreciation.md) — CON-FIN-023
+- [Bank Reconciliation](contexts/BC-FIN/CON-FIN-024.bank-reconciliation.md) — CON-FIN-024
+- [Inventory Costing Methods](contexts/BC-FIN/CON-FIN-025.inventory-costing-methods.md) — CON-FIN-025
+- [Accrual Basis Accounting](contexts/BC-FIN/CON-FIN-026.accrual-basis-accounting.md) — CON-FIN-026
+- [Cash Basis Accounting](contexts/BC-FIN/CON-FIN-027.cash-basis-accounting.md) — CON-FIN-027
+- [GAAP](contexts/BC-FIN/CON-FIN-028.gaap.md) — CON-FIN-028
+- [Matching Principle](contexts/BC-FIN/CON-FIN-029.matching-principle.md) — CON-FIN-029
+- [Liquidity Analysis](contexts/BC-FIN/CON-FIN-030.liquidity-analysis.md) — CON-FIN-030
+- [Solvency Analysis](contexts/BC-FIN/CON-FIN-031.solvency-analysis.md) — CON-FIN-031
+- [Profitability Analysis](contexts/BC-FIN/CON-FIN-032.profitability-analysis.md) — CON-FIN-032
+- [Accounts Receivable](contexts/BC-FIN/CON-FIN-033.accounts-receivable.md) — CON-FIN-033
+- [Inventory Turnover Ratio](contexts/BC-FIN/CON-FIN-034.inventory-turnover-ratio.md) — CON-FIN-034
+- [Current Ratio](contexts/BC-FIN/CON-FIN-035.current-ratio.md) — CON-FIN-035
+- [Working Capital](contexts/BC-FIN/CON-FIN-036.working-capital.md) — CON-FIN-036
+- [Times Interest Earned Ratio](contexts/BC-FIN/CON-FIN-037.times-interest-earned-ratio.md) — CON-FIN-037
+- [Return on Total Assets](contexts/BC-FIN/CON-FIN-038.return-on-total-assets.md) — CON-FIN-038
+- [Return on Common Stockholders' Equity](contexts/BC-FIN/CON-FIN-039.return-on-common-stockholders-equity.md) — CON-FIN-039
+- [Earnings Per Share (EPS)](contexts/BC-FIN/CON-FIN-040.earnings-per-share-eps.md) — CON-FIN-040
+- [Price-Earnings (P/E) Ratio](contexts/BC-FIN/CON-FIN-041.price-earnings-p-e-ratio.md) — CON-FIN-041
+- [Dividend Yield](contexts/BC-FIN/CON-FIN-042.dividend-yield.md) — CON-FIN-042
+- [Corporate Annual Report](contexts/BC-FIN/CON-FIN-043.corporate-annual-report.md) — CON-FIN-043
+- [ESG Reporting](contexts/BC-FIN/CON-FIN-044.esg-reporting.md) — CON-FIN-044
+- [Worksheet](contexts/BC-FIN/CON-FIN-045.worksheet.md) — CON-FIN-045
+- [Accrued Revenue Adjustment](contexts/BC-FIN/CON-FIN-046.accrued-revenue-adjustment.md) — CON-FIN-046
+- [Accrued Expense Adjustment](contexts/BC-FIN/CON-FIN-047.accrued-expense-adjustment.md) — CON-FIN-047
+- [Deferred Revenue](contexts/BC-FIN/CON-FIN-048.deferred-revenue.md) — CON-FIN-048
+- [Deferred Expense](contexts/BC-FIN/CON-FIN-049.deferred-expense.md) — CON-FIN-049
+- [Depreciation Expense](contexts/BC-FIN/CON-FIN-050.depreciation-expense.md) — CON-FIN-050
+- [Accumulated Depreciation](contexts/BC-FIN/CON-FIN-051.accumulated-depreciation.md) — CON-FIN-051
+- [Permanent Account](contexts/BC-FIN/CON-FIN-052.permanent-account.md) — CON-FIN-052
+- [Temporary Account](contexts/BC-FIN/CON-FIN-053.temporary-account.md) — CON-FIN-053
+- [Reversing Entry](contexts/BC-FIN/CON-FIN-054.reversing-entry.md) — CON-FIN-054
+- [Fiscal Year](contexts/BC-FIN/CON-FIN-055.fiscal-year.md) — CON-FIN-055
+- [Chart of Accounts](contexts/BC-FIN/CON-FIN-056.chart-of-accounts.md) — CON-FIN-056
+- [Corporation](contexts/BC-FIN/CON-FIN-057.corporation.md) — CON-FIN-057
+- [Stockholders' Equity](contexts/BC-FIN/CON-FIN-058.stockholders-equity.md) — CON-FIN-058
+- [Retained Earnings Statement](contexts/BC-FIN/CON-FIN-059.retained-earnings-statement.md) — CON-FIN-059
+- [Dividends](contexts/BC-FIN/CON-FIN-060.dividends.md) — CON-FIN-060
+- [Financial Statement Preparation Order](contexts/BC-FIN/CON-FIN-061.financial-statement-preparation-order.md) — CON-FIN-061
+- [Accounting](contexts/BC-FIN/CON-FIN-062.accounting.md) — CON-FIN-062
+- [Financial Statements](contexts/BC-FIN/CON-FIN-063.financial-statements.md) — CON-FIN-063
+- [Assets](contexts/BC-FIN/CON-FIN-064.assets.md) — CON-FIN-064
+- [Liabilities](contexts/BC-FIN/CON-FIN-065.liabilities.md) — CON-FIN-065
+- [Expenses](contexts/BC-FIN/CON-FIN-066.expenses.md) — CON-FIN-066
+- [Net Income Percentage](contexts/BC-FIN/CON-FIN-067.net-income-percentage.md) — CON-FIN-067
+- [Net Loss](contexts/BC-FIN/CON-FIN-068.net-loss.md) — CON-FIN-068
+- [Partnership](contexts/BC-FIN/CON-FIN-069.partnership.md) — CON-FIN-069
+- [Limited Liability Company (LLC)](contexts/BC-FIN/CON-FIN-070.limited-liability-company-llc.md) — CON-FIN-070
+- [Service Business](contexts/BC-FIN/CON-FIN-071.service-business.md) — CON-FIN-071
+- [Merchandising Business](contexts/BC-FIN/CON-FIN-072.merchandising-business.md) — CON-FIN-072
+- [Manufacturing Business](contexts/BC-FIN/CON-FIN-073.manufacturing-business.md) — CON-FIN-073
+- [Cost Principle](contexts/BC-FIN/CON-FIN-074.cost-principle.md) — CON-FIN-074
+- [Business Entity Assumption](contexts/BC-FIN/CON-FIN-075.business-entity-assumption.md) — CON-FIN-075
+- [Revenue Recognition](contexts/BC-FIN/CON-FIN-076.revenue-recognition.md) — CON-FIN-076
+- [Owner's Drawing](contexts/BC-FIN/CON-FIN-077.owner-s-drawing.md) — CON-FIN-077
+- [Accounts Payable](contexts/BC-FIN/CON-FIN-078.accounts-payable.md) — CON-FIN-078
+- [Horizontal Analysis](contexts/BC-FIN/CON-FIN-079.horizontal-analysis.md) — CON-FIN-079
+- [Ratio of Liabilities to Stockholders' Equity](contexts/BC-FIN/CON-FIN-080.ratio-of-liabilities-to-stockholders-equity.md) — CON-FIN-080
+- [Business Entity Identification](contexts/BC-FIN/CON-FIN-081.business-entity-identification.md) — CON-FIN-081
+- [Transaction Analysis](contexts/BC-FIN/CON-FIN-082.transaction-analysis.md) — CON-FIN-082
+- [Capital Balance Computation](contexts/BC-FIN/CON-FIN-083.capital-balance-computation.md) — CON-FIN-083
+- [Risk Assessment](contexts/BC-FIN/CON-FIN-084.risk-assessment.md) — CON-FIN-084
+- [Account](contexts/BC-FIN/CON-FIN-085.account.md) — CON-FIN-085
+- [Rules of Debit and Credit](contexts/BC-FIN/CON-FIN-086.rules-of-debit-and-credit.md) — CON-FIN-086
+- [Normal Balance](contexts/BC-FIN/CON-FIN-087.normal-balance.md) — CON-FIN-087
+- [Journal](contexts/BC-FIN/CON-FIN-088.journal.md) — CON-FIN-088
+- [Journalizing](contexts/BC-FIN/CON-FIN-089.journalizing.md) — CON-FIN-089
+- [Ledger](contexts/BC-FIN/CON-FIN-090.ledger.md) — CON-FIN-090
+- [Posting](contexts/BC-FIN/CON-FIN-091.posting.md) — CON-FIN-091
+- [Double-Entry Accounting System](contexts/BC-FIN/CON-FIN-092.double-entry-accounting-system.md) — CON-FIN-092
+- [Four-Column Account](contexts/BC-FIN/CON-FIN-093.four-column-account.md) — CON-FIN-093
+- [Prepaid Expenses](contexts/BC-FIN/CON-FIN-094.prepaid-expenses.md) — CON-FIN-094
+- [Unearned Revenue Adjustment](contexts/BC-FIN/CON-FIN-095.unearned-revenue-adjustment.md) — CON-FIN-095
+- [Account Receivable](contexts/BC-FIN/CON-FIN-096.account-receivable.md) — CON-FIN-096
+- [Overstatement Error](contexts/BC-FIN/CON-FIN-097.overstatement-error.md) — CON-FIN-097
+- [Omission Error](contexts/BC-FIN/CON-FIN-098.omission-error.md) — CON-FIN-098
+- [Posting Error](contexts/BC-FIN/CON-FIN-099.posting-error.md) — CON-FIN-099
+- [Cash Receipt](contexts/BC-FIN/CON-FIN-100.cash-receipt.md) — CON-FIN-100
+- [Cash Payment](contexts/BC-FIN/CON-FIN-101.cash-payment.md) — CON-FIN-101
+- [Owner Withdrawal](contexts/BC-FIN/CON-FIN-102.owner-withdrawal.md) — CON-FIN-102
+- [Owner Investment](contexts/BC-FIN/CON-FIN-103.owner-investment.md) — CON-FIN-103
+- [Fees Earned](contexts/BC-FIN/CON-FIN-104.fees-earned.md) — CON-FIN-104
+- [Prepaid Expense Adjustment](contexts/BC-FIN/CON-FIN-105.prepaid-expense-adjustment.md) — CON-FIN-105
+- [Notes Payable](contexts/BC-FIN/CON-FIN-106.notes-payable.md) — CON-FIN-106
+- [Fixed Asset](contexts/BC-FIN/CON-FIN-107.fixed-asset.md) — CON-FIN-107
+- [Contra Account](contexts/BC-FIN/CON-FIN-108.contra-account.md) — CON-FIN-108
+- [Book Value](contexts/BC-FIN/CON-FIN-109.book-value.md) — CON-FIN-109
+- [Land](contexts/BC-FIN/CON-FIN-110.land.md) — CON-FIN-110
+- [Buildings](contexts/BC-FIN/CON-FIN-111.buildings.md) — CON-FIN-111
+- [Store Equipment](contexts/BC-FIN/CON-FIN-112.store-equipment.md) — CON-FIN-112
+- [Office Equipment](contexts/BC-FIN/CON-FIN-113.office-equipment.md) — CON-FIN-113
+- [Property Tax](contexts/BC-FIN/CON-FIN-114.property-tax.md) — CON-FIN-114
+- [Vertical Analysis](contexts/BC-FIN/CON-FIN-115.vertical-analysis.md) — CON-FIN-115
+- [End-of-Period Spreadsheet](contexts/BC-FIN/CON-FIN-116.end-of-period-spreadsheet.md) — CON-FIN-116
+- [Partner Drawing Account](contexts/BC-FIN/CON-FIN-117.partner-drawing-account.md) — CON-FIN-117
+- [Liquidity](contexts/BC-FIN/CON-FIN-118.liquidity.md) — CON-FIN-118
+- [Current Asset](contexts/BC-FIN/CON-FIN-119.current-asset.md) — CON-FIN-119
+- [Property Plant and Equipment](contexts/BC-FIN/CON-FIN-120.property-plant-and-equipment.md) — CON-FIN-120
+- [Current Liability](contexts/BC-FIN/CON-FIN-121.current-liability.md) — CON-FIN-121
+- [Long-Term Liability](contexts/BC-FIN/CON-FIN-122.long-term-liability.md) — CON-FIN-122
+- [Expense Recognition Principle](contexts/BC-FIN/CON-FIN-123.expense-recognition-principle.md) — CON-FIN-123
+- [Closing Entries](contexts/BC-FIN/CON-FIN-124.closing-entries.md) — CON-FIN-124
+- [Permanent Accounts](contexts/BC-FIN/CON-FIN-125.permanent-accounts.md) — CON-FIN-125
+- [Temporary Accounts](contexts/BC-FIN/CON-FIN-126.temporary-accounts.md) — CON-FIN-126
+- [Subsequent Events](contexts/BC-FIN/CON-FIN-127.subsequent-events.md) — CON-FIN-127
+- [Operating Cycle](contexts/BC-FIN/CON-FIN-128.operating-cycle.md) — CON-FIN-128
+- [Perpetual Inventory System](contexts/BC-FIN/CON-FIN-129.perpetual-inventory-system.md) — CON-FIN-129
+- [Periodic Inventory System](contexts/BC-FIN/CON-FIN-130.periodic-inventory-system.md) — CON-FIN-130
+- [Subsidiary Inventory Ledger](contexts/BC-FIN/CON-FIN-131.subsidiary-inventory-ledger.md) — CON-FIN-131
+- [Credit Terms](contexts/BC-FIN/CON-FIN-132.credit-terms.md) — CON-FIN-132
+- [Purchase Discount](contexts/BC-FIN/CON-FIN-133.purchase-discount.md) — CON-FIN-133
+- [Purchase Returns and Allowances](contexts/BC-FIN/CON-FIN-134.purchase-returns-and-allowances.md) — CON-FIN-134
+- [Debit Memorandum](contexts/BC-FIN/CON-FIN-135.debit-memorandum.md) — CON-FIN-135
+- [Inventory](contexts/BC-FIN/CON-FIN-136.inventory.md) — CON-FIN-136
+- [Cost of Goods Sold - Periodic](contexts/BC-FIN/CON-FIN-137.cost-of-goods-sold-periodic.md) — CON-FIN-137
+- [Gross Profit Method](contexts/BC-FIN/CON-FIN-138.gross-profit-method.md) — CON-FIN-138
+- [Chart of Accounts for Retail Business](contexts/BC-FIN/CON-FIN-139.chart-of-accounts-for-retail-business.md) — CON-FIN-139
+- [Wholesaler](contexts/BC-FIN/CON-FIN-140.wholesaler.md) — CON-FIN-140
+- [Retailer](contexts/BC-FIN/CON-FIN-141.retailer.md) — CON-FIN-141
+- [Sales (Revenue)](contexts/BC-FIN/CON-FIN-142.sales-revenue.md) — CON-FIN-142
+- [Credit Card Expense](contexts/BC-FIN/CON-FIN-143.credit-card-expense.md) — CON-FIN-143
+- [Sales Discount (from Buyer Perspective: Purchase Discount)](contexts/BC-FIN/CON-FIN-144.sales-discount-from-buyer-perspective-purchase-discount.md) — CON-FIN-144
+- [Sales Returns, Refunds, and Allowances](contexts/BC-FIN/CON-FIN-145.sales-returns-refunds-and-allowances.md) — CON-FIN-145
+- [Customer Refunds Payable](contexts/BC-FIN/CON-FIN-146.customer-refunds-payable.md) — CON-FIN-146
+- [Estimated Returns Inventory](contexts/BC-FIN/CON-FIN-147.estimated-returns-inventory.md) — CON-FIN-147
+- [Credit Memorandum](contexts/BC-FIN/CON-FIN-148.credit-memorandum.md) — CON-FIN-148
+- [FOB Shipping Point](contexts/BC-FIN/CON-FIN-149.fob-shipping-point.md) — CON-FIN-149
+- [FOB Destination](contexts/BC-FIN/CON-FIN-150.fob-destination.md) — CON-FIN-150
+- [Inventory Shrinkage](contexts/BC-FIN/CON-FIN-151.inventory-shrinkage.md) — CON-FIN-151
+- [Selling Expenses](contexts/BC-FIN/CON-FIN-152.selling-expenses.md) — CON-FIN-152
+- [Administrative Expenses](contexts/BC-FIN/CON-FIN-153.administrative-expenses.md) — CON-FIN-153
+- [Other Revenue and Expense](contexts/BC-FIN/CON-FIN-154.other-revenue-and-expense.md) — CON-FIN-154
+- [Fixed Asset Turnover Ratio](contexts/BC-FIN/CON-FIN-155.fixed-asset-turnover-ratio.md) — CON-FIN-155
+- [Sales Discount (Gross Method)](contexts/BC-FIN/CON-FIN-156.sales-discount-gross-method.md) — CON-FIN-156
+- [Sales Discount (Net Method)](contexts/BC-FIN/CON-FIN-157.sales-discount-net-method.md) — CON-FIN-157
+- [Sales Taxes](contexts/BC-FIN/CON-FIN-158.sales-taxes.md) — CON-FIN-158
+- [Trade Discounts](contexts/BC-FIN/CON-FIN-159.trade-discounts.md) — CON-FIN-159
+- [Coupon (Point-of-Sale)](contexts/BC-FIN/CON-FIN-160.coupon-point-of-sale.md) — CON-FIN-160
+- [Coupon (Future Redemption)](contexts/BC-FIN/CON-FIN-161.coupon-future-redemption.md) — CON-FIN-161
+- [Estimated Coupons Payable](contexts/BC-FIN/CON-FIN-162.estimated-coupons-payable.md) — CON-FIN-162
+- [Rebate (Mail-In)](contexts/BC-FIN/CON-FIN-163.rebate-mail-in.md) — CON-FIN-163
+- [Delivery Expense](contexts/BC-FIN/CON-FIN-164.delivery-expense.md) — CON-FIN-164
+- [Freight In Account](contexts/BC-FIN/CON-FIN-165.freight-in-account.md) — CON-FIN-165
+- [Income Summary](contexts/BC-FIN/CON-FIN-166.income-summary.md) — CON-FIN-166
+- [Purchases Discounts Account](contexts/BC-FIN/CON-FIN-167.purchases-discounts-account.md) — CON-FIN-167
+- [Purchases Returns and Allowances Account](contexts/BC-FIN/CON-FIN-168.purchases-returns-and-allowances-account.md) — CON-FIN-168
+- [Purchase-Related Transaction](contexts/BC-FIN/CON-FIN-169.purchase-related-transaction.md) — CON-FIN-169
+- [Sales-Related Transaction](contexts/BC-FIN/CON-FIN-170.sales-related-transaction.md) — CON-FIN-170
+- [Credit Card Sale](contexts/BC-FIN/CON-FIN-171.credit-card-sale.md) — CON-FIN-171
+- [Customer Refunds and Allowances](contexts/BC-FIN/CON-FIN-172.customer-refunds-and-allowances.md) — CON-FIN-172
+- [Sales Tax Collection](contexts/BC-FIN/CON-FIN-173.sales-tax-collection.md) — CON-FIN-173
+- [Debit Memo](contexts/BC-FIN/CON-FIN-174.debit-memo.md) — CON-FIN-174
+- [Credit Memo](contexts/BC-FIN/CON-FIN-175.credit-memo.md) — CON-FIN-175
+- [Inventory Cost Flow Assumption](contexts/BC-FIN/CON-FIN-176.inventory-cost-flow-assumption.md) — CON-FIN-176
+- [First-In, First-Out (FIFO)](contexts/BC-FIN/CON-FIN-177.first-in-first-out-fifo.md) — CON-FIN-177
+- [Last-In, First-Out (LIFO)](contexts/BC-FIN/CON-FIN-178.last-in-first-out-lifo.md) — CON-FIN-178
+- [Weighted Average Cost Method](contexts/BC-FIN/CON-FIN-179.weighted-average-cost-method.md) — CON-FIN-179
+- [Specific Identification Method](contexts/BC-FIN/CON-FIN-180.specific-identification-method.md) — CON-FIN-180
+- [Lower of Cost or Market (LCM)](contexts/BC-FIN/CON-FIN-181.lower-of-cost-or-market-lcm.md) — CON-FIN-181
+- [Net Realizable Value](contexts/BC-FIN/CON-FIN-182.net-realizable-value.md) — CON-FIN-182
+- [Days' Sales in Inventory](contexts/BC-FIN/CON-FIN-183.days-sales-in-inventory.md) — CON-FIN-183
+- [Inventory Control](contexts/BC-FIN/CON-FIN-184.inventory-control.md) — CON-FIN-184
+- [Retail Method of Inventory Costing](contexts/BC-FIN/CON-FIN-185.retail-method-of-inventory-costing.md) — CON-FIN-185
+- [Gross Profit Method of Inventory Costing](contexts/BC-FIN/CON-FIN-186.gross-profit-method-of-inventory-costing.md) — CON-FIN-186
+- [Purchase Order](contexts/BC-FIN/CON-FIN-187.purchase-order.md) — CON-FIN-187
+- [Receiving Report](contexts/BC-FIN/CON-FIN-188.receiving-report.md) — CON-FIN-188
+- [Vendor's Invoice](contexts/BC-FIN/CON-FIN-189.vendor-s-invoice.md) — CON-FIN-189
+- [Inventory Profits (Illusory Profits)](contexts/BC-FIN/CON-FIN-190.inventory-profits-illusory-profits.md) — CON-FIN-190
+- [Consigned Inventory](contexts/BC-FIN/CON-FIN-191.consigned-inventory.md) — CON-FIN-191
+- [Retail Inventory Method](contexts/BC-FIN/CON-FIN-192.retail-inventory-method.md) — CON-FIN-192
+- [Sarbanes-Oxley Act](contexts/BC-FIN/CON-FIN-193.sarbanes-oxley-act.md) — CON-FIN-193
+- [Internal Control](contexts/BC-FIN/CON-FIN-194.internal-control.md) — CON-FIN-194
+- [Control Environment](contexts/BC-FIN/CON-FIN-195.control-environment.md) — CON-FIN-195
+- [Control Procedures](contexts/BC-FIN/CON-FIN-196.control-procedures.md) — CON-FIN-196
+- [Monitoring](contexts/BC-FIN/CON-FIN-197.monitoring.md) — CON-FIN-197
+- [Information and Communication](contexts/BC-FIN/CON-FIN-198.information-and-communication.md) — CON-FIN-198
+- [Employee Fraud](contexts/BC-FIN/CON-FIN-199.employee-fraud.md) — CON-FIN-199
+- [Cash Register Control](contexts/BC-FIN/CON-FIN-200.cash-register-control.md) — CON-FIN-200
+- [Remittance Advice](contexts/BC-FIN/CON-FIN-201.remittance-advice.md) — CON-FIN-201
+- [Voucher System](contexts/BC-FIN/CON-FIN-202.voucher-system.md) — CON-FIN-202
+- [Electronic Funds Transfer (EFT)](contexts/BC-FIN/CON-FIN-203.electronic-funds-transfer-eft.md) — CON-FIN-203
+- [Cash Short and Over Account](contexts/BC-FIN/CON-FIN-204.cash-short-and-over-account.md) — CON-FIN-204
+- [Inventory Ethics - LCM Application](contexts/BC-FIN/CON-FIN-205.inventory-ethics-lcm-application.md) — CON-FIN-205
+- [Bank Statement](contexts/BC-FIN/CON-FIN-206.bank-statement.md) — CON-FIN-206
+- [Deposit in Transit](contexts/BC-FIN/CON-FIN-207.deposit-in-transit.md) — CON-FIN-207
+- [Outstanding Checks](contexts/BC-FIN/CON-FIN-208.outstanding-checks.md) — CON-FIN-208
+- [NSF Check](contexts/BC-FIN/CON-FIN-209.nsf-check.md) — CON-FIN-209
+- [Petty Cash Fund](contexts/BC-FIN/CON-FIN-210.petty-cash-fund.md) — CON-FIN-210
+- [Cash Equivalents](contexts/BC-FIN/CON-FIN-211.cash-equivalents.md) — CON-FIN-211
+- [Compensating Balance](contexts/BC-FIN/CON-FIN-212.compensating-balance.md) — CON-FIN-212
+- [Days' Cash on Hand](contexts/BC-FIN/CON-FIN-213.days-cash-on-hand.md) — CON-FIN-213
+- [Petty Cash Custodian](contexts/BC-FIN/CON-FIN-214.petty-cash-custodian.md) — CON-FIN-214
+- [Special-Purpose Funds](contexts/BC-FIN/CON-FIN-215.special-purpose-funds.md) — CON-FIN-215
+- [Internal Control over Cash](contexts/BC-FIN/CON-FIN-216.internal-control-over-cash.md) — CON-FIN-216
+- [Allowance for Doubtful Accounts](contexts/BC-FIN/CON-FIN-217.allowance-for-doubtful-accounts.md) — CON-FIN-217
+- [Bad Debt Expense](contexts/BC-FIN/CON-FIN-218.bad-debt-expense.md) — CON-FIN-218
+- [Direct Method](contexts/BC-FIN/CON-FIN-219.direct-method.md) — CON-FIN-219
+- [Allowance Method](contexts/BC-FIN/CON-FIN-220.allowance-method.md) — CON-FIN-220
+- [Percent of Sales Method](contexts/BC-FIN/CON-FIN-221.percent-of-sales-method.md) — CON-FIN-221
+- [Analysis of Receivables Method](contexts/BC-FIN/CON-FIN-222.analysis-of-receivables-method.md) — CON-FIN-222
+- [Aging Schedule](contexts/BC-FIN/CON-FIN-223.aging-schedule.md) — CON-FIN-223
+- [Write-Off](contexts/BC-FIN/CON-FIN-224.write-off.md) — CON-FIN-224
+- [Recovery of Bad Debt](contexts/BC-FIN/CON-FIN-225.recovery-of-bad-debt.md) — CON-FIN-225
+- [Aging of Receivables Schedule](contexts/BC-FIN/CON-FIN-226.aging-of-receivables-schedule.md) — CON-FIN-226
+- [Days' Sales in Receivables](contexts/BC-FIN/CON-FIN-227.days-sales-in-receivables.md) — CON-FIN-227
+- [Number of Days Past Due](contexts/BC-FIN/CON-FIN-228.number-of-days-past-due.md) — CON-FIN-228
+- [Debit Balance in Allowance for Doubtful Accounts](contexts/BC-FIN/CON-FIN-229.debit-balance-in-allowance-for-doubtful-accounts.md) — CON-FIN-229
+- [Fixed Assets](contexts/BC-FIN/CON-FIN-230.fixed-assets.md) — CON-FIN-230
+- [Property, Plant, and Equipment](contexts/BC-FIN/CON-FIN-231.property-plant-and-equipment.md) — CON-FIN-231
+- [Intangible Assets](contexts/BC-FIN/CON-FIN-232.intangible-assets.md) — CON-FIN-232
+- [Investment (Long-Term Asset)](contexts/BC-FIN/CON-FIN-233.investment-long-term-asset.md) — CON-FIN-233
+- [Cost Principle for Fixed Assets](contexts/BC-FIN/CON-FIN-234.cost-principle-for-fixed-assets.md) — CON-FIN-234
+- [Capital Expenditure](contexts/BC-FIN/CON-FIN-235.capital-expenditure.md) — CON-FIN-235
+- [Revenue Expenditure](contexts/BC-FIN/CON-FIN-236.revenue-expenditure.md) — CON-FIN-236
+- [Construction in Progress](contexts/BC-FIN/CON-FIN-237.construction-in-progress.md) — CON-FIN-237
+- [Lease](contexts/BC-FIN/CON-FIN-238.lease.md) — CON-FIN-238
+- [Lessor](contexts/BC-FIN/CON-FIN-239.lessor.md) — CON-FIN-239
+- [Lessee](contexts/BC-FIN/CON-FIN-240.lessee.md) — CON-FIN-240
+- [Residual Value](contexts/BC-FIN/CON-FIN-241.residual-value.md) — CON-FIN-241
+- [Depreciable Cost](contexts/BC-FIN/CON-FIN-242.depreciable-cost.md) — CON-FIN-242
+- [Straight-Line Depreciation](contexts/BC-FIN/CON-FIN-243.straight-line-depreciation.md) — CON-FIN-243
+- [Units-of-Activity Depreciation](contexts/BC-FIN/CON-FIN-244.units-of-activity-depreciation.md) — CON-FIN-244
+- [Double-Declining-Balance Depreciation](contexts/BC-FIN/CON-FIN-245.double-declining-balance-depreciation.md) — CON-FIN-245
+- [Natural Resources](contexts/BC-FIN/CON-FIN-246.natural-resources.md) — CON-FIN-246
+- [Depletion](contexts/BC-FIN/CON-FIN-247.depletion.md) — CON-FIN-247
+- [Accumulated Depletion](contexts/BC-FIN/CON-FIN-248.accumulated-depletion.md) — CON-FIN-248
+- [Patent](contexts/BC-FIN/CON-FIN-249.patent.md) — CON-FIN-249
+- [Copyright](contexts/BC-FIN/CON-FIN-250.copyright.md) — CON-FIN-250
+- [Trademark](contexts/BC-FIN/CON-FIN-251.trademark.md) — CON-FIN-251
+- [Goodwill](contexts/BC-FIN/CON-FIN-252.goodwill.md) — CON-FIN-252
+- [Amortization](contexts/BC-FIN/CON-FIN-253.amortization.md) — CON-FIN-253
+- [Trade-In Allowance](contexts/BC-FIN/CON-FIN-254.trade-in-allowance.md) — CON-FIN-254
+- [Boot](contexts/BC-FIN/CON-FIN-255.boot.md) — CON-FIN-255
+- [Commercial Substance](contexts/BC-FIN/CON-FIN-256.commercial-substance.md) — CON-FIN-256
+- [Gain on Exchange](contexts/BC-FIN/CON-FIN-257.gain-on-exchange.md) — CON-FIN-257
+- [Loss on Exchange](contexts/BC-FIN/CON-FIN-258.loss-on-exchange.md) — CON-FIN-258
+- [Exchange of Similar Assets](contexts/BC-FIN/CON-FIN-259.exchange-of-similar-assets.md) — CON-FIN-259
+- [Accrued Liability](contexts/BC-FIN/CON-FIN-260.accrued-liability.md) — CON-FIN-260
+- [Interest-Bearing Note](contexts/BC-FIN/CON-FIN-261.interest-bearing-note.md) — CON-FIN-261
+- [Discounted Note](contexts/BC-FIN/CON-FIN-262.discounted-note.md) — CON-FIN-262
+- [Current Portion of Long-Term Debt](contexts/BC-FIN/CON-FIN-263.current-portion-of-long-term-debt.md) — CON-FIN-263
+- [Payroll](contexts/BC-FIN/CON-FIN-264.payroll.md) — CON-FIN-264
+- [Gross Pay](contexts/BC-FIN/CON-FIN-265.gross-pay.md) — CON-FIN-265
+- [Net Pay](contexts/BC-FIN/CON-FIN-266.net-pay.md) — CON-FIN-266
+- [FICA Tax](contexts/BC-FIN/CON-FIN-267.fica-tax.md) — CON-FIN-267
+- [Federal Unemployment Tax (FUTA)](contexts/BC-FIN/CON-FIN-268.federal-unemployment-tax-futa.md) — CON-FIN-268
+- [State Unemployment Tax (SUTA)](contexts/BC-FIN/CON-FIN-269.state-unemployment-tax-suta.md) — CON-FIN-269
+- [Payroll Tax](contexts/BC-FIN/CON-FIN-270.payroll-tax.md) — CON-FIN-270
+- [Vacation Pay](contexts/BC-FIN/CON-FIN-271.vacation-pay.md) — CON-FIN-271
+- [Pension](contexts/BC-FIN/CON-FIN-272.pension.md) — CON-FIN-272
+- [Defined Contribution Plan](contexts/BC-FIN/CON-FIN-273.defined-contribution-plan.md) — CON-FIN-273
+- [Defined Benefit Plan](contexts/BC-FIN/CON-FIN-274.defined-benefit-plan.md) — CON-FIN-274
+- [Installment Note](contexts/BC-FIN/CON-FIN-275.installment-note.md) — CON-FIN-275
+- [Mortgage Note](contexts/BC-FIN/CON-FIN-276.mortgage-note.md) — CON-FIN-276
+- [Creditor](contexts/BC-FIN/CON-FIN-277.creditor.md) — CON-FIN-277
+- [Debtor](contexts/BC-FIN/CON-FIN-278.debtor.md) — CON-FIN-278
+- [Contingent Liability](contexts/BC-FIN/CON-FIN-279.contingent-liability.md) — CON-FIN-279
+- [Maturity Value](contexts/BC-FIN/CON-FIN-280.maturity-value.md) — CON-FIN-280
+- [Quick Ratio](contexts/BC-FIN/CON-FIN-281.quick-ratio.md) — CON-FIN-281
+- [Payroll Register](contexts/BC-FIN/CON-FIN-282.payroll-register.md) — CON-FIN-282
+- [Payroll Summary](contexts/BC-FIN/CON-FIN-283.payroll-summary.md) — CON-FIN-283
+- [Salaries Payable](contexts/BC-FIN/CON-FIN-284.salaries-payable.md) — CON-FIN-284
+- [Bond Payable](contexts/BC-FIN/CON-FIN-285.bond-payable.md) — CON-FIN-285
+- [Bond Indenture](contexts/BC-FIN/CON-FIN-286.bond-indenture.md) — CON-FIN-286
+- [Term Bonds](contexts/BC-FIN/CON-FIN-287.term-bonds.md) — CON-FIN-287
+- [Serial Bonds](contexts/BC-FIN/CON-FIN-288.serial-bonds.md) — CON-FIN-288
+- [Convertible Bond](contexts/BC-FIN/CON-FIN-289.convertible-bond.md) — CON-FIN-289
+- [Callable Bond](contexts/BC-FIN/CON-FIN-290.callable-bond.md) — CON-FIN-290
+- [Bond Discount](contexts/BC-FIN/CON-FIN-291.bond-discount.md) — CON-FIN-291
+- [Bond Premium](contexts/BC-FIN/CON-FIN-292.bond-premium.md) — CON-FIN-292
+- [Straight-Line Amortization Method](contexts/BC-FIN/CON-FIN-293.straight-line-amortization-method.md) — CON-FIN-293
+- [Effective Interest Method](contexts/BC-FIN/CON-FIN-294.effective-interest-method.md) — CON-FIN-294
+- [Bond Redemption](contexts/BC-FIN/CON-FIN-295.bond-redemption.md) — CON-FIN-295
+- [Gain on Bond Redemption](contexts/BC-FIN/CON-FIN-296.gain-on-bond-redemption.md) — CON-FIN-296
+- [Loss on Bond Redemption](contexts/BC-FIN/CON-FIN-297.loss-on-bond-redemption.md) — CON-FIN-297
+- [Present Value of $1](contexts/BC-FIN/CON-FIN-298.present-value-of-1.md) — CON-FIN-298
+- [Present Value of an Amount](contexts/BC-FIN/CON-FIN-299.present-value-of-an-amount.md) — CON-FIN-299
+- [Bond Carrying Amount (Book Value)](contexts/BC-FIN/CON-FIN-300.bond-carrying-amount-book-value.md) — CON-FIN-300
+- [Interest Expense](contexts/BC-FIN/CON-FIN-301.interest-expense.md) — CON-FIN-301
+- [Bonds Payable](contexts/BC-FIN/CON-FIN-302.bonds-payable.md) — CON-FIN-302
+- [Convertible Bonds](contexts/BC-FIN/CON-FIN-303.convertible-bonds.md) — CON-FIN-303
+- [Carrying Amount of Bonds](contexts/BC-FIN/CON-FIN-304.carrying-amount-of-bonds.md) — CON-FIN-304
+- [Semiannual Interest Payment](contexts/BC-FIN/CON-FIN-305.semiannual-interest-payment.md) — CON-FIN-305
+- [Partner Capital Account](contexts/BC-FIN/CON-FIN-306.partner-capital-account.md) — CON-FIN-306
+- [Partnership Agreement](contexts/BC-FIN/CON-FIN-307.partnership-agreement.md) — CON-FIN-307
+- [Salary Allowance](contexts/BC-FIN/CON-FIN-308.salary-allowance.md) — CON-FIN-308
+- [Interest Allowance](contexts/BC-FIN/CON-FIN-309.interest-allowance.md) — CON-FIN-309
+- [Partnership Formation](contexts/BC-FIN/CON-FIN-310.partnership-formation.md) — CON-FIN-310
+- [Statement of Partnership Equity](contexts/BC-FIN/CON-FIN-311.statement-of-partnership-equity.md) — CON-FIN-311
+- [Admission of New Partner by Investment](contexts/BC-FIN/CON-FIN-312.admission-of-new-partner-by-investment.md) — CON-FIN-312
+- [Asset Revaluation](contexts/BC-FIN/CON-FIN-313.asset-revaluation.md) — CON-FIN-313
+- [Partnership Liquidation](contexts/BC-FIN/CON-FIN-314.partnership-liquidation.md) — CON-FIN-314
+- [Realization](contexts/BC-FIN/CON-FIN-315.realization.md) — CON-FIN-315
+- [Gain on Realization](contexts/BC-FIN/CON-FIN-316.gain-on-realization.md) — CON-FIN-316
+- [Loss on Realization](contexts/BC-FIN/CON-FIN-317.loss-on-realization.md) — CON-FIN-317
+- [Capital Deficiency](contexts/BC-FIN/CON-FIN-318.capital-deficiency.md) — CON-FIN-318
+- [Statement of Partnership Liquidation](contexts/BC-FIN/CON-FIN-319.statement-of-partnership-liquidation.md) — CON-FIN-319
+- [Installment Liquidation](contexts/BC-FIN/CON-FIN-320.installment-liquidation.md) — CON-FIN-320
+- [Statement of LLC Liquidation](contexts/BC-FIN/CON-FIN-321.statement-of-llc-liquidation.md) — CON-FIN-321
+- [Revenue per Employee](contexts/BC-FIN/CON-FIN-322.revenue-per-employee.md) — CON-FIN-322
+- [Stock](contexts/BC-FIN/CON-FIN-323.stock.md) — CON-FIN-323
+- [Common Stock](contexts/BC-FIN/CON-FIN-324.common-stock.md) — CON-FIN-324
+- [Cumulative Preferred Stock](contexts/BC-FIN/CON-FIN-325.cumulative-preferred-stock.md) — CON-FIN-325
+- [Paid-In Capital](contexts/BC-FIN/CON-FIN-326.paid-in-capital.md) — CON-FIN-326
+- [Cash Dividend](contexts/BC-FIN/CON-FIN-327.cash-dividend.md) — CON-FIN-327
+- [Stock Dividend](contexts/BC-FIN/CON-FIN-328.stock-dividend.md) — CON-FIN-328
+- [Stock Split](contexts/BC-FIN/CON-FIN-329.stock-split.md) — CON-FIN-329
+- [Legal Capital](contexts/BC-FIN/CON-FIN-330.legal-capital.md) — CON-FIN-330
+- [Discount on Stock](contexts/BC-FIN/CON-FIN-331.discount-on-stock.md) — CON-FIN-331
+- [Premium on Stock](contexts/BC-FIN/CON-FIN-332.premium-on-stock.md) — CON-FIN-332
+- [Treasury Stock](contexts/BC-FIN/CON-FIN-333.treasury-stock.md) — CON-FIN-333
+- [Paid-In Capital from Sale of Treasury Stock](contexts/BC-FIN/CON-FIN-334.paid-in-capital-from-sale-of-treasury-stock.md) — CON-FIN-334
+- [Statement of Stockholders' Equity](contexts/BC-FIN/CON-FIN-335.statement-of-stockholders-equity.md) — CON-FIN-335
+- [Prior Period Adjustment](contexts/BC-FIN/CON-FIN-336.prior-period-adjustment.md) — CON-FIN-336
+- [Restriction on Retained Earnings](contexts/BC-FIN/CON-FIN-337.restriction-on-retained-earnings.md) — CON-FIN-337
+- [Dividends Per Share](contexts/BC-FIN/CON-FIN-338.dividends-per-share.md) — CON-FIN-338
+- [Operating Activities](contexts/BC-FIN/CON-FIN-339.operating-activities.md) — CON-FIN-339
+- [Investing Activities](contexts/BC-FIN/CON-FIN-340.investing-activities.md) — CON-FIN-340
+- [Financing Activities](contexts/BC-FIN/CON-FIN-341.financing-activities.md) — CON-FIN-341
+- [Indirect Method](contexts/BC-FIN/CON-FIN-342.indirect-method.md) — CON-FIN-342
+- [Net Cash Inflow](contexts/BC-FIN/CON-FIN-343.net-cash-inflow.md) — CON-FIN-343
+- [Cash Outflow](contexts/BC-FIN/CON-FIN-344.cash-outflow.md) — CON-FIN-344
+- [Non-Cash Adjustment](contexts/BC-FIN/CON-FIN-345.non-cash-adjustment.md) — CON-FIN-345
+- [Working Capital Change Adjustment](contexts/BC-FIN/CON-FIN-346.working-capital-change-adjustment.md) — CON-FIN-346
+- [Noncash Investing and Financing Activities](contexts/BC-FIN/CON-FIN-347.noncash-investing-and-financing-activities.md) — CON-FIN-347
+- [Free Cash Flow](contexts/BC-FIN/CON-FIN-348.free-cash-flow.md) — CON-FIN-348
+- [Spreadsheet Method](contexts/BC-FIN/CON-FIN-349.spreadsheet-method.md) — CON-FIN-349
+- [Financial Distress Signal](contexts/BC-FIN/CON-FIN-350.financial-distress-signal.md) — CON-FIN-350
+- [Reconciliation Schedule](contexts/BC-FIN/CON-FIN-351.reconciliation-schedule.md) — CON-FIN-351
+- [Cash Received from Customers](contexts/BC-FIN/CON-FIN-352.cash-received-from-customers.md) — CON-FIN-352
+- [Cash Paid for Merchandise](contexts/BC-FIN/CON-FIN-353.cash-paid-for-merchandise.md) — CON-FIN-353
+- [Cash Paid for Operating Expenses](contexts/BC-FIN/CON-FIN-354.cash-paid-for-operating-expenses.md) — CON-FIN-354
+- [Cash Paid for Interest](contexts/BC-FIN/CON-FIN-355.cash-paid-for-interest.md) — CON-FIN-355
+- [Cash Paid for Income Taxes](contexts/BC-FIN/CON-FIN-356.cash-paid-for-income-taxes.md) — CON-FIN-356
+- [Gain on Sale of Land](contexts/BC-FIN/CON-FIN-357.gain-on-sale-of-land.md) — CON-FIN-357
+- [Depreciation Exclusion](contexts/BC-FIN/CON-FIN-358.depreciation-exclusion.md) — CON-FIN-358
+- [Common-Sized Statement](contexts/BC-FIN/CON-FIN-359.common-sized-statement.md) — CON-FIN-359
+- [Current Position Analysis](contexts/BC-FIN/CON-FIN-360.current-position-analysis.md) — CON-FIN-360
+- [Operating Income Percentage](contexts/BC-FIN/CON-FIN-361.operating-income-percentage.md) — CON-FIN-361
+- [Data Analytics Databases](contexts/BC-FIN/CON-FIN-362.data-analytics-databases.md) — CON-FIN-362
+- [Ratio of Fixed Assets to Long-Term Liabilities](contexts/BC-FIN/CON-FIN-363.ratio-of-fixed-assets-to-long-term-liabilities.md) — CON-FIN-363
+- [Leverage](contexts/BC-FIN/CON-FIN-364.leverage.md) — CON-FIN-364
+- [Managerial Accounting](contexts/BC-FIN/CON-FIN-365.managerial-accounting.md) — CON-FIN-365
+- [Financial Accounting](contexts/BC-FIN/CON-FIN-366.financial-accounting.md) — CON-FIN-366
+- [Strategic Planning](contexts/BC-FIN/CON-FIN-367.strategic-planning.md) — CON-FIN-367
+- [Operational Planning](contexts/BC-FIN/CON-FIN-368.operational-planning.md) — CON-FIN-368
+- [Measurement](contexts/BC-FIN/CON-FIN-369.measurement.md) — CON-FIN-369
+- [Evaluation](contexts/BC-FIN/CON-FIN-370.evaluation.md) — CON-FIN-370
+- [Control](contexts/BC-FIN/CON-FIN-371.control.md) — CON-FIN-371
+- [Cost Object](contexts/BC-FIN/CON-FIN-372.cost-object.md) — CON-FIN-372
+- [Direct Materials](contexts/BC-FIN/CON-FIN-373.direct-materials.md) — CON-FIN-373
+- [Indirect Cost](contexts/BC-FIN/CON-FIN-374.indirect-cost.md) — CON-FIN-374
+- [Manufacturing Overhead](contexts/BC-FIN/CON-FIN-375.manufacturing-overhead.md) — CON-FIN-375
+- [Prime Costs](contexts/BC-FIN/CON-FIN-376.prime-costs.md) — CON-FIN-376
+- [Conversion Costs](contexts/BC-FIN/CON-FIN-377.conversion-costs.md) — CON-FIN-377
+- [Product Costs](contexts/BC-FIN/CON-FIN-378.product-costs.md) — CON-FIN-378
+- [Period Costs](contexts/BC-FIN/CON-FIN-379.period-costs.md) — CON-FIN-379
+- [Sustainability](contexts/BC-FIN/CON-FIN-380.sustainability.md) — CON-FIN-380
+- [Eco-Efficiency Measures](contexts/BC-FIN/CON-FIN-381.eco-efficiency-measures.md) — CON-FIN-381
+- [Materials Inventory](contexts/BC-FIN/CON-FIN-382.materials-inventory.md) — CON-FIN-382
+- [Work in Process Inventory](contexts/BC-FIN/CON-FIN-383.work-in-process-inventory.md) — CON-FIN-383
+- [Finished Goods Inventory](contexts/BC-FIN/CON-FIN-384.finished-goods-inventory.md) — CON-FIN-384
+- [Statement of Cost of Goods Manufactured](contexts/BC-FIN/CON-FIN-385.statement-of-cost-of-goods-manufactured.md) — CON-FIN-385
+- [Verticals](contexts/BC-FIN/CON-FIN-386.verticals.md) — CON-FIN-386
+- [Horizontals](contexts/BC-FIN/CON-FIN-387.horizontals.md) — CON-FIN-387
+- [Certified Management Accountant](contexts/BC-FIN/CON-FIN-388.certified-management-accountant.md) — CON-FIN-388
+- [Product Cost Distortion](contexts/BC-FIN/CON-FIN-389.product-cost-distortion.md) — CON-FIN-389
+- [Period Cost](contexts/BC-FIN/CON-FIN-390.period-cost.md) — CON-FIN-390
+- [Indirect Materials](contexts/BC-FIN/CON-FIN-391.indirect-materials.md) — CON-FIN-391
+- [Indirect Labor](contexts/BC-FIN/CON-FIN-392.indirect-labor.md) — CON-FIN-392
+- [Prime Cost](contexts/BC-FIN/CON-FIN-393.prime-cost.md) — CON-FIN-393
+- [Conversion Cost](contexts/BC-FIN/CON-FIN-394.conversion-cost.md) — CON-FIN-394
+- [Occupancy Rate](contexts/BC-FIN/CON-FIN-395.occupancy-rate.md) — CON-FIN-395
+- [Guest Nights](contexts/BC-FIN/CON-FIN-396.guest-nights.md) — CON-FIN-396
+- [Available Room Nights](contexts/BC-FIN/CON-FIN-397.available-room-nights.md) — CON-FIN-397
+- [Manufacturing Costs](contexts/BC-FIN/CON-FIN-398.manufacturing-costs.md) — CON-FIN-398
+- [Cost of Finished Goods Available for Sale](contexts/BC-FIN/CON-FIN-399.cost-of-finished-goods-available-for-sale.md) — CON-FIN-399
+- [Cost System](contexts/BC-FIN/CON-FIN-400.cost-system.md) — CON-FIN-400
+- [Job Order Costing](contexts/BC-FIN/CON-FIN-401.job-order-costing.md) — CON-FIN-401
+- [Multi-Department Process Costing](contexts/BC-FIN/CON-FIN-402.multi-department-process-costing.md) — CON-FIN-402
+- [Hybrid Costing](contexts/BC-FIN/CON-FIN-403.hybrid-costing.md) — CON-FIN-403
+- [Job](contexts/BC-FIN/CON-FIN-404.job.md) — CON-FIN-404
+- [Job Cost Sheet](contexts/BC-FIN/CON-FIN-405.job-cost-sheet.md) — CON-FIN-405
+- [Materials Requisition](contexts/BC-FIN/CON-FIN-406.materials-requisition.md) — CON-FIN-406
+- [Materials Ledger](contexts/BC-FIN/CON-FIN-407.materials-ledger.md) — CON-FIN-407
+- [Work in Process Ledger](contexts/BC-FIN/CON-FIN-408.work-in-process-ledger.md) — CON-FIN-408
+- [Finished Goods Ledger](contexts/BC-FIN/CON-FIN-409.finished-goods-ledger.md) — CON-FIN-409
+- [Predetermined Overhead Rate](contexts/BC-FIN/CON-FIN-410.predetermined-overhead-rate.md) — CON-FIN-410
+- [Activity Base](contexts/BC-FIN/CON-FIN-411.activity-base.md) — CON-FIN-411
+- [Cost Allocation Base](contexts/BC-FIN/CON-FIN-412.cost-allocation-base.md) — CON-FIN-412
+- [Normal Costing](contexts/BC-FIN/CON-FIN-413.normal-costing.md) — CON-FIN-413
+- [Actual Costing](contexts/BC-FIN/CON-FIN-414.actual-costing.md) — CON-FIN-414
+- [Standard Costing](contexts/BC-FIN/CON-FIN-415.standard-costing.md) — CON-FIN-415
+- [Job Order Service Business](contexts/BC-FIN/CON-FIN-416.job-order-service-business.md) — CON-FIN-416
+- [Cost of Services Account](contexts/BC-FIN/CON-FIN-417.cost-of-services-account.md) — CON-FIN-417
+- [Cost Variance Analysis](contexts/BC-FIN/CON-FIN-418.cost-variance-analysis.md) — CON-FIN-418
+- [Unit Cost](contexts/BC-FIN/CON-FIN-419.unit-cost.md) — CON-FIN-419
+- [Cost Comparison](contexts/BC-FIN/CON-FIN-420.cost-comparison.md) — CON-FIN-420
+- [Service Business Job Costing](contexts/BC-FIN/CON-FIN-421.service-business-job-costing.md) — CON-FIN-421
+- [Direct Labor Rate for Services](contexts/BC-FIN/CON-FIN-422.direct-labor-rate-for-services.md) — CON-FIN-422
+- [Overhead Rate for Services](contexts/BC-FIN/CON-FIN-423.overhead-rate-for-services.md) — CON-FIN-423
+- [Gross Profit for Services](contexts/BC-FIN/CON-FIN-424.gross-profit-for-services.md) — CON-FIN-424
+- [Job Order Costing Decision Making](contexts/BC-FIN/CON-FIN-425.job-order-costing-decision-making.md) — CON-FIN-425
+- [Factory Labor](contexts/BC-FIN/CON-FIN-426.factory-labor.md) — CON-FIN-426
+- [Over-Applied Overhead](contexts/BC-FIN/CON-FIN-427.over-applied-overhead.md) — CON-FIN-427
+- [Under-Applied Overhead](contexts/BC-FIN/CON-FIN-428.under-applied-overhead.md) — CON-FIN-428
+- [Equivalent Units of Production](contexts/BC-FIN/CON-FIN-429.equivalent-units-of-production.md) — CON-FIN-429
+- [Whole Units](contexts/BC-FIN/CON-FIN-430.whole-units.md) — CON-FIN-430
+- [Direct Materials Equivalent Units](contexts/BC-FIN/CON-FIN-431.direct-materials-equivalent-units.md) — CON-FIN-431
+- [Conversion Equivalent Units](contexts/BC-FIN/CON-FIN-432.conversion-equivalent-units.md) — CON-FIN-432
+- [Cost of Production Report](contexts/BC-FIN/CON-FIN-433.cost-of-production-report.md) — CON-FIN-433
+- [Started and Completed Units](contexts/BC-FIN/CON-FIN-434.started-and-completed-units.md) — CON-FIN-434
+- [Transferred-In Costs](contexts/BC-FIN/CON-FIN-435.transferred-in-costs.md) — CON-FIN-435
+- [Three Groups of Units](contexts/BC-FIN/CON-FIN-436.three-groups-of-units.md) — CON-FIN-436
+- [Materials Addition Point](contexts/BC-FIN/CON-FIN-437.materials-addition-point.md) — CON-FIN-437
+- [Cost Per Equivalent Unit](contexts/BC-FIN/CON-FIN-438.cost-per-equivalent-unit.md) — CON-FIN-438
+- [FIFO Method](contexts/BC-FIN/CON-FIN-439.fifo-method.md) — CON-FIN-439
+- [Weighted Average Method in Process Costing](contexts/BC-FIN/CON-FIN-440.weighted-average-method-in-process-costing.md) — CON-FIN-440
+- [Lean Manufacturing](contexts/BC-FIN/CON-FIN-441.lean-manufacturing.md) — CON-FIN-441
+- [Pull Manufacturing](contexts/BC-FIN/CON-FIN-442.pull-manufacturing.md) — CON-FIN-442
+- [Push Manufacturing](contexts/BC-FIN/CON-FIN-443.push-manufacturing.md) — CON-FIN-443
+- [Transferred-In Costs Between Departments](contexts/BC-FIN/CON-FIN-444.transferred-in-costs-between-departments.md) — CON-FIN-444
+- [Yield Ratio](contexts/BC-FIN/CON-FIN-445.yield-ratio.md) — CON-FIN-445
+- [Flavor Changeover Cost](contexts/BC-FIN/CON-FIN-446.flavor-changeover-cost.md) — CON-FIN-446
+- [Process Costing Journal Entries](contexts/BC-FIN/CON-FIN-447.process-costing-journal-entries.md) — CON-FIN-447
+- [Activity-Based Costing (ABC)](contexts/BC-FIN/CON-FIN-448.activity-based-costing-abc.md) — CON-FIN-448
+- [Activity Rate](contexts/BC-FIN/CON-FIN-449.activity-rate.md) — CON-FIN-449
+- [Activity Pool](contexts/BC-FIN/CON-FIN-450.activity-pool.md) — CON-FIN-450
+- [Activity Base (Activity Driver)](contexts/BC-FIN/CON-FIN-451.activity-base-activity-driver.md) — CON-FIN-451
+- [Single Plantwide Overhead Rate](contexts/BC-FIN/CON-FIN-452.single-plantwide-overhead-rate.md) — CON-FIN-452
+- [Multiple Production Department Overhead Rate](contexts/BC-FIN/CON-FIN-453.multiple-production-department-overhead-rate.md) — CON-FIN-453
+- [ABC Selling and Administrative Expense Allocation](contexts/BC-FIN/CON-FIN-454.abc-selling-and-administrative-expense-allocation.md) — CON-FIN-454
+- [Cost Pool](contexts/BC-FIN/CON-FIN-455.cost-pool.md) — CON-FIN-455
+- [Direct Labor Hour (dlh)](contexts/BC-FIN/CON-FIN-456.direct-labor-hour-dlh.md) — CON-FIN-456
+- [Engineering Change Order (ECO)](contexts/BC-FIN/CON-FIN-457.engineering-change-order-eco.md) — CON-FIN-457
+- [Cost Behavior](contexts/BC-FIN/CON-FIN-458.cost-behavior.md) — CON-FIN-458
+- [Variable Cost Method](contexts/BC-FIN/CON-FIN-459.variable-cost-method.md) — CON-FIN-459
+- [Fixed Cost](contexts/BC-FIN/CON-FIN-460.fixed-cost.md) — CON-FIN-460
+- [Mixed Cost](contexts/BC-FIN/CON-FIN-461.mixed-cost.md) — CON-FIN-461
+- [Relevant Range](contexts/BC-FIN/CON-FIN-462.relevant-range.md) — CON-FIN-462
+- [Contribution Margin Ratio](contexts/BC-FIN/CON-FIN-463.contribution-margin-ratio.md) — CON-FIN-463
+- [Break-Even Point](contexts/BC-FIN/CON-FIN-464.break-even-point.md) — CON-FIN-464
+- [Target Profit Sales](contexts/BC-FIN/CON-FIN-465.target-profit-sales.md) — CON-FIN-465
+- [Cost-Volume-Profit Chart](contexts/BC-FIN/CON-FIN-466.cost-volume-profit-chart.md) — CON-FIN-466
+- [Profit-Volume Chart](contexts/BC-FIN/CON-FIN-467.profit-volume-chart.md) — CON-FIN-467
+- [Sales Mix](contexts/BC-FIN/CON-FIN-468.sales-mix.md) — CON-FIN-468
+- [Operating Leverage](contexts/BC-FIN/CON-FIN-469.operating-leverage.md) — CON-FIN-469
+- [Margin of Safety](contexts/BC-FIN/CON-FIN-470.margin-of-safety.md) — CON-FIN-470
+- [Absorption Costing](contexts/BC-FIN/CON-FIN-471.absorption-costing.md) — CON-FIN-471
+- [Variable Costing](contexts/BC-FIN/CON-FIN-472.variable-costing.md) — CON-FIN-472
+- [Cost-Volume-Profit Analysis for Service Businesses](contexts/BC-FIN/CON-FIN-473.cost-volume-profit-analysis-for-service-businesses.md) — CON-FIN-473
+- [Product Profitability Report](contexts/BC-FIN/CON-FIN-474.product-profitability-report.md) — CON-FIN-474
+- [Sales-Based Expense Allocation](contexts/BC-FIN/CON-FIN-475.sales-based-expense-allocation.md) — CON-FIN-475
+- [Manufacturing Overhead Cost per Unit Comparison](contexts/BC-FIN/CON-FIN-476.manufacturing-overhead-cost-per-unit-comparison.md) — CON-FIN-476
+- [Break-Even Analysis for Service Business](contexts/BC-FIN/CON-FIN-477.break-even-analysis-for-service-business.md) — CON-FIN-477
+- [Weighted Average Contribution Margin](contexts/BC-FIN/CON-FIN-478.weighted-average-contribution-margin.md) — CON-FIN-478
+- [Service Company Break-Even](contexts/BC-FIN/CON-FIN-479.service-company-break-even.md) — CON-FIN-479
+- [Promotional Campaign Break-Even](contexts/BC-FIN/CON-FIN-480.promotional-campaign-break-even.md) — CON-FIN-480
+- [Budget](contexts/BC-FIN/CON-FIN-481.budget.md) — CON-FIN-481
+- [Static Budget](contexts/BC-FIN/CON-FIN-482.static-budget.md) — CON-FIN-482
+- [Flexible Budget](contexts/BC-FIN/CON-FIN-483.flexible-budget.md) — CON-FIN-483
+- [Continuous Budget](contexts/BC-FIN/CON-FIN-484.continuous-budget.md) — CON-FIN-484
+- [Zero-Based Budgeting](contexts/BC-FIN/CON-FIN-485.zero-based-budgeting.md) — CON-FIN-485
+- [Incremental Budgeting](contexts/BC-FIN/CON-FIN-486.incremental-budgeting.md) — CON-FIN-486
+- [Budget Committee](contexts/BC-FIN/CON-FIN-487.budget-committee.md) — CON-FIN-487
+- [Budget Gaming](contexts/BC-FIN/CON-FIN-488.budget-gaming.md) — CON-FIN-488
+- [Nonmanufacturing Staffing Budget Scenario](contexts/BC-FIN/CON-FIN-489.nonmanufacturing-staffing-budget-scenario.md) — CON-FIN-489
+- [Multiperiod Budget](contexts/BC-FIN/CON-FIN-490.multiperiod-budget.md) — CON-FIN-490
+- [Sales Budget Forecasting](contexts/BC-FIN/CON-FIN-491.sales-budget-forecasting.md) — CON-FIN-491
+- [Production Budget](contexts/BC-FIN/CON-FIN-492.production-budget.md) — CON-FIN-492
+- [Direct Materials Purchases Budget](contexts/BC-FIN/CON-FIN-493.direct-materials-purchases-budget.md) — CON-FIN-493
+- [Manufacturing Overhead Cost Budget](contexts/BC-FIN/CON-FIN-494.manufacturing-overhead-cost-budget.md) — CON-FIN-494
+- [Selling and Administrative Expenses Budget](contexts/BC-FIN/CON-FIN-495.selling-and-administrative-expenses-budget.md) — CON-FIN-495
+- [Cash Budget](contexts/BC-FIN/CON-FIN-496.cash-budget.md) — CON-FIN-496
+- [Capital Expenditures Budget](contexts/BC-FIN/CON-FIN-497.capital-expenditures-budget.md) — CON-FIN-497
+- [Production Budget with Ending Inventory Percentage](contexts/BC-FIN/CON-FIN-498.production-budget-with-ending-inventory-percentage.md) — CON-FIN-498
+- [Multi-Product Direct Materials Budget](contexts/BC-FIN/CON-FIN-499.multi-product-direct-materials-budget.md) — CON-FIN-499
+- [Multi-Department Direct Labor Budget](contexts/BC-FIN/CON-FIN-500.multi-department-direct-labor-budget.md) — CON-FIN-500
+- [Cash Receipts Schedule](contexts/BC-FIN/CON-FIN-501.cash-receipts-schedule.md) — CON-FIN-501
+- [Cash Disbursements Schedule](contexts/BC-FIN/CON-FIN-502.cash-disbursements-schedule.md) — CON-FIN-502
+- [Standard Cost](contexts/BC-FIN/CON-FIN-503.standard-cost.md) — CON-FIN-503
+- [Budget Performance Report](contexts/BC-FIN/CON-FIN-504.budget-performance-report.md) — CON-FIN-504
+- [Total Manufacturing Cost Variance](contexts/BC-FIN/CON-FIN-505.total-manufacturing-cost-variance.md) — CON-FIN-505
+- [Direct Materials Price Variance](contexts/BC-FIN/CON-FIN-506.direct-materials-price-variance.md) — CON-FIN-506
+- [Direct Materials Quantity Variance](contexts/BC-FIN/CON-FIN-507.direct-materials-quantity-variance.md) — CON-FIN-507
+- [Direct Labor Rate Variance](contexts/BC-FIN/CON-FIN-508.direct-labor-rate-variance.md) — CON-FIN-508
+- [Direct Labor Time Variance](contexts/BC-FIN/CON-FIN-509.direct-labor-time-variance.md) — CON-FIN-509
+- [Manufacturing Overhead Cost Variance Report](contexts/BC-FIN/CON-FIN-510.manufacturing-overhead-cost-variance-report.md) — CON-FIN-510
+- [Variable Manufacturing Overhead Controllable Variance](contexts/BC-FIN/CON-FIN-511.variable-manufacturing-overhead-controllable-variance.md) — CON-FIN-511
+- [Fixed Manufacturing Overhead Volume Variance](contexts/BC-FIN/CON-FIN-512.fixed-manufacturing-overhead-volume-variance.md) — CON-FIN-512
+- [Favorable Cost Variance](contexts/BC-FIN/CON-FIN-513.favorable-cost-variance.md) — CON-FIN-513
+- [Unfavorable Cost Variance](contexts/BC-FIN/CON-FIN-514.unfavorable-cost-variance.md) — CON-FIN-514
+- [Revenue Price Variance](contexts/BC-FIN/CON-FIN-515.revenue-price-variance.md) — CON-FIN-515
+- [Revenue Volume Variance](contexts/BC-FIN/CON-FIN-516.revenue-volume-variance.md) — CON-FIN-516
+- [Standard Hours for Actual Production](contexts/BC-FIN/CON-FIN-517.standard-hours-for-actual-production.md) — CON-FIN-517
+- [Ideal Standards](contexts/BC-FIN/CON-FIN-518.ideal-standards.md) — CON-FIN-518
+- [Normal Standards](contexts/BC-FIN/CON-FIN-519.normal-standards.md) — CON-FIN-519
+- [Differential Analysis](contexts/BC-FIN/CON-FIN-520.differential-analysis.md) — CON-FIN-520
+- [Differential Revenue](contexts/BC-FIN/CON-FIN-521.differential-revenue.md) — CON-FIN-521
+- [Differential Cost](contexts/BC-FIN/CON-FIN-522.differential-cost.md) — CON-FIN-522
+- [Differential Profit](contexts/BC-FIN/CON-FIN-523.differential-profit.md) — CON-FIN-523
+- [Sunk Cost](contexts/BC-FIN/CON-FIN-524.sunk-cost.md) — CON-FIN-524
+- [Opportunity Cost](contexts/BC-FIN/CON-FIN-525.opportunity-cost.md) — CON-FIN-525
+- [Target Costing](contexts/BC-FIN/CON-FIN-526.target-costing.md) — CON-FIN-526
+- [Total Cost Method](contexts/BC-FIN/CON-FIN-527.total-cost-method.md) — CON-FIN-527
+- [Production Bottleneck](contexts/BC-FIN/CON-FIN-528.production-bottleneck.md) — CON-FIN-528
+- [Theory of Constraints](contexts/BC-FIN/CON-FIN-529.theory-of-constraints.md) — CON-FIN-529
+- [Unit Contribution Margin per Bottleneck Hour](contexts/BC-FIN/CON-FIN-530.unit-contribution-margin-per-bottleneck-hour.md) — CON-FIN-530
+- [Yield Pricing](contexts/BC-FIN/CON-FIN-531.yield-pricing.md) — CON-FIN-531
+- [Cost-Plus Pricing](contexts/BC-FIN/CON-FIN-532.cost-plus-pricing.md) — CON-FIN-532
+- [Desired Profit](contexts/BC-FIN/CON-FIN-533.desired-profit.md) — CON-FIN-533
+- [Target Cost](contexts/BC-FIN/CON-FIN-534.target-cost.md) — CON-FIN-534
+- [Capital Investment Analysis](contexts/BC-FIN/CON-FIN-535.capital-investment-analysis.md) — CON-FIN-535
+- [Average Rate of Return](contexts/BC-FIN/CON-FIN-536.average-rate-of-return.md) — CON-FIN-536
+- [Cash Payback Period](contexts/BC-FIN/CON-FIN-537.cash-payback-period.md) — CON-FIN-537
+- [Time Value of Money](contexts/BC-FIN/CON-FIN-538.time-value-of-money.md) — CON-FIN-538
+- [Annuity](contexts/BC-FIN/CON-FIN-539.annuity.md) — CON-FIN-539
+- [Net Present Value Method](contexts/BC-FIN/CON-FIN-540.net-present-value-method.md) — CON-FIN-540
+- [Present Value Index](contexts/BC-FIN/CON-FIN-541.present-value-index.md) — CON-FIN-541
+- [Internal Rate of Return Method](contexts/BC-FIN/CON-FIN-542.internal-rate-of-return-method.md) — CON-FIN-542
+- [Hurdle Rate](contexts/BC-FIN/CON-FIN-543.hurdle-rate.md) — CON-FIN-543
+- [Capital Rationing](contexts/BC-FIN/CON-FIN-544.capital-rationing.md) — CON-FIN-544
+- [Sensitivity Analysis](contexts/BC-FIN/CON-FIN-545.sensitivity-analysis.md) — CON-FIN-545
+- [Expected Value Analysis](contexts/BC-FIN/CON-FIN-546.expected-value-analysis.md) — CON-FIN-546
+- [Complicating Factor — Income Tax](contexts/BC-FIN/CON-FIN-547.complicating-factor-income-tax.md) — CON-FIN-547
+- [Complicating Factor — Unequal Lives](contexts/BC-FIN/CON-FIN-548.complicating-factor-unequal-lives.md) — CON-FIN-548
+- [Complicating Factor — Lease vs. Purchase](contexts/BC-FIN/CON-FIN-549.complicating-factor-lease-vs-purchase.md) — CON-FIN-549
+- [Complicating Factor — Sustainability](contexts/BC-FIN/CON-FIN-550.complicating-factor-sustainability.md) — CON-FIN-550
+- [Net Present Value (NPV)](contexts/BC-FIN/CON-FIN-551.net-present-value-npv.md) — CON-FIN-551
+- [Capital Investment Project](contexts/BC-FIN/CON-FIN-552.capital-investment-project.md) — CON-FIN-552
+- [Net Present Value of Sequential Revenue Streams](contexts/BC-FIN/CON-FIN-553.net-present-value-of-sequential-revenue-streams.md) — CON-FIN-553
+- [Forecast vs Actual Investment Performance](contexts/BC-FIN/CON-FIN-554.forecast-vs-actual-investment-performance.md) — CON-FIN-554
+- [Qualitative Investment Factors](contexts/BC-FIN/CON-FIN-555.qualitative-investment-factors.md) — CON-FIN-555
+- [Currency Exchange Rate Impact](contexts/BC-FIN/CON-FIN-556.currency-exchange-rate-impact.md) — CON-FIN-556
+- [Personal Investment Analysis](contexts/BC-FIN/CON-FIN-557.personal-investment-analysis.md) — CON-FIN-557
+- [Equity Investment](contexts/BC-FIN/CON-FIN-558.equity-investment.md) — CON-FIN-558
+- [Fair Value Method](contexts/BC-FIN/CON-FIN-559.fair-value-method.md) — CON-FIN-559
+- [Equity Method](contexts/BC-FIN/CON-FIN-560.equity-method.md) — CON-FIN-560
+- [Trading Securities](contexts/BC-FIN/CON-FIN-561.trading-securities.md) — CON-FIN-561
+- [Available-for-Sale Securities](contexts/BC-FIN/CON-FIN-562.available-for-sale-securities.md) — CON-FIN-562
+- [Valuation Allowance for Available-for-Sale Investments](contexts/BC-FIN/CON-FIN-563.valuation-allowance-for-available-for-sale-investments.md) — CON-FIN-563
+- [Decentralized Operations](contexts/BC-FIN/CON-FIN-564.decentralized-operations.md) — CON-FIN-564
+- [Cost Center](contexts/BC-FIN/CON-FIN-565.cost-center.md) — CON-FIN-565
+- [Profit Center](contexts/BC-FIN/CON-FIN-566.profit-center.md) — CON-FIN-566
+- [Investment Center](contexts/BC-FIN/CON-FIN-567.investment-center.md) — CON-FIN-567
+- [Return on Investment](contexts/BC-FIN/CON-FIN-568.return-on-investment.md) — CON-FIN-568
+- [Residual Income](contexts/BC-FIN/CON-FIN-569.residual-income.md) — CON-FIN-569
+- [Support Department Allocation](contexts/BC-FIN/CON-FIN-570.support-department-allocation.md) — CON-FIN-570
+- [DuPont Formula](contexts/BC-FIN/CON-FIN-571.dupont-formula.md) — CON-FIN-571
+- [Balanced Scorecard](contexts/BC-FIN/CON-FIN-572.balanced-scorecard.md) — CON-FIN-572
+- [Performance Perspective](contexts/BC-FIN/CON-FIN-573.performance-perspective.md) — CON-FIN-573
+- [Strategic Objective](contexts/BC-FIN/CON-FIN-574.strategic-objective.md) — CON-FIN-574
+- [Performance Metric](contexts/BC-FIN/CON-FIN-575.performance-metric.md) — CON-FIN-575
+- [Leading Indicator](contexts/BC-FIN/CON-FIN-576.leading-indicator.md) — CON-FIN-576
+- [Lagging Indicator](contexts/BC-FIN/CON-FIN-577.lagging-indicator.md) — CON-FIN-577
+- [Strategy Map](contexts/BC-FIN/CON-FIN-578.strategy-map.md) — CON-FIN-578
+- [Measure Map](contexts/BC-FIN/CON-FIN-579.measure-map.md) — CON-FIN-579
+- [Profit Margin](contexts/BC-FIN/CON-FIN-580.profit-margin.md) — CON-FIN-580
+- [Investment Turnover](contexts/BC-FIN/CON-FIN-581.investment-turnover.md) — CON-FIN-581
+- [Consolidated Statement of Shareholders' Equity](contexts/BC-FIN/CON-FIN-582.consolidated-statement-of-shareholders-equity.md) — CON-FIN-582
+- [Sales-Related Reserves](contexts/BC-FIN/CON-FIN-583.sales-related-reserves.md) — CON-FIN-583
+- [Property, Plant and Equipment](contexts/BC-FIN/CON-FIN-584.property-plant-and-equipment.md) — CON-FIN-584
+- [Accrued Liabilities](contexts/BC-FIN/CON-FIN-585.accrued-liabilities.md) — CON-FIN-585
+- [Supplier Finance Program](contexts/BC-FIN/CON-FIN-586.supplier-finance-program.md) — CON-FIN-586
+- [Internal Control over Financial Reporting](contexts/BC-FIN/CON-FIN-587.internal-control-over-financial-reporting.md) — CON-FIN-587
+- [Earnings Per Share (EPS) on Common Stock](contexts/BC-FIN/CON-FIN-588.earnings-per-share-eps-on-common-stock.md) — CON-FIN-588
+- [Profit](contexts/BC-FIN/CON-FIN-589.profit.md) — CON-FIN-589
+- [Performance Measurement Systems](contexts/BC-FIN/CON-FIN-590.performance-measurement-systems.md) — CON-FIN-590
+- [Performance Metrics](contexts/BC-FIN/CON-FIN-591.performance-metrics.md) — CON-FIN-591
+- [Physical Inventory](contexts/BC-FIN/CON-FIN-592.physical-inventory.md) — CON-FIN-592
+- [Premium (Bonds)](contexts/BC-FIN/CON-FIN-593.premium-bonds.md) — CON-FIN-593
+- [Quick Assets](contexts/BC-FIN/CON-FIN-594.quick-assets.md) — CON-FIN-594
+- [Receivables](contexts/BC-FIN/CON-FIN-595.receivables.md) — CON-FIN-595
+- [Sales Discount](contexts/BC-FIN/CON-FIN-596.sales-discount.md) — CON-FIN-596
+- [Securities and Exchange Commission (SEC)](contexts/BC-FIN/CON-FIN-597.securities-and-exchange-commission-sec.md) — CON-FIN-597
+- [Straight-Line Method (Depreciation)](contexts/BC-FIN/CON-FIN-598.straight-line-method-depreciation.md) — CON-FIN-598
+- [Controllable Expenses](contexts/BC-FIN/CON-FIN-599.controllable-expenses.md) — CON-FIN-599
+- [Controller](contexts/BC-FIN/CON-FIN-600.controller.md) — CON-FIN-600
+- [Cost Centers](contexts/BC-FIN/CON-FIN-601.cost-centers.md) — CON-FIN-601
+- [Cost-Volume-Profit Analysis](contexts/BC-FIN/CON-FIN-602.cost-volume-profit-analysis.md) — CON-FIN-602
+- [Current Assets](contexts/BC-FIN/CON-FIN-603.current-assets.md) — CON-FIN-603
+- [Current Liabilities](contexts/BC-FIN/CON-FIN-604.current-liabilities.md) — CON-FIN-604
+- [Direct Costs](contexts/BC-FIN/CON-FIN-605.direct-costs.md) — CON-FIN-605
+- [Double-Declining-Balance Method](contexts/BC-FIN/CON-FIN-606.double-declining-balance-method.md) — CON-FIN-606
+- [Equity](contexts/BC-FIN/CON-FIN-607.equity.md) — CON-FIN-607
+- [Fixed Costs](contexts/BC-FIN/CON-FIN-608.fixed-costs.md) — CON-FIN-608
+- [FIFO (First-In, First-Out)](contexts/BC-FIN/CON-FIN-609.fifo-first-in-first-out.md) — CON-FIN-609
+- [LIFO (Last-In, First-Out)](contexts/BC-FIN/CON-FIN-610.lifo-last-in-first-out.md) — CON-FIN-610
+- [Process Manufacturer](contexts/BC-FIN/CON-FIN-611.process-manufacturer.md) — CON-FIN-611
+- [Prior Period Adjustments](contexts/BC-FIN/CON-FIN-612.prior-period-adjustments.md) — CON-FIN-612
+- [Private Accounting](contexts/BC-FIN/CON-FIN-613.private-accounting.md) — CON-FIN-613
+- [Pro Forma Financial Statements](contexts/BC-FIN/CON-FIN-614.pro-forma-financial-statements.md) — CON-FIN-614
+- [Pro Forma Balance Sheet](contexts/BC-FIN/CON-FIN-615.pro-forma-balance-sheet.md) — CON-FIN-615
+- [Pro Forma Income Statement](contexts/BC-FIN/CON-FIN-616.pro-forma-income-statement.md) — CON-FIN-616
+- [Contingent Liability - Probable and Estimable](contexts/BC-FIN/CON-FIN-617.contingent-liability-probable-and-estimable.md) — CON-FIN-617
+- [Proceeds from Issuing Bonds](contexts/BC-FIN/CON-FIN-618.proceeds-from-issuing-bonds.md) — CON-FIN-618
+- [Principle of Exceptions](contexts/BC-FIN/CON-FIN-619.principle-of-exceptions.md) — CON-FIN-619
+- [Price Variances](contexts/BC-FIN/CON-FIN-620.price-variances.md) — CON-FIN-620
+- [Product Costing Allocation Methods](contexts/BC-FIN/CON-FIN-621.product-costing-allocation-methods.md) — CON-FIN-621
+- [Product Cost Method (for Pricing)](contexts/BC-FIN/CON-FIN-622.product-cost-method-for-pricing.md) — CON-FIN-622
+- [Process or Sell Decision](contexts/BC-FIN/CON-FIN-623.process-or-sell-decision.md) — CON-FIN-623
+- [Dynamic Pricing](contexts/BC-FIN/CON-FIN-624.dynamic-pricing.md) — CON-FIN-624
 
-## Relationships
+## Rules (595)
 
-| ID | Source | Target | Type | Status |
-|----|--------|--------|------|--------|
-| — | — | — | — | No relationships defined yet |
-
----
-
-## Diagrams
-
-| Diagram | Type | File |
-|---------|------|------|
-| — | — | No diagrams defined yet |
-
----
-
-*This index is auto-generated. Do not edit manually.*
+- [Accounting Equation Must Balance](../rules/active/BR-001.accounting-equation-must-balance.md) — BR-001
+- [Rules of Debit and Credit](../rules/active/BR-002.rules-of-debit-and-credit.md) — BR-002
+- [Double-Entry Bookkeeping](../rules/active/BR-003.double-entry-bookkeeping.md) — BR-003
+- [Trial Balance Equality](../rules/active/BR-004.trial-balance-equality.md) — BR-004
+- [Revenue Recognition Principle](../rules/active/BR-005.revenue-recognition-principle.md) — BR-005
+- [Matching Principle](../rules/active/BR-006.matching-principle.md) — BR-006
+- [Periodic Trial Balance Preparation](../rules/active/BR-007.periodic-trial-balance-preparation.md) — BR-007
+- [Closing Entries Zero Out Temporary Accounts](../rules/active/BR-008.closing-entries-zero-out-temporary-accounts.md) — BR-008
+- [Depreciation Methods Consistency](../rules/active/BR-009.depreciation-methods-consistency.md) — BR-009
+- [Bank Reconciliation Journal Entries Required](../rules/active/BR-010.bank-reconciliation-journal-entries-required.md) — BR-010
+- [Working Capital Positive Indicator](../rules/active/BR-011.working-capital-positive-indicator.md) — BR-011
+- [GAAP Requires Accrual Accounting](../rules/active/BR-012.gaap-requires-accrual-accounting.md) — BR-012
+- [Accrual Basis Better Matches Revenue and Expenses](../rules/active/BR-013.accrual-basis-better-matches-revenue-and-expenses.md) — BR-013
+- [Liquidity Ratios Evaluate Short-Term Ability to Pay](../rules/active/BR-014.liquidity-ratios-evaluate-short-term-ability-to-pay.md) — BR-014
+- [Ratio Analysis Requires Comparison](../rules/active/BR-015.ratio-analysis-requires-comparison.md) — BR-015
+- [Fixed Asset Turnover Measures Efficiency](../rules/active/BR-016.fixed-asset-turnover-measures-efficiency.md) — BR-016
+- [Consistency in Financial Reporting](../rules/active/BR-017.consistency-in-financial-reporting.md) — BR-017
+- [Full Disclosure Principle](../rules/active/BR-018.full-disclosure-principle.md) — BR-018
+- [Management Discussion and Analysis Required](../rules/active/BR-019.management-discussion-and-analysis-required.md) — BR-019
+- [Adjusting Entries Must Balance](../rules/active/BR-020.adjusting-entries-must-balance.md) — BR-020
+- [Four Types of Adjusting Entries](../rules/active/BR-021.four-types-of-adjusting-entries.md) — BR-021
+- [Worksheet Not a Financial Statement](../rules/active/BR-022.worksheet-not-a-financial-statement.md) — BR-022
+- [Post-Closing Trial Balance Contains Only Permanent Accounts](../rules/active/BR-023.post-closing-trial-balance-contains-only-permanent-accounts.md) — BR-023
+- [Retained Earnings Updates Each Period](../rules/active/BR-024.retained-earnings-updates-each-period.md) — BR-024
+- [Dividends Reduce Retained Earnings](../rules/active/BR-025.dividends-reduce-retained-earnings.md) — BR-025
+- [Financial Statement Preparation Order](../rules/active/BR-026.financial-statement-preparation-order.md) — BR-026
+- [Adjustments for Depreciation at Period End](../rules/active/BR-027.adjustments-for-depreciation-at-period-end.md) — BR-027
+- [Reversing Entries for Accruals](../rules/active/BR-028.reversing-entries-for-accruals.md) — BR-028
+- [Accounting Equation Must Balance](../rules/active/BR-029.accounting-equation-must-balance.md) — BR-029
+- [Matching Principle](../rules/active/BR-030.matching-principle.md) — BR-030
+- [Cost Principle](../rules/active/BR-031.cost-principle.md) — BR-031
+- [Business Entity Assumption](../rules/active/BR-032.business-entity-assumption.md) — BR-032
+- [Net Income Increases Owner's Equity](../rules/active/BR-033.net-income-increases-owner-s-equity.md) — BR-033
+- [Owner's Drawing Reduces Equity](../rules/active/BR-034.owner-s-drawing-reduces-equity.md) — BR-034
+- [Expense Ordering on Income Statement](../rules/active/BR-035.expense-ordering-on-income-statement.md) — BR-035
+- [Accounting Equation Balance Check](../rules/active/BR-036.accounting-equation-balance-check.md) — BR-036
+- [Business Entity Transaction Classification](../rules/active/BR-037.business-entity-transaction-classification.md) — BR-037
+- [Equity Changes from Transactions](../rules/active/BR-038.equity-changes-from-transactions.md) — BR-038
+- [Creditor Risk Increases with Higher Leverage](../rules/active/BR-039.creditor-risk-increases-with-higher-leverage.md) — BR-039
+- [Credit Decreases Assets](../rules/active/BR-040.credit-decreases-assets.md) — BR-040
+- [Credit Increases Liabilities and Equity](../rules/active/BR-041.credit-increases-liabilities-and-equity.md) — BR-041
+- [Credit Increases Revenue](../rules/active/BR-042.credit-increases-revenue.md) — BR-042
+- [Debit Increases Drawing](../rules/active/BR-043.debit-increases-drawing.md) — BR-043
+- [Double-Entry Equality](../rules/active/BR-044.double-entry-equality.md) — BR-044
+- [Posting Preserves Journal Entry Reference](../rules/active/BR-045.posting-preserves-journal-entry-reference.md) — BR-045
+- [Errors Do Not Always Cause Trial Balance Imbalance](../rules/active/BR-046.errors-do-not-always-cause-trial-balance-imbalance.md) — BR-046
+- [Horizontal Analysis Formula](../rules/active/BR-047.horizontal-analysis-formula.md) — BR-047
+- [Prepaid Expenses Are Assets Initially](../rules/active/BR-048.prepaid-expenses-are-assets-initially.md) — BR-048
+- [Unearned Revenue Is a Liability Initially](../rules/active/BR-049.unearned-revenue-is-a-liability-initially.md) — BR-049
+- [Normal Balance Convention](../rules/active/BR-050.normal-balance-convention.md) — BR-050
+- [Journal Before Ledger](../rules/active/BR-051.journal-before-ledger.md) — BR-051
+- [Balanced Trial Balance Does Not Guarantee Error-Free Records](../rules/active/BR-052.balanced-trial-balance-does-not-guarantee-error-free-records.md) — BR-052
+- [Trial Balance Detects Mathematical Errors Only](../rules/active/BR-053.trial-balance-detects-mathematical-errors-only.md) — BR-053
+- [Error Correction Requires Identifying Root Cause](../rules/active/BR-054.error-correction-requires-identifying-root-cause.md) — BR-054
+- [Cash Receipts Increase Cash Account](../rules/active/BR-055.cash-receipts-increase-cash-account.md) — BR-055
+- [Owner Withdrawals Reduce Owner Equity](../rules/active/BR-056.owner-withdrawals-reduce-owner-equity.md) — BR-056
+- [Owner Investments Increase Owner Equity](../rules/active/BR-057.owner-investments-increase-owner-equity.md) — BR-057
+- [Revenue Recognition on Earning](../rules/active/BR-058.revenue-recognition-on-earning.md) — BR-058
+- [Expense Recognition on Incurrence](../rules/active/BR-059.expense-recognition-on-incurrence.md) — BR-059
+- [Supplies Recorded as Asset When Purchased](../rules/active/BR-060.supplies-recorded-as-asset-when-purchased.md) — BR-060
+- [Prepaid Insurance Recorded as Asset](../rules/active/BR-061.prepaid-insurance-recorded-as-asset.md) — BR-061
+- [Depreciation Does Not Reduce the Asset Account Directly](../rules/active/BR-062.depreciation-does-not-reduce-the-asset-account-directly.md) — BR-062
+- [Land Is Not Depreciated](../rules/active/BR-063.land-is-not-depreciated.md) — BR-063
+- [Contra Account Balance Is Opposite to Related Account](../rules/active/BR-064.contra-account-balance-is-opposite-to-related-account.md) — BR-064
+- [Adjusting Entries Are Made at Period End Only](../rules/active/BR-065.adjusting-entries-are-made-at-period-end-only.md) — BR-065
+- [Adjusting Entries Never Involve Cash](../rules/active/BR-066.adjusting-entries-never-involve-cash.md) — BR-066
+- [Prepaid Expenses Must Be Adjusted](../rules/active/BR-067.prepaid-expenses-must-be-adjusted.md) — BR-067
+- [Unearned Revenue Must Be Adjusted](../rules/active/BR-068.unearned-revenue-must-be-adjusted.md) — BR-068
+- [Accrued Revenues Must Be Recorded](../rules/active/BR-069.accrued-revenues-must-be-recorded.md) — BR-069
+- [Adjusted Trial Balance Precedes Financial Statements](../rules/active/BR-070.adjusted-trial-balance-precedes-financial-statements.md) — BR-070
+- [Straight-Line Depreciation](../rules/active/BR-071.straight-line-depreciation.md) — BR-071
+- [Accrual Matching Principle](../rules/active/BR-072.accrual-matching-principle.md) — BR-072
+- [Depreciation Allocation](../rules/active/BR-073.depreciation-allocation.md) — BR-073
+- [Book Value Not Market Value](../rules/active/BR-074.book-value-not-market-value.md) — BR-074
+- [Unearned Revenue Recognition](../rules/active/BR-075.unearned-revenue-recognition.md) — BR-075
+- [Accrued Revenue Recording](../rules/active/BR-076.accrued-revenue-recording.md) — BR-076
+- [Property Tax Accrual](../rules/active/BR-077.property-tax-accrual.md) — BR-077
+- [Closing Process](../rules/active/BR-078.closing-process.md) — BR-078
+- [Post-Closing Trial Balance Verification](../rules/active/BR-079.post-closing-trial-balance-verification.md) — BR-079
+- [Capital Account Continuity](../rules/active/BR-080.capital-account-continuity.md) — BR-080
+- [Accrual Basis Requirement](../rules/active/BR-081.accrual-basis-requirement.md) — BR-081
+- [Working Capital Positive Indicator](../rules/active/BR-082.working-capital-positive-indicator.md) — BR-082
+- [Current Ratio Threshold](../rules/active/BR-083.current-ratio-threshold.md) — BR-083
+- [Balance Sheet Date Reporting](../rules/active/BR-084.balance-sheet-date-reporting.md) — BR-084
+- [Mortgage Payable Classification](../rules/active/BR-085.mortgage-payable-classification.md) — BR-085
+- [Accrual vs Cash Performance Difference](../rules/active/BR-086.accrual-vs-cash-performance-difference.md) — BR-086
+- [Closing Entries Sequence](../rules/active/BR-087.closing-entries-sequence.md) — BR-087
+- [Permanent vs. Temporary Accounts Distinction](../rules/active/BR-088.permanent-vs-temporary-accounts-distinction.md) — BR-088
+- [Post-Closing Trial Balance Equality](../rules/active/BR-089.post-closing-trial-balance-equality.md) — BR-089
+- [Balance Sheet Account Classification](../rules/active/BR-090.balance-sheet-account-classification.md) — BR-090
+- [Accrual Over Cash Basis](../rules/active/BR-091.accrual-over-cash-basis.md) — BR-091
+- [Ethical Financial Reporting](../rules/active/BR-092.ethical-financial-reporting.md) — BR-092
+- [Adjusted Trial Balance Equality](../rules/active/BR-093.adjusted-trial-balance-equality.md) — BR-093
+- [Spreadsheet Column Equality](../rules/active/BR-094.spreadsheet-column-equality.md) — BR-094
+- [Working Capital Interpretation](../rules/active/BR-095.working-capital-interpretation.md) — BR-095
+- [Current Ratio Comparison](../rules/active/BR-096.current-ratio-comparison.md) — BR-096
+- [Cash Flows Classification](../rules/active/BR-097.cash-flows-classification.md) — BR-097
+- [Inventory Purchased Debits Inventory Account](../rules/active/BR-098.inventory-purchased-debits-inventory-account.md) — BR-098
+- [COGS Recorded at Each Sale](../rules/active/BR-099.cogs-recorded-at-each-sale.md) — BR-099
+- [Purchase Discount Reduces Inventory Cost](../rules/active/BR-100.purchase-discount-reduces-inventory-cost.md) — BR-100
+- [Purchase Returns and Allowances Reduce Inventory](../rules/active/BR-101.purchase-returns-and-allowances-reduce-inventory.md) — BR-101
+- [Debit Memorandum for Returns](../rules/active/BR-102.debit-memorandum-for-returns.md) — BR-102
+- [Taking Purchase Discounts is Advantageous](../rules/active/BR-103.taking-purchase-discounts-is-advantageous.md) — BR-103
+- [Subsidiary Ledger Must Match Controlling Account](../rules/active/BR-104.subsidiary-ledger-must-match-controlling-account.md) — BR-104
+- [Credit Card Sales Recorded as Cash](../rules/active/BR-105.credit-card-sales-recorded-as-cash.md) — BR-105
+- [Credit Card Fees are Period Expenses](../rules/active/BR-106.credit-card-fees-are-period-expenses.md) — BR-106
+- [Operating Cycle Differs by Industry](../rules/active/BR-107.operating-cycle-differs-by-industry.md) — BR-107
+- [B2B vs B2C Transactions](../rules/active/BR-108.b2b-vs-b2c-transactions.md) — BR-108
+- [Estimate Customer Returns at Period End](../rules/active/BR-109.estimate-customer-returns-at-period-end.md) — BR-109
+- [FOB Shipping Point - Buyer Pays Freight](../rules/active/BR-110.fob-shipping-point-buyer-pays-freight.md) — BR-110
+- [FOB Destination - Seller Pays Freight](../rules/active/BR-111.fob-destination-seller-pays-freight.md) — BR-111
+- [Inventory Shrinkage Adjustment](../rules/active/BR-112.inventory-shrinkage-adjustment.md) — BR-112
+- [Gross Profit Computation](../rules/active/BR-113.gross-profit-computation.md) — BR-113
+- [Multiple-Step Income Statement Classification](../rules/active/BR-114.multiple-step-income-statement-classification.md) — BR-114
+- [Closing Entries for Retail Business](../rules/active/BR-115.closing-entries-for-retail-business.md) — BR-115
+- [Sales Discounts GAAP Requirement](../rules/active/BR-116.sales-discounts-gaap-requirement.md) — BR-116
+- [Net Method Preferred Under GAAP](../rules/active/BR-117.net-method-preferred-under-gaap.md) — BR-117
+- [Asset Turnover Ratio Interpretation](../rules/active/BR-118.asset-turnover-ratio-interpretation.md) — BR-118
+- [Trade Discounts Not Recorded](../rules/active/BR-119.trade-discounts-not-recorded.md) — BR-119
+- [Sales Taxes Collected as Liability](../rules/active/BR-120.sales-taxes-collected-as-liability.md) — BR-120
+- [Freight In Recording Rule](../rules/active/BR-121.freight-in-recording-rule.md) — BR-121
+- [Periodic Inventory Cost of Goods Sold Computation](../rules/active/BR-122.periodic-inventory-cost-of-goods-sold-computation.md) — BR-122
+- [Inventory Shrinkage Detection - Perpetual vs Periodic](../rules/active/BR-123.inventory-shrinkage-detection-perpetual-vs-periodic.md) — BR-123
+- [Purchases Account Debit Rule](../rules/active/BR-124.purchases-account-debit-rule.md) — BR-124
+- [Contra-Purchases Account Credit Rule](../rules/active/BR-125.contra-purchases-account-credit-rule.md) — BR-125
+- [Perpetual Inventory Purchase Recording](../rules/active/BR-126.perpetual-inventory-purchase-recording.md) — BR-126
+- [Perpetual Inventory Sale Recording](../rules/active/BR-127.perpetual-inventory-sale-recording.md) — BR-127
+- [Credit Card Sale Recording](../rules/active/BR-128.credit-card-sale-recording.md) — BR-128
+- [Sales Discount - Gross Method](../rules/active/BR-129.sales-discount-gross-method.md) — BR-129
+- [Sales Discount - Net Method](../rules/active/BR-130.sales-discount-net-method.md) — BR-130
+- [Customer Refund Adjustment](../rules/active/BR-131.customer-refund-adjustment.md) — BR-131
+- [Sales Tax Collection Liability](../rules/active/BR-132.sales-tax-collection-liability.md) — BR-132
+- [Asset Turnover Ratio Computation](../rules/active/BR-133.asset-turnover-ratio-computation.md) — BR-133
+- [FIFO Cost Flow Rule](../rules/active/BR-134.fifo-cost-flow-rule.md) — BR-134
+- [Weighted Average Cost Computation](../rules/active/BR-135.weighted-average-cost-computation.md) — BR-135
+- [LCM Valuation Rule](../rules/active/BR-136.lcm-valuation-rule.md) — BR-136
+- [LCM Application Methods](../rules/active/BR-137.lcm-application-methods.md) — BR-137
+- [Inventory Physical Count Requirement](../rules/active/BR-138.inventory-physical-count-requirement.md) — BR-138
+- [Inventory Costing Method Consistency](../rules/active/BR-139.inventory-costing-method-consistency.md) — BR-139
+- [LIFO Reserve Disclosure](../rules/active/BR-140.lifo-reserve-disclosure.md) — BR-140
+- [Inventory Turnover Analysis](../rules/active/BR-141.inventory-turnover-analysis.md) — BR-141
+- [Three-Way Match for Inventory Control](../rules/active/BR-142.three-way-match-for-inventory-control.md) — BR-142
+- [Inventory Security Controls](../rules/active/BR-143.inventory-security-controls.md) — BR-143
+- [Inventory Error Self-Correction Rule](../rules/active/BR-144.inventory-error-self-correction-rule.md) — BR-144
+- [Inventory Error Effects Rule](../rules/active/BR-145.inventory-error-effects-rule.md) — BR-145
+- [Inventory Turnover Interpretation Rule](../rules/active/BR-146.inventory-turnover-interpretation-rule.md) — BR-146
+- [Consigned Inventory Ownership Rule](../rules/active/BR-147.consigned-inventory-ownership-rule.md) — BR-147
+- [Three Methods Yield Different Results Rule](../rules/active/BR-148.three-methods-yield-different-results-rule.md) — BR-148
+- [Inventory Balance Sheet Presentation Rule](../rules/active/BR-149.inventory-balance-sheet-presentation-rule.md) — BR-149
+- [Perpetual System Still Requires Physical Count](../rules/active/BR-150.perpetual-system-still-requires-physical-count.md) — BR-150
+- [Separation of Duties Rule](../rules/active/BR-151.separation-of-duties-rule.md) — BR-151
+- [Separate Related Operations Rule](../rules/active/BR-152.separate-related-operations-rule.md) — BR-152
+- [Competent Personnel and Mandatory Vacations Rule](../rules/active/BR-153.competent-personnel-and-mandatory-vacations-rule.md) — BR-153
+- [Prenumbered Documents Rule](../rules/active/BR-154.prenumbered-documents-rule.md) — BR-154
+- [Internal Control Limitations Rule](../rules/active/BR-155.internal-control-limitations-rule.md) — BR-155
+- [Cash Register Daily Count Rule](../rules/active/BR-156.cash-register-daily-count-rule.md) — BR-156
+- [Bank Deposit Verification Rule](../rules/active/BR-157.bank-deposit-verification-rule.md) — BR-157
+- [Separate Cashier and Accounting Rule](../rules/active/BR-158.separate-cashier-and-accounting-rule.md) — BR-158
+- [Remittance Advice Control Rule](../rules/active/BR-159.remittance-advice-control-rule.md) — BR-159
+- [Voucher System Documentation Rule](../rules/active/BR-160.voucher-system-documentation-rule.md) — BR-160
+- [Cash Receipts Safeguard Rule](../rules/active/BR-161.cash-receipts-safeguard-rule.md) — BR-161
+- [Bank Reconciliation Independent Preparation Rule](../rules/active/BR-162.bank-reconciliation-independent-preparation-rule.md) — BR-162
+- [Warning Signs of Control Problems Rule](../rules/active/BR-163.warning-signs-of-control-problems-rule.md) — BR-163
+- [Cash Payments Authorization Rule](../rules/active/BR-164.cash-payments-authorization-rule.md) — BR-164
+- [FOB Shipping Point Sale Recording Rule](../rules/active/BR-165.fob-shipping-point-sale-recording-rule.md) — BR-165
+- [Bank Reconciliation Equality Rule](../rules/active/BR-166.bank-reconciliation-equality-rule.md) — BR-166
+- [Bank Reconciliation Journal Entry Rule](../rules/active/BR-167.bank-reconciliation-journal-entry-rule.md) — BR-167
+- [Bank Error Correction Rule](../rules/active/BR-168.bank-error-correction-rule.md) — BR-168
+- [Company Error Correction Rule](../rules/active/BR-169.company-error-correction-rule.md) — BR-169
+- [Petty Cash Fund Establishment Rule](../rules/active/BR-170.petty-cash-fund-establishment-rule.md) — BR-170
+- [Petty Cash Replenishment Rule](../rules/active/BR-171.petty-cash-replenishment-rule.md) — BR-171
+- [Petty Cash Short and Over Rule](../rules/active/BR-172.petty-cash-short-and-over-rule.md) — BR-172
+- [Cash Equivalents Maturity Rule](../rules/active/BR-173.cash-equivalents-maturity-rule.md) — BR-173
+- [Compensating Balance Disclosure Rule](../rules/active/BR-174.compensating-balance-disclosure-rule.md) — BR-174
+- [Days' Cash on Hand Adequacy Rule](../rules/active/BR-175.days-cash-on-hand-adequacy-rule.md) — BR-175
+- [Cash Balance Sheet Presentation Rule](../rules/active/BR-176.cash-balance-sheet-presentation-rule.md) — BR-176
+- [Petty Cash Fund Limitations Rule](../rules/active/BR-177.petty-cash-fund-limitations-rule.md) — BR-177
+- [Days' Cash on Hand Nonprofit Use Rule](../rules/active/BR-178.days-cash-on-hand-nonprofit-use-rule.md) — BR-178
+- [Petty Cash Replenishment](../rules/active/BR-179.petty-cash-replenishment.md) — BR-179
+- [Daily Cash Deposit](../rules/active/BR-180.daily-cash-deposit.md) — BR-180
+- [Separation of Cash Duties](../rules/active/BR-181.separation-of-cash-duties.md) — BR-181
+- [Write-Off Against Allowance](../rules/active/BR-182.write-off-against-allowance.md) — BR-182
+- [Recovery Requires Two Entries](../rules/active/BR-183.recovery-requires-two-entries.md) — BR-183
+- [Percent of Sales Independent of Allowance Balance](../rules/active/BR-184.percent-of-sales-independent-of-allowance-balance.md) — BR-184
+- [Aging Method Targets Ending Allowance Balance](../rules/active/BR-185.aging-method-targets-ending-allowance-balance.md) — BR-185
+- [Postdated Checks Not Permitted in Petty Cash](../rules/active/BR-186.postdated-checks-not-permitted-in-petty-cash.md) — BR-186
+- [Aging Days Calculation](../rules/active/BR-187.aging-days-calculation.md) — BR-187
+- [Aging Method Adjusting Entry with Credit Allowance Balance](../rules/active/BR-188.aging-method-adjusting-entry-with-credit-allowance-balance.md) — BR-188
+- [Recovery Entry Sequence](../rules/active/BR-189.recovery-entry-sequence.md) — BR-189
+- [Direct Write-Off Recovery Entries](../rules/active/BR-190.direct-write-off-recovery-entries.md) — BR-190
+- [AR Turnover Favorable Trend](../rules/active/BR-191.ar-turnover-favorable-trend.md) — BR-191
+- [Direct Write-Off Does Not Match Revenue](../rules/active/BR-192.direct-write-off-does-not-match-revenue.md) — BR-192
+- [Asset Classification Three-Step Test](../rules/active/BR-193.asset-classification-three-step-test.md) — BR-193
+- [Capitalize Only Necessary Costs](../rules/active/BR-194.capitalize-only-necessary-costs.md) — BR-194
+- [Standby Equipment Classification](../rules/active/BR-195.standby-equipment-classification.md) — BR-195
+- [Abandoned Assets Not Classified as Fixed](../rules/active/BR-196.abandoned-assets-not-classified-as-fixed.md) — BR-196
+- [Construction in Progress Reclassification](../rules/active/BR-197.construction-in-progress-reclassification.md) — BR-197
+- [Goods Held for Sale Are Not Fixed Assets](../rules/active/BR-198.goods-held-for-sale-are-not-fixed-assets.md) — BR-198
+- [Lease Advantage — No Upfront Capital](../rules/active/BR-199.lease-advantage-no-upfront-capital.md) — BR-199
+- [Land Is Not Depreciated](../rules/active/BR-200.land-is-not-depreciated.md) — BR-200
+- [Depreciation Does Not Measure Market Value Decline](../rules/active/BR-201.depreciation-does-not-measure-market-value-decline.md) — BR-201
+- [Depreciation Does Not Provide Cash for Replacement](../rules/active/BR-202.depreciation-does-not-provide-cash-for-replacement.md) — BR-202
+- [Cannot Depreciate Below Residual Value](../rules/active/BR-203.cannot-depreciate-below-residual-value.md) — BR-203
+- [Partial-Year Depreciation Proration](../rules/active/BR-204.partial-year-depreciation-proration.md) — BR-204
+- [Revision of Depreciation Estimates Is Prospective](../rules/active/BR-205.revision-of-depreciation-estimates-is-prospective.md) — BR-205
+- [Ordinary Repairs Are Revenue Expenditures](../rules/active/BR-206.ordinary-repairs-are-revenue-expenditures.md) — BR-206
+- [Extraordinary Repairs Reduce Accumulated Depreciation](../rules/active/BR-207.extraordinary-repairs-reduce-accumulated-depreciation.md) — BR-207
+- [Asset Improvements Increase Asset Account](../rules/active/BR-208.asset-improvements-increase-asset-account.md) — BR-208
+- [Fully Depreciated Assets Remain in Ledger](../rules/active/BR-209.fully-depreciated-assets-remain-in-ledger.md) — BR-209
+- [Depletion Is Computed Using Units-of-Activity Method](../rules/active/BR-210.depletion-is-computed-using-units-of-activity-method.md) — BR-210
+- [Goodwill Is Not Amortized](../rules/active/BR-211.goodwill-is-not-amortized.md) — BR-211
+- [Trademarks Are Not Amortized](../rules/active/BR-212.trademarks-are-not-amortized.md) — BR-212
+- [Patent and Copyright Amortization](../rules/active/BR-213.patent-and-copyright-amortization.md) — BR-213
+- [Depreciation Methods Can Differ by Asset Class](../rules/active/BR-214.depreciation-methods-can-differ-by-asset-class.md) — BR-214
+- [Losses on Disposal Reported in Other Revenue and Expense](../rules/active/BR-215.losses-on-disposal-reported-in-other-revenue-and-expense.md) — BR-215
+- [Update Depreciation Before Disposal](../rules/active/BR-216.update-depreciation-before-disposal.md) — BR-216
+- [Gain Recognized When Exchange Has Commercial Substance](../rules/active/BR-217.gain-recognized-when-exchange-has-commercial-substance.md) — BR-217
+- [Loss Recognized Regardless of Commercial Substance](../rules/active/BR-218.loss-recognized-regardless-of-commercial-substance.md) — BR-218
+- [No Gain Recognized Without Commercial Substance](../rules/active/BR-219.no-gain-recognized-without-commercial-substance.md) — BR-219
+- [Gain Can Be Computed Two Ways](../rules/active/BR-220.gain-can-be-computed-two-ways.md) — BR-220
+- [Remove Old Asset and Record New Asset](../rules/active/BR-221.remove-old-asset-and-record-new-asset.md) — BR-221
+- [Interest-Bearing Note Interest Computation](../rules/active/BR-222.interest-bearing-note-interest-computation.md) — BR-222
+- [Discounted Note Proceeds Computation](../rules/active/BR-223.discounted-note-proceeds-computation.md) — BR-223
+- [Installment Note Payment Allocation](../rules/active/BR-224.installment-note-payment-allocation.md) — BR-224
+- [Employer Must Match FICA Tax](../rules/active/BR-225.employer-must-match-fica-tax.md) — BR-225
+- [Employer Pays FUTA and SUTA](../rules/active/BR-226.employer-pays-futa-and-suta.md) — BR-226
+- [Gross Pay Less Deductions Equals Net Pay](../rules/active/BR-227.gross-pay-less-deductions-equals-net-pay.md) — BR-227
+- [Vacation Pay Is Accrued as Earned](../rules/active/BR-228.vacation-pay-is-accrued-as-earned.md) — BR-228
+- [Current Portion of Long-Term Debt Is Current Liability](../rules/active/BR-229.current-portion-of-long-term-debt-is-current-liability.md) — BR-229
+- [Interest Expense Reported Separately](../rules/active/BR-230.interest-expense-reported-separately.md) — BR-230
+- [Discounted Note Interest May Use Discount Account](../rules/active/BR-231.discounted-note-interest-may-use-discount-account.md) — BR-231
+- [Separation of Duties in Payroll](../rules/active/BR-232.separation-of-duties-in-payroll.md) — BR-232
+- [Contingent Liability Recognition](../rules/active/BR-233.contingent-liability-recognition.md) — BR-233
+- [Interest-Bearing Note Accounting](../rules/active/BR-234.interest-bearing-note-accounting.md) — BR-234
+- [Discounted Note Proceeds](../rules/active/BR-235.discounted-note-proceeds.md) — BR-235
+- [Employee Withholding Requirements](../rules/active/BR-236.employee-withholding-requirements.md) — BR-236
+- [Employer Payroll Tax Obligation](../rules/active/BR-237.employer-payroll-tax-obligation.md) — BR-237
+- [Vacation Pay Accrual](../rules/active/BR-238.vacation-pay-accrual.md) — BR-238
+- [Pension Expense Recognition](../rules/active/BR-239.pension-expense-recognition.md) — BR-239
+- [Warranty Expense Matching](../rules/active/BR-240.warranty-expense-matching.md) — BR-240
+- [Overtime Premium Rate](../rules/active/BR-241.overtime-premium-rate.md) — BR-241
+- [Payroll Check Sequential Numbering](../rules/active/BR-242.payroll-check-sequential-numbering.md) — BR-242
+- [Employer FICA Matching](../rules/active/BR-243.employer-fica-matching.md) — BR-243
+- [Unemployment Tax Wage Base](../rules/active/BR-244.unemployment-tax-wage-base.md) — BR-244
+- [Internal Control Over Payroll](../rules/active/BR-245.internal-control-over-payroll.md) — BR-245
+- [Warranty vs. Recall Distinction](../rules/active/BR-246.warranty-vs-recall-distinction.md) — BR-246
+- [Present Value Bond Pricing](../rules/active/BR-247.present-value-bond-pricing.md) — BR-247
+- [Contract Rate vs. Market Rate](../rules/active/BR-248.contract-rate-vs-market-rate.md) — BR-248
+- [Bond Discount](../rules/active/BR-249.bond-discount.md) — BR-249
+- [Times Interest Earned Analysis](../rules/active/BR-250.times-interest-earned-analysis.md) — BR-250
+- [Straight-Line Amortization Equal Allocation](../rules/active/BR-251.straight-line-amortization-equal-allocation.md) — BR-251
+- [Effective Interest Rate Method Requirement](../rules/active/BR-252.effective-interest-rate-method-requirement.md) — BR-252
+- [Premium Amortization Decreases Interest Expense](../rules/active/BR-253.premium-amortization-decreases-interest-expense.md) — BR-253
+- [Carrying Amount Converges to Face Amount](../rules/active/BR-254.carrying-amount-converges-to-face-amount.md) — BR-254
+- [Bond Redemption Gain/Loss Computation](../rules/active/BR-255.bond-redemption-gain-loss-computation.md) — BR-255
+- [Bond Face Amount Repayment at Maturity](../rules/active/BR-256.bond-face-amount-repayment-at-maturity.md) — BR-256
+- [Bond Interest Payment Frequency](../rules/active/BR-257.bond-interest-payment-frequency.md) — BR-257
+- [Balance Sheet Presentation of Bonds](../rules/active/BR-258.balance-sheet-presentation-of-bonds.md) — BR-258
+- [Present Value Factor Selection](../rules/active/BR-259.present-value-factor-selection.md) — BR-259
+- [Effective Interest Method Discount Amortization](../rules/active/BR-260.effective-interest-method-discount-amortization.md) — BR-260
+- [Bonds Issued at Discount When Contract Rate < Market Rate](../rules/active/BR-261.bonds-issued-at-discount-when-contract-rate-market-rate.md) — BR-261
+- [Bond Discount Amortization Increases Interest Expense](../rules/active/BR-262.bond-discount-amortization-increases-interest-expense.md) — BR-262
+- [Carrying Amount Approaches Face Value at Maturity](../rules/active/BR-263.carrying-amount-approaches-face-value-at-maturity.md) — BR-263
+- [Bond Redemption Gain or Loss Recognition](../rules/active/BR-264.bond-redemption-gain-or-loss-recognition.md) — BR-264
+- [Times Interest Earned Indicates Solvency](../rules/active/BR-265.times-interest-earned-indicates-solvency.md) — BR-265
+- [Bond Interest Paid Semiannually](../rules/active/BR-266.bond-interest-paid-semiannually.md) — BR-266
+- [Convertible Bonds Require Allocation Between Debt and Equity](../rules/active/BR-267.convertible-bonds-require-allocation-between-debt-and-equity.md) — BR-267
+- [Noncash Assets Recorded at Market Value](../rules/active/BR-268.noncash-assets-recorded-at-market-value.md) — BR-268
+- [Liabilities Assumed Reduce Capital Credit](../rules/active/BR-269.liabilities-assumed-reduce-capital-credit.md) — BR-269
+- [Income Divided Equally Without Agreement](../rules/active/BR-270.income-divided-equally-without-agreement.md) — BR-270
+- [Salary Allowances Are Not Expenses](../rules/active/BR-271.salary-allowances-are-not-expenses.md) — BR-271
+- [Income Division Formula Application](../rules/active/BR-272.income-division-formula-application.md) — BR-272
+- [Allowances May Exceed Net Income](../rules/active/BR-273.allowances-may-exceed-net-income.md) — BR-273
+- [Partner Withdrawals Close to Capital](../rules/active/BR-274.partner-withdrawals-close-to-capital.md) — BR-274
+- [Revenues and Expenses Close to Capital](../rules/active/BR-275.revenues-and-expenses-close-to-capital.md) — BR-275
+- [New Partner Purchase Price Goes to Selling Partner](../rules/active/BR-276.new-partner-purchase-price-goes-to-selling-partner.md) — BR-276
+- [Partner Bonus Method for Admission](../rules/active/BR-277.partner-bonus-method-for-admission.md) — BR-277
+- [LLC Uses Member Equity Instead of Capital](../rules/active/BR-278.llc-uses-member-equity-instead-of-capital.md) — BR-278
+- [Cash Distributed Based on Capital Balances](../rules/active/BR-279.cash-distributed-based-on-capital-balances.md) — BR-279
+- [Liabilities Paid Before Partners](../rules/active/BR-280.liabilities-paid-before-partners.md) — BR-280
+- [Gain or Loss Allocated by Income-Sharing Ratio](../rules/active/BR-281.gain-or-loss-allocated-by-income-sharing-ratio.md) — BR-281
+- [Capital Deficiency Partner Must Pay Partnership](../rules/active/BR-282.capital-deficiency-partner-must-pay-partnership.md) — BR-282
+- [Deficiency Allocated to Other Partners If Unpaid](../rules/active/BR-283.deficiency-allocated-to-other-partners-if-unpaid.md) — BR-283
+- [Four-Step Liquidation Process](../rules/active/BR-284.four-step-liquidation-process.md) — BR-284
+- [Income-Sharing Ratio Not Used for Cash Distribution](../rules/active/BR-285.income-sharing-ratio-not-used-for-cash-distribution.md) — BR-285
+- [LLC Liquidation Uses Member Equity Titles](../rules/active/BR-286.llc-liquidation-uses-member-equity-titles.md) — BR-286
+- [Revenue Per Employee Measures Efficiency](../rules/active/BR-287.revenue-per-employee-measures-efficiency.md) — BR-287
+- [Cash Dividend Declaration Creates Liability](../rules/active/BR-288.cash-dividend-declaration-creates-liability.md) — BR-288
+- [Stock Dividend Capitalizes Retained Earnings at Market Value](../rules/active/BR-289.stock-dividend-capitalizes-retained-earnings-at-market-value.md) — BR-289
+- [Stock Split Requires No Journal Entry](../rules/active/BR-290.stock-split-requires-no-journal-entry.md) — BR-290
+- [Dividends Not Paid on Treasury Stock](../rules/active/BR-291.dividends-not-paid-on-treasury-stock.md) — BR-291
+- [Preferred Stock Dividend Preference](../rules/active/BR-292.preferred-stock-dividend-preference.md) — BR-292
+- [Cumulative Preferred Dividends in Arrears](../rules/active/BR-293.cumulative-preferred-dividends-in-arrears.md) — BR-293
+- [Stock Issued for Non-Cash Consideration](../rules/active/BR-294.stock-issued-for-non-cash-consideration.md) — BR-294
+- [No Par Stock with Stated Value](../rules/active/BR-295.no-par-stock-with-stated-value.md) — BR-295
+- [Treasury Stock Recorded at Cost](../rules/active/BR-296.treasury-stock-recorded-at-cost.md) — BR-296
+- [Treasury Stock Resale Loss Limited to Paid-In Capital](../rules/active/BR-297.treasury-stock-resale-loss-limited-to-paid-in-capital.md) — BR-297
+- [Retained Earnings Restrictions Disclosure](../rules/active/BR-298.retained-earnings-restrictions-disclosure.md) — BR-298
+- [Prior Period Adjustment Reported Net of Tax](../rules/active/BR-299.prior-period-adjustment-reported-net-of-tax.md) — BR-299
+- [EPS Formula](../rules/active/BR-300.eps-formula.md) — BR-300
+- [Treasury Stock Purchase Increases EPS](../rules/active/BR-301.treasury-stock-purchase-increases-eps.md) — BR-301
+- [Stockholders' Equity Reporting Methods](../rules/active/BR-302.stockholders-equity-reporting-methods.md) — BR-302
+- [Cash Flows Classified into Three Activities](../rules/active/BR-303.cash-flows-classified-into-three-activities.md) — BR-303
+- [Ending Cash Must Match Balance Sheet](../rules/active/BR-304.ending-cash-must-match-balance-sheet.md) — BR-304
+- [Indirect Method Adjusts Net Income to Cash Basis](../rules/active/BR-305.indirect-method-adjusts-net-income-to-cash-basis.md) — BR-305
+- [Increase in Current Liability Increases Operating Cash Flow](../rules/active/BR-306.increase-in-current-liability-increases-operating-cash-flow.md) — BR-306
+- [Preferred Dividends Deducted for EPS](../rules/active/BR-307.preferred-dividends-deducted-for-eps.md) — BR-307
+- [Direct and Indirect Methods Produce Same Result](../rules/active/BR-308.direct-and-indirect-methods-produce-same-result.md) — BR-308
+- [Statement of Cash Flows Order](../rules/active/BR-309.statement-of-cash-flows-order.md) — BR-309
+- [Depreciation Add-Back](../rules/active/BR-310.depreciation-add-back.md) — BR-310
+- [Gain/Loss on Sale Adjustment](../rules/active/BR-311.gain-loss-on-sale-adjustment.md) — BR-311
+- [Changes in Current Operating Assets and Liabilities](../rules/active/BR-312.changes-in-current-operating-assets-and-liabilities.md) — BR-312
+- [No Cash Flow per Share](../rules/active/BR-313.no-cash-flow-per-share.md) — BR-313
+- [Free Cash Flow Computation](../rules/active/BR-314.free-cash-flow-computation.md) — BR-314
+- [Ending Cash Reconciliation](../rules/active/BR-315.ending-cash-reconciliation.md) — BR-315
+- [Spreadsheet Totals Must Equal](../rules/active/BR-316.spreadsheet-totals-must-equal.md) — BR-316
+- [Direct Method Cash Flow Components](../rules/active/BR-317.direct-method-cash-flow-components.md) — BR-317
+- [Direct Method Requires Reconciliation](../rules/active/BR-318.direct-method-requires-reconciliation.md) — BR-318
+- [Investing and Financing Sections Identical](../rules/active/BR-319.investing-and-financing-sections-identical.md) — BR-319
+- [Depreciation Not in Direct Method](../rules/active/BR-320.depreciation-not-in-direct-method.md) — BR-320
+- [Cash Received from Customers Formula](../rules/active/BR-321.cash-received-from-customers-formula.md) — BR-321
+- [Cash Paid for Operating Expenses Formula](../rules/active/BR-322.cash-paid-for-operating-expenses-formula.md) — BR-322
+- [Horizontal Analysis Formula](../rules/active/BR-323.horizontal-analysis-formula.md) — BR-323
+- [Vertical Analysis Balance Sheet](../rules/active/BR-324.vertical-analysis-balance-sheet.md) — BR-324
+- [Vertical Analysis Income Statement](../rules/active/BR-325.vertical-analysis-income-statement.md) — BR-325
+- [Working Capital Formula](../rules/active/BR-326.working-capital-formula.md) — BR-326
+- [Current Ratio Formula](../rules/active/BR-327.current-ratio-formula.md) — BR-327
+- [Quick Ratio Formula](../rules/active/BR-328.quick-ratio-formula.md) — BR-328
+- [Small Percentage Large Dollar Effect](../rules/active/BR-329.small-percentage-large-dollar-effect.md) — BR-329
+- [Common-Sized Comparison](../rules/active/BR-330.common-sized-comparison.md) — BR-330
+- [Working Capital Limitation](../rules/active/BR-331.working-capital-limitation.md) — BR-331
+- [Quick Assets Exclusion](../rules/active/BR-332.quick-assets-exclusion.md) — BR-332
+- [Long-Term Investments Exclusion from Asset Turnover](../rules/active/BR-333.long-term-investments-exclusion-from-asset-turnover.md) — BR-333
+- [Interest Expense Add-Back for Return on Assets](../rules/active/BR-334.interest-expense-add-back-for-return-on-assets.md) — BR-334
+- [Preferred Dividends Deduction](../rules/active/BR-335.preferred-dividends-deduction.md) — BR-335
+- [Days' Sales Comparison to Credit Terms](../rules/active/BR-336.days-sales-comparison-to-credit-terms.md) — BR-336
+- [Inventory Turnover Industry Variation](../rules/active/BR-337.inventory-turnover-industry-variation.md) — BR-337
+- [Average Accounts Receivable for Seasonal Companies](../rules/active/BR-338.average-accounts-receivable-for-seasonal-companies.md) — BR-338
+- [Comparative Statement Base Year Selection](../rules/active/BR-339.comparative-statement-base-year-selection.md) — BR-339
+- [Vertical Analysis Base Amount](../rules/active/BR-340.vertical-analysis-base-amount.md) — BR-340
+- [Effect of Transactions on Current Position](../rules/active/BR-341.effect-of-transactions-on-current-position.md) — BR-341
+- [Debt vs Equity Financing Trade-off](../rules/active/BR-342.debt-vs-equity-financing-trade-off.md) — BR-342
+- [Internal Control Disclosure Requirement](../rules/active/BR-343.internal-control-disclosure-requirement.md) — BR-343
+- [Bond Indenture Ratio Compliance](../rules/active/BR-344.bond-indenture-ratio-compliance.md) — BR-344
+- [Industry-Specific Profitability Measures](../rules/active/BR-345.industry-specific-profitability-measures.md) — BR-345
+- [Non-GAAP Reporting Requirements](../rules/active/BR-346.non-gaap-reporting-requirements.md) — BR-346
+- [Direct vs Indirect Cost Classification](../rules/active/BR-347.direct-vs-indirect-cost-classification.md) — BR-347
+- [Product Costs Flow Through Inventory](../rules/active/BR-348.product-costs-flow-through-inventory.md) — BR-348
+- [Period Costs Expensed Immediately](../rules/active/BR-349.period-costs-expensed-immediately.md) — BR-349
+- [Indirect Costs Become Manufacturing Overhead](../rules/active/BR-350.indirect-costs-become-manufacturing-overhead.md) — BR-350
+- [Managerial Accounting Not Bound by GAAP](../rules/active/BR-351.managerial-accounting-not-bound-by-gaap.md) — BR-351
+- [Sustainability Reporting Trend](../rules/active/BR-352.sustainability-reporting-trend.md) — BR-352
+- [Manufacturing Costs Three-Step Calculation](../rules/active/BR-353.manufacturing-costs-three-step-calculation.md) — BR-353
+- [Product Cost vs Period Cost Classification](../rules/active/BR-354.product-cost-vs-period-cost-classification.md) — BR-354
+- [Direct vs Indirect Cost Tracing](../rules/active/BR-355.direct-vs-indirect-cost-tracing.md) — BR-355
+- [Manufacturing Costs Flow](../rules/active/BR-356.manufacturing-costs-flow.md) — BR-356
+- [Manufacturing Overhead Components](../rules/active/BR-357.manufacturing-overhead-components.md) — BR-357
+- [Prime Cost and Conversion Cost Formulas](../rules/active/BR-358.prime-cost-and-conversion-cost-formulas.md) — BR-358
+- [Cost of Goods Manufactured Calculation](../rules/active/BR-359.cost-of-goods-manufactured-calculation.md) — BR-359
+- [Manufacturing Income Statement COGS Section](../rules/active/BR-360.manufacturing-income-statement-cogs-section.md) — BR-360
+- [Selling and Administrative Expense Classification](../rules/active/BR-361.selling-and-administrative-expense-classification.md) — BR-361
+- [Occupancy Rate Calculation](../rules/active/BR-362.occupancy-rate-calculation.md) — BR-362
+- [Job Order Costing Applicability](../rules/active/BR-363.job-order-costing-applicability.md) — BR-363
+- [Materials Requisition Requirement](../rules/active/BR-364.materials-requisition-requirement.md) — BR-364
+- [Costs Recorded by Job](../rules/active/BR-365.costs-recorded-by-job.md) — BR-365
+- [Predetermined Overhead Rate Application](../rules/active/BR-366.predetermined-overhead-rate-application.md) — BR-366
+- [Year-End Disposal of Overhead Balance](../rules/active/BR-367.year-end-disposal-of-overhead-balance.md) — BR-367
+- [Underapplied Overhead Disposal](../rules/active/BR-368.underapplied-overhead-disposal.md) — BR-368
+- [Work in Process Debits](../rules/active/BR-369.work-in-process-debits.md) — BR-369
+- [Work in Process Credits](../rules/active/BR-370.work-in-process-credits.md) — BR-370
+- [Overhead Balance Investigation](../rules/active/BR-371.overhead-balance-investigation.md) — BR-371
+- [Service Business Job Costing](../rules/active/BR-372.service-business-job-costing.md) — BR-372
+- [Job Cost Comparison for Analysis](../rules/active/BR-373.job-cost-comparison-for-analysis.md) — BR-373
+- [Service Business Overhead Allocation](../rules/active/BR-374.service-business-overhead-allocation.md) — BR-374
+- [Service Job Completion and Billing](../rules/active/BR-375.service-job-completion-and-billing.md) — BR-375
+- [Investigating Cost Variances](../rules/active/BR-376.investigating-cost-variances.md) — BR-376
+- [Materials Quantity Investigation](../rules/active/BR-377.materials-quantity-investigation.md) — BR-377
+- [Service Business Overhead Application Methods](../rules/active/BR-378.service-business-overhead-application-methods.md) — BR-378
+- [Job Cost Sheet Completeness](../rules/active/BR-379.job-cost-sheet-completeness.md) — BR-379
+- [Direct Materials Traced to Jobs](../rules/active/BR-380.direct-materials-traced-to-jobs.md) — BR-380
+- [Overhead Applied Using Predetermined Rate](../rules/active/BR-381.overhead-applied-using-predetermined-rate.md) — BR-381
+- [Cost Flow Through Inventory Accounts](../rules/active/BR-382.cost-flow-through-inventory-accounts.md) — BR-382
+- [Jobs Completed Transfer to Finished Goods](../rules/active/BR-383.jobs-completed-transfer-to-finished-goods.md) — BR-383
+- [Sale Triggers COGS Recognition](../rules/active/BR-384.sale-triggers-cogs-recognition.md) — BR-384
+- [Over/Under Applied Overhead Disposition](../rules/active/BR-385.over-under-applied-overhead-disposition.md) — BR-385
+- [Depreciation Classified by Function](../rules/active/BR-386.depreciation-classified-by-function.md) — BR-386
+- [Equivalent Units for Materials at Beginning of Process](../rules/active/BR-387.equivalent-units-for-materials-at-beginning-of-process.md) — BR-387
+- [Equivalent Units for Conversion in Beginning WIP](../rules/active/BR-388.equivalent-units-for-conversion-in-beginning-wip.md) — BR-388
+- [Units Started and Completed Formula](../rules/active/BR-389.units-started-and-completed-formula.md) — BR-389
+- [Ending WIP Equivalent Units](../rules/active/BR-390.ending-wip-equivalent-units.md) — BR-390
+- [Cost Per Equivalent Unit Computation](../rules/active/BR-391.cost-per-equivalent-unit-computation.md) — BR-391
+- [Assign Costs to Completed Units](../rules/active/BR-392.assign-costs-to-completed-units.md) — BR-392
+- [Assign Costs to Ending WIP](../rules/active/BR-393.assign-costs-to-ending-wip.md) — BR-393
+- [Cost Reconciliation in Process Costing](../rules/active/BR-394.cost-reconciliation-in-process-costing.md) — BR-394
+- [Materials and Conversion Computed Separately](../rules/active/BR-395.materials-and-conversion-computed-separately.md) — BR-395
+- [Process Costing vs Job Order Costing](../rules/active/BR-396.process-costing-vs-job-order-costing.md) — BR-396
+- [Weighted Average Equivalent Units Include Beginning WIP](../rules/active/BR-397.weighted-average-equivalent-units-include-beginning-wip.md) — BR-397
+- [Weighted Average Cost Includes Beginning WIP Costs](../rules/active/BR-398.weighted-average-cost-includes-beginning-wip-costs.md) — BR-398
+- [Units Reconciliation Formula](../rules/active/BR-399.units-reconciliation-formula.md) — BR-399
+- [Lean Manufacturing Pull Production](../rules/active/BR-400.lean-manufacturing-pull-production.md) — BR-400
+- [Flavor Changeover Cost Allocation](../rules/active/BR-401.flavor-changeover-cost-allocation.md) — BR-401
+- [Process Costing for Continuous Production](../rules/active/BR-402.process-costing-for-continuous-production.md) — BR-402
+- [Cost Per Unit Trend Analysis](../rules/active/BR-403.cost-per-unit-trend-analysis.md) — BR-403
+- [Scrap and Waste in Process Costing](../rules/active/BR-404.scrap-and-waste-in-process-costing.md) — BR-404
+- [Activity Rate Computation](../rules/active/BR-405.activity-rate-computation.md) — BR-405
+- [Overhead Allocation per Product](../rules/active/BR-406.overhead-allocation-per-product.md) — BR-406
+- [Manufacturing Overhead Cost per Unit](../rules/active/BR-407.manufacturing-overhead-cost-per-unit.md) — BR-407
+- [ABC Over Single Plantwide Rate](../rules/active/BR-408.abc-over-single-plantwide-rate.md) — BR-408
+- [GAAP Period Expense Rule](../rules/active/BR-409.gaap-period-expense-rule.md) — BR-409
+- [Selling/Admin ABC for Internal Use](../rules/active/BR-410.selling-admin-abc-for-internal-use.md) — BR-410
+- [Cost Distortion Causes Pricing Errors](../rules/active/BR-411.cost-distortion-causes-pricing-errors.md) — BR-411
+- [Variable Cost Behavior Rule](../rules/active/BR-412.variable-cost-behavior-rule.md) — BR-412
+- [Fixed Cost Behavior Rule](../rules/active/BR-413.fixed-cost-behavior-rule.md) — BR-413
+- [Break-Even Point Formula](../rules/active/BR-414.break-even-point-formula.md) — BR-414
+- [Target Profit Formula](../rules/active/BR-415.target-profit-formula.md) — BR-415
+- [Contribution Margin Formula](../rules/active/BR-416.contribution-margin-formula.md) — BR-416
+- [Sales Mix Break-Even](../rules/active/BR-417.sales-mix-break-even.md) — BR-417
+- [Operating Leverage Effect](../rules/active/BR-418.operating-leverage-effect.md) — BR-418
+- [Margin of Safety Rule](../rules/active/BR-419.margin-of-safety-rule.md) — BR-419
+- [Relevant Range Constraint](../rules/active/BR-420.relevant-range-constraint.md) — BR-420
+- [Absorption vs Variable Costing Income](../rules/active/BR-421.absorption-vs-variable-costing-income.md) — BR-421
+- [Appropriate Allocation Base Selection](../rules/active/BR-422.appropriate-allocation-base-selection.md) — BR-422
+- [Sales-Based Allocation Inaccuracy](../rules/active/BR-423.sales-based-allocation-inaccuracy.md) — BR-423
+- [CVP Analysis Application to Services](../rules/active/BR-424.cvp-analysis-application-to-services.md) — BR-424
+- [Process Costing Cost Per Unit](../rules/active/BR-425.process-costing-cost-per-unit.md) — BR-425
+- [Multiple Allocation Methods Comparison](../rules/active/BR-426.multiple-allocation-methods-comparison.md) — BR-426
+- [Selling/Admin ABC Activity Identification](../rules/active/BR-427.selling-admin-abc-activity-identification.md) — BR-427
+- [Mixed Cost Decomposition](../rules/active/BR-428.mixed-cost-decomposition.md) — BR-428
+- [Break-Even Equality](../rules/active/BR-429.break-even-equality.md) — BR-429
+- [Sales Mix Constancy Assumption](../rules/active/BR-430.sales-mix-constancy-assumption.md) — BR-430
+- [Operating Leverage Interpretation](../rules/active/BR-431.operating-leverage-interpretation.md) — BR-431
+- [Margin of Safety as Risk Indicator](../rules/active/BR-432.margin-of-safety-as-risk-indicator.md) — BR-432
+- [Break-Even for Service Companies](../rules/active/BR-433.break-even-for-service-companies.md) — BR-433
+- [Margin of Safety Cannot Be Negative](../rules/active/BR-434.margin-of-safety-cannot-be-negative.md) — BR-434
+- [Operating Leverage Inverse Relationship](../rules/active/BR-435.operating-leverage-inverse-relationship.md) — BR-435
+- [Validity Check on Margin of Safety Data](../rules/active/BR-436.validity-check-on-margin-of-safety-data.md) — BR-436
+- [Static Budget Limitation](../rules/active/BR-437.static-budget-limitation.md) — BR-437
+- [Flexible Budget Construction](../rules/active/BR-438.flexible-budget-construction.md) — BR-438
+- [Budget Gaming Prevention](../rules/active/BR-439.budget-gaming-prevention.md) — BR-439
+- [Flexible Budget Comparison Rule](../rules/active/BR-440.flexible-budget-comparison-rule.md) — BR-440
+- [Continuous Budget Update](../rules/active/BR-441.continuous-budget-update.md) — BR-441
+- [Production Budget Coordination Rule](../rules/active/BR-442.production-budget-coordination-rule.md) — BR-442
+- [Desired Ending Inventory Policy Rule](../rules/active/BR-443.desired-ending-inventory-policy-rule.md) — BR-443
+- [Direct Materials Inventory Coordination Rule](../rules/active/BR-444.direct-materials-inventory-coordination-rule.md) — BR-444
+- [Cash Budget Minimum Balance Rule](../rules/active/BR-445.cash-budget-minimum-balance-rule.md) — BR-445
+- [Cash Collections Timing Rule](../rules/active/BR-446.cash-collections-timing-rule.md) — BR-446
+- [Staffing Budget Variability Rule](../rules/active/BR-447.staffing-budget-variability-rule.md) — BR-447
+- [Multiperiod Budget Dependency Rule](../rules/active/BR-448.multiperiod-budget-dependency-rule.md) — BR-448
+- [Selling and Administrative Expense Payment Rule](../rules/active/BR-449.selling-and-administrative-expense-payment-rule.md) — BR-449
+- [Budget Goal Setting Behavioral Rule](../rules/active/BR-450.budget-goal-setting-behavioral-rule.md) — BR-450
+- [Sales Forecast Based on Historical Trend Rule](../rules/active/BR-451.sales-forecast-based-on-historical-trend-rule.md) — BR-451
+- [Ending Inventory Percentage Rule](../rules/active/BR-452.ending-inventory-percentage-rule.md) — BR-452
+- [Work in Process Inventory Assumption Rule](../rules/active/BR-453.work-in-process-inventory-assumption-rule.md) — BR-453
+- [Multi-Department Labor Rate Differentiation Rule](../rules/active/BR-454.multi-department-labor-rate-differentiation-rule.md) — BR-454
+- [Manufacturing Cost Payment Timing Rule](../rules/active/BR-455.manufacturing-cost-payment-timing-rule.md) — BR-455
+- [Accounts Receivable Collection Pattern Rule](../rules/active/BR-456.accounts-receivable-collection-pattern-rule.md) — BR-456
+- [Dividend Payment Timing Rule](../rules/active/BR-457.dividend-payment-timing-rule.md) — BR-457
+- [Staffing Ratio Per Activity Unit Rule](../rules/active/BR-458.staffing-ratio-per-activity-unit-rule.md) — BR-458
+- [Weekday vs Weekend Staffing Differentiation Rule](../rules/active/BR-459.weekday-vs-weekend-staffing-differentiation-rule.md) — BR-459
+- [Gross Profit Staffing Justification Rule](../rules/active/BR-460.gross-profit-staffing-justification-rule.md) — BR-460
+- [Standard Cost Computation Rule](../rules/active/BR-461.standard-cost-computation-rule.md) — BR-461
+- [Budget Performance Report Basis Rule](../rules/active/BR-462.budget-performance-report-basis-rule.md) — BR-462
+- [Direct Materials Quantity Variance Computation Rule](../rules/active/BR-463.direct-materials-quantity-variance-computation-rule.md) — BR-463
+- [Direct Labor Time Variance Computation Rule](../rules/active/BR-464.direct-labor-time-variance-computation-rule.md) — BR-464
+- [Favorable vs Unfavorable Variance Classification Rule](../rules/active/BR-465.favorable-vs-unfavorable-variance-classification-rule.md) — BR-465
+- [Manufacturing Overhead Variance Decomposition Rule](../rules/active/BR-466.manufacturing-overhead-variance-decomposition-rule.md) — BR-466
+- [Departmental Responsibility for Variances Rule](../rules/active/BR-467.departmental-responsibility-for-variances-rule.md) — BR-467
+- [Standard Cost Assumption of No Inventory Change Rule](../rules/active/BR-468.standard-cost-assumption-of-no-inventory-change-rule.md) — BR-468
+- [Variance Sign Convention](../rules/active/BR-469.variance-sign-convention.md) — BR-469
+- [Materials Price Variance Responsibility](../rules/active/BR-470.materials-price-variance-responsibility.md) — BR-470
+- [Materials Quantity Variance Responsibility](../rules/active/BR-471.materials-quantity-variance-responsibility.md) — BR-471
+- [Labor Rate Variance Responsibility](../rules/active/BR-472.labor-rate-variance-responsibility.md) — BR-472
+- [Labor Time Variance Responsibility](../rules/active/BR-473.labor-time-variance-responsibility.md) — BR-473
+- [Controllable Variance Responsibility](../rules/active/BR-474.controllable-variance-responsibility.md) — BR-474
+- [Volume Variance Interpretation](../rules/active/BR-475.volume-variance-interpretation.md) — BR-475
+- [Work in Process Standard Costing](../rules/active/BR-476.work-in-process-standard-costing.md) — BR-476
+- [Overapplied and Underapplied Overhead](../rules/active/BR-477.overapplied-and-underapplied-overhead.md) — BR-477
+- [Exchange Rate Variance Isolation](../rules/active/BR-478.exchange-rate-variance-isolation.md) — BR-478
+- [Standard Quantity Based on Actual Production](../rules/active/BR-479.standard-quantity-based-on-actual-production.md) — BR-479
+- [Revenue Variance Relationship](../rules/active/BR-480.revenue-variance-relationship.md) — BR-480
+- [Standards for Nonmanufacturing Activities](../rules/active/BR-481.standards-for-nonmanufacturing-activities.md) — BR-481
+- [Principle of Exceptions](../rules/active/BR-482.principle-of-exceptions.md) — BR-482
+- [Investigate Controllable Variances](../rules/active/BR-483.investigate-controllable-variances.md) — BR-483
+- [Exclude Sunk Costs from Analysis](../rules/active/BR-484.exclude-sunk-costs-from-analysis.md) — BR-484
+- [Include Only Relevant Costs](../rules/active/BR-485.include-only-relevant-costs.md) — BR-485
+- [Fixed Costs May Persist](../rules/active/BR-486.fixed-costs-may-persist.md) — BR-486
+- [Capacity Utilization Affects Costs](../rules/active/BR-487.capacity-utilization-affects-costs.md) — BR-487
+- [Normal Selling Price Must Cover All Costs](../rules/active/BR-488.normal-selling-price-must-cover-all-costs.md) — BR-488
+- [Markup Percentage Calculation](../rules/active/BR-489.markup-percentage-calculation.md) — BR-489
+- [Target Cost Reduction](../rules/active/BR-490.target-cost-reduction.md) — BR-490
+- [Price Fixing Prohibition](../rules/active/BR-491.price-fixing-prohibition.md) — BR-491
+- [Special Price Acceptance Criteria](../rules/active/BR-492.special-price-acceptance-criteria.md) — BR-492
+- [Bottleneck Profitability Rule](../rules/active/BR-493.bottleneck-profitability-rule.md) — BR-493
+- [Sunk Cost Irrelevance Rule](../rules/active/BR-494.sunk-cost-irrelevance-rule.md) — BR-494
+- [Opportunity Cost Inclusion Rule](../rules/active/BR-495.opportunity-cost-inclusion-rule.md) — BR-495
+- [Cost-Plus Pricing Markup Rule](../rules/active/BR-496.cost-plus-pricing-markup-rule.md) — BR-496
+- [Target Costing Market-Driven Rule](../rules/active/BR-497.target-costing-market-driven-rule.md) — BR-497
+- [Yield Pricing Demand-Based Rule](../rules/active/BR-498.yield-pricing-demand-based-rule.md) — BR-498
+- [Break-Even for Yield Pricing Rule](../rules/active/BR-499.break-even-for-yield-pricing-rule.md) — BR-499
+- [Process Further Decision Rule](../rules/active/BR-500.process-further-decision-rule.md) — BR-500
+- [Special Order Acceptance Rule](../rules/active/BR-501.special-order-acceptance-rule.md) — BR-501
+- [Fixed Cost Irrelevance in Short-Term Decisions](../rules/active/BR-502.fixed-cost-irrelevance-in-short-term-decisions.md) — BR-502
+- [Internal Rate of Return Acceptance Rule](../rules/active/BR-503.internal-rate-of-return-acceptance-rule.md) — BR-503
+- [Cash Payback Desirability Rule](../rules/active/BR-504.cash-payback-desirability-rule.md) — BR-504
+- [Depreciation Exclusion from Cash Flow](../rules/active/BR-505.depreciation-exclusion-from-cash-flow.md) — BR-505
+- [Unequal Cash Flows Payback Calculation](../rules/active/BR-506.unequal-cash-flows-payback-calculation.md) — BR-506
+- [Average Investment Computation Rule](../rules/active/BR-507.average-investment-computation-rule.md) — BR-507
+- [Present Value Compounding Rule](../rules/active/BR-508.present-value-compounding-rule.md) — BR-508
+- [Compounding Interest Calculation Rule](../rules/active/BR-509.compounding-interest-calculation-rule.md) — BR-509
+- [Net Present Value Acceptance Rule](../rules/active/BR-510.net-present-value-acceptance-rule.md) — BR-510
+- [Present Value Index Ranking Rule](../rules/active/BR-511.present-value-index-ranking-rule.md) — BR-511
+- [IRR Factor Computation Rule](../rules/active/BR-512.irr-factor-computation-rule.md) — BR-512
+- [Unequal Lives Equalization Rule](../rules/active/BR-513.unequal-lives-equalization-rule.md) — BR-513
+- [Capital Rationing Screening Rule](../rules/active/BR-514.capital-rationing-screening-rule.md) — BR-514
+- [Sensitivity Analysis Threshold Rule](../rules/active/BR-515.sensitivity-analysis-threshold-rule.md) — BR-515
+- [Expected Value Probability Rule](../rules/active/BR-516.expected-value-probability-rule.md) — BR-516
+- [Assumption Fudging Prohibition](../rules/active/BR-517.assumption-fudging-prohibition.md) — BR-517
+- [NPV Decision Rule](../rules/active/BR-518.npv-decision-rule.md) — BR-518
+- [Average Rate of Return Calculation](../rules/active/BR-519.average-rate-of-return-calculation.md) — BR-519
+- [Cash Payback Period Calculation](../rules/active/BR-520.cash-payback-period-calculation.md) — BR-520
+- [Present Value Index Decision Rule](../rules/active/BR-521.present-value-index-decision-rule.md) — BR-521
+- [NPV vs Average Rate of Return Conflict](../rules/active/BR-522.npv-vs-average-rate-of-return-conflict.md) — BR-522
+- [Sensitivity Analysis for Key Assumptions](../rules/active/BR-523.sensitivity-analysis-for-key-assumptions.md) — BR-523
+- [Multi-Phase Revenue NPV Calculation](../rules/active/BR-524.multi-phase-revenue-npv-calculation.md) — BR-524
+- [Financial Success Threshold](../rules/active/BR-525.financial-success-threshold.md) — BR-525
+- [Currency Risk on International Investments](../rules/active/BR-526.currency-risk-on-international-investments.md) — BR-526
+- [Role of Qualitative Factors in Capital Budgeting](../rules/active/BR-527.role-of-qualitative-factors-in-capital-budgeting.md) — BR-527
+- [Payback Period as Supplementary Metric](../rules/active/BR-528.payback-period-as-supplementary-metric.md) — BR-528
+- [Ownership Threshold Determines Accounting Method](../rules/active/BR-529.ownership-threshold-determines-accounting-method.md) — BR-529
+- [Fair Value Method - Purchase Recording](../rules/active/BR-530.fair-value-method-purchase-recording.md) — BR-530
+- [Fair Value Method - Dividend Revenue](../rules/active/BR-531.fair-value-method-dividend-revenue.md) — BR-531
+- [Fair Value Method - Sale of Stock](../rules/active/BR-532.fair-value-method-sale-of-stock.md) — BR-532
+- [Fair Value Method - Year-End Adjustment](../rules/active/BR-533.fair-value-method-year-end-adjustment.md) — BR-533
+- [Equity Method - Income Recognition](../rules/active/BR-534.equity-method-income-recognition.md) — BR-534
+- [Equity Method - Dividend Treatment](../rules/active/BR-535.equity-method-dividend-treatment.md) — BR-535
+- [Support Department Allocation Rate Calculation](../rules/active/BR-536.support-department-allocation-rate-calculation.md) — BR-536
+- [ROI Computation](../rules/active/BR-537.roi-computation.md) — BR-537
+- [Residual Income Computation](../rules/active/BR-538.residual-income-computation.md) — BR-538
+- [Profit Center Evaluation Across Divisions](../rules/active/BR-539.profit-center-evaluation-across-divisions.md) — BR-539
+- [ROI Calculation](../rules/active/BR-540.roi-calculation.md) — BR-540
+- [DuPont Formula Decomposition](../rules/active/BR-541.dupont-formula-decomposition.md) — BR-541
+- [Residual Income Calculation](../rules/active/BR-542.residual-income-calculation.md) — BR-542
+- [Balanced Scorecard Completeness](../rules/active/BR-543.balanced-scorecard-completeness.md) — BR-543
+- [Strategic Objective to Metric Linkage](../rules/active/BR-544.strategic-objective-to-metric-linkage.md) — BR-544
+- [Performance Metric Types](../rules/active/BR-545.performance-metric-types.md) — BR-545
+- [Strategy Map Causality](../rules/active/BR-546.strategy-map-causality.md) — BR-546
+- [Residual Income vs ROI Decision Rule](../rules/active/BR-547.residual-income-vs-roi-decision-rule.md) — BR-547
+- [Department-Specific Scorecards](../rules/active/BR-548.department-specific-scorecards.md) — BR-548
+- [Accounting Equation Equality](../rules/active/BR-549.accounting-equation-equality.md) — BR-549
+- [Revenue Recognition on Control Transfer](../rules/active/BR-550.revenue-recognition-on-control-transfer.md) — BR-550
+- [Sales Returns and Discounts Estimation](../rules/active/BR-551.sales-returns-and-discounts-estimation.md) — BR-551
+- [Depreciation of Property, Plant and Equipment](../rules/active/BR-552.depreciation-of-property-plant-and-equipment.md) — BR-552
+- [Supplier Finance Program Disclosure](../rules/active/BR-553.supplier-finance-program-disclosure.md) — BR-553
+- [Consolidation of Subsidiaries](../rules/active/BR-554.consolidation-of-subsidiaries.md) — BR-554
+- [Internal Control Effectiveness Assessment](../rules/active/BR-555.internal-control-effectiveness-assessment.md) — BR-555
+- [Net Income vs. Cash Flow Reconciliation](../rules/active/BR-556.net-income-vs-cash-flow-reconciliation.md) — BR-556
+- [Fiscal Year Selection](../rules/active/BR-557.fiscal-year-selection.md) — BR-557
+- [Closing Entries to Retained Earnings](../rules/active/BR-558.closing-entries-to-retained-earnings.md) — BR-558
+- [Year-End Adjusting Entries](../rules/active/BR-559.year-end-adjusting-entries.md) — BR-559
+- [Balanced Scorecard Perspective Alignment](../rules/active/BR-560.balanced-scorecard-perspective-alignment.md) — BR-560
+- [Shipping Error Impact on Customer Retention](../rules/active/BR-561.shipping-error-impact-on-customer-retention.md) — BR-561
+- [EPS Calculation Rule](../rules/active/BR-562.eps-calculation-rule.md) — BR-562
+- [Free Cash Flow Calculation Rule](../rules/active/BR-563.free-cash-flow-calculation-rule.md) — BR-563
+- [P/E Ratio Interpretation Rule](../rules/active/BR-564.p-e-ratio-interpretation-rule.md) — BR-564
+- [Times Interest Earned Interpretation Rule](../rules/active/BR-565.times-interest-earned-interpretation-rule.md) — BR-565
+- [Horizontal Analysis Rule](../rules/active/BR-566.horizontal-analysis-rule.md) — BR-566
+- [Inventory Valuation Consistency Rule](../rules/active/BR-567.inventory-valuation-consistency-rule.md) — BR-567
+- [Accrual Basis Recognition Rule](../rules/active/BR-568.accrual-basis-recognition-rule.md) — BR-568
+- [Double-Entry Accounting Rule](../rules/active/BR-569.double-entry-accounting-rule.md) — BR-569
+- [Allowance Method for Uncollectibles](../rules/active/BR-570.allowance-method-for-uncollectibles.md) — BR-570
+- [Revenue Recognition Timing](../rules/active/BR-571.revenue-recognition-timing.md) — BR-571
+- [Inventory System Selection](../rules/active/BR-572.inventory-system-selection.md) — BR-572
+- [Bond Premium Amortization](../rules/active/BR-573.bond-premium-amortization.md) — BR-573
+- [Quick Ratio Interpretation](../rules/active/BR-574.quick-ratio-interpretation.md) — BR-574
+- [Sales Discount Terms](../rules/active/BR-575.sales-discount-terms.md) — BR-575
+- [Present Value Concepts](../rules/active/BR-576.present-value-concepts.md) — BR-576
+- [Separation of Duties](../rules/active/BR-577.separation-of-duties.md) — BR-577
+- [LIFO Conformity Rule](../rules/active/BR-578.lifo-conformity-rule.md) — BR-578
+- [Break-Even Analysis Formula](../rules/active/BR-579.break-even-analysis-formula.md) — BR-579
+- [LCM Valuation Rule](../rules/active/BR-580.lcm-valuation-rule.md) — BR-580
+- [EPS Disclosure Requirement](../rules/active/BR-581.eps-disclosure-requirement.md) — BR-581
+- [Differential Analysis for Decision Making](../rules/active/BR-582.differential-analysis-for-decision-making.md) — BR-582
+- [Flexible Budget Adjustment](../rules/active/BR-583.flexible-budget-adjustment.md) — BR-583
+- [Prime Costs Definition](../rules/active/BR-584.prime-costs-definition.md) — BR-584
+- [Conversion Costs Definition](../rules/active/BR-585.conversion-costs-definition.md) — BR-585
+- [Probable and Estimable Contingent Liability Recognition](../rules/active/BR-586.probable-and-estimable-contingent-liability-recognition.md) — BR-586
+- [Probable but Not Estimable Contingent Liability Disclosure](../rules/active/BR-587.probable-but-not-estimable-contingent-liability-disclosure.md) — BR-587
+- [Prior Period Adjustment Treatment](../rules/active/BR-588.prior-period-adjustment-treatment.md) — BR-588
+- [Principle of Exceptions Application](../rules/active/BR-589.principle-of-exceptions-application.md) — BR-589
+- [Period Cost Recognition](../rules/active/BR-590.period-cost-recognition.md) — BR-590
+- [Process or Sell Differential Analysis](../rules/active/BR-591.process-or-sell-differential-analysis.md) — BR-591
+- [Price Variance Calculation](../rules/active/BR-592.price-variance-calculation.md) — BR-592
+- [P/E Ratio Calculation](../rules/active/BR-593.p-e-ratio-calculation.md) — BR-593
+- [Bond Proceeds Calculation](../rules/active/BR-594.bond-proceeds-calculation.md) — BR-594
+- [Product Cost Distortion Prevention](../rules/active/BR-595.product-cost-distortion-prevention.md) — BR-595

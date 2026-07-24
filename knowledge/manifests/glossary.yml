@@ -1,23 +1,2462 @@
----
-manifest: glossary
-version: 1.0.0
-last_updated: 2026-07-24
-total: 0
-by_category:
-  accounting: 0
-  inventory: 0
-  sales: 0
-  procurement: 0
-  hr: 0
-  technical: 0
-  general: 0
-by_context:
-  BC-FIN: 0
-  BC-AR: 0
-  BC-AP: 0
-  BC-CASH: 0
-  BC-INV: 0
-  BC-PROC: 0
-  BC-SALES: 0
-  BC-HR: 0
-terms: []
+[
+  {
+    "term": "Account",
+    "category": "domain"
+  },
+  {
+    "term": "Accounts Payable",
+    "category": "accounting"
+  },
+  {
+    "term": "Accounts Receivable Turnover",
+    "category": "domain"
+  },
+  {
+    "term": "Capital",
+    "category": "domain"
+  },
+  {
+    "term": "Drawing",
+    "category": "domain"
+  },
+  {
+    "term": "Fees Earned",
+    "category": "accounting"
+  },
+  {
+    "term": "GAAP",
+    "category": "acronym"
+  },
+  {
+    "term": "Journal",
+    "category": "accounting"
+  },
+  {
+    "term": "Ledger",
+    "category": "accounting"
+  },
+  {
+    "term": "Liquidity",
+    "category": "domain"
+  },
+  {
+    "term": "Net Income",
+    "category": "domain"
+  },
+  {
+    "term": "Net Loss",
+    "category": "domain"
+  },
+  {
+    "term": "Transaction",
+    "category": "domain"
+  },
+  {
+    "term": "Accrual Basis Accounting",
+    "category": "domain"
+  },
+  {
+    "term": "Cash Basis Accounting",
+    "category": "domain"
+  },
+  {
+    "term": "Working Capital",
+    "category": "domain"
+  },
+  {
+    "term": "Current Ratio",
+    "category": "domain"
+  },
+  {
+    "term": "FIFO",
+    "category": "domain"
+  },
+  {
+    "term": "LIFO",
+    "category": "domain"
+  },
+  {
+    "term": "Straight-Line Depreciation",
+    "category": "accounting"
+  },
+  {
+    "term": "Double-Declining-Balance Depreciation",
+    "category": "domain"
+  },
+  {
+    "term": "Units-of-Activity Depreciation",
+    "category": "domain"
+  },
+  {
+    "term": "Matching Principle",
+    "category": "domain"
+  },
+  {
+    "term": "Solvency",
+    "category": "domain"
+  },
+  {
+    "term": "Profitability",
+    "category": "domain"
+  },
+  {
+    "term": "Diluted Earnings per Share",
+    "category": "domain"
+  },
+  {
+    "term": "Price-Earnings Ratio",
+    "category": "domain"
+  },
+  {
+    "term": "MD&A",
+    "category": "acronym"
+  },
+  {
+    "term": "ESG",
+    "category": "acronym"
+  },
+  {
+    "term": "Dividend Yield",
+    "category": "domain"
+  },
+  {
+    "term": "Times Interest Earned",
+    "category": "domain"
+  },
+  {
+    "term": "Return on Total Assets",
+    "category": "domain"
+  },
+  {
+    "term": "Return on Stockholders' Equity",
+    "category": "domain"
+  },
+  {
+    "term": "Worksheet",
+    "category": "domain"
+  },
+  {
+    "term": "Trial Balance",
+    "category": "accounting"
+  },
+  {
+    "term": "Post-Closing Trial Balance",
+    "category": "domain"
+  },
+  {
+    "term": "Permanent Account",
+    "category": "domain"
+  },
+  {
+    "term": "Temporary Account",
+    "category": "domain"
+  },
+  {
+    "term": "Accrued Revenue",
+    "category": "accounting"
+  },
+  {
+    "term": "Accrued Expense",
+    "category": "accounting"
+  },
+  {
+    "term": "Deferred Revenue",
+    "category": "domain"
+  },
+  {
+    "term": "Deferred Expense",
+    "category": "domain"
+  },
+  {
+    "term": "Accumulated Depreciation",
+    "category": "accounting"
+  },
+  {
+    "term": "Reversing Entry",
+    "category": "domain"
+  },
+  {
+    "term": "Fiscal Year",
+    "category": "domain"
+  },
+  {
+    "term": "Chart of Accounts",
+    "category": "accounting"
+  },
+  {
+    "term": "Corporation",
+    "category": "domain"
+  },
+  {
+    "term": "Stockholders' Equity",
+    "category": "domain"
+  },
+  {
+    "term": "Retained Earnings",
+    "category": "domain"
+  },
+  {
+    "term": "Dividends",
+    "category": "domain"
+  },
+  {
+    "term": "Contra Account",
+    "category": "accounting"
+  },
+  {
+    "term": "Accounting",
+    "category": "domain"
+  },
+  {
+    "term": "Financial Statements",
+    "category": "domain"
+  },
+  {
+    "term": "Multiple-Step Income Statement",
+    "category": "domain"
+  },
+  {
+    "term": "Classified Balance Sheet",
+    "category": "domain"
+  },
+  {
+    "term": "Statement of Owner's Equity",
+    "category": "domain"
+  },
+  {
+    "term": "Statement of Cash Flows",
+    "category": "domain"
+  },
+  {
+    "term": "Accounting Equation",
+    "category": "domain"
+  },
+  {
+    "term": "Proprietorship",
+    "category": "domain"
+  },
+  {
+    "term": "Partnership",
+    "category": "domain"
+  },
+  {
+    "term": "LLC",
+    "category": "acronym"
+  },
+  {
+    "term": "Assets",
+    "category": "domain"
+  },
+  {
+    "term": "Liabilities",
+    "category": "domain"
+  },
+  {
+    "term": "Owner's Equity",
+    "category": "domain"
+  },
+  {
+    "term": "Revenue",
+    "category": "domain"
+  },
+  {
+    "term": "Expenses",
+    "category": "domain"
+  },
+  {
+    "term": "Owner's Drawing",
+    "category": "domain"
+  },
+  {
+    "term": "Cost Principle",
+    "category": "domain"
+  },
+  {
+    "term": "Revenue Recognition",
+    "category": "domain"
+  },
+  {
+    "term": "Business Entity",
+    "category": "domain"
+  },
+  {
+    "term": "Horizontal Analysis",
+    "category": "domain"
+  },
+  {
+    "term": "Ratio of Liabilities to Stockholders' Equity",
+    "category": "domain"
+  },
+  {
+    "term": "Transaction Analysis",
+    "category": "domain"
+  },
+  {
+    "term": "Capital Account",
+    "category": "domain"
+  },
+  {
+    "term": "Drawing Account",
+    "category": "domain"
+  },
+  {
+    "term": "Creditor Risk",
+    "category": "domain"
+  },
+  {
+    "term": "Additional Investment",
+    "category": "domain"
+  },
+  {
+    "term": "T Account",
+    "category": "domain"
+  },
+  {
+    "term": "Debit",
+    "category": "accounting"
+  },
+  {
+    "term": "Credit",
+    "category": "accounting"
+  },
+  {
+    "term": "Normal Balance",
+    "category": "accounting"
+  },
+  {
+    "term": "Journal Entry",
+    "category": "domain"
+  },
+  {
+    "term": "Journalizing",
+    "category": "domain"
+  },
+  {
+    "term": "Posting",
+    "category": "accounting"
+  },
+  {
+    "term": "Double-Entry Accounting",
+    "category": "domain"
+  },
+  {
+    "term": "Unadjusted Trial Balance",
+    "category": "domain"
+  },
+  {
+    "term": "Four-Column Account",
+    "category": "domain"
+  },
+  {
+    "term": "Prepaid Expenses",
+    "category": "domain"
+  },
+  {
+    "term": "Unearned Revenue",
+    "category": "accounting"
+  },
+  {
+    "term": "Expense",
+    "category": "domain"
+  },
+  {
+    "term": "T-Account",
+    "category": "accounting"
+  },
+  {
+    "term": "Correcting Entry",
+    "category": "accounting"
+  },
+  {
+    "term": "Overstatement",
+    "category": "accounting"
+  },
+  {
+    "term": "Omission",
+    "category": "accounting"
+  },
+  {
+    "term": "Posting Error",
+    "category": "accounting"
+  },
+  {
+    "term": "Compensating Error",
+    "category": "accounting"
+  },
+  {
+    "term": "Transposition Error",
+    "category": "accounting"
+  },
+  {
+    "term": "Owner Withdrawal",
+    "category": "accounting"
+  },
+  {
+    "term": "Owner Investment",
+    "category": "accounting"
+  },
+  {
+    "term": "Prepaid Expense",
+    "category": "accounting"
+  },
+  {
+    "term": "Notes Payable",
+    "category": "accounting"
+  },
+  {
+    "term": "Adjusting Entry",
+    "category": "accounting"
+  },
+  {
+    "term": "Depreciation",
+    "category": "accounting"
+  },
+  {
+    "term": "Book Value",
+    "category": "accounting"
+  },
+  {
+    "term": "Fixed Asset",
+    "category": "accounting"
+  },
+  {
+    "term": "Land",
+    "category": "accounting"
+  },
+  {
+    "term": "Buildings",
+    "category": "accounting"
+  },
+  {
+    "term": "Store Equipment",
+    "category": "accounting"
+  },
+  {
+    "term": "Office Equipment",
+    "category": "accounting"
+  },
+  {
+    "term": "Residual Value",
+    "category": "accounting"
+  },
+  {
+    "term": "Useful Life",
+    "category": "accounting"
+  },
+  {
+    "term": "Historical Cost",
+    "category": "accounting"
+  },
+  {
+    "term": "Property Tax",
+    "category": "domain"
+  },
+  {
+    "term": "Vertical Analysis",
+    "category": "domain"
+  },
+  {
+    "term": "Closing Entries",
+    "category": "domain"
+  },
+  {
+    "term": "End-of-Period Spreadsheet",
+    "category": "domain"
+  },
+  {
+    "term": "Owner's Capital",
+    "category": "domain"
+  },
+  {
+    "term": "Current Assets",
+    "category": "domain"
+  },
+  {
+    "term": "Property Plant and Equipment",
+    "category": "domain"
+  },
+  {
+    "term": "Current Liabilities",
+    "category": "domain"
+  },
+  {
+    "term": "Long-Term Liabilities",
+    "category": "domain"
+  },
+  {
+    "term": "Expense Recognition Principle",
+    "category": "domain"
+  },
+  {
+    "term": "Income Summary",
+    "category": "domain"
+  },
+  {
+    "term": "Subsequent Events",
+    "category": "domain"
+  },
+  {
+    "term": "Merchandising Business",
+    "category": "domain"
+  },
+  {
+    "term": "Operating Cycle",
+    "category": "domain"
+  },
+  {
+    "term": "Perpetual Inventory System",
+    "category": "domain"
+  },
+  {
+    "term": "Periodic Inventory System",
+    "category": "domain"
+  },
+  {
+    "term": "Subsidiary Ledger",
+    "category": "domain"
+  },
+  {
+    "term": "Controlling Account",
+    "category": "domain"
+  },
+  {
+    "term": "Credit Terms",
+    "category": "domain"
+  },
+  {
+    "term": "Purchase Discount",
+    "category": "domain"
+  },
+  {
+    "term": "Purchase Returns and Allowances",
+    "category": "domain"
+  },
+  {
+    "term": "Debit Memorandum",
+    "category": "domain"
+  },
+  {
+    "term": "Cost of Goods Sold",
+    "category": "domain"
+  },
+  {
+    "term": "Gross Profit Method",
+    "category": "domain"
+  },
+  {
+    "term": "FOB",
+    "category": "acronym"
+  },
+  {
+    "term": "B2B",
+    "category": "acronym"
+  },
+  {
+    "term": "B2C",
+    "category": "acronym"
+  },
+  {
+    "term": "Sales",
+    "category": "domain"
+  },
+  {
+    "term": "Customer Refunds Payable",
+    "category": "domain"
+  },
+  {
+    "term": "Estimated Returns Inventory",
+    "category": "domain"
+  },
+  {
+    "term": "Credit Memorandum",
+    "category": "domain"
+  },
+  {
+    "term": "Inventory Shrinkage",
+    "category": "domain"
+  },
+  {
+    "term": "Selling Expenses",
+    "category": "domain"
+  },
+  {
+    "term": "Administrative Expenses",
+    "category": "domain"
+  },
+  {
+    "term": "Other Revenue and Expense",
+    "category": "domain"
+  },
+  {
+    "term": "Asset Turnover",
+    "category": "domain"
+  },
+  {
+    "term": "Sales Discounts",
+    "category": "domain"
+  },
+  {
+    "term": "Sales Discounts (Gross Method)",
+    "category": "domain"
+  },
+  {
+    "term": "Sales Discounts (Net Method)",
+    "category": "domain"
+  },
+  {
+    "term": "Delivery Expense",
+    "category": "domain"
+  },
+  {
+    "term": "Freight In",
+    "category": "domain"
+  },
+  {
+    "term": "Estimated Coupons Payable",
+    "category": "domain"
+  },
+  {
+    "term": "Sales Tax Payable",
+    "category": "domain"
+  },
+  {
+    "term": "Trade Discount",
+    "category": "domain"
+  },
+  {
+    "term": "Point-of-Sale Coupon",
+    "category": "domain"
+  },
+  {
+    "term": "Mail-In Rebate",
+    "category": "domain"
+  },
+  {
+    "term": "FOB Shipping Point",
+    "category": "domain"
+  },
+  {
+    "term": "FOB Destination",
+    "category": "domain"
+  },
+  {
+    "term": "Net Purchases",
+    "category": "domain"
+  },
+  {
+    "term": "Cost of Merchandise Purchased",
+    "category": "domain"
+  },
+  {
+    "term": "Credit Card Clearinghouse",
+    "category": "technical"
+  },
+  {
+    "term": "Debit Memo",
+    "category": "domain"
+  },
+  {
+    "term": "Credit Memo",
+    "category": "domain"
+  },
+  {
+    "term": "Sales Discount",
+    "category": "domain"
+  },
+  {
+    "term": "Service Fee",
+    "category": "domain"
+  },
+  {
+    "term": "Weighted Average Cost",
+    "category": "domain"
+  },
+  {
+    "term": "Specific Identification",
+    "category": "domain"
+  },
+  {
+    "term": "Lower of Cost or Market",
+    "category": "domain"
+  },
+  {
+    "term": "Net Realizable Value",
+    "category": "domain"
+  },
+  {
+    "term": "Inventory Turnover",
+    "category": "domain"
+  },
+  {
+    "term": "Days' Sales in Inventory",
+    "category": "domain"
+  },
+  {
+    "term": "Inventory Profits",
+    "category": "domain"
+  },
+  {
+    "term": "Retail Inventory Method",
+    "category": "domain"
+  },
+  {
+    "term": "Purchase Order",
+    "category": "domain"
+  },
+  {
+    "term": "Receiving Report",
+    "category": "domain"
+  },
+  {
+    "term": "LCM",
+    "category": "domain"
+  },
+  {
+    "term": "NRV",
+    "category": "domain"
+  },
+  {
+    "term": "Consigned Inventory",
+    "category": "domain"
+  },
+  {
+    "term": "Consignment",
+    "category": "domain"
+  },
+  {
+    "term": "Consignor",
+    "category": "domain"
+  },
+  {
+    "term": "Consignee",
+    "category": "domain"
+  },
+  {
+    "term": "Cost Flow Assumption",
+    "category": "domain"
+  },
+  {
+    "term": "Physical Inventory",
+    "category": "domain"
+  },
+  {
+    "term": "Sarbanes-Oxley Act",
+    "category": "domain"
+  },
+  {
+    "term": "Internal Control",
+    "category": "domain"
+  },
+  {
+    "term": "Control Environment",
+    "category": "domain"
+  },
+  {
+    "term": "Risk Assessment",
+    "category": "domain"
+  },
+  {
+    "term": "Control Procedures",
+    "category": "domain"
+  },
+  {
+    "term": "Monitoring",
+    "category": "domain"
+  },
+  {
+    "term": "Information and Communication",
+    "category": "domain"
+  },
+  {
+    "term": "Employee Fraud",
+    "category": "domain"
+  },
+  {
+    "term": "Cash Register",
+    "category": "technical"
+  },
+  {
+    "term": "Remittance Advice",
+    "category": "domain"
+  },
+  {
+    "term": "Voucher System",
+    "category": "domain"
+  },
+  {
+    "term": "Electronic Funds Transfer",
+    "category": "technical"
+  },
+  {
+    "term": "ACH",
+    "category": "technical"
+  },
+  {
+    "term": "Cash Short and Over",
+    "category": "domain"
+  },
+  {
+    "term": "COSO",
+    "category": "acronym"
+  },
+  {
+    "term": "Bank Reconciliation",
+    "category": "domain"
+  },
+  {
+    "term": "Bank Statement",
+    "category": "domain"
+  },
+  {
+    "term": "Deposit in Transit",
+    "category": "domain"
+  },
+  {
+    "term": "Outstanding Checks",
+    "category": "domain"
+  },
+  {
+    "term": "NSF Check",
+    "category": "domain"
+  },
+  {
+    "term": "Petty Cash Fund",
+    "category": "domain"
+  },
+  {
+    "term": "Petty Cash Custodian",
+    "category": "domain"
+  },
+  {
+    "term": "Cash Equivalents",
+    "category": "domain"
+  },
+  {
+    "term": "Compensating Balance",
+    "category": "domain"
+  },
+  {
+    "term": "Days' Cash on Hand",
+    "category": "domain"
+  },
+  {
+    "term": "Line of Credit",
+    "category": "domain"
+  },
+  {
+    "term": "Allowance for Doubtful Accounts",
+    "category": "domain"
+  },
+  {
+    "term": "Bad Debt Expense",
+    "category": "domain"
+  },
+  {
+    "term": "Direct Method",
+    "category": "domain"
+  },
+  {
+    "term": "Allowance Method",
+    "category": "domain"
+  },
+  {
+    "term": "Percent of Sales Method",
+    "category": "domain"
+  },
+  {
+    "term": "Analysis of Receivables Method",
+    "category": "domain"
+  },
+  {
+    "term": "Aging Schedule",
+    "category": "domain"
+  },
+  {
+    "term": "Write-Off",
+    "category": "domain"
+  },
+  {
+    "term": "Recovery",
+    "category": "domain"
+  },
+  {
+    "term": "Aging of Receivables",
+    "category": "domain"
+  },
+  {
+    "term": "Days' Sales in Receivables",
+    "category": "domain"
+  },
+  {
+    "term": "Number of Days Past Due",
+    "category": "domain"
+  },
+  {
+    "term": "Due Date",
+    "category": "domain"
+  },
+  {
+    "term": "Fixed Assets",
+    "category": "domain"
+  },
+  {
+    "term": "Intangible Assets",
+    "category": "domain"
+  },
+  {
+    "term": "Capital Expenditure",
+    "category": "domain"
+  },
+  {
+    "term": "Revenue Expenditure",
+    "category": "domain"
+  },
+  {
+    "term": "Construction in Progress",
+    "category": "domain"
+  },
+  {
+    "term": "Lease",
+    "category": "domain"
+  },
+  {
+    "term": "Lessor",
+    "category": "domain"
+  },
+  {
+    "term": "Lessee",
+    "category": "domain"
+  },
+  {
+    "term": "Land Improvements",
+    "category": "domain"
+  },
+  {
+    "term": "Depletion",
+    "category": "domain"
+  },
+  {
+    "term": "Amortization",
+    "category": "domain"
+  },
+  {
+    "term": "Intangible Asset",
+    "category": "domain"
+  },
+  {
+    "term": "Goodwill",
+    "category": "domain"
+  },
+  {
+    "term": "Accelerated Depreciation",
+    "category": "domain"
+  },
+  {
+    "term": "Straight-Line Rate",
+    "category": "technical"
+  },
+  {
+    "term": "MACRS",
+    "category": "technical"
+  },
+  {
+    "term": "Trade-In Allowance",
+    "category": "domain"
+  },
+  {
+    "term": "Boot",
+    "category": "domain"
+  },
+  {
+    "term": "Commercial Substance",
+    "category": "domain"
+  },
+  {
+    "term": "Exchange of Similar Assets",
+    "category": "domain"
+  },
+  {
+    "term": "Fair Market Value",
+    "category": "domain"
+  },
+  {
+    "term": "Current Liability",
+    "category": "domain"
+  },
+  {
+    "term": "Long-Term Liability",
+    "category": "domain"
+  },
+  {
+    "term": "Accrued Liability",
+    "category": "domain"
+  },
+  {
+    "term": "Discount Rate",
+    "category": "domain"
+  },
+  {
+    "term": "Discount",
+    "category": "domain"
+  },
+  {
+    "term": "Proceeds",
+    "category": "domain"
+  },
+  {
+    "term": "FICA",
+    "category": "acronym"
+  },
+  {
+    "term": "Social Security Tax",
+    "category": "domain"
+  },
+  {
+    "term": "Medicare Tax",
+    "category": "domain"
+  },
+  {
+    "term": "FUTA",
+    "category": "acronym"
+  },
+  {
+    "term": "SUTA",
+    "category": "acronym"
+  },
+  {
+    "term": "Gross Pay",
+    "category": "domain"
+  },
+  {
+    "term": "Net Pay",
+    "category": "domain"
+  },
+  {
+    "term": "W-4",
+    "category": "technical"
+  },
+  {
+    "term": "Vacation Pay",
+    "category": "domain"
+  },
+  {
+    "term": "Pension",
+    "category": "domain"
+  },
+  {
+    "term": "401k Plan",
+    "category": "technical"
+  },
+  {
+    "term": "Installment Note",
+    "category": "domain"
+  },
+  {
+    "term": "Mortgage Note",
+    "category": "domain"
+  },
+  {
+    "term": "Creditor",
+    "category": "domain"
+  },
+  {
+    "term": "Debtor",
+    "category": "domain"
+  },
+  {
+    "term": "Quick Ratio",
+    "category": "domain"
+  },
+  {
+    "term": "Face Amount",
+    "category": "domain"
+  },
+  {
+    "term": "Contingent Liability",
+    "category": "domain"
+  },
+  {
+    "term": "Overtime Pay",
+    "category": "domain"
+  },
+  {
+    "term": "Product Warranty",
+    "category": "domain"
+  },
+  {
+    "term": "Defined Contribution Pension Plan",
+    "category": "domain"
+  },
+  {
+    "term": "Defined Benefit Pension Plan",
+    "category": "domain"
+  },
+  {
+    "term": "Payroll Register",
+    "category": "domain"
+  },
+  {
+    "term": "Payroll Summary",
+    "category": "domain"
+  },
+  {
+    "term": "Salaries Payable",
+    "category": "domain"
+  },
+  {
+    "term": "Bond",
+    "category": "domain"
+  },
+  {
+    "term": "Contract Rate",
+    "category": "domain"
+  },
+  {
+    "term": "Market Rate",
+    "category": "domain"
+  },
+  {
+    "term": "Premium on Bonds Payable",
+    "category": "domain"
+  },
+  {
+    "term": "Discount on Bonds Payable",
+    "category": "domain"
+  },
+  {
+    "term": "Carrying Amount",
+    "category": "domain"
+  },
+  {
+    "term": "Form W-2",
+    "category": "domain"
+  },
+  {
+    "term": "Form 941",
+    "category": "domain"
+  },
+  {
+    "term": "Straight-Line Method",
+    "category": "domain"
+  },
+  {
+    "term": "Effective Interest Rate Method",
+    "category": "domain"
+  },
+  {
+    "term": "Redemption",
+    "category": "domain"
+  },
+  {
+    "term": "Call Price",
+    "category": "domain"
+  },
+  {
+    "term": "Net Present Value",
+    "category": "domain"
+  },
+  {
+    "term": "Present Value of $1",
+    "category": "domain"
+  },
+  {
+    "term": "Present Value of an Annuity",
+    "category": "domain"
+  },
+  {
+    "term": "Interest Expense",
+    "category": "domain"
+  },
+  {
+    "term": "Semiannual Interest",
+    "category": "domain"
+  },
+  {
+    "term": "Face Value",
+    "category": "domain"
+  },
+  {
+    "term": "Callable Bonds",
+    "category": "domain"
+  },
+  {
+    "term": "Convertible Bonds",
+    "category": "domain"
+  },
+  {
+    "term": "Semiannual",
+    "category": "domain"
+  },
+  {
+    "term": "Bond Indenture",
+    "category": "domain"
+  },
+  {
+    "term": "Salary Allowance",
+    "category": "domain"
+  },
+  {
+    "term": "Interest Allowance",
+    "category": "domain"
+  },
+  {
+    "term": "Partnership Agreement",
+    "category": "domain"
+  },
+  {
+    "term": "Limited Liability Company (LLC)",
+    "category": "domain"
+  },
+  {
+    "term": "Member Equity",
+    "category": "domain"
+  },
+  {
+    "term": "Mutual Agency",
+    "category": "domain"
+  },
+  {
+    "term": "Unlimited Liability",
+    "category": "domain"
+  },
+  {
+    "term": "Bonus Method",
+    "category": "domain"
+  },
+  {
+    "term": "Revaluation",
+    "category": "domain"
+  },
+  {
+    "term": "Liquidation",
+    "category": "domain"
+  },
+  {
+    "term": "Realization",
+    "category": "domain"
+  },
+  {
+    "term": "Gain on Realization",
+    "category": "domain"
+  },
+  {
+    "term": "Loss on Realization",
+    "category": "domain"
+  },
+  {
+    "term": "Capital Deficiency",
+    "category": "domain"
+  },
+  {
+    "term": "Statement of Partnership Liquidation",
+    "category": "domain"
+  },
+  {
+    "term": "Income-Sharing Ratio",
+    "category": "domain"
+  },
+  {
+    "term": "Safe Payment",
+    "category": "domain"
+  },
+  {
+    "term": "Revenue per Employee",
+    "category": "domain"
+  },
+  {
+    "term": "Bankruptcy",
+    "category": "domain"
+  },
+  {
+    "term": "Stockholder",
+    "category": "domain"
+  },
+  {
+    "term": "Par Value",
+    "category": "domain"
+  },
+  {
+    "term": "No-Par Stock",
+    "category": "domain"
+  },
+  {
+    "term": "Stated Value",
+    "category": "domain"
+  },
+  {
+    "term": "Authorized Stock",
+    "category": "domain"
+  },
+  {
+    "term": "Issued Stock",
+    "category": "domain"
+  },
+  {
+    "term": "Outstanding Stock",
+    "category": "domain"
+  },
+  {
+    "term": "Common Stock",
+    "category": "domain"
+  },
+  {
+    "term": "Preferred Stock",
+    "category": "domain"
+  },
+  {
+    "term": "Paid-In Capital",
+    "category": "domain"
+  },
+  {
+    "term": "Cash Dividend",
+    "category": "domain"
+  },
+  {
+    "term": "Stock Dividend",
+    "category": "domain"
+  },
+  {
+    "term": "Stock Split",
+    "category": "domain"
+  },
+  {
+    "term": "Legal Capital",
+    "category": "domain"
+  },
+  {
+    "term": "Dividends in Arrears",
+    "category": "domain"
+  },
+  {
+    "term": "Articles of Incorporation",
+    "category": "domain"
+  },
+  {
+    "term": "Bylaws",
+    "category": "domain"
+  },
+  {
+    "term": "Board of Directors",
+    "category": "domain"
+  },
+  {
+    "term": "Treasury Stock",
+    "category": "domain"
+  },
+  {
+    "term": "Paid-In Capital from Sale of Treasury Stock",
+    "category": "domain"
+  },
+  {
+    "term": "Statement of Stockholders' Equity",
+    "category": "domain"
+  },
+  {
+    "term": "Prior Period Adjustment",
+    "category": "domain"
+  },
+  {
+    "term": "Restriction",
+    "category": "domain"
+  },
+  {
+    "term": "Legal Restriction",
+    "category": "domain"
+  },
+  {
+    "term": "Contractual Restriction",
+    "category": "domain"
+  },
+  {
+    "term": "Discretionary Restriction",
+    "category": "domain"
+  },
+  {
+    "term": "Product Cost Method",
+    "category": "domain"
+  },
+  {
+    "term": "Average Common Shares Outstanding",
+    "category": "domain"
+  },
+  {
+    "term": "Operating Activities",
+    "category": "domain"
+  },
+  {
+    "term": "Investing Activities",
+    "category": "domain"
+  },
+  {
+    "term": "Financing Activities",
+    "category": "domain"
+  },
+  {
+    "term": "Indirect Method",
+    "category": "domain"
+  },
+  {
+    "term": "Net Cash Inflow",
+    "category": "domain"
+  },
+  {
+    "term": "Cash Outflow",
+    "category": "domain"
+  },
+  {
+    "term": "Non-Cash Adjustment",
+    "category": "domain"
+  },
+  {
+    "term": "Depreciation Expense",
+    "category": "domain"
+  },
+  {
+    "term": "Gain on Sale of Asset",
+    "category": "domain"
+  },
+  {
+    "term": "Noncash Investing and Financing Activities",
+    "category": "domain"
+  },
+  {
+    "term": "Free Cash Flow",
+    "category": "domain"
+  },
+  {
+    "term": "Spreadsheet Method",
+    "category": "technical"
+  },
+  {
+    "term": "Cash Flow per Share",
+    "category": "domain"
+  },
+  {
+    "term": "Reconciliation Schedule",
+    "category": "domain"
+  },
+  {
+    "term": "Cash Received from Customers",
+    "category": "domain"
+  },
+  {
+    "term": "Cash Paid for Merchandise",
+    "category": "domain"
+  },
+  {
+    "term": "Cash Paid for Operating Expenses",
+    "category": "domain"
+  },
+  {
+    "term": "Cash Paid for Interest",
+    "category": "domain"
+  },
+  {
+    "term": "Cash Paid for Income Taxes",
+    "category": "domain"
+  },
+  {
+    "term": "Common-Sized Statement",
+    "category": "domain"
+  },
+  {
+    "term": "Current Position Analysis",
+    "category": "domain"
+  },
+  {
+    "term": "Quick Assets",
+    "category": "domain"
+  },
+  {
+    "term": "Temporary Investments",
+    "category": "domain"
+  },
+  {
+    "term": "Management by Exception",
+    "category": "domain"
+  },
+  {
+    "term": "Non-GAAP",
+    "category": "domain"
+  },
+  {
+    "term": "Financial Gearing",
+    "category": "domain"
+  },
+  {
+    "term": "Annual Report",
+    "category": "domain"
+  },
+  {
+    "term": "Base Year",
+    "category": "domain"
+  },
+  {
+    "term": "Force Majeure",
+    "category": "domain"
+  },
+  {
+    "term": "Form 10-K",
+    "category": "domain"
+  },
+  {
+    "term": "EDGAR",
+    "category": "acronym"
+  },
+  {
+    "term": "Cost",
+    "category": "domain"
+  },
+  {
+    "term": "Cost Object",
+    "category": "domain"
+  },
+  {
+    "term": "Factory Burden",
+    "category": "domain"
+  },
+  {
+    "term": "Indirect Materials",
+    "category": "domain"
+  },
+  {
+    "term": "Indirect Labor",
+    "category": "domain"
+  },
+  {
+    "term": "Controller",
+    "category": "domain"
+  },
+  {
+    "term": "Corporate Finance",
+    "category": "domain"
+  },
+  {
+    "term": "Operations Finance",
+    "category": "domain"
+  },
+  {
+    "term": "Lean Manufacturing",
+    "category": "domain"
+  },
+  {
+    "term": "Cost-Volume-Profit Analysis",
+    "category": "domain"
+  },
+  {
+    "term": "Differential Analysis",
+    "category": "domain"
+  },
+  {
+    "term": "Balanced Scorecard",
+    "category": "domain"
+  },
+  {
+    "term": "Activity-Based Costing",
+    "category": "domain"
+  },
+  {
+    "term": "Managerial Accounting",
+    "category": "domain"
+  },
+  {
+    "term": "Product Cost Distortion",
+    "category": "domain"
+  },
+  {
+    "term": "Period Cost",
+    "category": "domain"
+  },
+  {
+    "term": "Direct Materials",
+    "category": "domain"
+  },
+  {
+    "term": "Direct Labor",
+    "category": "domain"
+  },
+  {
+    "term": "Applied Manufacturing Overhead",
+    "category": "domain"
+  },
+  {
+    "term": "Prime Cost",
+    "category": "domain"
+  },
+  {
+    "term": "Conversion Cost",
+    "category": "domain"
+  },
+  {
+    "term": "Cost of Goods Manufactured",
+    "category": "domain"
+  },
+  {
+    "term": "Work in Process Ledger",
+    "category": "domain"
+  },
+  {
+    "term": "Occupancy Rate",
+    "category": "domain"
+  },
+  {
+    "term": "Guest Nights",
+    "category": "domain"
+  },
+  {
+    "term": "Job Order Costing",
+    "category": "domain"
+  },
+  {
+    "term": "Process Costing",
+    "category": "domain"
+  },
+  {
+    "term": "Hybrid Costing",
+    "category": "domain"
+  },
+  {
+    "term": "Job",
+    "category": "domain"
+  },
+  {
+    "term": "Job Cost Sheet",
+    "category": "domain"
+  },
+  {
+    "term": "Materials Requisition",
+    "category": "domain"
+  },
+  {
+    "term": "Materials Ledger",
+    "category": "domain"
+  },
+  {
+    "term": "Finished Goods Ledger",
+    "category": "domain"
+  },
+  {
+    "term": "Predetermined Overhead Rate",
+    "category": "domain"
+  },
+  {
+    "term": "Activity Base",
+    "category": "domain"
+  },
+  {
+    "term": "Normal Costing",
+    "category": "domain"
+  },
+  {
+    "term": "Actual Costing",
+    "category": "domain"
+  },
+  {
+    "term": "Standard Costing",
+    "category": "domain"
+  },
+  {
+    "term": "Cost of Services",
+    "category": "domain"
+  },
+  {
+    "term": "Unit Cost",
+    "category": "domain"
+  },
+  {
+    "term": "Job Cost Analysis",
+    "category": "domain"
+  },
+  {
+    "term": "Cost Variance Analysis",
+    "category": "domain"
+  },
+  {
+    "term": "Overhead Rate for Services",
+    "category": "domain"
+  },
+  {
+    "term": "Over-Applied Overhead",
+    "category": "domain"
+  },
+  {
+    "term": "Under-Applied Overhead",
+    "category": "domain"
+  },
+  {
+    "term": "Equivalent Units of Production",
+    "category": "domain"
+  },
+  {
+    "term": "Whole Units",
+    "category": "domain"
+  },
+  {
+    "term": "Conversion Costs",
+    "category": "domain"
+  },
+  {
+    "term": "Cost of Production Report",
+    "category": "domain"
+  },
+  {
+    "term": "Started and Completed",
+    "category": "domain"
+  },
+  {
+    "term": "Transferred-In Costs",
+    "category": "domain"
+  },
+  {
+    "term": "FIFO Method",
+    "category": "domain"
+  },
+  {
+    "term": "Weighted Average Method",
+    "category": "domain"
+  },
+  {
+    "term": "Materials Addition Point",
+    "category": "domain"
+  },
+  {
+    "term": "Pull Manufacturing",
+    "category": "domain"
+  },
+  {
+    "term": "Push Manufacturing",
+    "category": "domain"
+  },
+  {
+    "term": "Yield Ratio",
+    "category": "domain"
+  },
+  {
+    "term": "Flavor Changeover Cost",
+    "category": "domain"
+  },
+  {
+    "term": "Four-Step Process",
+    "category": "domain"
+  },
+  {
+    "term": "Activity Rate",
+    "category": "domain"
+  },
+  {
+    "term": "Activity Pool",
+    "category": "domain"
+  },
+  {
+    "term": "Single Plantwide Overhead Rate",
+    "category": "domain"
+  },
+  {
+    "term": "Multiple Production Department Overhead Rate",
+    "category": "domain"
+  },
+  {
+    "term": "Engineering Change Order",
+    "category": "domain"
+  },
+  {
+    "term": "Cost Behavior",
+    "category": "domain"
+  },
+  {
+    "term": "Variable Cost",
+    "category": "domain"
+  },
+  {
+    "term": "Fixed Cost",
+    "category": "domain"
+  },
+  {
+    "term": "Mixed Cost",
+    "category": "domain"
+  },
+  {
+    "term": "Relevant Range",
+    "category": "domain"
+  },
+  {
+    "term": "Contribution Margin",
+    "category": "domain"
+  },
+  {
+    "term": "Break-Even Point",
+    "category": "domain"
+  },
+  {
+    "term": "Target Profit",
+    "category": "domain"
+  },
+  {
+    "term": "Cost-Volume-Profit Chart",
+    "category": "domain"
+  },
+  {
+    "term": "Profit-Volume Chart",
+    "category": "domain"
+  },
+  {
+    "term": "Sales Mix",
+    "category": "domain"
+  },
+  {
+    "term": "Operating Leverage",
+    "category": "domain"
+  },
+  {
+    "term": "Margin of Safety",
+    "category": "domain"
+  },
+  {
+    "term": "Absorption Costing",
+    "category": "domain"
+  },
+  {
+    "term": "Variable Costing",
+    "category": "domain"
+  },
+  {
+    "term": "Cost Allocation",
+    "category": "domain"
+  },
+  {
+    "term": "Product Profitability Report",
+    "category": "domain"
+  },
+  {
+    "term": "Sales-Based Expense Allocation",
+    "category": "domain"
+  },
+  {
+    "term": "Activity-Based Selling/Admin Allocation",
+    "category": "domain"
+  },
+  {
+    "term": "Service Business CVP",
+    "category": "domain"
+  },
+  {
+    "term": "Weighted Average Contribution Margin",
+    "category": "domain"
+  },
+  {
+    "term": "Customer Lifetime Value",
+    "category": "domain"
+  },
+  {
+    "term": "Fixed Cost per Account",
+    "category": "domain"
+  },
+  {
+    "term": "Budget",
+    "category": "domain"
+  },
+  {
+    "term": "Static Budget",
+    "category": "domain"
+  },
+  {
+    "term": "Flexible Budget",
+    "category": "domain"
+  },
+  {
+    "term": "Continuous Budget",
+    "category": "domain"
+  },
+  {
+    "term": "Zero-Based Budgeting",
+    "category": "domain"
+  },
+  {
+    "term": "Incremental Budgeting",
+    "category": "domain"
+  },
+  {
+    "term": "Budget Committee",
+    "category": "domain"
+  },
+  {
+    "term": "Responsibility Center",
+    "category": "domain"
+  },
+  {
+    "term": "Budget Padding",
+    "category": "domain"
+  },
+  {
+    "term": "Master Budget",
+    "category": "domain"
+  },
+  {
+    "term": "Operating Budget",
+    "category": "domain"
+  },
+  {
+    "term": "Cash Budget",
+    "category": "domain"
+  },
+  {
+    "term": "Capital Expenditures Budget",
+    "category": "domain"
+  },
+  {
+    "term": "Budgetary Performance Evaluation",
+    "category": "domain"
+  },
+  {
+    "term": "Direct Materials Purchases Budget",
+    "category": "domain"
+  },
+  {
+    "term": "Direct Labor Cost Budget",
+    "category": "domain"
+  },
+  {
+    "term": "Selling and Administrative Expenses Budget",
+    "category": "domain"
+  },
+  {
+    "term": "Multiperiod Budget",
+    "category": "domain"
+  },
+  {
+    "term": "RVU",
+    "category": "domain"
+  },
+  {
+    "term": "Cash Receipts Schedule",
+    "category": "domain"
+  },
+  {
+    "term": "Cash Disbursements Schedule",
+    "category": "domain"
+  },
+  {
+    "term": "Sales Forecast",
+    "category": "domain"
+  },
+  {
+    "term": "Production Requirements",
+    "category": "domain"
+  },
+  {
+    "term": "Cost of Direct Materials Available for Use",
+    "category": "domain"
+  },
+  {
+    "term": "Cost of Direct Materials Placed in Production",
+    "category": "domain"
+  },
+  {
+    "term": "Total Manufacturing Costs",
+    "category": "domain"
+  },
+  {
+    "term": "Total Work in Process During Period",
+    "category": "domain"
+  },
+  {
+    "term": "Cost of Finished Goods Available for Sale",
+    "category": "domain"
+  },
+  {
+    "term": "Marketable Securities",
+    "category": "domain"
+  },
+  {
+    "term": "Standard Cost System",
+    "category": "technical"
+  },
+  {
+    "term": "Favorable Variance",
+    "category": "domain"
+  },
+  {
+    "term": "Unfavorable Variance",
+    "category": "domain"
+  },
+  {
+    "term": "Budget Performance Report",
+    "category": "domain"
+  },
+  {
+    "term": "Direct Materials Price Variance",
+    "category": "domain"
+  },
+  {
+    "term": "Direct Materials Quantity Variance",
+    "category": "domain"
+  },
+  {
+    "term": "Direct Labor Rate Variance",
+    "category": "domain"
+  },
+  {
+    "term": "Direct Labor Time Variance",
+    "category": "domain"
+  },
+  {
+    "term": "Manufacturing Overhead Controllable Variance",
+    "category": "domain"
+  },
+  {
+    "term": "Fixed Manufacturing Overhead Volume Variance",
+    "category": "domain"
+  },
+  {
+    "term": "Total Manufacturing Cost Variance",
+    "category": "domain"
+  },
+  {
+    "term": "Standard Price",
+    "category": "domain"
+  },
+  {
+    "term": "Standard Quantity",
+    "category": "domain"
+  },
+  {
+    "term": "Controllable Variance",
+    "category": "domain"
+  },
+  {
+    "term": "Volume Variance",
+    "category": "domain"
+  },
+  {
+    "term": "Normal Capacity",
+    "category": "domain"
+  },
+  {
+    "term": "Exchange Rate",
+    "category": "domain"
+  },
+  {
+    "term": "Revenue Price Variance",
+    "category": "domain"
+  },
+  {
+    "term": "Principle of Exceptions",
+    "category": "domain"
+  },
+  {
+    "term": "Ideal Standards",
+    "category": "domain"
+  },
+  {
+    "term": "Normal Standards",
+    "category": "domain"
+  },
+  {
+    "term": "Service Staffing Variance",
+    "category": "domain"
+  },
+  {
+    "term": "Differential Revenue",
+    "category": "domain"
+  },
+  {
+    "term": "Differential Cost",
+    "category": "domain"
+  },
+  {
+    "term": "Sunk Cost",
+    "category": "domain"
+  },
+  {
+    "term": "Opportunity Cost",
+    "category": "domain"
+  },
+  {
+    "term": "Target Costing",
+    "category": "domain"
+  },
+  {
+    "term": "Cost-Plus Pricing",
+    "category": "domain"
+  },
+  {
+    "term": "Production Bottleneck",
+    "category": "domain"
+  },
+  {
+    "term": "Robinson-Patman Act",
+    "category": "domain"
+  },
+  {
+    "term": "Differential Profit (Loss)",
+    "category": "domain"
+  },
+  {
+    "term": "Theory of Constraints",
+    "category": "domain"
+  },
+  {
+    "term": "Yield Pricing",
+    "category": "domain"
+  },
+  {
+    "term": "Cost-Plus Methods",
+    "category": "domain"
+  },
+  {
+    "term": "Markup Percentage",
+    "category": "domain"
+  },
+  {
+    "term": "Capital Investment Analysis",
+    "category": "domain"
+  },
+  {
+    "term": "Average Rate of Return",
+    "category": "domain"
+  },
+  {
+    "term": "Cash Payback Period",
+    "category": "domain"
+  },
+  {
+    "term": "Average Investment",
+    "category": "domain"
+  },
+  {
+    "term": "Time Value of Money",
+    "category": "domain"
+  },
+  {
+    "term": "Annuity",
+    "category": "domain"
+  },
+  {
+    "term": "Target Cost Drift",
+    "category": "domain"
+  },
+  {
+    "term": "Compounding",
+    "category": "domain"
+  },
+  {
+    "term": "Discounting",
+    "category": "domain"
+  },
+  {
+    "term": "Internal Rate of Return",
+    "category": "domain"
+  },
+  {
+    "term": "Hurdle Rate",
+    "category": "domain"
+  },
+  {
+    "term": "Capital Rationing",
+    "category": "domain"
+  },
+  {
+    "term": "Sensitivity Analysis",
+    "category": "domain"
+  },
+  {
+    "term": "Expected Value",
+    "category": "domain"
+  },
+  {
+    "term": "Currency Exchange Rates",
+    "category": "domain"
+  },
+  {
+    "term": "Inflation",
+    "category": "domain"
+  },
+  {
+    "term": "Sustainability",
+    "category": "domain"
+  },
+  {
+    "term": "Annuity Factor",
+    "category": "domain"
+  },
+  {
+    "term": "Desired Rate of Return",
+    "category": "domain"
+  },
+  {
+    "term": "Sequential Revenue Channels",
+    "category": "domain"
+  },
+  {
+    "term": "Theatrical Release",
+    "category": "domain"
+  },
+  {
+    "term": "Syndication",
+    "category": "domain"
+  },
+  {
+    "term": "Discounted Cash Flow",
+    "category": "domain"
+  },
+  {
+    "term": "Net Advantage of Graduate Degree",
+    "category": "domain"
+  },
+  {
+    "term": "Investor",
+    "category": "domain"
+  },
+  {
+    "term": "Investee",
+    "category": "domain"
+  },
+  {
+    "term": "Fair Value Method",
+    "category": "domain"
+  },
+  {
+    "term": "Equity Method",
+    "category": "domain"
+  },
+  {
+    "term": "Trading Securities",
+    "category": "domain"
+  },
+  {
+    "term": "Available-for-Sale Securities",
+    "category": "domain"
+  },
+  {
+    "term": "Unrealized Gain or Loss",
+    "category": "domain"
+  },
+  {
+    "term": "Valuation Allowance",
+    "category": "domain"
+  },
+  {
+    "term": "Responsibility Accounting",
+    "category": "domain"
+  },
+  {
+    "term": "Cost Center",
+    "category": "domain"
+  },
+  {
+    "term": "Profit Center",
+    "category": "domain"
+  },
+  {
+    "term": "Investment Center",
+    "category": "domain"
+  },
+  {
+    "term": "Return on Investment (ROI)",
+    "category": "domain"
+  },
+  {
+    "term": "Residual Income",
+    "category": "domain"
+  },
+  {
+    "term": "Support Department",
+    "category": "domain"
+  },
+  {
+    "term": "Support Department Allocation Rate",
+    "category": "domain"
+  },
+  {
+    "term": "DuPont Formula",
+    "category": "domain"
+  },
+  {
+    "term": "Profit Margin",
+    "category": "domain"
+  },
+  {
+    "term": "Investment Turnover",
+    "category": "domain"
+  },
+  {
+    "term": "Performance Perspective",
+    "category": "domain"
+  },
+  {
+    "term": "Strategic Objective",
+    "category": "domain"
+  },
+  {
+    "term": "Performance Metric",
+    "category": "domain"
+  },
+  {
+    "term": "Leading Indicator",
+    "category": "domain"
+  },
+  {
+    "term": "Lagging Indicator",
+    "category": "domain"
+  },
+  {
+    "term": "Strategy Map",
+    "category": "domain"
+  },
+  {
+    "term": "Measure Map",
+    "category": "domain"
+  },
+  {
+    "term": "Strategic Initiative",
+    "category": "domain"
+  },
+  {
+    "term": "Performance Target",
+    "category": "domain"
+  },
+  {
+    "term": "Operating Income",
+    "category": "domain"
+  },
+  {
+    "term": "Invested Assets",
+    "category": "domain"
+  },
+  {
+    "term": "Decentralized Operations",
+    "category": "domain"
+  },
+  {
+    "term": "10-K",
+    "category": "technical"
+  },
+  {
+    "term": "AOCI",
+    "category": "acronym"
+  },
+  {
+    "term": "PP&E",
+    "category": "acronym"
+  },
+  {
+    "term": "Supplier Finance Program",
+    "category": "domain"
+  },
+  {
+    "term": "Material Weakness",
+    "category": "domain"
+  },
+  {
+    "term": "Critical Audit Matter",
+    "category": "domain"
+  },
+  {
+    "term": "Deferred Income Taxes",
+    "category": "domain"
+  },
+  {
+    "term": "Stock-Based Compensation",
+    "category": "domain"
+  },
+  {
+    "term": "FASB",
+    "category": "acronym"
+  },
+  {
+    "term": "Participative Budgeting",
+    "category": "domain"
+  },
+  {
+    "term": "Profit",
+    "category": "domain"
+  },
+  {
+    "term": "Payroll",
+    "category": "domain"
+  },
+  {
+    "term": "Premium",
+    "category": "domain"
+  },
+  {
+    "term": "Receivables",
+    "category": "domain"
+  },
+  {
+    "term": "Securities and Exchange Commission",
+    "category": "technical"
+  },
+  {
+    "term": "Stock",
+    "category": "domain"
+  },
+  {
+    "term": "Cost Centers",
+    "category": "domain"
+  },
+  {
+    "term": "CVP Analysis",
+    "category": "domain"
+  },
+  {
+    "term": "Depreciable Cost",
+    "category": "domain"
+  },
+  {
+    "term": "DDB Method",
+    "category": "domain"
+  },
+  {
+    "term": "EPS",
+    "category": "domain"
+  },
+  {
+    "term": "Prime Costs",
+    "category": "domain"
+  },
+  {
+    "term": "Private Accounting",
+    "category": "domain"
+  },
+  {
+    "term": "Pro Forma Financial Statements",
+    "category": "domain"
+  },
+  {
+    "term": "Pro Forma Balance Sheet",
+    "category": "domain"
+  },
+  {
+    "term": "Pro Forma Income Statement",
+    "category": "domain"
+  },
+  {
+    "term": "Product Costing Allocation Methods",
+    "category": "domain"
+  },
+  {
+    "term": "Product Costs",
+    "category": "domain"
+  },
+  {
+    "term": "Period Costs",
+    "category": "domain"
+  },
+  {
+    "term": "Process or Sell Decision",
+    "category": "domain"
+  },
+  {
+    "term": "Dynamic Pricing",
+    "category": "domain"
+  },
+  {
+    "term": "Equivalent Units",
+    "category": "domain"
+  },
+  {
+    "term": "Process Manufacturer",
+    "category": "domain"
+  }
+]

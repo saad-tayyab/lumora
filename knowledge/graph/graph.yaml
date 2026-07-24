@@ -1,15 +1,7481 @@
----
-graph_id: KG-001
-name: Lumora ERP Knowledge Graph
-version: 1.0.0
-last_updated: 2026-07-24
-owner: Knowledge Engineer
-description: >
-  Master knowledge graph for the Lumora ERP system.
-  Captures relationships between concepts, rules, workflows, and decisions.
-  Source of truth for Mermaid and JSON representations.
----
+# Financial Knowledge Graph
+# Generated: 2026-07-24T06:53:34.857Z
 
-nodes: []
-
-edges: []
+{
+  "metadata": {
+    "title": "Financial Knowledge Graph",
+    "version": "1.0.0",
+    "generated": "2026-07-24T06:53:34.856Z",
+    "stats": {
+      "concepts": 624,
+      "rules": 595,
+      "relationships": 531,
+      "glossary": 615
+    }
+  },
+  "nodes": [
+    {
+      "id": "CON-FIN-001",
+      "label": "Accounting Equation Solving",
+      "type": "value_object",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-002",
+      "label": "Asset",
+      "type": "entity",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-003",
+      "label": "Liability",
+      "type": "entity",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-004",
+      "label": "Owner's Equity",
+      "type": "entity",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-005",
+      "label": "Revenue",
+      "type": "entity",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-006",
+      "label": "Expense",
+      "type": "entity",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-007",
+      "label": "Business Transaction",
+      "type": "event",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-008",
+      "label": "T Account",
+      "type": "value_object",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-009",
+      "label": "Debit",
+      "type": "value_object",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-010",
+      "label": "Credit",
+      "type": "value_object",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-011",
+      "label": "Journal Entry",
+      "type": "entity",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-012",
+      "label": "General Journal",
+      "type": "entity",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-013",
+      "label": "General Ledger",
+      "type": "aggregate",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-014",
+      "label": "Adjusted Trial Balance",
+      "type": "value_object",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-015",
+      "label": "Income Statement",
+      "type": "entity",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-016",
+      "label": "Statement of Owner's Equity",
+      "type": "entity",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-017",
+      "label": "Consolidated Balance Sheet",
+      "type": "entity",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-018",
+      "label": "Statement of Cash Flows",
+      "type": "entity",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-019",
+      "label": "Accounting Cycle Steps",
+      "type": "policy",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-020",
+      "label": "Adjusting Entry",
+      "type": "command",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-021",
+      "label": "Closing Entry",
+      "type": "command",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-022",
+      "label": "Proprietorship",
+      "type": "entity",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-023",
+      "label": "Depreciation",
+      "type": "value_object",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-024",
+      "label": "Bank Reconciliation",
+      "type": "aggregate",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-025",
+      "label": "Inventory Costing Methods",
+      "type": "policy",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-026",
+      "label": "Accrual Basis Accounting",
+      "type": "policy",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-027",
+      "label": "Cash Basis Accounting",
+      "type": "policy",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-028",
+      "label": "GAAP",
+      "type": "policy",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-029",
+      "label": "Matching Principle",
+      "type": "policy",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-030",
+      "label": "Liquidity Analysis",
+      "type": "value_object",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-031",
+      "label": "Solvency Analysis",
+      "type": "value_object",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-032",
+      "label": "Profitability Analysis",
+      "type": "value_object",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-033",
+      "label": "Accounts Receivable",
+      "type": "entity",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-034",
+      "label": "Inventory Turnover Ratio",
+      "type": "value_object",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-035",
+      "label": "Current Ratio",
+      "type": "value_object",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-036",
+      "label": "Working Capital",
+      "type": "value_object",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-037",
+      "label": "Times Interest Earned Ratio",
+      "type": "value_object",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-038",
+      "label": "Return on Total Assets",
+      "type": "value_object",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-039",
+      "label": "Return on Common Stockholders' Equity",
+      "type": "value_object",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-040",
+      "label": "Earnings Per Share (EPS)",
+      "type": "value_object",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-041",
+      "label": "Price-Earnings (P/E) Ratio",
+      "type": "value_object",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-042",
+      "label": "Dividend Yield",
+      "type": "value_object",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-043",
+      "label": "Corporate Annual Report",
+      "type": "entity",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-044",
+      "label": "ESG Reporting",
+      "type": "entity",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-045",
+      "label": "Worksheet",
+      "type": "value_object",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-046",
+      "label": "Accrued Revenue Adjustment",
+      "type": "command",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-047",
+      "label": "Accrued Expense Adjustment",
+      "type": "command",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-048",
+      "label": "Deferred Revenue",
+      "type": "event",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-049",
+      "label": "Deferred Expense",
+      "type": "event",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-050",
+      "label": "Depreciation Expense",
+      "type": "entity",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-051",
+      "label": "Accumulated Depreciation",
+      "type": "entity",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-052",
+      "label": "Permanent Account",
+      "type": "entity",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-053",
+      "label": "Temporary Account",
+      "type": "entity",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-054",
+      "label": "Reversing Entry",
+      "type": "command",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-055",
+      "label": "Fiscal Year",
+      "type": "value_object",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-056",
+      "label": "Chart of Accounts",
+      "type": "aggregate",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-057",
+      "label": "Corporation",
+      "type": "entity",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-058",
+      "label": "Stockholders' Equity",
+      "type": "entity",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-059",
+      "label": "Retained Earnings Statement",
+      "type": "entity",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-060",
+      "label": "Dividends",
+      "type": "event",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-061",
+      "label": "Financial Statement Preparation Order",
+      "type": "policy",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-062",
+      "label": "Accounting",
+      "type": "entity",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-063",
+      "label": "Financial Statements",
+      "type": "aggregate",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-064",
+      "label": "Assets",
+      "type": "entity",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-065",
+      "label": "Liabilities",
+      "type": "entity",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-066",
+      "label": "Expenses",
+      "type": "entity",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-067",
+      "label": "Net Income Percentage",
+      "type": "value_object",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-068",
+      "label": "Net Loss",
+      "type": "value_object",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-069",
+      "label": "Partnership",
+      "type": "aggregate",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-070",
+      "label": "Limited Liability Company (LLC)",
+      "type": "aggregate",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-071",
+      "label": "Service Business",
+      "type": "entity",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-072",
+      "label": "Merchandising Business",
+      "type": "entity",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-073",
+      "label": "Manufacturing Business",
+      "type": "entity",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-074",
+      "label": "Cost Principle",
+      "type": "policy",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-075",
+      "label": "Business Entity Assumption",
+      "type": "policy",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-076",
+      "label": "Revenue Recognition",
+      "type": "policy",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-077",
+      "label": "Owner's Drawing",
+      "type": "entity",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-078",
+      "label": "Accounts Payable",
+      "type": "entity",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-079",
+      "label": "Horizontal Analysis",
+      "type": "value_object",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-080",
+      "label": "Ratio of Liabilities to Stockholders' Equity",
+      "type": "value_object",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-081",
+      "label": "Business Entity Identification",
+      "type": "value_object",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-082",
+      "label": "Transaction Analysis",
+      "type": "value_object",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-083",
+      "label": "Capital Balance Computation",
+      "type": "value_object",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-084",
+      "label": "Risk Assessment",
+      "type": "policy",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-085",
+      "label": "Account",
+      "type": "entity",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-086",
+      "label": "Rules of Debit and Credit",
+      "type": "policy",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-087",
+      "label": "Normal Balance",
+      "type": "value_object",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-088",
+      "label": "Journal",
+      "type": "entity",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-089",
+      "label": "Journalizing",
+      "type": "entity",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-090",
+      "label": "Ledger",
+      "type": "entity",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-091",
+      "label": "Posting",
+      "type": "entity",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-092",
+      "label": "Double-Entry Accounting System",
+      "type": "policy",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-093",
+      "label": "Four-Column Account",
+      "type": "entity",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-094",
+      "label": "Prepaid Expenses",
+      "type": "entity",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-095",
+      "label": "Unearned Revenue Adjustment",
+      "type": "command",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-096",
+      "label": "Account Receivable",
+      "type": "entity",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-097",
+      "label": "Overstatement Error",
+      "type": "event",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-098",
+      "label": "Omission Error",
+      "type": "event",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-099",
+      "label": "Posting Error",
+      "type": "event",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-100",
+      "label": "Cash Receipt",
+      "type": "command",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-101",
+      "label": "Cash Payment",
+      "type": "command",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-102",
+      "label": "Owner Withdrawal",
+      "type": "command",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-103",
+      "label": "Owner Investment",
+      "type": "command",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-104",
+      "label": "Fees Earned",
+      "type": "entity",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-105",
+      "label": "Prepaid Expense Adjustment",
+      "type": "command",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-106",
+      "label": "Notes Payable",
+      "type": "entity",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-107",
+      "label": "Fixed Asset",
+      "type": "entity",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-108",
+      "label": "Contra Account",
+      "type": "value_object",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-109",
+      "label": "Book Value",
+      "type": "value_object",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-110",
+      "label": "Land",
+      "type": "entity",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-111",
+      "label": "Buildings",
+      "type": "entity",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-112",
+      "label": "Store Equipment",
+      "type": "entity",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-113",
+      "label": "Office Equipment",
+      "type": "entity",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-114",
+      "label": "Property Tax",
+      "type": "entity",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-115",
+      "label": "Vertical Analysis",
+      "type": "value_object",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-116",
+      "label": "End-of-Period Spreadsheet",
+      "type": "aggregate",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-117",
+      "label": "Partner Drawing Account",
+      "type": "entity",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-118",
+      "label": "Liquidity",
+      "type": "value_object",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-119",
+      "label": "Current Asset",
+      "type": "entity",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-120",
+      "label": "Property Plant and Equipment",
+      "type": "entity",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-121",
+      "label": "Current Liability",
+      "type": "aggregate",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-122",
+      "label": "Long-Term Liability",
+      "type": "aggregate",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-123",
+      "label": "Expense Recognition Principle",
+      "type": "policy",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-124",
+      "label": "Closing Entries",
+      "type": "command",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-125",
+      "label": "Permanent Accounts",
+      "type": "entity",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-126",
+      "label": "Temporary Accounts",
+      "type": "entity",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-127",
+      "label": "Subsequent Events",
+      "type": "event",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-128",
+      "label": "Operating Cycle",
+      "type": "aggregate",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-129",
+      "label": "Perpetual Inventory System",
+      "type": "policy",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-130",
+      "label": "Periodic Inventory System",
+      "type": "aggregate",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-131",
+      "label": "Subsidiary Inventory Ledger",
+      "type": "aggregate",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-132",
+      "label": "Credit Terms",
+      "type": "value_object",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-133",
+      "label": "Purchase Discount",
+      "type": "value_object",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-134",
+      "label": "Purchase Returns and Allowances",
+      "type": "event",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-135",
+      "label": "Debit Memorandum",
+      "type": "entity",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-136",
+      "label": "Inventory",
+      "type": "entity",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-137",
+      "label": "Cost of Goods Sold - Periodic",
+      "type": "value_object",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-138",
+      "label": "Gross Profit Method",
+      "type": "policy",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-139",
+      "label": "Chart of Accounts for Retail Business",
+      "type": "aggregate",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-140",
+      "label": "Wholesaler",
+      "type": "entity",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-141",
+      "label": "Retailer",
+      "type": "entity",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-142",
+      "label": "Sales (Revenue)",
+      "type": "entity",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-143",
+      "label": "Credit Card Expense",
+      "type": "entity",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-144",
+      "label": "Sales Discount (from Buyer Perspective: Purchase Discount)",
+      "type": "value_object",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-145",
+      "label": "Sales Returns, Refunds, and Allowances",
+      "type": "event",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-146",
+      "label": "Customer Refunds Payable",
+      "type": "entity",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-147",
+      "label": "Estimated Returns Inventory",
+      "type": "entity",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-148",
+      "label": "Credit Memorandum",
+      "type": "entity",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-149",
+      "label": "FOB Shipping Point",
+      "type": "value_object",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-150",
+      "label": "FOB Destination",
+      "type": "value_object",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-151",
+      "label": "Inventory Shrinkage",
+      "type": "event",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-152",
+      "label": "Selling Expenses",
+      "type": "entity",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-153",
+      "label": "Administrative Expenses",
+      "type": "entity",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-154",
+      "label": "Other Revenue and Expense",
+      "type": "entity",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-155",
+      "label": "Fixed Asset Turnover Ratio",
+      "type": "value_object",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-156",
+      "label": "Sales Discount (Gross Method)",
+      "type": "value_object",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-157",
+      "label": "Sales Discount (Net Method)",
+      "type": "value_object",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-158",
+      "label": "Sales Taxes",
+      "type": "entity",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-159",
+      "label": "Trade Discounts",
+      "type": "value_object",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-160",
+      "label": "Coupon (Point-of-Sale)",
+      "type": "event",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-161",
+      "label": "Coupon (Future Redemption)",
+      "type": "event",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-162",
+      "label": "Estimated Coupons Payable",
+      "type": "entity",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-163",
+      "label": "Rebate (Mail-In)",
+      "type": "event",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-164",
+      "label": "Delivery Expense",
+      "type": "entity",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-165",
+      "label": "Freight In Account",
+      "type": "entity",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-166",
+      "label": "Income Summary",
+      "type": "entity",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-167",
+      "label": "Purchases Discounts Account",
+      "type": "entity",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-168",
+      "label": "Purchases Returns and Allowances Account",
+      "type": "entity",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-169",
+      "label": "Purchase-Related Transaction",
+      "type": "event",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-170",
+      "label": "Sales-Related Transaction",
+      "type": "event",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-171",
+      "label": "Credit Card Sale",
+      "type": "event",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-172",
+      "label": "Customer Refunds and Allowances",
+      "type": "event",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-173",
+      "label": "Sales Tax Collection",
+      "type": "entity",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-174",
+      "label": "Debit Memo",
+      "type": "entity",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-175",
+      "label": "Credit Memo",
+      "type": "event",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-176",
+      "label": "Inventory Cost Flow Assumption",
+      "type": "value_object",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-177",
+      "label": "First-In, First-Out (FIFO)",
+      "type": "policy",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-178",
+      "label": "Last-In, First-Out (LIFO)",
+      "type": "policy",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-179",
+      "label": "Weighted Average Cost Method",
+      "type": "policy",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-180",
+      "label": "Specific Identification Method",
+      "type": "value_object",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-181",
+      "label": "Lower of Cost or Market (LCM)",
+      "type": "policy",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-182",
+      "label": "Net Realizable Value",
+      "type": "value_object",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-183",
+      "label": "Days' Sales in Inventory",
+      "type": "value_object",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-184",
+      "label": "Inventory Control",
+      "type": "policy",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-185",
+      "label": "Retail Method of Inventory Costing",
+      "type": "value_object",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-186",
+      "label": "Gross Profit Method of Inventory Costing",
+      "type": "value_object",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-187",
+      "label": "Purchase Order",
+      "type": "entity",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-188",
+      "label": "Receiving Report",
+      "type": "entity",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-189",
+      "label": "Vendor's Invoice",
+      "type": "entity",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-190",
+      "label": "Inventory Profits (Illusory Profits)",
+      "type": "value_object",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-191",
+      "label": "Consigned Inventory",
+      "type": "aggregate",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-192",
+      "label": "Retail Inventory Method",
+      "type": "policy",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-193",
+      "label": "Sarbanes-Oxley Act",
+      "type": "policy",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-194",
+      "label": "Internal Control",
+      "type": "policy",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-195",
+      "label": "Control Environment",
+      "type": "policy",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-196",
+      "label": "Control Procedures",
+      "type": "policy",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-197",
+      "label": "Monitoring",
+      "type": "policy",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-198",
+      "label": "Information and Communication",
+      "type": "policy",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-199",
+      "label": "Employee Fraud",
+      "type": "event",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-200",
+      "label": "Cash Register Control",
+      "type": "policy",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-201",
+      "label": "Remittance Advice",
+      "type": "event",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-202",
+      "label": "Voucher System",
+      "type": "policy",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-203",
+      "label": "Electronic Funds Transfer (EFT)",
+      "type": "command",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-204",
+      "label": "Cash Short and Over Account",
+      "type": "value_object",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-205",
+      "label": "Inventory Ethics - LCM Application",
+      "type": "policy",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-206",
+      "label": "Bank Statement",
+      "type": "aggregate",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-207",
+      "label": "Deposit in Transit",
+      "type": "event",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-208",
+      "label": "Outstanding Checks",
+      "type": "event",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-209",
+      "label": "NSF Check",
+      "type": "event",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-210",
+      "label": "Petty Cash Fund",
+      "type": "entity",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-211",
+      "label": "Cash Equivalents",
+      "type": "value_object",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-212",
+      "label": "Compensating Balance",
+      "type": "value_object",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-213",
+      "label": "Days' Cash on Hand",
+      "type": "value_object",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-214",
+      "label": "Petty Cash Custodian",
+      "type": "role",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-215",
+      "label": "Special-Purpose Funds",
+      "type": "aggregate",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-216",
+      "label": "Internal Control over Cash",
+      "type": "policy",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-217",
+      "label": "Allowance for Doubtful Accounts",
+      "type": "entity",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-218",
+      "label": "Bad Debt Expense",
+      "type": "entity",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-219",
+      "label": "Direct Method",
+      "type": "value_object",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-220",
+      "label": "Allowance Method",
+      "type": "policy",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-221",
+      "label": "Percent of Sales Method",
+      "type": "policy",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-222",
+      "label": "Analysis of Receivables Method",
+      "type": "policy",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-223",
+      "label": "Aging Schedule",
+      "type": "entity",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-224",
+      "label": "Write-Off",
+      "type": "command",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-225",
+      "label": "Recovery of Bad Debt",
+      "type": "command",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-226",
+      "label": "Aging of Receivables Schedule",
+      "type": "entity",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-227",
+      "label": "Days' Sales in Receivables",
+      "type": "value_object",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-228",
+      "label": "Number of Days Past Due",
+      "type": "value_object",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-229",
+      "label": "Debit Balance in Allowance for Doubtful Accounts",
+      "type": "value_object",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-230",
+      "label": "Fixed Assets",
+      "type": "aggregate",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-231",
+      "label": "Property, Plant, and Equipment",
+      "type": "aggregate",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-232",
+      "label": "Intangible Assets",
+      "type": "aggregate",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-233",
+      "label": "Investment (Long-Term Asset)",
+      "type": "entity",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-234",
+      "label": "Cost Principle for Fixed Assets",
+      "type": "policy",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-235",
+      "label": "Capital Expenditure",
+      "type": "value_object",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-236",
+      "label": "Revenue Expenditure",
+      "type": "value_object",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-237",
+      "label": "Construction in Progress",
+      "type": "entity",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-238",
+      "label": "Lease",
+      "type": "entity",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-239",
+      "label": "Lessor",
+      "type": "role",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-240",
+      "label": "Lessee",
+      "type": "role",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-241",
+      "label": "Residual Value",
+      "type": "value_object",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-242",
+      "label": "Depreciable Cost",
+      "type": "value_object",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-243",
+      "label": "Straight-Line Depreciation",
+      "type": "value_object",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-244",
+      "label": "Units-of-Activity Depreciation",
+      "type": "value_object",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-245",
+      "label": "Double-Declining-Balance Depreciation",
+      "type": "value_object",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-246",
+      "label": "Natural Resources",
+      "type": "entity",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-247",
+      "label": "Depletion",
+      "type": "value_object",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-248",
+      "label": "Accumulated Depletion",
+      "type": "entity",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-249",
+      "label": "Patent",
+      "type": "entity",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-250",
+      "label": "Copyright",
+      "type": "entity",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-251",
+      "label": "Trademark",
+      "type": "entity",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-252",
+      "label": "Goodwill",
+      "type": "entity",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-253",
+      "label": "Amortization",
+      "type": "value_object",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-254",
+      "label": "Trade-In Allowance",
+      "type": "value_object",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-255",
+      "label": "Boot",
+      "type": "value_object",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-256",
+      "label": "Commercial Substance",
+      "type": "value_object",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-257",
+      "label": "Gain on Exchange",
+      "type": "event",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-258",
+      "label": "Loss on Exchange",
+      "type": "event",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-259",
+      "label": "Exchange of Similar Assets",
+      "type": "command",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-260",
+      "label": "Accrued Liability",
+      "type": "entity",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-261",
+      "label": "Interest-Bearing Note",
+      "type": "entity",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-262",
+      "label": "Discounted Note",
+      "type": "entity",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-263",
+      "label": "Current Portion of Long-Term Debt",
+      "type": "entity",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-264",
+      "label": "Payroll",
+      "type": "aggregate",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-265",
+      "label": "Gross Pay",
+      "type": "value_object",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-266",
+      "label": "Net Pay",
+      "type": "value_object",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-267",
+      "label": "FICA Tax",
+      "type": "entity",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-268",
+      "label": "Federal Unemployment Tax (FUTA)",
+      "type": "entity",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-269",
+      "label": "State Unemployment Tax (SUTA)",
+      "type": "entity",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-270",
+      "label": "Payroll Tax",
+      "type": "entity",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-271",
+      "label": "Vacation Pay",
+      "type": "entity",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-272",
+      "label": "Pension",
+      "type": "aggregate",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-273",
+      "label": "Defined Contribution Plan",
+      "type": "entity",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-274",
+      "label": "Defined Benefit Plan",
+      "type": "entity",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-275",
+      "label": "Installment Note",
+      "type": "entity",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-276",
+      "label": "Mortgage Note",
+      "type": "entity",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-277",
+      "label": "Creditor",
+      "type": "role",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-278",
+      "label": "Debtor",
+      "type": "role",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-279",
+      "label": "Contingent Liability",
+      "type": "entity",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-280",
+      "label": "Maturity Value",
+      "type": "value_object",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-281",
+      "label": "Quick Ratio",
+      "type": "value_object",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-282",
+      "label": "Payroll Register",
+      "type": "entity",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-283",
+      "label": "Payroll Summary",
+      "type": "entity",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-284",
+      "label": "Salaries Payable",
+      "type": "entity",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-285",
+      "label": "Bond Payable",
+      "type": "entity",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-286",
+      "label": "Bond Indenture",
+      "type": "entity",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-287",
+      "label": "Term Bonds",
+      "type": "entity",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-288",
+      "label": "Serial Bonds",
+      "type": "entity",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-289",
+      "label": "Convertible Bond",
+      "type": "entity",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-290",
+      "label": "Callable Bond",
+      "type": "entity",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-291",
+      "label": "Bond Discount",
+      "type": "value_object",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-292",
+      "label": "Bond Premium",
+      "type": "value_object",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-293",
+      "label": "Straight-Line Amortization Method",
+      "type": "policy",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-294",
+      "label": "Effective Interest Method",
+      "type": "policy",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-295",
+      "label": "Bond Redemption",
+      "type": "command",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-296",
+      "label": "Gain on Bond Redemption",
+      "type": "event",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-297",
+      "label": "Loss on Bond Redemption",
+      "type": "event",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-298",
+      "label": "Present Value of $1",
+      "type": "value_object",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-299",
+      "label": "Present Value of an Amount",
+      "type": "value_object",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-300",
+      "label": "Bond Carrying Amount (Book Value)",
+      "type": "value_object",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-301",
+      "label": "Interest Expense",
+      "type": "entity",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-302",
+      "label": "Bonds Payable",
+      "type": "entity",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-303",
+      "label": "Convertible Bonds",
+      "type": "entity",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-304",
+      "label": "Carrying Amount of Bonds",
+      "type": "value_object",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-305",
+      "label": "Semiannual Interest Payment",
+      "type": "event",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-306",
+      "label": "Partner Capital Account",
+      "type": "entity",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-307",
+      "label": "Partnership Agreement",
+      "type": "entity",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-308",
+      "label": "Salary Allowance",
+      "type": "value_object",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-309",
+      "label": "Interest Allowance",
+      "type": "value_object",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-310",
+      "label": "Partnership Formation",
+      "type": "command",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-311",
+      "label": "Statement of Partnership Equity",
+      "type": "entity",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-312",
+      "label": "Admission of New Partner by Investment",
+      "type": "command",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-313",
+      "label": "Asset Revaluation",
+      "type": "command",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-314",
+      "label": "Partnership Liquidation",
+      "type": "command",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-315",
+      "label": "Realization",
+      "type": "event",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-316",
+      "label": "Gain on Realization",
+      "type": "event",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-317",
+      "label": "Loss on Realization",
+      "type": "event",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-318",
+      "label": "Capital Deficiency",
+      "type": "value_object",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-319",
+      "label": "Statement of Partnership Liquidation",
+      "type": "entity",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-320",
+      "label": "Installment Liquidation",
+      "type": "command",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-321",
+      "label": "Statement of LLC Liquidation",
+      "type": "entity",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-322",
+      "label": "Revenue per Employee",
+      "type": "value_object",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-323",
+      "label": "Stock",
+      "type": "entity",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-324",
+      "label": "Common Stock",
+      "type": "entity",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-325",
+      "label": "Cumulative Preferred Stock",
+      "type": "entity",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-326",
+      "label": "Paid-In Capital",
+      "type": "aggregate",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-327",
+      "label": "Cash Dividend",
+      "type": "event",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-328",
+      "label": "Stock Dividend",
+      "type": "event",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-329",
+      "label": "Stock Split",
+      "type": "event",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-330",
+      "label": "Legal Capital",
+      "type": "value_object",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-331",
+      "label": "Discount on Stock",
+      "type": "value_object",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-332",
+      "label": "Premium on Stock",
+      "type": "value_object",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-333",
+      "label": "Treasury Stock",
+      "type": "entity",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-334",
+      "label": "Paid-In Capital from Sale of Treasury Stock",
+      "type": "entity",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-335",
+      "label": "Statement of Stockholders' Equity",
+      "type": "entity",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-336",
+      "label": "Prior Period Adjustment",
+      "type": "event",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-337",
+      "label": "Restriction on Retained Earnings",
+      "type": "policy",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-338",
+      "label": "Dividends Per Share",
+      "type": "value_object",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-339",
+      "label": "Operating Activities",
+      "type": "value_object",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-340",
+      "label": "Investing Activities",
+      "type": "value_object",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-341",
+      "label": "Financing Activities",
+      "type": "value_object",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-342",
+      "label": "Indirect Method",
+      "type": "value_object",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-343",
+      "label": "Net Cash Inflow",
+      "type": "value_object",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-344",
+      "label": "Cash Outflow",
+      "type": "event",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-345",
+      "label": "Non-Cash Adjustment",
+      "type": "value_object",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-346",
+      "label": "Working Capital Change Adjustment",
+      "type": "value_object",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-347",
+      "label": "Noncash Investing and Financing Activities",
+      "type": "value_object",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-348",
+      "label": "Free Cash Flow",
+      "type": "value_object",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-349",
+      "label": "Spreadsheet Method",
+      "type": "value_object",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-350",
+      "label": "Financial Distress Signal",
+      "type": "policy",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-351",
+      "label": "Reconciliation Schedule",
+      "type": "value_object",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-352",
+      "label": "Cash Received from Customers",
+      "type": "value_object",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-353",
+      "label": "Cash Paid for Merchandise",
+      "type": "value_object",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-354",
+      "label": "Cash Paid for Operating Expenses",
+      "type": "value_object",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-355",
+      "label": "Cash Paid for Interest",
+      "type": "value_object",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-356",
+      "label": "Cash Paid for Income Taxes",
+      "type": "value_object",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-357",
+      "label": "Gain on Sale of Land",
+      "type": "value_object",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-358",
+      "label": "Depreciation Exclusion",
+      "type": "policy",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-359",
+      "label": "Common-Sized Statement",
+      "type": "value_object",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-360",
+      "label": "Current Position Analysis",
+      "type": "aggregate",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-361",
+      "label": "Operating Income Percentage",
+      "type": "value_object",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-362",
+      "label": "Data Analytics Databases",
+      "type": "entity",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-363",
+      "label": "Ratio of Fixed Assets to Long-Term Liabilities",
+      "type": "value_object",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-364",
+      "label": "Leverage",
+      "type": "value_object",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-365",
+      "label": "Managerial Accounting",
+      "type": "aggregate",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-366",
+      "label": "Financial Accounting",
+      "type": "aggregate",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-367",
+      "label": "Strategic Planning",
+      "type": "policy",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-368",
+      "label": "Operational Planning",
+      "type": "policy",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-369",
+      "label": "Measurement",
+      "type": "policy",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-370",
+      "label": "Evaluation",
+      "type": "policy",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-371",
+      "label": "Control",
+      "type": "policy",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-372",
+      "label": "Cost Object",
+      "type": "entity",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-373",
+      "label": "Direct Materials",
+      "type": "entity",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-374",
+      "label": "Indirect Cost",
+      "type": "value_object",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-375",
+      "label": "Manufacturing Overhead",
+      "type": "aggregate",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-376",
+      "label": "Prime Costs",
+      "type": "value_object",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-377",
+      "label": "Conversion Costs",
+      "type": "value_object",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-378",
+      "label": "Product Costs",
+      "type": "value_object",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-379",
+      "label": "Period Costs",
+      "type": "value_object",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-380",
+      "label": "Sustainability",
+      "type": "policy",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-381",
+      "label": "Eco-Efficiency Measures",
+      "type": "value_object",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-382",
+      "label": "Materials Inventory",
+      "type": "entity",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-383",
+      "label": "Work in Process Inventory",
+      "type": "entity",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-384",
+      "label": "Finished Goods Inventory",
+      "type": "entity",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-385",
+      "label": "Statement of Cost of Goods Manufactured",
+      "type": "entity",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-386",
+      "label": "Verticals",
+      "type": "entity",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-387",
+      "label": "Horizontals",
+      "type": "entity",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-388",
+      "label": "Certified Management Accountant",
+      "type": "entity",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-389",
+      "label": "Product Cost Distortion",
+      "type": "event",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-390",
+      "label": "Period Cost",
+      "type": "value_object",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-391",
+      "label": "Indirect Materials",
+      "type": "entity",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-392",
+      "label": "Indirect Labor",
+      "type": "entity",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-393",
+      "label": "Prime Cost",
+      "type": "value_object",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-394",
+      "label": "Conversion Cost",
+      "type": "value_object",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-395",
+      "label": "Occupancy Rate",
+      "type": "value_object",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-396",
+      "label": "Guest Nights",
+      "type": "value_object",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-397",
+      "label": "Available Room Nights",
+      "type": "value_object",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-398",
+      "label": "Manufacturing Costs",
+      "type": "value_object",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-399",
+      "label": "Cost of Finished Goods Available for Sale",
+      "type": "value_object",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-400",
+      "label": "Cost System",
+      "type": "entity",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-401",
+      "label": "Job Order Costing",
+      "type": "aggregate",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-402",
+      "label": "Multi-Department Process Costing",
+      "type": "aggregate",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-403",
+      "label": "Hybrid Costing",
+      "type": "entity",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-404",
+      "label": "Job",
+      "type": "entity",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-405",
+      "label": "Job Cost Sheet",
+      "type": "entity",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-406",
+      "label": "Materials Requisition",
+      "type": "command",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-407",
+      "label": "Materials Ledger",
+      "type": "entity",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-408",
+      "label": "Work in Process Ledger",
+      "type": "entity",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-409",
+      "label": "Finished Goods Ledger",
+      "type": "entity",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-410",
+      "label": "Predetermined Overhead Rate",
+      "type": "value_object",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-411",
+      "label": "Activity Base",
+      "type": "value_object",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-412",
+      "label": "Cost Allocation Base",
+      "type": "value_object",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-413",
+      "label": "Normal Costing",
+      "type": "policy",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-414",
+      "label": "Actual Costing",
+      "type": "policy",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-415",
+      "label": "Standard Costing",
+      "type": "policy",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-416",
+      "label": "Job Order Service Business",
+      "type": "entity",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-417",
+      "label": "Cost of Services Account",
+      "type": "entity",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-418",
+      "label": "Cost Variance Analysis",
+      "type": "value_object",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-419",
+      "label": "Unit Cost",
+      "type": "value_object",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-420",
+      "label": "Cost Comparison",
+      "type": "process",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-421",
+      "label": "Service Business Job Costing",
+      "type": "entity",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-422",
+      "label": "Direct Labor Rate for Services",
+      "type": "value_object",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-423",
+      "label": "Overhead Rate for Services",
+      "type": "value_object",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-424",
+      "label": "Gross Profit for Services",
+      "type": "value_object",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-425",
+      "label": "Job Order Costing Decision Making",
+      "type": "process",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-426",
+      "label": "Factory Labor",
+      "type": "value_object",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-427",
+      "label": "Over-Applied Overhead",
+      "type": "value_object",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-428",
+      "label": "Under-Applied Overhead",
+      "type": "value_object",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-429",
+      "label": "Equivalent Units of Production",
+      "type": "value_object",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-430",
+      "label": "Whole Units",
+      "type": "value_object",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-431",
+      "label": "Direct Materials Equivalent Units",
+      "type": "value_object",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-432",
+      "label": "Conversion Equivalent Units",
+      "type": "value_object",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-433",
+      "label": "Cost of Production Report",
+      "type": "entity",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-434",
+      "label": "Started and Completed Units",
+      "type": "value_object",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-435",
+      "label": "Transferred-In Costs",
+      "type": "value_object",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-436",
+      "label": "Three Groups of Units",
+      "type": "value_object",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-437",
+      "label": "Materials Addition Point",
+      "type": "value_object",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-438",
+      "label": "Cost Per Equivalent Unit",
+      "type": "value_object",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-439",
+      "label": "FIFO Method",
+      "type": "value_object",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-440",
+      "label": "Weighted Average Method in Process Costing",
+      "type": "value_object",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-441",
+      "label": "Lean Manufacturing",
+      "type": "policy",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-442",
+      "label": "Pull Manufacturing",
+      "type": "policy",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-443",
+      "label": "Push Manufacturing",
+      "type": "policy",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-444",
+      "label": "Transferred-In Costs Between Departments",
+      "type": "event",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-445",
+      "label": "Yield Ratio",
+      "type": "value_object",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-446",
+      "label": "Flavor Changeover Cost",
+      "type": "value_object",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-447",
+      "label": "Process Costing Journal Entries",
+      "type": "command",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-448",
+      "label": "Activity-Based Costing (ABC)",
+      "type": "policy",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-449",
+      "label": "Activity Rate",
+      "type": "value_object",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-450",
+      "label": "Activity Pool",
+      "type": "aggregate",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-451",
+      "label": "Activity Base (Activity Driver)",
+      "type": "value_object",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-452",
+      "label": "Single Plantwide Overhead Rate",
+      "type": "policy",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-453",
+      "label": "Multiple Production Department Overhead Rate",
+      "type": "policy",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-454",
+      "label": "ABC Selling and Administrative Expense Allocation",
+      "type": "policy",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-455",
+      "label": "Cost Pool",
+      "type": "aggregate",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-456",
+      "label": "Direct Labor Hour (dlh)",
+      "type": "value_object",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-457",
+      "label": "Engineering Change Order (ECO)",
+      "type": "entity",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-458",
+      "label": "Cost Behavior",
+      "type": "value_object",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-459",
+      "label": "Variable Cost Method",
+      "type": "value_object",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-460",
+      "label": "Fixed Cost",
+      "type": "entity",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-461",
+      "label": "Mixed Cost",
+      "type": "value_object",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-462",
+      "label": "Relevant Range",
+      "type": "value_object",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-463",
+      "label": "Contribution Margin Ratio",
+      "type": "value_object",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-464",
+      "label": "Break-Even Point",
+      "type": "value_object",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-465",
+      "label": "Target Profit Sales",
+      "type": "value_object",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-466",
+      "label": "Cost-Volume-Profit Chart",
+      "type": "value_object",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-467",
+      "label": "Profit-Volume Chart",
+      "type": "value_object",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-468",
+      "label": "Sales Mix",
+      "type": "value_object",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-469",
+      "label": "Operating Leverage",
+      "type": "value_object",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-470",
+      "label": "Margin of Safety",
+      "type": "value_object",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-471",
+      "label": "Absorption Costing",
+      "type": "policy",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-472",
+      "label": "Variable Costing",
+      "type": "policy",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-473",
+      "label": "Cost-Volume-Profit Analysis for Service Businesses",
+      "type": "policy",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-474",
+      "label": "Product Profitability Report",
+      "type": "entity",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-475",
+      "label": "Sales-Based Expense Allocation",
+      "type": "policy",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-476",
+      "label": "Manufacturing Overhead Cost per Unit Comparison",
+      "type": "entity",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-477",
+      "label": "Break-Even Analysis for Service Business",
+      "type": "policy",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-478",
+      "label": "Weighted Average Contribution Margin",
+      "type": "value_object",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-479",
+      "label": "Service Company Break-Even",
+      "type": "value_object",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-480",
+      "label": "Promotional Campaign Break-Even",
+      "type": "value_object",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-481",
+      "label": "Budget",
+      "type": "aggregate",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-482",
+      "label": "Static Budget",
+      "type": "entity",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-483",
+      "label": "Flexible Budget",
+      "type": "entity",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-484",
+      "label": "Continuous Budget",
+      "type": "entity",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-485",
+      "label": "Zero-Based Budgeting",
+      "type": "policy",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-486",
+      "label": "Incremental Budgeting",
+      "type": "policy",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-487",
+      "label": "Budget Committee",
+      "type": "role",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-488",
+      "label": "Budget Gaming",
+      "type": "policy",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-489",
+      "label": "Nonmanufacturing Staffing Budget Scenario",
+      "type": "aggregate",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-490",
+      "label": "Multiperiod Budget",
+      "type": "aggregate",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-491",
+      "label": "Sales Budget Forecasting",
+      "type": "aggregate",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-492",
+      "label": "Production Budget",
+      "type": "aggregate",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-493",
+      "label": "Direct Materials Purchases Budget",
+      "type": "aggregate",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-494",
+      "label": "Manufacturing Overhead Cost Budget",
+      "type": "aggregate",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-495",
+      "label": "Selling and Administrative Expenses Budget",
+      "type": "aggregate",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-496",
+      "label": "Cash Budget",
+      "type": "aggregate",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-497",
+      "label": "Capital Expenditures Budget",
+      "type": "aggregate",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-498",
+      "label": "Production Budget with Ending Inventory Percentage",
+      "type": "aggregate",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-499",
+      "label": "Multi-Product Direct Materials Budget",
+      "type": "aggregate",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-500",
+      "label": "Multi-Department Direct Labor Budget",
+      "type": "aggregate",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-501",
+      "label": "Cash Receipts Schedule",
+      "type": "aggregate",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-502",
+      "label": "Cash Disbursements Schedule",
+      "type": "aggregate",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-503",
+      "label": "Standard Cost",
+      "type": "value_object",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-504",
+      "label": "Budget Performance Report",
+      "type": "entity",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-505",
+      "label": "Total Manufacturing Cost Variance",
+      "type": "value_object",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-506",
+      "label": "Direct Materials Price Variance",
+      "type": "value_object",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-507",
+      "label": "Direct Materials Quantity Variance",
+      "type": "value_object",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-508",
+      "label": "Direct Labor Rate Variance",
+      "type": "value_object",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-509",
+      "label": "Direct Labor Time Variance",
+      "type": "value_object",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-510",
+      "label": "Manufacturing Overhead Cost Variance Report",
+      "type": "entity",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-511",
+      "label": "Variable Manufacturing Overhead Controllable Variance",
+      "type": "value_object",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-512",
+      "label": "Fixed Manufacturing Overhead Volume Variance",
+      "type": "value_object",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-513",
+      "label": "Favorable Cost Variance",
+      "type": "value_object",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-514",
+      "label": "Unfavorable Cost Variance",
+      "type": "value_object",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-515",
+      "label": "Revenue Price Variance",
+      "type": "value_object",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-516",
+      "label": "Revenue Volume Variance",
+      "type": "value_object",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-517",
+      "label": "Standard Hours for Actual Production",
+      "type": "value_object",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-518",
+      "label": "Ideal Standards",
+      "type": "value_object",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-519",
+      "label": "Normal Standards",
+      "type": "value_object",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-520",
+      "label": "Differential Analysis",
+      "type": "value_object",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-521",
+      "label": "Differential Revenue",
+      "type": "value_object",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-522",
+      "label": "Differential Cost",
+      "type": "value_object",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-523",
+      "label": "Differential Profit",
+      "type": "value_object",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-524",
+      "label": "Sunk Cost",
+      "type": "value_object",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-525",
+      "label": "Opportunity Cost",
+      "type": "value_object",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-526",
+      "label": "Target Costing",
+      "type": "policy",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-527",
+      "label": "Total Cost Method",
+      "type": "policy",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-528",
+      "label": "Production Bottleneck",
+      "type": "entity",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-529",
+      "label": "Theory of Constraints",
+      "type": "policy",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-530",
+      "label": "Unit Contribution Margin per Bottleneck Hour",
+      "type": "value_object",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-531",
+      "label": "Yield Pricing",
+      "type": "policy",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-532",
+      "label": "Cost-Plus Pricing",
+      "type": "policy",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-533",
+      "label": "Desired Profit",
+      "type": "value_object",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-534",
+      "label": "Target Cost",
+      "type": "value_object",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-535",
+      "label": "Capital Investment Analysis",
+      "type": "policy",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-536",
+      "label": "Average Rate of Return",
+      "type": "value_object",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-537",
+      "label": "Cash Payback Period",
+      "type": "value_object",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-538",
+      "label": "Time Value of Money",
+      "type": "value_object",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-539",
+      "label": "Annuity",
+      "type": "value_object",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-540",
+      "label": "Net Present Value Method",
+      "type": "value_object",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-541",
+      "label": "Present Value Index",
+      "type": "value_object",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-542",
+      "label": "Internal Rate of Return Method",
+      "type": "value_object",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-543",
+      "label": "Hurdle Rate",
+      "type": "value_object",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-544",
+      "label": "Capital Rationing",
+      "type": "policy",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-545",
+      "label": "Sensitivity Analysis",
+      "type": "policy",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-546",
+      "label": "Expected Value Analysis",
+      "type": "policy",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-547",
+      "label": "Complicating Factor — Income Tax",
+      "type": "policy",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-548",
+      "label": "Complicating Factor — Unequal Lives",
+      "type": "policy",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-549",
+      "label": "Complicating Factor — Lease vs. Purchase",
+      "type": "policy",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-550",
+      "label": "Complicating Factor — Sustainability",
+      "type": "policy",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-551",
+      "label": "Net Present Value (NPV)",
+      "type": "value_object",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-552",
+      "label": "Capital Investment Project",
+      "type": "aggregate",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-553",
+      "label": "Net Present Value of Sequential Revenue Streams",
+      "type": "value_object",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-554",
+      "label": "Forecast vs Actual Investment Performance",
+      "type": "value_object",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-555",
+      "label": "Qualitative Investment Factors",
+      "type": "value_object",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-556",
+      "label": "Currency Exchange Rate Impact",
+      "type": "value_object",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-557",
+      "label": "Personal Investment Analysis",
+      "type": "value_object",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-558",
+      "label": "Equity Investment",
+      "type": "aggregate",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-559",
+      "label": "Fair Value Method",
+      "type": "policy",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-560",
+      "label": "Equity Method",
+      "type": "policy",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-561",
+      "label": "Trading Securities",
+      "type": "entity",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-562",
+      "label": "Available-for-Sale Securities",
+      "type": "entity",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-563",
+      "label": "Valuation Allowance for Available-for-Sale Investments",
+      "type": "entity",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-564",
+      "label": "Decentralized Operations",
+      "type": "aggregate",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-565",
+      "label": "Cost Center",
+      "type": "entity",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-566",
+      "label": "Profit Center",
+      "type": "entity",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-567",
+      "label": "Investment Center",
+      "type": "entity",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-568",
+      "label": "Return on Investment",
+      "type": "value_object",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-569",
+      "label": "Residual Income",
+      "type": "value_object",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-570",
+      "label": "Support Department Allocation",
+      "type": "process",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-571",
+      "label": "DuPont Formula",
+      "type": "value_object",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-572",
+      "label": "Balanced Scorecard",
+      "type": "aggregate",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-573",
+      "label": "Performance Perspective",
+      "type": "value_object",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-574",
+      "label": "Strategic Objective",
+      "type": "value_object",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-575",
+      "label": "Performance Metric",
+      "type": "value_object",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-576",
+      "label": "Leading Indicator",
+      "type": "value_object",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-577",
+      "label": "Lagging Indicator",
+      "type": "value_object",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-578",
+      "label": "Strategy Map",
+      "type": "value_object",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-579",
+      "label": "Measure Map",
+      "type": "value_object",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-580",
+      "label": "Profit Margin",
+      "type": "value_object",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-581",
+      "label": "Investment Turnover",
+      "type": "value_object",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-582",
+      "label": "Consolidated Statement of Shareholders' Equity",
+      "type": "entity",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-583",
+      "label": "Sales-Related Reserves",
+      "type": "value_object",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-584",
+      "label": "Property, Plant and Equipment",
+      "type": "aggregate",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-585",
+      "label": "Accrued Liabilities",
+      "type": "entity",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-586",
+      "label": "Supplier Finance Program",
+      "type": "value_object",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-587",
+      "label": "Internal Control over Financial Reporting",
+      "type": "policy",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-588",
+      "label": "Earnings Per Share (EPS) on Common Stock",
+      "type": "value_object",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-589",
+      "label": "Profit",
+      "type": "value_object",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-590",
+      "label": "Performance Measurement Systems",
+      "type": "entity",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-591",
+      "label": "Performance Metrics",
+      "type": "value_object",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-592",
+      "label": "Physical Inventory",
+      "type": "entity",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-593",
+      "label": "Premium (Bonds)",
+      "type": "value_object",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-594",
+      "label": "Quick Assets",
+      "type": "value_object",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-595",
+      "label": "Receivables",
+      "type": "aggregate",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-596",
+      "label": "Sales Discount",
+      "type": "value_object",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-597",
+      "label": "Securities and Exchange Commission (SEC)",
+      "type": "entity",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-598",
+      "label": "Straight-Line Method (Depreciation)",
+      "type": "policy",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-599",
+      "label": "Controllable Expenses",
+      "type": "value_object",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-600",
+      "label": "Controller",
+      "type": "role",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-601",
+      "label": "Cost Centers",
+      "type": "aggregate",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-602",
+      "label": "Cost-Volume-Profit Analysis",
+      "type": "command",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-603",
+      "label": "Current Assets",
+      "type": "aggregate",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-604",
+      "label": "Current Liabilities",
+      "type": "aggregate",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-605",
+      "label": "Direct Costs",
+      "type": "value_object",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-606",
+      "label": "Double-Declining-Balance Method",
+      "type": "policy",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-607",
+      "label": "Equity",
+      "type": "aggregate",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-608",
+      "label": "Fixed Costs",
+      "type": "value_object",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-609",
+      "label": "FIFO (First-In, First-Out)",
+      "type": "policy",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-610",
+      "label": "LIFO (Last-In, First-Out)",
+      "type": "policy",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-611",
+      "label": "Process Manufacturer",
+      "type": "role",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-612",
+      "label": "Prior Period Adjustments",
+      "type": "event",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-613",
+      "label": "Private Accounting",
+      "type": "role",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-614",
+      "label": "Pro Forma Financial Statements",
+      "type": "aggregate",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-615",
+      "label": "Pro Forma Balance Sheet",
+      "type": "aggregate",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-616",
+      "label": "Pro Forma Income Statement",
+      "type": "aggregate",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-617",
+      "label": "Contingent Liability - Probable and Estimable",
+      "type": "entity",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-618",
+      "label": "Proceeds from Issuing Bonds",
+      "type": "value_object",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-619",
+      "label": "Principle of Exceptions",
+      "type": "policy",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-620",
+      "label": "Price Variances",
+      "type": "value_object",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-621",
+      "label": "Product Costing Allocation Methods",
+      "type": "policy",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-622",
+      "label": "Product Cost Method (for Pricing)",
+      "type": "policy",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-623",
+      "label": "Process or Sell Decision",
+      "type": "command",
+      "context": "BC-FIN"
+    },
+    {
+      "id": "CON-FIN-624",
+      "label": "Dynamic Pricing",
+      "type": "policy",
+      "context": "BC-FIN"
+    }
+  ],
+  "edges": [
+    {
+      "id": "REL-001",
+      "source": "CON-FIN-011",
+      "target": "CON-FIN-012",
+      "type": "has-a",
+      "cardinality": "1:N"
+    },
+    {
+      "id": "REL-002",
+      "source": "CON-FIN-012",
+      "target": "CON-FIN-013",
+      "type": "depends-on",
+      "cardinality": "1:1"
+    },
+    {
+      "id": "REL-003",
+      "source": "CON-FIN-015",
+      "target": "CON-FIN-016",
+      "type": "depends-on",
+      "cardinality": "1:1"
+    },
+    {
+      "id": "REL-004",
+      "source": "CON-FIN-005",
+      "target": "CON-FIN-015",
+      "type": "has-a",
+      "cardinality": "1:N"
+    },
+    {
+      "id": "REL-005",
+      "source": "CON-FIN-006",
+      "target": "CON-FIN-015",
+      "type": "has-a",
+      "cardinality": "1:N"
+    },
+    {
+      "id": "REL-006",
+      "source": "CON-FIN-004",
+      "target": "CON-FIN-005",
+      "type": "depends-on",
+      "cardinality": "1:N"
+    },
+    {
+      "id": "REL-007",
+      "source": "CON-FIN-004",
+      "target": "CON-FIN-006",
+      "type": "depends-on",
+      "cardinality": "1:N"
+    },
+    {
+      "id": "REL-008",
+      "source": "CON-FIN-020",
+      "target": "CON-FIN-012",
+      "type": "is-a",
+      "cardinality": "N:1"
+    },
+    {
+      "id": "REL-009",
+      "source": "CON-FIN-021",
+      "target": "CON-FIN-012",
+      "type": "is-a",
+      "cardinality": "N:1"
+    },
+    {
+      "id": "REL-010",
+      "source": "CON-FIN-023",
+      "target": "CON-FIN-020",
+      "type": "triggers",
+      "cardinality": "1:N"
+    },
+    {
+      "id": "REL-011",
+      "source": "CON-FIN-024",
+      "target": "CON-FIN-011",
+      "type": "triggers",
+      "cardinality": "1:N"
+    },
+    {
+      "id": "REL-012",
+      "source": "CON-FIN-030",
+      "target": "CON-FIN-035",
+      "type": "has-a",
+      "cardinality": "1:N"
+    },
+    {
+      "id": "REL-013",
+      "source": "CON-FIN-030",
+      "target": "CON-FIN-036",
+      "type": "has-a",
+      "cardinality": "1:1"
+    },
+    {
+      "id": "REL-014",
+      "source": "CON-FIN-032",
+      "target": "CON-FIN-038",
+      "type": "has-a",
+      "cardinality": "1:1"
+    },
+    {
+      "id": "REL-015",
+      "source": "CON-FIN-043",
+      "target": "CON-FIN-044",
+      "type": "has-a",
+      "cardinality": "1:1"
+    },
+    {
+      "id": "REL-016",
+      "source": "CON-FIN-045",
+      "target": "CON-FIN-014",
+      "type": "has-a",
+      "cardinality": "1:1"
+    },
+    {
+      "id": "REL-017",
+      "source": "CON-FIN-014",
+      "target": "CON-FIN-015",
+      "type": "depends-on",
+      "cardinality": "1:1"
+    },
+    {
+      "id": "REL-018",
+      "source": "CON-FIN-048",
+      "target": "CON-FIN-020",
+      "type": "is-a",
+      "cardinality": "N:1"
+    },
+    {
+      "id": "REL-019",
+      "source": "CON-FIN-049",
+      "target": "CON-FIN-020",
+      "type": "is-a",
+      "cardinality": "N:1"
+    },
+    {
+      "id": "REL-020",
+      "source": "CON-FIN-050",
+      "target": "CON-FIN-051",
+      "type": "triggers",
+      "cardinality": "1:1"
+    },
+    {
+      "id": "REL-021",
+      "source": "CON-FIN-051",
+      "target": "CON-FIN-002",
+      "type": "constrains",
+      "cardinality": "N:1"
+    },
+    {
+      "id": "REL-022",
+      "source": "CON-FIN-021",
+      "target": "CON-FIN-053",
+      "type": "constrains",
+      "cardinality": "N:N"
+    },
+    {
+      "id": "REL-023",
+      "source": "CON-FIN-053",
+      "target": "CON-FIN-052",
+      "type": "is-a",
+      "cardinality": "N:N"
+    },
+    {
+      "id": "REL-024",
+      "source": "CON-FIN-054",
+      "target": "CON-FIN-020",
+      "type": "depends-on",
+      "cardinality": "1:1"
+    },
+    {
+      "id": "REL-025",
+      "source": "CON-FIN-057",
+      "target": "CON-FIN-058",
+      "type": "has-a",
+      "cardinality": "1:1"
+    },
+    {
+      "id": "REL-026",
+      "source": "CON-FIN-057",
+      "target": "CON-FIN-060",
+      "type": "triggers",
+      "cardinality": "1:N"
+    },
+    {
+      "id": "REL-027",
+      "source": "CON-FIN-015",
+      "target": "CON-FIN-016",
+      "type": "depends-on",
+      "cardinality": "1:1"
+    },
+    {
+      "id": "REL-028",
+      "source": "CON-FIN-077",
+      "target": "CON-FIN-016",
+      "type": "triggers",
+      "cardinality": "1:1"
+    },
+    {
+      "id": "REL-029",
+      "source": "CON-FIN-005",
+      "target": "CON-FIN-015",
+      "type": "has-a",
+      "cardinality": "1:N"
+    },
+    {
+      "id": "REL-030",
+      "source": "CON-FIN-066",
+      "target": "CON-FIN-015",
+      "type": "has-a",
+      "cardinality": "1:N"
+    },
+    {
+      "id": "REL-031",
+      "source": "CON-FIN-022",
+      "target": "CON-FIN-004",
+      "type": "has-a",
+      "cardinality": "1:1"
+    },
+    {
+      "id": "REL-032",
+      "source": "CON-FIN-069",
+      "target": "CON-FIN-004",
+      "type": "has-a",
+      "cardinality": "1:N"
+    },
+    {
+      "id": "REL-033",
+      "source": "CON-FIN-057",
+      "target": "CON-FIN-058",
+      "type": "has-a",
+      "cardinality": "1:1"
+    },
+    {
+      "id": "REL-034",
+      "source": "CON-FIN-029",
+      "target": "CON-FIN-015",
+      "type": "constrains",
+      "cardinality": "1:1"
+    },
+    {
+      "id": "REL-035",
+      "source": "CON-FIN-079",
+      "target": "CON-FIN-015",
+      "type": "depends-on",
+      "cardinality": "N:1"
+    },
+    {
+      "id": "REL-036",
+      "source": "CON-FIN-081",
+      "target": "CON-FIN-075",
+      "type": "constrains",
+      "cardinality": "1:1"
+    },
+    {
+      "id": "REL-037",
+      "source": "CON-FIN-083",
+      "target": "CON-FIN-016",
+      "type": "is-a",
+      "cardinality": "1:1"
+    },
+    {
+      "id": "REL-038",
+      "source": "CON-FIN-058",
+      "target": "CON-FIN-004",
+      "type": "is-a",
+      "cardinality": "1:1"
+    },
+    {
+      "id": "REL-039",
+      "source": "CON-FIN-008",
+      "target": "CON-FIN-085",
+      "type": "is-a",
+      "cardinality": "1:1"
+    },
+    {
+      "id": "REL-040",
+      "source": "CON-FIN-093",
+      "target": "CON-FIN-085",
+      "type": "is-a",
+      "cardinality": "1:1"
+    },
+    {
+      "id": "REL-041",
+      "source": "CON-FIN-009",
+      "target": "CON-FIN-085",
+      "type": "has-a",
+      "cardinality": "1:1"
+    },
+    {
+      "id": "REL-042",
+      "source": "CON-FIN-010",
+      "target": "CON-FIN-085",
+      "type": "has-a",
+      "cardinality": "1:1"
+    },
+    {
+      "id": "REL-043",
+      "source": "CON-FIN-087",
+      "target": "CON-FIN-085",
+      "type": "constrains",
+      "cardinality": "1:1"
+    },
+    {
+      "id": "REL-044",
+      "source": "CON-FIN-086",
+      "target": "CON-FIN-085",
+      "type": "constrains",
+      "cardinality": "N:1"
+    },
+    {
+      "id": "REL-045",
+      "source": "CON-FIN-011",
+      "target": "CON-FIN-088",
+      "type": "has-a",
+      "cardinality": "N:1"
+    },
+    {
+      "id": "REL-046",
+      "source": "CON-FIN-089",
+      "target": "CON-FIN-088",
+      "type": "depends-on",
+      "cardinality": "1:1"
+    },
+    {
+      "id": "REL-047",
+      "source": "CON-FIN-091",
+      "target": "CON-FIN-088",
+      "type": "depends-on",
+      "cardinality": "N:1"
+    },
+    {
+      "id": "REL-048",
+      "source": "CON-FIN-091",
+      "target": "CON-FIN-090",
+      "type": "triggers",
+      "cardinality": "N:1"
+    },
+    {
+      "id": "REL-049",
+      "source": "CON-FIN-090",
+      "target": "CON-FIN-085",
+      "type": "has-a",
+      "cardinality": "1:N"
+    },
+    {
+      "id": "REL-050",
+      "source": "CON-FIN-056",
+      "target": "CON-FIN-090",
+      "type": "constrains",
+      "cardinality": "1:1"
+    },
+    {
+      "id": "REL-051",
+      "source": "CON-FIN-092",
+      "target": "CON-FIN-011",
+      "type": "constrains",
+      "cardinality": "1:1"
+    },
+    {
+      "id": "REL-052",
+      "source": "CON-FIN-094",
+      "target": "CON-FIN-085",
+      "type": "is-a",
+      "cardinality": "1:1"
+    },
+    {
+      "id": "REL-053",
+      "source": "CON-FIN-096",
+      "target": "CON-FIN-085",
+      "type": "is-a",
+      "cardinality": "1:1"
+    },
+    {
+      "id": "REL-054",
+      "source": "CON-FIN-079",
+      "target": "CON-FIN-015",
+      "type": "depends-on",
+      "cardinality": "N:1"
+    },
+    {
+      "id": "REL-055",
+      "source": "CON-FIN-056",
+      "target": "CON-FIN-085",
+      "type": "has-a",
+      "cardinality": "1:N"
+    },
+    {
+      "id": "REL-056",
+      "source": "CON-FIN-088",
+      "target": "CON-FIN-090",
+      "type": "depends-on",
+      "cardinality": "1:1"
+    },
+    {
+      "id": "REL-057",
+      "source": "CON-FIN-088",
+      "target": "CON-FIN-009",
+      "type": "has-a",
+      "cardinality": "1:N"
+    },
+    {
+      "id": "REL-058",
+      "source": "CON-FIN-088",
+      "target": "CON-FIN-010",
+      "type": "has-a",
+      "cardinality": "1:N"
+    },
+    {
+      "id": "REL-059",
+      "source": "CON-FIN-090",
+      "target": "CON-FIN-085",
+      "type": "has-a",
+      "cardinality": "1:N"
+    },
+    {
+      "id": "REL-060",
+      "source": "CON-FIN-087",
+      "target": "CON-FIN-085",
+      "type": "constrains",
+      "cardinality": "1:1"
+    },
+    {
+      "id": "REL-061",
+      "source": "CON-FIN-104",
+      "target": "CON-FIN-033",
+      "type": "depends-on",
+      "cardinality": "1:N"
+    },
+    {
+      "id": "REL-062",
+      "source": "CON-FIN-078",
+      "target": "CON-FIN-101",
+      "type": "triggers",
+      "cardinality": "1:N"
+    },
+    {
+      "id": "REL-063",
+      "source": "CON-FIN-033",
+      "target": "CON-FIN-100",
+      "type": "triggers",
+      "cardinality": "1:N"
+    },
+    {
+      "id": "REL-064",
+      "source": "CON-FIN-050",
+      "target": "CON-FIN-051",
+      "type": "triggers",
+      "cardinality": "1:1"
+    },
+    {
+      "id": "REL-065",
+      "source": "CON-FIN-051",
+      "target": "CON-FIN-107",
+      "type": "constrains",
+      "cardinality": "N:1"
+    },
+    {
+      "id": "REL-066",
+      "source": "CON-FIN-107",
+      "target": "CON-FIN-109",
+      "type": "has-a",
+      "cardinality": "1:1"
+    },
+    {
+      "id": "REL-067",
+      "source": "CON-FIN-108",
+      "target": "CON-FIN-107",
+      "type": "constrains",
+      "cardinality": "N:1"
+    },
+    {
+      "id": "REL-068",
+      "source": "CON-FIN-014",
+      "target": "CON-FIN-020",
+      "type": "depends-on",
+      "cardinality": "1:N"
+    },
+    {
+      "id": "REL-069",
+      "source": "CON-FIN-110",
+      "target": "CON-FIN-107",
+      "type": "is-a",
+      "cardinality": "1:1"
+    },
+    {
+      "id": "REL-070",
+      "source": "CON-FIN-111",
+      "target": "CON-FIN-107",
+      "type": "is-a",
+      "cardinality": "1:1"
+    },
+    {
+      "id": "REL-071",
+      "source": "CON-FIN-112",
+      "target": "CON-FIN-107",
+      "type": "is-a",
+      "cardinality": "1:1"
+    },
+    {
+      "id": "REL-072",
+      "source": "CON-FIN-113",
+      "target": "CON-FIN-107",
+      "type": "is-a",
+      "cardinality": "1:1"
+    },
+    {
+      "id": "REL-073",
+      "source": "CON-FIN-243",
+      "target": "CON-FIN-050",
+      "type": "depends-on",
+      "cardinality": "1:1"
+    },
+    {
+      "id": "REL-074",
+      "source": "CON-FIN-023",
+      "target": "CON-FIN-051",
+      "type": "triggers",
+      "cardinality": "1:1"
+    },
+    {
+      "id": "REL-075",
+      "source": "CON-FIN-051",
+      "target": "CON-FIN-109",
+      "type": "constrains",
+      "cardinality": "1:1"
+    },
+    {
+      "id": "REL-076",
+      "source": "CON-FIN-109",
+      "target": "CON-FIN-114",
+      "type": "depends-on",
+      "cardinality": "1:1"
+    },
+    {
+      "id": "REL-077",
+      "source": "CON-FIN-015",
+      "target": "CON-FIN-016",
+      "type": "depends-on",
+      "cardinality": "1:1"
+    },
+    {
+      "id": "REL-078",
+      "source": "CON-FIN-021",
+      "target": "CON-FIN-053",
+      "type": "constrains",
+      "cardinality": "1:N"
+    },
+    {
+      "id": "REL-079",
+      "source": "CON-FIN-021",
+      "target": "CON-FIN-052",
+      "type": "triggers",
+      "cardinality": "1:1"
+    },
+    {
+      "id": "REL-080",
+      "source": "CON-FIN-036",
+      "target": "CON-FIN-119",
+      "type": "has-a",
+      "cardinality": "1:N"
+    },
+    {
+      "id": "REL-081",
+      "source": "CON-FIN-036",
+      "target": "CON-FIN-121",
+      "type": "has-a",
+      "cardinality": "1:N"
+    },
+    {
+      "id": "REL-082",
+      "source": "CON-FIN-035",
+      "target": "CON-FIN-036",
+      "type": "depends-on",
+      "cardinality": "1:1"
+    },
+    {
+      "id": "REL-083",
+      "source": "CON-FIN-122",
+      "target": "CON-FIN-121",
+      "type": "depends-on",
+      "cardinality": "1:1"
+    },
+    {
+      "id": "REL-084",
+      "source": "CON-FIN-124",
+      "target": "CON-FIN-126",
+      "type": "constrains",
+      "cardinality": "1:N"
+    },
+    {
+      "id": "REL-085",
+      "source": "CON-FIN-124",
+      "target": "CON-FIN-125",
+      "type": "triggers",
+      "cardinality": "1:1"
+    },
+    {
+      "id": "REL-086",
+      "source": "CON-FIN-116",
+      "target": "CON-FIN-014",
+      "type": "depends-on",
+      "cardinality": "1:1"
+    },
+    {
+      "id": "REL-087",
+      "source": "CON-FIN-014",
+      "target": "CON-FIN-063",
+      "type": "depends-on",
+      "cardinality": "1:1"
+    },
+    {
+      "id": "REL-088",
+      "source": "CON-FIN-026",
+      "target": "CON-FIN-027",
+      "type": "is-a",
+      "cardinality": "1:1"
+    },
+    {
+      "id": "REL-089",
+      "source": "CON-FIN-018",
+      "target": "CON-FIN-339",
+      "type": "has-a",
+      "cardinality": "1:1"
+    },
+    {
+      "id": "REL-090",
+      "source": "CON-FIN-018",
+      "target": "CON-FIN-340",
+      "type": "has-a",
+      "cardinality": "1:1"
+    },
+    {
+      "id": "REL-091",
+      "source": "CON-FIN-018",
+      "target": "CON-FIN-341",
+      "type": "has-a",
+      "cardinality": "1:1"
+    },
+    {
+      "id": "REL-092",
+      "source": "CON-FIN-036",
+      "target": "CON-FIN-603",
+      "type": "depends-on",
+      "cardinality": "1:1"
+    },
+    {
+      "id": "REL-093",
+      "source": "CON-FIN-036",
+      "target": "CON-FIN-604",
+      "type": "depends-on",
+      "cardinality": "1:1"
+    },
+    {
+      "id": "REL-094",
+      "source": "CON-FIN-035",
+      "target": "CON-FIN-036",
+      "type": "depends-on",
+      "cardinality": "1:1"
+    },
+    {
+      "id": "REL-095",
+      "source": "CON-FIN-072",
+      "target": "CON-FIN-140",
+      "type": "is-a",
+      "cardinality": "1:1"
+    },
+    {
+      "id": "REL-096",
+      "source": "CON-FIN-072",
+      "target": "CON-FIN-141",
+      "type": "is-a",
+      "cardinality": "1:1"
+    },
+    {
+      "id": "REL-097",
+      "source": "CON-FIN-129",
+      "target": "CON-FIN-136",
+      "type": "constrains",
+      "cardinality": "1:1"
+    },
+    {
+      "id": "REL-098",
+      "source": "CON-FIN-130",
+      "target": "CON-FIN-136",
+      "type": "constrains",
+      "cardinality": "1:1"
+    },
+    {
+      "id": "REL-099",
+      "source": "CON-FIN-133",
+      "target": "CON-FIN-132",
+      "type": "depends-on",
+      "cardinality": "1:1"
+    },
+    {
+      "id": "REL-100",
+      "source": "CON-FIN-134",
+      "target": "CON-FIN-135",
+      "type": "triggers",
+      "cardinality": "1:1"
+    },
+    {
+      "id": "REL-101",
+      "source": "CON-FIN-128",
+      "target": "CON-FIN-072",
+      "type": "constrains",
+      "cardinality": "1:1"
+    },
+    {
+      "id": "REL-102",
+      "source": "CON-FIN-145",
+      "target": "CON-FIN-146",
+      "type": "triggers",
+      "cardinality": "1:N"
+    },
+    {
+      "id": "REL-103",
+      "source": "CON-FIN-148",
+      "target": "CON-FIN-146",
+      "type": "triggers",
+      "cardinality": "1:1"
+    },
+    {
+      "id": "REL-104",
+      "source": "CON-FIN-150",
+      "target": "CON-FIN-164",
+      "type": "triggers",
+      "cardinality": "1:1"
+    },
+    {
+      "id": "REL-105",
+      "source": "CON-FIN-162",
+      "target": "CON-FIN-161",
+      "type": "triggers",
+      "cardinality": "1:1"
+    },
+    {
+      "id": "REL-106",
+      "source": "CON-FIN-163",
+      "target": "CON-FIN-162",
+      "type": "depends-on",
+      "cardinality": "1:1"
+    },
+    {
+      "id": "REL-107",
+      "source": "CON-FIN-157",
+      "target": "CON-FIN-156",
+      "type": "is-a",
+      "cardinality": "1:1"
+    },
+    {
+      "id": "REL-108",
+      "source": "CON-FIN-166",
+      "target": "CON-FIN-124",
+      "type": "triggers",
+      "cardinality": "1:1"
+    },
+    {
+      "id": "REL-109",
+      "source": "CON-FIN-151",
+      "target": "CON-FIN-130",
+      "type": "depends-on",
+      "cardinality": "1:1"
+    },
+    {
+      "id": "REL-110",
+      "source": "CON-FIN-171",
+      "target": "CON-FIN-170",
+      "type": "is-a",
+      "cardinality": "1:1"
+    },
+    {
+      "id": "REL-111",
+      "source": "CON-FIN-169",
+      "target": "CON-FIN-136",
+      "type": "triggers",
+      "cardinality": "N:1"
+    },
+    {
+      "id": "REL-112",
+      "source": "CON-FIN-172",
+      "target": "CON-FIN-170",
+      "type": "constrains",
+      "cardinality": "1:N"
+    },
+    {
+      "id": "REL-113",
+      "source": "CON-FIN-147",
+      "target": "CON-FIN-146",
+      "type": "depends-on",
+      "cardinality": "1:1"
+    },
+    {
+      "id": "REL-114",
+      "source": "CON-FIN-174",
+      "target": "CON-FIN-169",
+      "type": "constrains",
+      "cardinality": "N:1"
+    },
+    {
+      "id": "REL-115",
+      "source": "CON-FIN-175",
+      "target": "CON-FIN-170",
+      "type": "constrains",
+      "cardinality": "N:1"
+    },
+    {
+      "id": "REL-116",
+      "source": "CON-FIN-179",
+      "target": "CON-FIN-176",
+      "type": "is-a",
+      "cardinality": "1:1"
+    },
+    {
+      "id": "REL-117",
+      "source": "CON-FIN-180",
+      "target": "CON-FIN-176",
+      "type": "is-a",
+      "cardinality": "1:1"
+    },
+    {
+      "id": "REL-118",
+      "source": "CON-FIN-183",
+      "target": "CON-FIN-034",
+      "type": "depends-on",
+      "cardinality": "1:1"
+    },
+    {
+      "id": "REL-119",
+      "source": "CON-FIN-184",
+      "target": "CON-FIN-187",
+      "type": "has-a",
+      "cardinality": "1:N"
+    },
+    {
+      "id": "REL-120",
+      "source": "CON-FIN-184",
+      "target": "CON-FIN-188",
+      "type": "has-a",
+      "cardinality": "1:N"
+    },
+    {
+      "id": "REL-121",
+      "source": "CON-FIN-184",
+      "target": "CON-FIN-189",
+      "type": "has-a",
+      "cardinality": "1:N"
+    },
+    {
+      "id": "REL-122",
+      "source": "CON-FIN-185",
+      "target": "CON-FIN-176",
+      "type": "depends-on",
+      "cardinality": "1:1"
+    },
+    {
+      "id": "REL-123",
+      "source": "CON-FIN-186",
+      "target": "CON-FIN-176",
+      "type": "depends-on",
+      "cardinality": "1:1"
+    },
+    {
+      "id": "REL-124",
+      "source": "CON-FIN-129",
+      "target": "CON-FIN-131",
+      "type": "has-a",
+      "cardinality": "1:N"
+    },
+    {
+      "id": "REL-125",
+      "source": "CON-FIN-181",
+      "target": "CON-FIN-182",
+      "type": "depends-on",
+      "cardinality": "1:1"
+    },
+    {
+      "id": "REL-126",
+      "source": "CON-FIN-130",
+      "target": "CON-FIN-592",
+      "type": "depends-on",
+      "cardinality": "1:1"
+    },
+    {
+      "id": "REL-127",
+      "source": "CON-FIN-187",
+      "target": "CON-FIN-188",
+      "type": "triggers",
+      "cardinality": "1:1"
+    },
+    {
+      "id": "REL-128",
+      "source": "CON-FIN-188",
+      "target": "CON-FIN-129",
+      "type": "triggers",
+      "cardinality": "1:1"
+    },
+    {
+      "id": "REL-129",
+      "source": "CON-FIN-193",
+      "target": "CON-FIN-194",
+      "type": "constrains",
+      "cardinality": "1:1"
+    },
+    {
+      "id": "REL-130",
+      "source": "CON-FIN-194",
+      "target": "CON-FIN-195",
+      "type": "has-a",
+      "cardinality": "1:1"
+    },
+    {
+      "id": "REL-131",
+      "source": "CON-FIN-194",
+      "target": "CON-FIN-084",
+      "type": "has-a",
+      "cardinality": "1:1"
+    },
+    {
+      "id": "REL-132",
+      "source": "CON-FIN-194",
+      "target": "CON-FIN-196",
+      "type": "has-a",
+      "cardinality": "1:1"
+    },
+    {
+      "id": "REL-133",
+      "source": "CON-FIN-194",
+      "target": "CON-FIN-197",
+      "type": "has-a",
+      "cardinality": "1:1"
+    },
+    {
+      "id": "REL-134",
+      "source": "CON-FIN-194",
+      "target": "CON-FIN-198",
+      "type": "has-a",
+      "cardinality": "1:1"
+    },
+    {
+      "id": "REL-135",
+      "source": "CON-FIN-199",
+      "target": "CON-FIN-194",
+      "type": "constrains",
+      "cardinality": "N:1"
+    },
+    {
+      "id": "REL-136",
+      "source": "CON-FIN-205",
+      "target": "CON-FIN-181",
+      "type": "constrains",
+      "cardinality": "1:1"
+    },
+    {
+      "id": "REL-137",
+      "source": "CON-FIN-024",
+      "target": "CON-FIN-206",
+      "type": "depends-on",
+      "cardinality": "1:1"
+    },
+    {
+      "id": "REL-138",
+      "source": "CON-FIN-024",
+      "target": "CON-FIN-207",
+      "type": "has-a",
+      "cardinality": "1:N"
+    },
+    {
+      "id": "REL-139",
+      "source": "CON-FIN-024",
+      "target": "CON-FIN-208",
+      "type": "has-a",
+      "cardinality": "1:N"
+    },
+    {
+      "id": "REL-140",
+      "source": "CON-FIN-024",
+      "target": "CON-FIN-175",
+      "type": "has-a",
+      "cardinality": "1:N"
+    },
+    {
+      "id": "REL-141",
+      "source": "CON-FIN-024",
+      "target": "CON-FIN-174",
+      "type": "has-a",
+      "cardinality": "1:N"
+    },
+    {
+      "id": "REL-142",
+      "source": "CON-FIN-209",
+      "target": "CON-FIN-174",
+      "type": "triggers",
+      "cardinality": "1:1"
+    },
+    {
+      "id": "REL-143",
+      "source": "CON-FIN-210",
+      "target": "CON-FIN-214",
+      "type": "has-a",
+      "cardinality": "1:1"
+    },
+    {
+      "id": "REL-144",
+      "source": "CON-FIN-213",
+      "target": "CON-FIN-211",
+      "type": "depends-on",
+      "cardinality": "1:1"
+    },
+    {
+      "id": "REL-145",
+      "source": "CON-FIN-215",
+      "target": "CON-FIN-210",
+      "type": "is-a",
+      "cardinality": "1:1"
+    },
+    {
+      "id": "REL-146",
+      "source": "CON-FIN-217",
+      "target": "CON-FIN-033",
+      "type": "constrains",
+      "cardinality": "1:1"
+    },
+    {
+      "id": "REL-147",
+      "source": "CON-FIN-218",
+      "target": "CON-FIN-217",
+      "type": "triggers",
+      "cardinality": "1:1"
+    },
+    {
+      "id": "REL-148",
+      "source": "CON-FIN-223",
+      "target": "CON-FIN-222",
+      "type": "depends-on",
+      "cardinality": "1:1"
+    },
+    {
+      "id": "REL-149",
+      "source": "CON-FIN-222",
+      "target": "CON-FIN-217",
+      "type": "triggers",
+      "cardinality": "1:1"
+    },
+    {
+      "id": "REL-150",
+      "source": "CON-FIN-221",
+      "target": "CON-FIN-218",
+      "type": "triggers",
+      "cardinality": "1:1"
+    },
+    {
+      "id": "REL-151",
+      "source": "CON-FIN-224",
+      "target": "CON-FIN-217",
+      "type": "depends-on",
+      "cardinality": "N:1"
+    },
+    {
+      "id": "REL-152",
+      "source": "CON-FIN-224",
+      "target": "CON-FIN-033",
+      "type": "depends-on",
+      "cardinality": "N:1"
+    },
+    {
+      "id": "REL-153",
+      "source": "CON-FIN-216",
+      "target": "CON-FIN-210",
+      "type": "constrains",
+      "cardinality": "1:N"
+    },
+    {
+      "id": "REL-154",
+      "source": "CON-FIN-182",
+      "target": "CON-FIN-033",
+      "type": "depends-on",
+      "cardinality": "1:1"
+    },
+    {
+      "id": "REL-155",
+      "source": "CON-FIN-182",
+      "target": "CON-FIN-217",
+      "type": "depends-on",
+      "cardinality": "1:1"
+    },
+    {
+      "id": "REL-156",
+      "source": "CON-FIN-226",
+      "target": "CON-FIN-222",
+      "type": "depends-on",
+      "cardinality": "1:1"
+    },
+    {
+      "id": "REL-157",
+      "source": "CON-FIN-228",
+      "target": "CON-FIN-226",
+      "type": "depends-on",
+      "cardinality": "N:1"
+    },
+    {
+      "id": "REL-158",
+      "source": "CON-FIN-132",
+      "target": "CON-FIN-228",
+      "type": "depends-on",
+      "cardinality": "1:1"
+    },
+    {
+      "id": "REL-159",
+      "source": "CON-FIN-229",
+      "target": "CON-FIN-217",
+      "type": "is-a",
+      "cardinality": "1:1"
+    },
+    {
+      "id": "REL-160",
+      "source": "CON-FIN-231",
+      "target": "CON-FIN-230",
+      "type": "is-a",
+      "cardinality": "1:1"
+    },
+    {
+      "id": "REL-161",
+      "source": "CON-FIN-230",
+      "target": "CON-FIN-235",
+      "type": "depends-on",
+      "cardinality": "1:N"
+    },
+    {
+      "id": "REL-162",
+      "source": "CON-FIN-236",
+      "target": "CON-FIN-235",
+      "type": "is-a",
+      "cardinality": "1:1"
+    },
+    {
+      "id": "REL-163",
+      "source": "CON-FIN-237",
+      "target": "CON-FIN-230",
+      "type": "depends-on",
+      "cardinality": "1:1"
+    },
+    {
+      "id": "REL-164",
+      "source": "CON-FIN-238",
+      "target": "CON-FIN-239",
+      "type": "has-a",
+      "cardinality": "N:1"
+    },
+    {
+      "id": "REL-165",
+      "source": "CON-FIN-238",
+      "target": "CON-FIN-240",
+      "type": "has-a",
+      "cardinality": "N:1"
+    },
+    {
+      "id": "REL-166",
+      "source": "CON-FIN-234",
+      "target": "CON-FIN-230",
+      "type": "constrains",
+      "cardinality": "1:1"
+    },
+    {
+      "id": "REL-167",
+      "source": "CON-FIN-233",
+      "target": "CON-FIN-230",
+      "type": "is-a",
+      "cardinality": "1:1"
+    },
+    {
+      "id": "REL-168",
+      "source": "CON-FIN-232",
+      "target": "CON-FIN-230",
+      "type": "is-a",
+      "cardinality": "1:1"
+    },
+    {
+      "id": "REL-169",
+      "source": "CON-FIN-230",
+      "target": "CON-FIN-023",
+      "type": "has-a",
+      "cardinality": "1:N"
+    },
+    {
+      "id": "REL-170",
+      "source": "CON-FIN-023",
+      "target": "CON-FIN-051",
+      "type": "triggers",
+      "cardinality": "1:1"
+    },
+    {
+      "id": "REL-171",
+      "source": "CON-FIN-023",
+      "target": "CON-FIN-241",
+      "type": "constrains",
+      "cardinality": "1:1"
+    },
+    {
+      "id": "REL-172",
+      "source": "CON-FIN-023",
+      "target": "CON-FIN-242",
+      "type": "depends-on",
+      "cardinality": "1:1"
+    },
+    {
+      "id": "REL-173",
+      "source": "CON-FIN-236",
+      "target": "CON-FIN-230",
+      "type": "constrains",
+      "cardinality": "1:N"
+    },
+    {
+      "id": "REL-174",
+      "source": "CON-FIN-235",
+      "target": "CON-FIN-230",
+      "type": "depends-on",
+      "cardinality": "1:N"
+    },
+    {
+      "id": "REL-175",
+      "source": "CON-FIN-246",
+      "target": "CON-FIN-247",
+      "type": "has-a",
+      "cardinality": "1:N"
+    },
+    {
+      "id": "REL-176",
+      "source": "CON-FIN-247",
+      "target": "CON-FIN-248",
+      "type": "triggers",
+      "cardinality": "1:1"
+    },
+    {
+      "id": "REL-177",
+      "source": "CON-FIN-232",
+      "target": "CON-FIN-253",
+      "type": "has-a",
+      "cardinality": "1:N"
+    },
+    {
+      "id": "REL-178",
+      "source": "CON-FIN-249",
+      "target": "CON-FIN-232",
+      "type": "is-a",
+      "cardinality": "1:1"
+    },
+    {
+      "id": "REL-179",
+      "source": "CON-FIN-250",
+      "target": "CON-FIN-232",
+      "type": "is-a",
+      "cardinality": "1:1"
+    },
+    {
+      "id": "REL-180",
+      "source": "CON-FIN-251",
+      "target": "CON-FIN-232",
+      "type": "is-a",
+      "cardinality": "1:1"
+    },
+    {
+      "id": "REL-181",
+      "source": "CON-FIN-252",
+      "target": "CON-FIN-232",
+      "type": "is-a",
+      "cardinality": "1:1"
+    },
+    {
+      "id": "REL-182",
+      "source": "CON-FIN-243",
+      "target": "CON-FIN-023",
+      "type": "is-a",
+      "cardinality": "1:1"
+    },
+    {
+      "id": "REL-183",
+      "source": "CON-FIN-244",
+      "target": "CON-FIN-023",
+      "type": "is-a",
+      "cardinality": "1:1"
+    },
+    {
+      "id": "REL-184",
+      "source": "CON-FIN-245",
+      "target": "CON-FIN-023",
+      "type": "is-a",
+      "cardinality": "1:1"
+    },
+    {
+      "id": "REL-185",
+      "source": "CON-FIN-155",
+      "target": "CON-FIN-230",
+      "type": "depends-on",
+      "cardinality": "1:1"
+    },
+    {
+      "id": "REL-186",
+      "source": "CON-FIN-238",
+      "target": "CON-FIN-230",
+      "type": "has-a",
+      "cardinality": "1:1"
+    },
+    {
+      "id": "REL-187",
+      "source": "CON-FIN-259",
+      "target": "CON-FIN-254",
+      "type": "has-a",
+      "cardinality": "1:1"
+    },
+    {
+      "id": "REL-188",
+      "source": "CON-FIN-259",
+      "target": "CON-FIN-256",
+      "type": "depends-on",
+      "cardinality": "1:1"
+    },
+    {
+      "id": "REL-189",
+      "source": "CON-FIN-257",
+      "target": "CON-FIN-259",
+      "type": "triggers",
+      "cardinality": "1:1"
+    },
+    {
+      "id": "REL-190",
+      "source": "CON-FIN-258",
+      "target": "CON-FIN-259",
+      "type": "triggers",
+      "cardinality": "1:1"
+    },
+    {
+      "id": "REL-191",
+      "source": "CON-FIN-256",
+      "target": "CON-FIN-257",
+      "type": "constrains",
+      "cardinality": "1:1"
+    },
+    {
+      "id": "REL-192",
+      "source": "CON-FIN-254",
+      "target": "CON-FIN-255",
+      "type": "depends-on",
+      "cardinality": "1:1"
+    },
+    {
+      "id": "REL-193",
+      "source": "CON-FIN-259",
+      "target": "CON-FIN-230",
+      "type": "depends-on",
+      "cardinality": "1:1"
+    },
+    {
+      "id": "REL-194",
+      "source": "CON-FIN-121",
+      "target": "CON-FIN-122",
+      "type": "is-a",
+      "cardinality": "1:1"
+    },
+    {
+      "id": "REL-195",
+      "source": "CON-FIN-078",
+      "target": "CON-FIN-121",
+      "type": "is-a",
+      "cardinality": "1:1"
+    },
+    {
+      "id": "REL-196",
+      "source": "CON-FIN-260",
+      "target": "CON-FIN-121",
+      "type": "is-a",
+      "cardinality": "1:1"
+    },
+    {
+      "id": "REL-197",
+      "source": "CON-FIN-106",
+      "target": "CON-FIN-121",
+      "type": "is-a",
+      "cardinality": "1:1"
+    },
+    {
+      "id": "REL-198",
+      "source": "CON-FIN-261",
+      "target": "CON-FIN-106",
+      "type": "is-a",
+      "cardinality": "1:1"
+    },
+    {
+      "id": "REL-199",
+      "source": "CON-FIN-262",
+      "target": "CON-FIN-106",
+      "type": "is-a",
+      "cardinality": "1:1"
+    },
+    {
+      "id": "REL-200",
+      "source": "CON-FIN-263",
+      "target": "CON-FIN-121",
+      "type": "is-a",
+      "cardinality": "1:1"
+    },
+    {
+      "id": "REL-201",
+      "source": "CON-FIN-275",
+      "target": "CON-FIN-106",
+      "type": "is-a",
+      "cardinality": "1:1"
+    },
+    {
+      "id": "REL-202",
+      "source": "CON-FIN-276",
+      "target": "CON-FIN-275",
+      "type": "is-a",
+      "cardinality": "1:1"
+    },
+    {
+      "id": "REL-203",
+      "source": "CON-FIN-264",
+      "target": "CON-FIN-121",
+      "type": "has-a",
+      "cardinality": "1:N"
+    },
+    {
+      "id": "REL-204",
+      "source": "CON-FIN-267",
+      "target": "CON-FIN-264",
+      "type": "has-a",
+      "cardinality": "1:1"
+    },
+    {
+      "id": "REL-205",
+      "source": "CON-FIN-265",
+      "target": "CON-FIN-266",
+      "type": "depends-on",
+      "cardinality": "1:1"
+    },
+    {
+      "id": "REL-206",
+      "source": "CON-FIN-271",
+      "target": "CON-FIN-121",
+      "type": "is-a",
+      "cardinality": "1:1"
+    },
+    {
+      "id": "REL-207",
+      "source": "CON-FIN-273",
+      "target": "CON-FIN-272",
+      "type": "is-a",
+      "cardinality": "1:1"
+    },
+    {
+      "id": "REL-208",
+      "source": "CON-FIN-274",
+      "target": "CON-FIN-272",
+      "type": "is-a",
+      "cardinality": "1:1"
+    },
+    {
+      "id": "REL-209",
+      "source": "CON-FIN-277",
+      "target": "CON-FIN-106",
+      "type": "constrains",
+      "cardinality": "1:N"
+    },
+    {
+      "id": "REL-210",
+      "source": "CON-FIN-278",
+      "target": "CON-FIN-106",
+      "type": "depends-on",
+      "cardinality": "1:N"
+    },
+    {
+      "id": "REL-211",
+      "source": "CON-FIN-106",
+      "target": "CON-FIN-121",
+      "type": "is-a",
+      "cardinality": "1:1"
+    },
+    {
+      "id": "REL-212",
+      "source": "CON-FIN-267",
+      "target": "CON-FIN-270",
+      "type": "has-a",
+      "cardinality": "1:2"
+    },
+    {
+      "id": "REL-213",
+      "source": "CON-FIN-279",
+      "target": "CON-FIN-121",
+      "type": "is-a",
+      "cardinality": "0:N"
+    },
+    {
+      "id": "REL-214",
+      "source": "CON-FIN-275",
+      "target": "CON-FIN-106",
+      "type": "is-a",
+      "cardinality": "1:1"
+    },
+    {
+      "id": "REL-215",
+      "source": "CON-FIN-036",
+      "target": "CON-FIN-121",
+      "type": "depends-on",
+      "cardinality": "1:1"
+    },
+    {
+      "id": "REL-216",
+      "source": "CON-FIN-281",
+      "target": "CON-FIN-121",
+      "type": "depends-on",
+      "cardinality": "1:1"
+    },
+    {
+      "id": "REL-217",
+      "source": "CON-FIN-270",
+      "target": "CON-FIN-267",
+      "type": "constrains",
+      "cardinality": "1:1"
+    },
+    {
+      "id": "REL-218",
+      "source": "CON-FIN-271",
+      "target": "CON-FIN-121",
+      "type": "triggers",
+      "cardinality": "1:1"
+    },
+    {
+      "id": "REL-219",
+      "source": "CON-FIN-282",
+      "target": "CON-FIN-283",
+      "type": "depends-on",
+      "cardinality": "N:1"
+    },
+    {
+      "id": "REL-220",
+      "source": "CON-FIN-283",
+      "target": "CON-FIN-284",
+      "type": "triggers",
+      "cardinality": "1:1"
+    },
+    {
+      "id": "REL-221",
+      "source": "CON-FIN-285",
+      "target": "CON-FIN-286",
+      "type": "depends-on",
+      "cardinality": "N:1"
+    },
+    {
+      "id": "REL-222",
+      "source": "CON-FIN-287",
+      "target": "CON-FIN-285",
+      "type": "is-a",
+      "cardinality": "1:1"
+    },
+    {
+      "id": "REL-223",
+      "source": "CON-FIN-288",
+      "target": "CON-FIN-285",
+      "type": "is-a",
+      "cardinality": "1:1"
+    },
+    {
+      "id": "REL-224",
+      "source": "CON-FIN-289",
+      "target": "CON-FIN-285",
+      "type": "is-a",
+      "cardinality": "1:1"
+    },
+    {
+      "id": "REL-225",
+      "source": "CON-FIN-290",
+      "target": "CON-FIN-285",
+      "type": "is-a",
+      "cardinality": "1:1"
+    },
+    {
+      "id": "REL-226",
+      "source": "CON-FIN-037",
+      "target": "CON-FIN-285",
+      "type": "constrains",
+      "cardinality": "N:1"
+    },
+    {
+      "id": "REL-227",
+      "source": "CON-FIN-295",
+      "target": "CON-FIN-285",
+      "type": "triggers",
+      "cardinality": "N:1"
+    },
+    {
+      "id": "REL-228",
+      "source": "CON-FIN-296",
+      "target": "CON-FIN-295",
+      "type": "triggers",
+      "cardinality": "0:1"
+    },
+    {
+      "id": "REL-229",
+      "source": "CON-FIN-297",
+      "target": "CON-FIN-295",
+      "type": "triggers",
+      "cardinality": "0:1"
+    },
+    {
+      "id": "REL-230",
+      "source": "CON-FIN-291",
+      "target": "CON-FIN-302",
+      "type": "has-a",
+      "cardinality": "1:1"
+    },
+    {
+      "id": "REL-231",
+      "source": "CON-FIN-292",
+      "target": "CON-FIN-302",
+      "type": "has-a",
+      "cardinality": "1:1"
+    },
+    {
+      "id": "REL-232",
+      "source": "CON-FIN-294",
+      "target": "CON-FIN-291",
+      "type": "constrains",
+      "cardinality": "1:1"
+    },
+    {
+      "id": "REL-233",
+      "source": "CON-FIN-294",
+      "target": "CON-FIN-292",
+      "type": "constrains",
+      "cardinality": "1:1"
+    },
+    {
+      "id": "REL-234",
+      "source": "CON-FIN-305",
+      "target": "CON-FIN-302",
+      "type": "triggers",
+      "cardinality": "1:N"
+    },
+    {
+      "id": "REL-235",
+      "source": "CON-FIN-295",
+      "target": "CON-FIN-302",
+      "type": "depends-on",
+      "cardinality": "1:1"
+    },
+    {
+      "id": "REL-236",
+      "source": "CON-FIN-037",
+      "target": "CON-FIN-302",
+      "type": "depends-on",
+      "cardinality": "N:1"
+    },
+    {
+      "id": "REL-237",
+      "source": "CON-FIN-303",
+      "target": "CON-FIN-302",
+      "type": "is-a",
+      "cardinality": "1:1"
+    },
+    {
+      "id": "REL-238",
+      "source": "CON-FIN-304",
+      "target": "CON-FIN-302",
+      "type": "has-a",
+      "cardinality": "1:1"
+    },
+    {
+      "id": "REL-239",
+      "source": "CON-FIN-306",
+      "target": "CON-FIN-069",
+      "type": "has-a",
+      "cardinality": "1:N"
+    },
+    {
+      "id": "REL-240",
+      "source": "CON-FIN-117",
+      "target": "CON-FIN-306",
+      "type": "depends-on",
+      "cardinality": "1:1"
+    },
+    {
+      "id": "REL-241",
+      "source": "CON-FIN-307",
+      "target": "CON-FIN-069",
+      "type": "has-a",
+      "cardinality": "1:1"
+    },
+    {
+      "id": "REL-242",
+      "source": "CON-FIN-308",
+      "target": "CON-FIN-307",
+      "type": "has-a",
+      "cardinality": "N:1"
+    },
+    {
+      "id": "REL-243",
+      "source": "CON-FIN-309",
+      "target": "CON-FIN-307",
+      "type": "has-a",
+      "cardinality": "N:1"
+    },
+    {
+      "id": "REL-244",
+      "source": "CON-FIN-310",
+      "target": "CON-FIN-306",
+      "type": "triggers",
+      "cardinality": "1:N"
+    },
+    {
+      "id": "REL-245",
+      "source": "CON-FIN-070",
+      "target": "CON-FIN-069",
+      "type": "is-a",
+      "cardinality": "1:1"
+    },
+    {
+      "id": "REL-246",
+      "source": "CON-FIN-312",
+      "target": "CON-FIN-306",
+      "type": "constrains",
+      "cardinality": "1:1"
+    },
+    {
+      "id": "REL-247",
+      "source": "CON-FIN-313",
+      "target": "CON-FIN-306",
+      "type": "triggers",
+      "cardinality": "1:N"
+    },
+    {
+      "id": "REL-248",
+      "source": "CON-FIN-311",
+      "target": "CON-FIN-306",
+      "type": "depends-on",
+      "cardinality": "1:N"
+    },
+    {
+      "id": "REL-249",
+      "source": "CON-FIN-314",
+      "target": "CON-FIN-315",
+      "type": "has-a",
+      "cardinality": "1:N"
+    },
+    {
+      "id": "REL-250",
+      "source": "CON-FIN-315",
+      "target": "CON-FIN-316",
+      "type": "triggers",
+      "cardinality": "1:1"
+    },
+    {
+      "id": "REL-251",
+      "source": "CON-FIN-315",
+      "target": "CON-FIN-317",
+      "type": "triggers",
+      "cardinality": "1:1"
+    },
+    {
+      "id": "REL-252",
+      "source": "CON-FIN-316",
+      "target": "CON-FIN-306",
+      "type": "triggers",
+      "cardinality": "1:N"
+    },
+    {
+      "id": "REL-253",
+      "source": "CON-FIN-317",
+      "target": "CON-FIN-306",
+      "type": "triggers",
+      "cardinality": "1:N"
+    },
+    {
+      "id": "REL-254",
+      "source": "CON-FIN-317",
+      "target": "CON-FIN-318",
+      "type": "triggers",
+      "cardinality": "1:1"
+    },
+    {
+      "id": "REL-255",
+      "source": "CON-FIN-318",
+      "target": "CON-FIN-314",
+      "type": "constrains",
+      "cardinality": "N:1"
+    },
+    {
+      "id": "REL-256",
+      "source": "CON-FIN-319",
+      "target": "CON-FIN-314",
+      "type": "depends-on",
+      "cardinality": "1:1"
+    },
+    {
+      "id": "REL-257",
+      "source": "CON-FIN-321",
+      "target": "CON-FIN-319",
+      "type": "is-a",
+      "cardinality": "1:1"
+    },
+    {
+      "id": "REL-258",
+      "source": "CON-FIN-322",
+      "target": "CON-FIN-069",
+      "type": "depends-on",
+      "cardinality": "N:1"
+    },
+    {
+      "id": "REL-259",
+      "source": "CON-FIN-320",
+      "target": "CON-FIN-314",
+      "type": "is-a",
+      "cardinality": "1:1"
+    },
+    {
+      "id": "REL-260",
+      "source": "CON-FIN-324",
+      "target": "CON-FIN-057",
+      "type": "has-a",
+      "cardinality": "1:N"
+    },
+    {
+      "id": "REL-261",
+      "source": "CON-FIN-326",
+      "target": "CON-FIN-324",
+      "type": "has-a",
+      "cardinality": "1:1"
+    },
+    {
+      "id": "REL-262",
+      "source": "CON-FIN-329",
+      "target": "CON-FIN-324",
+      "type": "constrains",
+      "cardinality": "1:1"
+    },
+    {
+      "id": "REL-263",
+      "source": "CON-FIN-330",
+      "target": "CON-FIN-326",
+      "type": "constrains",
+      "cardinality": "1:1"
+    },
+    {
+      "id": "REL-264",
+      "source": "CON-FIN-333",
+      "target": "CON-FIN-334",
+      "type": "constrains",
+      "cardinality": "1:1"
+    },
+    {
+      "id": "REL-265",
+      "source": "CON-FIN-335",
+      "target": "CON-FIN-059",
+      "type": "is-a",
+      "cardinality": "1:1"
+    },
+    {
+      "id": "REL-266",
+      "source": "CON-FIN-018",
+      "target": "CON-FIN-339",
+      "type": "has-a",
+      "cardinality": "1:1"
+    },
+    {
+      "id": "REL-267",
+      "source": "CON-FIN-018",
+      "target": "CON-FIN-340",
+      "type": "has-a",
+      "cardinality": "1:1"
+    },
+    {
+      "id": "REL-268",
+      "source": "CON-FIN-018",
+      "target": "CON-FIN-341",
+      "type": "has-a",
+      "cardinality": "1:1"
+    },
+    {
+      "id": "REL-269",
+      "source": "CON-FIN-342",
+      "target": "CON-FIN-339",
+      "type": "constrains",
+      "cardinality": "1:1"
+    },
+    {
+      "id": "REL-270",
+      "source": "CON-FIN-219",
+      "target": "CON-FIN-339",
+      "type": "constrains",
+      "cardinality": "1:1"
+    },
+    {
+      "id": "REL-271",
+      "source": "CON-FIN-345",
+      "target": "CON-FIN-342",
+      "type": "depends-on",
+      "cardinality": "1:N"
+    },
+    {
+      "id": "REL-272",
+      "source": "CON-FIN-346",
+      "target": "CON-FIN-342",
+      "type": "depends-on",
+      "cardinality": "1:N"
+    },
+    {
+      "id": "REL-273",
+      "source": "CON-FIN-344",
+      "target": "CON-FIN-018",
+      "type": "has-a",
+      "cardinality": "1:N"
+    },
+    {
+      "id": "REL-274",
+      "source": "CON-FIN-018",
+      "target": "CON-FIN-339",
+      "type": "has-a",
+      "cardinality": "1:1"
+    },
+    {
+      "id": "REL-275",
+      "source": "CON-FIN-018",
+      "target": "CON-FIN-340",
+      "type": "has-a",
+      "cardinality": "1:1"
+    },
+    {
+      "id": "REL-276",
+      "source": "CON-FIN-018",
+      "target": "CON-FIN-341",
+      "type": "has-a",
+      "cardinality": "1:1"
+    },
+    {
+      "id": "REL-277",
+      "source": "CON-FIN-018",
+      "target": "CON-FIN-347",
+      "type": "has-a",
+      "cardinality": "1:1"
+    },
+    {
+      "id": "REL-278",
+      "source": "CON-FIN-342",
+      "target": "CON-FIN-339",
+      "type": "constrains",
+      "cardinality": "1:1"
+    },
+    {
+      "id": "REL-279",
+      "source": "CON-FIN-349",
+      "target": "CON-FIN-342",
+      "type": "depends-on",
+      "cardinality": "1:1"
+    },
+    {
+      "id": "REL-280",
+      "source": "CON-FIN-348",
+      "target": "CON-FIN-339",
+      "type": "depends-on",
+      "cardinality": "1:1"
+    },
+    {
+      "id": "REL-281",
+      "source": "CON-FIN-050",
+      "target": "CON-FIN-342",
+      "type": "constrains",
+      "cardinality": "1:N"
+    },
+    {
+      "id": "REL-282",
+      "source": "CON-FIN-350",
+      "target": "CON-FIN-339",
+      "type": "constrains",
+      "cardinality": "1:1"
+    },
+    {
+      "id": "REL-283",
+      "source": "CON-FIN-219",
+      "target": "CON-FIN-351",
+      "type": "depends-on",
+      "cardinality": "1:1"
+    },
+    {
+      "id": "REL-284",
+      "source": "CON-FIN-352",
+      "target": "CON-FIN-219",
+      "type": "has-a",
+      "cardinality": "1:1"
+    },
+    {
+      "id": "REL-285",
+      "source": "CON-FIN-353",
+      "target": "CON-FIN-219",
+      "type": "has-a",
+      "cardinality": "1:1"
+    },
+    {
+      "id": "REL-286",
+      "source": "CON-FIN-354",
+      "target": "CON-FIN-219",
+      "type": "has-a",
+      "cardinality": "1:1"
+    },
+    {
+      "id": "REL-287",
+      "source": "CON-FIN-355",
+      "target": "CON-FIN-219",
+      "type": "has-a",
+      "cardinality": "1:1"
+    },
+    {
+      "id": "REL-288",
+      "source": "CON-FIN-356",
+      "target": "CON-FIN-219",
+      "type": "has-a",
+      "cardinality": "1:1"
+    },
+    {
+      "id": "REL-289",
+      "source": "CON-FIN-357",
+      "target": "CON-FIN-219",
+      "type": "constrains",
+      "cardinality": "1:1"
+    },
+    {
+      "id": "REL-290",
+      "source": "CON-FIN-358",
+      "target": "CON-FIN-219",
+      "type": "constrains",
+      "cardinality": "1:1"
+    },
+    {
+      "id": "REL-291",
+      "source": "CON-FIN-352",
+      "target": "CON-FIN-033",
+      "type": "depends-on",
+      "cardinality": "1:N"
+    },
+    {
+      "id": "REL-292",
+      "source": "CON-FIN-079",
+      "target": "CON-FIN-115",
+      "type": "is-a",
+      "cardinality": "1:1"
+    },
+    {
+      "id": "REL-293",
+      "source": "CON-FIN-115",
+      "target": "CON-FIN-359",
+      "type": "depends-on",
+      "cardinality": "1:1"
+    },
+    {
+      "id": "REL-294",
+      "source": "CON-FIN-360",
+      "target": "CON-FIN-036",
+      "type": "has-a",
+      "cardinality": "1:1"
+    },
+    {
+      "id": "REL-295",
+      "source": "CON-FIN-360",
+      "target": "CON-FIN-035",
+      "type": "has-a",
+      "cardinality": "1:1"
+    },
+    {
+      "id": "REL-296",
+      "source": "CON-FIN-360",
+      "target": "CON-FIN-281",
+      "type": "has-a",
+      "cardinality": "1:1"
+    },
+    {
+      "id": "REL-297",
+      "source": "CON-FIN-281",
+      "target": "CON-FIN-594",
+      "type": "depends-on",
+      "cardinality": "1:1"
+    },
+    {
+      "id": "REL-298",
+      "source": "CON-FIN-035",
+      "target": "CON-FIN-036",
+      "type": "depends-on",
+      "cardinality": "1:1"
+    },
+    {
+      "id": "REL-299",
+      "source": "CON-FIN-362",
+      "target": "CON-FIN-079",
+      "type": "depends-on",
+      "cardinality": "N:M"
+    },
+    {
+      "id": "REL-300",
+      "source": "CON-FIN-035",
+      "target": "CON-FIN-036",
+      "type": "is-a",
+      "cardinality": "1:1"
+    },
+    {
+      "id": "REL-301",
+      "source": "CON-FIN-281",
+      "target": "CON-FIN-035",
+      "type": "is-a",
+      "cardinality": "1:1"
+    },
+    {
+      "id": "REL-302",
+      "source": "CON-FIN-281",
+      "target": "CON-FIN-036",
+      "type": "depends-on",
+      "cardinality": "1:1"
+    },
+    {
+      "id": "REL-303",
+      "source": "CON-FIN-038",
+      "target": "CON-FIN-364",
+      "type": "constrains",
+      "cardinality": "1:1"
+    },
+    {
+      "id": "REL-304",
+      "source": "CON-FIN-042",
+      "target": "CON-FIN-338",
+      "type": "depends-on",
+      "cardinality": "1:1"
+    },
+    {
+      "id": "REL-305",
+      "source": "CON-FIN-030",
+      "target": "CON-FIN-035",
+      "type": "has-a",
+      "cardinality": "1:N"
+    },
+    {
+      "id": "REL-306",
+      "source": "CON-FIN-030",
+      "target": "CON-FIN-281",
+      "type": "has-a",
+      "cardinality": "1:N"
+    },
+    {
+      "id": "REL-307",
+      "source": "CON-FIN-031",
+      "target": "CON-FIN-080",
+      "type": "has-a",
+      "cardinality": "1:N"
+    },
+    {
+      "id": "REL-308",
+      "source": "CON-FIN-032",
+      "target": "CON-FIN-038",
+      "type": "has-a",
+      "cardinality": "1:N"
+    },
+    {
+      "id": "REL-309",
+      "source": "CON-FIN-286",
+      "target": "CON-FIN-035",
+      "type": "constrains",
+      "cardinality": "1:N"
+    },
+    {
+      "id": "REL-310",
+      "source": "CON-FIN-286",
+      "target": "CON-FIN-281",
+      "type": "constrains",
+      "cardinality": "1:N"
+    },
+    {
+      "id": "REL-311",
+      "source": "CON-FIN-365",
+      "target": "CON-FIN-366",
+      "type": "is-a",
+      "cardinality": "1:1"
+    },
+    {
+      "id": "REL-312",
+      "source": "CON-FIN-367",
+      "target": "CON-FIN-368",
+      "type": "depends-on",
+      "cardinality": "1:N"
+    },
+    {
+      "id": "REL-313",
+      "source": "CON-FIN-369",
+      "target": "CON-FIN-370",
+      "type": "depends-on",
+      "cardinality": "1:1"
+    },
+    {
+      "id": "REL-314",
+      "source": "CON-FIN-370",
+      "target": "CON-FIN-371",
+      "type": "triggers",
+      "cardinality": "1:1"
+    },
+    {
+      "id": "REL-315",
+      "source": "CON-FIN-375",
+      "target": "CON-FIN-377",
+      "type": "has-a",
+      "cardinality": "1:1"
+    },
+    {
+      "id": "REL-316",
+      "source": "CON-FIN-378",
+      "target": "CON-FIN-375",
+      "type": "has-a",
+      "cardinality": "1:1"
+    },
+    {
+      "id": "REL-317",
+      "source": "CON-FIN-378",
+      "target": "CON-FIN-382",
+      "type": "depends-on",
+      "cardinality": "1:N"
+    },
+    {
+      "id": "REL-318",
+      "source": "CON-FIN-378",
+      "target": "CON-FIN-383",
+      "type": "depends-on",
+      "cardinality": "1:N"
+    },
+    {
+      "id": "REL-319",
+      "source": "CON-FIN-378",
+      "target": "CON-FIN-384",
+      "type": "depends-on",
+      "cardinality": "1:N"
+    },
+    {
+      "id": "REL-320",
+      "source": "CON-FIN-385",
+      "target": "CON-FIN-383",
+      "type": "depends-on",
+      "cardinality": "1:1"
+    },
+    {
+      "id": "REL-321",
+      "source": "CON-FIN-386",
+      "target": "CON-FIN-387",
+      "type": "depends-on",
+      "cardinality": "N:M"
+    },
+    {
+      "id": "REL-322",
+      "source": "CON-FIN-388",
+      "target": "CON-FIN-365",
+      "type": "depends-on",
+      "cardinality": "1:1"
+    },
+    {
+      "id": "REL-323",
+      "source": "CON-FIN-391",
+      "target": "CON-FIN-375",
+      "type": "is-a",
+      "cardinality": "N:1"
+    },
+    {
+      "id": "REL-324",
+      "source": "CON-FIN-392",
+      "target": "CON-FIN-375",
+      "type": "is-a",
+      "cardinality": "N:1"
+    },
+    {
+      "id": "REL-325",
+      "source": "CON-FIN-152",
+      "target": "CON-FIN-390",
+      "type": "is-a",
+      "cardinality": "N:1"
+    },
+    {
+      "id": "REL-326",
+      "source": "CON-FIN-153",
+      "target": "CON-FIN-390",
+      "type": "is-a",
+      "cardinality": "N:1"
+    },
+    {
+      "id": "REL-327",
+      "source": "CON-FIN-382",
+      "target": "CON-FIN-383",
+      "type": "triggers",
+      "cardinality": "1:1"
+    },
+    {
+      "id": "REL-328",
+      "source": "CON-FIN-383",
+      "target": "CON-FIN-384",
+      "type": "triggers",
+      "cardinality": "1:1"
+    },
+    {
+      "id": "REL-329",
+      "source": "CON-FIN-395",
+      "target": "CON-FIN-396",
+      "type": "depends-on",
+      "cardinality": "1:1"
+    },
+    {
+      "id": "REL-330",
+      "source": "CON-FIN-395",
+      "target": "CON-FIN-397",
+      "type": "depends-on",
+      "cardinality": "1:1"
+    },
+    {
+      "id": "REL-331",
+      "source": "CON-FIN-401",
+      "target": "CON-FIN-400",
+      "type": "is-a",
+      "cardinality": "1:1"
+    },
+    {
+      "id": "REL-332",
+      "source": "CON-FIN-403",
+      "target": "CON-FIN-400",
+      "type": "is-a",
+      "cardinality": "1:1"
+    },
+    {
+      "id": "REL-333",
+      "source": "CON-FIN-405",
+      "target": "CON-FIN-404",
+      "type": "has-a",
+      "cardinality": "1:1"
+    },
+    {
+      "id": "REL-334",
+      "source": "CON-FIN-406",
+      "target": "CON-FIN-407",
+      "type": "triggers",
+      "cardinality": "1:1"
+    },
+    {
+      "id": "REL-335",
+      "source": "CON-FIN-405",
+      "target": "CON-FIN-408",
+      "type": "has-a",
+      "cardinality": "N:1"
+    },
+    {
+      "id": "REL-336",
+      "source": "CON-FIN-408",
+      "target": "CON-FIN-383",
+      "type": "constrains",
+      "cardinality": "N:1"
+    },
+    {
+      "id": "REL-337",
+      "source": "CON-FIN-409",
+      "target": "CON-FIN-384",
+      "type": "constrains",
+      "cardinality": "N:1"
+    },
+    {
+      "id": "REL-338",
+      "source": "CON-FIN-416",
+      "target": "CON-FIN-401",
+      "type": "is-a",
+      "cardinality": "1:1"
+    },
+    {
+      "id": "REL-339",
+      "source": "CON-FIN-413",
+      "target": "CON-FIN-400",
+      "type": "depends-on",
+      "cardinality": "1:1"
+    },
+    {
+      "id": "REL-340",
+      "source": "CON-FIN-414",
+      "target": "CON-FIN-400",
+      "type": "depends-on",
+      "cardinality": "1:1"
+    },
+    {
+      "id": "REL-341",
+      "source": "CON-FIN-415",
+      "target": "CON-FIN-400",
+      "type": "depends-on",
+      "cardinality": "1:1"
+    },
+    {
+      "id": "REL-342",
+      "source": "CON-FIN-421",
+      "target": "CON-FIN-401",
+      "type": "is-a",
+      "cardinality": "1:1"
+    },
+    {
+      "id": "REL-343",
+      "source": "CON-FIN-423",
+      "target": "CON-FIN-421",
+      "type": "depends-on",
+      "cardinality": "1:1"
+    },
+    {
+      "id": "REL-344",
+      "source": "CON-FIN-422",
+      "target": "CON-FIN-421",
+      "type": "depends-on",
+      "cardinality": "1:1"
+    },
+    {
+      "id": "REL-345",
+      "source": "CON-FIN-406",
+      "target": "CON-FIN-383",
+      "type": "triggers",
+      "cardinality": "1:N"
+    },
+    {
+      "id": "REL-346",
+      "source": "CON-FIN-373",
+      "target": "CON-FIN-405",
+      "type": "has-a",
+      "cardinality": "1:N"
+    },
+    {
+      "id": "REL-347",
+      "source": "CON-FIN-375",
+      "target": "CON-FIN-405",
+      "type": "constrains",
+      "cardinality": "1:N"
+    },
+    {
+      "id": "REL-348",
+      "source": "CON-FIN-410",
+      "target": "CON-FIN-375",
+      "type": "depends-on",
+      "cardinality": "1:1"
+    },
+    {
+      "id": "REL-349",
+      "source": "CON-FIN-405",
+      "target": "CON-FIN-383",
+      "type": "has-a",
+      "cardinality": "N:1"
+    },
+    {
+      "id": "REL-350",
+      "source": "CON-FIN-383",
+      "target": "CON-FIN-384",
+      "type": "triggers",
+      "cardinality": "1:1"
+    },
+    {
+      "id": "REL-351",
+      "source": "CON-FIN-429",
+      "target": "CON-FIN-431",
+      "type": "has-a",
+      "cardinality": "1:1"
+    },
+    {
+      "id": "REL-352",
+      "source": "CON-FIN-429",
+      "target": "CON-FIN-432",
+      "type": "has-a",
+      "cardinality": "1:1"
+    },
+    {
+      "id": "REL-353",
+      "source": "CON-FIN-377",
+      "target": "CON-FIN-375",
+      "type": "has-a",
+      "cardinality": "1:1"
+    },
+    {
+      "id": "REL-354",
+      "source": "CON-FIN-433",
+      "target": "CON-FIN-429",
+      "type": "depends-on",
+      "cardinality": "1:1"
+    },
+    {
+      "id": "REL-355",
+      "source": "CON-FIN-433",
+      "target": "CON-FIN-438",
+      "type": "depends-on",
+      "cardinality": "1:1"
+    },
+    {
+      "id": "REL-356",
+      "source": "CON-FIN-434",
+      "target": "CON-FIN-430",
+      "type": "is-a",
+      "cardinality": "1:1"
+    },
+    {
+      "id": "REL-357",
+      "source": "CON-FIN-437",
+      "target": "CON-FIN-431",
+      "type": "constrains",
+      "cardinality": "1:1"
+    },
+    {
+      "id": "REL-358",
+      "source": "CON-FIN-439",
+      "target": "CON-FIN-436",
+      "type": "depends-on",
+      "cardinality": "1:1"
+    },
+    {
+      "id": "REL-359",
+      "source": "CON-FIN-435",
+      "target": "CON-FIN-431",
+      "type": "is-a",
+      "cardinality": "1:1"
+    },
+    {
+      "id": "REL-360",
+      "source": "CON-FIN-402",
+      "target": "CON-FIN-444",
+      "type": "has-a",
+      "cardinality": "1:N"
+    },
+    {
+      "id": "REL-361",
+      "source": "CON-FIN-444",
+      "target": "CON-FIN-383",
+      "type": "triggers",
+      "cardinality": "1:1"
+    },
+    {
+      "id": "REL-362",
+      "source": "CON-FIN-441",
+      "target": "CON-FIN-442",
+      "type": "has-a",
+      "cardinality": "1:1"
+    },
+    {
+      "id": "REL-363",
+      "source": "CON-FIN-442",
+      "target": "CON-FIN-443",
+      "type": "is-a",
+      "cardinality": "1:1"
+    },
+    {
+      "id": "REL-364",
+      "source": "CON-FIN-418",
+      "target": "CON-FIN-438",
+      "type": "depends-on",
+      "cardinality": "1:1"
+    },
+    {
+      "id": "REL-365",
+      "source": "CON-FIN-445",
+      "target": "CON-FIN-418",
+      "type": "constrains",
+      "cardinality": "1:1"
+    },
+    {
+      "id": "REL-366",
+      "source": "CON-FIN-446",
+      "target": "CON-FIN-375",
+      "type": "is-a",
+      "cardinality": "1:1"
+    },
+    {
+      "id": "REL-367",
+      "source": "CON-FIN-447",
+      "target": "CON-FIN-433",
+      "type": "depends-on",
+      "cardinality": "1:1"
+    },
+    {
+      "id": "REL-368",
+      "source": "CON-FIN-449",
+      "target": "CON-FIN-450",
+      "type": "depends-on",
+      "cardinality": "1:1"
+    },
+    {
+      "id": "REL-369",
+      "source": "CON-FIN-450",
+      "target": "CON-FIN-411",
+      "type": "has-a",
+      "cardinality": "1:1"
+    },
+    {
+      "id": "REL-370",
+      "source": "CON-FIN-375",
+      "target": "CON-FIN-450",
+      "type": "has-a",
+      "cardinality": "1:N"
+    },
+    {
+      "id": "REL-371",
+      "source": "CON-FIN-389",
+      "target": "CON-FIN-452",
+      "type": "triggers",
+      "cardinality": "1:1"
+    },
+    {
+      "id": "REL-372",
+      "source": "CON-FIN-460",
+      "target": "CON-FIN-458",
+      "type": "is-a",
+      "cardinality": "1:1"
+    },
+    {
+      "id": "REL-373",
+      "source": "CON-FIN-461",
+      "target": "CON-FIN-458",
+      "type": "is-a",
+      "cardinality": "1:1"
+    },
+    {
+      "id": "REL-374",
+      "source": "CON-FIN-468",
+      "target": "CON-FIN-464",
+      "type": "constrains",
+      "cardinality": "1:1"
+    },
+    {
+      "id": "REL-375",
+      "source": "CON-FIN-470",
+      "target": "CON-FIN-464",
+      "type": "depends-on",
+      "cardinality": "1:1"
+    },
+    {
+      "id": "REL-376",
+      "source": "CON-FIN-472",
+      "target": "CON-FIN-471",
+      "type": "is-a",
+      "cardinality": "1:1"
+    },
+    {
+      "id": "REL-377",
+      "source": "CON-FIN-466",
+      "target": "CON-FIN-464",
+      "type": "depends-on",
+      "cardinality": "1:1"
+    },
+    {
+      "id": "REL-378",
+      "source": "CON-FIN-467",
+      "target": "CON-FIN-464",
+      "type": "depends-on",
+      "cardinality": "1:1"
+    },
+    {
+      "id": "REL-379",
+      "source": "CON-FIN-475",
+      "target": "CON-FIN-454",
+      "type": "is-a",
+      "cardinality": "1:1"
+    },
+    {
+      "id": "REL-380",
+      "source": "CON-FIN-454",
+      "target": "CON-FIN-474",
+      "type": "depends-on",
+      "cardinality": "1:1"
+    },
+    {
+      "id": "REL-381",
+      "source": "CON-FIN-412",
+      "target": "CON-FIN-449",
+      "type": "depends-on",
+      "cardinality": "1:1"
+    },
+    {
+      "id": "REL-382",
+      "source": "CON-FIN-477",
+      "target": "CON-FIN-464",
+      "type": "depends-on",
+      "cardinality": "1:1"
+    },
+    {
+      "id": "REL-383",
+      "source": "CON-FIN-461",
+      "target": "CON-FIN-462",
+      "type": "depends-on",
+      "cardinality": "1:1"
+    },
+    {
+      "id": "REL-384",
+      "source": "CON-FIN-464",
+      "target": "CON-FIN-468",
+      "type": "depends-on",
+      "cardinality": "1:1"
+    },
+    {
+      "id": "REL-385",
+      "source": "CON-FIN-478",
+      "target": "CON-FIN-468",
+      "type": "depends-on",
+      "cardinality": "N:1"
+    },
+    {
+      "id": "REL-386",
+      "source": "CON-FIN-470",
+      "target": "CON-FIN-464",
+      "type": "depends-on",
+      "cardinality": "1:1"
+    },
+    {
+      "id": "REL-387",
+      "source": "CON-FIN-465",
+      "target": "CON-FIN-464",
+      "type": "depends-on",
+      "cardinality": "1:1"
+    },
+    {
+      "id": "REL-388",
+      "source": "CON-FIN-464",
+      "target": "CON-FIN-461",
+      "type": "constrains",
+      "cardinality": "1:N"
+    },
+    {
+      "id": "REL-389",
+      "source": "CON-FIN-479",
+      "target": "CON-FIN-464",
+      "type": "is-a",
+      "cardinality": "1:1"
+    },
+    {
+      "id": "REL-390",
+      "source": "CON-FIN-480",
+      "target": "CON-FIN-464",
+      "type": "is-a",
+      "cardinality": "1:1"
+    },
+    {
+      "id": "REL-391",
+      "source": "CON-FIN-467",
+      "target": "CON-FIN-464",
+      "type": "depends-on",
+      "cardinality": "1:1"
+    },
+    {
+      "id": "REL-392",
+      "source": "CON-FIN-466",
+      "target": "CON-FIN-464",
+      "type": "depends-on",
+      "cardinality": "1:1"
+    },
+    {
+      "id": "REL-393",
+      "source": "CON-FIN-482",
+      "target": "CON-FIN-481",
+      "type": "is-a",
+      "cardinality": "1:1"
+    },
+    {
+      "id": "REL-394",
+      "source": "CON-FIN-483",
+      "target": "CON-FIN-481",
+      "type": "is-a",
+      "cardinality": "1:1"
+    },
+    {
+      "id": "REL-395",
+      "source": "CON-FIN-484",
+      "target": "CON-FIN-481",
+      "type": "is-a",
+      "cardinality": "1:1"
+    },
+    {
+      "id": "REL-396",
+      "source": "CON-FIN-483",
+      "target": "CON-FIN-461",
+      "type": "depends-on",
+      "cardinality": "1:N"
+    },
+    {
+      "id": "REL-397",
+      "source": "CON-FIN-487",
+      "target": "CON-FIN-481",
+      "type": "constrains",
+      "cardinality": "1:N"
+    },
+    {
+      "id": "REL-398",
+      "source": "CON-FIN-488",
+      "target": "CON-FIN-481",
+      "type": "constrains",
+      "cardinality": "N:1"
+    },
+    {
+      "id": "REL-399",
+      "source": "CON-FIN-485",
+      "target": "CON-FIN-486",
+      "type": "is-a",
+      "cardinality": "1:1"
+    },
+    {
+      "id": "REL-400",
+      "source": "CON-FIN-492",
+      "target": "CON-FIN-493",
+      "type": "depends-on",
+      "cardinality": "1:1"
+    },
+    {
+      "id": "REL-401",
+      "source": "CON-FIN-492",
+      "target": "CON-FIN-494",
+      "type": "depends-on",
+      "cardinality": "1:1"
+    },
+    {
+      "id": "REL-402",
+      "source": "CON-FIN-497",
+      "target": "CON-FIN-496",
+      "type": "depends-on",
+      "cardinality": "1:1"
+    },
+    {
+      "id": "REL-403",
+      "source": "CON-FIN-483",
+      "target": "CON-FIN-482",
+      "type": "is-a",
+      "cardinality": "1:1"
+    },
+    {
+      "id": "REL-404",
+      "source": "CON-FIN-490",
+      "target": "CON-FIN-492",
+      "type": "has-a",
+      "cardinality": "1:N"
+    },
+    {
+      "id": "REL-405",
+      "source": "CON-FIN-491",
+      "target": "CON-FIN-498",
+      "type": "depends-on",
+      "cardinality": "1:1"
+    },
+    {
+      "id": "REL-406",
+      "source": "CON-FIN-498",
+      "target": "CON-FIN-499",
+      "type": "depends-on",
+      "cardinality": "1:1"
+    },
+    {
+      "id": "REL-407",
+      "source": "CON-FIN-498",
+      "target": "CON-FIN-500",
+      "type": "depends-on",
+      "cardinality": "1:1"
+    },
+    {
+      "id": "REL-408",
+      "source": "CON-FIN-491",
+      "target": "CON-FIN-501",
+      "type": "depends-on",
+      "cardinality": "1:1"
+    },
+    {
+      "id": "REL-409",
+      "source": "CON-FIN-499",
+      "target": "CON-FIN-502",
+      "type": "depends-on",
+      "cardinality": "1:1"
+    },
+    {
+      "id": "REL-410",
+      "source": "CON-FIN-500",
+      "target": "CON-FIN-502",
+      "type": "depends-on",
+      "cardinality": "1:1"
+    },
+    {
+      "id": "REL-411",
+      "source": "CON-FIN-501",
+      "target": "CON-FIN-496",
+      "type": "depends-on",
+      "cardinality": "1:1"
+    },
+    {
+      "id": "REL-412",
+      "source": "CON-FIN-502",
+      "target": "CON-FIN-496",
+      "type": "depends-on",
+      "cardinality": "1:1"
+    },
+    {
+      "id": "REL-413",
+      "source": "CON-FIN-489",
+      "target": "CON-FIN-502",
+      "type": "depends-on",
+      "cardinality": "1:1"
+    },
+    {
+      "id": "REL-414",
+      "source": "CON-FIN-504",
+      "target": "CON-FIN-505",
+      "type": "has-a",
+      "cardinality": "1:1"
+    },
+    {
+      "id": "REL-415",
+      "source": "CON-FIN-506",
+      "target": "CON-FIN-513",
+      "type": "is-a",
+      "cardinality": "1:1"
+    },
+    {
+      "id": "REL-416",
+      "source": "CON-FIN-506",
+      "target": "CON-FIN-514",
+      "type": "is-a",
+      "cardinality": "1:1"
+    },
+    {
+      "id": "REL-417",
+      "source": "CON-FIN-506",
+      "target": "CON-FIN-503",
+      "type": "has-a",
+      "cardinality": "1:1"
+    },
+    {
+      "id": "REL-418",
+      "source": "CON-FIN-507",
+      "target": "CON-FIN-503",
+      "type": "has-a",
+      "cardinality": "1:1"
+    },
+    {
+      "id": "REL-419",
+      "source": "CON-FIN-508",
+      "target": "CON-FIN-503",
+      "type": "has-a",
+      "cardinality": "1:1"
+    },
+    {
+      "id": "REL-420",
+      "source": "CON-FIN-509",
+      "target": "CON-FIN-503",
+      "type": "has-a",
+      "cardinality": "1:1"
+    },
+    {
+      "id": "REL-421",
+      "source": "CON-FIN-504",
+      "target": "CON-FIN-506",
+      "type": "has-a",
+      "cardinality": "1:N"
+    },
+    {
+      "id": "REL-422",
+      "source": "CON-FIN-504",
+      "target": "CON-FIN-508",
+      "type": "has-a",
+      "cardinality": "1:N"
+    },
+    {
+      "id": "REL-423",
+      "source": "CON-FIN-510",
+      "target": "CON-FIN-512",
+      "type": "has-a",
+      "cardinality": "1:1"
+    },
+    {
+      "id": "REL-424",
+      "source": "CON-FIN-515",
+      "target": "CON-FIN-516",
+      "type": "depends-on",
+      "cardinality": "1:1"
+    },
+    {
+      "id": "REL-425",
+      "source": "CON-FIN-517",
+      "target": "CON-FIN-509",
+      "type": "depends-on",
+      "cardinality": "1:1"
+    },
+    {
+      "id": "REL-426",
+      "source": "CON-FIN-519",
+      "target": "CON-FIN-518",
+      "type": "is-a",
+      "cardinality": "1:1"
+    },
+    {
+      "id": "REL-427",
+      "source": "CON-FIN-520",
+      "target": "CON-FIN-521",
+      "type": "has-a",
+      "cardinality": "1:1"
+    },
+    {
+      "id": "REL-428",
+      "source": "CON-FIN-520",
+      "target": "CON-FIN-522",
+      "type": "has-a",
+      "cardinality": "1:1"
+    },
+    {
+      "id": "REL-429",
+      "source": "CON-FIN-520",
+      "target": "CON-FIN-523",
+      "type": "has-a",
+      "cardinality": "1:1"
+    },
+    {
+      "id": "REL-430",
+      "source": "CON-FIN-523",
+      "target": "CON-FIN-521",
+      "type": "depends-on",
+      "cardinality": "1:1"
+    },
+    {
+      "id": "REL-431",
+      "source": "CON-FIN-523",
+      "target": "CON-FIN-522",
+      "type": "depends-on",
+      "cardinality": "1:1"
+    },
+    {
+      "id": "REL-432",
+      "source": "CON-FIN-524",
+      "target": "CON-FIN-520",
+      "type": "constrains",
+      "cardinality": "1:1"
+    },
+    {
+      "id": "REL-433",
+      "source": "CON-FIN-525",
+      "target": "CON-FIN-520",
+      "type": "depends-on",
+      "cardinality": "1:N"
+    },
+    {
+      "id": "REL-434",
+      "source": "CON-FIN-527",
+      "target": "CON-FIN-532",
+      "type": "is-a",
+      "cardinality": "1:1"
+    },
+    {
+      "id": "REL-435",
+      "source": "CON-FIN-459",
+      "target": "CON-FIN-532",
+      "type": "is-a",
+      "cardinality": "1:1"
+    },
+    {
+      "id": "REL-436",
+      "source": "CON-FIN-526",
+      "target": "CON-FIN-520",
+      "type": "depends-on",
+      "cardinality": "1:1"
+    },
+    {
+      "id": "REL-437",
+      "source": "CON-FIN-528",
+      "target": "CON-FIN-529",
+      "type": "constrains",
+      "cardinality": "N:M"
+    },
+    {
+      "id": "REL-438",
+      "source": "CON-FIN-530",
+      "target": "CON-FIN-528",
+      "type": "depends-on",
+      "cardinality": "1:1"
+    },
+    {
+      "id": "REL-439",
+      "source": "CON-FIN-526",
+      "target": "CON-FIN-533",
+      "type": "constrains",
+      "cardinality": "1:1"
+    },
+    {
+      "id": "REL-440",
+      "source": "CON-FIN-527",
+      "target": "CON-FIN-532",
+      "type": "is-a",
+      "cardinality": "1:1"
+    },
+    {
+      "id": "REL-441",
+      "source": "CON-FIN-459",
+      "target": "CON-FIN-532",
+      "type": "is-a",
+      "cardinality": "1:1"
+    },
+    {
+      "id": "REL-442",
+      "source": "CON-FIN-520",
+      "target": "CON-FIN-524",
+      "type": "constrains",
+      "cardinality": "1:N"
+    },
+    {
+      "id": "REL-443",
+      "source": "CON-FIN-520",
+      "target": "CON-FIN-525",
+      "type": "constrains",
+      "cardinality": "1:N"
+    },
+    {
+      "id": "REL-444",
+      "source": "CON-FIN-533",
+      "target": "CON-FIN-532",
+      "type": "depends-on",
+      "cardinality": "N:M"
+    },
+    {
+      "id": "REL-445",
+      "source": "CON-FIN-536",
+      "target": "CON-FIN-535",
+      "type": "is-a",
+      "cardinality": "N:1"
+    },
+    {
+      "id": "REL-446",
+      "source": "CON-FIN-537",
+      "target": "CON-FIN-535",
+      "type": "is-a",
+      "cardinality": "N:1"
+    },
+    {
+      "id": "REL-447",
+      "source": "CON-FIN-536",
+      "target": "CON-FIN-343",
+      "type": "depends-on",
+      "cardinality": "1:1"
+    },
+    {
+      "id": "REL-448",
+      "source": "CON-FIN-537",
+      "target": "CON-FIN-343",
+      "type": "depends-on",
+      "cardinality": "1:1"
+    },
+    {
+      "id": "REL-449",
+      "source": "CON-FIN-539",
+      "target": "CON-FIN-538",
+      "type": "depends-on",
+      "cardinality": "N:1"
+    },
+    {
+      "id": "REL-450",
+      "source": "CON-FIN-299",
+      "target": "CON-FIN-538",
+      "type": "depends-on",
+      "cardinality": "N:1"
+    },
+    {
+      "id": "REL-451",
+      "source": "CON-FIN-540",
+      "target": "CON-FIN-535",
+      "type": "is-a",
+      "cardinality": "N:1"
+    },
+    {
+      "id": "REL-452",
+      "source": "CON-FIN-542",
+      "target": "CON-FIN-535",
+      "type": "is-a",
+      "cardinality": "N:1"
+    },
+    {
+      "id": "REL-453",
+      "source": "CON-FIN-541",
+      "target": "CON-FIN-540",
+      "type": "depends-on",
+      "cardinality": "1:1"
+    },
+    {
+      "id": "REL-454",
+      "source": "CON-FIN-540",
+      "target": "CON-FIN-543",
+      "type": "depends-on",
+      "cardinality": "1:1"
+    },
+    {
+      "id": "REL-455",
+      "source": "CON-FIN-544",
+      "target": "CON-FIN-540",
+      "type": "depends-on",
+      "cardinality": "1:N"
+    },
+    {
+      "id": "REL-456",
+      "source": "CON-FIN-544",
+      "target": "CON-FIN-542",
+      "type": "depends-on",
+      "cardinality": "1:N"
+    },
+    {
+      "id": "REL-457",
+      "source": "CON-FIN-544",
+      "target": "CON-FIN-541",
+      "type": "depends-on",
+      "cardinality": "1:1"
+    },
+    {
+      "id": "REL-458",
+      "source": "CON-FIN-545",
+      "target": "CON-FIN-540",
+      "type": "constrains",
+      "cardinality": "N:1"
+    },
+    {
+      "id": "REL-459",
+      "source": "CON-FIN-546",
+      "target": "CON-FIN-540",
+      "type": "constrains",
+      "cardinality": "N:1"
+    },
+    {
+      "id": "REL-460",
+      "source": "CON-FIN-545",
+      "target": "CON-FIN-542",
+      "type": "constrains",
+      "cardinality": "N:1"
+    },
+    {
+      "id": "REL-461",
+      "source": "CON-FIN-547",
+      "target": "CON-FIN-540",
+      "type": "constrains",
+      "cardinality": "1:1"
+    },
+    {
+      "id": "REL-462",
+      "source": "CON-FIN-550",
+      "target": "CON-FIN-540",
+      "type": "depends-on",
+      "cardinality": "1:1"
+    },
+    {
+      "id": "REL-463",
+      "source": "CON-FIN-536",
+      "target": "CON-FIN-552",
+      "type": "constrains",
+      "cardinality": "1:1"
+    },
+    {
+      "id": "REL-464",
+      "source": "CON-FIN-537",
+      "target": "CON-FIN-552",
+      "type": "constrains",
+      "cardinality": "1:1"
+    },
+    {
+      "id": "REL-465",
+      "source": "CON-FIN-558",
+      "target": "CON-FIN-559",
+      "type": "depends-on",
+      "cardinality": "1:1"
+    },
+    {
+      "id": "REL-466",
+      "source": "CON-FIN-558",
+      "target": "CON-FIN-560",
+      "type": "depends-on",
+      "cardinality": "1:1"
+    },
+    {
+      "id": "REL-467",
+      "source": "CON-FIN-559",
+      "target": "CON-FIN-561",
+      "type": "constrains",
+      "cardinality": "1:N"
+    },
+    {
+      "id": "REL-468",
+      "source": "CON-FIN-559",
+      "target": "CON-FIN-562",
+      "type": "constrains",
+      "cardinality": "1:N"
+    },
+    {
+      "id": "REL-469",
+      "source": "CON-FIN-563",
+      "target": "CON-FIN-562",
+      "type": "has-a",
+      "cardinality": "1:1"
+    },
+    {
+      "id": "REL-470",
+      "source": "CON-FIN-564",
+      "target": "CON-FIN-565",
+      "type": "has-a",
+      "cardinality": "1:N"
+    },
+    {
+      "id": "REL-471",
+      "source": "CON-FIN-564",
+      "target": "CON-FIN-566",
+      "type": "has-a",
+      "cardinality": "1:N"
+    },
+    {
+      "id": "REL-472",
+      "source": "CON-FIN-564",
+      "target": "CON-FIN-567",
+      "type": "has-a",
+      "cardinality": "1:N"
+    },
+    {
+      "id": "REL-473",
+      "source": "CON-FIN-567",
+      "target": "CON-FIN-568",
+      "type": "depends-on",
+      "cardinality": "1:1"
+    },
+    {
+      "id": "REL-474",
+      "source": "CON-FIN-567",
+      "target": "CON-FIN-569",
+      "type": "depends-on",
+      "cardinality": "1:1"
+    },
+    {
+      "id": "REL-475",
+      "source": "CON-FIN-570",
+      "target": "CON-FIN-565",
+      "type": "depends-on",
+      "cardinality": "1:N"
+    },
+    {
+      "id": "REL-476",
+      "source": "CON-FIN-570",
+      "target": "CON-FIN-566",
+      "type": "constrains",
+      "cardinality": "1:N"
+    },
+    {
+      "id": "REL-477",
+      "source": "CON-FIN-568",
+      "target": "CON-FIN-569",
+      "type": "depends-on",
+      "cardinality": "1:1"
+    },
+    {
+      "id": "REL-478",
+      "source": "CON-FIN-568",
+      "target": "CON-FIN-571",
+      "type": "is-a",
+      "cardinality": "1:1"
+    },
+    {
+      "id": "REL-479",
+      "source": "CON-FIN-571",
+      "target": "CON-FIN-580",
+      "type": "has-a",
+      "cardinality": "1:1"
+    },
+    {
+      "id": "REL-480",
+      "source": "CON-FIN-571",
+      "target": "CON-FIN-581",
+      "type": "has-a",
+      "cardinality": "1:1"
+    },
+    {
+      "id": "REL-481",
+      "source": "CON-FIN-572",
+      "target": "CON-FIN-573",
+      "type": "has-a",
+      "cardinality": "1:4"
+    },
+    {
+      "id": "REL-482",
+      "source": "CON-FIN-573",
+      "target": "CON-FIN-574",
+      "type": "has-a",
+      "cardinality": "1:N"
+    },
+    {
+      "id": "REL-483",
+      "source": "CON-FIN-574",
+      "target": "CON-FIN-575",
+      "type": "has-a",
+      "cardinality": "1:N"
+    },
+    {
+      "id": "REL-484",
+      "source": "CON-FIN-572",
+      "target": "CON-FIN-578",
+      "type": "has-a",
+      "cardinality": "1:1"
+    },
+    {
+      "id": "REL-485",
+      "source": "CON-FIN-572",
+      "target": "CON-FIN-579",
+      "type": "has-a",
+      "cardinality": "1:1"
+    },
+    {
+      "id": "REL-486",
+      "source": "CON-FIN-578",
+      "target": "CON-FIN-574",
+      "type": "has-a",
+      "cardinality": "1:N"
+    },
+    {
+      "id": "REL-487",
+      "source": "CON-FIN-579",
+      "target": "CON-FIN-575",
+      "type": "has-a",
+      "cardinality": "1:N"
+    },
+    {
+      "id": "REL-488",
+      "source": "CON-FIN-567",
+      "target": "CON-FIN-568",
+      "type": "depends-on",
+      "cardinality": "1:1"
+    },
+    {
+      "id": "REL-489",
+      "source": "CON-FIN-567",
+      "target": "CON-FIN-569",
+      "type": "depends-on",
+      "cardinality": "1:1"
+    },
+    {
+      "id": "REL-490",
+      "source": "CON-FIN-564",
+      "target": "CON-FIN-567",
+      "type": "has-a",
+      "cardinality": "1:N"
+    },
+    {
+      "id": "REL-491",
+      "source": "CON-FIN-576",
+      "target": "CON-FIN-577",
+      "type": "depends-on",
+      "cardinality": "N:M"
+    },
+    {
+      "id": "REL-492",
+      "source": "CON-FIN-569",
+      "target": "CON-FIN-567",
+      "type": "constrains",
+      "cardinality": "1:1"
+    },
+    {
+      "id": "REL-493",
+      "source": "CON-FIN-583",
+      "target": "CON-FIN-076",
+      "type": "constrains",
+      "cardinality": "1:1"
+    },
+    {
+      "id": "REL-494",
+      "source": "CON-FIN-583",
+      "target": "CON-FIN-585",
+      "type": "has-a",
+      "cardinality": "1:1"
+    },
+    {
+      "id": "REL-495",
+      "source": "CON-FIN-584",
+      "target": "CON-FIN-017",
+      "type": "has-a",
+      "cardinality": "1:1"
+    },
+    {
+      "id": "REL-496",
+      "source": "CON-FIN-586",
+      "target": "CON-FIN-017",
+      "type": "constrains",
+      "cardinality": "1:1"
+    },
+    {
+      "id": "REL-497",
+      "source": "CON-FIN-281",
+      "target": "CON-FIN-035",
+      "type": "is-a",
+      "cardinality": "1:1"
+    },
+    {
+      "id": "REL-498",
+      "source": "CON-FIN-582",
+      "target": "CON-FIN-017",
+      "type": "triggers",
+      "cardinality": "1:1"
+    },
+    {
+      "id": "REL-499",
+      "source": "CON-FIN-578",
+      "target": "CON-FIN-572",
+      "type": "has-a",
+      "cardinality": "1:1"
+    },
+    {
+      "id": "REL-500",
+      "source": "CON-FIN-579",
+      "target": "CON-FIN-572",
+      "type": "has-a",
+      "cardinality": "1:1"
+    },
+    {
+      "id": "REL-501",
+      "source": "CON-FIN-042",
+      "target": "CON-FIN-338",
+      "type": "depends-on",
+      "cardinality": "1:1"
+    },
+    {
+      "id": "REL-502",
+      "source": "CON-FIN-571",
+      "target": "CON-FIN-038",
+      "type": "depends-on",
+      "cardinality": "1:1"
+    },
+    {
+      "id": "REL-503",
+      "source": "CON-FIN-039",
+      "target": "CON-FIN-040",
+      "type": "depends-on",
+      "cardinality": "1:1"
+    },
+    {
+      "id": "REL-504",
+      "source": "CON-FIN-281",
+      "target": "CON-FIN-594",
+      "type": "depends-on",
+      "cardinality": "1:1"
+    },
+    {
+      "id": "REL-505",
+      "source": "CON-FIN-281",
+      "target": "CON-FIN-604",
+      "type": "depends-on",
+      "cardinality": "1:1"
+    },
+    {
+      "id": "REL-506",
+      "source": "CON-FIN-036",
+      "target": "CON-FIN-594",
+      "type": "depends-on",
+      "cardinality": "1:1"
+    },
+    {
+      "id": "REL-507",
+      "source": "CON-FIN-333",
+      "target": "CON-FIN-323",
+      "type": "has-a",
+      "cardinality": "1:N"
+    },
+    {
+      "id": "REL-508",
+      "source": "CON-FIN-410",
+      "target": "CON-FIN-375",
+      "type": "constrains",
+      "cardinality": "1:1"
+    },
+    {
+      "id": "REL-509",
+      "source": "CON-FIN-130",
+      "target": "CON-FIN-592",
+      "type": "depends-on",
+      "cardinality": "1:N"
+    },
+    {
+      "id": "REL-510",
+      "source": "CON-FIN-059",
+      "target": "CON-FIN-060",
+      "type": "depends-on",
+      "cardinality": "1:N"
+    },
+    {
+      "id": "REL-511",
+      "source": "CON-FIN-596",
+      "target": "CON-FIN-033",
+      "type": "constrains",
+      "cardinality": "1:N"
+    },
+    {
+      "id": "REL-512",
+      "source": "CON-FIN-593",
+      "target": "CON-FIN-302",
+      "type": "has-a",
+      "cardinality": "1:1"
+    },
+    {
+      "id": "REL-513",
+      "source": "CON-FIN-094",
+      "target": "CON-FIN-006",
+      "type": "triggers",
+      "cardinality": "1:N"
+    },
+    {
+      "id": "REL-514",
+      "source": "CON-FIN-377",
+      "target": "CON-FIN-375",
+      "type": "has-a",
+      "cardinality": "1:1"
+    },
+    {
+      "id": "REL-515",
+      "source": "CON-FIN-602",
+      "target": "CON-FIN-608",
+      "type": "depends-on",
+      "cardinality": "1:1"
+    },
+    {
+      "id": "REL-516",
+      "source": "CON-FIN-601",
+      "target": "CON-FIN-375",
+      "type": "constrains",
+      "cardinality": "1:N"
+    },
+    {
+      "id": "REL-517",
+      "source": "CON-FIN-023",
+      "target": "CON-FIN-230",
+      "type": "constrains",
+      "cardinality": "1:1"
+    },
+    {
+      "id": "REL-518",
+      "source": "CON-FIN-242",
+      "target": "CON-FIN-230",
+      "type": "depends-on",
+      "cardinality": "1:1"
+    },
+    {
+      "id": "REL-519",
+      "source": "CON-FIN-520",
+      "target": "CON-FIN-608",
+      "type": "depends-on",
+      "cardinality": "1:N"
+    },
+    {
+      "id": "REL-520",
+      "source": "CON-FIN-194",
+      "target": "CON-FIN-196",
+      "type": "has-a",
+      "cardinality": "1:N"
+    },
+    {
+      "id": "REL-521",
+      "source": "CON-FIN-483",
+      "target": "CON-FIN-608",
+      "type": "depends-on",
+      "cardinality": "1:1"
+    },
+    {
+      "id": "REL-522",
+      "source": "CON-FIN-401",
+      "target": "CON-FIN-375",
+      "type": "depends-on",
+      "cardinality": "1:1"
+    },
+    {
+      "id": "REL-523",
+      "source": "CON-FIN-376",
+      "target": "CON-FIN-378",
+      "type": "has-a",
+      "cardinality": "N:M"
+    },
+    {
+      "id": "REL-524",
+      "source": "CON-FIN-377",
+      "target": "CON-FIN-378",
+      "type": "has-a",
+      "cardinality": "N:M"
+    },
+    {
+      "id": "REL-525",
+      "source": "CON-FIN-615",
+      "target": "CON-FIN-614",
+      "type": "is-a",
+      "cardinality": "1:1"
+    },
+    {
+      "id": "REL-526",
+      "source": "CON-FIN-616",
+      "target": "CON-FIN-614",
+      "type": "is-a",
+      "cardinality": "1:1"
+    },
+    {
+      "id": "REL-527",
+      "source": "CON-FIN-621",
+      "target": "CON-FIN-389",
+      "type": "constrains",
+      "cardinality": "1:1"
+    },
+    {
+      "id": "REL-528",
+      "source": "CON-FIN-617",
+      "target": "CON-FIN-378",
+      "type": "constrains",
+      "cardinality": "1:1"
+    },
+    {
+      "id": "REL-529",
+      "source": "CON-FIN-612",
+      "target": "CON-FIN-614",
+      "type": "depends-on",
+      "cardinality": "1:1"
+    },
+    {
+      "id": "REL-530",
+      "source": "CON-FIN-619",
+      "target": "CON-FIN-620",
+      "type": "triggers",
+      "cardinality": "1:N"
+    },
+    {
+      "id": "REL-531",
+      "source": "CON-FIN-624",
+      "target": "CON-FIN-515",
+      "type": "triggers",
+      "cardinality": "1:N"
+    }
+  ]
+}

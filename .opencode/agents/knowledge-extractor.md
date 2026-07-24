@@ -1,7 +1,7 @@
 ---
 description: Extracts knowledge from source documents into the knowledge repository
 mode: subagent
-model: opencode-go/mimo-v2-5
+model: opencode-go/mimo-v2.5
 steps: 100
 permission:
   edit: allow

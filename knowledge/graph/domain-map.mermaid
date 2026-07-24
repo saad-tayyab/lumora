@@ -1,29 +1,182 @@
-graph TD
-    subgraph Domains["Lumora ERP Domains"]
-        BC-AUTH["Authentication & Identity"]
-        BC-FIN["Financial Management"]
-        BC-AR["Accounts Receivable"]
-        BC-AP["Accounts Payable"]
-        BC-CASH["Cash & Treasury"]
-        BC-INV["Inventory Management"]
-        BC-PROC["Procurement"]
-        BC-SALES["Sales & Orders"]
-        BC-HR["Human Resources"]
-        BC-REPORT["Reporting & Analytics"]
-        BC-AI["AI & Automation"]
-    end
+graph LR
+  CON-FIN-001["Accounting Equation Solving"]
+  CON-FIN-002["Asset"]
+  CON-FIN-003["Liability"]
+  CON-FIN-004["Owner's Equity"]
+  CON-FIN-005["Revenue"]
+  CON-FIN-006["Expense"]
+  CON-FIN-007["Business Transaction"]
+  CON-FIN-008["T Account"]
+  CON-FIN-009["Debit"]
+  CON-FIN-010["Credit"]
+  CON-FIN-011["Journal Entry"]
+  CON-FIN-012["General Journal"]
+  CON-FIN-013["General Ledger"]
+  CON-FIN-014["Adjusted Trial Balance"]
+  CON-FIN-015["Income Statement"]
+  CON-FIN-016["Statement of Owner's Equity"]
+  CON-FIN-017["Consolidated Balance Sheet"]
+  CON-FIN-018["Statement of Cash Flows"]
+  CON-FIN-019["Accounting Cycle Steps"]
+  CON-FIN-020["Adjusting Entry"]
+  CON-FIN-021["Closing Entry"]
+  CON-FIN-022["Proprietorship"]
+  CON-FIN-023["Depreciation"]
+  CON-FIN-024["Bank Reconciliation"]
+  CON-FIN-025["Inventory Costing Methods"]
+  CON-FIN-026["Accrual Basis Accounting"]
+  CON-FIN-027["Cash Basis Accounting"]
+  CON-FIN-028["GAAP"]
+  CON-FIN-029["Matching Principle"]
+  CON-FIN-030["Liquidity Analysis"]
+  CON-FIN-031["Solvency Analysis"]
+  CON-FIN-032["Profitability Analysis"]
+  CON-FIN-033["Accounts Receivable"]
+  CON-FIN-034["Inventory Turnover Ratio"]
+  CON-FIN-035["Current Ratio"]
+  CON-FIN-036["Working Capital"]
+  CON-FIN-037["Times Interest Earned Ratio"]
+  CON-FIN-038["Return on Total Assets"]
+  CON-FIN-039["Return on Common Stockholders'"]
+  CON-FIN-040["Earnings Per Share (EPS)"]
+  CON-FIN-041["Price-Earnings (P/E) Ratio"]
+  CON-FIN-042["Dividend Yield"]
+  CON-FIN-043["Corporate Annual Report"]
+  CON-FIN-044["ESG Reporting"]
+  CON-FIN-045["Worksheet"]
+  CON-FIN-046["Accrued Revenue Adjustment"]
+  CON-FIN-047["Accrued Expense Adjustment"]
+  CON-FIN-048["Deferred Revenue"]
+  CON-FIN-049["Deferred Expense"]
+  CON-FIN-050["Depreciation Expense"]
+  CON-FIN-051["Accumulated Depreciation"]
+  CON-FIN-052["Permanent Account"]
+  CON-FIN-053["Temporary Account"]
+  CON-FIN-054["Reversing Entry"]
+  CON-FIN-055["Fiscal Year"]
+  CON-FIN-056["Chart of Accounts"]
+  CON-FIN-057["Corporation"]
+  CON-FIN-058["Stockholders' Equity"]
+  CON-FIN-059["Retained Earnings Statement"]
+  CON-FIN-060["Dividends"]
+  CON-FIN-061["Financial Statement Preparatio"]
+  CON-FIN-062["Accounting"]
+  CON-FIN-063["Financial Statements"]
+  CON-FIN-064["Assets"]
+  CON-FIN-065["Liabilities"]
+  CON-FIN-066["Expenses"]
+  CON-FIN-067["Net Income Percentage"]
+  CON-FIN-068["Net Loss"]
+  CON-FIN-069["Partnership"]
+  CON-FIN-070["Limited Liability Company (LLC"]
+  CON-FIN-071["Service Business"]
+  CON-FIN-072["Merchandising Business"]
+  CON-FIN-073["Manufacturing Business"]
+  CON-FIN-074["Cost Principle"]
+  CON-FIN-075["Business Entity Assumption"]
+  CON-FIN-076["Revenue Recognition"]
+  CON-FIN-077["Owner's Drawing"]
+  CON-FIN-078["Accounts Payable"]
+  CON-FIN-079["Horizontal Analysis"]
+  CON-FIN-080["Ratio of Liabilities to Stockh"]
 
-    BC-AR -->|"triggers"| BC-FIN
-    BC-AP -->|"triggers"| BC-FIN
-    BC-INV -->|"triggers"| BC-FIN
-    BC-PROC -->|"triggers"| BC-INV
-    BC-SALES -->|"triggers"| BC-AR
-    BC-HR -->|"triggers"| BC-FIN
-    BC-REPORT -->|"reads"| BC-FIN
-    BC-AI -->|"automates"| BC-FIN
-    BC-AI -->|"automates"| BC-INV
-    BC-AI -->|"automates"| BC-AR
-    BC-CASH -->|"reconciles"| BC-FIN
-```
-
-*This diagram will be populated as concepts are defined.*
+  CON-FIN-011 --> CON-FIN-012
+  CON-FIN-012 -.-> CON-FIN-013
+  CON-FIN-015 -.-> CON-FIN-016
+  CON-FIN-005 --> CON-FIN-015
+  CON-FIN-006 --> CON-FIN-015
+  CON-FIN-004 -.-> CON-FIN-005
+  CON-FIN-004 -.-> CON-FIN-006
+  CON-FIN-020 --|> CON-FIN-012
+  CON-FIN-021 --|> CON-FIN-012
+  CON-FIN-023 --> CON-FIN-020
+  CON-FIN-024 --> CON-FIN-011
+  CON-FIN-030 --> CON-FIN-035
+  CON-FIN-030 --> CON-FIN-036
+  CON-FIN-032 --> CON-FIN-038
+  CON-FIN-043 --> CON-FIN-044
+  CON-FIN-045 --> CON-FIN-014
+  CON-FIN-014 -.-> CON-FIN-015
+  CON-FIN-048 --|> CON-FIN-020
+  CON-FIN-049 --|> CON-FIN-020
+  CON-FIN-050 --> CON-FIN-051
+  CON-FIN-051 --> CON-FIN-002
+  CON-FIN-021 --> CON-FIN-053
+  CON-FIN-053 --|> CON-FIN-052
+  CON-FIN-054 -.-> CON-FIN-020
+  CON-FIN-057 --> CON-FIN-058
+  CON-FIN-057 --> CON-FIN-060
+  CON-FIN-015 -.-> CON-FIN-016
+  CON-FIN-077 --> CON-FIN-016
+  CON-FIN-005 --> CON-FIN-015
+  CON-FIN-066 --> CON-FIN-015
+  CON-FIN-022 --> CON-FIN-004
+  CON-FIN-069 --> CON-FIN-004
+  CON-FIN-057 --> CON-FIN-058
+  CON-FIN-029 --> CON-FIN-015
+  CON-FIN-079 -.-> CON-FIN-015
+  CON-FIN-081 --> CON-FIN-075
+  CON-FIN-083 --|> CON-FIN-016
+  CON-FIN-058 --|> CON-FIN-004
+  CON-FIN-008 --|> CON-FIN-085
+  CON-FIN-093 --|> CON-FIN-085
+  CON-FIN-009 --> CON-FIN-085
+  CON-FIN-010 --> CON-FIN-085
+  CON-FIN-087 --> CON-FIN-085
+  CON-FIN-086 --> CON-FIN-085
+  CON-FIN-011 --> CON-FIN-088
+  CON-FIN-089 -.-> CON-FIN-088
+  CON-FIN-091 -.-> CON-FIN-088
+  CON-FIN-091 --> CON-FIN-090
+  CON-FIN-090 --> CON-FIN-085
+  CON-FIN-056 --> CON-FIN-090
+  CON-FIN-092 --> CON-FIN-011
+  CON-FIN-094 --|> CON-FIN-085
+  CON-FIN-096 --|> CON-FIN-085
+  CON-FIN-079 -.-> CON-FIN-015
+  CON-FIN-056 --> CON-FIN-085
+  CON-FIN-088 -.-> CON-FIN-090
+  CON-FIN-088 --> CON-FIN-009
+  CON-FIN-088 --> CON-FIN-010
+  CON-FIN-090 --> CON-FIN-085
+  CON-FIN-087 --> CON-FIN-085
+  CON-FIN-104 -.-> CON-FIN-033
+  CON-FIN-078 --> CON-FIN-101
+  CON-FIN-033 --> CON-FIN-100
+  CON-FIN-050 --> CON-FIN-051
+  CON-FIN-051 --> CON-FIN-107
+  CON-FIN-107 --> CON-FIN-109
+  CON-FIN-108 --> CON-FIN-107
+  CON-FIN-014 -.-> CON-FIN-020
+  CON-FIN-110 --|> CON-FIN-107
+  CON-FIN-111 --|> CON-FIN-107
+  CON-FIN-112 --|> CON-FIN-107
+  CON-FIN-113 --|> CON-FIN-107
+  CON-FIN-243 -.-> CON-FIN-050
+  CON-FIN-023 --> CON-FIN-051
+  CON-FIN-051 --> CON-FIN-109
+  CON-FIN-109 -.-> CON-FIN-114
+  CON-FIN-015 -.-> CON-FIN-016
+  CON-FIN-021 --> CON-FIN-053
+  CON-FIN-021 --> CON-FIN-052
+  CON-FIN-036 --> CON-FIN-119
+  CON-FIN-036 --> CON-FIN-121
+  CON-FIN-035 -.-> CON-FIN-036
+  CON-FIN-122 -.-> CON-FIN-121
+  CON-FIN-124 --> CON-FIN-126
+  CON-FIN-124 --> CON-FIN-125
+  CON-FIN-116 -.-> CON-FIN-014
+  CON-FIN-014 -.-> CON-FIN-063
+  CON-FIN-026 --|> CON-FIN-027
+  CON-FIN-018 --> CON-FIN-339
+  CON-FIN-018 --> CON-FIN-340
+  CON-FIN-018 --> CON-FIN-341
+  CON-FIN-036 -.-> CON-FIN-603
+  CON-FIN-036 -.-> CON-FIN-604
+  CON-FIN-035 -.-> CON-FIN-036
+  CON-FIN-072 --|> CON-FIN-140
+  CON-FIN-072 --|> CON-FIN-141
+  CON-FIN-129 --> CON-FIN-136
+  CON-FIN-130 --> CON-FIN-136
+  CON-FIN-133 -.-> CON-FIN-132
+  CON-FIN-134 --> CON-FIN-135

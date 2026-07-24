@@ -1,7 +1,7 @@
 ---
 description: Generates production code from knowledge repository artifacts
 mode: subagent
-model: opencode-go/mimo-v2-5
+model: opencode-go/mimo-v2.5
 steps: 100
 permission:
   edit: allow

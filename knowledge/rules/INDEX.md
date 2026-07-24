@@ -1,49 +1,603 @@
-# Rules Index
-
-> **Last Updated:** 2026-07-24  
-> **Total Rules:** 0  
-> **Status:** Pending population
-
+---
+title: Business Rules Index
+version: 1.0.0
+status: active
 ---
 
-## Rules by Context
+# Business Rules
 
-| Context | Count |
-|---------|-------|
-| BC-FIN | 0 |
-| BC-AR | 0 |
-| BC-AP | 0 |
-| BC-CASH | 0 |
-| BC-INV | 0 |
-| BC-PROC | 0 |
-| BC-SALES | 0 |
-| BC-HR | 0 |
-
----
-
-## Rules by Priority
-
-| Priority | Count |
-|----------|-------|
-| Critical | 0 |
-| High | 0 |
-| Medium | 0 |
-| Low | 0 |
-
----
-
-## Rules by Type
-
-| Type | Count |
-|------|-------|
-| Invariant | 0 |
-| Constraint | 0 |
-| Validation | 0 |
-| Business Process | 0 |
-| Computational | 0 |
-| Temporal | 0 |
-| Access Control | 0 |
-
----
-
-*This index is auto-generated. Do not edit manually.*
+- [Accounting Equation Must Balance](active/BR-001.accounting-equation-must-balance.md) — BR-001
+- [Rules of Debit and Credit](active/BR-002.rules-of-debit-and-credit.md) — BR-002
+- [Double-Entry Bookkeeping](active/BR-003.double-entry-bookkeeping.md) — BR-003
+- [Trial Balance Equality](active/BR-004.trial-balance-equality.md) — BR-004
+- [Revenue Recognition Principle](active/BR-005.revenue-recognition-principle.md) — BR-005
+- [Matching Principle](active/BR-006.matching-principle.md) — BR-006
+- [Periodic Trial Balance Preparation](active/BR-007.periodic-trial-balance-preparation.md) — BR-007
+- [Closing Entries Zero Out Temporary Accounts](active/BR-008.closing-entries-zero-out-temporary-accounts.md) — BR-008
+- [Depreciation Methods Consistency](active/BR-009.depreciation-methods-consistency.md) — BR-009
+- [Bank Reconciliation Journal Entries Required](active/BR-010.bank-reconciliation-journal-entries-required.md) — BR-010
+- [Working Capital Positive Indicator](active/BR-011.working-capital-positive-indicator.md) — BR-011
+- [GAAP Requires Accrual Accounting](active/BR-012.gaap-requires-accrual-accounting.md) — BR-012
+- [Accrual Basis Better Matches Revenue and Expenses](active/BR-013.accrual-basis-better-matches-revenue-and-expenses.md) — BR-013
+- [Liquidity Ratios Evaluate Short-Term Ability to Pay](active/BR-014.liquidity-ratios-evaluate-short-term-ability-to-pay.md) — BR-014
+- [Ratio Analysis Requires Comparison](active/BR-015.ratio-analysis-requires-comparison.md) — BR-015
+- [Fixed Asset Turnover Measures Efficiency](active/BR-016.fixed-asset-turnover-measures-efficiency.md) — BR-016
+- [Consistency in Financial Reporting](active/BR-017.consistency-in-financial-reporting.md) — BR-017
+- [Full Disclosure Principle](active/BR-018.full-disclosure-principle.md) — BR-018
+- [Management Discussion and Analysis Required](active/BR-019.management-discussion-and-analysis-required.md) — BR-019
+- [Adjusting Entries Must Balance](active/BR-020.adjusting-entries-must-balance.md) — BR-020
+- [Four Types of Adjusting Entries](active/BR-021.four-types-of-adjusting-entries.md) — BR-021
+- [Worksheet Not a Financial Statement](active/BR-022.worksheet-not-a-financial-statement.md) — BR-022
+- [Post-Closing Trial Balance Contains Only Permanent Accounts](active/BR-023.post-closing-trial-balance-contains-only-permanent-accounts.md) — BR-023
+- [Retained Earnings Updates Each Period](active/BR-024.retained-earnings-updates-each-period.md) — BR-024
+- [Dividends Reduce Retained Earnings](active/BR-025.dividends-reduce-retained-earnings.md) — BR-025
+- [Financial Statement Preparation Order](active/BR-026.financial-statement-preparation-order.md) — BR-026
+- [Adjustments for Depreciation at Period End](active/BR-027.adjustments-for-depreciation-at-period-end.md) — BR-027
+- [Reversing Entries for Accruals](active/BR-028.reversing-entries-for-accruals.md) — BR-028
+- [Accounting Equation Must Balance](active/BR-029.accounting-equation-must-balance.md) — BR-029
+- [Matching Principle](active/BR-030.matching-principle.md) — BR-030
+- [Cost Principle](active/BR-031.cost-principle.md) — BR-031
+- [Business Entity Assumption](active/BR-032.business-entity-assumption.md) — BR-032
+- [Net Income Increases Owner's Equity](active/BR-033.net-income-increases-owner-s-equity.md) — BR-033
+- [Owner's Drawing Reduces Equity](active/BR-034.owner-s-drawing-reduces-equity.md) — BR-034
+- [Expense Ordering on Income Statement](active/BR-035.expense-ordering-on-income-statement.md) — BR-035
+- [Accounting Equation Balance Check](active/BR-036.accounting-equation-balance-check.md) — BR-036
+- [Business Entity Transaction Classification](active/BR-037.business-entity-transaction-classification.md) — BR-037
+- [Equity Changes from Transactions](active/BR-038.equity-changes-from-transactions.md) — BR-038
+- [Creditor Risk Increases with Higher Leverage](active/BR-039.creditor-risk-increases-with-higher-leverage.md) — BR-039
+- [Credit Decreases Assets](active/BR-040.credit-decreases-assets.md) — BR-040
+- [Credit Increases Liabilities and Equity](active/BR-041.credit-increases-liabilities-and-equity.md) — BR-041
+- [Credit Increases Revenue](active/BR-042.credit-increases-revenue.md) — BR-042
+- [Debit Increases Drawing](active/BR-043.debit-increases-drawing.md) — BR-043
+- [Double-Entry Equality](active/BR-044.double-entry-equality.md) — BR-044
+- [Posting Preserves Journal Entry Reference](active/BR-045.posting-preserves-journal-entry-reference.md) — BR-045
+- [Errors Do Not Always Cause Trial Balance Imbalance](active/BR-046.errors-do-not-always-cause-trial-balance-imbalance.md) — BR-046
+- [Horizontal Analysis Formula](active/BR-047.horizontal-analysis-formula.md) — BR-047
+- [Prepaid Expenses Are Assets Initially](active/BR-048.prepaid-expenses-are-assets-initially.md) — BR-048
+- [Unearned Revenue Is a Liability Initially](active/BR-049.unearned-revenue-is-a-liability-initially.md) — BR-049
+- [Normal Balance Convention](active/BR-050.normal-balance-convention.md) — BR-050
+- [Journal Before Ledger](active/BR-051.journal-before-ledger.md) — BR-051
+- [Balanced Trial Balance Does Not Guarantee Error-Free Records](active/BR-052.balanced-trial-balance-does-not-guarantee-error-free-records.md) — BR-052
+- [Trial Balance Detects Mathematical Errors Only](active/BR-053.trial-balance-detects-mathematical-errors-only.md) — BR-053
+- [Error Correction Requires Identifying Root Cause](active/BR-054.error-correction-requires-identifying-root-cause.md) — BR-054
+- [Cash Receipts Increase Cash Account](active/BR-055.cash-receipts-increase-cash-account.md) — BR-055
+- [Owner Withdrawals Reduce Owner Equity](active/BR-056.owner-withdrawals-reduce-owner-equity.md) — BR-056
+- [Owner Investments Increase Owner Equity](active/BR-057.owner-investments-increase-owner-equity.md) — BR-057
+- [Revenue Recognition on Earning](active/BR-058.revenue-recognition-on-earning.md) — BR-058
+- [Expense Recognition on Incurrence](active/BR-059.expense-recognition-on-incurrence.md) — BR-059
+- [Supplies Recorded as Asset When Purchased](active/BR-060.supplies-recorded-as-asset-when-purchased.md) — BR-060
+- [Prepaid Insurance Recorded as Asset](active/BR-061.prepaid-insurance-recorded-as-asset.md) — BR-061
+- [Depreciation Does Not Reduce the Asset Account Directly](active/BR-062.depreciation-does-not-reduce-the-asset-account-directly.md) — BR-062
+- [Land Is Not Depreciated](active/BR-063.land-is-not-depreciated.md) — BR-063
+- [Contra Account Balance Is Opposite to Related Account](active/BR-064.contra-account-balance-is-opposite-to-related-account.md) — BR-064
+- [Adjusting Entries Are Made at Period End Only](active/BR-065.adjusting-entries-are-made-at-period-end-only.md) — BR-065
+- [Adjusting Entries Never Involve Cash](active/BR-066.adjusting-entries-never-involve-cash.md) — BR-066
+- [Prepaid Expenses Must Be Adjusted](active/BR-067.prepaid-expenses-must-be-adjusted.md) — BR-067
+- [Unearned Revenue Must Be Adjusted](active/BR-068.unearned-revenue-must-be-adjusted.md) — BR-068
+- [Accrued Revenues Must Be Recorded](active/BR-069.accrued-revenues-must-be-recorded.md) — BR-069
+- [Adjusted Trial Balance Precedes Financial Statements](active/BR-070.adjusted-trial-balance-precedes-financial-statements.md) — BR-070
+- [Straight-Line Depreciation](active/BR-071.straight-line-depreciation.md) — BR-071
+- [Accrual Matching Principle](active/BR-072.accrual-matching-principle.md) — BR-072
+- [Depreciation Allocation](active/BR-073.depreciation-allocation.md) — BR-073
+- [Book Value Not Market Value](active/BR-074.book-value-not-market-value.md) — BR-074
+- [Unearned Revenue Recognition](active/BR-075.unearned-revenue-recognition.md) — BR-075
+- [Accrued Revenue Recording](active/BR-076.accrued-revenue-recording.md) — BR-076
+- [Property Tax Accrual](active/BR-077.property-tax-accrual.md) — BR-077
+- [Closing Process](active/BR-078.closing-process.md) — BR-078
+- [Post-Closing Trial Balance Verification](active/BR-079.post-closing-trial-balance-verification.md) — BR-079
+- [Capital Account Continuity](active/BR-080.capital-account-continuity.md) — BR-080
+- [Accrual Basis Requirement](active/BR-081.accrual-basis-requirement.md) — BR-081
+- [Working Capital Positive Indicator](active/BR-082.working-capital-positive-indicator.md) — BR-082
+- [Current Ratio Threshold](active/BR-083.current-ratio-threshold.md) — BR-083
+- [Balance Sheet Date Reporting](active/BR-084.balance-sheet-date-reporting.md) — BR-084
+- [Mortgage Payable Classification](active/BR-085.mortgage-payable-classification.md) — BR-085
+- [Accrual vs Cash Performance Difference](active/BR-086.accrual-vs-cash-performance-difference.md) — BR-086
+- [Closing Entries Sequence](active/BR-087.closing-entries-sequence.md) — BR-087
+- [Permanent vs. Temporary Accounts Distinction](active/BR-088.permanent-vs-temporary-accounts-distinction.md) — BR-088
+- [Post-Closing Trial Balance Equality](active/BR-089.post-closing-trial-balance-equality.md) — BR-089
+- [Balance Sheet Account Classification](active/BR-090.balance-sheet-account-classification.md) — BR-090
+- [Accrual Over Cash Basis](active/BR-091.accrual-over-cash-basis.md) — BR-091
+- [Ethical Financial Reporting](active/BR-092.ethical-financial-reporting.md) — BR-092
+- [Adjusted Trial Balance Equality](active/BR-093.adjusted-trial-balance-equality.md) — BR-093
+- [Spreadsheet Column Equality](active/BR-094.spreadsheet-column-equality.md) — BR-094
+- [Working Capital Interpretation](active/BR-095.working-capital-interpretation.md) — BR-095
+- [Current Ratio Comparison](active/BR-096.current-ratio-comparison.md) — BR-096
+- [Cash Flows Classification](active/BR-097.cash-flows-classification.md) — BR-097
+- [Inventory Purchased Debits Inventory Account](active/BR-098.inventory-purchased-debits-inventory-account.md) — BR-098
+- [COGS Recorded at Each Sale](active/BR-099.cogs-recorded-at-each-sale.md) — BR-099
+- [Purchase Discount Reduces Inventory Cost](active/BR-100.purchase-discount-reduces-inventory-cost.md) — BR-100
+- [Purchase Returns and Allowances Reduce Inventory](active/BR-101.purchase-returns-and-allowances-reduce-inventory.md) — BR-101
+- [Debit Memorandum for Returns](active/BR-102.debit-memorandum-for-returns.md) — BR-102
+- [Taking Purchase Discounts is Advantageous](active/BR-103.taking-purchase-discounts-is-advantageous.md) — BR-103
+- [Subsidiary Ledger Must Match Controlling Account](active/BR-104.subsidiary-ledger-must-match-controlling-account.md) — BR-104
+- [Credit Card Sales Recorded as Cash](active/BR-105.credit-card-sales-recorded-as-cash.md) — BR-105
+- [Credit Card Fees are Period Expenses](active/BR-106.credit-card-fees-are-period-expenses.md) — BR-106
+- [Operating Cycle Differs by Industry](active/BR-107.operating-cycle-differs-by-industry.md) — BR-107
+- [B2B vs B2C Transactions](active/BR-108.b2b-vs-b2c-transactions.md) — BR-108
+- [Estimate Customer Returns at Period End](active/BR-109.estimate-customer-returns-at-period-end.md) — BR-109
+- [FOB Shipping Point - Buyer Pays Freight](active/BR-110.fob-shipping-point-buyer-pays-freight.md) — BR-110
+- [FOB Destination - Seller Pays Freight](active/BR-111.fob-destination-seller-pays-freight.md) — BR-111
+- [Inventory Shrinkage Adjustment](active/BR-112.inventory-shrinkage-adjustment.md) — BR-112
+- [Gross Profit Computation](active/BR-113.gross-profit-computation.md) — BR-113
+- [Multiple-Step Income Statement Classification](active/BR-114.multiple-step-income-statement-classification.md) — BR-114
+- [Closing Entries for Retail Business](active/BR-115.closing-entries-for-retail-business.md) — BR-115
+- [Sales Discounts GAAP Requirement](active/BR-116.sales-discounts-gaap-requirement.md) — BR-116
+- [Net Method Preferred Under GAAP](active/BR-117.net-method-preferred-under-gaap.md) — BR-117
+- [Asset Turnover Ratio Interpretation](active/BR-118.asset-turnover-ratio-interpretation.md) — BR-118
+- [Trade Discounts Not Recorded](active/BR-119.trade-discounts-not-recorded.md) — BR-119
+- [Sales Taxes Collected as Liability](active/BR-120.sales-taxes-collected-as-liability.md) — BR-120
+- [Freight In Recording Rule](active/BR-121.freight-in-recording-rule.md) — BR-121
+- [Periodic Inventory Cost of Goods Sold Computation](active/BR-122.periodic-inventory-cost-of-goods-sold-computation.md) — BR-122
+- [Inventory Shrinkage Detection - Perpetual vs Periodic](active/BR-123.inventory-shrinkage-detection-perpetual-vs-periodic.md) — BR-123
+- [Purchases Account Debit Rule](active/BR-124.purchases-account-debit-rule.md) — BR-124
+- [Contra-Purchases Account Credit Rule](active/BR-125.contra-purchases-account-credit-rule.md) — BR-125
+- [Perpetual Inventory Purchase Recording](active/BR-126.perpetual-inventory-purchase-recording.md) — BR-126
+- [Perpetual Inventory Sale Recording](active/BR-127.perpetual-inventory-sale-recording.md) — BR-127
+- [Credit Card Sale Recording](active/BR-128.credit-card-sale-recording.md) — BR-128
+- [Sales Discount - Gross Method](active/BR-129.sales-discount-gross-method.md) — BR-129
+- [Sales Discount - Net Method](active/BR-130.sales-discount-net-method.md) — BR-130
+- [Customer Refund Adjustment](active/BR-131.customer-refund-adjustment.md) — BR-131
+- [Sales Tax Collection Liability](active/BR-132.sales-tax-collection-liability.md) — BR-132
+- [Asset Turnover Ratio Computation](active/BR-133.asset-turnover-ratio-computation.md) — BR-133
+- [FIFO Cost Flow Rule](active/BR-134.fifo-cost-flow-rule.md) — BR-134
+- [Weighted Average Cost Computation](active/BR-135.weighted-average-cost-computation.md) — BR-135
+- [LCM Valuation Rule](active/BR-136.lcm-valuation-rule.md) — BR-136
+- [LCM Application Methods](active/BR-137.lcm-application-methods.md) — BR-137
+- [Inventory Physical Count Requirement](active/BR-138.inventory-physical-count-requirement.md) — BR-138
+- [Inventory Costing Method Consistency](active/BR-139.inventory-costing-method-consistency.md) — BR-139
+- [LIFO Reserve Disclosure](active/BR-140.lifo-reserve-disclosure.md) — BR-140
+- [Inventory Turnover Analysis](active/BR-141.inventory-turnover-analysis.md) — BR-141
+- [Three-Way Match for Inventory Control](active/BR-142.three-way-match-for-inventory-control.md) — BR-142
+- [Inventory Security Controls](active/BR-143.inventory-security-controls.md) — BR-143
+- [Inventory Error Self-Correction Rule](active/BR-144.inventory-error-self-correction-rule.md) — BR-144
+- [Inventory Error Effects Rule](active/BR-145.inventory-error-effects-rule.md) — BR-145
+- [Inventory Turnover Interpretation Rule](active/BR-146.inventory-turnover-interpretation-rule.md) — BR-146
+- [Consigned Inventory Ownership Rule](active/BR-147.consigned-inventory-ownership-rule.md) — BR-147
+- [Three Methods Yield Different Results Rule](active/BR-148.three-methods-yield-different-results-rule.md) — BR-148
+- [Inventory Balance Sheet Presentation Rule](active/BR-149.inventory-balance-sheet-presentation-rule.md) — BR-149
+- [Perpetual System Still Requires Physical Count](active/BR-150.perpetual-system-still-requires-physical-count.md) — BR-150
+- [Separation of Duties Rule](active/BR-151.separation-of-duties-rule.md) — BR-151
+- [Separate Related Operations Rule](active/BR-152.separate-related-operations-rule.md) — BR-152
+- [Competent Personnel and Mandatory Vacations Rule](active/BR-153.competent-personnel-and-mandatory-vacations-rule.md) — BR-153
+- [Prenumbered Documents Rule](active/BR-154.prenumbered-documents-rule.md) — BR-154
+- [Internal Control Limitations Rule](active/BR-155.internal-control-limitations-rule.md) — BR-155
+- [Cash Register Daily Count Rule](active/BR-156.cash-register-daily-count-rule.md) — BR-156
+- [Bank Deposit Verification Rule](active/BR-157.bank-deposit-verification-rule.md) — BR-157
+- [Separate Cashier and Accounting Rule](active/BR-158.separate-cashier-and-accounting-rule.md) — BR-158
+- [Remittance Advice Control Rule](active/BR-159.remittance-advice-control-rule.md) — BR-159
+- [Voucher System Documentation Rule](active/BR-160.voucher-system-documentation-rule.md) — BR-160
+- [Cash Receipts Safeguard Rule](active/BR-161.cash-receipts-safeguard-rule.md) — BR-161
+- [Bank Reconciliation Independent Preparation Rule](active/BR-162.bank-reconciliation-independent-preparation-rule.md) — BR-162
+- [Warning Signs of Control Problems Rule](active/BR-163.warning-signs-of-control-problems-rule.md) — BR-163
+- [Cash Payments Authorization Rule](active/BR-164.cash-payments-authorization-rule.md) — BR-164
+- [FOB Shipping Point Sale Recording Rule](active/BR-165.fob-shipping-point-sale-recording-rule.md) — BR-165
+- [Bank Reconciliation Equality Rule](active/BR-166.bank-reconciliation-equality-rule.md) — BR-166
+- [Bank Reconciliation Journal Entry Rule](active/BR-167.bank-reconciliation-journal-entry-rule.md) — BR-167
+- [Bank Error Correction Rule](active/BR-168.bank-error-correction-rule.md) — BR-168
+- [Company Error Correction Rule](active/BR-169.company-error-correction-rule.md) — BR-169
+- [Petty Cash Fund Establishment Rule](active/BR-170.petty-cash-fund-establishment-rule.md) — BR-170
+- [Petty Cash Replenishment Rule](active/BR-171.petty-cash-replenishment-rule.md) — BR-171
+- [Petty Cash Short and Over Rule](active/BR-172.petty-cash-short-and-over-rule.md) — BR-172
+- [Cash Equivalents Maturity Rule](active/BR-173.cash-equivalents-maturity-rule.md) — BR-173
+- [Compensating Balance Disclosure Rule](active/BR-174.compensating-balance-disclosure-rule.md) — BR-174
+- [Days' Cash on Hand Adequacy Rule](active/BR-175.days-cash-on-hand-adequacy-rule.md) — BR-175
+- [Cash Balance Sheet Presentation Rule](active/BR-176.cash-balance-sheet-presentation-rule.md) — BR-176
+- [Petty Cash Fund Limitations Rule](active/BR-177.petty-cash-fund-limitations-rule.md) — BR-177
+- [Days' Cash on Hand Nonprofit Use Rule](active/BR-178.days-cash-on-hand-nonprofit-use-rule.md) — BR-178
+- [Petty Cash Replenishment](active/BR-179.petty-cash-replenishment.md) — BR-179
+- [Daily Cash Deposit](active/BR-180.daily-cash-deposit.md) — BR-180
+- [Separation of Cash Duties](active/BR-181.separation-of-cash-duties.md) — BR-181
+- [Write-Off Against Allowance](active/BR-182.write-off-against-allowance.md) — BR-182
+- [Recovery Requires Two Entries](active/BR-183.recovery-requires-two-entries.md) — BR-183
+- [Percent of Sales Independent of Allowance Balance](active/BR-184.percent-of-sales-independent-of-allowance-balance.md) — BR-184
+- [Aging Method Targets Ending Allowance Balance](active/BR-185.aging-method-targets-ending-allowance-balance.md) — BR-185
+- [Postdated Checks Not Permitted in Petty Cash](active/BR-186.postdated-checks-not-permitted-in-petty-cash.md) — BR-186
+- [Aging Days Calculation](active/BR-187.aging-days-calculation.md) — BR-187
+- [Aging Method Adjusting Entry with Credit Allowance Balance](active/BR-188.aging-method-adjusting-entry-with-credit-allowance-balance.md) — BR-188
+- [Recovery Entry Sequence](active/BR-189.recovery-entry-sequence.md) — BR-189
+- [Direct Write-Off Recovery Entries](active/BR-190.direct-write-off-recovery-entries.md) — BR-190
+- [AR Turnover Favorable Trend](active/BR-191.ar-turnover-favorable-trend.md) — BR-191
+- [Direct Write-Off Does Not Match Revenue](active/BR-192.direct-write-off-does-not-match-revenue.md) — BR-192
+- [Asset Classification Three-Step Test](active/BR-193.asset-classification-three-step-test.md) — BR-193
+- [Capitalize Only Necessary Costs](active/BR-194.capitalize-only-necessary-costs.md) — BR-194
+- [Standby Equipment Classification](active/BR-195.standby-equipment-classification.md) — BR-195
+- [Abandoned Assets Not Classified as Fixed](active/BR-196.abandoned-assets-not-classified-as-fixed.md) — BR-196
+- [Construction in Progress Reclassification](active/BR-197.construction-in-progress-reclassification.md) — BR-197
+- [Goods Held for Sale Are Not Fixed Assets](active/BR-198.goods-held-for-sale-are-not-fixed-assets.md) — BR-198
+- [Lease Advantage — No Upfront Capital](active/BR-199.lease-advantage-no-upfront-capital.md) — BR-199
+- [Land Is Not Depreciated](active/BR-200.land-is-not-depreciated.md) — BR-200
+- [Depreciation Does Not Measure Market Value Decline](active/BR-201.depreciation-does-not-measure-market-value-decline.md) — BR-201
+- [Depreciation Does Not Provide Cash for Replacement](active/BR-202.depreciation-does-not-provide-cash-for-replacement.md) — BR-202
+- [Cannot Depreciate Below Residual Value](active/BR-203.cannot-depreciate-below-residual-value.md) — BR-203
+- [Partial-Year Depreciation Proration](active/BR-204.partial-year-depreciation-proration.md) — BR-204
+- [Revision of Depreciation Estimates Is Prospective](active/BR-205.revision-of-depreciation-estimates-is-prospective.md) — BR-205
+- [Ordinary Repairs Are Revenue Expenditures](active/BR-206.ordinary-repairs-are-revenue-expenditures.md) — BR-206
+- [Extraordinary Repairs Reduce Accumulated Depreciation](active/BR-207.extraordinary-repairs-reduce-accumulated-depreciation.md) — BR-207
+- [Asset Improvements Increase Asset Account](active/BR-208.asset-improvements-increase-asset-account.md) — BR-208
+- [Fully Depreciated Assets Remain in Ledger](active/BR-209.fully-depreciated-assets-remain-in-ledger.md) — BR-209
+- [Depletion Is Computed Using Units-of-Activity Method](active/BR-210.depletion-is-computed-using-units-of-activity-method.md) — BR-210
+- [Goodwill Is Not Amortized](active/BR-211.goodwill-is-not-amortized.md) — BR-211
+- [Trademarks Are Not Amortized](active/BR-212.trademarks-are-not-amortized.md) — BR-212
+- [Patent and Copyright Amortization](active/BR-213.patent-and-copyright-amortization.md) — BR-213
+- [Depreciation Methods Can Differ by Asset Class](active/BR-214.depreciation-methods-can-differ-by-asset-class.md) — BR-214
+- [Losses on Disposal Reported in Other Revenue and Expense](active/BR-215.losses-on-disposal-reported-in-other-revenue-and-expense.md) — BR-215
+- [Update Depreciation Before Disposal](active/BR-216.update-depreciation-before-disposal.md) — BR-216
+- [Gain Recognized When Exchange Has Commercial Substance](active/BR-217.gain-recognized-when-exchange-has-commercial-substance.md) — BR-217
+- [Loss Recognized Regardless of Commercial Substance](active/BR-218.loss-recognized-regardless-of-commercial-substance.md) — BR-218
+- [No Gain Recognized Without Commercial Substance](active/BR-219.no-gain-recognized-without-commercial-substance.md) — BR-219
+- [Gain Can Be Computed Two Ways](active/BR-220.gain-can-be-computed-two-ways.md) — BR-220
+- [Remove Old Asset and Record New Asset](active/BR-221.remove-old-asset-and-record-new-asset.md) — BR-221
+- [Interest-Bearing Note Interest Computation](active/BR-222.interest-bearing-note-interest-computation.md) — BR-222
+- [Discounted Note Proceeds Computation](active/BR-223.discounted-note-proceeds-computation.md) — BR-223
+- [Installment Note Payment Allocation](active/BR-224.installment-note-payment-allocation.md) — BR-224
+- [Employer Must Match FICA Tax](active/BR-225.employer-must-match-fica-tax.md) — BR-225
+- [Employer Pays FUTA and SUTA](active/BR-226.employer-pays-futa-and-suta.md) — BR-226
+- [Gross Pay Less Deductions Equals Net Pay](active/BR-227.gross-pay-less-deductions-equals-net-pay.md) — BR-227
+- [Vacation Pay Is Accrued as Earned](active/BR-228.vacation-pay-is-accrued-as-earned.md) — BR-228
+- [Current Portion of Long-Term Debt Is Current Liability](active/BR-229.current-portion-of-long-term-debt-is-current-liability.md) — BR-229
+- [Interest Expense Reported Separately](active/BR-230.interest-expense-reported-separately.md) — BR-230
+- [Discounted Note Interest May Use Discount Account](active/BR-231.discounted-note-interest-may-use-discount-account.md) — BR-231
+- [Separation of Duties in Payroll](active/BR-232.separation-of-duties-in-payroll.md) — BR-232
+- [Contingent Liability Recognition](active/BR-233.contingent-liability-recognition.md) — BR-233
+- [Interest-Bearing Note Accounting](active/BR-234.interest-bearing-note-accounting.md) — BR-234
+- [Discounted Note Proceeds](active/BR-235.discounted-note-proceeds.md) — BR-235
+- [Employee Withholding Requirements](active/BR-236.employee-withholding-requirements.md) — BR-236
+- [Employer Payroll Tax Obligation](active/BR-237.employer-payroll-tax-obligation.md) — BR-237
+- [Vacation Pay Accrual](active/BR-238.vacation-pay-accrual.md) — BR-238
+- [Pension Expense Recognition](active/BR-239.pension-expense-recognition.md) — BR-239
+- [Warranty Expense Matching](active/BR-240.warranty-expense-matching.md) — BR-240
+- [Overtime Premium Rate](active/BR-241.overtime-premium-rate.md) — BR-241
+- [Payroll Check Sequential Numbering](active/BR-242.payroll-check-sequential-numbering.md) — BR-242
+- [Employer FICA Matching](active/BR-243.employer-fica-matching.md) — BR-243
+- [Unemployment Tax Wage Base](active/BR-244.unemployment-tax-wage-base.md) — BR-244
+- [Internal Control Over Payroll](active/BR-245.internal-control-over-payroll.md) — BR-245
+- [Warranty vs. Recall Distinction](active/BR-246.warranty-vs-recall-distinction.md) — BR-246
+- [Present Value Bond Pricing](active/BR-247.present-value-bond-pricing.md) — BR-247
+- [Contract Rate vs. Market Rate](active/BR-248.contract-rate-vs-market-rate.md) — BR-248
+- [Bond Discount](active/BR-249.bond-discount.md) — BR-249
+- [Times Interest Earned Analysis](active/BR-250.times-interest-earned-analysis.md) — BR-250
+- [Straight-Line Amortization Equal Allocation](active/BR-251.straight-line-amortization-equal-allocation.md) — BR-251
+- [Effective Interest Rate Method Requirement](active/BR-252.effective-interest-rate-method-requirement.md) — BR-252
+- [Premium Amortization Decreases Interest Expense](active/BR-253.premium-amortization-decreases-interest-expense.md) — BR-253
+- [Carrying Amount Converges to Face Amount](active/BR-254.carrying-amount-converges-to-face-amount.md) — BR-254
+- [Bond Redemption Gain/Loss Computation](active/BR-255.bond-redemption-gain-loss-computation.md) — BR-255
+- [Bond Face Amount Repayment at Maturity](active/BR-256.bond-face-amount-repayment-at-maturity.md) — BR-256
+- [Bond Interest Payment Frequency](active/BR-257.bond-interest-payment-frequency.md) — BR-257
+- [Balance Sheet Presentation of Bonds](active/BR-258.balance-sheet-presentation-of-bonds.md) — BR-258
+- [Present Value Factor Selection](active/BR-259.present-value-factor-selection.md) — BR-259
+- [Effective Interest Method Discount Amortization](active/BR-260.effective-interest-method-discount-amortization.md) — BR-260
+- [Bonds Issued at Discount When Contract Rate < Market Rate](active/BR-261.bonds-issued-at-discount-when-contract-rate-market-rate.md) — BR-261
+- [Bond Discount Amortization Increases Interest Expense](active/BR-262.bond-discount-amortization-increases-interest-expense.md) — BR-262
+- [Carrying Amount Approaches Face Value at Maturity](active/BR-263.carrying-amount-approaches-face-value-at-maturity.md) — BR-263
+- [Bond Redemption Gain or Loss Recognition](active/BR-264.bond-redemption-gain-or-loss-recognition.md) — BR-264
+- [Times Interest Earned Indicates Solvency](active/BR-265.times-interest-earned-indicates-solvency.md) — BR-265
+- [Bond Interest Paid Semiannually](active/BR-266.bond-interest-paid-semiannually.md) — BR-266
+- [Convertible Bonds Require Allocation Between Debt and Equity](active/BR-267.convertible-bonds-require-allocation-between-debt-and-equity.md) — BR-267
+- [Noncash Assets Recorded at Market Value](active/BR-268.noncash-assets-recorded-at-market-value.md) — BR-268
+- [Liabilities Assumed Reduce Capital Credit](active/BR-269.liabilities-assumed-reduce-capital-credit.md) — BR-269
+- [Income Divided Equally Without Agreement](active/BR-270.income-divided-equally-without-agreement.md) — BR-270
+- [Salary Allowances Are Not Expenses](active/BR-271.salary-allowances-are-not-expenses.md) — BR-271
+- [Income Division Formula Application](active/BR-272.income-division-formula-application.md) — BR-272
+- [Allowances May Exceed Net Income](active/BR-273.allowances-may-exceed-net-income.md) — BR-273
+- [Partner Withdrawals Close to Capital](active/BR-274.partner-withdrawals-close-to-capital.md) — BR-274
+- [Revenues and Expenses Close to Capital](active/BR-275.revenues-and-expenses-close-to-capital.md) — BR-275
+- [New Partner Purchase Price Goes to Selling Partner](active/BR-276.new-partner-purchase-price-goes-to-selling-partner.md) — BR-276
+- [Partner Bonus Method for Admission](active/BR-277.partner-bonus-method-for-admission.md) — BR-277
+- [LLC Uses Member Equity Instead of Capital](active/BR-278.llc-uses-member-equity-instead-of-capital.md) — BR-278
+- [Cash Distributed Based on Capital Balances](active/BR-279.cash-distributed-based-on-capital-balances.md) — BR-279
+- [Liabilities Paid Before Partners](active/BR-280.liabilities-paid-before-partners.md) — BR-280
+- [Gain or Loss Allocated by Income-Sharing Ratio](active/BR-281.gain-or-loss-allocated-by-income-sharing-ratio.md) — BR-281
+- [Capital Deficiency Partner Must Pay Partnership](active/BR-282.capital-deficiency-partner-must-pay-partnership.md) — BR-282
+- [Deficiency Allocated to Other Partners If Unpaid](active/BR-283.deficiency-allocated-to-other-partners-if-unpaid.md) — BR-283
+- [Four-Step Liquidation Process](active/BR-284.four-step-liquidation-process.md) — BR-284
+- [Income-Sharing Ratio Not Used for Cash Distribution](active/BR-285.income-sharing-ratio-not-used-for-cash-distribution.md) — BR-285
+- [LLC Liquidation Uses Member Equity Titles](active/BR-286.llc-liquidation-uses-member-equity-titles.md) — BR-286
+- [Revenue Per Employee Measures Efficiency](active/BR-287.revenue-per-employee-measures-efficiency.md) — BR-287
+- [Cash Dividend Declaration Creates Liability](active/BR-288.cash-dividend-declaration-creates-liability.md) — BR-288
+- [Stock Dividend Capitalizes Retained Earnings at Market Value](active/BR-289.stock-dividend-capitalizes-retained-earnings-at-market-value.md) — BR-289
+- [Stock Split Requires No Journal Entry](active/BR-290.stock-split-requires-no-journal-entry.md) — BR-290
+- [Dividends Not Paid on Treasury Stock](active/BR-291.dividends-not-paid-on-treasury-stock.md) — BR-291
+- [Preferred Stock Dividend Preference](active/BR-292.preferred-stock-dividend-preference.md) — BR-292
+- [Cumulative Preferred Dividends in Arrears](active/BR-293.cumulative-preferred-dividends-in-arrears.md) — BR-293
+- [Stock Issued for Non-Cash Consideration](active/BR-294.stock-issued-for-non-cash-consideration.md) — BR-294
+- [No Par Stock with Stated Value](active/BR-295.no-par-stock-with-stated-value.md) — BR-295
+- [Treasury Stock Recorded at Cost](active/BR-296.treasury-stock-recorded-at-cost.md) — BR-296
+- [Treasury Stock Resale Loss Limited to Paid-In Capital](active/BR-297.treasury-stock-resale-loss-limited-to-paid-in-capital.md) — BR-297
+- [Retained Earnings Restrictions Disclosure](active/BR-298.retained-earnings-restrictions-disclosure.md) — BR-298
+- [Prior Period Adjustment Reported Net of Tax](active/BR-299.prior-period-adjustment-reported-net-of-tax.md) — BR-299
+- [EPS Formula](active/BR-300.eps-formula.md) — BR-300
+- [Treasury Stock Purchase Increases EPS](active/BR-301.treasury-stock-purchase-increases-eps.md) — BR-301
+- [Stockholders' Equity Reporting Methods](active/BR-302.stockholders-equity-reporting-methods.md) — BR-302
+- [Cash Flows Classified into Three Activities](active/BR-303.cash-flows-classified-into-three-activities.md) — BR-303
+- [Ending Cash Must Match Balance Sheet](active/BR-304.ending-cash-must-match-balance-sheet.md) — BR-304
+- [Indirect Method Adjusts Net Income to Cash Basis](active/BR-305.indirect-method-adjusts-net-income-to-cash-basis.md) — BR-305
+- [Increase in Current Liability Increases Operating Cash Flow](active/BR-306.increase-in-current-liability-increases-operating-cash-flow.md) — BR-306
+- [Preferred Dividends Deducted for EPS](active/BR-307.preferred-dividends-deducted-for-eps.md) — BR-307
+- [Direct and Indirect Methods Produce Same Result](active/BR-308.direct-and-indirect-methods-produce-same-result.md) — BR-308
+- [Statement of Cash Flows Order](active/BR-309.statement-of-cash-flows-order.md) — BR-309
+- [Depreciation Add-Back](active/BR-310.depreciation-add-back.md) — BR-310
+- [Gain/Loss on Sale Adjustment](active/BR-311.gain-loss-on-sale-adjustment.md) — BR-311
+- [Changes in Current Operating Assets and Liabilities](active/BR-312.changes-in-current-operating-assets-and-liabilities.md) — BR-312
+- [No Cash Flow per Share](active/BR-313.no-cash-flow-per-share.md) — BR-313
+- [Free Cash Flow Computation](active/BR-314.free-cash-flow-computation.md) — BR-314
+- [Ending Cash Reconciliation](active/BR-315.ending-cash-reconciliation.md) — BR-315
+- [Spreadsheet Totals Must Equal](active/BR-316.spreadsheet-totals-must-equal.md) — BR-316
+- [Direct Method Cash Flow Components](active/BR-317.direct-method-cash-flow-components.md) — BR-317
+- [Direct Method Requires Reconciliation](active/BR-318.direct-method-requires-reconciliation.md) — BR-318
+- [Investing and Financing Sections Identical](active/BR-319.investing-and-financing-sections-identical.md) — BR-319
+- [Depreciation Not in Direct Method](active/BR-320.depreciation-not-in-direct-method.md) — BR-320
+- [Cash Received from Customers Formula](active/BR-321.cash-received-from-customers-formula.md) — BR-321
+- [Cash Paid for Operating Expenses Formula](active/BR-322.cash-paid-for-operating-expenses-formula.md) — BR-322
+- [Horizontal Analysis Formula](active/BR-323.horizontal-analysis-formula.md) — BR-323
+- [Vertical Analysis Balance Sheet](active/BR-324.vertical-analysis-balance-sheet.md) — BR-324
+- [Vertical Analysis Income Statement](active/BR-325.vertical-analysis-income-statement.md) — BR-325
+- [Working Capital Formula](active/BR-326.working-capital-formula.md) — BR-326
+- [Current Ratio Formula](active/BR-327.current-ratio-formula.md) — BR-327
+- [Quick Ratio Formula](active/BR-328.quick-ratio-formula.md) — BR-328
+- [Small Percentage Large Dollar Effect](active/BR-329.small-percentage-large-dollar-effect.md) — BR-329
+- [Common-Sized Comparison](active/BR-330.common-sized-comparison.md) — BR-330
+- [Working Capital Limitation](active/BR-331.working-capital-limitation.md) — BR-331
+- [Quick Assets Exclusion](active/BR-332.quick-assets-exclusion.md) — BR-332
+- [Long-Term Investments Exclusion from Asset Turnover](active/BR-333.long-term-investments-exclusion-from-asset-turnover.md) — BR-333
+- [Interest Expense Add-Back for Return on Assets](active/BR-334.interest-expense-add-back-for-return-on-assets.md) — BR-334
+- [Preferred Dividends Deduction](active/BR-335.preferred-dividends-deduction.md) — BR-335
+- [Days' Sales Comparison to Credit Terms](active/BR-336.days-sales-comparison-to-credit-terms.md) — BR-336
+- [Inventory Turnover Industry Variation](active/BR-337.inventory-turnover-industry-variation.md) — BR-337
+- [Average Accounts Receivable for Seasonal Companies](active/BR-338.average-accounts-receivable-for-seasonal-companies.md) — BR-338
+- [Comparative Statement Base Year Selection](active/BR-339.comparative-statement-base-year-selection.md) — BR-339
+- [Vertical Analysis Base Amount](active/BR-340.vertical-analysis-base-amount.md) — BR-340
+- [Effect of Transactions on Current Position](active/BR-341.effect-of-transactions-on-current-position.md) — BR-341
+- [Debt vs Equity Financing Trade-off](active/BR-342.debt-vs-equity-financing-trade-off.md) — BR-342
+- [Internal Control Disclosure Requirement](active/BR-343.internal-control-disclosure-requirement.md) — BR-343
+- [Bond Indenture Ratio Compliance](active/BR-344.bond-indenture-ratio-compliance.md) — BR-344
+- [Industry-Specific Profitability Measures](active/BR-345.industry-specific-profitability-measures.md) — BR-345
+- [Non-GAAP Reporting Requirements](active/BR-346.non-gaap-reporting-requirements.md) — BR-346
+- [Direct vs Indirect Cost Classification](active/BR-347.direct-vs-indirect-cost-classification.md) — BR-347
+- [Product Costs Flow Through Inventory](active/BR-348.product-costs-flow-through-inventory.md) — BR-348
+- [Period Costs Expensed Immediately](active/BR-349.period-costs-expensed-immediately.md) — BR-349
+- [Indirect Costs Become Manufacturing Overhead](active/BR-350.indirect-costs-become-manufacturing-overhead.md) — BR-350
+- [Managerial Accounting Not Bound by GAAP](active/BR-351.managerial-accounting-not-bound-by-gaap.md) — BR-351
+- [Sustainability Reporting Trend](active/BR-352.sustainability-reporting-trend.md) — BR-352
+- [Manufacturing Costs Three-Step Calculation](active/BR-353.manufacturing-costs-three-step-calculation.md) — BR-353
+- [Product Cost vs Period Cost Classification](active/BR-354.product-cost-vs-period-cost-classification.md) — BR-354
+- [Direct vs Indirect Cost Tracing](active/BR-355.direct-vs-indirect-cost-tracing.md) — BR-355
+- [Manufacturing Costs Flow](active/BR-356.manufacturing-costs-flow.md) — BR-356
+- [Manufacturing Overhead Components](active/BR-357.manufacturing-overhead-components.md) — BR-357
+- [Prime Cost and Conversion Cost Formulas](active/BR-358.prime-cost-and-conversion-cost-formulas.md) — BR-358
+- [Cost of Goods Manufactured Calculation](active/BR-359.cost-of-goods-manufactured-calculation.md) — BR-359
+- [Manufacturing Income Statement COGS Section](active/BR-360.manufacturing-income-statement-cogs-section.md) — BR-360
+- [Selling and Administrative Expense Classification](active/BR-361.selling-and-administrative-expense-classification.md) — BR-361
+- [Occupancy Rate Calculation](active/BR-362.occupancy-rate-calculation.md) — BR-362
+- [Job Order Costing Applicability](active/BR-363.job-order-costing-applicability.md) — BR-363
+- [Materials Requisition Requirement](active/BR-364.materials-requisition-requirement.md) — BR-364
+- [Costs Recorded by Job](active/BR-365.costs-recorded-by-job.md) — BR-365
+- [Predetermined Overhead Rate Application](active/BR-366.predetermined-overhead-rate-application.md) — BR-366
+- [Year-End Disposal of Overhead Balance](active/BR-367.year-end-disposal-of-overhead-balance.md) — BR-367
+- [Underapplied Overhead Disposal](active/BR-368.underapplied-overhead-disposal.md) — BR-368
+- [Work in Process Debits](active/BR-369.work-in-process-debits.md) — BR-369
+- [Work in Process Credits](active/BR-370.work-in-process-credits.md) — BR-370
+- [Overhead Balance Investigation](active/BR-371.overhead-balance-investigation.md) — BR-371
+- [Service Business Job Costing](active/BR-372.service-business-job-costing.md) — BR-372
+- [Job Cost Comparison for Analysis](active/BR-373.job-cost-comparison-for-analysis.md) — BR-373
+- [Service Business Overhead Allocation](active/BR-374.service-business-overhead-allocation.md) — BR-374
+- [Service Job Completion and Billing](active/BR-375.service-job-completion-and-billing.md) — BR-375
+- [Investigating Cost Variances](active/BR-376.investigating-cost-variances.md) — BR-376
+- [Materials Quantity Investigation](active/BR-377.materials-quantity-investigation.md) — BR-377
+- [Service Business Overhead Application Methods](active/BR-378.service-business-overhead-application-methods.md) — BR-378
+- [Job Cost Sheet Completeness](active/BR-379.job-cost-sheet-completeness.md) — BR-379
+- [Direct Materials Traced to Jobs](active/BR-380.direct-materials-traced-to-jobs.md) — BR-380
+- [Overhead Applied Using Predetermined Rate](active/BR-381.overhead-applied-using-predetermined-rate.md) — BR-381
+- [Cost Flow Through Inventory Accounts](active/BR-382.cost-flow-through-inventory-accounts.md) — BR-382
+- [Jobs Completed Transfer to Finished Goods](active/BR-383.jobs-completed-transfer-to-finished-goods.md) — BR-383
+- [Sale Triggers COGS Recognition](active/BR-384.sale-triggers-cogs-recognition.md) — BR-384
+- [Over/Under Applied Overhead Disposition](active/BR-385.over-under-applied-overhead-disposition.md) — BR-385
+- [Depreciation Classified by Function](active/BR-386.depreciation-classified-by-function.md) — BR-386
+- [Equivalent Units for Materials at Beginning of Process](active/BR-387.equivalent-units-for-materials-at-beginning-of-process.md) — BR-387
+- [Equivalent Units for Conversion in Beginning WIP](active/BR-388.equivalent-units-for-conversion-in-beginning-wip.md) — BR-388
+- [Units Started and Completed Formula](active/BR-389.units-started-and-completed-formula.md) — BR-389
+- [Ending WIP Equivalent Units](active/BR-390.ending-wip-equivalent-units.md) — BR-390
+- [Cost Per Equivalent Unit Computation](active/BR-391.cost-per-equivalent-unit-computation.md) — BR-391
+- [Assign Costs to Completed Units](active/BR-392.assign-costs-to-completed-units.md) — BR-392
+- [Assign Costs to Ending WIP](active/BR-393.assign-costs-to-ending-wip.md) — BR-393
+- [Cost Reconciliation in Process Costing](active/BR-394.cost-reconciliation-in-process-costing.md) — BR-394
+- [Materials and Conversion Computed Separately](active/BR-395.materials-and-conversion-computed-separately.md) — BR-395
+- [Process Costing vs Job Order Costing](active/BR-396.process-costing-vs-job-order-costing.md) — BR-396
+- [Weighted Average Equivalent Units Include Beginning WIP](active/BR-397.weighted-average-equivalent-units-include-beginning-wip.md) — BR-397
+- [Weighted Average Cost Includes Beginning WIP Costs](active/BR-398.weighted-average-cost-includes-beginning-wip-costs.md) — BR-398
+- [Units Reconciliation Formula](active/BR-399.units-reconciliation-formula.md) — BR-399
+- [Lean Manufacturing Pull Production](active/BR-400.lean-manufacturing-pull-production.md) — BR-400
+- [Flavor Changeover Cost Allocation](active/BR-401.flavor-changeover-cost-allocation.md) — BR-401
+- [Process Costing for Continuous Production](active/BR-402.process-costing-for-continuous-production.md) — BR-402
+- [Cost Per Unit Trend Analysis](active/BR-403.cost-per-unit-trend-analysis.md) — BR-403
+- [Scrap and Waste in Process Costing](active/BR-404.scrap-and-waste-in-process-costing.md) — BR-404
+- [Activity Rate Computation](active/BR-405.activity-rate-computation.md) — BR-405
+- [Overhead Allocation per Product](active/BR-406.overhead-allocation-per-product.md) — BR-406
+- [Manufacturing Overhead Cost per Unit](active/BR-407.manufacturing-overhead-cost-per-unit.md) — BR-407
+- [ABC Over Single Plantwide Rate](active/BR-408.abc-over-single-plantwide-rate.md) — BR-408
+- [GAAP Period Expense Rule](active/BR-409.gaap-period-expense-rule.md) — BR-409
+- [Selling/Admin ABC for Internal Use](active/BR-410.selling-admin-abc-for-internal-use.md) — BR-410
+- [Cost Distortion Causes Pricing Errors](active/BR-411.cost-distortion-causes-pricing-errors.md) — BR-411
+- [Variable Cost Behavior Rule](active/BR-412.variable-cost-behavior-rule.md) — BR-412
+- [Fixed Cost Behavior Rule](active/BR-413.fixed-cost-behavior-rule.md) — BR-413
+- [Break-Even Point Formula](active/BR-414.break-even-point-formula.md) — BR-414
+- [Target Profit Formula](active/BR-415.target-profit-formula.md) — BR-415
+- [Contribution Margin Formula](active/BR-416.contribution-margin-formula.md) — BR-416
+- [Sales Mix Break-Even](active/BR-417.sales-mix-break-even.md) — BR-417
+- [Operating Leverage Effect](active/BR-418.operating-leverage-effect.md) — BR-418
+- [Margin of Safety Rule](active/BR-419.margin-of-safety-rule.md) — BR-419
+- [Relevant Range Constraint](active/BR-420.relevant-range-constraint.md) — BR-420
+- [Absorption vs Variable Costing Income](active/BR-421.absorption-vs-variable-costing-income.md) — BR-421
+- [Appropriate Allocation Base Selection](active/BR-422.appropriate-allocation-base-selection.md) — BR-422
+- [Sales-Based Allocation Inaccuracy](active/BR-423.sales-based-allocation-inaccuracy.md) — BR-423
+- [CVP Analysis Application to Services](active/BR-424.cvp-analysis-application-to-services.md) — BR-424
+- [Process Costing Cost Per Unit](active/BR-425.process-costing-cost-per-unit.md) — BR-425
+- [Multiple Allocation Methods Comparison](active/BR-426.multiple-allocation-methods-comparison.md) — BR-426
+- [Selling/Admin ABC Activity Identification](active/BR-427.selling-admin-abc-activity-identification.md) — BR-427
+- [Mixed Cost Decomposition](active/BR-428.mixed-cost-decomposition.md) — BR-428
+- [Break-Even Equality](active/BR-429.break-even-equality.md) — BR-429
+- [Sales Mix Constancy Assumption](active/BR-430.sales-mix-constancy-assumption.md) — BR-430
+- [Operating Leverage Interpretation](active/BR-431.operating-leverage-interpretation.md) — BR-431
+- [Margin of Safety as Risk Indicator](active/BR-432.margin-of-safety-as-risk-indicator.md) — BR-432
+- [Break-Even for Service Companies](active/BR-433.break-even-for-service-companies.md) — BR-433
+- [Margin of Safety Cannot Be Negative](active/BR-434.margin-of-safety-cannot-be-negative.md) — BR-434
+- [Operating Leverage Inverse Relationship](active/BR-435.operating-leverage-inverse-relationship.md) — BR-435
+- [Validity Check on Margin of Safety Data](active/BR-436.validity-check-on-margin-of-safety-data.md) — BR-436
+- [Static Budget Limitation](active/BR-437.static-budget-limitation.md) — BR-437
+- [Flexible Budget Construction](active/BR-438.flexible-budget-construction.md) — BR-438
+- [Budget Gaming Prevention](active/BR-439.budget-gaming-prevention.md) — BR-439
+- [Flexible Budget Comparison Rule](active/BR-440.flexible-budget-comparison-rule.md) — BR-440
+- [Continuous Budget Update](active/BR-441.continuous-budget-update.md) — BR-441
+- [Production Budget Coordination Rule](active/BR-442.production-budget-coordination-rule.md) — BR-442
+- [Desired Ending Inventory Policy Rule](active/BR-443.desired-ending-inventory-policy-rule.md) — BR-443
+- [Direct Materials Inventory Coordination Rule](active/BR-444.direct-materials-inventory-coordination-rule.md) — BR-444
+- [Cash Budget Minimum Balance Rule](active/BR-445.cash-budget-minimum-balance-rule.md) — BR-445
+- [Cash Collections Timing Rule](active/BR-446.cash-collections-timing-rule.md) — BR-446
+- [Staffing Budget Variability Rule](active/BR-447.staffing-budget-variability-rule.md) — BR-447
+- [Multiperiod Budget Dependency Rule](active/BR-448.multiperiod-budget-dependency-rule.md) — BR-448
+- [Selling and Administrative Expense Payment Rule](active/BR-449.selling-and-administrative-expense-payment-rule.md) — BR-449
+- [Budget Goal Setting Behavioral Rule](active/BR-450.budget-goal-setting-behavioral-rule.md) — BR-450
+- [Sales Forecast Based on Historical Trend Rule](active/BR-451.sales-forecast-based-on-historical-trend-rule.md) — BR-451
+- [Ending Inventory Percentage Rule](active/BR-452.ending-inventory-percentage-rule.md) — BR-452
+- [Work in Process Inventory Assumption Rule](active/BR-453.work-in-process-inventory-assumption-rule.md) — BR-453
+- [Multi-Department Labor Rate Differentiation Rule](active/BR-454.multi-department-labor-rate-differentiation-rule.md) — BR-454
+- [Manufacturing Cost Payment Timing Rule](active/BR-455.manufacturing-cost-payment-timing-rule.md) — BR-455
+- [Accounts Receivable Collection Pattern Rule](active/BR-456.accounts-receivable-collection-pattern-rule.md) — BR-456
+- [Dividend Payment Timing Rule](active/BR-457.dividend-payment-timing-rule.md) — BR-457
+- [Staffing Ratio Per Activity Unit Rule](active/BR-458.staffing-ratio-per-activity-unit-rule.md) — BR-458
+- [Weekday vs Weekend Staffing Differentiation Rule](active/BR-459.weekday-vs-weekend-staffing-differentiation-rule.md) — BR-459
+- [Gross Profit Staffing Justification Rule](active/BR-460.gross-profit-staffing-justification-rule.md) — BR-460
+- [Standard Cost Computation Rule](active/BR-461.standard-cost-computation-rule.md) — BR-461
+- [Budget Performance Report Basis Rule](active/BR-462.budget-performance-report-basis-rule.md) — BR-462
+- [Direct Materials Quantity Variance Computation Rule](active/BR-463.direct-materials-quantity-variance-computation-rule.md) — BR-463
+- [Direct Labor Time Variance Computation Rule](active/BR-464.direct-labor-time-variance-computation-rule.md) — BR-464
+- [Favorable vs Unfavorable Variance Classification Rule](active/BR-465.favorable-vs-unfavorable-variance-classification-rule.md) — BR-465
+- [Manufacturing Overhead Variance Decomposition Rule](active/BR-466.manufacturing-overhead-variance-decomposition-rule.md) — BR-466
+- [Departmental Responsibility for Variances Rule](active/BR-467.departmental-responsibility-for-variances-rule.md) — BR-467
+- [Standard Cost Assumption of No Inventory Change Rule](active/BR-468.standard-cost-assumption-of-no-inventory-change-rule.md) — BR-468
+- [Variance Sign Convention](active/BR-469.variance-sign-convention.md) — BR-469
+- [Materials Price Variance Responsibility](active/BR-470.materials-price-variance-responsibility.md) — BR-470
+- [Materials Quantity Variance Responsibility](active/BR-471.materials-quantity-variance-responsibility.md) — BR-471
+- [Labor Rate Variance Responsibility](active/BR-472.labor-rate-variance-responsibility.md) — BR-472
+- [Labor Time Variance Responsibility](active/BR-473.labor-time-variance-responsibility.md) — BR-473
+- [Controllable Variance Responsibility](active/BR-474.controllable-variance-responsibility.md) — BR-474
+- [Volume Variance Interpretation](active/BR-475.volume-variance-interpretation.md) — BR-475
+- [Work in Process Standard Costing](active/BR-476.work-in-process-standard-costing.md) — BR-476
+- [Overapplied and Underapplied Overhead](active/BR-477.overapplied-and-underapplied-overhead.md) — BR-477
+- [Exchange Rate Variance Isolation](active/BR-478.exchange-rate-variance-isolation.md) — BR-478
+- [Standard Quantity Based on Actual Production](active/BR-479.standard-quantity-based-on-actual-production.md) — BR-479
+- [Revenue Variance Relationship](active/BR-480.revenue-variance-relationship.md) — BR-480
+- [Standards for Nonmanufacturing Activities](active/BR-481.standards-for-nonmanufacturing-activities.md) — BR-481
+- [Principle of Exceptions](active/BR-482.principle-of-exceptions.md) — BR-482
+- [Investigate Controllable Variances](active/BR-483.investigate-controllable-variances.md) — BR-483
+- [Exclude Sunk Costs from Analysis](active/BR-484.exclude-sunk-costs-from-analysis.md) — BR-484
+- [Include Only Relevant Costs](active/BR-485.include-only-relevant-costs.md) — BR-485
+- [Fixed Costs May Persist](active/BR-486.fixed-costs-may-persist.md) — BR-486
+- [Capacity Utilization Affects Costs](active/BR-487.capacity-utilization-affects-costs.md) — BR-487
+- [Normal Selling Price Must Cover All Costs](active/BR-488.normal-selling-price-must-cover-all-costs.md) — BR-488
+- [Markup Percentage Calculation](active/BR-489.markup-percentage-calculation.md) — BR-489
+- [Target Cost Reduction](active/BR-490.target-cost-reduction.md) — BR-490
+- [Price Fixing Prohibition](active/BR-491.price-fixing-prohibition.md) — BR-491
+- [Special Price Acceptance Criteria](active/BR-492.special-price-acceptance-criteria.md) — BR-492
+- [Bottleneck Profitability Rule](active/BR-493.bottleneck-profitability-rule.md) — BR-493
+- [Sunk Cost Irrelevance Rule](active/BR-494.sunk-cost-irrelevance-rule.md) — BR-494
+- [Opportunity Cost Inclusion Rule](active/BR-495.opportunity-cost-inclusion-rule.md) — BR-495
+- [Cost-Plus Pricing Markup Rule](active/BR-496.cost-plus-pricing-markup-rule.md) — BR-496
+- [Target Costing Market-Driven Rule](active/BR-497.target-costing-market-driven-rule.md) — BR-497
+- [Yield Pricing Demand-Based Rule](active/BR-498.yield-pricing-demand-based-rule.md) — BR-498
+- [Break-Even for Yield Pricing Rule](active/BR-499.break-even-for-yield-pricing-rule.md) — BR-499
+- [Process Further Decision Rule](active/BR-500.process-further-decision-rule.md) — BR-500
+- [Special Order Acceptance Rule](active/BR-501.special-order-acceptance-rule.md) — BR-501
+- [Fixed Cost Irrelevance in Short-Term Decisions](active/BR-502.fixed-cost-irrelevance-in-short-term-decisions.md) — BR-502
+- [Internal Rate of Return Acceptance Rule](active/BR-503.internal-rate-of-return-acceptance-rule.md) — BR-503
+- [Cash Payback Desirability Rule](active/BR-504.cash-payback-desirability-rule.md) — BR-504
+- [Depreciation Exclusion from Cash Flow](active/BR-505.depreciation-exclusion-from-cash-flow.md) — BR-505
+- [Unequal Cash Flows Payback Calculation](active/BR-506.unequal-cash-flows-payback-calculation.md) — BR-506
+- [Average Investment Computation Rule](active/BR-507.average-investment-computation-rule.md) — BR-507
+- [Present Value Compounding Rule](active/BR-508.present-value-compounding-rule.md) — BR-508
+- [Compounding Interest Calculation Rule](active/BR-509.compounding-interest-calculation-rule.md) — BR-509
+- [Net Present Value Acceptance Rule](active/BR-510.net-present-value-acceptance-rule.md) — BR-510
+- [Present Value Index Ranking Rule](active/BR-511.present-value-index-ranking-rule.md) — BR-511
+- [IRR Factor Computation Rule](active/BR-512.irr-factor-computation-rule.md) — BR-512
+- [Unequal Lives Equalization Rule](active/BR-513.unequal-lives-equalization-rule.md) — BR-513
+- [Capital Rationing Screening Rule](active/BR-514.capital-rationing-screening-rule.md) — BR-514
+- [Sensitivity Analysis Threshold Rule](active/BR-515.sensitivity-analysis-threshold-rule.md) — BR-515
+- [Expected Value Probability Rule](active/BR-516.expected-value-probability-rule.md) — BR-516
+- [Assumption Fudging Prohibition](active/BR-517.assumption-fudging-prohibition.md) — BR-517
+- [NPV Decision Rule](active/BR-518.npv-decision-rule.md) — BR-518
+- [Average Rate of Return Calculation](active/BR-519.average-rate-of-return-calculation.md) — BR-519
+- [Cash Payback Period Calculation](active/BR-520.cash-payback-period-calculation.md) — BR-520
+- [Present Value Index Decision Rule](active/BR-521.present-value-index-decision-rule.md) — BR-521
+- [NPV vs Average Rate of Return Conflict](active/BR-522.npv-vs-average-rate-of-return-conflict.md) — BR-522
+- [Sensitivity Analysis for Key Assumptions](active/BR-523.sensitivity-analysis-for-key-assumptions.md) — BR-523
+- [Multi-Phase Revenue NPV Calculation](active/BR-524.multi-phase-revenue-npv-calculation.md) — BR-524
+- [Financial Success Threshold](active/BR-525.financial-success-threshold.md) — BR-525
+- [Currency Risk on International Investments](active/BR-526.currency-risk-on-international-investments.md) — BR-526
+- [Role of Qualitative Factors in Capital Budgeting](active/BR-527.role-of-qualitative-factors-in-capital-budgeting.md) — BR-527
+- [Payback Period as Supplementary Metric](active/BR-528.payback-period-as-supplementary-metric.md) — BR-528
+- [Ownership Threshold Determines Accounting Method](active/BR-529.ownership-threshold-determines-accounting-method.md) — BR-529
+- [Fair Value Method - Purchase Recording](active/BR-530.fair-value-method-purchase-recording.md) — BR-530
+- [Fair Value Method - Dividend Revenue](active/BR-531.fair-value-method-dividend-revenue.md) — BR-531
+- [Fair Value Method - Sale of Stock](active/BR-532.fair-value-method-sale-of-stock.md) — BR-532
+- [Fair Value Method - Year-End Adjustment](active/BR-533.fair-value-method-year-end-adjustment.md) — BR-533
+- [Equity Method - Income Recognition](active/BR-534.equity-method-income-recognition.md) — BR-534
+- [Equity Method - Dividend Treatment](active/BR-535.equity-method-dividend-treatment.md) — BR-535
+- [Support Department Allocation Rate Calculation](active/BR-536.support-department-allocation-rate-calculation.md) — BR-536
+- [ROI Computation](active/BR-537.roi-computation.md) — BR-537
+- [Residual Income Computation](active/BR-538.residual-income-computation.md) — BR-538
+- [Profit Center Evaluation Across Divisions](active/BR-539.profit-center-evaluation-across-divisions.md) — BR-539
+- [ROI Calculation](active/BR-540.roi-calculation.md) — BR-540
+- [DuPont Formula Decomposition](active/BR-541.dupont-formula-decomposition.md) — BR-541
+- [Residual Income Calculation](active/BR-542.residual-income-calculation.md) — BR-542
+- [Balanced Scorecard Completeness](active/BR-543.balanced-scorecard-completeness.md) — BR-543
+- [Strategic Objective to Metric Linkage](active/BR-544.strategic-objective-to-metric-linkage.md) — BR-544
+- [Performance Metric Types](active/BR-545.performance-metric-types.md) — BR-545
+- [Strategy Map Causality](active/BR-546.strategy-map-causality.md) — BR-546
+- [Residual Income vs ROI Decision Rule](active/BR-547.residual-income-vs-roi-decision-rule.md) — BR-547
+- [Department-Specific Scorecards](active/BR-548.department-specific-scorecards.md) — BR-548
+- [Accounting Equation Equality](active/BR-549.accounting-equation-equality.md) — BR-549
+- [Revenue Recognition on Control Transfer](active/BR-550.revenue-recognition-on-control-transfer.md) — BR-550
+- [Sales Returns and Discounts Estimation](active/BR-551.sales-returns-and-discounts-estimation.md) — BR-551
+- [Depreciation of Property, Plant and Equipment](active/BR-552.depreciation-of-property-plant-and-equipment.md) — BR-552
+- [Supplier Finance Program Disclosure](active/BR-553.supplier-finance-program-disclosure.md) — BR-553
+- [Consolidation of Subsidiaries](active/BR-554.consolidation-of-subsidiaries.md) — BR-554
+- [Internal Control Effectiveness Assessment](active/BR-555.internal-control-effectiveness-assessment.md) — BR-555
+- [Net Income vs. Cash Flow Reconciliation](active/BR-556.net-income-vs-cash-flow-reconciliation.md) — BR-556
+- [Fiscal Year Selection](active/BR-557.fiscal-year-selection.md) — BR-557
+- [Closing Entries to Retained Earnings](active/BR-558.closing-entries-to-retained-earnings.md) — BR-558
+- [Year-End Adjusting Entries](active/BR-559.year-end-adjusting-entries.md) — BR-559
+- [Balanced Scorecard Perspective Alignment](active/BR-560.balanced-scorecard-perspective-alignment.md) — BR-560
+- [Shipping Error Impact on Customer Retention](active/BR-561.shipping-error-impact-on-customer-retention.md) — BR-561
+- [EPS Calculation Rule](active/BR-562.eps-calculation-rule.md) — BR-562
+- [Free Cash Flow Calculation Rule](active/BR-563.free-cash-flow-calculation-rule.md) — BR-563
+- [P/E Ratio Interpretation Rule](active/BR-564.p-e-ratio-interpretation-rule.md) — BR-564
+- [Times Interest Earned Interpretation Rule](active/BR-565.times-interest-earned-interpretation-rule.md) — BR-565
+- [Horizontal Analysis Rule](active/BR-566.horizontal-analysis-rule.md) — BR-566
+- [Inventory Valuation Consistency Rule](active/BR-567.inventory-valuation-consistency-rule.md) — BR-567
+- [Accrual Basis Recognition Rule](active/BR-568.accrual-basis-recognition-rule.md) — BR-568
+- [Double-Entry Accounting Rule](active/BR-569.double-entry-accounting-rule.md) — BR-569
+- [Allowance Method for Uncollectibles](active/BR-570.allowance-method-for-uncollectibles.md) — BR-570
+- [Revenue Recognition Timing](active/BR-571.revenue-recognition-timing.md) — BR-571
+- [Inventory System Selection](active/BR-572.inventory-system-selection.md) — BR-572
+- [Bond Premium Amortization](active/BR-573.bond-premium-amortization.md) — BR-573
+- [Quick Ratio Interpretation](active/BR-574.quick-ratio-interpretation.md) — BR-574
+- [Sales Discount Terms](active/BR-575.sales-discount-terms.md) — BR-575
+- [Present Value Concepts](active/BR-576.present-value-concepts.md) — BR-576
+- [Separation of Duties](active/BR-577.separation-of-duties.md) — BR-577
+- [LIFO Conformity Rule](active/BR-578.lifo-conformity-rule.md) — BR-578
+- [Break-Even Analysis Formula](active/BR-579.break-even-analysis-formula.md) — BR-579
+- [LCM Valuation Rule](active/BR-580.lcm-valuation-rule.md) — BR-580
+- [EPS Disclosure Requirement](active/BR-581.eps-disclosure-requirement.md) — BR-581
+- [Differential Analysis for Decision Making](active/BR-582.differential-analysis-for-decision-making.md) — BR-582
+- [Flexible Budget Adjustment](active/BR-583.flexible-budget-adjustment.md) — BR-583
+- [Prime Costs Definition](active/BR-584.prime-costs-definition.md) — BR-584
+- [Conversion Costs Definition](active/BR-585.conversion-costs-definition.md) — BR-585
+- [Probable and Estimable Contingent Liability Recognition](active/BR-586.probable-and-estimable-contingent-liability-recognition.md) — BR-586
+- [Probable but Not Estimable Contingent Liability Disclosure](active/BR-587.probable-but-not-estimable-contingent-liability-disclosure.md) — BR-587
+- [Prior Period Adjustment Treatment](active/BR-588.prior-period-adjustment-treatment.md) — BR-588
+- [Principle of Exceptions Application](active/BR-589.principle-of-exceptions-application.md) — BR-589
+- [Period Cost Recognition](active/BR-590.period-cost-recognition.md) — BR-590
+- [Process or Sell Differential Analysis](active/BR-591.process-or-sell-differential-analysis.md) — BR-591
+- [Price Variance Calculation](active/BR-592.price-variance-calculation.md) — BR-592
+- [P/E Ratio Calculation](active/BR-593.p-e-ratio-calculation.md) — BR-593
+- [Bond Proceeds Calculation](active/BR-594.bond-proceeds-calculation.md) — BR-594
+- [Product Cost Distortion Prevention](active/BR-595.product-cost-distortion-prevention.md) — BR-595
