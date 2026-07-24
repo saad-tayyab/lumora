@@ -61,7 +61,7 @@ import { pgTable, uuid, varchar, decimal, timestamp } from 'drizzle-orm/pg-core'
 import { createInsertSchema, createSelectSchema } from 'drizzle-zod';
 
 export const accounts = pgTable('accounts', {
-  id: uuid('id').primaryKey().$defaultFn(() => crypto.randomUUID()), // UUID v7 for time-ordered IDs
+  id: uuid('id').primaryKey().$defaultFn(() => generateUUIDv7()), // UUID v7 for time-ordered, globally unique IDs
   code: varchar('code', { length: 20 }).notNull().unique(),
   name: varchar('name', { length: 100 }).notNull(),
   type: varchar('type', { length: 20 }).notNull(), // asset, liability, equity, revenue, expense
@@ -94,7 +94,7 @@ Every table must include:
 
 ```typescript
 {
-  id: uuid('id').primaryKey().$defaultFn(() => crypto.randomUUID()), // UUID v7 for time-ordered IDs
+  id: uuid('id').primaryKey().$defaultFn(() => generateUUIDv7()), // UUID v7 for time-ordered, globally unique IDs
   createdAt: timestamp('created_at').notNull().defaultNow(),
   updatedAt: timestamp('updated_at').notNull().defaultNow(),
 }

@@ -12,7 +12,8 @@ import {
 } from 'drizzle-orm/pg-core';
 import { createInsertSchema, createSelectSchema, createUpdateSchema } from 'drizzle-orm/zod';
 
-import { auditFields, createdByFields, tenantFields } from '../common/audit';
+import { auditFields, createdByFields, softDeleteFields, tenantFields } from '../common/audit';
+import { generateUUIDv7 } from '../common/uuid';
 
 // ─── Enums ────────────────────────────────────────────────────────────────────
 
@@ -43,7 +44,7 @@ export const movementTypeEnum = pgEnum('movement_type', [
 export const unitOfMeasures = pgTable(
   'unit_of_measures',
   {
-    id: uuid('id').primaryKey().defaultRandom(),
+    id: uuid('id').primaryKey().$defaultFn(() => generateUUIDv7()),
     code: varchar('code', { length: 10 }).notNull().unique(),
     name: varchar('name', { length: 50 }).notNull(),
     category: uomCategoryEnum('category').notNull(),
@@ -64,6 +65,7 @@ export const itemCategories = pgTable(
   {
     ...auditFields,
     ...tenantFields,
+    ...softDeleteFields,
     name: varchar('name', { length: 100 }).notNull(),
     code: varchar('code', { length: 20 }).notNull(),
     description: varchar('description', { length: 500 }),
@@ -83,6 +85,7 @@ export const items = pgTable(
   {
     ...auditFields,
     ...tenantFields,
+    ...softDeleteFields,
     sku: varchar('sku', { length: 50 }).notNull().unique(),
     barcode: varchar('barcode', { length: 100 }),
     name: varchar('name', { length: 200 }).notNull(),
@@ -105,6 +108,7 @@ export const items = pgTable(
   },
   (table) => [
     index('idx_items_category_id').on(table.categoryId),
+    index('idx_items_unit_of_measure_id').on(table.unitOfMeasureId),
     index('idx_items_tenant_id').on(table.tenantId),
     index('idx_items_barcode').on(table.barcode),
   ],
@@ -115,6 +119,7 @@ export const warehouses = pgTable(
   {
     ...auditFields,
     ...tenantFields,
+    ...softDeleteFields,
     name: varchar('name', { length: 100 }).notNull(),
     code: varchar('code', { length: 20 }).notNull(),
     addressLine1: varchar('address_line1', { length: 200 }),
@@ -150,7 +155,11 @@ export const stockLevels = pgTable(
     lastCountedAt: timestamp('last_counted_at'),
     lastMovementAt: timestamp('last_movement_at'),
   },
-  (table) => [index('idx_stock_levels_tenant_id').on(table.tenantId)],
+  (table) => [
+    index('idx_stock_levels_tenant_id').on(table.tenantId),
+    index('idx_stock_levels_item_id').on(table.itemId),
+    index('idx_stock_levels_warehouse_id').on(table.warehouseId),
+  ],
 );
 
 export const stockMovements = pgTable(

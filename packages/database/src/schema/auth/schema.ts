@@ -42,14 +42,13 @@ export const roles = pgTable(
 export const userRoles = pgTable(
   'user_roles',
   {
+    ...auditFields,
     userId: uuid('user_id')
       .notNull()
       .references(() => users.id, { onDelete: 'cascade' }),
     roleId: uuid('role_id')
       .notNull()
       .references(() => roles.id, { onDelete: 'cascade' }),
-    createdAt: auditFields.createdAt,
-    updatedAt: auditFields.updatedAt,
   },
   (table) => [uniqueIndex('user_roles_user_id_role_id_unique').on(table.userId, table.roleId)],
 );

@@ -12,7 +12,7 @@ import {
 } from 'drizzle-orm/pg-core';
 import { createInsertSchema, createSelectSchema, createUpdateSchema } from 'drizzle-orm/zod';
 
-import { auditFields, createdByFields, tenantFields } from '../common/audit';
+import { auditFields, createdByFields, softDeleteFields, tenantFields } from '../common/audit';
 
 // ─── Enums ────────────────────────────────────────────────────────────────────
 
@@ -39,6 +39,7 @@ export const purchaseOrders = pgTable(
   {
     ...auditFields,
     ...tenantFields,
+    ...softDeleteFields,
     poNumber: varchar('po_number', { length: 30 }).notNull().unique(),
     vendorId: uuid('vendor_id').notNull(),
     status: poStatusEnum('status').notNull().default('draft'),
@@ -99,6 +100,7 @@ export const receivingReports = pgTable(
   {
     ...auditFields,
     ...tenantFields,
+    ...softDeleteFields,
     rrNumber: varchar('rr_number', { length: 30 }).notNull().unique(),
     poId: uuid('po_id')
       .notNull()
@@ -121,6 +123,7 @@ export const vendorCatalogItems = pgTable(
   'vendor_catalog_items',
   {
     ...auditFields,
+    ...softDeleteFields,
     vendorId: uuid('vendor_id').notNull(),
     vendorItemCode: varchar('vendor_item_code', { length: 50 }).notNull(),
     internalItemId: uuid('internal_item_id'),

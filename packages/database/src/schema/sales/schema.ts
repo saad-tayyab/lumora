@@ -11,7 +11,8 @@ import {
 } from 'drizzle-orm/pg-core';
 import { createInsertSchema, createSelectSchema, createUpdateSchema } from 'drizzle-orm/zod';
 
-import { auditFields } from '../common/audit';
+import { auditFields, softDeleteFields } from '../common/audit';
+import { generateUUIDv7 } from '../common/uuid';
 
 export const salesOrderStatusEnum = pgEnum('sales_order_status', [
   'draft',
@@ -36,6 +37,7 @@ export const salesOrders = pgTable(
   'sales_orders',
   {
     ...auditFields,
+    ...softDeleteFields,
     orderNumber: varchar('order_number', { length: 50 }).notNull().unique(),
     customerId: uuid('customer_id').notNull(),
     status: salesOrderStatusEnum('status').notNull().default('draft'),
@@ -58,7 +60,7 @@ export const salesOrders = pgTable(
 export const salesOrderLineItems = pgTable(
   'sales_order_line_items',
   {
-    id: uuid('id').primaryKey().defaultRandom(),
+    id: uuid('id').primaryKey().$defaultFn(() => generateUUIDv7()),
     salesOrderId: uuid('sales_order_id')
       .notNull()
       .references(() => salesOrders.id, { onDelete: 'cascade' }),
@@ -84,6 +86,7 @@ export const quotations = pgTable(
   'quotations',
   {
     ...auditFields,
+    ...softDeleteFields,
     quotationNumber: varchar('quotation_number', { length: 50 }).notNull().unique(),
     customerId: uuid('customer_id').notNull(),
     status: quotationStatusEnum('status').notNull().default('draft'),
@@ -107,7 +110,7 @@ export const quotations = pgTable(
 export const quotationLineItems = pgTable(
   'quotation_line_items',
   {
-    id: uuid('id').primaryKey().defaultRandom(),
+    id: uuid('id').primaryKey().$defaultFn(() => generateUUIDv7()),
     quotationId: uuid('quotation_id')
       .notNull()
       .references(() => quotations.id, { onDelete: 'cascade' }),
@@ -133,6 +136,7 @@ export const discountPolicies = pgTable(
   'discount_policies',
   {
     ...auditFields,
+    ...softDeleteFields,
     name: varchar('name', { length: 100 }).notNull(),
     type: varchar('type', { length: 20 }).notNull(),
     value: decimal('value', { precision: 12, scale: 2 }).notNull().default('0'),

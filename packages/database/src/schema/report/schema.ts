@@ -12,7 +12,8 @@ import {
   varchar,
 } from 'drizzle-orm/pg-core';
 import { createInsertSchema, createSelectSchema, createUpdateSchema } from 'drizzle-orm/zod';
-import { auditFields, createdByFields, tenantFields } from '../common/audit';
+import { auditFields, createdByFields, softDeleteFields, tenantFields } from '../common/audit';
+import { generateUUIDv7 } from '../common/uuid';
 
 // ─── Tables ───────────────────────────────────────────────────────────────────
 
@@ -20,6 +21,7 @@ export const reportTemplates = pgTable(
   'report_templates',
   {
     ...auditFields,
+    ...softDeleteFields,
     name: varchar('name', { length: 200 }).notNull(),
     description: text('description'),
     category: varchar('category', { length: 20 }).notNull(),
@@ -41,6 +43,7 @@ export const reports = pgTable(
     ...auditFields,
     ...tenantFields,
     ...createdByFields,
+    ...softDeleteFields,
     name: varchar('name', { length: 200 }).notNull(),
     description: text('description'),
     templateId: uuid('template_id')
@@ -50,6 +53,7 @@ export const reports = pgTable(
   },
   (table) => [
     index('idx_reports_tenant_id').on(table.tenantId),
+    index('idx_reports_template_id').on(table.templateId),
     index('idx_reports_status').on(table.status),
     index('idx_reports_created_by').on(table.createdBy),
   ],
@@ -61,6 +65,7 @@ export const dashboards = pgTable(
     ...auditFields,
     ...tenantFields,
     ...createdByFields,
+    ...softDeleteFields,
     title: varchar('title', { length: 200 }).notNull(),
     description: text('description'),
     layout: jsonb('layout').notNull(),
@@ -77,7 +82,7 @@ export const dashboards = pgTable(
 export const kpis = pgTable(
   'kpis',
   {
-    id: uuid('id').primaryKey().defaultRandom(),
+    id: uuid('id').primaryKey().$defaultFn(() => generateUUIDv7()),
     ...tenantFields,
     name: varchar('name', { length: 200 }).notNull(),
     description: text('description'),
@@ -91,6 +96,7 @@ export const kpis = pgTable(
     currentValue: decimal('current_value', { precision: 19, scale: 4 }),
     lastCalculatedAt: timestamp('last_calculated_at'),
     ...createdByFields,
+    ...softDeleteFields,
     createdAt: timestamp('created_at').notNull().defaultNow(),
     updatedAt: timestamp('updated_at').notNull().defaultNow(),
   },
@@ -123,7 +129,7 @@ export const dataSources = pgTable(
 export const reportSchedules = pgTable(
   'report_schedules',
   {
-    id: uuid('id').primaryKey().defaultRandom(),
+    id: uuid('id').primaryKey().$defaultFn(() => generateUUIDv7()),
     reportId: uuid('report_id')
       .notNull()
       .references(() => reports.id),
@@ -136,6 +142,7 @@ export const reportSchedules = pgTable(
     deliveryMethod: varchar('delivery_method', { length: 20 }).notNull(),
     deliveryConfig: jsonb('delivery_config'),
     ...createdByFields,
+    ...softDeleteFields,
     createdAt: timestamp('created_at').notNull().defaultNow(),
     updatedAt: timestamp('updated_at').notNull().defaultNow(),
   },

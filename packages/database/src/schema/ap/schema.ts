@@ -2,6 +2,7 @@ import {
   boolean,
   date,
   decimal,
+  index,
   integer,
   pgEnum,
   pgTable,
@@ -11,7 +12,7 @@ import {
   varchar,
 } from 'drizzle-orm/pg-core';
 import { createInsertSchema, createSelectSchema, createUpdateSchema } from 'drizzle-orm/zod';
-import { auditFields, createdByFields, tenantFields } from '../common/audit';
+import { auditFields, createdByFields, softDeleteFields, tenantFields } from '../common/audit';
 
 // =============================================================================
 // Enums
@@ -36,6 +37,7 @@ export const vendors = pgTable(
     ...auditFields,
     ...tenantFields,
     ...createdByFields,
+    ...softDeleteFields,
     name: varchar('name', { length: 200 }).notNull(),
     code: varchar('code', { length: 20 }).notNull(),
     taxId: varchar('tax_id', { length: 50 }),
@@ -62,6 +64,7 @@ export const bills = pgTable(
   {
     ...auditFields,
     ...createdByFields,
+    ...softDeleteFields,
     vendorId: uuid('vendor_id')
       .notNull()
       .references(() => vendors.id),
@@ -78,8 +81,8 @@ export const bills = pgTable(
   },
   (table) => [
     uniqueIndex('bills_vendor_id_bill_number_unique').on(table.vendorId, table.billNumber),
-    uniqueIndex('idx_bills_status').on(table.status),
-    uniqueIndex('idx_bills_due_date').on(table.dueDate),
+    index('idx_bills_status').on(table.status),
+    index('idx_bills_due_date').on(table.dueDate),
   ],
 );
 
@@ -98,7 +101,7 @@ export const billLineItems = pgTable(
     taxAmount: decimal('tax_amount', { precision: 19, scale: 4 }),
     sortOrder: integer('sort_order').notNull().default(0),
   },
-  (table) => [uniqueIndex('idx_bill_line_items_bill_id').on(table.billId)],
+  (table) => [index('idx_bill_line_items_bill_id').on(table.billId)],
 );
 
 // =============================================================================

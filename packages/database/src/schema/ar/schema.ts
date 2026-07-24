@@ -11,7 +11,7 @@ import {
   varchar,
 } from 'drizzle-orm/pg-core';
 import { createInsertSchema, createSelectSchema, createUpdateSchema } from 'drizzle-orm/zod';
-import { auditFields } from '../common/audit';
+import { auditFields, softDeleteFields } from '../common/audit';
 
 // ─── Enums ────────────────────────────────────────────────────────────────────
 
@@ -44,6 +44,7 @@ export const customers = pgTable(
   'customers',
   {
     ...auditFields,
+    ...softDeleteFields,
     name: varchar('name', { length: 200 }).notNull(),
     email: varchar('email', { length: 255 }),
     phone: varchar('phone', { length: 50 }),
@@ -67,6 +68,7 @@ export const invoices = pgTable(
   'invoices',
   {
     ...auditFields,
+    ...softDeleteFields,
     customerId: uuid('customer_id')
       .notNull()
       .references(() => customers.id),
@@ -112,6 +114,7 @@ export const payments = pgTable(
   'payments',
   {
     ...auditFields,
+    ...softDeleteFields,
     customerId: uuid('customer_id')
       .notNull()
       .references(() => customers.id),
@@ -154,6 +157,7 @@ export const creditNotes = pgTable(
   'credit_notes',
   {
     ...auditFields,
+    ...softDeleteFields,
     customerId: uuid('customer_id')
       .notNull()
       .references(() => customers.id),

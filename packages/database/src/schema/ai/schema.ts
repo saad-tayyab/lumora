@@ -11,7 +11,7 @@ import {
   varchar,
 } from 'drizzle-orm/pg-core';
 import { createInsertSchema, createSelectSchema, createUpdateSchema } from 'drizzle-orm/zod';
-import { auditFields, createdByFields, tenantFields } from '../common/audit';
+import { auditFields, createdByFields, softDeleteFields, tenantFields } from '../common/audit';
 
 // ─── Tables ───────────────────────────────────────────────────────────────────
 
@@ -29,6 +29,7 @@ export const workflows = pgTable(
     triggerType: varchar('trigger_type', { length: 20 }).notNull(),
     createdBy: createdByFields.createdBy,
     ...tenantFields,
+    ...softDeleteFields,
   },
   (table) => [
     index('idx_workflows_tenant_id').on(table.tenantId),
@@ -75,9 +76,10 @@ export const aiModels = pgTable(
     // status: training | active | deprecated | failed
     status: varchar('status', { length: 20 }).notNull().default('training'),
     accuracyScore: decimal('accuracy_score', { precision: 5, scale: 4 }),
-    trainingDataId: uuid('training_data_id'),
+    trainingDataId: uuid('training_data_id').references(() => trainingData.id),
     config: jsonb('config').notNull(),
     ...tenantFields,
+    ...softDeleteFields,
     createdAt: auditFields.createdAt,
     updatedAt: auditFields.updatedAt,
     deployedAt: timestamp('deployed_at'),

@@ -1,8 +1,9 @@
 # Knowledge Consolidation Prompt
 
 > **Prompt ID:** PR-003  
-> **Version:** 1.0.0  
-> **Agent:** Domain Agent
+> **Version:** 2.0.0  
+> **Agent:** Domain Agent  
+> **Updated:** 2026-07-24
 
 ---
 
@@ -43,7 +44,12 @@ You must validate consistency, detect orphans, and rebuild the graph.
    a. Check for concepts with similar names
    b. Check for rules with similar statements
    c. Flag potential duplicates for review
-5. Rebuild knowledge graph:
+5. Validate against DOMAIN.md (knowledge/constitution/DOMAIN.md):
+   a. Check that no rule contradicts Domain Invariants (Section 4: INV-FIN-001 through INV-CROSS-003)
+   b. Check that no rule violates Non-Negotiables (Section 9)
+   c. Verify all bounded context codes match DOMAIN.md Section 3
+   d. Flag any new invariants that conflict with existing ones
+6. Rebuild knowledge graph:
    a. Rebuild graph.yaml from all artifacts
    b. Regenerate graph.json
    c. Update Mermaid diagrams
@@ -55,6 +61,7 @@ You must validate consistency, detect orphans, and rebuild the graph.
 - Always flag duplicates for human review
 - Always validate naming conventions
 - Always check YAML front matter validity
+- Always validate against DOMAIN.md invariants before accepting changes
 
 # OUTPUT FORMAT
 - Updated manifests

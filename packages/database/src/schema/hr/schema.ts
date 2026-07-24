@@ -13,7 +13,8 @@ import {
   varchar,
 } from 'drizzle-orm/pg-core';
 import { createInsertSchema, createSelectSchema, createUpdateSchema } from 'drizzle-orm/zod';
-import { auditFields } from '../common/audit';
+import { auditFields, softDeleteFields } from '../common/audit';
+import { generateUUIDv7 } from '../common/uuid';
 
 // ─── Enums ────────────────────────────────────────────────────────────────────
 
@@ -52,6 +53,7 @@ export const departments = pgTable(
   'departments',
   {
     ...auditFields,
+    ...softDeleteFields,
     name: varchar('name', { length: 100 }).notNull(),
     code: varchar('code', { length: 20 }).notNull().unique(),
     description: varchar('description', { length: 500 }),
@@ -72,6 +74,7 @@ export const designations = pgTable(
   'designations',
   {
     ...auditFields,
+    ...softDeleteFields,
     name: varchar('name', { length: 100 }).notNull(),
     code: varchar('code', { length: 20 }).notNull().unique(),
     description: varchar('description', { length: 500 }),
@@ -88,6 +91,7 @@ export const employees = pgTable(
   'employees',
   {
     ...auditFields,
+    ...softDeleteFields,
     userId: uuid('user_id').unique(),
     firstName: varchar('first_name', { length: 100 }).notNull(),
     lastName: varchar('last_name', { length: 100 }).notNull(),
@@ -109,6 +113,7 @@ export const employees = pgTable(
     index('idx_employees_department_id').on(table.departmentId),
     index('idx_employees_designation_id').on(table.designationId),
     index('idx_employees_manager_id').on(table.managerId),
+    index('idx_employees_user_id').on(table.userId),
     index('idx_employees_status').on(table.status),
     index('idx_employees_employment_type').on(table.employmentType),
   ],
@@ -117,7 +122,7 @@ export const employees = pgTable(
 export const attendance = pgTable(
   'attendance',
   {
-    id: uuid('id').primaryKey().defaultRandom(),
+    id: uuid('id').primaryKey().$defaultFn(() => generateUUIDv7()),
     employeeId: uuid('employee_id')
       .notNull()
       .references(() => employees.id),
@@ -143,6 +148,7 @@ export const leaveTypes = pgTable(
   'leave_types',
   {
     ...auditFields,
+    ...softDeleteFields,
     name: varchar('name', { length: 50 }).notNull(),
     code: varchar('code', { length: 20 }).notNull().unique(),
     daysPerYear: integer('days_per_year').notNull().default(0),
@@ -156,6 +162,7 @@ export const leaveRequests = pgTable(
   'leave_requests',
   {
     ...auditFields,
+    ...softDeleteFields,
     employeeId: uuid('employee_id')
       .notNull()
       .references(() => employees.id),
@@ -172,6 +179,7 @@ export const leaveRequests = pgTable(
   (table) => [
     index('idx_leave_requests_employee_id').on(table.employeeId),
     index('idx_leave_requests_leave_type_id').on(table.leaveTypeId),
+    index('idx_leave_requests_approved_by').on(table.approvedBy),
     index('idx_leave_requests_status').on(table.status),
     index('idx_leave_requests_start_date').on(table.startDate),
     index('idx_leave_requests_end_date').on(table.endDate),
@@ -182,6 +190,7 @@ export const salaries = pgTable(
   'salaries',
   {
     ...auditFields,
+    ...softDeleteFields,
     employeeId: uuid('employee_id')
       .notNull()
       .references(() => employees.id)
@@ -202,6 +211,7 @@ export const payroll = pgTable(
   'payroll',
   {
     ...auditFields,
+    ...softDeleteFields,
     employeeId: uuid('employee_id')
       .notNull()
       .references(() => employees.id),

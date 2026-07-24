@@ -1,8 +1,9 @@
 # Workflow Generation Prompt
 
 > **Prompt ID:** PR-006  
-> **Version:** 1.0.0  
-> **Agent:** Domain Agent
+> **Version:** 2.0.0  
+> **Agent:** Domain Agent  
+> **Updated:** 2026-07-24
 
 ---
 
@@ -51,7 +52,7 @@ The workflows must follow knowledge/workflows/STANDARDS.md.
 - Always link to business rules
 - Always follow naming conventions
 - Always reference ontology concepts in metadata (concepts field)
-- Always reference event IDs from Event Catalog in "Events Emitted"
+- Always reference event IDs from Event Catalog (knowledge/constitution/DOMAIN.md Section 7, EVT-001 through EVT-006) in "Events Emitted"
 - Actor names use PascalCase (e.g., AccountsReceivable, InventoryManager)
 - Bump minor version when updating existing workflows
 
@@ -89,4 +90,5 @@ The workflows must follow knowledge/workflows/STANDARDS.md.
 ## Related
 
 - Standards: `knowledge/workflows/STANDARDS.md`
+- Domain: `knowledge/constitution/DOMAIN.md` (Event Catalog Section 7, Bounded Contexts Section 3)
 - Agent: `domain-agent.md`

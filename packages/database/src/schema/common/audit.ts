@@ -1,7 +1,9 @@
 import { timestamp, uuid } from 'drizzle-orm/pg-core';
 
+import { generateUUIDv7 } from './uuid';
+
 export const auditFields = {
-  id: uuid('id').primaryKey().defaultRandom(),
+  id: uuid('id').primaryKey().$defaultFn(() => generateUUIDv7()),
   createdAt: timestamp('created_at').notNull().defaultNow(),
   updatedAt: timestamp('updated_at').notNull().defaultNow(),
 };
