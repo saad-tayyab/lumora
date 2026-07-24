@@ -26,6 +26,7 @@
     "lint:fix": "biome lint --write .",
     "check": "biome check .",
     "check:fix": "biome check --write .",
+    "validate": "bun run tooling/validate.ts",
     "prepare": "husky"
   },
   "devDependencies": {

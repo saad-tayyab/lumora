@@ -58,9 +58,9 @@ jobs:
     needs: [build]
     steps:
       - uses: actions/checkout@v4
-      - name: Check no duplicate business rules
-        run: echo "Checking knowledge repository consistency..."
-      - name: Check no orphan ontology nodes
-        run: echo "Checking ontology graph integrity..."
-      - name: Check all READMEs present
-        run: echo "Checking documentation completeness..."
+      - uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: latest
+      - run: bun install --frozen-lockfile
+      - name: Run Knowledge Repository Validation
+        run: bun run validate
