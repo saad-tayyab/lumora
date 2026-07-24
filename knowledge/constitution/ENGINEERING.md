@@ -23,7 +23,8 @@ This constitution defines the **permanent engineering rules** for the Lumora ERP
 | Frontend | Svelte 5 + SvelteKit | 5.56.7 / 2.70.1 | Reactivity without runtime overhead |
 | Backend | Encore.ts | 1.57.13 | Type-safe APIs, built-in infra |
 | Database | Neon PostgreSQL | 1.1.0 (serverless driver) | Serverless Postgres, branching |
-| ORM | Drizzle ORM | 1.0.0-rc.4 (beta) | Type-safe, SQL-like, lightweight |
+| ORM | Drizzle ORM | 1.0.0-rc.4 | Type-safe, SQL-like, lightweight |
+| ORM Validation | drizzle-orm/zod | Built-in | Zod schema generation from Drizzle |
 | Auth | Better Auth | 1.6.25 | Flexible, self-hosted |
 | UI | Tailwind CSS v4 + Bits UI + shadcn-svelte | 4.3.3 / 2.18.1 / 1.4.2 | Accessible, composable |
 | Storage | Cloudflare R2 | @aws-sdk/client-s3 3.1094.0 | S3-compatible, no egress fees |
