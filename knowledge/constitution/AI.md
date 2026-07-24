@@ -104,14 +104,18 @@ This constitution defines how AI operates within the Lumora development ecosyste
 |-----------|------|---------|---------|
 | PR-001 | Repository Bootstrap | 1.0 | Architect Agent |
 | PR-002 | PDF Ingestion | 1.0 | Domain Agent |
-| PR-003 | Knowledge Extraction | 1.0 | Domain Agent |
+| PR-003 | Knowledge Consolidation | 1.0 | Domain Agent |
 | PR-004 | Ontology Generation | 1.0 | Domain Agent |
 | PR-005 | Business Rule Extraction | 1.0 | Domain Agent |
-| PR-006 | Code Generation | 1.0 | Code Agent |
-| PR-007 | Test Generation | 1.0 | Test Agent |
-| PR-008 | Documentation Generation | 1.0 | Doc Agent |
-| PR-009 | Security Review | 1.0 | Review Agent |
-| PR-010 | Performance Analysis | 1.0 | QA Agent |
+| PR-006 | Workflow Generation | 1.0 | Code Agent |
+| PR-007 | Architecture Generation | 1.0 | Architect Agent |
+| PR-008 | Database Generation | 1.0 | Code Agent |
+| PR-010 | Frontend Generation | 1.0 | Code Agent |
+| PR-011 | Backend Generation | 1.0 | Code Agent |
+| PR-012 | Testing Generation | 1.0 | Test Agent |
+| PR-013 | Security Review | 1.0 | Review Agent |
+| PR-014 | Deployment | 1.0 | Code Agent |
+| PR-015 | Maintenance | 1.0 | QA Agent |
 
 ---
 

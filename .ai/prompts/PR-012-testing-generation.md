@@ -69,6 +69,16 @@ The tests must follow engineering/testing/STANDARDS.md.
 
 ---
 
+## Skills
+
+Before executing this prompt, load these agent skills:
+
+| Skill | Purpose |
+|-------|---------|
+| `turborepo` | Test task configuration, `--affected` for CI, cache configuration |
+
+---
+
 ## Related
 
 - Standards: `engineering/testing/STANDARDS.md`

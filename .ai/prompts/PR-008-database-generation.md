@@ -66,6 +66,18 @@ The schemas must follow engineering/database/STANDARDS.md.
 
 ---
 
+## Skills
+
+Before executing this prompt, load these agent skills:
+
+| Skill | Purpose |
+|-------|---------|
+| `drizzle` | Staleness check and CLI/MCP surface selection (load first) |
+| `drizzle-generate` | Create migration SQL files by diffing schema against snapshot |
+| `drizzle-migrations` | Workflow guidance: generate vs push, dialect quirks, file structure |
+
+---
+
 ## Related
 
 - Standards: `engineering/database/STANDARDS.md`

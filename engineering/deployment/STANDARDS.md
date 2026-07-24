@@ -30,7 +30,7 @@ This document defines deployment standards for the Lumora ERP system.
 
 ```dockerfile
 # Use Bun as base
-FROM oven/bun:latest AS base
+FROM oven/bun:1.3.14 AS base
 
 # Install dependencies
 FROM base AS deps

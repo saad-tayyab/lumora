@@ -64,6 +64,16 @@ This includes validation, cleanup, and consistency checks.
 
 ---
 
+## Skills
+
+Before executing this prompt, load these agent skills:
+
+| Skill | Purpose |
+|-------|---------|
+| `turborepo` | Task pipeline configuration for running maintenance via build system |
+
+---
+
 ## Related
 
 - Playbook: `pb-004-knowledge-consolidation.md`

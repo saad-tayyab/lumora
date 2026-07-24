@@ -39,7 +39,7 @@ export const auth = betterAuth({
 ### 2.2 Session Management
 
 - Sessions expire after 7 days
-- Sessions update every 24 days
+- Sessions update every 24 hours
 - Sessions are invalidated on logout
 - Sessions are invalidated on password change
 

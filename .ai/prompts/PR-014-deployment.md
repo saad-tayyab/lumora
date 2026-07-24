@@ -67,6 +67,16 @@ The configurations must follow engineering/deployment/STANDARDS.md.
 
 ---
 
+## Skills
+
+Before executing this prompt, load these agent skills:
+
+| Skill | Purpose |
+|-------|---------|
+| `turborepo` | CI/CD pipeline patterns, GitHub Actions integration, `--affected` flag, remote cache setup |
+
+---
+
 ## Related
 
 - Standards: `engineering/deployment/STANDARDS.md`

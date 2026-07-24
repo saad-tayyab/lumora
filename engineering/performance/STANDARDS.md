@@ -32,9 +32,14 @@ This document defines performance standards for the Lumora ERP system.
 
 ### 3.1 Bundle Optimization
 
-```typescript
-// Use dynamic imports for code splitting
-const HeavyComponent = lazy(() => import('./HeavyComponent'));
+```svelte
+<!-- Use dynamic imports for code splitting in SvelteKit -->
+<script>
+  let HeavyComponent = $state();
+  $effect(() => {
+    import('./HeavyComponent').then(m => { HeavyComponent = m.default; });
+  });
+</script>
 
 // Use tree shaking
 import { format } from 'date-fns'; // Only import what you use

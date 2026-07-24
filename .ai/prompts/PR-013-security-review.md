@@ -72,6 +72,16 @@ The review must follow engineering/security/STANDARDS.md.
 
 ---
 
+## Skills
+
+Before executing this prompt, load these agent skills:
+
+| Skill | Purpose |
+|-------|---------|
+| `better-auth-security-best-practices` | Complete security checklist: secret management, rate limiting, CSRF, trusted origins, session security, cookie security, OAuth token encryption, IP tracking, audit logging |
+
+---
+
 ## Related
 
 - Standards: `engineering/security/STANDARDS.md`

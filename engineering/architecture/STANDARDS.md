@@ -96,7 +96,7 @@ deciders: [list of people]
 {Status}
 
 ## Context
-{What is the issue?
+{What is the issue?}
 
 ## Decision
 {What was decided}

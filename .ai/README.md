@@ -43,9 +43,9 @@ The `.ai/` directory is the AI operating system for the Lumora ERP development p
 | Artifact | Format | Example |
 |----------|--------|---------|
 | Agent | `{role}-agent.md` | `architect-agent.md` |
-| Prompt | `PR-{NUMBER}-{name}.md` | `PR-001-bootstrap.md` |
-| Playbook | `PB-{name}.md` | `PB-pdf-ingestion.md` |
-| Command | `{name}.sh` | `ingest.sh` |
+| Prompt | `PR-{NUMBER}-{name}.md` | `PR-001-repository-bootstrap.md` |
+| Playbook | `pb-{number}-{name}.md` | `pb-002-pdf-ingestion.md` |
+| Command | `{name}.md` | `ingest.md` |
 | Memory | `{type}-{date}.md` | `shortterm-2026-07-24.md` |
 | Context | `{task}-context.md` | `code-generation-context.md` |
 | Checklist | `{gate}-checklist.md` | `pre-merge-checklist.md` |
