@@ -601,3 +601,84 @@ status: active
 - [P/E Ratio Calculation](active/BR-593.p-e-ratio-calculation.md) — BR-593
 - [Bond Proceeds Calculation](active/BR-594.bond-proceeds-calculation.md) — BR-594
 - [Product Cost Distortion Prevention](active/BR-595.product-cost-distortion-prevention.md) — BR-595
+
+## BC-AP (Accounts Payable)
+
+- [Bill Total Must Match Line Items](active/BR-596.bill-total-must-match-line-items.md) — BR-596
+- [Voided Bill Audit Retention](active/BR-597.voided-bill-audit-retention.md) — BR-597
+- [Payment Amount Must Match Bill Amounts](active/BR-598.payment-amount-must-match-bill-amounts.md) — BR-598
+- [Voided Payment Audit Retention](active/BR-599.voided-payment-audit-retention.md) — BR-599
+- [Bill Line Item Amount Calculation](active/BR-600.bill-line-item-amount-calculation.md) — BR-600
+- [Bill Due Date After Bill Date](active/BR-601.bill-due-date-after-bill-date.md) — BR-601
+- [Three-Way Match Variance Reason Required](active/BR-602.three-way-match-variance-reason-required.md) — BR-602
+- [Bill Approval Single Approver](active/BR-603.bill-approval-single-approver.md) — BR-603
+- [Bill Approval Dual Approvers](active/BR-604.bill-approval-dual-approvers.md) — BR-604
+- [Bill Approval Executive Approval](active/BR-605.bill-approval-executive-approval.md) — BR-605
+
+## BC-CASH (Cash & Treasury)
+
+- [Transfer Amount Must Be Positive](active/BR-606.transfer-amount-must-be-positive.md) — BR-606
+- [Transfer Source Different From Destination](active/BR-607.transfer-source-different-from-destination.md) — BR-607
+- [Completed Transfers Cannot Be Modified](active/BR-608.completed-transfers-cannot-be-modified.md) — BR-608
+- [Bank Account Balance Decimal Precision](active/BR-609.bank-account-balance-decimal-precision.md) — BR-609
+- [Bank Account Number Encryption](active/BR-610.bank-account-number-encryption.md) — BR-610
+- [Single Active Tolerance Policy Per Tenant](active/BR-611.single-active-tolerance-policy-per-tenant.md) — BR-611
+- [Single Active Fee Policy Per Tenant](active/BR-612.single-active-fee-policy-per-tenant.md) — BR-612
+- [Reconciliation Match Confidence Range](active/BR-613.reconciliation-match-confidence-range.md) — BR-613
+
+## BC-HR (Human Resources)
+
+- [Employee Must Belong To One Department](active/BR-614.employee-must-belong-to-one-department.md) — BR-614
+- [Employee Must Have One Designation](active/BR-615.employee-must-have-one-designation.md) — BR-615
+- [Leave Request End Date After Start Date](active/BR-616.leave-request-end-date-after-start-date.md) — BR-616
+- [Leave Request Total Days Positive](active/BR-617.leave-request-total-days-positive.md) — BR-617
+- [Terminated Employee Cannot Request Leave](active/BR-618.terminated-employee-cannot-request-leave.md) — BR-618
+- [Payroll Net Pay Calculation](active/BR-619.payroll-net-pay-calculation.md) — BR-619
+- [Completed Payroll Cannot Be Modified](active/BR-620.completed-payroll-cannot-be-modified.md) — BR-620
+- [No Overlapping Payroll Runs](active/BR-621.no-overlapping-payroll-runs.md) — BR-621
+- [Salary Base Amount Non-Negative](active/BR-622.salary-base-amount-non-negative.md) — BR-622
+- [Only Manager Can Approve Leave](active/BR-623.only-manager-can-approve-leave.md) — BR-623
+- [Overtime Hours Capped At Maximum](active/BR-624.overtime-hours-capped-at-maximum.md) — BR-624
+- [Holiday Work Double Rate](active/BR-625.holiday-work-double-rate.md) — BR-625
+- [Salary Value Object Immutability](active/BR-626.salary-value-object-immutability.md) — BR-626
+
+## BC-REPORT (Reporting & Analytics)
+
+- [Report Must Reference Data Source](active/BR-627.report-must-reference-data-source.md) — BR-627
+- [Report Status Transition Order](active/BR-628.report-status-transition-order.md) — BR-628
+- [Archived Reports Cannot Be Modified](active/BR-629.archived-reports-cannot-be-modified.md) — BR-629
+- [Dashboard Refresh Interval Bounds](active/BR-630.dashboard-refresh-interval-bounds.md) — BR-630
+- [KPI Threshold Breach Triggers Event](active/BR-631.kpi-threshold-breach-triggers-event.md) — BR-631
+- [Financial Reports Longer Retention](active/BR-632.financial-reports-longer-retention.md) — BR-632
+- [Report Retention Policy Evaluation](active/BR-633.report-retention-policy-evaluation.md) — BR-633
+- [Deleted Reports Soft-Delete Period](active/BR-634.deleted-reports-soft-delete-period.md) — BR-634
+- [Audit Log Entries Retained Indefinitely](active/BR-635.audit-log-entries-retained-indefinitely.md) — BR-635
+- [Periodic Refresh Requires Valid Interval](active/BR-636.periodic-refresh-requires-valid-interval.md) — BR-636
+- [Dashboard Valid JSON Layout](active/BR-637.dashboard-valid-json-layout.md) — BR-637
+
+## BC-PROC (Procurement)
+
+- [Vendor Must Be Qualified For Purchase Orders](active/BR-638.vendor-must-be-qualified-for-purchase-orders.md) — BR-638
+- [Suspended Vendors Cannot Receive Orders](active/BR-639.suspended-vendors-cannot-receive-orders.md) — BR-639
+- [Purchase Order Must Have Line Items](active/BR-640.purchase-order-must-have-line-items.md) — BR-640
+- [Purchase Order Total Calculation](active/BR-641.purchase-order-total-calculation.md) — BR-641
+- [Purchase Order Approval State Gate](active/BR-642.purchase-order-approval-state-gate.md) — BR-642
+- [Purchase Order Cannot Be Modified After Approval](active/BR-643.purchase-order-cannot-be-modified-after-approval.md) — BR-643
+- [Purchase Order Self-Approval Prohibited](active/BR-644.purchase-order-self-approval-prohibited.md) — BR-644
+- [Purchase Order Number Uniqueness](active/BR-645.purchase-order-number-uniqueness.md) — BR-645
+- [Receiving Report Must Reference Valid PO](active/BR-646.receiving-report-must-reference-valid-po.md) — BR-646
+- [Receiving Report Number Uniqueness](active/BR-647.receiving-report-number-uniqueness.md) — BR-647
+- [Received Date Cannot Be Before PO Date](active/BR-648.received-date-cannot-be-before-po-date.md) — BR-648
+- [PO Approval Thresholds Configurable](active/BR-649.po-approval-thresholds-configurable.md) — BR-649
+- [PO Approval Role Validation](active/BR-650.po-approval-role-validation.md) — BR-650
+
+## BC-SALES (Sales & Orders)
+
+- [Customer Credit Limit Blocks Orders](active/BR-651.customer-credit-limit-blocks-orders.md) — BR-651
+- [Suspended Customers Cannot Place Orders](active/BR-652.suspended-customers-cannot-place-orders.md) — BR-652
+- [Quotation Total Calculation](active/BR-653.quotation-total-calculation.md) — BR-653
+- [Discount Percentage Bounds](active/BR-654.discount-percentage-bounds.md) — BR-654
+- [Fixed Amount Discount Non-Negative](active/BR-655.fixed-amount-discount-non-negative.md) — BR-655
+- [Credit Check At Least One Stage Required](active/BR-656.credit-check-at-least-one-stage-required.md) — BR-656
+- [Quotation Expiry Date After Issue Date](active/BR-657.quotation-expiry-date-after-issue-date.md) — BR-657
+- [Discount Policy Validity Period](active/BR-658.discount-policy-validity-period.md) — BR-658
