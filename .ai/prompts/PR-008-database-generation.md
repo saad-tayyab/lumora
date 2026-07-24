@@ -1,7 +1,7 @@
 # Database Generation Prompt
 
 > **Prompt ID:** PR-008  
-> **Version:** 2.0.0  
+> **Version:** 2.1.0  
 > **Agent:** Code Agent  
 > **Updated:** 2026-07-24
 
@@ -10,6 +10,18 @@
 ## Purpose
 
 Generate Drizzle ORM schemas from ontology concepts, following all database engineering standards.
+
+---
+
+## Context Variables
+
+| Variable | Description | Example |
+|----------|-------------|---------|
+| `{CONTEXT}` | Bounded context name (PascalCase) | `Financial` |
+| `{CTX}` | Bounded context abbreviation (uppercase) | `FIN` |
+| `{context}` | Bounded context name (kebab-case) | `financial` |
+| `{entity}` | Entity name (kebab-case) | `journal-entry` |
+| `{Entity}` | Entity name (PascalCase) | `JournalEntry` |
 
 ---
 
@@ -25,6 +37,17 @@ The schemas must follow engineering/database/STANDARDS.md.
 Stack: Neon PostgreSQL, Drizzle ORM 1.0.0-rc.4, Drizzle Kit.
 
 # INSTRUCTIONS
+
+## 0. Pre-Flight Check (Run before generating)
+1. Scan all concept files: `knowledge/ontology/contexts/{CONTEXT}/CON-{CTX}-*.md`
+2. List entity and aggregate concepts (type: entity or aggregate)
+3. Read existing schema: `packages/database/src/schema/{context}/schema.ts`
+4. Compare concept attributes against existing table columns
+5. Report:
+   - Concepts WITH tables (already covered)
+   - Concepts WITHOUT tables (need generation)
+   - Column mismatches (attributes in concept but not in schema)
+6. Only generate schemas for uncovered concepts (incremental)
 
 ## 1. Schema Generation
 1. Read the ontology concepts for the target context

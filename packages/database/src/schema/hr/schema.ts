@@ -81,6 +81,8 @@ export const designations = pgTable(
     code: varchar('code', { length: 20 }).notNull().unique(),
     description: varchar('description', { length: 500 }),
     level: integer('level').notNull().default(1),
+    salaryBandMin: decimal('salary_band_min', { precision: 19, scale: 4 }),
+    salaryBandMax: decimal('salary_band_max', { precision: 19, scale: 4 }),
     isActive: boolean('is_active').notNull().default(true),
   },
   (table) => [
@@ -158,6 +160,7 @@ export const leaveTypes = pgTable(
     code: varchar('code', { length: 20 }).notNull().unique(),
     daysPerYear: integer('days_per_year').notNull().default(0),
     isPaid: boolean('is_paid').notNull().default(true),
+    carryForward: boolean('carry_forward').notNull().default(false),
     isActive: boolean('is_active').notNull().default(true),
   },
   (table) => [index('idx_leave_types_is_active').on(table.isActive)],
@@ -177,8 +180,10 @@ export const leaveRequests = pgTable(
       .references(() => leaveTypes.id),
     startDate: date('start_date').notNull(),
     endDate: date('end_date').notNull(),
+    totalDays: integer('total_days').notNull(),
     reason: text('reason'),
     status: leaveStatusEnum('status').notNull().default('pending'),
+    rejectionReason: text('rejection_reason'),
     approvedBy: uuid('approved_by'),
     approvedAt: timestamp('approved_at'),
   },
@@ -241,6 +246,25 @@ export const payroll = pgTable(
   ],
 );
 
+export const payslips = pgTable(
+  'payslips',
+  {
+    ...auditFields,
+    ...tenantFields,
+    employeeId: uuid('employee_id').notNull().references(() => employees.id),
+    payrollId: uuid('payroll_id').references(() => payroll.id),
+    period: varchar('period', 50).notNull(),
+    grossPay: decimal('gross_pay', { precision: 19, scale: 4 }).notNull(),
+    deductions: decimal('deductions', { precision: 19, scale: 4 }).notNull().default('0'),
+    netPay: decimal('net_pay', { precision: 19, scale: 4 }).notNull(),
+    generatedAt: timestamp('generated_at').notNull().defaultNow(),
+  },
+  (table) => [
+    index('idx_payslips_employee_id').on(table.employeeId),
+    index('idx_payslips_payroll_id').on(table.payrollId),
+  ],
+);
+
 // ─── Zod Schemas ──────────────────────────────────────────────────────────────
 
 export const insertDepartmentSchema = createInsertSchema(departments, {
@@ -280,6 +304,9 @@ export const selectSalarySchema = createSelectSchema(salaries);
 export const insertPayrollSchema = createInsertSchema(payroll);
 export const selectPayrollSchema = createSelectSchema(payroll);
 
+export const insertPayslipSchema = createInsertSchema(payslips);
+export const selectPayslipSchema = createSelectSchema(payslips);
+
 export const updateDepartmentSchema = createUpdateSchema(departments);
 export const updateDesignationSchema = createUpdateSchema(designations);
 export const updateEmployeeSchema = createUpdateSchema(employees);
@@ -288,6 +315,7 @@ export const updateLeaveTypeSchema = createUpdateSchema(leaveTypes);
 export const updateLeaveRequestSchema = createUpdateSchema(leaveRequests);
 export const updateSalarySchema = createUpdateSchema(salaries);
 export const updatePayrollSchema = createUpdateSchema(payroll);
+export const updatePayslipSchema = createUpdateSchema(payslips);
 
 // ─── Types ────────────────────────────────────────────────────────────────────
 
@@ -314,3 +342,6 @@ export type NewSalary = typeof salaries.$inferInsert;
 
 export type PayrollRecord = typeof payroll.$inferSelect;
 export type NewPayrollRecord = typeof payroll.$inferInsert;
+
+export type Payslip = typeof payslips.$inferSelect;
+export type NewPayslip = typeof payslips.$inferInsert;

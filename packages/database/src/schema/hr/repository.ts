@@ -14,8 +14,10 @@ import type {
   NewLeaveRequest,
   NewLeaveType,
   NewPayrollRecord,
+  NewPayslip,
   NewSalary,
   PayrollRecord,
+  Payslip,
   Salary,
 } from './schema';
 import {
@@ -26,6 +28,7 @@ import {
   leaveRequests,
   leaveTypes,
   payroll,
+  payslips,
   salaries,
 } from './schema';
 
@@ -455,5 +458,62 @@ export const payrollRepository = {
 
   async delete(id: string): Promise<PayrollRecord[]> {
     return db.delete(payroll).where(eq(payroll.id, id)).returning();
+  },
+};
+
+// ─── Payslips ─────────────────────────────────────────────────────────────────
+
+export const payslipRepository = {
+  async findById(id: string): Promise<Payslip | undefined> {
+    return db.query.payslips.findFirst({ where: eq(payslips.id, id) });
+  },
+
+  async findByEmployee(employeeId: string): Promise<Payslip[]> {
+    return db.query.payslips.findMany({
+      where: eq(payslips.employeeId, employeeId),
+      orderBy: desc(payslips.generatedAt),
+    });
+  },
+
+  async findByPayrollId(payrollId: string): Promise<Payslip[]> {
+    return db.query.payslips.findMany({
+      where: eq(payslips.payrollId, payrollId),
+      orderBy: desc(payslips.generatedAt),
+    });
+  },
+
+  async findByPeriod(period: string): Promise<Payslip[]> {
+    return db.query.payslips.findMany({
+      where: eq(payslips.period, period),
+      orderBy: desc(payslips.generatedAt),
+    });
+  },
+
+  async findByEmployeeAndPeriod(
+    employeeId: string,
+    period: string,
+  ): Promise<Payslip | undefined> {
+    return db.query.payslips.findFirst({
+      where: and(eq(payslips.employeeId, employeeId), eq(payslips.period, period)),
+    });
+  },
+
+  async findMany(args?: { limit?: number; offset?: number; orderBy?: SQL }) {
+    const { limit = 50, offset = 0, orderBy = desc(payslips.generatedAt) } = args ?? {};
+    const data = await db.query.payslips.findMany({ limit, offset, orderBy });
+    const total = await db.select({ count: count() }).from(payslips);
+    return { data, total: total[0].count, limit, offset };
+  },
+
+  async create(data: NewPayslip): Promise<Payslip[]> {
+    return db.insert(payslips).values(data).returning();
+  },
+
+  async update(id: string, data: Partial<NewPayslip>): Promise<Payslip[]> {
+    return db.update(payslips).set(data).where(eq(payslips.id, id)).returning();
+  },
+
+  async delete(id: string): Promise<Payslip[]> {
+    return db.delete(payslips).where(eq(payslips.id, id)).returning();
   },
 };

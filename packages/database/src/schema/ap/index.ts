@@ -3,7 +3,9 @@ export type { PaginatedResult } from './repository';
 export {
   billLineItemsRepository,
   billsRepository,
+  paymentSchedulesRepository,
   vendorsRepository,
+  vendorPaymentsRepository,
 } from './repository';
 export {
   billLineItems,
@@ -13,15 +15,23 @@ export {
   insertBillLineItemSchema,
   insertBillSchema,
   // Zod — Insert
+  insertPaymentScheduleSchema,
+  insertVendorPaymentSchema,
   insertVendorSchema,
+  paymentSchedules,
   selectBillLineItemSchema,
   selectBillSchema,
   // Zod — Select
+  selectPaymentScheduleSchema,
+  selectVendorPaymentSchema,
   selectVendorSchema,
   updateBillLineItemSchema,
   updateBillSchema,
   // Zod — Update
+  updatePaymentScheduleSchema,
+  updateVendorPaymentSchema,
   updateVendorSchema,
   // Tables
+  vendorPayments,
   vendors,
 } from './schema';

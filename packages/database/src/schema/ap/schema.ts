@@ -7,6 +7,7 @@ import {
   pgEnum,
   pgTable,
   text,
+  timestamp,
   uniqueIndex,
   uuid,
   varchar,
@@ -105,6 +106,47 @@ export const billLineItems = pgTable(
   (table) => [index('idx_bill_line_items_bill_id').on(table.billId)],
 );
 
+export const vendorPayments = pgTable(
+  'vendor_payments',
+  {
+    ...auditFields,
+    ...tenantFields,
+    ...softDeleteFields,
+    vendorId: uuid('vendor_id').notNull().references(() => vendors.id),
+    billId: uuid('bill_id').references(() => bills.id),
+    amount: decimal('amount', { precision: 19, scale: 4 }).notNull(),
+    paymentDate: timestamp('payment_date').notNull(),
+    paymentMethod: varchar('payment_method', 50).notNull(),
+    referenceNumber: varchar('reference_number', 100),
+    bankAccountId: uuid('bank_account_id'),
+    currency: varchar('currency', { length: 3 }).notNull().default('USD'),
+    notes: text('notes'),
+  },
+  (table) => [
+    index('idx_vendor_payments_vendor_id').on(table.vendorId),
+    index('idx_vendor_payments_bill_id').on(table.billId),
+    index('idx_vendor_payments_payment_date').on(table.paymentDate),
+  ],
+);
+
+export const paymentSchedules = pgTable(
+  'payment_schedules',
+  {
+    ...auditFields,
+    ...tenantFields,
+    billId: uuid('bill_id')
+      .notNull()
+      .references(() => bills.id),
+    dueDate: timestamp('due_date').notNull(),
+    amount: decimal('amount', { precision: 19, scale: 4 }).notNull(),
+    status: varchar('status', 20).notNull().default('pending'),
+  },
+  (table) => [
+    index('idx_payment_schedules_bill_id').on(table.billId),
+    index('idx_payment_schedules_due_date').on(table.dueDate),
+  ],
+);
+
 // =============================================================================
 // Zod Schemas — Insert
 // =============================================================================
@@ -118,6 +160,8 @@ export const insertBillSchema = createInsertSchema(bills, {
   billNumber: (schema) => schema.min(1).max(50),
 });
 export const insertBillLineItemSchema = createInsertSchema(billLineItems);
+export const insertVendorPaymentSchema = createInsertSchema(vendorPayments);
+export const insertPaymentScheduleSchema = createInsertSchema(paymentSchedules);
 
 // =============================================================================
 // Zod Schemas — Select
@@ -126,6 +170,8 @@ export const insertBillLineItemSchema = createInsertSchema(billLineItems);
 export const selectVendorSchema = createSelectSchema(vendors);
 export const selectBillSchema = createSelectSchema(bills);
 export const selectBillLineItemSchema = createSelectSchema(billLineItems);
+export const selectVendorPaymentSchema = createSelectSchema(vendorPayments);
+export const selectPaymentScheduleSchema = createSelectSchema(paymentSchedules);
 
 // =============================================================================
 // Zod Schemas — Update
@@ -134,6 +180,8 @@ export const selectBillLineItemSchema = createSelectSchema(billLineItems);
 export const updateVendorSchema = createUpdateSchema(vendors);
 export const updateBillSchema = createUpdateSchema(bills);
 export const updateBillLineItemSchema = createUpdateSchema(billLineItems);
+export const updateVendorPaymentSchema = createUpdateSchema(vendorPayments);
+export const updatePaymentScheduleSchema = createUpdateSchema(paymentSchedules);
 
 export type Vendor = typeof vendors.$inferSelect;
 export type NewVendor = typeof vendors.$inferInsert;
@@ -141,3 +189,7 @@ export type Bill = typeof bills.$inferSelect;
 export type NewBill = typeof bills.$inferInsert;
 export type BillLineItem = typeof billLineItems.$inferSelect;
 export type NewBillLineItem = typeof billLineItems.$inferInsert;
+export type VendorPayment = typeof vendorPayments.$inferSelect;
+export type NewVendorPayment = typeof vendorPayments.$inferInsert;
+export type PaymentSchedule = typeof paymentSchedules.$inferSelect;
+export type NewPaymentSchedule = typeof paymentSchedules.$inferInsert;

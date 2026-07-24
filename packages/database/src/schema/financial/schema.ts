@@ -6,6 +6,7 @@ import {
   pgEnum,
   pgTable,
   text,
+  timestamp,
   uuid,
   varchar,
 } from 'drizzle-orm/pg-core';
@@ -88,6 +89,23 @@ export const journalEntryLines = pgTable(
   ],
 );
 
+export const fiscalYears = pgTable(
+  'fiscal_years',
+  {
+    ...auditFields,
+    ...tenantFields,
+    ...softDeleteFields,
+    name: varchar('name', 100).notNull(),
+    startDate: timestamp('start_date').notNull(),
+    endDate: timestamp('end_date').notNull(),
+    status: varchar('status', 20).notNull().default('open'),
+  },
+  (table) => [
+    index('idx_fiscal_years_tenant_id').on(table.tenantId),
+    index('idx_fiscal_years_status').on(table.status),
+  ],
+);
+
 // ─── Zod Schemas ──────────────────────────────────────────────────────────────
 
 export const insertAccountSchema = createInsertSchema(accounts, {
@@ -103,9 +121,15 @@ export const selectJournalEntrySchema = createSelectSchema(journalEntries);
 export const insertJournalEntryLineSchema = createInsertSchema(journalEntryLines);
 export const selectJournalEntryLineSchema = createSelectSchema(journalEntryLines);
 
+export const insertFiscalYearSchema = createInsertSchema(fiscalYears, {
+  name: (schema) => schema.min(1).max(100),
+});
+export const selectFiscalYearSchema = createSelectSchema(fiscalYears);
+
 export const updateAccountSchema = createUpdateSchema(accounts);
 export const updateJournalEntrySchema = createUpdateSchema(journalEntries);
 export const updateJournalEntryLineSchema = createUpdateSchema(journalEntryLines);
+export const updateFiscalYearSchema = createUpdateSchema(fiscalYears);
 
 // ─── Types ────────────────────────────────────────────────────────────────────
 
@@ -117,3 +141,6 @@ export type NewJournalEntry = typeof journalEntries.$inferInsert;
 
 export type JournalEntryLine = typeof journalEntryLines.$inferSelect;
 export type NewJournalEntryLine = typeof journalEntryLines.$inferInsert;
+
+export type FiscalYear = typeof fiscalYears.$inferSelect;
+export type NewFiscalYear = typeof fiscalYears.$inferInsert;

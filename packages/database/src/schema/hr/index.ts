@@ -12,7 +12,9 @@ export type {
   NewLeaveRequest,
   NewLeaveType,
   NewPayrollRecord,
+  NewPayslip,
   NewSalary,
+  Payslip,
   PayrollRecord,
   Salary,
 } from './schema';
@@ -35,6 +37,7 @@ export {
   insertLeaveRequestSchema,
   insertLeaveTypeSchema,
   insertPayrollSchema,
+  insertPayslipSchema,
   insertSalarySchema,
   leaveRequests,
   leaveStatusEnum,
@@ -42,6 +45,7 @@ export {
   payFrequencyEnum,
   payroll,
   payrollStatusEnum,
+  payslips,
   salaries,
   selectAttendanceSchema,
   // Zod Schemas — Select
@@ -51,6 +55,7 @@ export {
   selectLeaveRequestSchema,
   selectLeaveTypeSchema,
   selectPayrollSchema,
+  selectPayslipSchema,
   selectSalarySchema,
   updateAttendanceSchema,
   updateDepartmentSchema,
@@ -59,5 +64,6 @@ export {
   updateLeaveRequestSchema,
   updateLeaveTypeSchema,
   updatePayrollSchema,
+  updatePayslipSchema,
   updateSalarySchema,
 } from './schema';

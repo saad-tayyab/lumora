@@ -26,7 +26,8 @@ export const workflows = pgTable(
     // status: draft | active | paused | completed | failed
     status: varchar('status', { length: 20 }).notNull().default('draft'),
     // triggerType: event | manual | schedule | cron
-    triggerType: varchar('trigger_type', { length: 20 }).notNull(),
+    triggerType: varchar('trigger_type', { length: 50 }).notNull(),
+    triggerConfig: jsonb('trigger_config'),
     createdBy: createdByFields.createdBy,
     ...tenantFields,
     ...softDeleteFields,
