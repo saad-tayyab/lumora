@@ -11,7 +11,8 @@ import {
   varchar,
 } from 'drizzle-orm/pg-core';
 import { createInsertSchema, createSelectSchema, createUpdateSchema } from 'drizzle-orm/zod';
-import { auditFields, softDeleteFields } from '../common/audit';
+import { auditFields, softDeleteFields, tenantFields } from '../common/audit';
+import { bankAccounts } from '../cash/schema';
 
 // ─── Enums ────────────────────────────────────────────────────────────────────
 
@@ -44,6 +45,7 @@ export const customers = pgTable(
   'customers',
   {
     ...auditFields,
+    ...tenantFields,
     ...softDeleteFields,
     name: varchar('name', { length: 200 }).notNull(),
     email: varchar('email', { length: 255 }),
@@ -68,6 +70,7 @@ export const invoices = pgTable(
   'invoices',
   {
     ...auditFields,
+    ...tenantFields,
     ...softDeleteFields,
     customerId: uuid('customer_id')
       .notNull()
@@ -96,6 +99,7 @@ export const invoiceLineItems = pgTable(
   'invoice_line_items',
   {
     ...auditFields,
+    ...tenantFields,
     invoiceId: uuid('invoice_id')
       .notNull()
       .references(() => invoices.id, { onDelete: 'cascade' }),
@@ -114,6 +118,7 @@ export const payments = pgTable(
   'payments',
   {
     ...auditFields,
+    ...tenantFields,
     ...softDeleteFields,
     customerId: uuid('customer_id')
       .notNull()
@@ -123,7 +128,7 @@ export const payments = pgTable(
     amount: decimal('amount', { precision: 19, scale: 4 }).notNull().default('0'),
     paymentMethod: paymentMethodEnum('payment_method').notNull(),
     referenceNumber: varchar('reference_number', { length: 100 }),
-    bankAccountId: uuid('bank_account_id'),
+    bankAccountId: uuid('bank_account_id').references(() => bankAccounts.id),
     currency: varchar('currency', { length: 3 }).notNull().default('USD'),
     notes: text('notes'),
   },
@@ -138,6 +143,7 @@ export const paymentApplications = pgTable(
   'payment_applications',
   {
     ...auditFields,
+    ...tenantFields,
     paymentId: uuid('payment_id')
       .notNull()
       .references(() => payments.id),
@@ -157,6 +163,7 @@ export const creditNotes = pgTable(
   'credit_notes',
   {
     ...auditFields,
+    ...tenantFields,
     ...softDeleteFields,
     customerId: uuid('customer_id')
       .notNull()

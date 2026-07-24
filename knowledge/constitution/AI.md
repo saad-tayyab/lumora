@@ -116,6 +116,10 @@ This constitution defines how AI operates within the Lumora development ecosyste
 | PR-013 | Security Review | 1.0 | Review Agent |
 | PR-014 | Deployment | 1.0 | Code Agent |
 | PR-015 | Maintenance | 1.0 | QA Agent |
+| PR-016 | Drizzle Migration | 1.0 | Code Agent |
+| PR-017 | Event Wiring | 1.0 | Code Agent |
+| PR-018 | Traceability | 1.0 | QA Agent |
+| PR-019 | API Documentation | 1.0 | Code Agent |
 
 ---
 

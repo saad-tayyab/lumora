@@ -2,6 +2,7 @@ export * from './ai';
 export * from './ap';
 export * from './ar';
 export * from './auth';
+export * from './cash';
 export * from './common';
 export * from './financial';
 export * from './hr';

@@ -85,3 +85,16 @@ export const selectUserRoleSchema = createSelectSchema(userRoles);
 export const updateUserSchema = createUpdateSchema(users);
 export const updateRoleSchema = createUpdateSchema(roles);
 export const updateUserRoleSchema = createUpdateSchema(userRoles);
+
+// =============================================================================
+// Types
+// =============================================================================
+
+export type User = typeof users.$inferSelect;
+export type NewUser = typeof users.$inferInsert;
+
+export type Role = typeof roles.$inferSelect;
+export type NewRole = typeof roles.$inferInsert;
+
+export type UserRole = typeof userRoles.$inferSelect;
+export type NewUserRole = typeof userRoles.$inferInsert;

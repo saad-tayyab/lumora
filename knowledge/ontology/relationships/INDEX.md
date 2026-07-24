@@ -4,53 +4,265 @@ version: 1.0.0
 status: active
 ---
 
-# Relationships Index
+# Relationships
 
-## BC-AUTH Relationships (15)
+## CON-AP-001
 
-| ID | Source | Target | Type | Description |
-|----|--------|--------|------|-------------|
-| REL-001 | CON-AUTH-001 (User) | CON-AUTH-002 (Role) | has-many | A user can have multiple roles |
-| REL-002 | CON-AUTH-001 (User) | CON-AUTH-004 (Session) | has-many | A user can have multiple active sessions |
-| REL-003 | CON-AUTH-001 (User) | CON-AUTH-005 (OAuthProvider) | has-many | A user can link multiple OAuth providers |
-| REL-004 | CON-AUTH-001 (User) | CON-AUTH-006 (UserCredential) | has-one | A user has exactly one credential record |
-| REL-005 | CON-AUTH-001 (User) | CON-AUTH-007 (MFAConfig) | has-one | A user has at most one MFA configuration |
-| REL-006 | CON-AUTH-001 (User) | CON-AUTH-008 (AuditLog) | has-many | Every user action produces an audit log entry |
-| REL-007 | CON-AUTH-002 (Role) | CON-AUTH-003 (Permission) | has-many | A role contains multiple permissions |
-| REL-008 | CON-AUTH-004 (Session) | CON-AUTH-001 (User) | belongs-to | A session belongs to one user |
-| REL-009 | CON-AUTH-005 (OAuthProvider) | CON-AUTH-001 (User) | belongs-to | An OAuth provider link belongs to one user |
-| REL-010 | CON-AUTH-006 (UserCredential) | CON-AUTH-001 (User) | belongs-to | A credential belongs to one user |
-| REL-011 | CON-AUTH-007 (MFAConfig) | CON-AUTH-001 (User) | belongs-to | An MFA config belongs to one user |
-| REL-012 | CON-AUTH-008 (AuditLog) | CON-AUTH-001 (User) | belongs-to | An audit log entry belongs to one user |
-| REL-013 | CON-AUTH-013 (CreateUser) | CON-AUTH-001 (User) | creates | CreateUser command creates a User aggregate |
-| REL-014 | CON-AUTH-014 (AuthenticateUser) | CON-AUTH-001 (User) | authenticates | AuthenticateUser command authenticates a user |
-| REL-015 | CON-AUTH-015 (AssignRole) | CON-AUTH-002 (Role) | references | AssignRole command assigns a Role to a User |
+- [REL-001.vendor-has-bills](./REL-001.vendor-has-bills.md)
 
-## BC-SALES Relationships (24)
+## CON-AP-002
 
-| ID | Source | Target | Type | Description |
-|----|--------|--------|------|-------------|
-| REL-SALES-001 | CON-SALES-001 (Customer) | CON-SALES-002 (SalesOrder) | has-many | Customer places many sales orders |
-| REL-SALES-002 | CON-SALES-001 (Customer) | CON-SALES-004 (Quotation) | has-many | Customer receives many quotations |
-| REL-SALES-003 | CON-SALES-002 (SalesOrder) | CON-SALES-003 (SalesOrderLineItem) | has-many | Order contains many line items |
-| REL-SALES-004 | CON-SALES-003 (SalesOrderLineItem) | CON-SALES-002 (SalesOrder) | belongs-to | Line item belongs to a sales order |
-| REL-SALES-005 | CON-SALES-004 (Quotation) | CON-SALES-005 (QuotationLineItem) | has-many | Quotation contains many line items |
-| REL-SALES-006 | CON-SALES-005 (QuotationLineItem) | CON-SALES-004 (Quotation) | belongs-to | Line item belongs to a quotation |
-| REL-SALES-007 | CON-SALES-002 (SalesOrder) | CON-SALES-006 (SalesOrderStatus) | uses | Order has a status value object |
-| REL-SALES-008 | CON-SALES-004 (Quotation) | CON-SALES-002 (SalesOrder) | converts-to | Accepted quotation may convert to sales order |
-| REL-SALES-009 | CON-SALES-007 (DiscountPolicy) | CON-SALES-001 (Customer) | may-apply-to | Policy may be customer-specific |
-| REL-SALES-010 | CON-SALES-015 (QuotationExpiryPolicy) | CON-SALES-004 (Quotation) | governs | Policy governs quotation expiry |
-| REL-SALES-011 | CON-SALES-016 (CreditCheckPolicy) | CON-SALES-001 (Customer) | evaluates | Policy evaluates customer credit |
-| REL-SALES-012 | CON-SALES-016 (CreditCheckPolicy) | CON-SALES-002 (SalesOrder) | gates | Policy gates order confirmation |
-| REL-SALES-013 | CON-SALES-008 (CustomerCreated) | CON-SALES-001 (Customer) | caused-by | Event caused by customer creation |
-| REL-SALES-014 | CON-SALES-009 (SalesOrderCreated) | CON-SALES-002 (SalesOrder) | caused-by | Event caused by order creation |
-| REL-SALES-015 | CON-SALES-010 (QuotationAccepted) | CON-SALES-004 (Quotation) | caused-by | Event caused by quotation acceptance |
-| REL-SALES-016 | CON-SALES-010 (QuotationAccepted) | CON-SALES-009 (SalesOrderCreated) | triggers | Acceptance may trigger order creation |
-| REL-SALES-017 | CON-SALES-011 (CreateCustomer) | CON-SALES-001 (Customer) | creates | Command creates a customer |
-| REL-SALES-018 | CON-SALES-011 (CreateCustomer) | CON-SALES-008 (CustomerCreated) | results-in | Success emits this event |
-| REL-SALES-019 | CON-SALES-012 (CreateSalesOrder) | CON-SALES-002 (SalesOrder) | creates | Command creates a sales order |
-| REL-SALES-020 | CON-SALES-012 (CreateSalesOrder) | CON-SALES-009 (SalesOrderCreated) | results-in | Success emits this event |
-| REL-SALES-021 | CON-SALES-013 (CreateQuotation) | CON-SALES-004 (Quotation) | creates | Command creates a quotation |
-| REL-SALES-022 | CON-SALES-014 (AcceptQuotation) | CON-SALES-004 (Quotation) | targets | Command targets a quotation |
-| REL-SALES-023 | CON-SALES-014 (AcceptQuotation) | CON-SALES-010 (QuotationAccepted) | results-in | Success emits this event |
-| REL-SALES-024 | CON-SALES-014 (AcceptQuotation) | CON-SALES-002 (SalesOrder) | may-create | May create order if auto-convert |
+- [REL-012.vendor-payment-pays-bill](./REL-012.vendor-payment-pays-bill.md)
+
+## CON-AP-003
+
+- [REL-002.bill-has-line-items](./REL-002.bill-has-line-items.md)
+- [REL-003.bill-has-payment-schedule](./REL-003.bill-has-payment-schedule.md)
+- [REL-005.bill-triggers-bill-received](./REL-005.bill-triggers-bill-received.md)
+- [REL-006.bill-triggers-bill-approved](./REL-006.bill-triggers-bill-approved.md)
+
+## CON-AP-007
+
+- [REL-013.bill-received-triggers-bc-fin](./REL-013.bill-received-triggers-bc-fin.md)
+
+## CON-AP-009
+
+- [REL-014.bill-paid-triggers-bc-fin](./REL-014.bill-paid-triggers-bc-fin.md)
+
+## CON-AP-010
+
+- [REL-004.create-bill-triggers-bill](./REL-004.create-bill-triggers-bill.md)
+
+## CON-AP-011
+
+- [REL-007.approve-bill-triggers-bill](./REL-007.approve-bill-triggers-bill.md)
+
+## CON-AP-012
+
+- [REL-008.process-payment-triggers-vendor-payment](./REL-008.process-payment-triggers-vendor-payment.md)
+- [REL-009.process-payment-triggers-bill-paid](./REL-009.process-payment-triggers-bill-paid.md)
+
+## CON-AP-013
+
+- [REL-010.three-way-match-policy-enforces-result](./REL-010.three-way-match-policy-enforces-result.md)
+
+## CON-AP-014
+
+- [REL-011.approval-workflow-enforces-bill-approved](./REL-011.approval-workflow-enforces-bill-approved.md)
+
+## CON-AR-001
+
+- [REL-001.customer-has-many-invoices](./REL-001.customer-has-many-invoices.md)
+- [REL-005.customer-has-one-credit-limit](./REL-005.customer-has-one-credit-limit.md)
+- [REL-006.customer-has-many-credit-notes](./REL-006.customer-has-many-credit-notes.md)
+
+## CON-AR-002
+
+- [REL-002.invoice-has-many-line-items](./REL-002.invoice-has-many-line-items.md)
+- [REL-003.invoice-has-many-payment-applications](./REL-003.invoice-has-many-payment-applications.md)
+- [REL-007.invoice-triggers-invoice-created](./REL-007.invoice-triggers-invoice-created.md)
+
+## CON-AR-004
+
+- [REL-004.payment-has-many-payment-applications](./REL-004.payment-has-many-payment-applications.md)
+- [REL-008.payment-triggers-payment-received](./REL-008.payment-triggers-payment-received.md)
+
+## CON-AR-006
+
+- [REL-009.credit-note-triggers-credit-note-issued](./REL-009.credit-note-triggers-credit-note-issued.md)
+
+## CON-AR-012
+
+- [REL-015.invoice-overdue-triggers-dunning-policy](./REL-015.invoice-overdue-triggers-dunning-policy.md)
+
+## CON-AR-013
+
+- [REL-010.create-invoice-targets-invoice](./REL-010.create-invoice-targets-invoice.md)
+
+## CON-AR-014
+
+- [REL-011.record-payment-targets-payment](./REL-011.record-payment-targets-payment.md)
+
+## CON-AR-015
+
+- [REL-012.issue-credit-note-targets-credit-note](./REL-012.issue-credit-note-targets-credit-note.md)
+
+## CON-AR-016
+
+- [REL-013.credit-approval-policy-enforces-credit-limit](./REL-013.credit-approval-policy-enforces-credit-limit.md)
+
+## CON-AR-017
+
+- [REL-014.dunning-policy-uses-aging-bucket](./REL-014.dunning-policy-uses-aging-bucket.md)
+
+## CON-AUTH-001
+
+- [REL-001.user-has-many-roles](./REL-001.user-has-many-roles.md)
+- [REL-002.user-has-many-sessions](./REL-002.user-has-many-sessions.md)
+- [REL-003.user-has-many-oauth-providers](./REL-003.user-has-many-oauth-providers.md)
+- [REL-004.user-has-one-credential](./REL-004.user-has-one-credential.md)
+- [REL-005.user-has-one-mfa-config](./REL-005.user-has-one-mfa-config.md)
+- [REL-006.user-has-many-audit-logs](./REL-006.user-has-many-audit-logs.md)
+
+## CON-AUTH-002
+
+- [REL-007.role-has-many-permissions](./REL-007.role-has-many-permissions.md)
+
+## CON-AUTH-004
+
+- [REL-008.session-belongs-to-user](./REL-008.session-belongs-to-user.md)
+
+## CON-AUTH-005
+
+- [REL-009.oauth-provider-belongs-to-user](./REL-009.oauth-provider-belongs-to-user.md)
+
+## CON-AUTH-006
+
+- [REL-010.credential-belongs-to-user](./REL-010.credential-belongs-to-user.md)
+
+## CON-AUTH-007
+
+- [REL-011.mfa-config-belongs-to-user](./REL-011.mfa-config-belongs-to-user.md)
+
+## CON-AUTH-008
+
+- [REL-012.audit-log-belongs-to-user](./REL-012.audit-log-belongs-to-user.md)
+
+## CON-AUTH-013
+
+- [REL-013.create-user-creates-user](./REL-013.create-user-creates-user.md)
+
+## CON-AUTH-014
+
+- [REL-014.authenticate-user-authenticates-user](./REL-014.authenticate-user-authenticates-user.md)
+
+## CON-AUTH-015
+
+- [REL-015.assign-role-references-role](./REL-015.assign-role-references-role.md)
+
+## CON-PROC-001
+
+- [REL-PROC-001.vendor-has-purchase-orders](./REL-PROC-001.vendor-has-purchase-orders.md)
+
+## CON-PROC-002
+
+- [REL-PROC-002.po-has-line-items](./REL-PROC-002.po-has-line-items.md)
+- [REL-PROC-004.po-has-receiving-reports](./REL-PROC-004.po-has-receiving-reports.md)
+- [REL-PROC-005.po-uses-status](./REL-PROC-005.po-uses-status.md)
+
+## CON-PROC-003
+
+- [REL-PROC-003.line-item-uses-catalog-item](./REL-PROC-003.line-item-uses-catalog-item.md)
+
+## CON-PROC-010
+
+- [REL-PROC-006.create-po-triggers-event](./REL-PROC-006.create-po-triggers-event.md)
+
+## CON-PROC-011
+
+- [REL-PROC-007.approve-po-triggers-event](./REL-PROC-007.approve-po-triggers-event.md)
+
+## CON-PROC-012
+
+- [REL-PROC-008.receive-goods-triggers-event](./REL-PROC-008.receive-goods-triggers-event.md)
+
+## CON-PROC-013
+
+- [REL-PROC-009.qualification-policy-enforces-vendor](./REL-PROC-009.qualification-policy-enforces-vendor.md)
+
+## CON-PROC-014
+
+- [REL-PROC-010.approval-policy-enforces-po](./REL-PROC-010.approval-policy-enforces-po.md)
+
+## CON-REPORT-001
+
+- [REL-031.report-uses-template](./REL-031.report-uses-template.md)
+- [REL-032.report-uses-data-source](./REL-032.report-uses-data-source.md)
+- [REL-033.report-has-many-kpi](./REL-033.report-has-many-kpi.md)
+- [REL-034.report-has-one-schedule](./REL-034.report-has-one-schedule.md)
+
+## CON-REPORT-002
+
+- [REL-035.dashboard-has-many-kpi](./REL-035.dashboard-has-many-kpi.md)
+- [REL-036.dashboard-has-many-report](./REL-036.dashboard-has-many-report.md)
+
+## CON-REPORT-003
+
+- [REL-037.kpi-uses-data-source](./REL-037.kpi-uses-data-source.md)
+
+## CON-REPORT-006
+
+- [REL-038.schedule-belongs-to-report](./REL-038.schedule-belongs-to-report.md)
+
+## CON-REPORT-007
+
+- [REL-039.export-belongs-to-report](./REL-039.export-belongs-to-report.md)
+
+## CON-REPORT-008
+
+- [REL-040.report-generated-triggers-report](./REL-040.report-generated-triggers-report.md)
+
+## CON-REPORT-009
+
+- [REL-041.kpi-breached-triggers-kpi](./REL-041.kpi-breached-triggers-kpi.md)
+
+## CON-REPORT-010
+
+- [REL-042.dashboard-shared-triggers-dashboard](./REL-042.dashboard-shared-triggers-dashboard.md)
+
+## CON-REPORT-011
+
+- [REL-043.generate-report-targets-report](./REL-043.generate-report-targets-report.md)
+
+## CON-REPORT-012
+
+- [REL-044.schedule-report-targets-schedule](./REL-044.schedule-report-targets-schedule.md)
+
+## CON-REPORT-013
+
+- [REL-045.share-dashboard-targets-dashboard](./REL-045.share-dashboard-targets-dashboard.md)
+
+## CON-REPORT-014
+
+- [REL-046.refresh-policy-enforces-data-source](./REL-046.refresh-policy-enforces-data-source.md)
+
+## CON-REPORT-015
+
+- [REL-047.retention-policy-enforces-report](./REL-047.retention-policy-enforces-report.md)
+
+## CON-SALES-001
+
+- [REL-SALES-001](./REL-SALES-001.md)
+- [REL-SALES-002](./REL-SALES-002.md)
+
+## CON-SALES-002
+
+- [REL-SALES-003](./REL-SALES-003.md)
+- [REL-SALES-007](./REL-SALES-007.md)
+
+## CON-SALES-003
+
+- [REL-SALES-004](./REL-SALES-004.md)
+
+## CON-SALES-004
+
+- [REL-SALES-005](./REL-SALES-005.md)
+- [REL-SALES-008](./REL-SALES-008.md)
+
+## CON-SALES-005
+
+- [REL-SALES-006](./REL-SALES-006.md)
+
+## CON-SALES-007
+
+- [REL-SALES-009](./REL-SALES-009.md)
+
+## CON-SALES-015
+
+- [REL-SALES-010](./REL-SALES-010.md)
+
+## CON-SALES-016
+
+- [REL-SALES-011](./REL-SALES-011.md)
+- [REL-SALES-012](./REL-SALES-012.md)
+

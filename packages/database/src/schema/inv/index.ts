@@ -44,3 +44,12 @@ export {
   updateWarehouseSchema,
   warehouses,
 } from './schema';
+
+export {
+  itemCategoryRepository,
+  itemRepository,
+  stockLevelRepository,
+  stockMovementRepository,
+  unitOfMeasureRepository,
+  warehouseRepository,
+} from './repository';

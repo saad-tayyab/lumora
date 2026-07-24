@@ -10,7 +10,7 @@ import {
   varchar,
 } from 'drizzle-orm/pg-core';
 import { createInsertSchema, createSelectSchema, createUpdateSchema } from 'drizzle-orm/zod';
-import { auditFields, createdByFields } from '../common/audit';
+import { auditFields, createdByFields, softDeleteFields, tenantFields } from '../common/audit';
 
 // ─── Enums ────────────────────────────────────────────────────────────────────
 
@@ -30,6 +30,8 @@ export const accounts = pgTable(
   'accounts',
   {
     ...auditFields,
+    ...tenantFields,
+    ...softDeleteFields,
     code: varchar('code', { length: 20 }).notNull().unique(),
     name: varchar('name', { length: 100 }).notNull(),
     type: accountTypeEnum('type').notNull(),
@@ -49,6 +51,8 @@ export const journalEntries = pgTable(
   'journal_entries',
   {
     ...auditFields,
+    ...tenantFields,
+    ...softDeleteFields,
     date: date('date').notNull(),
     description: text('description').notNull(),
     referenceNumber: varchar('reference_number', { length: 50 }),
@@ -66,6 +70,8 @@ export const journalEntryLines = pgTable(
   'journal_entry_lines',
   {
     ...auditFields,
+    ...tenantFields,
+    ...softDeleteFields,
     journalEntryId: uuid('journal_entry_id')
       .notNull()
       .references(() => journalEntries.id),

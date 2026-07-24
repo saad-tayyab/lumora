@@ -34,8 +34,6 @@ status: active
 - [Financial Statement Preparation Order](active/BR-026.financial-statement-preparation-order.md) — BR-026
 - [Adjustments for Depreciation at Period End](active/BR-027.adjustments-for-depreciation-at-period-end.md) — BR-027
 - [Reversing Entries for Accruals](active/BR-028.reversing-entries-for-accruals.md) — BR-028
-- [Accounting Equation Must Balance](active/BR-029.accounting-equation-must-balance.md) — BR-029
-- [Matching Principle](active/BR-030.matching-principle.md) — BR-030
 - [Cost Principle](active/BR-031.cost-principle.md) — BR-031
 - [Business Entity Assumption](active/BR-032.business-entity-assumption.md) — BR-032
 - [Net Income Increases Owner's Equity](active/BR-033.net-income-increases-owner-s-equity.md) — BR-033
@@ -58,12 +56,10 @@ status: active
 - [Normal Balance Convention](active/BR-050.normal-balance-convention.md) — BR-050
 - [Journal Before Ledger](active/BR-051.journal-before-ledger.md) — BR-051
 - [Balanced Trial Balance Does Not Guarantee Error-Free Records](active/BR-052.balanced-trial-balance-does-not-guarantee-error-free-records.md) — BR-052
-- [Trial Balance Detects Mathematical Errors Only](active/BR-053.trial-balance-detects-mathematical-errors-only.md) — BR-053
 - [Error Correction Requires Identifying Root Cause](active/BR-054.error-correction-requires-identifying-root-cause.md) — BR-054
 - [Cash Receipts Increase Cash Account](active/BR-055.cash-receipts-increase-cash-account.md) — BR-055
 - [Owner Withdrawals Reduce Owner Equity](active/BR-056.owner-withdrawals-reduce-owner-equity.md) — BR-056
 - [Owner Investments Increase Owner Equity](active/BR-057.owner-investments-increase-owner-equity.md) — BR-057
-- [Revenue Recognition on Earning](active/BR-058.revenue-recognition-on-earning.md) — BR-058
 - [Expense Recognition on Incurrence](active/BR-059.expense-recognition-on-incurrence.md) — BR-059
 - [Supplies Recorded as Asset When Purchased](active/BR-060.supplies-recorded-as-asset-when-purchased.md) — BR-060
 - [Prepaid Insurance Recorded as Asset](active/BR-061.prepaid-insurance-recorded-as-asset.md) — BR-061
@@ -71,7 +67,6 @@ status: active
 - [Land Is Not Depreciated](active/BR-063.land-is-not-depreciated.md) — BR-063
 - [Contra Account Balance Is Opposite to Related Account](active/BR-064.contra-account-balance-is-opposite-to-related-account.md) — BR-064
 - [Adjusting Entries Are Made at Period End Only](active/BR-065.adjusting-entries-are-made-at-period-end-only.md) — BR-065
-- [Adjusting Entries Never Involve Cash](active/BR-066.adjusting-entries-never-involve-cash.md) — BR-066
 - [Prepaid Expenses Must Be Adjusted](active/BR-067.prepaid-expenses-must-be-adjusted.md) — BR-067
 - [Unearned Revenue Must Be Adjusted](active/BR-068.unearned-revenue-must-be-adjusted.md) — BR-068
 - [Accrued Revenues Must Be Recorded](active/BR-069.accrued-revenues-must-be-recorded.md) — BR-069
@@ -86,22 +81,14 @@ status: active
 - [Closing Process](active/BR-078.closing-process.md) — BR-078
 - [Post-Closing Trial Balance Verification](active/BR-079.post-closing-trial-balance-verification.md) — BR-079
 - [Capital Account Continuity](active/BR-080.capital-account-continuity.md) — BR-080
-- [Accrual Basis Requirement](active/BR-081.accrual-basis-requirement.md) — BR-081
-- [Working Capital Positive Indicator](active/BR-082.working-capital-positive-indicator.md) — BR-082
-- [Current Ratio Threshold](active/BR-083.current-ratio-threshold.md) — BR-083
 - [Balance Sheet Date Reporting](active/BR-084.balance-sheet-date-reporting.md) — BR-084
 - [Mortgage Payable Classification](active/BR-085.mortgage-payable-classification.md) — BR-085
 - [Accrual vs Cash Performance Difference](active/BR-086.accrual-vs-cash-performance-difference.md) — BR-086
-- [Closing Entries Sequence](active/BR-087.closing-entries-sequence.md) — BR-087
 - [Permanent vs. Temporary Accounts Distinction](active/BR-088.permanent-vs-temporary-accounts-distinction.md) — BR-088
-- [Post-Closing Trial Balance Equality](active/BR-089.post-closing-trial-balance-equality.md) — BR-089
 - [Balance Sheet Account Classification](active/BR-090.balance-sheet-account-classification.md) — BR-090
-- [Accrual Over Cash Basis](active/BR-091.accrual-over-cash-basis.md) — BR-091
 - [Ethical Financial Reporting](active/BR-092.ethical-financial-reporting.md) — BR-092
-- [Adjusted Trial Balance Equality](active/BR-093.adjusted-trial-balance-equality.md) — BR-093
 - [Spreadsheet Column Equality](active/BR-094.spreadsheet-column-equality.md) — BR-094
 - [Working Capital Interpretation](active/BR-095.working-capital-interpretation.md) — BR-095
-- [Current Ratio Comparison](active/BR-096.current-ratio-comparison.md) — BR-096
 - [Cash Flows Classification](active/BR-097.cash-flows-classification.md) — BR-097
 - [Inventory Purchased Debits Inventory Account](active/BR-098.inventory-purchased-debits-inventory-account.md) — BR-098
 - [COGS Recorded at Each Sale](active/BR-099.cogs-recorded-at-each-sale.md) — BR-099
@@ -120,7 +107,6 @@ status: active
 - [Inventory Shrinkage Adjustment](active/BR-112.inventory-shrinkage-adjustment.md) — BR-112
 - [Gross Profit Computation](active/BR-113.gross-profit-computation.md) — BR-113
 - [Multiple-Step Income Statement Classification](active/BR-114.multiple-step-income-statement-classification.md) — BR-114
-- [Closing Entries for Retail Business](active/BR-115.closing-entries-for-retail-business.md) — BR-115
 - [Sales Discounts GAAP Requirement](active/BR-116.sales-discounts-gaap-requirement.md) — BR-116
 - [Net Method Preferred Under GAAP](active/BR-117.net-method-preferred-under-gaap.md) — BR-117
 - [Asset Turnover Ratio Interpretation](active/BR-118.asset-turnover-ratio-interpretation.md) — BR-118
@@ -184,7 +170,6 @@ status: active
 - [Cash Balance Sheet Presentation Rule](active/BR-176.cash-balance-sheet-presentation-rule.md) — BR-176
 - [Petty Cash Fund Limitations Rule](active/BR-177.petty-cash-fund-limitations-rule.md) — BR-177
 - [Days' Cash on Hand Nonprofit Use Rule](active/BR-178.days-cash-on-hand-nonprofit-use-rule.md) — BR-178
-- [Petty Cash Replenishment](active/BR-179.petty-cash-replenishment.md) — BR-179
 - [Daily Cash Deposit](active/BR-180.daily-cash-deposit.md) — BR-180
 - [Separation of Cash Duties](active/BR-181.separation-of-cash-duties.md) — BR-181
 - [Write-Off Against Allowance](active/BR-182.write-off-against-allowance.md) — BR-182
@@ -205,7 +190,6 @@ status: active
 - [Construction in Progress Reclassification](active/BR-197.construction-in-progress-reclassification.md) — BR-197
 - [Goods Held for Sale Are Not Fixed Assets](active/BR-198.goods-held-for-sale-are-not-fixed-assets.md) — BR-198
 - [Lease Advantage — No Upfront Capital](active/BR-199.lease-advantage-no-upfront-capital.md) — BR-199
-- [Land Is Not Depreciated](active/BR-200.land-is-not-depreciated.md) — BR-200
 - [Depreciation Does Not Measure Market Value Decline](active/BR-201.depreciation-does-not-measure-market-value-decline.md) — BR-201
 - [Depreciation Does Not Provide Cash for Replacement](active/BR-202.depreciation-does-not-provide-cash-for-replacement.md) — BR-202
 - [Cannot Depreciate Below Residual Value](active/BR-203.cannot-depreciate-below-residual-value.md) — BR-203
@@ -240,7 +224,6 @@ status: active
 - [Separation of Duties in Payroll](active/BR-232.separation-of-duties-in-payroll.md) — BR-232
 - [Contingent Liability Recognition](active/BR-233.contingent-liability-recognition.md) — BR-233
 - [Interest-Bearing Note Accounting](active/BR-234.interest-bearing-note-accounting.md) — BR-234
-- [Discounted Note Proceeds](active/BR-235.discounted-note-proceeds.md) — BR-235
 - [Employee Withholding Requirements](active/BR-236.employee-withholding-requirements.md) — BR-236
 - [Employer Payroll Tax Obligation](active/BR-237.employer-payroll-tax-obligation.md) — BR-237
 - [Vacation Pay Accrual](active/BR-238.vacation-pay-accrual.md) — BR-238
@@ -267,7 +250,6 @@ status: active
 - [Present Value Factor Selection](active/BR-259.present-value-factor-selection.md) — BR-259
 - [Effective Interest Method Discount Amortization](active/BR-260.effective-interest-method-discount-amortization.md) — BR-260
 - [Bonds Issued at Discount When Contract Rate < Market Rate](active/BR-261.bonds-issued-at-discount-when-contract-rate-market-rate.md) — BR-261
-- [Bond Discount Amortization Increases Interest Expense](active/BR-262.bond-discount-amortization-increases-interest-expense.md) — BR-262
 - [Carrying Amount Approaches Face Value at Maturity](active/BR-263.carrying-amount-approaches-face-value-at-maturity.md) — BR-263
 - [Bond Redemption Gain or Loss Recognition](active/BR-264.bond-redemption-gain-or-loss-recognition.md) — BR-264
 - [Times Interest Earned Indicates Solvency](active/BR-265.times-interest-earned-indicates-solvency.md) — BR-265
@@ -302,7 +284,6 @@ status: active
 - [Stock Issued for Non-Cash Consideration](active/BR-294.stock-issued-for-non-cash-consideration.md) — BR-294
 - [No Par Stock with Stated Value](active/BR-295.no-par-stock-with-stated-value.md) — BR-295
 - [Treasury Stock Recorded at Cost](active/BR-296.treasury-stock-recorded-at-cost.md) — BR-296
-- [Treasury Stock Resale Loss Limited to Paid-In Capital](active/BR-297.treasury-stock-resale-loss-limited-to-paid-in-capital.md) — BR-297
 - [Retained Earnings Restrictions Disclosure](active/BR-298.retained-earnings-restrictions-disclosure.md) — BR-298
 - [Prior Period Adjustment Reported Net of Tax](active/BR-299.prior-period-adjustment-reported-net-of-tax.md) — BR-299
 - [EPS Formula](active/BR-300.eps-formula.md) — BR-300
@@ -328,7 +309,6 @@ status: active
 - [Depreciation Not in Direct Method](active/BR-320.depreciation-not-in-direct-method.md) — BR-320
 - [Cash Received from Customers Formula](active/BR-321.cash-received-from-customers-formula.md) — BR-321
 - [Cash Paid for Operating Expenses Formula](active/BR-322.cash-paid-for-operating-expenses-formula.md) — BR-322
-- [Horizontal Analysis Formula](active/BR-323.horizontal-analysis-formula.md) — BR-323
 - [Vertical Analysis Balance Sheet](active/BR-324.vertical-analysis-balance-sheet.md) — BR-324
 - [Vertical Analysis Income Statement](active/BR-325.vertical-analysis-income-statement.md) — BR-325
 - [Working Capital Formula](active/BR-326.working-capital-formula.md) — BR-326
@@ -547,14 +527,12 @@ status: active
 - [Profit Center Evaluation Across Divisions](active/BR-539.profit-center-evaluation-across-divisions.md) — BR-539
 - [ROI Calculation](active/BR-540.roi-calculation.md) — BR-540
 - [DuPont Formula Decomposition](active/BR-541.dupont-formula-decomposition.md) — BR-541
-- [Residual Income Calculation](active/BR-542.residual-income-calculation.md) — BR-542
 - [Balanced Scorecard Completeness](active/BR-543.balanced-scorecard-completeness.md) — BR-543
 - [Strategic Objective to Metric Linkage](active/BR-544.strategic-objective-to-metric-linkage.md) — BR-544
 - [Performance Metric Types](active/BR-545.performance-metric-types.md) — BR-545
 - [Strategy Map Causality](active/BR-546.strategy-map-causality.md) — BR-546
 - [Residual Income vs ROI Decision Rule](active/BR-547.residual-income-vs-roi-decision-rule.md) — BR-547
 - [Department-Specific Scorecards](active/BR-548.department-specific-scorecards.md) — BR-548
-- [Accounting Equation Equality](active/BR-549.accounting-equation-equality.md) — BR-549
 - [Revenue Recognition on Control Transfer](active/BR-550.revenue-recognition-on-control-transfer.md) — BR-550
 - [Sales Returns and Discounts Estimation](active/BR-551.sales-returns-and-discounts-estimation.md) — BR-551
 - [Depreciation of Property, Plant and Equipment](active/BR-552.depreciation-of-property-plant-and-equipment.md) — BR-552
@@ -563,8 +541,6 @@ status: active
 - [Internal Control Effectiveness Assessment](active/BR-555.internal-control-effectiveness-assessment.md) — BR-555
 - [Net Income vs. Cash Flow Reconciliation](active/BR-556.net-income-vs-cash-flow-reconciliation.md) — BR-556
 - [Fiscal Year Selection](active/BR-557.fiscal-year-selection.md) — BR-557
-- [Closing Entries to Retained Earnings](active/BR-558.closing-entries-to-retained-earnings.md) — BR-558
-- [Year-End Adjusting Entries](active/BR-559.year-end-adjusting-entries.md) — BR-559
 - [Balanced Scorecard Perspective Alignment](active/BR-560.balanced-scorecard-perspective-alignment.md) — BR-560
 - [Shipping Error Impact on Customer Retention](active/BR-561.shipping-error-impact-on-customer-retention.md) — BR-561
 - [EPS Calculation Rule](active/BR-562.eps-calculation-rule.md) — BR-562
@@ -582,10 +558,8 @@ status: active
 - [Quick Ratio Interpretation](active/BR-574.quick-ratio-interpretation.md) — BR-574
 - [Sales Discount Terms](active/BR-575.sales-discount-terms.md) — BR-575
 - [Present Value Concepts](active/BR-576.present-value-concepts.md) — BR-576
-- [Separation of Duties](active/BR-577.separation-of-duties.md) — BR-577
 - [LIFO Conformity Rule](active/BR-578.lifo-conformity-rule.md) — BR-578
 - [Break-Even Analysis Formula](active/BR-579.break-even-analysis-formula.md) — BR-579
-- [LCM Valuation Rule](active/BR-580.lcm-valuation-rule.md) — BR-580
 - [EPS Disclosure Requirement](active/BR-581.eps-disclosure-requirement.md) — BR-581
 - [Differential Analysis for Decision Making](active/BR-582.differential-analysis-for-decision-making.md) — BR-582
 - [Flexible Budget Adjustment](active/BR-583.flexible-budget-adjustment.md) — BR-583
@@ -594,16 +568,12 @@ status: active
 - [Probable and Estimable Contingent Liability Recognition](active/BR-586.probable-and-estimable-contingent-liability-recognition.md) — BR-586
 - [Probable but Not Estimable Contingent Liability Disclosure](active/BR-587.probable-but-not-estimable-contingent-liability-disclosure.md) — BR-587
 - [Prior Period Adjustment Treatment](active/BR-588.prior-period-adjustment-treatment.md) — BR-588
-- [Principle of Exceptions Application](active/BR-589.principle-of-exceptions-application.md) — BR-589
 - [Period Cost Recognition](active/BR-590.period-cost-recognition.md) — BR-590
 - [Process or Sell Differential Analysis](active/BR-591.process-or-sell-differential-analysis.md) — BR-591
 - [Price Variance Calculation](active/BR-592.price-variance-calculation.md) — BR-592
 - [P/E Ratio Calculation](active/BR-593.p-e-ratio-calculation.md) — BR-593
 - [Bond Proceeds Calculation](active/BR-594.bond-proceeds-calculation.md) — BR-594
 - [Product Cost Distortion Prevention](active/BR-595.product-cost-distortion-prevention.md) — BR-595
-
-## BC-AP (Accounts Payable)
-
 - [Bill Total Must Match Line Items](active/BR-596.bill-total-must-match-line-items.md) — BR-596
 - [Voided Bill Audit Retention](active/BR-597.voided-bill-audit-retention.md) — BR-597
 - [Payment Amount Must Match Bill Amounts](active/BR-598.payment-amount-must-match-bill-amounts.md) — BR-598
@@ -614,9 +584,6 @@ status: active
 - [Bill Approval Single Approver](active/BR-603.bill-approval-single-approver.md) — BR-603
 - [Bill Approval Dual Approvers](active/BR-604.bill-approval-dual-approvers.md) — BR-604
 - [Bill Approval Executive Approval](active/BR-605.bill-approval-executive-approval.md) — BR-605
-
-## BC-CASH (Cash & Treasury)
-
 - [Transfer Amount Must Be Positive](active/BR-606.transfer-amount-must-be-positive.md) — BR-606
 - [Transfer Source Different From Destination](active/BR-607.transfer-source-different-from-destination.md) — BR-607
 - [Completed Transfers Cannot Be Modified](active/BR-608.completed-transfers-cannot-be-modified.md) — BR-608
@@ -625,9 +592,6 @@ status: active
 - [Single Active Tolerance Policy Per Tenant](active/BR-611.single-active-tolerance-policy-per-tenant.md) — BR-611
 - [Single Active Fee Policy Per Tenant](active/BR-612.single-active-fee-policy-per-tenant.md) — BR-612
 - [Reconciliation Match Confidence Range](active/BR-613.reconciliation-match-confidence-range.md) — BR-613
-
-## BC-HR (Human Resources)
-
 - [Employee Must Belong To One Department](active/BR-614.employee-must-belong-to-one-department.md) — BR-614
 - [Employee Must Have One Designation](active/BR-615.employee-must-have-one-designation.md) — BR-615
 - [Leave Request End Date After Start Date](active/BR-616.leave-request-end-date-after-start-date.md) — BR-616
@@ -641,9 +605,6 @@ status: active
 - [Overtime Hours Capped At Maximum](active/BR-624.overtime-hours-capped-at-maximum.md) — BR-624
 - [Holiday Work Double Rate](active/BR-625.holiday-work-double-rate.md) — BR-625
 - [Salary Value Object Immutability](active/BR-626.salary-value-object-immutability.md) — BR-626
-
-## BC-REPORT (Reporting & Analytics)
-
 - [Report Must Reference Data Source](active/BR-627.report-must-reference-data-source.md) — BR-627
 - [Report Status Transition Order](active/BR-628.report-status-transition-order.md) — BR-628
 - [Archived Reports Cannot Be Modified](active/BR-629.archived-reports-cannot-be-modified.md) — BR-629
@@ -655,9 +616,6 @@ status: active
 - [Audit Log Entries Retained Indefinitely](active/BR-635.audit-log-entries-retained-indefinitely.md) — BR-635
 - [Periodic Refresh Requires Valid Interval](active/BR-636.periodic-refresh-requires-valid-interval.md) — BR-636
 - [Dashboard Valid JSON Layout](active/BR-637.dashboard-valid-json-layout.md) — BR-637
-
-## BC-PROC (Procurement)
-
 - [Vendor Must Be Qualified For Purchase Orders](active/BR-638.vendor-must-be-qualified-for-purchase-orders.md) — BR-638
 - [Suspended Vendors Cannot Receive Orders](active/BR-639.suspended-vendors-cannot-receive-orders.md) — BR-639
 - [Purchase Order Must Have Line Items](active/BR-640.purchase-order-must-have-line-items.md) — BR-640
@@ -671,9 +629,6 @@ status: active
 - [Received Date Cannot Be Before PO Date](active/BR-648.received-date-cannot-be-before-po-date.md) — BR-648
 - [PO Approval Thresholds Configurable](active/BR-649.po-approval-thresholds-configurable.md) — BR-649
 - [PO Approval Role Validation](active/BR-650.po-approval-role-validation.md) — BR-650
-
-## BC-SALES (Sales & Orders)
-
 - [Customer Credit Limit Blocks Orders](active/BR-651.customer-credit-limit-blocks-orders.md) — BR-651
 - [Suspended Customers Cannot Place Orders](active/BR-652.suspended-customers-cannot-place-orders.md) — BR-652
 - [Quotation Total Calculation](active/BR-653.quotation-total-calculation.md) — BR-653
@@ -682,3 +637,34 @@ status: active
 - [Credit Check At Least One Stage Required](active/BR-656.credit-check-at-least-one-stage-required.md) — BR-656
 - [Quotation Expiry Date After Issue Date](active/BR-657.quotation-expiry-date-after-issue-date.md) — BR-657
 - [Discount Policy Validity Period](active/BR-658.discount-policy-validity-period.md) — BR-658
+- [Invoice Number Must Be Unique](active/BR-659.invoice-number-must-be-unique.md) — BR-659
+- [Invoice Total Must Equal Sum of Line Items](active/BR-660.invoice-total-must-equal-sum-of-line-items.md) — BR-660
+- [Invoice Status Transitions Are Restricted](active/BR-661.invoice-status-transitions-are-restricted.md) — BR-661
+- [Payment Amount Must Be Positive](active/BR-662.payment-amount-must-be-positive.md) — BR-662
+- [Payment Application Must Not Exceed Invoice Balance](active/BR-663.payment-application-must-not-exceed-invoice-balance.md) — BR-663
+- [Payment Application Sum Must Equal Payment Amount](active/BR-664.payment-application-sum-must-equal-payment-amount.md) — BR-664
+- [Credit Note Must Reference Invoice](active/BR-665.credit-note-must-reference-invoice.md) — BR-665
+- [Credit Note Amount Must Be Positive](active/BR-666.credit-note-amount-must-be-positive.md) — BR-666
+- [Credit Note Amount Cannot Exceed Invoice Balance](active/BR-667.credit-note-amount-cannot-exceed-invoice-balance.md) — BR-667
+- [Customer Must Be Active to Place Orders](active/BR-668.customer-must-be-active-to-place-orders.md) — BR-668
+- [Credit Limit Check on Invoice Creation](active/BR-669.credit-limit-check-on-invoice-creation.md) — BR-669
+- [Invoice Due Date Must Be After Issue Date](active/BR-670.invoice-due-date-must-be-after-issue-date.md) — BR-670
+- [Payment Must Have Payment Method](active/BR-671.payment-must-have-payment-method.md) — BR-671
+- [Voided Invoice Cannot Be Modified](active/BR-672.voided-invoice-cannot-be-modified.md) — BR-672
+- [Aging Buckets Are Mutually Exclusive](active/BR-673.aging-buckets-are-mutually-exclusive.md) — BR-673
+- [Credit Note Status Transitions Are Restricted](active/BR-674.credit-note-status-transitions-are-restricted.md) — BR-674
+- [Invoice Line Item Quantity Must Be Positive](active/BR-675.invoice-line-item-quantity-must-be-positive.md) — BR-675
+- [Invoice Currency Must Be Valid ISO Code](active/BR-676.invoice-currency-must-be-valid-iso-code.md) — BR-676
+- [Item SKU Must Be Unique Per Tenant](active/BR-677.item-sku-must-be-unique-per-tenant.md) — BR-677
+- [Stock Quantity Cannot Go Negative Unless Configured](active/BR-678.stock-quantity-cannot-go-negative-unless-configured.md) — BR-678
+- [Stock Movement Must Reference Source Document](active/BR-679.stock-movement-must-reference-source-document.md) — BR-679
+- [Stock Movement Quantity Must Be Positive](active/BR-680.stock-movement-quantity-must-be-positive.md) — BR-680
+- [Item Must Belong to Exactly One Category](active/BR-681.item-must-belong-to-exactly-one-category.md) — BR-681
+- [Warehouse Code Must Be Unique](active/BR-682.warehouse-code-must-be-unique.md) — BR-682
+- [Stock Level Is Per Item Per Warehouse](active/BR-683.stock-level-is-per-item-per-warehouse.md) — BR-683
+- [Stock Movement Type Must Be Valid](active/BR-684.stock-movement-type-must-be-valid.md) — BR-684
+- [Reorder Point Triggers Alert](active/BR-685.reorder-point-triggers-alert.md) — BR-685
+- [Transfer Movement Creates Two Records](active/BR-686.transfer-movement-creates-two-records.md) — BR-686
+- [Item Category Cannot Be Deleted If Items Exist](active/BR-687.item-category-cannot-be-deleted-if-items-exist.md) — BR-687
+- [Stock Adjustment Requires Reason](active/BR-688.stock-adjustment-requires-reason.md) — BR-688
+- [Cost Basis Required For Outbound Movements](active/BR-689.cost-basis-required-for-outbound-movements.md) — BR-689

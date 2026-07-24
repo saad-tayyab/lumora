@@ -2,40 +2,87 @@
 title: Constraints Index
 version: 1.0.0
 status: active
-last_updated: 2026-07-24
 ---
 
-# Constraints Index
+# Constraints
 
-## BC-AUTH Constraints (6)
+## BC-AI
 
-| ID | Concept | Attribute | Type | Description |
-|----|---------|-----------|------|-------------|
-| CTR-AUTH-001 | CON-AUTH-001 (User) | email | unique | Email addresses must be unique within a tenant |
-| CTR-AUTH-002 | CON-AUTH-001 (User) | username | unique | Usernames must be unique within a tenant |
-| CTR-AUTH-003 | CON-AUTH-001 (User) | deleted_at | invariant | Soft deletion is mandatory for all user-facing entities |
-| CTR-AUTH-004 | CON-AUTH-002 (Role) | name | unique | Role names must be unique within a tenant |
-| CTR-AUTH-005 | CON-AUTH-008 (AuditLog) | id | invariant | Audit logs are append-only and must never be modified or deleted |
-| CTR-AUTH-006 | CON-AUTH-001 (User) | id | invariant | Every action must be attributable to a user or system process |
+- [CTR-AI-001.workflow-name-unique](./CTR-AI-001.workflow-name-unique.md)
+- [CTR-AI-002.workflow-step-order-required](./CTR-AI-002.workflow-step-order-required.md)
+- [CTR-AI-003.model-accuracy-range](./CTR-AI-003.model-accuracy-range.md)
+- [CTR-AI-004.prediction-confidence-range](./CTR-AI-004.prediction-confidence-range.md)
+- [CTR-AI-005.trigger-enabled-required](./CTR-AI-005.trigger-enabled-required.md)
+- [CTR-AI-006.anomaly-score-range](./CTR-AI-006.anomaly-score-range.md)
+- [CTR-AI-007.workflow-steps-required](./CTR-AI-007.workflow-steps-required.md)
+- [CTR-AI-008.model-active-unique](./CTR-AI-008.model-active-unique.md)
 
-## BC-INV Constraints (7)
+## BC-AP
 
-| ID | Concept | Attribute | Type | Description |
-|----|---------|-----------|------|-------------|
-| CTR-INV-001 | CON-INV-001 (Item) | sku | unique | SKU codes must be unique within a tenant |
-| CTR-INV-002 | CON-INV-001 (Item) | category_id | required | Items must belong to exactly one item category |
-| CTR-INV-003 | CON-INV-005 (StockLevel) | quantity_on_hand | invariant | Stock quantity cannot go negative unless explicitly allowed |
-| CTR-INV-004 | CON-INV-003 (StockMovement) | source_document_id | required | Every stock movement must reference a source document |
-| CTR-INV-005 | CON-INV-002 (ItemCategory) | code | unique | Category codes must be unique within a tenant |
-| CTR-INV-006 | CON-INV-005 (StockLevel) | composite_key | unique | StockLevel unique per item-warehouse-tenant |
-| CTR-INV-007 | CON-INV-004 (Warehouse) | code | unique | Warehouse codes must be unique within a tenant |
+- [CTR-AP-001.unique-bill-number-per-vendor](./CTR-AP-001.unique-bill-number-per-vendor.md)
+- [CTR-AP-002.three-way-matching-required](./CTR-AP-002.three-way-matching-required.md)
+- [CTR-AP-003.bill-total-must-balance](./CTR-AP-003.bill-total-must-balance.md)
+- [CTR-AP-004.line-item-requires-bill](./CTR-AP-004.line-item-requires-bill.md)
+- [CTR-AP-005.bill-must-be-approved-before-payment](./CTR-AP-005.bill-must-be-approved-before-payment.md)
+- [CTR-AP-006.payment-amount-must-equal-bill-amounts](./CTR-AP-006.payment-amount-must-equal-bill-amounts.md)
 
-## Files
+## BC-AR
 
-- [CTR-INV-001](constraints/CTR-INV-001.unique-item-sku.md)
-- [CTR-INV-002](constraints/CTR-INV-002.item-category-required.md)
-- [CTR-INV-003](constraints/CTR-INV-003.non-negative-stock.md)
-- [CTR-INV-004](constraints/CTR-INV-004.source-document-required.md)
-- [CTR-INV-005](constraints/CTR-INV-005.unique-category-code.md)
-- [CTR-INV-006](constraints/CTR-INV-006.unique-stock-level.md)
-- [CTR-INV-007](constraints/CTR-INV-007.unique-warehouse-code.md)
+- [CTR-AR-001.invoice-total-positive](./CTR-AR-001.invoice-total-positive.md)
+- [CTR-AR-002.payment-amount-positive](./CTR-AR-002.payment-amount-positive.md)
+- [CTR-AR-003.credit-note-amount-positive](./CTR-AR-003.credit-note-amount-positive.md)
+- [CTR-AR-004.payment-application-exceeds-balance](./CTR-AR-004.payment-application-exceeds-balance.md)
+- [CTR-AR-005.line-item-quantity-positive](./CTR-AR-005.line-item-quantity-positive.md)
+- [CTR-AR-006.customer-payment-terms-required](./CTR-AR-006.customer-payment-terms-required.md)
+- [CTR-AR-007.credit-limit-non-negative](./CTR-AR-007.credit-limit-non-negative.md)
+
+## BC-AUTH
+
+- [CTR-AUTH-001.unique-email-per-tenant](./CTR-AUTH-001.unique-email-per-tenant.md)
+- [CTR-AUTH-002.unique-username-per-tenant](./CTR-AUTH-002.unique-username-per-tenant.md)
+- [CTR-AUTH-003.soft-deletion-mandatory](./CTR-AUTH-003.soft-deletion-mandatory.md)
+- [CTR-AUTH-004.unique-role-name-per-tenant](./CTR-AUTH-004.unique-role-name-per-tenant.md)
+- [CTR-AUTH-005.audit-log-append-only](./CTR-AUTH-005.audit-log-append-only.md)
+- [CTR-AUTH-006.every-action-attributable](./CTR-AUTH-006.every-action-attributable.md)
+
+## BC-INV
+
+- [CTR-INV-001.unique-item-sku](./CTR-INV-001.unique-item-sku.md)
+- [CTR-INV-002.item-category-required](./CTR-INV-002.item-category-required.md)
+- [CTR-INV-003.non-negative-stock](./CTR-INV-003.non-negative-stock.md)
+- [CTR-INV-004.source-document-required](./CTR-INV-004.source-document-required.md)
+- [CTR-INV-005.unique-category-code](./CTR-INV-005.unique-category-code.md)
+- [CTR-INV-006.unique-stock-level](./CTR-INV-006.unique-stock-level.md)
+- [CTR-INV-007.unique-warehouse-code](./CTR-INV-007.unique-warehouse-code.md)
+
+## BC-PROC
+
+- [CTR-PROC-001.unique-vendor-code](./CTR-PROC-001.unique-vendor-code.md)
+- [CTR-PROC-002.unique-po-number](./CTR-PROC-002.unique-po-number.md)
+- [CTR-PROC-003.po-total-consistency](./CTR-PROC-003.po-total-consistency.md)
+- [CTR-PROC-004.received-quantity-bounds](./CTR-PROC-004.received-quantity-bounds.md)
+- [CTR-PROC-005.valid-po-status](./CTR-PROC-005.valid-po-status.md)
+
+## BC-REPORT
+
+- [CTR-REPORT-001.unique-report-name](./CTR-REPORT-001.unique-report-name.md)
+- [CTR-REPORT-002.kpi-target-required](./CTR-REPORT-002.kpi-target-required.md)
+- [CTR-REPORT-003.valid-data-source-type](./CTR-REPORT-003.valid-data-source-type.md)
+- [CTR-REPORT-004.valid-cron-expression](./CTR-REPORT-004.valid-cron-expression.md)
+- [CTR-REPORT-005.dashboard-title-required](./CTR-REPORT-005.dashboard-title-required.md)
+
+## BC-SALES
+
+- [CTR-SALES-001](./CTR-SALES-001.md)
+- [CTR-SALES-002](./CTR-SALES-002.md)
+- [CTR-SALES-003](./CTR-SALES-003.md)
+- [CTR-SALES-004](./CTR-SALES-004.md)
+- [CTR-SALES-005](./CTR-SALES-005.md)
+- [CTR-SALES-006](./CTR-SALES-006.md)
+- [CTR-SALES-007](./CTR-SALES-007.md)
+- [CTR-SALES-008](./CTR-SALES-008.md)
+- [CTR-SALES-009](./CTR-SALES-009.md)
+- [CTR-SALES-010](./CTR-SALES-010.md)
+- [CTR-SALES-011](./CTR-SALES-011.md)
+- [CTR-SALES-012](./CTR-SALES-012.md)
+

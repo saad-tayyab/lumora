@@ -63,6 +63,7 @@ export const bills = pgTable(
   'bills',
   {
     ...auditFields,
+    ...tenantFields,
     ...createdByFields,
     ...softDeleteFields,
     vendorId: uuid('vendor_id')

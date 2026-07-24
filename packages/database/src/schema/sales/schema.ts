@@ -11,8 +11,10 @@ import {
 } from 'drizzle-orm/pg-core';
 import { createInsertSchema, createSelectSchema, createUpdateSchema } from 'drizzle-orm/zod';
 
-import { auditFields, softDeleteFields } from '../common/audit';
+import { auditFields, softDeleteFields, tenantFields } from '../common/audit';
 import { generateUUIDv7 } from '../common/uuid';
+import { customers } from '../ar/schema';
+import { items } from '../inv/schema';
 
 export const salesOrderStatusEnum = pgEnum('sales_order_status', [
   'draft',
@@ -37,9 +39,10 @@ export const salesOrders = pgTable(
   'sales_orders',
   {
     ...auditFields,
+    ...tenantFields,
     ...softDeleteFields,
     orderNumber: varchar('order_number', { length: 50 }).notNull().unique(),
-    customerId: uuid('customer_id').notNull(),
+    customerId: uuid('customer_id').notNull().references(() => customers.id),
     status: salesOrderStatusEnum('status').notNull().default('draft'),
     orderDate: date('order_date').notNull(),
     expectedDeliveryDate: date('expected_delivery_date'),
@@ -61,10 +64,11 @@ export const salesOrderLineItems = pgTable(
   'sales_order_line_items',
   {
     id: uuid('id').primaryKey().$defaultFn(() => generateUUIDv7()),
+    ...tenantFields,
     salesOrderId: uuid('sales_order_id')
       .notNull()
       .references(() => salesOrders.id, { onDelete: 'cascade' }),
-    itemId: uuid('item_id').notNull(),
+    itemId: uuid('item_id').notNull().references(() => items.id),
     description: varchar('description', { length: 500 }),
     quantity: decimal('quantity', { precision: 12, scale: 2 }).notNull().default('1'),
     unitPrice: decimal('unit_price', { precision: 19, scale: 4 }).notNull().default('0'),
@@ -86,9 +90,10 @@ export const quotations = pgTable(
   'quotations',
   {
     ...auditFields,
+    ...tenantFields,
     ...softDeleteFields,
     quotationNumber: varchar('quotation_number', { length: 50 }).notNull().unique(),
-    customerId: uuid('customer_id').notNull(),
+    customerId: uuid('customer_id').notNull().references(() => customers.id),
     status: quotationStatusEnum('status').notNull().default('draft'),
     issueDate: date('issue_date').notNull(),
     expiryDate: date('expiry_date').notNull(),
@@ -111,10 +116,11 @@ export const quotationLineItems = pgTable(
   'quotation_line_items',
   {
     id: uuid('id').primaryKey().$defaultFn(() => generateUUIDv7()),
+    ...tenantFields,
     quotationId: uuid('quotation_id')
       .notNull()
       .references(() => quotations.id, { onDelete: 'cascade' }),
-    itemId: uuid('item_id').notNull(),
+    itemId: uuid('item_id').notNull().references(() => items.id),
     description: varchar('description', { length: 500 }),
     quantity: decimal('quantity', { precision: 12, scale: 2 }).notNull().default('1'),
     unitPrice: decimal('unit_price', { precision: 19, scale: 4 }).notNull().default('0'),
@@ -136,6 +142,7 @@ export const discountPolicies = pgTable(
   'discount_policies',
   {
     ...auditFields,
+    ...tenantFields,
     ...softDeleteFields,
     name: varchar('name', { length: 100 }).notNull(),
     type: varchar('type', { length: 20 }).notNull(),
@@ -144,7 +151,7 @@ export const discountPolicies = pgTable(
     maxDiscountAmount: decimal('max_discount_amount', { precision: 19, scale: 4 }),
     validFrom: date('valid_from').notNull(),
     validUntil: date('valid_until'),
-    customerId: uuid('customer_id'),
+    customerId: uuid('customer_id').references(() => customers.id),
   },
   (table) => [
     index('idx_discount_policies_customer_id').on(table.customerId),

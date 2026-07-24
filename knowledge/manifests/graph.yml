@@ -1,25 +1,14 @@
 ---
 manifest: graph
 version: 1.0.0
-last_updated: 2026-07-24
-statistics:
-  total_nodes: 1834
-  total_edges: 0
-  by_type:
-    concepts: 624
-    rules: 595
-    glossary: 614
-    workflows: 0
-    reports: 1
-  by_context:
-    BC-FIN: 1834
-    BC-AUTH: 0
-    BC-AR: 0
-    BC-AP: 0
-    BC-CASH: 0
-    BC-INV: 0
-    BC-PROC: 0
-    BC-SALES: 0
-    BC-HR: 0
-    BC-REPORT: 0
-    BC-AI: 0
+last_updated: 2026-07-25
+nodes: 784
+edges: 84
+contexts: 11
+node_types:
+  entity: 203
+  aggregate: 77
+  value_object: 251
+  event: 75
+  command: 57
+  policy: 109

@@ -13,6 +13,9 @@ import {
 import { createInsertSchema, createSelectSchema, createUpdateSchema } from 'drizzle-orm/zod';
 
 import { auditFields, createdByFields, softDeleteFields, tenantFields } from '../common/audit';
+import { vendors } from '../ap/schema';
+import { items, warehouses } from '../inv/schema';
+import { employees } from '../hr/schema';
 
 // ─── Enums ────────────────────────────────────────────────────────────────────
 
@@ -41,7 +44,7 @@ export const purchaseOrders = pgTable(
     ...tenantFields,
     ...softDeleteFields,
     poNumber: varchar('po_number', { length: 30 }).notNull().unique(),
-    vendorId: uuid('vendor_id').notNull(),
+    vendorId: uuid('vendor_id').notNull().references(() => vendors.id),
     status: poStatusEnum('status').notNull().default('draft'),
     orderDate: date('order_date').notNull(),
     expectedDeliveryDate: date('expected_delivery_date'),
@@ -58,7 +61,7 @@ export const purchaseOrders = pgTable(
     paymentTerms: varchar('payment_terms', { length: 50 }).notNull(),
     notes: text('notes'),
     ...createdByFields,
-    approvedBy: uuid('approved_by'),
+    approvedBy: uuid('approved_by').references(() => employees.id),
     approvedAt: timestamp('approved_at'),
   },
   (table) => [
@@ -76,7 +79,7 @@ export const poLineItems = pgTable(
       .notNull()
       .references(() => purchaseOrders.id, { onDelete: 'cascade' }),
     lineNumber: integer('line_number').notNull(),
-    itemId: uuid('item_id').notNull(),
+    itemId: uuid('item_id').notNull().references(() => items.id),
     description: varchar('description', { length: 500 }).notNull(),
     quantity: decimal('quantity', { precision: 19, scale: 4 }).notNull().default('1'),
     unitOfMeasure: varchar('unit_of_measure', { length: 20 }).notNull(),
@@ -105,10 +108,10 @@ export const receivingReports = pgTable(
     poId: uuid('po_id')
       .notNull()
       .references(() => purchaseOrders.id),
-    vendorId: uuid('vendor_id').notNull(),
+    vendorId: uuid('vendor_id').notNull().references(() => vendors.id),
     receivedDate: date('received_date').notNull(),
-    receivedBy: uuid('received_by').notNull(),
-    warehouseId: uuid('warehouse_id').notNull(),
+    receivedBy: uuid('received_by').notNull().references(() => employees.id),
+    warehouseId: uuid('warehouse_id').notNull().references(() => warehouses.id),
     status: receivingReportStatusEnum('status').notNull().default('draft'),
     notes: text('notes'),
   },
@@ -124,9 +127,9 @@ export const vendorCatalogItems = pgTable(
   {
     ...auditFields,
     ...softDeleteFields,
-    vendorId: uuid('vendor_id').notNull(),
+    vendorId: uuid('vendor_id').notNull().references(() => vendors.id),
     vendorItemCode: varchar('vendor_item_code', { length: 50 }).notNull(),
-    internalItemId: uuid('internal_item_id'),
+    internalItemId: uuid('internal_item_id').references(() => items.id),
     description: varchar('description', { length: 500 }).notNull(),
     unitPrice: decimal('unit_price', { precision: 19, scale: 4 }).notNull().default('0'),
     currency: varchar('currency', { length: 3 }).notNull().default('USD'),

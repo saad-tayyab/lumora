@@ -6,6 +6,7 @@ import {
   pgEnum,
   pgTable,
   timestamp,
+  unique,
   uniqueIndex,
   uuid,
   varchar,
@@ -156,6 +157,7 @@ export const stockLevels = pgTable(
     lastMovementAt: timestamp('last_movement_at'),
   },
   (table) => [
+    unique('stock_levels_item_id_warehouse_id_unique').on(table.itemId, table.warehouseId),
     index('idx_stock_levels_tenant_id').on(table.tenantId),
     index('idx_stock_levels_item_id').on(table.itemId),
     index('idx_stock_levels_warehouse_id').on(table.warehouseId),

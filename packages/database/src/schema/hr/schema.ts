@@ -13,7 +13,7 @@ import {
   varchar,
 } from 'drizzle-orm/pg-core';
 import { createInsertSchema, createSelectSchema, createUpdateSchema } from 'drizzle-orm/zod';
-import { auditFields, softDeleteFields } from '../common/audit';
+import { auditFields, softDeleteFields, tenantFields } from '../common/audit';
 import { generateUUIDv7 } from '../common/uuid';
 
 // ─── Enums ────────────────────────────────────────────────────────────────────
@@ -53,6 +53,7 @@ export const departments = pgTable(
   'departments',
   {
     ...auditFields,
+    ...tenantFields,
     ...softDeleteFields,
     name: varchar('name', { length: 100 }).notNull(),
     code: varchar('code', { length: 20 }).notNull().unique(),
@@ -74,6 +75,7 @@ export const designations = pgTable(
   'designations',
   {
     ...auditFields,
+    ...tenantFields,
     ...softDeleteFields,
     name: varchar('name', { length: 100 }).notNull(),
     code: varchar('code', { length: 20 }).notNull().unique(),
@@ -91,6 +93,7 @@ export const employees = pgTable(
   'employees',
   {
     ...auditFields,
+    ...tenantFields,
     ...softDeleteFields,
     userId: uuid('user_id').unique(),
     firstName: varchar('first_name', { length: 100 }).notNull(),
@@ -123,6 +126,7 @@ export const attendance = pgTable(
   'attendance',
   {
     id: uuid('id').primaryKey().$defaultFn(() => generateUUIDv7()),
+    ...tenantFields,
     employeeId: uuid('employee_id')
       .notNull()
       .references(() => employees.id),
@@ -148,6 +152,7 @@ export const leaveTypes = pgTable(
   'leave_types',
   {
     ...auditFields,
+    ...tenantFields,
     ...softDeleteFields,
     name: varchar('name', { length: 50 }).notNull(),
     code: varchar('code', { length: 20 }).notNull().unique(),
@@ -162,6 +167,7 @@ export const leaveRequests = pgTable(
   'leave_requests',
   {
     ...auditFields,
+    ...tenantFields,
     ...softDeleteFields,
     employeeId: uuid('employee_id')
       .notNull()
@@ -190,6 +196,7 @@ export const salaries = pgTable(
   'salaries',
   {
     ...auditFields,
+    ...tenantFields,
     ...softDeleteFields,
     employeeId: uuid('employee_id')
       .notNull()
@@ -211,6 +218,7 @@ export const payroll = pgTable(
   'payroll',
   {
     ...auditFields,
+    ...tenantFields,
     ...softDeleteFields,
     employeeId: uuid('employee_id')
       .notNull()
