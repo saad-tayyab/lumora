@@ -4,7 +4,7 @@ aliases:
   - Net Book Value
   - Carrying Value
   - Carrying Amount
-context: BC-FIN
+context: BC-ASSET
 category: accounting
 version: 1.0.0
 status: active

@@ -3,7 +3,7 @@ term: PP&E
 aliases:
   - Property, Plant and Equipment
   - Fixed Assets
-context: BC-FIN
+context: BC-ASSET
 category: acronym
 version: 1.0.0
 status: active

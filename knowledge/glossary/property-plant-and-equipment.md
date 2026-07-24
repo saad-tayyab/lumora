@@ -3,7 +3,7 @@ term: Property Plant and Equipment
 aliases:
   - fixed assets
   - long-lived assets
-context: BC-FIN
+context: BC-ASSET
 category: domain
 version: 1.0.0
 status: active

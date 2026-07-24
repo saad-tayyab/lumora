@@ -1,9 +1,9 @@
 # Database Generation Prompt
 
 > **Prompt ID:** PR-008  
-> **Version:** 2.1.0  
+> **Version:** 2.2.0  
 > **Agent:** Code Agent  
-> **Updated:** 2026-07-24
+> **Updated:** 2026-07-25
 
 ---
 

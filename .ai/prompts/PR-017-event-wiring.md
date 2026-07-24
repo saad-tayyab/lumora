@@ -1,7 +1,7 @@
 # Event Wiring Prompt
 
 > **Prompt ID:** PR-017  
-> **Version:** 1.0.0  
+> **Version:** 1.1.0  
 > **Agent:** Code Agent  
 > **Updated:** 2026-07-25
 
@@ -21,7 +21,7 @@ You are the Staff Software Engineer for the Lumora ERP system.
 
 # CONTEXT
 You are implementing domain event handlers that connect bounded contexts.
-Events are defined in knowledge/constitution/DOMAIN.md Section 7 (EVT-001 through EVT-006).
+Events are defined in knowledge/constitution/DOMAIN.md Section 7 (EVT-001 through EVT-012).
 Cross-context communication happens through domain events only (INV-CROSS-002).
 
 # INSTRUCTIONS
@@ -76,6 +76,40 @@ Cross-context communication happens through domain events only (INV-CROSS-002).
    - Publisher: BC-FIN (services/backend/src/features/financial/events/)
    - Subscriber: BC-REPORT — Update report aggregations and dashboards
    - Payload: EntryID, Period
+
+### EVT-007: DepreciationPosted
+   - Publisher: BC-ASSET (services/backend/src/features/asset/events/)
+   - Subscriber: BC-FIN — Create journal entry (debit Depreciation Expense, credit Accumulated Depreciation)
+   - Subscriber: BC-REPORT — Update asset reports
+   - Payload: AssetID, PeriodID, Amount
+
+### EVT-008: AssetDisposed
+   - Publisher: BC-ASSET (services/backend/src/features/asset/events/)
+   - Subscriber: BC-FIN — Create journal entry for gain/loss on disposal
+   - Payload: AssetID, Proceeds, GainLoss
+
+### EVT-009: TaxRateCreated
+   - Publisher: BC-TAX (services/backend/src/features/tax/events/)
+   - Subscriber: BC-FIN — Update tax configuration
+   - Payload: TaxCodeID, Rate, EffectiveDate
+
+### EVT-010: BudgetExceeded
+   - Publisher: BC-BUDGET (services/backend/src/features/budget/events/)
+   - Subscriber: BC-REPORT — Update budget variance reports
+   - Subscriber: BC-AI — Trigger anomaly detection
+   - Payload: BudgetLineID, Threshold, Actual
+
+### EVT-011: AuditLogCreated
+   - Publisher: BC-AUDIT (services/backend/src/features/audit/events/)
+   - Subscriber: BC-REPORT — Update compliance reports
+   - Payload: EntityType, EntityID, Action
+
+### EVT-012: PeriodClosed
+   - Publisher: BC-FIN (services/backend/src/features/financial/events/)
+   - Subscriber: BC-ASSET — Trigger depreciation run for closed period
+   - Subscriber: BC-BUDGET — Close budget period
+   - Subscriber: BC-REPORT — Update period reports
+   - Payload: PeriodID, ClosedBy
 
 ## 5. Quality
 5. Run Biome check

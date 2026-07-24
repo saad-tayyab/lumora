@@ -4,7 +4,7 @@ aliases:
   - Property, Plant, and Equipment
   - PP&E
   - Long-Term Operating Assets
-context: BC-FIN
+context: BC-ASSET
 category: domain
 version: 1.0.0
 status: active

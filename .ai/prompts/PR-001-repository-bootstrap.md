@@ -43,7 +43,7 @@ Must enforce: DDD bounded contexts, Clean Architecture layers, Feature-First org
 
 ## 3. DDD Bounded Context Directories (ARC-1)
 6. Create bounded context directories under services/backend/src/features/:
-   - For each context in DOMAIN.md Section 3 (BC-AUTH, BC-FIN, BC-AR, BC-AP, BC-CASH, BC-INV, BC-PROC, BC-SALES, BC-HR, BC-REPORT, BC-AI):
+   - For each context in DOMAIN.md Section 3 (BC-AUTH, BC-FIN, BC-AR, BC-AP, BC-CASH, BC-INV, BC-PROC, BC-SALES, BC-HR, BC-REPORT, BC-AI, BC-ASSET, BC-TAX, BC-BUDGET, BC-AUDIT):
      a. Create context directory
      b. Create aggregate subdirectories within each context
      c. Create entity, value object, domain event directories

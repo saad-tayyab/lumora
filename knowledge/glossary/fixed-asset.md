@@ -5,7 +5,7 @@ aliases:
   - PP&E
   - Long-Lived Asset
   - Tangible Asset
-context: BC-FIN
+context: BC-ASSET
 category: accounting
 version: 1.0.0
 status: active

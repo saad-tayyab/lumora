@@ -180,3 +180,39 @@ graph LR
   CON-FIN-130 --> CON-FIN-136
   CON-FIN-133 -.-> CON-FIN-132
   CON-FIN-134 --> CON-FIN-135
+
+  CON-ASSET-001["Fixed Asset Register"]
+  CON-ASSET-002["Asset Acquisition"]
+  CON-ASSET-003["Depreciation Schedule"]
+  CON-ASSET-004["Depreciation Entry"]
+  CON-ASSET-005["Asset Adjustment"]
+  CON-ASSET-006["Asset Disposal"]
+  CON-ASSET-007["Asset Category"]
+  CON-ASSET-008["Capex Allocation"]
+  CON-TAX-001["Tax Code"]
+  CON-TAX-002["Tax Rate Version"]
+  CON-TAX-003["Tax Rule"]
+  CON-TAX-004["Tax Transaction"]
+  CON-TAX-005["Tax Liability"]
+  CON-BUDGET-001["Budget Header"]
+  CON-BUDGET-002["Budget Line"]
+  CON-BUDGET-003["Budget Consumption"]
+  CON-BUDGET-004["Budget Variance"]
+  CON-BUDGET-005["Budget Period"]
+  CON-AUDIT-001["Audit Log"]
+  CON-AUDIT-002["Audit Log Entry"]
+  CON-AUDIT-003["Entity Change Snapshot"]
+
+  CON-ASSET-001 --> CON-ASSET-002
+  CON-ASSET-001 --> CON-ASSET-003
+  CON-ASSET-003 --> CON-ASSET-004
+  CON-ASSET-004 --> CON-FIN-011
+  CON-ASSET-006 --> CON-ASSET-001
+  CON-TAX-001 --> CON-TAX-002
+  CON-TAX-001 --> CON-FIN-001
+  CON-TAX-004 --> CON-TAX-001
+  CON-BUDGET-001 --> CON-BUDGET-002
+  CON-BUDGET-002 --> CON-BUDGET-003
+  CON-BUDGET-002 --> CON-FIN-001
+  CON-AUDIT-001 --> CON-AUDIT-002
+  CON-AUDIT-002 --> CON-AUTH-001

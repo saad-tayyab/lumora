@@ -3,7 +3,7 @@ term: Useful Life
 aliases:
   - Estimated Useful Life
   - Service Life
-context: BC-FIN
+context: BC-ASSET
 category: accounting
 version: 1.0.0
 status: active

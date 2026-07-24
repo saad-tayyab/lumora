@@ -11597,5 +11597,191 @@ nodes:
     context: BC-FIN
     category: domain
     file: knowledge/glossary/zero-based-budgeting.md
+  # BC-ASSET concepts
+  - id: CON-ASSET-001
+    name: "Fixed Asset Register"
+    type: concept
+    context: BC-ASSET
+    concept_type: aggregate
+    file: knowledge/ontology/contexts/BC-ASSET/CON-ASSET-001.fixed-asset-register.md
+  - id: CON-ASSET-002
+    name: "Asset Acquisition"
+    type: concept
+    context: BC-ASSET
+    concept_type: event
+    file: knowledge/ontology/contexts/BC-ASSET/CON-ASSET-002.asset-acquisition.md
+  - id: CON-ASSET-003
+    name: "Depreciation Schedule"
+    type: concept
+    context: BC-ASSET
+    concept_type: entity
+    file: knowledge/ontology/contexts/BC-ASSET/CON-ASSET-003.depreciation-schedule.md
+  - id: CON-ASSET-004
+    name: "Depreciation Entry"
+    type: concept
+    context: BC-ASSET
+    concept_type: entity
+    file: knowledge/ontology/contexts/BC-ASSET/CON-ASSET-004.depreciation-entry.md
+  - id: CON-ASSET-005
+    name: "Asset Adjustment"
+    type: concept
+    context: BC-ASSET
+    concept_type: entity
+    file: knowledge/ontology/contexts/BC-ASSET/CON-ASSET-005.asset-adjustment.md
+  - id: CON-ASSET-006
+    name: "Asset Disposal"
+    type: concept
+    context: BC-ASSET
+    concept_type: event
+    file: knowledge/ontology/contexts/BC-ASSET/CON-ASSET-006.asset-disposal.md
+  - id: CON-ASSET-007
+    name: "Asset Category"
+    type: concept
+    context: BC-ASSET
+    concept_type: value_object
+    file: knowledge/ontology/contexts/BC-ASSET/CON-ASSET-007.asset-category.md
+  - id: CON-ASSET-008
+    name: "Capex Allocation"
+    type: concept
+    context: BC-ASSET
+    concept_type: entity
+    file: knowledge/ontology/contexts/BC-ASSET/CON-ASSET-008.capex-allocation.md
+  # BC-TAX concepts
+  - id: CON-TAX-001
+    name: "Tax Code"
+    type: concept
+    context: BC-TAX
+    concept_type: aggregate
+    file: knowledge/ontology/contexts/BC-TAX/CON-TAX-001.tax-code.md
+  - id: CON-TAX-002
+    name: "Tax Rate Version"
+    type: concept
+    context: BC-TAX
+    concept_type: value_object
+    file: knowledge/ontology/contexts/BC-TAX/CON-TAX-002.tax-rate-version.md
+  - id: CON-TAX-003
+    name: "Tax Rule"
+    type: concept
+    context: BC-TAX
+    concept_type: entity
+    file: knowledge/ontology/contexts/BC-TAX/CON-TAX-003.tax-rule.md
+  - id: CON-TAX-004
+    name: "Tax Transaction"
+    type: concept
+    context: BC-TAX
+    concept_type: entity
+    file: knowledge/ontology/contexts/BC-TAX/CON-TAX-004.tax-transaction.md
+  - id: CON-TAX-005
+    name: "Tax Liability"
+    type: concept
+    context: BC-TAX
+    concept_type: entity
+    file: knowledge/ontology/contexts/BC-TAX/CON-TAX-005.tax-liability.md
+  # BC-BUDGET concepts
+  - id: CON-BUDGET-001
+    name: "Budget Header"
+    type: concept
+    context: BC-BUDGET
+    concept_type: aggregate
+    file: knowledge/ontology/contexts/BC-BUDGET/CON-BUDGET-001.budget-header.md
+  - id: CON-BUDGET-002
+    name: "Budget Line"
+    type: concept
+    context: BC-BUDGET
+    concept_type: entity
+    file: knowledge/ontology/contexts/BC-BUDGET/CON-BUDGET-002.budget-line.md
+  - id: CON-BUDGET-003
+    name: "Budget Consumption"
+    type: concept
+    context: BC-BUDGET
+    concept_type: entity
+    file: knowledge/ontology/contexts/BC-BUDGET/CON-BUDGET-003.budget-consumption.md
+  - id: CON-BUDGET-004
+    name: "Budget Variance"
+    type: concept
+    context: BC-BUDGET
+    concept_type: value_object
+    file: knowledge/ontology/contexts/BC-BUDGET/CON-BUDGET-004.budget-variance.md
+  - id: CON-BUDGET-005
+    name: "Budget Period"
+    type: concept
+    context: BC-BUDGET
+    concept_type: value_object
+    file: knowledge/ontology/contexts/BC-BUDGET/CON-BUDGET-005.budget-period.md
+  # BC-AUDIT concepts
+  - id: CON-AUDIT-001
+    name: "Audit Log"
+    type: concept
+    context: BC-AUDIT
+    concept_type: aggregate
+    file: knowledge/ontology/contexts/BC-AUDIT/CON-AUDIT-001.audit-log.md
+  - id: CON-AUDIT-002
+    name: "Audit Log Entry"
+    type: concept
+    context: BC-AUDIT
+    concept_type: entity
+    file: knowledge/ontology/contexts/BC-AUDIT/CON-AUDIT-002.audit-log-entry.md
+  - id: CON-AUDIT-003
+    name: "Entity Change Snapshot"
+    type: concept
+    context: BC-AUDIT
+    concept_type: value_object
+    file: knowledge/ontology/contexts/BC-AUDIT/CON-AUDIT-003.entity-change-snapshot.md
 
-edges: []
+edges:
+  # BC-ASSET edges
+  - source: CON-ASSET-001
+    target: CON-ASSET-002
+    type: has-many
+    description: "An asset is created through an acquisition event"
+  - source: CON-ASSET-001
+    target: CON-ASSET-003
+    type: has-many
+    description: "Each asset has one depreciation schedule"
+  - source: CON-ASSET-003
+    target: CON-ASSET-004
+    type: has-many
+    description: "A schedule produces multiple depreciation entries"
+  - source: CON-ASSET-004
+    target: CON-FIN-011
+    type: uses
+    description: "Depreciation entries post to journal entries"
+  - source: CON-ASSET-006
+    target: CON-ASSET-001
+    type: triggers
+    description: "Disposal removes asset from active register"
+  # BC-TAX edges
+  - source: CON-TAX-001
+    target: CON-TAX-002
+    type: has-many
+    description: "Tax codes have multiple rate versions"
+  - source: CON-TAX-001
+    target: CON-FIN-001
+    type: uses
+    description: "Tax codes link to GL accounts"
+  - source: CON-TAX-004
+    target: CON-TAX-001
+    type: uses
+    description: "Tax transactions reference tax codes"
+  # BC-BUDGET edges
+  - source: CON-BUDGET-001
+    target: CON-BUDGET-002
+    type: has-many
+    description: "Budget headers contain multiple budget lines"
+  - source: CON-BUDGET-002
+    target: CON-BUDGET-003
+    type: has-many
+    description: "Budget lines track consumption records"
+  - source: CON-BUDGET-002
+    target: CON-FIN-001
+    type: uses
+    description: "Budget lines are allocated per GL account"
+  # BC-AUDIT edges
+  - source: CON-AUDIT-001
+    target: CON-AUDIT-002
+    type: has-many
+    description: "Audit log contains multiple entries"
+  - source: CON-AUDIT-002
+    target: CON-AUTH-001
+    type: uses
+    description: "Audit entries reference the performing user"

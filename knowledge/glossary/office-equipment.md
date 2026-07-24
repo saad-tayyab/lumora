@@ -2,7 +2,7 @@
 term: Office Equipment
 aliases:
   - Administrative Equipment
-context: BC-FIN
+context: BC-ASSET
 category: accounting
 version: 1.0.0
 status: active

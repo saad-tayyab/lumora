@@ -2,7 +2,7 @@
 term: Double-Declining-Balance Depreciation
 aliases:
   - DDB
-context: BC-FIN
+context: BC-ASSET
 category: domain
 version: 1.0.0
 status: active

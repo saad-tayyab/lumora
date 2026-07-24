@@ -1,8 +1,9 @@
 # Backend Generation Prompt
 
 > **Prompt ID:** PR-011  
-> **Version:** 3.0.0  
-> **Agent:** Code Agent
+> **Version:** 3.1.0  
+> **Agent:** Code Agent  
+> **Updated:** 2026-07-25
 
 ---
 
@@ -16,9 +17,9 @@ Generate Encore.ts backend services including API endpoints, service layer, and 
 
 | Variable | Meaning | Mapping |
 |----------|---------|---------|
-| `{CONTEXT}` | Directory-level context name (lowercase) | `ar`, `financial`, `inv`, `ap`, `cash`, `auth`, `hr`, `proc`, `sales`, `report`, `ai` |
-| `{CTX}` | Uppercase bounded context prefix | `AR`, `FIN`, `INV`, `AP`, `CASH`, `AUTH`, `HR`, `PROC`, `SALES`, `REPORT`, `AI` |
-| `{BC-ID}` | Bounded context ID from DOMAIN.md | `BC-AR`, `BC-FIN`, `BC-INV`, `BC-AP`, `BC-CASH`, `BC-AUTH`, `BC-HR`, `BC-PROC`, `BC-SALES`, `BC-REPORT`, `BC-AI` |
+| `{CONTEXT}` | Directory-level context name (lowercase) | `ar`, `financial`, `inv`, `ap`, `cash`, `auth`, `hr`, `proc`, `sales`, `report`, `ai`, `asset`, `tax`, `budget`, `audit` |
+| `{CTX}` | Uppercase bounded context prefix | `AR`, `FIN`, `INV`, `AP`, `CASH`, `AUTH`, `HR`, `PROC`, `SALES`, `REPORT`, `AI`, `ASSET`, `TAX`, `BUDGET`, `AUDIT` |
+| `{BC-ID}` | Bounded context ID from DOMAIN.md | `BC-AR`, `BC-FIN`, `BC-INV`, `BC-AP`, `BC-CASH`, `BC-AUTH`, `BC-HR`, `BC-PROC`, `BC-SALES`, `BC-REPORT`, `BC-AI`, `BC-ASSET`, `BC-TAX`, `BC-BUDGET`, `BC-AUDIT` |
 
 Example: For Accounts Receivable → `{CONTEXT}` = `ar`, `{CTX}` = `AR`, `{BC-ID}` = `BC-AR`.
 

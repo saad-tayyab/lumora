@@ -9,7 +9,7 @@ last_updated: 2026-07-24
 
 ## BC-FIN Concepts (624)
 
-> **Total Ontology Concepts: 784** (BC-FIN: 624 + BC-AUTH: 17 + BC-AR: 17 + BC-AP: 14 + BC-CASH: 16 + BC-INV: 17 + BC-PROC: 14 + BC-SALES: 16 + BC-HR: 18 + BC-REPORT: 15 + BC-AI: 16)
+> **Total Ontology Concepts: 815** (BC-FIN: 624 + BC-AUTH: 17 + BC-AR: 17 + BC-AP: 14 + BC-CASH: 16 + BC-INV: 17 + BC-PROC: 14 + BC-SALES: 16 + BC-HR: 18 + BC-REPORT: 15 + BC-AI: 16 + BC-ASSET: 8 + BC-TAX: 5 + BC-BUDGET: 5 + BC-AUDIT: 3)
 
 - [Accounting Equation Solving](contexts/BC-FIN/CON-FIN-001.accounting-equation-solving.md) — CON-FIN-001
 - [Asset](contexts/BC-FIN/CON-FIN-002.asset.md) — CON-FIN-002
@@ -1437,3 +1437,44 @@ last_updated: 2026-07-24
 - [AcceptQuotation](contexts/BC-SALES/CON-SALES-014.accept-quotation.md) — CON-SALES-014
 - [QuotationExpiryPolicy](contexts/BC-SALES/CON-SALES-015.quotation-expiry-policy.md) — CON-SALES-015
 - [CreditCheckPolicy](contexts/BC-SALES/CON-SALES-016.credit-check-policy.md) — CON-SALES-016
+
+---
+
+## BC-ASSET Concepts (8)
+
+- [Fixed Asset Register](contexts/BC-ASSET/CON-ASSET-001.fixed-asset-register.md) — CON-ASSET-001
+- [Asset Acquisition](contexts/BC-ASSET/CON-ASSET-002.asset-acquisition.md) — CON-ASSET-002
+- [Depreciation Schedule](contexts/BC-ASSET/CON-ASSET-003.depreciation-schedule.md) — CON-ASSET-003
+- [Depreciation Entry](contexts/BC-ASSET/CON-ASSET-004.depreciation-entry.md) — CON-ASSET-004
+- [Asset Adjustment](contexts/BC-ASSET/CON-ASSET-005.asset-adjustment.md) — CON-ASSET-005
+- [Asset Disposal](contexts/BC-ASSET/CON-ASSET-006.asset-disposal.md) — CON-ASSET-006
+- [Asset Category](contexts/BC-ASSET/CON-ASSET-007.asset-category.md) — CON-ASSET-007
+- [Capex Allocation](contexts/BC-ASSET/CON-ASSET-008.capex-allocation.md) — CON-ASSET-008
+
+---
+
+## BC-TAX Concepts (5)
+
+- [Tax Code](contexts/BC-TAX/CON-TAX-001.tax-code.md) — CON-TAX-001
+- [Tax Rate Version](contexts/BC-TAX/CON-TAX-002.tax-rate-version.md) — CON-TAX-002
+- [Tax Rule](contexts/BC-TAX/CON-TAX-003.tax-rule.md) — CON-TAX-003
+- [Tax Transaction](contexts/BC-TAX/CON-TAX-004.tax-transaction.md) — CON-TAX-004
+- [Tax Liability](contexts/BC-TAX/CON-TAX-005.tax-liability.md) — CON-TAX-005
+
+---
+
+## BC-BUDGET Concepts (5)
+
+- [Budget Header](contexts/BC-BUDGET/CON-BUDGET-001.budget-header.md) — CON-BUDGET-001
+- [Budget Line](contexts/BC-BUDGET/CON-BUDGET-002.budget-line.md) — CON-BUDGET-002
+- [Budget Consumption](contexts/BC-BUDGET/CON-BUDGET-003.budget-consumption.md) — CON-BUDGET-003
+- [Budget Variance](contexts/BC-BUDGET/CON-BUDGET-004.budget-variance.md) — CON-BUDGET-004
+- [Budget Period](contexts/BC-BUDGET/CON-BUDGET-005.budget-period.md) — CON-BUDGET-005
+
+---
+
+## BC-AUDIT Concepts (3)
+
+- [Audit Log](contexts/BC-AUDIT/CON-AUDIT-001.audit-log.md) — CON-AUDIT-001
+- [Audit Log Entry](contexts/BC-AUDIT/CON-AUDIT-002.audit-log-entry.md) — CON-AUDIT-002
+- [Entity Change Snapshot](contexts/BC-AUDIT/CON-AUDIT-003.entity-change-snapshot.md) — CON-AUDIT-003

@@ -2,7 +2,7 @@
 term: Store Equipment
 aliases:
   - Retail Equipment
-context: BC-FIN
+context: BC-ASSET
 category: accounting
 version: 1.0.0
 status: active

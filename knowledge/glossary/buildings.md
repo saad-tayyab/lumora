@@ -2,7 +2,7 @@
 term: Buildings
 aliases:
   - Structures
-context: BC-FIN
+context: BC-ASSET
 category: accounting
 version: 1.0.0
 status: active

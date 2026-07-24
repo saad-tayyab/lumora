@@ -1,8 +1,8 @@
 # Domain Constitution
 
 > **Status:** Active  
-> **Version:** 1.0.0  
-> **Last Updated:** 2026-07-24  
+> **Version:** 1.1.0  
+> **Last Updated:** 2026-07-25  
 > **Owner:** Product Ontologist + ERP Architect  
 > **Review Cycle:** Quarterly
 
@@ -33,6 +33,10 @@ Lumora is an AI-first ERP system designed for small-to-medium enterprises. It re
 | BC-PROC | Procurement | Purchase orders, receiving, vendor management | PurchaseOrder, Vendor |
 | BC-SALES | Sales & Orders | Sales orders, quotations, customer management | SalesOrder, Customer |
 | BC-HR | Human Resources | Employees, attendance, leave, payroll | Employee, Payroll |
+| BC-ASSET | Fixed Asset Management | Asset register, depreciation schedules, adjustments, disposals | FixedAsset, DepreciationEntry |
+| BC-TAX | Tax Management | Tax codes, versioned rates, auto-assignment rules, tax calculations | TaxCode, TaxRate |
+| BC-BUDGET | Budget Management | Budget definitions, line-level allocations, consumption tracking | BudgetHeader, BudgetLine |
+| BC-AUDIT | Audit & Compliance | Append-only audit log, compliance tracking | AuditLogEntry |
 | BC-REPORT | Reporting & Analytics | Financial reports, dashboards, KPIs | Report, Dashboard |
 | BC-AI | AI & Automation | Workflows, predictions, anomaly detection | Workflow, Prediction |
 
@@ -60,7 +64,32 @@ Lumora is an AI-first ERP system designed for small-to-medium enterprises. It re
 - **INV-AUTH-002:** Roles are additive only; no role can revoke base permissions.
 - **INV-AUTH-003:** Soft deletion is mandatory for all user-facing entities.
 
-### 4.4 Cross-Context Invariants
+### 4.4 Fixed Asset Invariants
+
+- **INV-ASSET-001:** Every fixed asset must have a depreciation method, useful life, and salvage value at acquisition.
+- **INV-ASSET-002:** Depreciation entries must reference an open accounting period.
+- **INV-ASSET-003:** Accumulated depreciation cannot exceed depreciable cost (acquisition cost minus salvage value).
+- **INV-ASSET-004:** Disposed assets must have depreciation updated to disposal date before removal.
+
+### 4.5 Tax Invariants
+
+- **INV-TAX-001:** Every tax rate must have an effective date and optional expiry date for temporal versioning.
+- **INV-TAX-002:** Tax transactions must snapshot the rate at time of calculation (not reference current rate).
+- **INV-TAX-003:** Tax codes must link to a GL account for liability/asset posting.
+
+### 4.6 Budget Invariants
+
+- **INV-BUDGET-001:** Budget consumption amounts must be non-negative.
+- **INV-BUDGET-002:** Only one budget can be active per period per tenant.
+- **INV-BUDGET-003:** Budget line amounts must sum to the header total.
+
+### 4.7 Audit Invariants
+
+- **INV-AUDIT-001:** Audit log entries are append-only; no updates or deletes permitted.
+- **INV-AUDIT-002:** Every audit log entry must reference an entity type and entity ID.
+- **INV-AUDIT-003:** Audit log entries must include old and new values for update operations.
+
+### 4.8 Cross-Context Invariants
 
 - **INV-CROSS-001:** No bounded context may directly access another context's database tables.
 - **INV-CROSS-002:** Cross-context communication happens through domain events only.
@@ -80,6 +109,21 @@ Lumora is an AI-first ERP system designed for small-to-medium enterprises. It re
 | BR-006 | BC-HR | Leave requests require manager approval | Medium |
 | BR-007 | BC-SALES | Quotations expire after configurable days | Low |
 | BR-008 | BC-CASH | Bank reconciliation requires matching with tolerance | High |
+| BR-009 | BC-ASSET | Depreciation methods must be applied consistently throughout asset life | High |
+| BR-010 | BC-ASSET | Land is not a depreciable asset | High |
+| BR-011 | BC-ASSET | Depreciation must be posted before period close | High |
+| BR-012 | BC-ASSET | Accumulated depreciation cannot exceed depreciable cost | High |
+| BR-013 | BC-ASSET | Depreciation method cannot change after asset is placed in service | High |
+| BR-014 | BC-TAX | Tax rates are versioned with effective dates | High |
+| BR-015 | BC-TAX | Tax amount is calculated and snapshotted at transaction time | High |
+| BR-016 | BC-TAX | Tax auto-assignment rules are evaluated by priority order | Medium |
+| BR-017 | BC-TAX | Expired tax rates cannot be applied to new transactions | High |
+| BR-018 | BC-BUDGET | Budget consumption is tracked per GL account per period | High |
+| BR-019 | BC-BUDGET | Budget variance is calculated as consumed minus budgeted amount | Medium |
+| BR-020 | BC-BUDGET | Budget consumption reverses when journal entries are voided | High |
+| BR-021 | BC-AUDIT | All state-changing operations must create an audit log entry | Critical |
+| BR-022 | BC-AUDIT | Audit log entries must not be modifiable or deletable | Critical |
+| BR-023 | BC-AUDIT | Audit log entries must include old and new values for updates | High |
 
 ---
 
@@ -97,6 +141,16 @@ Lumora is an AI-first ERP system designed for small-to-medium enterprises. It re
 | Sales Order | A customer's commitment to purchase goods/services | BC-SALES |
 | Payroll | The process of paying employees | BC-HR |
 | Three-Way Matching | Matching PO, receiving document, and vendor bill | BC-AP |
+| Fixed Asset | A long-term tangible asset used in business operations | BC-ASSET |
+| Depreciation | Systematic allocation of asset cost over its useful life | BC-ASSET |
+| Accumulated Depreciation | Total depreciation recorded against an asset since acquisition | BC-ASSET |
+| Tax Code | A configuration defining tax type, rate, and posting rules | BC-TAX |
+| Tax Rate Version | A temporal record of a tax rate with effective and expiry dates | BC-TAX |
+| Budget Header | A definition of a budget for a specific period | BC-BUDGET |
+| Budget Line | An allocation of budget amount to a specific GL account | BC-BUDGET |
+| Budget Consumption | Actual spending tracked against a budget line | BC-BUDGET |
+| Audit Log | An append-only record of all state changes in the system | BC-AUDIT |
+| Batch Payment | A group of payments processed together as a single bank export | BC-AP |
 
 ---
 
@@ -110,6 +164,12 @@ Lumora is an AI-first ERP system designed for small-to-medium enterprises. It re
 | EVT-004 | StockAdjusted | BC-INV | BC-FIN, BC-REPORT | ItemID, Quantity, Reason |
 | EVT-005 | EmployeeHired | BC-HR | BC-AUTH | EmployeeID, UserID |
 | EVT-006 | JournalEntryPosted | BC-FIN | BC-REPORT | EntryID, Period |
+| EVT-007 | DepreciationPosted | BC-ASSET | BC-FIN, BC-REPORT | AssetID, PeriodID, Amount |
+| EVT-008 | AssetDisposed | BC-ASSET | BC-FIN | AssetID, Proceeds, GainLoss |
+| EVT-009 | TaxRateCreated | BC-TAX | BC-FIN | TaxCodeID, Rate, EffectiveDate |
+| EVT-010 | BudgetExceeded | BC-BUDGET | BC-REPORT, BC-AI | BudgetLineID, Threshold, Actual |
+| EVT-011 | AuditLogCreated | BC-AUDIT | BC-REPORT | EntityType, EntityID, Action |
+| EVT-012 | PeriodClosed | BC-FIN | BC-ASSET, BC-BUDGET, BC-REPORT | PeriodID, ClosedBy |
 
 ---
 
@@ -120,6 +180,7 @@ Lumora is an AI-first ERP system designed for small-to-medium enterprises. It re
 | DOM-001 | 2026-07-24 | Use UUID v7 for all entity IDs | Time-ordered, globally unique, no coordination needed | Accepted |
 | DOM-002 | 2026-07-24 | Multi-tenant via row-level security | Cost-effective, simpler ops than schema-per-tenant | Accepted |
 | DOM-003 | 2026-07-24 | Domain events for cross-context communication | Decoupled, auditable, supports AI automation | Accepted |
+| DOM-004 | 2026-07-25 | Add BC-ASSET, BC-TAX, BC-BUDGET, BC-AUDIT bounded contexts | Comprehensive accounting ERP requires dedicated modules for fixed assets, tax, budgets, and audit | Accepted |
 
 ---
 

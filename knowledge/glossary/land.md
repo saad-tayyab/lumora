@@ -3,7 +3,7 @@ term: Land
 aliases:
   - Real Property
   - Real Estate
-context: BC-FIN
+context: BC-ASSET
 category: accounting
 version: 1.0.0
 status: active

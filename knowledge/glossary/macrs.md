@@ -2,7 +2,7 @@
 term: MACRS
 aliases:
   - Modified Accelerated Cost Recovery System
-context: BC-FIN
+context: BC-ASSET
 category: technical
 version: 1.0.0
 status: active

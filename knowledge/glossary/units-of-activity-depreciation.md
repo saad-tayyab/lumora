@@ -2,7 +2,7 @@
 term: Units-of-Activity Depreciation
 aliases:
   - Units of Production
-context: BC-FIN
+context: BC-ASSET
 category: domain
 version: 1.0.0
 status: active

@@ -2,7 +2,7 @@
 term: Straight-Line Depreciation
 aliases:
   - SL Method
-context: BC-FIN
+context: BC-ASSET
 category: accounting
 version: 1.0.0
 status: active

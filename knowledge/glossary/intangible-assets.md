@@ -2,7 +2,7 @@
 term: Intangible Assets
 aliases:
   - None
-context: BC-FIN
+context: BC-ASSET
 category: domain
 version: 1.0.0
 status: active
