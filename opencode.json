@@ -52,16 +52,7 @@
       "permission": {
         "edit": "allow",
         "bash": {
-          "bun *": "allow",
-          "bunx *": "allow",
-          "git *": "allow",
-          "ls *": "allow",
-          "find *": "allow",
-          "cat *": "allow",
-          "mkdir *": "allow",
-          "rm *": "ask",
-          "rmdir *": "ask",
-          "*": "ask"
+          "*": "allow"
         },
         "read": "allow",
         "glob": "allow",
@@ -89,11 +80,7 @@
       "permission": {
         "edit": "deny",
         "bash": {
-          "git *": "allow",
-          "ls *": "allow",
-          "find *": "allow",
-          "cat *": "allow",
-          "*": "ask"
+          "*": "allow"
         },
         "read": "allow",
         "glob": "allow",
@@ -107,11 +94,7 @@
       "permission": {
         "edit": "deny",
         "bash": {
-          "git *": "allow",
-          "ls *": "allow",
-          "find *": "allow",
-          "cat *": "allow",
-          "*": "ask"
+          "*": "allow"
         },
         "read": "allow",
         "glob": "allow",
@@ -125,14 +108,7 @@
   "permission": {
     "edit": "allow",
     "bash": {
-      "bun *": "allow",
-      "bunx *": "allow",
-      "git *": "allow",
-      "ls *": "allow",
-      "find *": "allow",
-      "cat *": "allow",
-      "mkdir *": "allow",
-      "*": "ask"
+      "*": "allow"
     },
     "read": "allow",
     "glob": "allow",

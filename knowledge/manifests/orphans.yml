@@ -2,5 +2,414 @@
 manifest: orphans
 version: 1.0.0
 last_updated: 2026-07-24
-total: 0
-orphans: []
+total: 136
+orphans:
+  - id: CON-FIN-001
+    name: Accounting Equation Solving
+    context: BC-FIN
+  - id: CON-FIN-003
+    name: Liability
+    context: BC-FIN
+  - id: CON-FIN-007
+    name: Business Transaction
+    context: BC-FIN
+  - id: CON-FIN-019
+    name: Accounting Cycle Steps
+    context: BC-FIN
+  - id: CON-FIN-025
+    name: Inventory Costing Methods
+    context: BC-FIN
+  - id: CON-FIN-028
+    name: GAAP
+    context: BC-FIN
+  - id: CON-FIN-041
+    name: Price-Earnings (P/E) Ratio
+    context: BC-FIN
+  - id: CON-FIN-046
+    name: Accrued Revenue Adjustment
+    context: BC-FIN
+  - id: CON-FIN-047
+    name: Accrued Expense Adjustment
+    context: BC-FIN
+  - id: CON-FIN-055
+    name: Fiscal Year
+    context: BC-FIN
+  - id: CON-FIN-061
+    name: Financial Statement Preparation Order
+    context: BC-FIN
+  - id: CON-FIN-062
+    name: Accounting
+    context: BC-FIN
+  - id: CON-FIN-064
+    name: Assets
+    context: BC-FIN
+  - id: CON-FIN-065
+    name: Liabilities
+    context: BC-FIN
+  - id: CON-FIN-067
+    name: Net Income Percentage
+    context: BC-FIN
+  - id: CON-FIN-068
+    name: Net Loss
+    context: BC-FIN
+  - id: CON-FIN-071
+    name: Service Business
+    context: BC-FIN
+  - id: CON-FIN-073
+    name: Manufacturing Business
+    context: BC-FIN
+  - id: CON-FIN-074
+    name: Cost Principle
+    context: BC-FIN
+  - id: CON-FIN-082
+    name: Transaction Analysis
+    context: BC-FIN
+  - id: CON-FIN-095
+    name: Unearned Revenue Adjustment
+    context: BC-FIN
+  - id: CON-FIN-097
+    name: Overstatement Error
+    context: BC-FIN
+  - id: CON-FIN-098
+    name: Omission Error
+    context: BC-FIN
+  - id: CON-FIN-099
+    name: Posting Error
+    context: BC-FIN
+  - id: CON-FIN-102
+    name: Owner Withdrawal
+    context: BC-FIN
+  - id: CON-FIN-103
+    name: Owner Investment
+    context: BC-FIN
+  - id: CON-FIN-105
+    name: Prepaid Expense Adjustment
+    context: BC-FIN
+  - id: CON-FIN-118
+    name: Liquidity
+    context: BC-FIN
+  - id: CON-FIN-120
+    name: Property Plant and Equipment
+    context: BC-FIN
+  - id: CON-FIN-123
+    name: Expense Recognition Principle
+    context: BC-FIN
+  - id: CON-FIN-127
+    name: Subsequent Events
+    context: BC-FIN
+  - id: CON-FIN-137
+    name: Cost of Goods Sold - Periodic
+    context: BC-FIN
+  - id: CON-FIN-138
+    name: Gross Profit Method
+    context: BC-FIN
+  - id: CON-FIN-139
+    name: Chart of Accounts for Retail Business
+    context: BC-FIN
+  - id: CON-FIN-142
+    name: Sales (Revenue)
+    context: BC-FIN
+  - id: CON-FIN-143
+    name: Credit Card Expense
+    context: BC-FIN
+  - id: CON-FIN-144
+    name: Sales Discount (from Buyer Perspective: Purchase Discount)
+    context: BC-FIN
+  - id: CON-FIN-149
+    name: FOB Shipping Point
+    context: BC-FIN
+  - id: CON-FIN-154
+    name: Other Revenue and Expense
+    context: BC-FIN
+  - id: CON-FIN-158
+    name: Sales Taxes
+    context: BC-FIN
+  - id: CON-FIN-159
+    name: Trade Discounts
+    context: BC-FIN
+  - id: CON-FIN-160
+    name: Coupon (Point-of-Sale)
+    context: BC-FIN
+  - id: CON-FIN-165
+    name: Freight In Account
+    context: BC-FIN
+  - id: CON-FIN-167
+    name: Purchases Discounts Account
+    context: BC-FIN
+  - id: CON-FIN-168
+    name: Purchases Returns and Allowances Account
+    context: BC-FIN
+  - id: CON-FIN-173
+    name: Sales Tax Collection
+    context: BC-FIN
+  - id: CON-FIN-177
+    name: First-In, First-Out (FIFO)
+    context: BC-FIN
+  - id: CON-FIN-178
+    name: Last-In, First-Out (LIFO)
+    context: BC-FIN
+  - id: CON-FIN-190
+    name: Inventory Profits (Illusory Profits)
+    context: BC-FIN
+  - id: CON-FIN-191
+    name: Consigned Inventory
+    context: BC-FIN
+  - id: CON-FIN-192
+    name: Retail Inventory Method
+    context: BC-FIN
+  - id: CON-FIN-200
+    name: Cash Register Control
+    context: BC-FIN
+  - id: CON-FIN-201
+    name: Remittance Advice
+    context: BC-FIN
+  - id: CON-FIN-202
+    name: Voucher System
+    context: BC-FIN
+  - id: CON-FIN-203
+    name: Electronic Funds Transfer (EFT)
+    context: BC-FIN
+  - id: CON-FIN-204
+    name: Cash Short and Over Account
+    context: BC-FIN
+  - id: CON-FIN-212
+    name: Compensating Balance
+    context: BC-FIN
+  - id: CON-FIN-220
+    name: Allowance Method
+    context: BC-FIN
+  - id: CON-FIN-225
+    name: Recovery of Bad Debt
+    context: BC-FIN
+  - id: CON-FIN-227
+    name: Days' Sales in Receivables
+    context: BC-FIN
+  - id: CON-FIN-268
+    name: Federal Unemployment Tax (FUTA)
+    context: BC-FIN
+  - id: CON-FIN-269
+    name: State Unemployment Tax (SUTA)
+    context: BC-FIN
+  - id: CON-FIN-280
+    name: Maturity Value
+    context: BC-FIN
+  - id: CON-FIN-293
+    name: Straight-Line Amortization Method
+    context: BC-FIN
+  - id: CON-FIN-298
+    name: Present Value of $1
+    context: BC-FIN
+  - id: CON-FIN-300
+    name: Bond Carrying Amount (Book Value)
+    context: BC-FIN
+  - id: CON-FIN-301
+    name: Interest Expense
+    context: BC-FIN
+  - id: CON-FIN-325
+    name: Cumulative Preferred Stock
+    context: BC-FIN
+  - id: CON-FIN-327
+    name: Cash Dividend
+    context: BC-FIN
+  - id: CON-FIN-328
+    name: Stock Dividend
+    context: BC-FIN
+  - id: CON-FIN-331
+    name: Discount on Stock
+    context: BC-FIN
+  - id: CON-FIN-332
+    name: Premium on Stock
+    context: BC-FIN
+  - id: CON-FIN-336
+    name: Prior Period Adjustment
+    context: BC-FIN
+  - id: CON-FIN-337
+    name: Restriction on Retained Earnings
+    context: BC-FIN
+  - id: CON-FIN-361
+    name: Operating Income Percentage
+    context: BC-FIN
+  - id: CON-FIN-363
+    name: Ratio of Fixed Assets to Long-Term Liabilities
+    context: BC-FIN
+  - id: CON-FIN-372
+    name: Cost Object
+    context: BC-FIN
+  - id: CON-FIN-374
+    name: Indirect Cost
+    context: BC-FIN
+  - id: CON-FIN-379
+    name: Period Costs
+    context: BC-FIN
+  - id: CON-FIN-380
+    name: Sustainability
+    context: BC-FIN
+  - id: CON-FIN-381
+    name: Eco-Efficiency Measures
+    context: BC-FIN
+  - id: CON-FIN-393
+    name: Prime Cost
+    context: BC-FIN
+  - id: CON-FIN-394
+    name: Conversion Cost
+    context: BC-FIN
+  - id: CON-FIN-398
+    name: Manufacturing Costs
+    context: BC-FIN
+  - id: CON-FIN-399
+    name: Cost of Finished Goods Available for Sale
+    context: BC-FIN
+  - id: CON-FIN-417
+    name: Cost of Services Account
+    context: BC-FIN
+  - id: CON-FIN-419
+    name: Unit Cost
+    context: BC-FIN
+  - id: CON-FIN-420
+    name: Cost Comparison
+    context: BC-FIN
+  - id: CON-FIN-424
+    name: Gross Profit for Services
+    context: BC-FIN
+  - id: CON-FIN-425
+    name: Job Order Costing Decision Making
+    context: BC-FIN
+  - id: CON-FIN-426
+    name: Factory Labor
+    context: BC-FIN
+  - id: CON-FIN-427
+    name: Over-Applied Overhead
+    context: BC-FIN
+  - id: CON-FIN-428
+    name: Under-Applied Overhead
+    context: BC-FIN
+  - id: CON-FIN-440
+    name: Weighted Average Method in Process Costing
+    context: BC-FIN
+  - id: CON-FIN-448
+    name: Activity-Based Costing (ABC)
+    context: BC-FIN
+  - id: CON-FIN-451
+    name: Activity Base (Activity Driver)
+    context: BC-FIN
+  - id: CON-FIN-453
+    name: Multiple Production Department Overhead Rate
+    context: BC-FIN
+  - id: CON-FIN-455
+    name: Cost Pool
+    context: BC-FIN
+  - id: CON-FIN-456
+    name: Direct Labor Hour (dlh)
+    context: BC-FIN
+  - id: CON-FIN-457
+    name: Engineering Change Order (ECO)
+    context: BC-FIN
+  - id: CON-FIN-463
+    name: Contribution Margin Ratio
+    context: BC-FIN
+  - id: CON-FIN-469
+    name: Operating Leverage
+    context: BC-FIN
+  - id: CON-FIN-473
+    name: Cost-Volume-Profit Analysis for Service Businesses
+    context: BC-FIN
+  - id: CON-FIN-476
+    name: Manufacturing Overhead Cost per Unit Comparison
+    context: BC-FIN
+  - id: CON-FIN-495
+    name: Selling and Administrative Expenses Budget
+    context: BC-FIN
+  - id: CON-FIN-511
+    name: Variable Manufacturing Overhead Controllable Variance
+    context: BC-FIN
+  - id: CON-FIN-531
+    name: Yield Pricing
+    context: BC-FIN
+  - id: CON-FIN-534
+    name: Target Cost
+    context: BC-FIN
+  - id: CON-FIN-548
+    name: Complicating Factor — Unequal Lives
+    context: BC-FIN
+  - id: CON-FIN-549
+    name: Complicating Factor — Lease vs. Purchase
+    context: BC-FIN
+  - id: CON-FIN-551
+    name: Net Present Value (NPV)
+    context: BC-FIN
+  - id: CON-FIN-553
+    name: Net Present Value of Sequential Revenue Streams
+    context: BC-FIN
+  - id: CON-FIN-554
+    name: Forecast vs Actual Investment Performance
+    context: BC-FIN
+  - id: CON-FIN-555
+    name: Qualitative Investment Factors
+    context: BC-FIN
+  - id: CON-FIN-556
+    name: Currency Exchange Rate Impact
+    context: BC-FIN
+  - id: CON-FIN-557
+    name: Personal Investment Analysis
+    context: BC-FIN
+  - id: CON-FIN-587
+    name: Internal Control over Financial Reporting
+    context: BC-FIN
+  - id: CON-FIN-588
+    name: Earnings Per Share (EPS) on Common Stock
+    context: BC-FIN
+  - id: CON-FIN-589
+    name: Profit
+    context: BC-FIN
+  - id: CON-FIN-590
+    name: Performance Measurement Systems
+    context: BC-FIN
+  - id: CON-FIN-591
+    name: Performance Metrics
+    context: BC-FIN
+  - id: CON-FIN-595
+    name: Receivables
+    context: BC-FIN
+  - id: CON-FIN-597
+    name: Securities and Exchange Commission (SEC)
+    context: BC-FIN
+  - id: CON-FIN-598
+    name: Straight-Line Method (Depreciation)
+    context: BC-FIN
+  - id: CON-FIN-599
+    name: Controllable Expenses
+    context: BC-FIN
+  - id: CON-FIN-600
+    name: Controller
+    context: BC-FIN
+  - id: CON-FIN-605
+    name: Direct Costs
+    context: BC-FIN
+  - id: CON-FIN-606
+    name: Double-Declining-Balance Method
+    context: BC-FIN
+  - id: CON-FIN-607
+    name: Equity
+    context: BC-FIN
+  - id: CON-FIN-609
+    name: FIFO (First-In, First-Out)
+    context: BC-FIN
+  - id: CON-FIN-610
+    name: LIFO (Last-In, First-Out)
+    context: BC-FIN
+  - id: CON-FIN-611
+    name: Process Manufacturer
+    context: BC-FIN
+  - id: CON-FIN-613
+    name: Private Accounting
+    context: BC-FIN
+  - id: CON-FIN-618
+    name: Proceeds from Issuing Bonds
+    context: BC-FIN
+  - id: CON-FIN-622
+    name: Product Cost Method (for Pricing)
+    context: BC-FIN
+  - id: CON-FIN-623
+    name: Process or Sell Decision
+    context: BC-FIN
+---

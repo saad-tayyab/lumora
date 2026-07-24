@@ -1,7 +1,10 @@
-{
-  "title": "Financial Knowledge Graph",
-  "version": "1.0.0",
-  "nodeCount": 624,
-  "edgeCount": 860,
-  "generated": "2026-07-24T06:52:29.126Z"
-}
+---
+manifest: graph
+version: 1.0.0
+last_updated: 2026-07-24
+stats:
+  nodes: 624
+  edges: 531
+  connected_nodes: 488
+  orphan_nodes: 136
+---

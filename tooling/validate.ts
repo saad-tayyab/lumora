@@ -24,7 +24,7 @@ interface ValidationResult {
   };
 }
 
-const ROOT = join(import.meta.dir, '../..');
+const ROOT = join(import.meta.dir, '..');
 const KNOWLEDGE_DIR = join(ROOT, 'knowledge');
 
 async function getAllFiles(dir: string, pattern?: RegExp): Promise<string[]> {
