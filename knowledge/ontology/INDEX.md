@@ -1,12 +1,15 @@
 ---
-title: Financial Ontology Index
+title: Ontology Index
 version: 1.0.0
 status: active
+last_updated: 2026-07-24
 ---
 
-# Financial Ontology
+# Ontology Index
 
-## Concepts (624)
+## BC-FIN Concepts (624)
+
+> **Total Ontology Concepts: 784** (BC-FIN: 624 + BC-AUTH: 17 + BC-AR: 17 + BC-AP: 14 + BC-CASH: 16 + BC-INV: 17 + BC-PROC: 14 + BC-SALES: 16 + BC-HR: 18 + BC-REPORT: 15 + BC-AI: 16)
 
 - [Accounting Equation Solving](contexts/BC-FIN/CON-FIN-001.accounting-equation-solving.md) — CON-FIN-001
 - [Asset](contexts/BC-FIN/CON-FIN-002.asset.md) — CON-FIN-002
@@ -633,6 +636,61 @@ status: active
 - [Process or Sell Decision](contexts/BC-FIN/CON-FIN-623.process-or-sell-decision.md) — CON-FIN-623
 - [Dynamic Pricing](contexts/BC-FIN/CON-FIN-624.dynamic-pricing.md) — CON-FIN-624
 
+## Concepts — BC-AP (14)
+
+- [Vendor](contexts/BC-AP/CON-AP-001.vendor.md) — CON-AP-001
+- [VendorPayment](contexts/BC-AP/CON-AP-002.vendor-payment.md) — CON-AP-002
+- [Bill](contexts/BC-AP/CON-AP-003.bill.md) — CON-AP-003
+- [BillLineItem](contexts/BC-AP/CON-AP-004.bill-line-item.md) — CON-AP-004
+- [PaymentSchedule](contexts/BC-AP/CON-AP-005.payment-schedule.md) — CON-AP-005
+- [ThreeWayMatchResult](contexts/BC-AP/CON-AP-006.three-way-match-result.md) — CON-AP-006
+- [BillReceived](contexts/BC-AP/CON-AP-007.bill-received.md) — CON-AP-007
+- [BillApproved](contexts/BC-AP/CON-AP-008.bill-approved.md) — CON-AP-008
+- [BillPaid](contexts/BC-AP/CON-AP-009.bill-paid.md) — CON-AP-009
+- [CreateBill](contexts/BC-AP/CON-AP-010.create-bill.md) — CON-AP-010
+- [ApproveBill](contexts/BC-AP/CON-AP-011.approve-bill.md) — CON-AP-011
+- [ProcessPayment](contexts/BC-AP/CON-AP-012.process-payment.md) — CON-AP-012
+- [ThreeWayMatchPolicy](contexts/BC-AP/CON-AP-013.three-way-match-policy.md) — CON-AP-013
+- [ApprovalWorkflow](contexts/BC-AP/CON-AP-014.approval-workflow.md) — CON-AP-014
+
+## Concepts — BC-AI (16)
+
+- [Workflow](contexts/BC-AI/CON-AI-001.workflow.md) — CON-AI-001
+- [WorkflowStep](contexts/BC-AI/CON-AI-002.workflow-step.md) — CON-AI-002
+- [Prediction](contexts/BC-AI/CON-AI-003.prediction.md) — CON-AI-003
+- [AnomalyDetection](contexts/BC-AI/CON-AI-004.anomaly-detection.md) — CON-AI-004
+- [AIModel](contexts/BC-AI/CON-AI-005.ai-model.md) — CON-AI-005
+- [TrainingData](contexts/BC-AI/CON-AI-006.training-data.md) — CON-AI-006
+- [PredictionResult](contexts/BC-AI/CON-AI-007.prediction-result.md) — CON-AI-007
+- [AutomationTrigger](contexts/BC-AI/CON-AI-008.automation-trigger.md) — CON-AI-008
+- [WorkflowCreated](contexts/BC-AI/CON-AI-009.workflow-created.md) — CON-AI-009
+- [PredictionGenerated](contexts/BC-AI/CON-AI-010.prediction-generated.md) — CON-AI-010
+- [AnomalyDetected](contexts/BC-AI/CON-AI-011.anomaly-detected.md) — CON-AI-011
+- [CreateWorkflow](contexts/BC-AI/CON-AI-012.create-workflow.md) — CON-AI-012
+- [RunPrediction](contexts/BC-AI/CON-AI-013.run-prediction.md) — CON-AI-013
+- [TrainModel](contexts/BC-AI/CON-AI-014.train-model.md) — CON-AI-014
+- [ModelAccuracyPolicy](contexts/BC-AI/CON-AI-015.model-accuracy-policy.md) — CON-AI-015
+- [AutomationSafetyPolicy](contexts/BC-AI/CON-AI-016.automation-safety-policy.md) — CON-AI-016
+
+## Concepts — BC-CASH (16)
+
+- [BankAccount](contexts/BC-CASH/CON-CASH-001.bank-account.md) — CON-CASH-001
+- [BankTransfer](contexts/BC-CASH/CON-CASH-002.bank-transfer.md) — CON-CASH-002
+- [BankStatement](contexts/BC-CASH/CON-CASH-003.bank-statement.md) — CON-CASH-003
+- [ReconciliationEntry](contexts/BC-CASH/CON-CASH-004.reconciliation-entry.md) — CON-CASH-004
+- [ReconciliationMatch](contexts/BC-CASH/CON-CASH-005.reconciliation-match.md) — CON-CASH-005
+- [Currency](contexts/BC-CASH/CON-CASH-006.currency.md) — CON-CASH-006
+- [BankConnection](contexts/BC-CASH/CON-CASH-007.bank-connection.md) — CON-CASH-007
+- [TransferCreated](contexts/BC-CASH/CON-CASH-008.transfer-created.md) — CON-CASH-008
+- [TransferCompleted](contexts/BC-CASH/CON-CASH-009.transfer-completed.md) — CON-CASH-009
+- [StatementImported](contexts/BC-CASH/CON-CASH-010.statement-imported.md) — CON-CASH-010
+- [ReconciliationCompleted](contexts/BC-CASH/CON-CASH-011.reconciliation-completed.md) — CON-CASH-011
+- [CreateTransfer](contexts/BC-CASH/CON-CASH-012.create-transfer.md) — CON-CASH-012
+- [ImportStatement](contexts/BC-CASH/CON-CASH-013.import-statement.md) — CON-CASH-013
+- [ReconcileAccount](contexts/BC-CASH/CON-CASH-014.reconcile-account.md) — CON-CASH-014
+- [ReconciliationTolerancePolicy](contexts/BC-CASH/CON-CASH-015.reconciliation-tolerance-policy.md) — CON-CASH-015
+- [BankFeePolicy](contexts/BC-CASH/CON-CASH-016.bank-fee-policy.md) — CON-CASH-016
+
 ## Rules (595)
 
 - [Accounting Equation Must Balance](../rules/active/BR-001.accounting-equation-must-balance.md) — BR-001
@@ -1230,3 +1288,152 @@ status: active
 - [P/E Ratio Calculation](../rules/active/BR-593.p-e-ratio-calculation.md) — BR-593
 - [Bond Proceeds Calculation](../rules/active/BR-594.bond-proceeds-calculation.md) — BR-594
 - [Product Cost Distortion Prevention](../rules/active/BR-595.product-cost-distortion-prevention.md) — BR-595
+
+---
+
+## BC-INV Concepts (17)
+
+- [Item](contexts/BC-INV/CON-INV-001.item.md) — CON-INV-001
+- [ItemCategory](contexts/BC-INV/CON-INV-002.item-category.md) — CON-INV-002
+- [StockMovement](contexts/BC-INV/CON-INV-003.stock-movement.md) — CON-INV-003
+- [Warehouse](contexts/BC-INV/CON-INV-004.warehouse.md) — CON-INV-004
+- [StockLevel](contexts/BC-INV/CON-INV-005.stock-level.md) — CON-INV-005
+- [SKU](contexts/BC-INV/CON-INV-006.sku.md) — CON-INV-006
+- [ReorderPoint](contexts/BC-INV/CON-INV-007.reorder-point.md) — CON-INV-007
+- [UnitOfMeasure](contexts/BC-INV/CON-INV-008.unit-of-measure.md) — CON-INV-008
+- [ItemCreated](contexts/BC-INV/CON-INV-009.item-created.md) — CON-INV-009
+- [StockAdjusted](contexts/BC-INV/CON-INV-010.stock-adjusted.md) — CON-INV-010
+- [StockDepleted](contexts/BC-INV/CON-INV-011.stock-depleted.md) — CON-INV-011
+- [ReorderTriggered](contexts/BC-INV/CON-INV-012.reorder-triggered.md) — CON-INV-012
+- [CreateItem](contexts/BC-INV/CON-INV-013.create-item.md) — CON-INV-013
+- [AdjustStock](contexts/BC-INV/CON-INV-014.adjust-stock.md) — CON-INV-014
+- [TransferStock](contexts/BC-INV/CON-INV-015.transfer-stock.md) — CON-INV-015
+- [NegativeStockPolicy](contexts/BC-INV/CON-INV-016.negative-stock-policy.md) — CON-INV-016
+- [ReorderPointPolicy](contexts/BC-INV/CON-INV-017.reorder-point-policy.md) — CON-INV-017
+
+---
+
+## BC-AUTH Concepts (17)
+
+- [User](contexts/BC-AUTH/CON-AUTH-001.user.md) — CON-AUTH-001
+- [Role](contexts/BC-AUTH/CON-AUTH-002.role.md) — CON-AUTH-002
+- [Permission](contexts/BC-AUTH/CON-AUTH-003.permission.md) — CON-AUTH-003
+- [Session](contexts/BC-AUTH/CON-AUTH-004.session.md) — CON-AUTH-004
+- [OAuthProvider](contexts/BC-AUTH/CON-AUTH-005.oauth-provider.md) — CON-AUTH-005
+- [UserCredential](contexts/BC-AUTH/CON-AUTH-006.user-credential.md) — CON-AUTH-006
+- [MFAConfig](contexts/BC-AUTH/CON-AUTH-007.mfa-config.md) — CON-AUTH-007
+- [AuditLog](contexts/BC-AUTH/CON-AUTH-008.audit-log.md) — CON-AUTH-008
+- [UserCreated](contexts/BC-AUTH/CON-AUTH-009.user-created.md) — CON-AUTH-009
+- [UserAuthenticated](contexts/BC-AUTH/CON-AUTH-010.user-authenticated.md) — CON-AUTH-010
+- [RoleAssigned](contexts/BC-AUTH/CON-AUTH-011.role-assigned.md) — CON-AUTH-011
+- [LoginAttempted](contexts/BC-AUTH/CON-AUTH-012.login-attempted.md) — CON-AUTH-012
+- [CreateUser](contexts/BC-AUTH/CON-AUTH-013.create-user.md) — CON-AUTH-013
+- [AuthenticateUser](contexts/BC-AUTH/CON-AUTH-014.authenticate-user.md) — CON-AUTH-014
+- [AssignRole](contexts/BC-AUTH/CON-AUTH-015.assign-role.md) — CON-AUTH-015
+- [PasswordPolicy](contexts/BC-AUTH/CON-AUTH-016.password-policy.md) — CON-AUTH-016
+- [SessionTimeoutPolicy](contexts/BC-AUTH/CON-AUTH-017.session-timeout-policy.md) — CON-AUTH-017
+
+---
+
+## BC-AR Concepts (17)
+
+- [Customer](contexts/BC-AR/CON-AR-001.customer.md) — CON-AR-001
+- [Invoice](contexts/BC-AR/CON-AR-002.invoice.md) — CON-AR-002
+- [InvoiceLineItem](contexts/BC-AR/CON-AR-003.invoice-line-item.md) — CON-AR-003
+- [Payment](contexts/BC-AR/CON-AR-004.payment.md) — CON-AR-004
+- [PaymentApplication](contexts/BC-AR/CON-AR-005.payment-application.md) — CON-AR-005
+- [CreditNote](contexts/BC-AR/CON-AR-006.credit-note.md) — CON-AR-006
+- [AgingBucket](contexts/BC-AR/CON-AR-007.aging-bucket.md) — CON-AR-007
+- [CreditLimit](contexts/BC-AR/CON-AR-008.credit-limit.md) — CON-AR-008
+- [InvoiceCreated](contexts/BC-AR/CON-AR-009.invoice-created.md) — CON-AR-009
+- [PaymentReceived](contexts/BC-AR/CON-AR-010.payment-received.md) — CON-AR-010
+- [CreditNoteIssued](contexts/BC-AR/CON-AR-011.credit-note-issued.md) — CON-AR-011
+- [InvoiceOverdue](contexts/BC-AR/CON-AR-012.invoice-overdue.md) — CON-AR-012
+- [CreateInvoice](contexts/BC-AR/CON-AR-013.create-invoice.md) — CON-AR-013
+- [RecordPayment](contexts/BC-AR/CON-AR-014.record-payment.md) — CON-AR-014
+- [IssueCreditNote](contexts/BC-AR/CON-AR-015.issue-credit-note.md) — CON-AR-015
+- [CreditApprovalPolicy](contexts/BC-AR/CON-AR-016.credit-approval-policy.md) — CON-AR-016
+- [DunningPolicy](contexts/BC-AR/CON-AR-017.dunning-policy.md) — CON-AR-017
+
+---
+
+## BC-REPORT Concepts (15)
+
+- [Report](contexts/BC-REPORT/CON-REPORT-001.report.md) — CON-REPORT-001
+- [Dashboard](contexts/BC-REPORT/CON-REPORT-002.dashboard.md) — CON-REPORT-002
+- [KPI](contexts/BC-REPORT/CON-REPORT-003.kpi.md) — CON-REPORT-003
+- [ReportTemplate](contexts/BC-REPORT/CON-REPORT-004.report-template.md) — CON-REPORT-004
+- [DataSource](contexts/BC-REPORT/CON-REPORT-005.data-source.md) — CON-REPORT-005
+- [ReportSchedule](contexts/BC-REPORT/CON-REPORT-006.report-schedule.md) — CON-REPORT-006
+- [ReportExport](contexts/BC-REPORT/CON-REPORT-007.report-export.md) — CON-REPORT-007
+- [ReportGenerated](contexts/BC-REPORT/CON-REPORT-008.report-generated.md) — CON-REPORT-008
+- [KPIBreached](contexts/BC-REPORT/CON-REPORT-009.kpi-breached.md) — CON-REPORT-009
+- [DashboardShared](contexts/BC-REPORT/CON-REPORT-010.dashboard-shared.md) — CON-REPORT-010
+- [GenerateReport](contexts/BC-REPORT/CON-REPORT-011.generate-report.md) — CON-REPORT-011
+- [ScheduleReport](contexts/BC-REPORT/CON-REPORT-012.schedule-report.md) — CON-REPORT-012
+- [ShareDashboard](contexts/BC-REPORT/CON-REPORT-013.share-dashboard.md) — CON-REPORT-013
+- [DataRefreshPolicy](contexts/BC-REPORT/CON-REPORT-014.data-refresh-policy.md) — CON-REPORT-014
+- [ReportRetentionPolicy](contexts/BC-REPORT/CON-REPORT-015.report-retention-policy.md) — CON-REPORT-015
+
+---
+
+## BC-HR Concepts (18)
+
+- [Employee](contexts/BC-HR/CON-HR-001.employee.md) — CON-HR-001
+- [Department](contexts/BC-HR/CON-HR-002.department.md) — CON-HR-002
+- [Designation](contexts/BC-HR/CON-HR-003.designation.md) — CON-HR-003
+- [Attendance](contexts/BC-HR/CON-HR-004.attendance.md) — CON-HR-004
+- [LeaveRequest](contexts/BC-HR/CON-HR-005.leave-request.md) — CON-HR-005
+- [LeaveType](contexts/BC-HR/CON-HR-006.leave-type.md) — CON-HR-006
+- [Payroll](contexts/BC-HR/CON-HR-007.payroll.md) — CON-HR-007
+- [Payslip](contexts/BC-HR/CON-HR-008.payslip.md) — CON-HR-008
+- [Salary](contexts/BC-HR/CON-HR-009.salary.md) — CON-HR-009
+- [EmployeeHired](contexts/BC-HR/CON-HR-010.employee-hired.md) — CON-HR-010
+- [LeaveRequested](contexts/BC-HR/CON-HR-011.leave-requested.md) — CON-HR-011
+- [LeaveApproved](contexts/BC-HR/CON-HR-012.leave-approved.md) — CON-HR-012
+- [PayrollProcessed](contexts/BC-HR/CON-HR-013.payroll-processed.md) — CON-HR-013
+- [HireEmployee](contexts/BC-HR/CON-HR-014.hire-employee.md) — CON-HR-014
+- [RequestLeave](contexts/BC-HR/CON-HR-015.request-leave.md) — CON-HR-015
+- [ProcessPayroll](contexts/BC-HR/CON-HR-016.process-payroll.md) — CON-HR-016
+- [LeaveApprovalPolicy](contexts/BC-HR/CON-HR-017.leave-approval-policy.md) — CON-HR-017
+- [OvertimePolicy](contexts/BC-HR/CON-HR-018.overtime-policy.md) — CON-HR-018
+
+---
+
+## BC-PROC Concepts (14)
+
+- [Vendor](contexts/BC-PROC/CON-PROC-001.vendor.md) — CON-PROC-001
+- [PurchaseOrder](contexts/BC-PROC/CON-PROC-002.purchase-order.md) — CON-PROC-002
+- [POLineItem](contexts/BC-PROC/CON-PROC-003.po-line-item.md) — CON-PROC-003
+- [ReceivingReport](contexts/BC-PROC/CON-PROC-004.receiving-report.md) — CON-PROC-004
+- [VendorCatalogItem](contexts/BC-PROC/CON-PROC-005.vendor-catalog-item.md) — CON-PROC-005
+- [POStatus](contexts/BC-PROC/CON-PROC-006.po-status.md) — CON-PROC-006
+- [PurchaseOrderCreated](contexts/BC-PROC/CON-PROC-007.purchase-order-created.md) — CON-PROC-007
+- [PurchaseOrderApproved](contexts/BC-PROC/CON-PROC-008.purchase-order-approved.md) — CON-PROC-008
+- [GoodsReceived](contexts/BC-PROC/CON-PROC-009.goods-received.md) — CON-PROC-009
+- [CreatePurchaseOrder](contexts/BC-PROC/CON-PROC-010.create-purchase-order.md) — CON-PROC-010
+- [ApprovePurchaseOrder](contexts/BC-PROC/CON-PROC-011.approve-purchase-order.md) — CON-PROC-011
+- [ReceiveGoods](contexts/BC-PROC/CON-PROC-012.receive-goods.md) — CON-PROC-012
+- [VendorQualificationPolicy](contexts/BC-PROC/CON-PROC-013.vendor-qualification-policy.md) — CON-PROC-013
+- [POApprovalPolicy](contexts/BC-PROC/CON-PROC-014.po-approval-policy.md) — CON-PROC-014
+
+---
+
+## BC-SALES Concepts (16)
+
+- [Customer](contexts/BC-SALES/CON-SALES-001.customer.md) — CON-SALES-001
+- [SalesOrder](contexts/BC-SALES/CON-SALES-002.sales-order.md) — CON-SALES-002
+- [SalesOrderLineItem](contexts/BC-SALES/CON-SALES-003.sales-order-line-item.md) — CON-SALES-003
+- [Quotation](contexts/BC-SALES/CON-SALES-004.quotation.md) — CON-SALES-004
+- [QuotationLineItem](contexts/BC-SALES/CON-SALES-005.quotation-line-item.md) — CON-SALES-005
+- [SalesOrderStatus](contexts/BC-SALES/CON-SALES-006.sales-order-status.md) — CON-SALES-006
+- [DiscountPolicy](contexts/BC-SALES/CON-SALES-007.discount-policy.md) — CON-SALES-007
+- [CustomerCreated](contexts/BC-SALES/CON-SALES-008.customer-created.md) — CON-SALES-008
+- [SalesOrderCreated](contexts/BC-SALES/CON-SALES-009.sales-order-created.md) — CON-SALES-009
+- [QuotationAccepted](contexts/BC-SALES/CON-SALES-010.quotation-accepted.md) — CON-SALES-010
+- [CreateCustomer](contexts/BC-SALES/CON-SALES-011.create-customer.md) — CON-SALES-011
+- [CreateSalesOrder](contexts/BC-SALES/CON-SALES-012.create-sales-order.md) — CON-SALES-012
+- [CreateQuotation](contexts/BC-SALES/CON-SALES-013.create-quotation.md) — CON-SALES-013
+- [AcceptQuotation](contexts/BC-SALES/CON-SALES-014.accept-quotation.md) — CON-SALES-014
+- [QuotationExpiryPolicy](contexts/BC-SALES/CON-SALES-015.quotation-expiry-policy.md) — CON-SALES-015
+- [CreditCheckPolicy](contexts/BC-SALES/CON-SALES-016.credit-check-policy.md) — CON-SALES-016

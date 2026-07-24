@@ -1,20 +1,20 @@
 ---
 manifest: concepts
-version: 1.0.0
+version: 2.0.0
 last_updated: 2026-07-24
-total: 624
+total: 784
 by_context:
-  BC-AUTH: 0
   BC-FIN: 624
-  BC-AR: 0
-  BC-AP: 0
-  BC-CASH: 0
-  BC-INV: 0
-  BC-PROC: 0
-  BC-SALES: 0
-  BC-HR: 0
-  BC-REPORT: 0
-  BC-AI: 0
+  BC-AUTH: 17
+  BC-AR: 17
+  BC-AP: 14
+  BC-CASH: 16
+  BC-INV: 17
+  BC-PROC: 14
+  BC-SALES: 16
+  BC-HR: 18
+  BC-REPORT: 15
+  BC-AI: 16
 concepts:
   - id: CON-FIN-001
     name: Accounting Equation Solving
@@ -3760,3 +3760,971 @@ concepts:
     type: policy
     status: active
     file: knowledge/ontology/contexts/BC-FIN/CON-FIN-624.dynamic-pricing.md
+  - id: CON-REPORT-001
+    name: Report
+    context: BC-REPORT
+    type: aggregate
+    status: active
+    file: knowledge/ontology/contexts/BC-REPORT/CON-REPORT-001.report.md
+  - id: CON-REPORT-002
+    name: Dashboard
+    context: BC-REPORT
+    type: aggregate
+    status: active
+    file: knowledge/ontology/contexts/BC-REPORT/CON-REPORT-002.dashboard.md
+  - id: CON-REPORT-003
+    name: KPI
+    context: BC-REPORT
+    type: entity
+    status: active
+    file: knowledge/ontology/contexts/BC-REPORT/CON-REPORT-003.kpi.md
+  - id: CON-REPORT-004
+    name: ReportTemplate
+    context: BC-REPORT
+    type: value_object
+    status: active
+    file: knowledge/ontology/contexts/BC-REPORT/CON-REPORT-004.report-template.md
+  - id: CON-REPORT-005
+    name: DataSource
+    context: BC-REPORT
+    type: value_object
+    status: active
+    file: knowledge/ontology/contexts/BC-REPORT/CON-REPORT-005.data-source.md
+  - id: CON-REPORT-006
+    name: ReportSchedule
+    context: BC-REPORT
+    type: entity
+    status: active
+    file: knowledge/ontology/contexts/BC-REPORT/CON-REPORT-006.report-schedule.md
+  - id: CON-REPORT-007
+    name: ReportExport
+    context: BC-REPORT
+    type: value_object
+    status: active
+    file: knowledge/ontology/contexts/BC-REPORT/CON-REPORT-007.report-export.md
+  - id: CON-REPORT-008
+    name: ReportGenerated
+    context: BC-REPORT
+    type: event
+    status: active
+    file: knowledge/ontology/contexts/BC-REPORT/CON-REPORT-008.report-generated.md
+  - id: CON-REPORT-009
+    name: KPIBreached
+    context: BC-REPORT
+    type: event
+    status: active
+    file: knowledge/ontology/contexts/BC-REPORT/CON-REPORT-009.kpi-breached.md
+  - id: CON-REPORT-010
+    name: DashboardShared
+    context: BC-REPORT
+    type: event
+    status: active
+    file: knowledge/ontology/contexts/BC-REPORT/CON-REPORT-010.dashboard-shared.md
+  - id: CON-REPORT-011
+    name: GenerateReport
+    context: BC-REPORT
+    type: command
+    status: active
+    file: knowledge/ontology/contexts/BC-REPORT/CON-REPORT-011.generate-report.md
+  - id: CON-REPORT-012
+    name: ScheduleReport
+    context: BC-REPORT
+    type: command
+    status: active
+    file: knowledge/ontology/contexts/BC-REPORT/CON-REPORT-012.schedule-report.md
+  - id: CON-REPORT-013
+    name: ShareDashboard
+    context: BC-REPORT
+    type: command
+    status: active
+    file: knowledge/ontology/contexts/BC-REPORT/CON-REPORT-013.share-dashboard.md
+  - id: CON-REPORT-014
+    name: DataRefreshPolicy
+    context: BC-REPORT
+    type: policy
+    status: active
+    file: knowledge/ontology/contexts/BC-REPORT/CON-REPORT-014.data-refresh-policy.md
+  - id: CON-REPORT-015
+    name: ReportRetentionPolicy
+    context: BC-REPORT
+    type: policy
+    status: active
+    file: knowledge/ontology/contexts/BC-REPORT/CON-REPORT-015.report-retention-policy.md
+  - id: CON-INV-001
+    name: Item
+    context: BC-INV
+    type: aggregate
+    status: active
+    file: knowledge/ontology/contexts/BC-INV/CON-INV-001.item.md
+  - id: CON-INV-002
+    name: ItemCategory
+    context: BC-INV
+    type: entity
+    status: active
+    file: knowledge/ontology/contexts/BC-INV/CON-INV-002.item-category.md
+  - id: CON-INV-003
+    name: StockMovement
+    context: BC-INV
+    type: aggregate
+    status: active
+    file: knowledge/ontology/contexts/BC-INV/CON-INV-003.stock-movement.md
+  - id: CON-INV-004
+    name: Warehouse
+    context: BC-INV
+    type: entity
+    status: active
+    file: knowledge/ontology/contexts/BC-INV/CON-INV-004.warehouse.md
+  - id: CON-INV-005
+    name: StockLevel
+    context: BC-INV
+    type: value_object
+    status: active
+    file: knowledge/ontology/contexts/BC-INV/CON-INV-005.stock-level.md
+  - id: CON-INV-006
+    name: SKU
+    context: BC-INV
+    type: value_object
+    status: active
+    file: knowledge/ontology/contexts/BC-INV/CON-INV-006.sku.md
+  - id: CON-INV-007
+    name: ReorderPoint
+    context: BC-INV
+    type: value_object
+    status: active
+    file: knowledge/ontology/contexts/BC-INV/CON-INV-007.reorder-point.md
+  - id: CON-INV-008
+    name: UnitOfMeasure
+    context: BC-INV
+    type: value_object
+    status: active
+    file: knowledge/ontology/contexts/BC-INV/CON-INV-008.unit-of-measure.md
+  - id: CON-INV-009
+    name: ItemCreated
+    context: BC-INV
+    type: event
+    status: active
+    file: knowledge/ontology/contexts/BC-INV/CON-INV-009.item-created.md
+  - id: CON-INV-010
+    name: StockAdjusted
+    context: BC-INV
+    type: event
+    status: active
+    file: knowledge/ontology/contexts/BC-INV/CON-INV-010.stock-adjusted.md
+  - id: CON-INV-011
+    name: StockDepleted
+    context: BC-INV
+    type: event
+    status: active
+    file: knowledge/ontology/contexts/BC-INV/CON-INV-011.stock-depleted.md
+  - id: CON-INV-012
+    name: ReorderTriggered
+    context: BC-INV
+    type: event
+    status: active
+    file: knowledge/ontology/contexts/BC-INV/CON-INV-012.reorder-triggered.md
+  - id: CON-INV-013
+    name: CreateItem
+    context: BC-INV
+    type: command
+    status: active
+    file: knowledge/ontology/contexts/BC-INV/CON-INV-013.create-item.md
+  - id: CON-INV-014
+    name: AdjustStock
+    context: BC-INV
+    type: command
+    status: active
+    file: knowledge/ontology/contexts/BC-INV/CON-INV-014.adjust-stock.md
+  - id: CON-INV-015
+    name: TransferStock
+    context: BC-INV
+    type: command
+    status: active
+    file: knowledge/ontology/contexts/BC-INV/CON-INV-015.transfer-stock.md
+  - id: CON-INV-016
+    name: NegativeStockPolicy
+    context: BC-INV
+    type: policy
+    status: active
+    file: knowledge/ontology/contexts/BC-INV/CON-INV-016.negative-stock-policy.md
+  - id: CON-INV-017
+    name: ReorderPointPolicy
+    context: BC-INV
+    type: policy
+    status: active
+    file: knowledge/ontology/contexts/BC-INV/CON-INV-017.reorder-point-policy.md
+  # BC-SALES Concepts
+  - id: CON-SALES-001
+    name: Customer
+    context: BC-SALES
+    type: entity
+    status: active
+    file: knowledge/ontology/contexts/BC-SALES/CON-SALES-001.customer.md
+  - id: CON-SALES-002
+    name: SalesOrder
+    context: BC-SALES
+    type: aggregate
+    status: active
+    file: knowledge/ontology/contexts/BC-SALES/CON-SALES-002.sales-order.md
+  - id: CON-SALES-003
+    name: SalesOrderLineItem
+    context: BC-SALES
+    type: entity
+    status: active
+    file: knowledge/ontology/contexts/BC-SALES/CON-SALES-003.sales-order-line-item.md
+  - id: CON-SALES-004
+    name: Quotation
+    context: BC-SALES
+    type: aggregate
+    status: active
+    file: knowledge/ontology/contexts/BC-SALES/CON-SALES-004.quotation.md
+  - id: CON-SALES-005
+    name: QuotationLineItem
+    context: BC-SALES
+    type: entity
+    status: active
+    file: knowledge/ontology/contexts/BC-SALES/CON-SALES-005.quotation-line-item.md
+  - id: CON-SALES-006
+    name: SalesOrderStatus
+    context: BC-SALES
+    type: value_object
+    status: active
+    file: knowledge/ontology/contexts/BC-SALES/CON-SALES-006.sales-order-status.md
+  - id: CON-SALES-007
+    name: DiscountPolicy
+    context: BC-SALES
+    type: value_object
+    status: active
+    file: knowledge/ontology/contexts/BC-SALES/CON-SALES-007.discount-policy.md
+  - id: CON-SALES-008
+    name: CustomerCreated
+    context: BC-SALES
+    type: event
+    status: active
+    file: knowledge/ontology/contexts/BC-SALES/CON-SALES-008.customer-created.md
+  - id: CON-SALES-009
+    name: SalesOrderCreated
+    context: BC-SALES
+    type: event
+    status: active
+    file: knowledge/ontology/contexts/BC-SALES/CON-SALES-009.sales-order-created.md
+  - id: CON-SALES-010
+    name: QuotationAccepted
+    context: BC-SALES
+    type: event
+    status: active
+    file: knowledge/ontology/contexts/BC-SALES/CON-SALES-010.quotation-accepted.md
+  - id: CON-SALES-011
+    name: CreateCustomer
+    context: BC-SALES
+    type: command
+    status: active
+    file: knowledge/ontology/contexts/BC-SALES/CON-SALES-011.create-customer.md
+  - id: CON-SALES-012
+    name: CreateSalesOrder
+    context: BC-SALES
+    type: command
+    status: active
+    file: knowledge/ontology/contexts/BC-SALES/CON-SALES-012.create-sales-order.md
+  - id: CON-SALES-013
+    name: CreateQuotation
+    context: BC-SALES
+    type: command
+    status: active
+    file: knowledge/ontology/contexts/BC-SALES/CON-SALES-013.create-quotation.md
+  - id: CON-SALES-014
+    name: AcceptQuotation
+    context: BC-SALES
+    type: command
+    status: active
+    file: knowledge/ontology/contexts/BC-SALES/CON-SALES-014.accept-quotation.md
+  - id: CON-SALES-015
+    name: QuotationExpiryPolicy
+    context: BC-SALES
+    type: policy
+    status: active
+    file: knowledge/ontology/contexts/BC-SALES/CON-SALES-015.quotation-expiry-policy.md
+  - id: CON-SALES-016
+    name: CreditCheckPolicy
+    context: BC-SALES
+    type: policy
+    status: active
+    file: knowledge/ontology/contexts/BC-SALES/CON-SALES-016.credit-check-policy.md
+  # BC-AUTH Concepts
+  - id: CON-AUTH-001
+    name: User
+    context: BC-AUTH
+    type: aggregate
+    status: active
+    file: knowledge/ontology/contexts/BC-AUTH/CON-AUTH-001.user.md
+  - id: CON-AUTH-002
+    name: Role
+    context: BC-AUTH
+    type: entity
+    status: active
+    file: knowledge/ontology/contexts/BC-AUTH/CON-AUTH-002.role.md
+  - id: CON-AUTH-003
+    name: Permission
+    context: BC-AUTH
+    type: value_object
+    status: active
+    file: knowledge/ontology/contexts/BC-AUTH/CON-AUTH-003.permission.md
+  - id: CON-AUTH-004
+    name: Session
+    context: BC-AUTH
+    type: entity
+    status: active
+    file: knowledge/ontology/contexts/BC-AUTH/CON-AUTH-004.session.md
+  - id: CON-AUTH-005
+    name: OAuthProvider
+    context: BC-AUTH
+    type: entity
+    status: active
+    file: knowledge/ontology/contexts/BC-AUTH/CON-AUTH-005.oauth-provider.md
+  - id: CON-AUTH-006
+    name: UserCredential
+    context: BC-AUTH
+    type: entity
+    status: active
+    file: knowledge/ontology/contexts/BC-AUTH/CON-AUTH-006.user-credential.md
+  - id: CON-AUTH-007
+    name: MFAConfig
+    context: BC-AUTH
+    type: value_object
+    status: active
+    file: knowledge/ontology/contexts/BC-AUTH/CON-AUTH-007.mfa-config.md
+  - id: CON-AUTH-008
+    name: AuditLog
+    context: BC-AUTH
+    type: entity
+    status: active
+    file: knowledge/ontology/contexts/BC-AUTH/CON-AUTH-008.audit-log.md
+  - id: CON-AUTH-009
+    name: UserCreated
+    context: BC-AUTH
+    type: event
+    status: active
+    file: knowledge/ontology/contexts/BC-AUTH/CON-AUTH-009.user-created.md
+  - id: CON-AUTH-010
+    name: UserAuthenticated
+    context: BC-AUTH
+    type: event
+    status: active
+    file: knowledge/ontology/contexts/BC-AUTH/CON-AUTH-010.user-authenticated.md
+  - id: CON-AUTH-011
+    name: RoleAssigned
+    context: BC-AUTH
+    type: event
+    status: active
+    file: knowledge/ontology/contexts/BC-AUTH/CON-AUTH-011.role-assigned.md
+  - id: CON-AUTH-012
+    name: LoginAttempted
+    context: BC-AUTH
+    type: event
+    status: active
+    file: knowledge/ontology/contexts/BC-AUTH/CON-AUTH-012.login-attempted.md
+  - id: CON-AUTH-013
+    name: CreateUser
+    context: BC-AUTH
+    type: command
+    status: active
+    file: knowledge/ontology/contexts/BC-AUTH/CON-AUTH-013.create-user.md
+  - id: CON-AUTH-014
+    name: AuthenticateUser
+    context: BC-AUTH
+    type: command
+    status: active
+    file: knowledge/ontology/contexts/BC-AUTH/CON-AUTH-014.authenticate-user.md
+  - id: CON-AUTH-015
+    name: AssignRole
+    context: BC-AUTH
+    type: command
+    status: active
+    file: knowledge/ontology/contexts/BC-AUTH/CON-AUTH-015.assign-role.md
+  - id: CON-AUTH-016
+    name: PasswordPolicy
+    context: BC-AUTH
+    type: policy
+    status: active
+    file: knowledge/ontology/contexts/BC-AUTH/CON-AUTH-016.password-policy.md
+  - id: CON-AUTH-017
+    name: SessionTimeoutPolicy
+    context: BC-AUTH
+    type: policy
+    status: active
+    file: knowledge/ontology/contexts/BC-AUTH/CON-AUTH-017.session-timeout-policy.md
+  # BC-AR Concepts
+  - id: CON-AR-001
+    name: Customer
+    context: BC-AR
+    type: entity
+    status: active
+    file: knowledge/ontology/contexts/BC-AR/CON-AR-001.customer.md
+  - id: CON-AR-002
+    name: Invoice
+    context: BC-AR
+    type: aggregate
+    status: active
+    file: knowledge/ontology/contexts/BC-AR/CON-AR-002.invoice.md
+  - id: CON-AR-003
+    name: InvoiceLineItem
+    context: BC-AR
+    type: entity
+    status: active
+    file: knowledge/ontology/contexts/BC-AR/CON-AR-003.invoice-line-item.md
+  - id: CON-AR-004
+    name: Payment
+    context: BC-AR
+    type: aggregate
+    status: active
+    file: knowledge/ontology/contexts/BC-AR/CON-AR-004.payment.md
+  - id: CON-AR-005
+    name: PaymentApplication
+    context: BC-AR
+    type: entity
+    status: active
+    file: knowledge/ontology/contexts/BC-AR/CON-AR-005.payment-application.md
+  - id: CON-AR-006
+    name: CreditNote
+    context: BC-AR
+    type: entity
+    status: active
+    file: knowledge/ontology/contexts/BC-AR/CON-AR-006.credit-note.md
+  - id: CON-AR-007
+    name: AgingBucket
+    context: BC-AR
+    type: value_object
+    status: active
+    file: knowledge/ontology/contexts/BC-AR/CON-AR-007.aging-bucket.md
+  - id: CON-AR-008
+    name: CreditLimit
+    context: BC-AR
+    type: value_object
+    status: active
+    file: knowledge/ontology/contexts/BC-AR/CON-AR-008.credit-limit.md
+  - id: CON-AR-009
+    name: InvoiceCreated
+    context: BC-AR
+    type: event
+    status: active
+    file: knowledge/ontology/contexts/BC-AR/CON-AR-009.invoice-created.md
+  - id: CON-AR-010
+    name: PaymentReceived
+    context: BC-AR
+    type: event
+    status: active
+    file: knowledge/ontology/contexts/BC-AR/CON-AR-010.payment-received.md
+  - id: CON-AR-011
+    name: CreditNoteIssued
+    context: BC-AR
+    type: event
+    status: active
+    file: knowledge/ontology/contexts/BC-AR/CON-AR-011.credit-note-issued.md
+  - id: CON-AR-012
+    name: InvoiceOverdue
+    context: BC-AR
+    type: event
+    status: active
+    file: knowledge/ontology/contexts/BC-AR/CON-AR-012.invoice-overdue.md
+  - id: CON-AR-013
+    name: CreateInvoice
+    context: BC-AR
+    type: command
+    status: active
+    file: knowledge/ontology/contexts/BC-AR/CON-AR-013.create-invoice.md
+  - id: CON-AR-014
+    name: RecordPayment
+    context: BC-AR
+    type: command
+    status: active
+    file: knowledge/ontology/contexts/BC-AR/CON-AR-014.record-payment.md
+  - id: CON-AR-015
+    name: IssueCreditNote
+    context: BC-AR
+    type: command
+    status: active
+    file: knowledge/ontology/contexts/BC-AR/CON-AR-015.issue-credit-note.md
+  - id: CON-AR-016
+    name: CreditApprovalPolicy
+    context: BC-AR
+    type: policy
+    status: active
+    file: knowledge/ontology/contexts/BC-AR/CON-AR-016.credit-approval-policy.md
+  - id: CON-AR-017
+    name: DunningPolicy
+    context: BC-AR
+    type: policy
+    status: active
+    file: knowledge/ontology/contexts/BC-AR/CON-AR-017.dunning-policy.md
+  # BC-AP Concepts
+  - id: CON-AP-001
+    name: Vendor
+    context: BC-AP
+    type: entity
+    status: active
+    file: knowledge/ontology/contexts/BC-AP/CON-AP-001.vendor.md
+  - id: CON-AP-002
+    name: VendorPayment
+    context: BC-AP
+    type: aggregate
+    status: active
+    file: knowledge/ontology/contexts/BC-AP/CON-AP-002.vendor-payment.md
+  - id: CON-AP-003
+    name: Bill
+    context: BC-AP
+    type: aggregate
+    status: active
+    file: knowledge/ontology/contexts/BC-AP/CON-AP-003.bill.md
+  - id: CON-AP-004
+    name: BillLineItem
+    context: BC-AP
+    type: entity
+    status: active
+    file: knowledge/ontology/contexts/BC-AP/CON-AP-004.bill-line-item.md
+  - id: CON-AP-005
+    name: PaymentSchedule
+    context: BC-AP
+    type: value_object
+    status: active
+    file: knowledge/ontology/contexts/BC-AP/CON-AP-005.payment-schedule.md
+  - id: CON-AP-006
+    name: ThreeWayMatchResult
+    context: BC-AP
+    type: value_object
+    status: active
+    file: knowledge/ontology/contexts/BC-AP/CON-AP-006.three-way-match-result.md
+  - id: CON-AP-007
+    name: BillReceived
+    context: BC-AP
+    type: event
+    status: active
+    file: knowledge/ontology/contexts/BC-AP/CON-AP-007.bill-received.md
+  - id: CON-AP-008
+    name: BillApproved
+    context: BC-AP
+    type: event
+    status: active
+    file: knowledge/ontology/contexts/BC-AP/CON-AP-008.bill-approved.md
+  - id: CON-AP-009
+    name: BillPaid
+    context: BC-AP
+    type: event
+    status: active
+    file: knowledge/ontology/contexts/BC-AP/CON-AP-009.bill-paid.md
+  - id: CON-AP-010
+    name: CreateBill
+    context: BC-AP
+    type: command
+    status: active
+    file: knowledge/ontology/contexts/BC-AP/CON-AP-010.create-bill.md
+  - id: CON-AP-011
+    name: ApproveBill
+    context: BC-AP
+    type: command
+    status: active
+    file: knowledge/ontology/contexts/BC-AP/CON-AP-011.approve-bill.md
+  - id: CON-AP-012
+    name: ProcessPayment
+    context: BC-AP
+    type: command
+    status: active
+    file: knowledge/ontology/contexts/BC-AP/CON-AP-012.process-payment.md
+  - id: CON-AP-013
+    name: ThreeWayMatchPolicy
+    context: BC-AP
+    type: policy
+    status: active
+    file: knowledge/ontology/contexts/BC-AP/CON-AP-013.three-way-match-policy.md
+  - id: CON-AP-014
+    name: ApprovalWorkflow
+    context: BC-AP
+    type: policy
+    status: active
+    file: knowledge/ontology/contexts/BC-AP/CON-AP-014.approval-workflow.md
+  # BC-CASH Concepts
+  - id: CON-CASH-001
+    name: BankAccount
+    context: BC-CASH
+    type: aggregate
+    status: active
+    file: knowledge/ontology/contexts/BC-CASH/CON-CASH-001.bank-account.md
+  - id: CON-CASH-002
+    name: BankTransfer
+    context: BC-CASH
+    type: aggregate
+    status: active
+    file: knowledge/ontology/contexts/BC-CASH/CON-CASH-002.bank-transfer.md
+  - id: CON-CASH-003
+    name: BankStatement
+    context: BC-CASH
+    type: entity
+    status: active
+    file: knowledge/ontology/contexts/BC-CASH/CON-CASH-003.bank-statement.md
+  - id: CON-CASH-004
+    name: ReconciliationEntry
+    context: BC-CASH
+    type: entity
+    status: active
+    file: knowledge/ontology/contexts/BC-CASH/CON-CASH-004.reconciliation-entry.md
+  - id: CON-CASH-005
+    name: ReconciliationMatch
+    context: BC-CASH
+    type: value_object
+    status: active
+    file: knowledge/ontology/contexts/BC-CASH/CON-CASH-005.reconciliation-match.md
+  - id: CON-CASH-006
+    name: Currency
+    context: BC-CASH
+    type: value_object
+    status: active
+    file: knowledge/ontology/contexts/BC-CASH/CON-CASH-006.currency.md
+  - id: CON-CASH-007
+    name: BankConnection
+    context: BC-CASH
+    type: entity
+    status: active
+    file: knowledge/ontology/contexts/BC-CASH/CON-CASH-007.bank-connection.md
+  - id: CON-CASH-008
+    name: TransferCreated
+    context: BC-CASH
+    type: event
+    status: active
+    file: knowledge/ontology/contexts/BC-CASH/CON-CASH-008.transfer-created.md
+  - id: CON-CASH-009
+    name: TransferCompleted
+    context: BC-CASH
+    type: event
+    status: active
+    file: knowledge/ontology/contexts/BC-CASH/CON-CASH-009.transfer-completed.md
+  - id: CON-CASH-010
+    name: StatementImported
+    context: BC-CASH
+    type: event
+    status: active
+    file: knowledge/ontology/contexts/BC-CASH/CON-CASH-010.statement-imported.md
+  - id: CON-CASH-011
+    name: ReconciliationCompleted
+    context: BC-CASH
+    type: event
+    status: active
+    file: knowledge/ontology/contexts/BC-CASH/CON-CASH-011.reconciliation-completed.md
+  - id: CON-CASH-012
+    name: CreateTransfer
+    context: BC-CASH
+    type: command
+    status: active
+    file: knowledge/ontology/contexts/BC-CASH/CON-CASH-012.create-transfer.md
+  - id: CON-CASH-013
+    name: ImportStatement
+    context: BC-CASH
+    type: command
+    status: active
+    file: knowledge/ontology/contexts/BC-CASH/CON-CASH-013.import-statement.md
+  - id: CON-CASH-014
+    name: ReconcileAccount
+    context: BC-CASH
+    type: command
+    status: active
+    file: knowledge/ontology/contexts/BC-CASH/CON-CASH-014.reconcile-account.md
+  - id: CON-CASH-015
+    name: ReconciliationTolerancePolicy
+    context: BC-CASH
+    type: policy
+    status: active
+    file: knowledge/ontology/contexts/BC-CASH/CON-CASH-015.reconciliation-tolerance-policy.md
+  - id: CON-CASH-016
+    name: BankFeePolicy
+    context: BC-CASH
+    type: policy
+    status: active
+    file: knowledge/ontology/contexts/BC-CASH/CON-CASH-016.bank-fee-policy.md
+  # BC-PROC Concepts
+  - id: CON-PROC-001
+    name: Vendor
+    context: BC-PROC
+    type: entity
+    status: active
+    file: knowledge/ontology/contexts/BC-PROC/CON-PROC-001.vendor.md
+  - id: CON-PROC-002
+    name: PurchaseOrder
+    context: BC-PROC
+    type: aggregate
+    status: active
+    file: knowledge/ontology/contexts/BC-PROC/CON-PROC-002.purchase-order.md
+  - id: CON-PROC-003
+    name: POLineItem
+    context: BC-PROC
+    type: entity
+    status: active
+    file: knowledge/ontology/contexts/BC-PROC/CON-PROC-003.po-line-item.md
+  - id: CON-PROC-004
+    name: ReceivingReport
+    context: BC-PROC
+    type: entity
+    status: active
+    file: knowledge/ontology/contexts/BC-PROC/CON-PROC-004.receiving-report.md
+  - id: CON-PROC-005
+    name: VendorCatalogItem
+    context: BC-PROC
+    type: value_object
+    status: active
+    file: knowledge/ontology/contexts/BC-PROC/CON-PROC-005.vendor-catalog-item.md
+  - id: CON-PROC-006
+    name: POStatus
+    context: BC-PROC
+    type: value_object
+    status: active
+    file: knowledge/ontology/contexts/BC-PROC/CON-PROC-006.po-status.md
+  - id: CON-PROC-007
+    name: PurchaseOrderCreated
+    context: BC-PROC
+    type: event
+    status: active
+    file: knowledge/ontology/contexts/BC-PROC/CON-PROC-007.purchase-order-created.md
+  - id: CON-PROC-008
+    name: PurchaseOrderApproved
+    context: BC-PROC
+    type: event
+    status: active
+    file: knowledge/ontology/contexts/BC-PROC/CON-PROC-008.purchase-order-approved.md
+  - id: CON-PROC-009
+    name: GoodsReceived
+    context: BC-PROC
+    type: event
+    status: active
+    file: knowledge/ontology/contexts/BC-PROC/CON-PROC-009.goods-received.md
+  - id: CON-PROC-010
+    name: CreatePurchaseOrder
+    context: BC-PROC
+    type: command
+    status: active
+    file: knowledge/ontology/contexts/BC-PROC/CON-PROC-010.create-purchase-order.md
+  - id: CON-PROC-011
+    name: ApprovePurchaseOrder
+    context: BC-PROC
+    type: command
+    status: active
+    file: knowledge/ontology/contexts/BC-PROC/CON-PROC-011.approve-purchase-order.md
+  - id: CON-PROC-012
+    name: ReceiveGoods
+    context: BC-PROC
+    type: command
+    status: active
+    file: knowledge/ontology/contexts/BC-PROC/CON-PROC-012.receive-goods.md
+  - id: CON-PROC-013
+    name: VendorQualificationPolicy
+    context: BC-PROC
+    type: policy
+    status: active
+    file: knowledge/ontology/contexts/BC-PROC/CON-PROC-013.vendor-qualification-policy.md
+  - id: CON-PROC-014
+    name: POApprovalPolicy
+    context: BC-PROC
+    type: policy
+    status: active
+    file: knowledge/ontology/contexts/BC-PROC/CON-PROC-014.po-approval-policy.md
+  # BC-HR Concepts
+  - id: CON-HR-001
+    name: Employee
+    context: BC-HR
+    type: aggregate
+    status: active
+    file: knowledge/ontology/contexts/BC-HR/CON-HR-001.employee.md
+  - id: CON-HR-002
+    name: Department
+    context: BC-HR
+    type: entity
+    status: active
+    file: knowledge/ontology/contexts/BC-HR/CON-HR-002.department.md
+  - id: CON-HR-003
+    name: Designation
+    context: BC-HR
+    type: entity
+    status: active
+    file: knowledge/ontology/contexts/BC-HR/CON-HR-003.designation.md
+  - id: CON-HR-004
+    name: Attendance
+    context: BC-HR
+    type: entity
+    status: active
+    file: knowledge/ontology/contexts/BC-HR/CON-HR-004.attendance.md
+  - id: CON-HR-005
+    name: LeaveRequest
+    context: BC-HR
+    type: aggregate
+    status: active
+    file: knowledge/ontology/contexts/BC-HR/CON-HR-005.leave-request.md
+  - id: CON-HR-006
+    name: LeaveType
+    context: BC-HR
+    type: value_object
+    status: active
+    file: knowledge/ontology/contexts/BC-HR/CON-HR-006.leave-type.md
+  - id: CON-HR-007
+    name: Payroll
+    context: BC-HR
+    type: aggregate
+    status: active
+    file: knowledge/ontology/contexts/BC-HR/CON-HR-007.payroll.md
+  - id: CON-HR-008
+    name: Payslip
+    context: BC-HR
+    type: entity
+    status: active
+    file: knowledge/ontology/contexts/BC-HR/CON-HR-008.payslip.md
+  - id: CON-HR-009
+    name: Salary
+    context: BC-HR
+    type: value_object
+    status: active
+    file: knowledge/ontology/contexts/BC-HR/CON-HR-009.salary.md
+  - id: CON-HR-010
+    name: EmployeeHired
+    context: BC-HR
+    type: event
+    status: active
+    file: knowledge/ontology/contexts/BC-HR/CON-HR-010.employee-hired.md
+  - id: CON-HR-011
+    name: LeaveRequested
+    context: BC-HR
+    type: event
+    status: active
+    file: knowledge/ontology/contexts/BC-HR/CON-HR-011.leave-requested.md
+  - id: CON-HR-012
+    name: LeaveApproved
+    context: BC-HR
+    type: event
+    status: active
+    file: knowledge/ontology/contexts/BC-HR/CON-HR-012.leave-approved.md
+  - id: CON-HR-013
+    name: PayrollProcessed
+    context: BC-HR
+    type: event
+    status: active
+    file: knowledge/ontology/contexts/BC-HR/CON-HR-013.payroll-processed.md
+  - id: CON-HR-014
+    name: HireEmployee
+    context: BC-HR
+    type: command
+    status: active
+    file: knowledge/ontology/contexts/BC-HR/CON-HR-014.hire-employee.md
+  - id: CON-HR-015
+    name: RequestLeave
+    context: BC-HR
+    type: command
+    status: active
+    file: knowledge/ontology/contexts/BC-HR/CON-HR-015.request-leave.md
+  - id: CON-HR-016
+    name: ProcessPayroll
+    context: BC-HR
+    type: command
+    status: active
+    file: knowledge/ontology/contexts/BC-HR/CON-HR-016.process-payroll.md
+  - id: CON-HR-017
+    name: LeaveApprovalPolicy
+    context: BC-HR
+    type: policy
+    status: active
+    file: knowledge/ontology/contexts/BC-HR/CON-HR-017.leave-approval-policy.md
+  - id: CON-HR-018
+    name: OvertimePolicy
+    context: BC-HR
+    type: policy
+    status: active
+    file: knowledge/ontology/contexts/BC-HR/CON-HR-018.overtime-policy.md
+  # BC-AI Concepts
+  - id: CON-AI-001
+    name: Workflow
+    context: BC-AI
+    type: aggregate
+    status: active
+    file: knowledge/ontology/contexts/BC-AI/CON-AI-001.workflow.md
+  - id: CON-AI-002
+    name: WorkflowStep
+    context: BC-AI
+    type: entity
+    status: active
+    file: knowledge/ontology/contexts/BC-AI/CON-AI-002.workflow-step.md
+  - id: CON-AI-003
+    name: Prediction
+    context: BC-AI
+    type: aggregate
+    status: active
+    file: knowledge/ontology/contexts/BC-AI/CON-AI-003.prediction.md
+  - id: CON-AI-004
+    name: AnomalyDetection
+    context: BC-AI
+    type: entity
+    status: active
+    file: knowledge/ontology/contexts/BC-AI/CON-AI-004.anomaly-detection.md
+  - id: CON-AI-005
+    name: AIModel
+    context: BC-AI
+    type: entity
+    status: active
+    file: knowledge/ontology/contexts/BC-AI/CON-AI-005.ai-model.md
+  - id: CON-AI-006
+    name: TrainingData
+    context: BC-AI
+    type: value_object
+    status: active
+    file: knowledge/ontology/contexts/BC-AI/CON-AI-006.training-data.md
+  - id: CON-AI-007
+    name: PredictionResult
+    context: BC-AI
+    type: value_object
+    status: active
+    file: knowledge/ontology/contexts/BC-AI/CON-AI-007.prediction-result.md
+  - id: CON-AI-008
+    name: AutomationTrigger
+    context: BC-AI
+    type: value_object
+    status: active
+    file: knowledge/ontology/contexts/BC-AI/CON-AI-008.automation-trigger.md
+  - id: CON-AI-009
+    name: WorkflowCreated
+    context: BC-AI
+    type: event
+    status: active
+    file: knowledge/ontology/contexts/BC-AI/CON-AI-009.workflow-created.md
+  - id: CON-AI-010
+    name: PredictionGenerated
+    context: BC-AI
+    type: event
+    status: active
+    file: knowledge/ontology/contexts/BC-AI/CON-AI-010.prediction-generated.md
+  - id: CON-AI-011
+    name: AnomalyDetected
+    context: BC-AI
+    type: event
+    status: active
+    file: knowledge/ontology/contexts/BC-AI/CON-AI-011.anomaly-detected.md
+  - id: CON-AI-012
+    name: CreateWorkflow
+    context: BC-AI
+    type: command
+    status: active
+    file: knowledge/ontology/contexts/BC-AI/CON-AI-012.create-workflow.md
+  - id: CON-AI-013
+    name: RunPrediction
+    context: BC-AI
+    type: command
+    status: active
+    file: knowledge/ontology/contexts/BC-AI/CON-AI-013.run-prediction.md
+  - id: CON-AI-014
+    name: TrainModel
+    context: BC-AI
+    type: command
+    status: active
+    file: knowledge/ontology/contexts/BC-AI/CON-AI-014.train-model.md
+  - id: CON-AI-015
+    name: ModelAccuracyPolicy
+    context: BC-AI
+    type: policy
+    status: active
+    file: knowledge/ontology/contexts/BC-AI/CON-AI-015.model-accuracy-policy.md
+  - id: CON-AI-016
+    name: AutomationSafetyPolicy
+    context: BC-AI
+    type: policy
+    status: active
+    file: knowledge/ontology/contexts/BC-AI/CON-AI-016.automation-safety-policy.md
