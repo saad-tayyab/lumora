@@ -1,0 +1,154 @@
+{
+  "$schema": "https://opencode.ai/config.json",
+  "logLevel": "INFO",
+  "autoupdate": "notify",
+  "share": "manual",
+  "snapshot": true,
+
+  "instructions": [
+    "README.md",
+    "knowledge/constitution/DOMAIN.md",
+    "knowledge/constitution/ENGINEERING.md",
+    "knowledge/constitution/AI.md",
+    "knowledge/constitution/QUALITY.md",
+    ".ai/system/system-prompt.md"
+  ],
+
+  "references": {
+    "knowledge": {
+      "path": "knowledge",
+      "description": "Knowledge Repository (SSOT). Contains ontology, business rules, workflows, glossary, and all domain knowledge."
+    },
+    "engineering": {
+      "path": "engineering",
+      "description": "Engineering standards for frontend, backend, database, API, testing, deployment, security, architecture, performance, and observability."
+    },
+    "ai": {
+      "path": ".ai",
+      "description": "AI operating system. Agents, prompts, playbooks, memory, contexts, checklists, and system prompts."
+    }
+  },
+
+  "formatter": {
+    "command": ["bunx", "@biomejs/biome", "check", "--write"],
+    "extensions": ["ts", "tsx", "js", "jsx", "svelte", "json", "jsonc"]
+  },
+
+  "lsp": {
+    "typescript": {
+      "command": ["bunx", "typescript-language-server", "--stdio"],
+      "extensions": ["ts", "tsx", "js", "jsx", "svelte"],
+      "env": {
+        "NODE_OPTIONS": "--experimental-strip-types"
+      }
+    }
+  },
+
+  "agent": {
+    "build": {
+      "steps": 50,
+      "permission": {
+        "edit": "allow",
+        "bash": {
+          "bun *": "allow",
+          "bunx *": "allow",
+          "git *": "allow",
+          "ls *": "allow",
+          "find *": "allow",
+          "cat *": "allow",
+          "mkdir *": "allow",
+          "rm *": "ask",
+          "rmdir *": "ask",
+          "*": "ask"
+        },
+        "read": "allow",
+        "glob": "allow",
+        "grep": "allow",
+        "list": "allow",
+        "todowrite": "allow",
+        "webfetch": "allow",
+        "skill": "allow",
+        "task": "allow",
+        "external_directory": {
+          "knowledge/**": "allow",
+          "engineering/**": "allow",
+          ".ai/**": "allow",
+          "apps/**": "allow",
+          "services/**": "allow",
+          "packages/**": "allow",
+          "tooling/**": "allow",
+          "docs/**": "allow",
+          ".github/**": "allow",
+          "*": "ask"
+        }
+      }
+    },
+    "plan": {
+      "permission": {
+        "edit": "deny",
+        "bash": {
+          "git *": "allow",
+          "ls *": "allow",
+          "find *": "allow",
+          "cat *": "allow",
+          "*": "ask"
+        },
+        "read": "allow",
+        "glob": "allow",
+        "grep": "allow",
+        "list": "allow",
+        "webfetch": "allow",
+        "skill": "allow"
+      }
+    },
+    "explore": {
+      "permission": {
+        "edit": "deny",
+        "bash": {
+          "git *": "allow",
+          "ls *": "allow",
+          "find *": "allow",
+          "cat *": "allow",
+          "*": "ask"
+        },
+        "read": "allow",
+        "glob": "allow",
+        "grep": "allow",
+        "list": "allow",
+        "webfetch": "allow"
+      }
+    }
+  },
+
+  "permission": {
+    "edit": "allow",
+    "bash": {
+      "bun *": "allow",
+      "bunx *": "allow",
+      "git *": "allow",
+      "ls *": "allow",
+      "find *": "allow",
+      "cat *": "allow",
+      "mkdir *": "allow",
+      "*": "ask"
+    },
+    "read": "allow",
+    "glob": "allow",
+    "grep": "allow",
+    "list": "allow",
+    "todowrite": "allow",
+    "webfetch": "allow",
+    "skill": "allow",
+    "task": "allow"
+  },
+
+  "compaction": {
+    "auto": true,
+    "tail_turns": 15
+  },
+
+  "tool_output": {
+    "max_lines": 200,
+    "max_bytes": 8192
+  }
+}
