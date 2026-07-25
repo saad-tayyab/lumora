@@ -1,7 +1,5 @@
 import { db } from '@lumora/database';
 import {
-  type AuditLog,
-  auditLog,
   type Permission,
   permissions,
   type Role,
@@ -355,66 +353,5 @@ export const sessionsRepo = {
       .update(sessions)
       .set({ deletedAt: new Date() })
       .where(and(eq(sessions.userId, userId), eq(sessions.tenantId, tenantId)));
-  },
-};
-
-// ─── Audit Log Repository ───────────────────────────────────────────────────
-// INV-AUDIT-001: Audit log entries are append-only; no updates or deletes.
-
-export const auditLogRepo = {
-  async findById(id: string, tenantId: string): Promise<AuditLog | undefined> {
-    return db.query.auditLog.findFirst({
-      where: and(eq(auditLog.id, id), eq(auditLog.tenantId, tenantId)),
-    });
-  },
-
-  async findMany(
-    tenantId: string,
-    args?: {
-      limit?: number;
-      offset?: number;
-      userId?: string;
-      action?: string;
-      resource?: string;
-    },
-  ): Promise<{ data: AuditLog[]; total: number }> {
-    const { limit = 50, offset = 0, userId, action, resource } = args ?? {};
-    const conditions: SQL[] = [eq(auditLog.tenantId, tenantId)];
-
-    if (userId) {
-      conditions.push(eq(auditLog.userId, userId));
-    }
-    if (action) {
-      conditions.push(eq(auditLog.action, action));
-    }
-    if (resource) {
-      conditions.push(eq(auditLog.resource, resource));
-    }
-
-    const where = and(...conditions);
-
-    const data = await db.query.auditLog.findMany({
-      where,
-      orderBy: asc(auditLog.createdAt),
-      limit,
-      offset,
-    });
-
-    const [totalResult] = await db.select({ count: count() }).from(auditLog).where(where);
-
-    return { data, total: totalResult.count };
-  },
-
-  async create(data: {
-    userId?: string;
-    tenantId: string;
-    action: string;
-    resource: string;
-    resourceId?: string;
-    metadata?: Record<string, unknown>;
-    ipAddress?: string;
-  }): Promise<AuditLog> {
-    const [result] = await db.insert(auditLog).values(data).returning();
-    return result;
   },
 };

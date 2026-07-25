@@ -117,8 +117,8 @@ describe('Audit Service', () => {
           userId: input.userId,
           tenantId: TEST_TENANT_ID,
           action: input.action,
-          entityType: input.entityType,
-          entityId: input.entityId,
+          resource: input.resource,
+          resourceId: input.resourceId,
           oldValues: null,
           newValues: input.newValues,
           ipAddress: input.ipAddress,
@@ -181,9 +181,9 @@ describe('Audit Service', () => {
       );
     });
 
-    it('should throw AuditLogEntityRequiredError when entityType is missing', async () => {
+    it('should throw AuditLogEntityRequiredError when resource is missing', async () => {
       const input = createCreateAuditLogEntryInputFixture({
-        entityType: '',
+        resource: '',
       });
 
       await expect(service.createLogEntry(input, TEST_TENANT_ID)).rejects.toThrow(
@@ -192,9 +192,9 @@ describe('Audit Service', () => {
       expect(mockAuditLogEntriesRepo.create).not.toHaveBeenCalled();
     });
 
-    it('should throw AuditLogEntityRequiredError when entityId is missing', async () => {
+    it('should throw AuditLogEntityRequiredError when resourceId is missing', async () => {
       const input = createCreateAuditLogEntryInputFixture({
-        entityId: '' as unknown as string,
+        resourceId: '' as unknown as string,
       });
 
       await expect(service.createLogEntry(input, TEST_TENANT_ID)).rejects.toThrow(
@@ -203,10 +203,10 @@ describe('Audit Service', () => {
       expect(mockAuditLogEntriesRepo.create).not.toHaveBeenCalled();
     });
 
-    it('should throw AuditLogEntityRequiredError when both entityType and entityId are missing', async () => {
+    it('should throw AuditLogEntityRequiredError when both resource and resourceId are missing', async () => {
       const input = createCreateAuditLogEntryInputFixture({
-        entityType: '',
-        entityId: '' as unknown as string,
+        resource: '',
+        resourceId: '' as unknown as string,
       });
 
       await expect(service.createLogEntry(input, TEST_TENANT_ID)).rejects.toThrow(
@@ -362,7 +362,6 @@ describe('Audit Service', () => {
 
     it('should not return entries from other tenants', async () => {
       const entry = createAuditLogEntryFixture({ tenantId: OTHER_TENANT_ID });
-      // findById returns undefined because tenantId doesn't match
       mockAuditLogEntriesRepo.findById.mockResolvedValue(undefined);
 
       await expect(service.getLogEntry(entry.id, TEST_TENANT_ID)).rejects.toThrow(
@@ -421,8 +420,8 @@ describe('Audit Service', () => {
     it('should pass filter parameters to repo', async () => {
       const query = createAuditLogEntryQueryFixture({
         userId: TEST_USER_ID,
-        entityType: 'JournalEntry',
-        entityId: 'je-00000000-0000-0000-000000000001',
+        resource: 'journal_entry',
+        resourceId: 'je-00000000-0000-0000-000000000001',
         action: 'create',
         startDate: '2026-01-01',
         endDate: '2026-12-31',
@@ -438,8 +437,8 @@ describe('Audit Service', () => {
         TEST_TENANT_ID,
         expect.objectContaining({
           userId: TEST_USER_ID,
-          entityType: 'JournalEntry',
-          entityId: 'je-00000000-0000-0000-000000000001',
+          resource: 'journal_entry',
+          resourceId: 'je-00000000-0000-0000-000000000001',
           action: 'create',
           startDate: '2026-01-01',
           endDate: '2026-12-31',
@@ -464,18 +463,18 @@ describe('Audit Service', () => {
   });
 
   // ═══════════════════════════════════════════════════════════════════════════
-  // GET LOG ENTRIES BY ENTITY
+  // GET LOG ENTRIES BY RESOURCE
   // ═══════════════════════════════════════════════════════════════════════════
 
-  describe('getLogEntriesByEntity', () => {
-    it('should return entries for a specific entity', async () => {
+  describe('getLogEntriesByResource', () => {
+    it('should return entries for a specific resource', async () => {
       const entries = [createAuditLogEntryFixture()];
       const paginated = createPaginatedResultFixture(entries);
 
       mockAuditLogEntriesRepo.findMany.mockResolvedValue(paginated);
 
-      const result = await service.getLogEntriesByEntity(
-        'JournalEntry',
+      const result = await service.getLogEntriesByResource(
+        'journal_entry',
         'je-00000000-0000-0000-000000000001',
         TEST_TENANT_ID,
         createPaginationParamsFixture(),
@@ -485,19 +484,19 @@ describe('Audit Service', () => {
       expect(mockAuditLogEntriesRepo.findMany).toHaveBeenCalledWith(
         TEST_TENANT_ID,
         expect.objectContaining({
-          entityType: 'JournalEntry',
-          entityId: 'je-00000000-0000-0000-000000000001',
+          resource: 'journal_entry',
+          resourceId: 'je-00000000-0000-0000-000000000001',
         }),
       );
     });
 
-    it('should return empty list when entity has no entries', async () => {
+    it('should return empty list when resource has no entries', async () => {
       mockAuditLogEntriesRepo.findMany.mockResolvedValue(
         createPaginatedResultFixture([], { total: 0 }),
       );
 
-      const result = await service.getLogEntriesByEntity(
-        'Account',
+      const result = await service.getLogEntriesByResource(
+        'account',
         'acc-00000000-0000-0000-000000000001',
         TEST_TENANT_ID,
         createPaginationParamsFixture(),
@@ -512,8 +511,8 @@ describe('Audit Service', () => {
         createPaginatedResultFixture([], { total: 0 }),
       );
 
-      await service.getLogEntriesByEntity(
-        'JournalEntry',
+      await service.getLogEntriesByResource(
+        'journal_entry',
         'je-00000000-0000-0000-000000000001',
         TEST_TENANT_ID,
         createPaginationParamsFixture(),
@@ -532,8 +531,8 @@ describe('Audit Service', () => {
 
       const pagination = createPaginationParamsFixture({ limit: 10, offset: 20 });
 
-      await service.getLogEntriesByEntity(
-        'JournalEntry',
+      await service.getLogEntriesByResource(
+        'journal_entry',
         'je-00000000-0000-0000-000000000001',
         TEST_TENANT_ID,
         pagination,
@@ -550,8 +549,8 @@ describe('Audit Service', () => {
         createPaginatedResultFixture([], { total: 0 }),
       );
 
-      await service.getLogEntriesByEntity(
-        'JournalEntry',
+      await service.getLogEntriesByResource(
+        'journal_entry',
         'je-00000000-0000-0000-000000000001',
         OTHER_TENANT_ID,
         createPaginationParamsFixture(),

@@ -16,7 +16,7 @@ import type {
 // ─── Business Rules Reference ────────────────────────────────────────────────
 //
 // INV-AUDIT-001: Audit log entries are append-only; no updates or deletes permitted.
-// INV-AUDIT-002: Every audit log entry must reference an entity type and entity ID.
+// INV-AUDIT-002: Every audit log entry must reference a resource and resource ID.
 // INV-AUDIT-003: Audit log entries must include old and new values for update operations.
 // BR-021: All state-changing operations must create an audit log entry.
 // BR-022: Audit log entries must not be modifiable or deletable.
@@ -32,8 +32,8 @@ export async function createLogEntry(
   data: CreateAuditLogEntryRequest,
   tenantId: string,
 ): Promise<AuditLogEntry> {
-  // INV-AUDIT-002: Must reference an entity type and entity ID
-  if (!data.entityType || !data.entityId) {
+  // INV-AUDIT-002: Must reference a resource and resource ID
+  if (!data.resource || !data.resourceId) {
     throw new AuditLogEntityRequiredError();
   }
 
@@ -49,8 +49,8 @@ export async function createLogEntry(
       userId: data.userId,
       tenantId,
       action: data.action,
-      entityType: data.entityType,
-      entityId: data.entityId,
+      resource: data.resource,
+      resourceId: data.resourceId,
       oldValues: data.oldValues ?? null,
       newValues: data.newValues ?? null,
       ipAddress: data.ipAddress,
@@ -81,25 +81,25 @@ export async function listLogEntries(
     limit: query.limit,
     offset: query.offset,
     userId: query.userId,
-    entityType: query.entityType,
-    entityId: query.entityId,
+    resource: query.resource,
+    resourceId: query.resourceId,
     action: query.action,
     startDate: query.startDate,
     endDate: query.endDate,
   });
 }
 
-export async function getLogEntriesByEntity(
-  entityType: string,
-  entityId: string,
+export async function getLogEntriesByResource(
+  resource: string,
+  resourceId: string,
   tenantId: string,
   pagination: PaginationParams,
 ): Promise<PaginatedResult<AuditLogEntry>> {
   return auditLogEntriesRepository.findMany(tenantId, {
     limit: pagination.limit,
     offset: pagination.offset,
-    entityType,
-    entityId,
+    resource,
+    resourceId,
   });
 }
 

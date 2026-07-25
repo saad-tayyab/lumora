@@ -47,8 +47,8 @@ export const auditLogEntriesRepository = {
       offset?: number;
       orderBy?: SQL;
       userId?: string;
-      entityType?: string;
-      entityId?: string;
+      resource?: string;
+      resourceId?: string;
       action?: string;
       startDate?: string;
       endDate?: string;
@@ -59,8 +59,8 @@ export const auditLogEntriesRepository = {
       offset = 0,
       orderBy = asc(auditLogEntries.createdAt),
       userId,
-      entityType,
-      entityId,
+      resource,
+      resourceId,
       action,
       startDate,
       endDate,
@@ -69,8 +69,8 @@ export const auditLogEntriesRepository = {
     const conditions: SQL[] = [eq(auditLogEntries.tenantId, tenantId)];
 
     if (userId) conditions.push(eq(auditLogEntries.userId, userId));
-    if (entityType) conditions.push(eq(auditLogEntries.entityType, entityType));
-    if (entityId) conditions.push(eq(auditLogEntries.entityId, entityId));
+    if (resource) conditions.push(eq(auditLogEntries.resource, resource));
+    if (resourceId) conditions.push(eq(auditLogEntries.resourceId, resourceId));
     if (action) conditions.push(eq(auditLogEntries.action, action));
     if (startDate) conditions.push(gte(auditLogEntries.createdAt, new Date(startDate)));
     if (endDate) conditions.push(lte(auditLogEntries.createdAt, new Date(endDate)));
@@ -87,50 +87,5 @@ export const auditLogEntriesRepository = {
     const total = await db.select({ count: count() }).from(auditLogEntries).where(where);
 
     return { data, total: total[0].count, limit, offset };
-  },
-
-  /**
-   * Find all audit log entries for a specific entity, scoped to tenant.
-   */
-  async findByEntity(
-    entityType: string,
-    entityId: string,
-    tenantId: string,
-  ): Promise<AuditLogEntry[]> {
-    return db.query.auditLogEntries.findMany({
-      where: and(
-        eq(auditLogEntries.entityType, entityType),
-        eq(auditLogEntries.entityId, entityId),
-        eq(auditLogEntries.tenantId, tenantId),
-      ),
-      orderBy: asc(auditLogEntries.createdAt),
-    });
-  },
-
-  /**
-   * Find all audit log entries for a specific user, scoped to tenant.
-   */
-  async findByUserId(userId: string, tenantId: string): Promise<AuditLogEntry[]> {
-    return db.query.auditLogEntries.findMany({
-      where: and(eq(auditLogEntries.userId, userId), eq(auditLogEntries.tenantId, tenantId)),
-      orderBy: asc(auditLogEntries.createdAt),
-    });
-  },
-
-  /**
-   * Count audit log entries for a specific entity, scoped to tenant.
-   */
-  async countByEntity(entityType: string, entityId: string, tenantId: string): Promise<number> {
-    const result = await db
-      .select({ count: count() })
-      .from(auditLogEntries)
-      .where(
-        and(
-          eq(auditLogEntries.entityType, entityType),
-          eq(auditLogEntries.entityId, entityId),
-          eq(auditLogEntries.tenantId, tenantId),
-        ),
-      );
-    return result[0].count;
   },
 };

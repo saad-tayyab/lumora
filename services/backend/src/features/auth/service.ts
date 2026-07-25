@@ -1,3 +1,4 @@
+import { auditLog } from '../audit/client';
 import {
   CannotDeactivateSelfError,
   CannotDeleteSystemRoleError,
@@ -15,14 +16,7 @@ import {
   UserRoleAlreadyExistsError,
   UserRoleNotFoundError,
 } from './errors';
-import {
-  auditLogRepo,
-  permissionsRepo,
-  rolesRepo,
-  sessionsRepo,
-  userRolesRepo,
-  usersRepo,
-} from './repo';
+import { permissionsRepo, rolesRepo, sessionsRepo, userRolesRepo, usersRepo } from './repo';
 import type {
   CreateUserRequest,
   ListResponse,
@@ -62,13 +56,13 @@ export async function createUser(
   });
 
   // BR-021: All state-changing operations create an audit log entry
-  await auditLogRepo.create({
-    userId: actorUserId,
-    tenantId,
-    action: 'USER_CREATED',
+  await auditLog({
+    action: 'create',
     resource: 'user',
     resourceId: user.id,
-    metadata: { email: data.email, username: data.username },
+    tenantId,
+    userId: actorUserId,
+    newValues: { email: data.email, username: data.username, name: data.name },
   });
 
   return user;
@@ -146,13 +140,19 @@ export async function updateUser(
 
   const user = await usersRepo.update(id, tenantId, data);
 
-  await auditLogRepo.create({
-    userId: actorUserId,
-    tenantId,
-    action: 'USER_UPDATED',
+  await auditLog({
+    action: 'update',
     resource: 'user',
     resourceId: id,
-    metadata: { changes: data },
+    tenantId,
+    userId: actorUserId,
+    oldValues: {
+      name: existing.name,
+      email: existing.email,
+      username: existing.username,
+      status: existing.status,
+    },
+    newValues: data,
   });
 
   return user;
@@ -178,13 +178,13 @@ export async function deleteUser(id: string, tenantId: string, actorUserId: stri
   // Invalidate all sessions for this user
   await sessionsRepo.deleteAllForUser(id, tenantId);
 
-  await auditLogRepo.create({
-    userId: actorUserId,
-    tenantId,
-    action: 'USER_DELETED',
+  await auditLog({
+    action: 'delete',
     resource: 'user',
     resourceId: id,
-    metadata: { email: existing.email, username: existing.username },
+    tenantId,
+    userId: actorUserId,
+    oldValues: { email: existing.email, username: existing.username },
   });
 }
 
@@ -212,13 +212,13 @@ export async function createRole(
     tenantId,
   });
 
-  await auditLogRepo.create({
-    userId: actorUserId,
-    tenantId,
-    action: 'ROLE_CREATED',
+  await auditLog({
+    action: 'create',
     resource: 'role',
     resourceId: role.id,
-    metadata: { name: data.name, isSystem: data.isSystem },
+    tenantId,
+    userId: actorUserId,
+    newValues: { name: data.name, isSystem: data.isSystem },
   });
 
   return role;
@@ -279,13 +279,14 @@ export async function updateRole(
 
   const role = await rolesRepo.update(id, tenantId, data);
 
-  await auditLogRepo.create({
-    userId: actorUserId,
-    tenantId,
-    action: 'ROLE_UPDATED',
+  await auditLog({
+    action: 'update',
     resource: 'role',
     resourceId: id,
-    metadata: { changes: data },
+    tenantId,
+    userId: actorUserId,
+    oldValues: { name: existing.name, description: existing.description },
+    newValues: data,
   });
 
   return role;
@@ -314,13 +315,13 @@ export async function deleteRole(id: string, tenantId: string, actorUserId: stri
   // Soft-delete the role (INV-AUTH-003)
   await rolesRepo.softDelete(id, tenantId);
 
-  await auditLogRepo.create({
-    userId: actorUserId,
-    tenantId,
-    action: 'ROLE_DELETED',
+  await auditLog({
+    action: 'delete',
     resource: 'role',
     resourceId: id,
-    metadata: { name: existing.name },
+    tenantId,
+    userId: actorUserId,
+    oldValues: { name: existing.name },
   });
 }
 
@@ -357,13 +358,13 @@ export async function assignRole(
 
   const assignment = await userRolesRepo.assign({ userId, roleId });
 
-  await auditLogRepo.create({
-    userId: actorUserId,
-    tenantId,
-    action: 'ROLE_ASSIGNED',
+  await auditLog({
+    action: 'assign',
     resource: 'user_role',
     resourceId: assignment.id,
-    metadata: { userId, roleId, roleName: role.name },
+    tenantId,
+    userId: actorUserId,
+    newValues: { userId, roleId, roleName: role.name },
   });
 
   return assignment;
@@ -389,13 +390,13 @@ export async function revokeRole(
 
   await userRolesRepo.remove(userId, roleId);
 
-  await auditLogRepo.create({
-    userId: actorUserId,
-    tenantId,
-    action: 'ROLE_REVOKED',
+  await auditLog({
+    action: 'revoke',
     resource: 'user_role',
     resourceId: existingAssignment.id,
-    metadata: { userId, roleId, roleName: role.name },
+    tenantId,
+    userId: actorUserId,
+    oldValues: { userId, roleId, roleName: role.name },
   });
 }
 
@@ -447,13 +448,13 @@ export async function createPermission(
     tenantId,
   });
 
-  await auditLogRepo.create({
-    userId: actorUserId,
-    tenantId,
-    action: 'PERMISSION_CREATED',
+  await auditLog({
+    action: 'create',
     resource: 'permission',
     resourceId: permission.id,
-    metadata: { roleId: data.roleId, resource: data.resource, action: data.action },
+    tenantId,
+    userId: actorUserId,
+    newValues: { roleId: data.roleId, resource: data.resource, action: data.action },
   });
 
   return permission;
@@ -512,13 +513,13 @@ export async function deletePermission(
 
   await permissionsRepo.delete(id, tenantId);
 
-  await auditLogRepo.create({
-    userId: actorUserId,
-    tenantId,
-    action: 'PERMISSION_DELETED',
+  await auditLog({
+    action: 'delete',
     resource: 'permission',
     resourceId: id,
-    metadata: { roleId: existing.roleId, resource: existing.resource, action: existing.action },
+    tenantId,
+    userId: actorUserId,
+    oldValues: { roleId: existing.roleId, resource: existing.resource, action: existing.action },
   });
 }
 
@@ -554,13 +555,13 @@ export async function invalidateSession(
 
   await sessionsRepo.softDelete(id, tenantId);
 
-  await auditLogRepo.create({
-    userId: actorUserId,
-    tenantId,
-    action: 'SESSION_INVALIDATED',
+  await auditLog({
+    action: 'invalidate',
     resource: 'session',
     resourceId: id,
-    metadata: { sessionUserId: existing.userId },
+    tenantId,
+    userId: actorUserId,
+    oldValues: { sessionUserId: existing.userId },
   });
 }
 
@@ -576,12 +577,12 @@ export async function invalidateAllUserSessions(
 
   await sessionsRepo.deleteAllForUser(userId, tenantId);
 
-  await auditLogRepo.create({
-    userId: actorUserId,
-    tenantId,
-    action: 'ALL_SESSIONS_INVALIDATED',
+  await auditLog({
+    action: 'invalidate_all',
     resource: 'session',
-    metadata: { targetUserId: userId },
+    tenantId,
+    userId: actorUserId,
+    oldValues: { targetUserId: userId },
   });
 }
 
@@ -594,9 +595,10 @@ export async function listAuditLogs(
     action?: string;
     resource?: string;
   },
-): Promise<ListResponse<Awaited<ReturnType<typeof auditLogRepo.findById>>>> {
+): Promise<ListResponse<Awaited<ReturnType<typeof usersRepo.findById>>>> {
+  const { listLogEntries } = await import('../audit/service');
   const offset = (params.page - 1) * params.limit;
-  const { data, total } = await auditLogRepo.findMany(tenantId, {
+  const result = await listLogEntries(tenantId, {
     limit: params.limit,
     offset,
     userId: params.userId,
@@ -605,8 +607,8 @@ export async function listAuditLogs(
   });
 
   return {
-    data,
-    total,
+    data: result.data,
+    total: result.total,
     page: params.page,
     limit: params.limit,
   };

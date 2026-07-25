@@ -92,8 +92,8 @@ describe('AuditLogEntityRequiredError', () => {
   it('should reference INV-AUDIT-002 in the message', () => {
     const error = new AuditLogEntityRequiredError();
     expect(error.message).toContain('INV-AUDIT-002');
-    expect(error.message).toContain('entity type');
-    expect(error.message).toContain('entity ID');
+    expect(error.message).toContain('resource');
+    expect(error.message).toContain('resource ID');
   });
 });
 

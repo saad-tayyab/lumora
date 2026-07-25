@@ -63,32 +63,32 @@ export const getLogEntry = api(
 );
 
 /**
- * GET /audit/entries/entity/:entityType/:entityId
- * Get all audit log entries for a specific entity.
+ * GET /audit/entries/resource/:resource/:resourceId
+ * Get all audit log entries for a specific resource.
  * Useful for viewing the full history of any domain object.
  */
-export const getLogEntriesByEntity = api(
+export const getLogEntriesByResource = api(
   {
     expose: true,
     method: 'GET',
-    path: '/audit/entries/entity/:entityType/:entityId',
+    path: '/audit/entries/resource/:resource/:resourceId',
   },
   async (
     {
-      entityType,
-      entityId,
+      resource,
+      resourceId,
       limit,
       offset,
     }: {
-      entityType: string;
-      entityId: string;
+      resource: string;
+      resourceId: string;
       limit?: number;
       offset?: number;
     },
     { headers }: { headers: Record<string, string> },
   ): Promise<PaginatedResponse<AuditLogEntryResponse>> => {
     const auth = await requireAuth(headers);
-    return service.getLogEntriesByEntity(entityType, entityId, auth.tenantId, {
+    return service.getLogEntriesByResource(resource, resourceId, auth.tenantId, {
       limit: limit ?? 50,
       offset: offset ?? 0,
     });

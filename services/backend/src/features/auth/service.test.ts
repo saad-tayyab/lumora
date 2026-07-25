@@ -66,10 +66,6 @@ const mockTx = {
       findFirst: vi.fn().mockResolvedValue(undefined),
       findMany: vi.fn().mockResolvedValue([]),
     },
-    auditLog: {
-      findFirst: vi.fn().mockResolvedValue(undefined),
-      findMany: vi.fn().mockResolvedValue([]),
-    },
   },
 };
 
@@ -107,7 +103,6 @@ vi.mock('@lumora/database/schema', () => ({
   userRoles: createMockTable('user_roles'),
   permissions: createMockTable('permissions'),
   sessions: createMockTable('sessions'),
-  auditLog: createMockTable('audit_log'),
 }));
 
 vi.mock('drizzle-orm', async (importOriginal) => {
@@ -125,63 +120,52 @@ vi.mock('drizzle-orm', async (importOriginal) => {
 
 // ─── Mock Repo Module ─────────────────────────────────────────────────────
 
-const {
-  mockUsersRepo,
-  mockRolesRepo,
-  mockUserRolesRepo,
-  mockPermissionsRepo,
-  mockSessionsRepo,
-  mockAuditLogRepo,
-} = vi.hoisted(() => ({
-  mockUsersRepo: {
-    findById: vi.fn(),
-    findByEmail: vi.fn(),
-    findByUsername: vi.fn(),
-    findMany: vi.fn(),
-    create: vi.fn(),
-    update: vi.fn(),
-    softDelete: vi.fn(),
-    countByTenantId: vi.fn(),
-  },
-  mockRolesRepo: {
-    findById: vi.fn(),
-    findByName: vi.fn(),
-    findMany: vi.fn(),
-    create: vi.fn(),
-    update: vi.fn(),
-    softDelete: vi.fn(),
-  },
-  mockUserRolesRepo: {
-    findByUserAndRole: vi.fn(),
-    findByUserId: vi.fn(),
-    findByRoleId: vi.fn(),
-    assign: vi.fn(),
-    remove: vi.fn(),
-    removeAllForUser: vi.fn(),
-  },
-  mockPermissionsRepo: {
-    findById: vi.fn(),
-    findByRoleId: vi.fn(),
-    findByRoleAndResource: vi.fn(),
-    findMany: vi.fn(),
-    create: vi.fn(),
-    delete: vi.fn(),
-    deleteByRoleId: vi.fn(),
-  },
-  mockSessionsRepo: {
-    findById: vi.fn(),
-    findByToken: vi.fn(),
-    findManyByUserId: vi.fn(),
-    findMany: vi.fn(),
-    softDelete: vi.fn(),
-    deleteAllForUser: vi.fn(),
-  },
-  mockAuditLogRepo: {
-    findById: vi.fn(),
-    findMany: vi.fn(),
-    create: vi.fn(),
-  },
-}));
+const { mockUsersRepo, mockRolesRepo, mockUserRolesRepo, mockPermissionsRepo, mockSessionsRepo } =
+  vi.hoisted(() => ({
+    mockUsersRepo: {
+      findById: vi.fn(),
+      findByEmail: vi.fn(),
+      findByUsername: vi.fn(),
+      findMany: vi.fn(),
+      create: vi.fn(),
+      update: vi.fn(),
+      softDelete: vi.fn(),
+      countByTenantId: vi.fn(),
+    },
+    mockRolesRepo: {
+      findById: vi.fn(),
+      findByName: vi.fn(),
+      findMany: vi.fn(),
+      create: vi.fn(),
+      update: vi.fn(),
+      softDelete: vi.fn(),
+    },
+    mockUserRolesRepo: {
+      findByUserAndRole: vi.fn(),
+      findByUserId: vi.fn(),
+      findByRoleId: vi.fn(),
+      assign: vi.fn(),
+      remove: vi.fn(),
+      removeAllForUser: vi.fn(),
+    },
+    mockPermissionsRepo: {
+      findById: vi.fn(),
+      findByRoleId: vi.fn(),
+      findByRoleAndResource: vi.fn(),
+      findMany: vi.fn(),
+      create: vi.fn(),
+      delete: vi.fn(),
+      deleteByRoleId: vi.fn(),
+    },
+    mockSessionsRepo: {
+      findById: vi.fn(),
+      findByToken: vi.fn(),
+      findManyByUserId: vi.fn(),
+      findMany: vi.fn(),
+      softDelete: vi.fn(),
+      deleteAllForUser: vi.fn(),
+    },
+  }));
 
 vi.mock('./repo', () => ({
   usersRepo: mockUsersRepo,
@@ -189,7 +173,26 @@ vi.mock('./repo', () => ({
   userRolesRepo: mockUserRolesRepo,
   permissionsRepo: mockPermissionsRepo,
   sessionsRepo: mockSessionsRepo,
-  auditLogRepo: mockAuditLogRepo,
+}));
+
+// ─── Mock Audit Client ──────────────────────────────────────────────────────
+
+const { mockAuditLog } = vi.hoisted(() => ({
+  mockAuditLog: vi.fn(),
+}));
+
+vi.mock('../audit/client', () => ({
+  auditLog: mockAuditLog,
+}));
+
+// ─── Mock Audit Service (for listLogEntries dynamic import) ─────────────────
+
+const { mockListLogEntries } = vi.hoisted(() => ({
+  mockListLogEntries: vi.fn(),
+}));
+
+vi.mock('../audit/service', () => ({
+  listLogEntries: mockListLogEntries,
 }));
 
 // ─── Import Errors and Service After Mocking ──────────────────────────────
@@ -232,7 +235,7 @@ describe('Auth Service', () => {
         mockUsersRepo.findByEmail.mockResolvedValue(undefined);
         mockUsersRepo.findByUsername.mockResolvedValue(undefined);
         mockUsersRepo.create.mockResolvedValue(user);
-        mockAuditLogRepo.create.mockResolvedValue(createAuditLogFixture());
+        mockAuditLog.mockResolvedValue(undefined);
 
         const result = await service.createUser(
           { email: user.email, name: user.name, username: user.username },
@@ -260,7 +263,7 @@ describe('Auth Service', () => {
         mockUsersRepo.findByEmail.mockResolvedValue(undefined);
         mockUsersRepo.findByUsername.mockResolvedValue(undefined);
         mockUsersRepo.create.mockResolvedValue(user);
-        mockAuditLogRepo.create.mockResolvedValue(createAuditLogFixture());
+        mockAuditLog.mockResolvedValue(undefined);
 
         const result = await service.createUser(
           { email: user.email, name: user.name, username: user.username, status: 'suspended' },
@@ -280,7 +283,7 @@ describe('Auth Service', () => {
         mockUsersRepo.findByEmail.mockResolvedValue(undefined);
         mockUsersRepo.findByUsername.mockResolvedValue(undefined);
         mockUsersRepo.create.mockResolvedValue(user);
-        mockAuditLogRepo.create.mockResolvedValue(createAuditLogFixture());
+        mockAuditLog.mockResolvedValue(undefined);
 
         await service.createUser(
           { email: user.email, name: user.name, username: user.username },
@@ -288,11 +291,11 @@ describe('Auth Service', () => {
           TEST_USER_ID,
         );
 
-        expect(mockAuditLogRepo.create).toHaveBeenCalledWith(
+        expect(mockAuditLog).toHaveBeenCalledWith(
           expect.objectContaining({
             userId: TEST_USER_ID,
             tenantId: TEST_TENANT_ID,
-            action: 'USER_CREATED',
+            action: 'create',
             resource: 'user',
             resourceId: user.id,
           }),
@@ -337,7 +340,7 @@ describe('Auth Service', () => {
         });
         mockUsersRepo.findByUsername.mockResolvedValue(undefined);
         mockUsersRepo.create.mockResolvedValue(user);
-        mockAuditLogRepo.create.mockResolvedValue(createAuditLogFixture());
+        mockAuditLog.mockResolvedValue(undefined);
 
         const result = await service.createUser(
           { email: user.email, name: user.name, username: user.username },
@@ -360,7 +363,7 @@ describe('Auth Service', () => {
           },
         );
         mockUsersRepo.create.mockResolvedValue(user);
-        mockAuditLogRepo.create.mockResolvedValue(createAuditLogFixture());
+        mockAuditLog.mockResolvedValue(undefined);
 
         const result = await service.createUser(
           { email: user.email, name: user.name, username: user.username },
@@ -460,7 +463,7 @@ describe('Auth Service', () => {
 
         mockUsersRepo.findById.mockResolvedValue(existing);
         mockUsersRepo.update.mockResolvedValue(updated);
-        mockAuditLogRepo.create.mockResolvedValue(createAuditLogFixture());
+        mockAuditLog.mockResolvedValue(undefined);
 
         const result = await service.updateUser(
           existing.id,
@@ -482,7 +485,7 @@ describe('Auth Service', () => {
         mockUsersRepo.findById.mockResolvedValue(existing);
         mockUsersRepo.findByEmail.mockResolvedValue(undefined);
         mockUsersRepo.update.mockResolvedValue(updated);
-        mockAuditLogRepo.create.mockResolvedValue(createAuditLogFixture());
+        mockAuditLog.mockResolvedValue(undefined);
 
         const result = await service.updateUser(
           existing.id,
@@ -501,7 +504,7 @@ describe('Auth Service', () => {
         mockUsersRepo.findById.mockResolvedValue(existing);
         mockUsersRepo.findByUsername.mockResolvedValue(undefined);
         mockUsersRepo.update.mockResolvedValue(updated);
-        mockAuditLogRepo.create.mockResolvedValue(createAuditLogFixture());
+        mockAuditLog.mockResolvedValue(undefined);
 
         const result = await service.updateUser(
           existing.id,
@@ -519,7 +522,7 @@ describe('Auth Service', () => {
 
         mockUsersRepo.findById.mockResolvedValue(existing);
         mockUsersRepo.update.mockResolvedValue(updated);
-        mockAuditLogRepo.create.mockResolvedValue(createAuditLogFixture());
+        mockAuditLog.mockResolvedValue(undefined);
 
         const result = await service.updateUser(
           existing.id,
@@ -537,15 +540,15 @@ describe('Auth Service', () => {
 
         mockUsersRepo.findById.mockResolvedValue(existing);
         mockUsersRepo.update.mockResolvedValue(updated);
-        mockAuditLogRepo.create.mockResolvedValue(createAuditLogFixture());
+        mockAuditLog.mockResolvedValue(undefined);
 
         await service.updateUser(existing.id, { name: 'Updated' }, TEST_TENANT_ID, TEST_USER_ID);
 
-        expect(mockAuditLogRepo.create).toHaveBeenCalledWith(
+        expect(mockAuditLog).toHaveBeenCalledWith(
           expect.objectContaining({
             userId: TEST_USER_ID,
             tenantId: TEST_TENANT_ID,
-            action: 'USER_UPDATED',
+            action: 'update',
             resource: 'user',
             resourceId: existing.id,
           }),
@@ -595,7 +598,7 @@ describe('Auth Service', () => {
 
         mockUsersRepo.findById.mockResolvedValue(existing);
         mockUsersRepo.update.mockResolvedValue(updated);
-        mockAuditLogRepo.create.mockResolvedValue(createAuditLogFixture());
+        mockAuditLog.mockResolvedValue(undefined);
 
         const result = await service.updateUser(
           existing.id,
@@ -614,7 +617,7 @@ describe('Auth Service', () => {
 
         mockUsersRepo.findById.mockResolvedValue(existing);
         mockUsersRepo.update.mockResolvedValue(updated);
-        mockAuditLogRepo.create.mockResolvedValue(createAuditLogFixture());
+        mockAuditLog.mockResolvedValue(undefined);
 
         const result = await service.updateUser(
           existing.id,
@@ -653,7 +656,7 @@ describe('Auth Service', () => {
 
         mockUsersRepo.findById.mockResolvedValue(existing);
         mockUsersRepo.update.mockResolvedValue(updated);
-        mockAuditLogRepo.create.mockResolvedValue(createAuditLogFixture());
+        mockAuditLog.mockResolvedValue(undefined);
 
         const result = await service.updateUser(
           existing.id,
@@ -674,7 +677,7 @@ describe('Auth Service', () => {
           return undefined;
         });
         mockUsersRepo.update.mockResolvedValue({ ...existing, email: 'new@example.com' });
-        mockAuditLogRepo.create.mockResolvedValue(createAuditLogFixture());
+        mockAuditLog.mockResolvedValue(undefined);
 
         const result = await service.updateUser(
           existing.id,
@@ -697,7 +700,7 @@ describe('Auth Service', () => {
           },
         );
         mockUsersRepo.update.mockResolvedValue({ ...existing, username: 'newuser' });
-        mockAuditLogRepo.create.mockResolvedValue(createAuditLogFixture());
+        mockAuditLog.mockResolvedValue(undefined);
 
         const result = await service.updateUser(
           existing.id,
@@ -718,7 +721,7 @@ describe('Auth Service', () => {
         mockUsersRepo.softDelete.mockResolvedValue(undefined);
         mockUserRolesRepo.removeAllForUser.mockResolvedValue(undefined);
         mockSessionsRepo.deleteAllForUser.mockResolvedValue(undefined);
-        mockAuditLogRepo.create.mockResolvedValue(createAuditLogFixture());
+        mockAuditLog.mockResolvedValue(undefined);
 
         await service.deleteUser(existing.id, TEST_TENANT_ID, TEST_USER_ID);
 
@@ -732,7 +735,7 @@ describe('Auth Service', () => {
         mockUsersRepo.softDelete.mockResolvedValue(undefined);
         mockUserRolesRepo.removeAllForUser.mockResolvedValue(undefined);
         mockSessionsRepo.deleteAllForUser.mockResolvedValue(undefined);
-        mockAuditLogRepo.create.mockResolvedValue(createAuditLogFixture());
+        mockAuditLog.mockResolvedValue(undefined);
 
         await service.deleteUser(existing.id, TEST_TENANT_ID, TEST_USER_ID);
 
@@ -746,7 +749,7 @@ describe('Auth Service', () => {
         mockUsersRepo.softDelete.mockResolvedValue(undefined);
         mockUserRolesRepo.removeAllForUser.mockResolvedValue(undefined);
         mockSessionsRepo.deleteAllForUser.mockResolvedValue(undefined);
-        mockAuditLogRepo.create.mockResolvedValue(createAuditLogFixture());
+        mockAuditLog.mockResolvedValue(undefined);
 
         await service.deleteUser(existing.id, TEST_TENANT_ID, TEST_USER_ID);
 
@@ -760,15 +763,15 @@ describe('Auth Service', () => {
         mockUsersRepo.softDelete.mockResolvedValue(undefined);
         mockUserRolesRepo.removeAllForUser.mockResolvedValue(undefined);
         mockSessionsRepo.deleteAllForUser.mockResolvedValue(undefined);
-        mockAuditLogRepo.create.mockResolvedValue(createAuditLogFixture());
+        mockAuditLog.mockResolvedValue(undefined);
 
         await service.deleteUser(existing.id, TEST_TENANT_ID, TEST_USER_ID);
 
-        expect(mockAuditLogRepo.create).toHaveBeenCalledWith(
+        expect(mockAuditLog).toHaveBeenCalledWith(
           expect.objectContaining({
             userId: TEST_USER_ID,
             tenantId: TEST_TENANT_ID,
-            action: 'USER_DELETED',
+            action: 'delete',
             resource: 'user',
             resourceId: existing.id,
           }),
@@ -815,7 +818,7 @@ describe('Auth Service', () => {
 
         mockRolesRepo.findByName.mockResolvedValue(undefined);
         mockRolesRepo.create.mockResolvedValue(role);
-        mockAuditLogRepo.create.mockResolvedValue(createAuditLogFixture());
+        mockAuditLog.mockResolvedValue(undefined);
 
         const result = await service.createRole(
           { name: role.name, description: role.description },
@@ -840,7 +843,7 @@ describe('Auth Service', () => {
 
         mockRolesRepo.findByName.mockResolvedValue(undefined);
         mockRolesRepo.create.mockResolvedValue(role);
-        mockAuditLogRepo.create.mockResolvedValue(createAuditLogFixture());
+        mockAuditLog.mockResolvedValue(undefined);
 
         const result = await service.createRole(
           { name: role.name, isSystem: true },
@@ -859,15 +862,15 @@ describe('Auth Service', () => {
 
         mockRolesRepo.findByName.mockResolvedValue(undefined);
         mockRolesRepo.create.mockResolvedValue(role);
-        mockAuditLogRepo.create.mockResolvedValue(createAuditLogFixture());
+        mockAuditLog.mockResolvedValue(undefined);
 
         await service.createRole({ name: role.name }, TEST_TENANT_ID, TEST_USER_ID);
 
-        expect(mockAuditLogRepo.create).toHaveBeenCalledWith(
+        expect(mockAuditLog).toHaveBeenCalledWith(
           expect.objectContaining({
             userId: TEST_USER_ID,
             tenantId: TEST_TENANT_ID,
-            action: 'ROLE_CREATED',
+            action: 'create',
             resource: 'role',
             resourceId: role.id,
           }),
@@ -892,7 +895,7 @@ describe('Auth Service', () => {
           return undefined;
         });
         mockRolesRepo.create.mockResolvedValue(role);
-        mockAuditLogRepo.create.mockResolvedValue(createAuditLogFixture());
+        mockAuditLog.mockResolvedValue(undefined);
 
         const result = await service.createRole({ name: role.name }, TEST_TENANT_ID, TEST_USER_ID);
 
@@ -977,7 +980,7 @@ describe('Auth Service', () => {
 
         mockRolesRepo.findById.mockResolvedValue(existing);
         mockRolesRepo.update.mockResolvedValue(updated);
-        mockAuditLogRepo.create.mockResolvedValue(createAuditLogFixture());
+        mockAuditLog.mockResolvedValue(undefined);
 
         const result = await service.updateRole(
           existing.id,
@@ -998,7 +1001,7 @@ describe('Auth Service', () => {
 
         mockRolesRepo.findById.mockResolvedValue(existing);
         mockRolesRepo.update.mockResolvedValue(updated);
-        mockAuditLogRepo.create.mockResolvedValue(createAuditLogFixture());
+        mockAuditLog.mockResolvedValue(undefined);
 
         const result = await service.updateRole(
           existing.id,
@@ -1016,15 +1019,15 @@ describe('Auth Service', () => {
 
         mockRolesRepo.findById.mockResolvedValue(existing);
         mockRolesRepo.update.mockResolvedValue(updated);
-        mockAuditLogRepo.create.mockResolvedValue(createAuditLogFixture());
+        mockAuditLog.mockResolvedValue(undefined);
 
         await service.updateRole(existing.id, { name: 'Updated' }, TEST_TENANT_ID, TEST_USER_ID);
 
-        expect(mockAuditLogRepo.create).toHaveBeenCalledWith(
+        expect(mockAuditLog).toHaveBeenCalledWith(
           expect.objectContaining({
             userId: TEST_USER_ID,
             tenantId: TEST_TENANT_ID,
-            action: 'ROLE_UPDATED',
+            action: 'update',
             resource: 'role',
             resourceId: existing.id,
           }),
@@ -1066,7 +1069,7 @@ describe('Auth Service', () => {
 
         mockRolesRepo.findById.mockResolvedValue(existing);
         mockRolesRepo.update.mockResolvedValue(updated);
-        mockAuditLogRepo.create.mockResolvedValue(createAuditLogFixture());
+        mockAuditLog.mockResolvedValue(undefined);
 
         const result = await service.updateRole(
           existing.id,
@@ -1088,7 +1091,7 @@ describe('Auth Service', () => {
           return undefined;
         });
         mockRolesRepo.update.mockResolvedValue({ ...existing, name: 'New Name' });
-        mockAuditLogRepo.create.mockResolvedValue(createAuditLogFixture());
+        mockAuditLog.mockResolvedValue(undefined);
 
         const result = await service.updateRole(
           existing.id,
@@ -1111,7 +1114,7 @@ describe('Auth Service', () => {
         mockUserRolesRepo.remove.mockResolvedValue(undefined);
         mockPermissionsRepo.deleteByRoleId.mockResolvedValue(undefined);
         mockRolesRepo.softDelete.mockResolvedValue(undefined);
-        mockAuditLogRepo.create.mockResolvedValue(createAuditLogFixture());
+        mockAuditLog.mockResolvedValue(undefined);
 
         await service.deleteRole(existing.id, TEST_TENANT_ID, TEST_USER_ID);
 
@@ -1130,7 +1133,7 @@ describe('Auth Service', () => {
         mockUserRolesRepo.remove.mockResolvedValue(undefined);
         mockPermissionsRepo.deleteByRoleId.mockResolvedValue(undefined);
         mockRolesRepo.softDelete.mockResolvedValue(undefined);
-        mockAuditLogRepo.create.mockResolvedValue(createAuditLogFixture());
+        mockAuditLog.mockResolvedValue(undefined);
 
         await service.deleteRole(existing.id, TEST_TENANT_ID, TEST_USER_ID);
 
@@ -1146,7 +1149,7 @@ describe('Auth Service', () => {
         mockUserRolesRepo.findByRoleId.mockResolvedValue([]);
         mockPermissionsRepo.deleteByRoleId.mockResolvedValue(undefined);
         mockRolesRepo.softDelete.mockResolvedValue(undefined);
-        mockAuditLogRepo.create.mockResolvedValue(createAuditLogFixture());
+        mockAuditLog.mockResolvedValue(undefined);
 
         await service.deleteRole(existing.id, TEST_TENANT_ID, TEST_USER_ID);
 
@@ -1163,15 +1166,15 @@ describe('Auth Service', () => {
         mockUserRolesRepo.findByRoleId.mockResolvedValue([]);
         mockPermissionsRepo.deleteByRoleId.mockResolvedValue(undefined);
         mockRolesRepo.softDelete.mockResolvedValue(undefined);
-        mockAuditLogRepo.create.mockResolvedValue(createAuditLogFixture());
+        mockAuditLog.mockResolvedValue(undefined);
 
         await service.deleteRole(existing.id, TEST_TENANT_ID, TEST_USER_ID);
 
-        expect(mockAuditLogRepo.create).toHaveBeenCalledWith(
+        expect(mockAuditLog).toHaveBeenCalledWith(
           expect.objectContaining({
             userId: TEST_USER_ID,
             tenantId: TEST_TENANT_ID,
-            action: 'ROLE_DELETED',
+            action: 'delete',
             resource: 'role',
             resourceId: existing.id,
           }),
@@ -1221,7 +1224,7 @@ describe('Auth Service', () => {
         mockRolesRepo.findById.mockResolvedValue(role);
         mockUserRolesRepo.findByUserAndRole.mockResolvedValue(undefined);
         mockUserRolesRepo.assign.mockResolvedValue(assignment);
-        mockAuditLogRepo.create.mockResolvedValue(createAuditLogFixture());
+        mockAuditLog.mockResolvedValue(undefined);
 
         const result = await service.assignRole(user.id, role.id, TEST_TENANT_ID, TEST_USER_ID);
 
@@ -1241,15 +1244,15 @@ describe('Auth Service', () => {
         mockRolesRepo.findById.mockResolvedValue(role);
         mockUserRolesRepo.findByUserAndRole.mockResolvedValue(undefined);
         mockUserRolesRepo.assign.mockResolvedValue(assignment);
-        mockAuditLogRepo.create.mockResolvedValue(createAuditLogFixture());
+        mockAuditLog.mockResolvedValue(undefined);
 
         await service.assignRole(user.id, role.id, TEST_TENANT_ID, TEST_USER_ID);
 
-        expect(mockAuditLogRepo.create).toHaveBeenCalledWith(
+        expect(mockAuditLog).toHaveBeenCalledWith(
           expect.objectContaining({
             userId: TEST_USER_ID,
             tenantId: TEST_TENANT_ID,
-            action: 'ROLE_ASSIGNED',
+            action: 'assign',
             resource: 'user_role',
             resourceId: assignment.id,
           }),
@@ -1308,7 +1311,7 @@ describe('Auth Service', () => {
         mockUserRolesRepo.findByUserAndRole.mockResolvedValue(existingAssignment);
         mockRolesRepo.findById.mockResolvedValue(role);
         mockUserRolesRepo.remove.mockResolvedValue(undefined);
-        mockAuditLogRepo.create.mockResolvedValue(createAuditLogFixture());
+        mockAuditLog.mockResolvedValue(undefined);
 
         await service.revokeRole(
           existingAssignment.userId,
@@ -1330,7 +1333,7 @@ describe('Auth Service', () => {
         mockUserRolesRepo.findByUserAndRole.mockResolvedValue(existingAssignment);
         mockRolesRepo.findById.mockResolvedValue(role);
         mockUserRolesRepo.remove.mockResolvedValue(undefined);
-        mockAuditLogRepo.create.mockResolvedValue(createAuditLogFixture());
+        mockAuditLog.mockResolvedValue(undefined);
 
         await service.revokeRole(
           existingAssignment.userId,
@@ -1339,11 +1342,11 @@ describe('Auth Service', () => {
           TEST_USER_ID,
         );
 
-        expect(mockAuditLogRepo.create).toHaveBeenCalledWith(
+        expect(mockAuditLog).toHaveBeenCalledWith(
           expect.objectContaining({
             userId: TEST_USER_ID,
             tenantId: TEST_TENANT_ID,
-            action: 'ROLE_REVOKED',
+            action: 'revoke',
             resource: 'user_role',
             resourceId: existingAssignment.id,
           }),
@@ -1432,7 +1435,7 @@ describe('Auth Service', () => {
         mockRolesRepo.findById.mockResolvedValue(role);
         mockPermissionsRepo.findByRoleAndResource.mockResolvedValue(undefined);
         mockPermissionsRepo.create.mockResolvedValue(permission);
-        mockAuditLogRepo.create.mockResolvedValue(createAuditLogFixture());
+        mockAuditLog.mockResolvedValue(undefined);
 
         const result = await service.createPermission(
           { roleId: permission.roleId, resource: permission.resource, action: permission.action },
@@ -1458,7 +1461,7 @@ describe('Auth Service', () => {
         mockRolesRepo.findById.mockResolvedValue(role);
         mockPermissionsRepo.findByRoleAndResource.mockResolvedValue(undefined);
         mockPermissionsRepo.create.mockResolvedValue(permission);
-        mockAuditLogRepo.create.mockResolvedValue(createAuditLogFixture());
+        mockAuditLog.mockResolvedValue(undefined);
 
         await service.createPermission(
           { roleId: permission.roleId, resource: permission.resource, action: permission.action },
@@ -1466,11 +1469,11 @@ describe('Auth Service', () => {
           TEST_USER_ID,
         );
 
-        expect(mockAuditLogRepo.create).toHaveBeenCalledWith(
+        expect(mockAuditLog).toHaveBeenCalledWith(
           expect.objectContaining({
             userId: TEST_USER_ID,
             tenantId: TEST_TENANT_ID,
-            action: 'PERMISSION_CREATED',
+            action: 'create',
             resource: 'permission',
             resourceId: permission.id,
           }),
@@ -1601,7 +1604,7 @@ describe('Auth Service', () => {
 
         mockPermissionsRepo.findById.mockResolvedValue(existing);
         mockPermissionsRepo.delete.mockResolvedValue(undefined);
-        mockAuditLogRepo.create.mockResolvedValue(createAuditLogFixture());
+        mockAuditLog.mockResolvedValue(undefined);
 
         await service.deletePermission(existing.id, TEST_TENANT_ID, TEST_USER_ID);
 
@@ -1613,15 +1616,15 @@ describe('Auth Service', () => {
 
         mockPermissionsRepo.findById.mockResolvedValue(existing);
         mockPermissionsRepo.delete.mockResolvedValue(undefined);
-        mockAuditLogRepo.create.mockResolvedValue(createAuditLogFixture());
+        mockAuditLog.mockResolvedValue(undefined);
 
         await service.deletePermission(existing.id, TEST_TENANT_ID, TEST_USER_ID);
 
-        expect(mockAuditLogRepo.create).toHaveBeenCalledWith(
+        expect(mockAuditLog).toHaveBeenCalledWith(
           expect.objectContaining({
             userId: TEST_USER_ID,
             tenantId: TEST_TENANT_ID,
-            action: 'PERMISSION_DELETED',
+            action: 'delete',
             resource: 'permission',
             resourceId: existing.id,
           }),
@@ -1700,7 +1703,7 @@ describe('Auth Service', () => {
 
         mockSessionsRepo.findById.mockResolvedValue(existing);
         mockSessionsRepo.softDelete.mockResolvedValue(undefined);
-        mockAuditLogRepo.create.mockResolvedValue(createAuditLogFixture());
+        mockAuditLog.mockResolvedValue(undefined);
 
         await service.invalidateSession(existing.id, TEST_TENANT_ID, TEST_USER_ID);
 
@@ -1712,15 +1715,15 @@ describe('Auth Service', () => {
 
         mockSessionsRepo.findById.mockResolvedValue(existing);
         mockSessionsRepo.softDelete.mockResolvedValue(undefined);
-        mockAuditLogRepo.create.mockResolvedValue(createAuditLogFixture());
+        mockAuditLog.mockResolvedValue(undefined);
 
         await service.invalidateSession(existing.id, TEST_TENANT_ID, TEST_USER_ID);
 
-        expect(mockAuditLogRepo.create).toHaveBeenCalledWith(
+        expect(mockAuditLog).toHaveBeenCalledWith(
           expect.objectContaining({
             userId: TEST_USER_ID,
             tenantId: TEST_TENANT_ID,
-            action: 'SESSION_INVALIDATED',
+            action: 'invalidate',
             resource: 'session',
             resourceId: existing.id,
           }),
@@ -1751,7 +1754,7 @@ describe('Auth Service', () => {
 
         mockUsersRepo.findById.mockResolvedValue(user);
         mockSessionsRepo.deleteAllForUser.mockResolvedValue(undefined);
-        mockAuditLogRepo.create.mockResolvedValue(createAuditLogFixture());
+        mockAuditLog.mockResolvedValue(undefined);
 
         await service.invalidateAllUserSessions(user.id, TEST_TENANT_ID, TEST_USER_ID);
 
@@ -1763,15 +1766,15 @@ describe('Auth Service', () => {
 
         mockUsersRepo.findById.mockResolvedValue(user);
         mockSessionsRepo.deleteAllForUser.mockResolvedValue(undefined);
-        mockAuditLogRepo.create.mockResolvedValue(createAuditLogFixture());
+        mockAuditLog.mockResolvedValue(undefined);
 
         await service.invalidateAllUserSessions(user.id, TEST_TENANT_ID, TEST_USER_ID);
 
-        expect(mockAuditLogRepo.create).toHaveBeenCalledWith(
+        expect(mockAuditLog).toHaveBeenCalledWith(
           expect.objectContaining({
             userId: TEST_USER_ID,
             tenantId: TEST_TENANT_ID,
-            action: 'ALL_SESSIONS_INVALIDATED',
+            action: 'invalidate_all',
             resource: 'session',
           }),
         );
@@ -1804,7 +1807,7 @@ describe('Auth Service', () => {
     describe('listAuditLogs', () => {
       it('should return paginated audit logs', async () => {
         const logs = [createAuditLogFixture()];
-        mockAuditLogRepo.findMany.mockResolvedValue({ data: logs, total: 1 });
+        mockListLogEntries.mockResolvedValue({ data: logs, total: 1 });
 
         const result = await service.listAuditLogs(TEST_TENANT_ID, { page: 1, limit: 20 });
 
@@ -1815,7 +1818,7 @@ describe('Auth Service', () => {
       });
 
       it('should return empty list when no audit logs exist', async () => {
-        mockAuditLogRepo.findMany.mockResolvedValue({ data: [], total: 0 });
+        mockListLogEntries.mockResolvedValue({ data: [], total: 0 });
 
         const result = await service.listAuditLogs(TEST_TENANT_ID, { page: 1, limit: 20 });
 
@@ -1824,18 +1827,18 @@ describe('Auth Service', () => {
       });
 
       it('should calculate correct offset for pagination', async () => {
-        mockAuditLogRepo.findMany.mockResolvedValue({ data: [], total: 0 });
+        mockListLogEntries.mockResolvedValue({ data: [], total: 0 });
 
         await service.listAuditLogs(TEST_TENANT_ID, { page: 2, limit: 10 });
 
-        expect(mockAuditLogRepo.findMany).toHaveBeenCalledWith(
+        expect(mockListLogEntries).toHaveBeenCalledWith(
           TEST_TENANT_ID,
           expect.objectContaining({ limit: 10, offset: 10 }),
         );
       });
 
       it('should filter by userId', async () => {
-        mockAuditLogRepo.findMany.mockResolvedValue({ data: [], total: 0 });
+        mockListLogEntries.mockResolvedValue({ data: [], total: 0 });
 
         await service.listAuditLogs(TEST_TENANT_ID, {
           page: 1,
@@ -1843,29 +1846,29 @@ describe('Auth Service', () => {
           userId: 'user-1',
         });
 
-        expect(mockAuditLogRepo.findMany).toHaveBeenCalledWith(
+        expect(mockListLogEntries).toHaveBeenCalledWith(
           TEST_TENANT_ID,
           expect.objectContaining({ userId: 'user-1' }),
         );
       });
 
       it('should filter by action', async () => {
-        mockAuditLogRepo.findMany.mockResolvedValue({ data: [], total: 0 });
+        mockListLogEntries.mockResolvedValue({ data: [], total: 0 });
 
         await service.listAuditLogs(TEST_TENANT_ID, {
           page: 1,
           limit: 20,
-          action: 'USER_CREATED',
+          action: 'create',
         });
 
-        expect(mockAuditLogRepo.findMany).toHaveBeenCalledWith(
+        expect(mockListLogEntries).toHaveBeenCalledWith(
           TEST_TENANT_ID,
-          expect.objectContaining({ action: 'USER_CREATED' }),
+          expect.objectContaining({ action: 'create' }),
         );
       });
 
       it('should filter by resource', async () => {
-        mockAuditLogRepo.findMany.mockResolvedValue({ data: [], total: 0 });
+        mockListLogEntries.mockResolvedValue({ data: [], total: 0 });
 
         await service.listAuditLogs(TEST_TENANT_ID, {
           page: 1,
@@ -1873,39 +1876,39 @@ describe('Auth Service', () => {
           resource: 'user',
         });
 
-        expect(mockAuditLogRepo.findMany).toHaveBeenCalledWith(
+        expect(mockListLogEntries).toHaveBeenCalledWith(
           TEST_TENANT_ID,
           expect.objectContaining({ resource: 'user' }),
         );
       });
 
       it('should filter by multiple criteria', async () => {
-        mockAuditLogRepo.findMany.mockResolvedValue({ data: [], total: 0 });
+        mockListLogEntries.mockResolvedValue({ data: [], total: 0 });
 
         await service.listAuditLogs(TEST_TENANT_ID, {
           page: 1,
           limit: 20,
           userId: 'user-1',
-          action: 'USER_CREATED',
+          action: 'create',
           resource: 'user',
         });
 
-        expect(mockAuditLogRepo.findMany).toHaveBeenCalledWith(
+        expect(mockListLogEntries).toHaveBeenCalledWith(
           TEST_TENANT_ID,
           expect.objectContaining({
             userId: 'user-1',
-            action: 'USER_CREATED',
+            action: 'create',
             resource: 'user',
           }),
         );
       });
 
-      it('should pass tenantId to repo', async () => {
-        mockAuditLogRepo.findMany.mockResolvedValue({ data: [], total: 0 });
+      it('should pass tenantId to service', async () => {
+        mockListLogEntries.mockResolvedValue({ data: [], total: 0 });
 
         await service.listAuditLogs(TEST_TENANT_ID, { page: 1, limit: 20 });
 
-        expect(mockAuditLogRepo.findMany).toHaveBeenCalledWith(TEST_TENANT_ID, expect.anything());
+        expect(mockListLogEntries).toHaveBeenCalledWith(TEST_TENANT_ID, expect.anything());
       });
     });
   });

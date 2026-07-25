@@ -23,8 +23,8 @@ export interface PaginatedResponse<T> {
 
 export const AuditLogEntryQuerySchema = z.object({
   userId: z.string().uuid().optional(),
-  entityType: z.string().max(100).optional(),
-  entityId: z.string().uuid().optional(),
+  resource: z.string().max(100).optional(),
+  resourceId: z.string().uuid().optional(),
   action: z.string().max(100).optional(),
   startDate: z
     .string()
@@ -43,21 +43,17 @@ export type AuditLogEntryQuery = z.infer<typeof AuditLogEntryQuerySchema>;
 // Used by other bounded contexts to create audit log entries internally.
 // NOT exposed via API — audit entries are created by the system, not by users.
 
-export const CreateAuditLogEntrySchema = z
-  .object({
-    userId: z.string().uuid().optional(),
-    action: z.string().min(1).max(100),
-    entityType: z.string().min(1).max(100),
-    entityId: z.string().uuid(),
-    oldValues: z.record(z.unknown()).nullable().optional(),
-    newValues: z.record(z.unknown()).nullable().optional(),
-    ipAddress: z.string().max(45).optional(),
-    userAgent: z.string().max(500).optional(),
-    metadata: z.record(z.unknown()).nullable().optional(),
-  })
-  .refine((data) => data.entityType && data.entityId, {
-    message: 'Audit log entry must reference an entity type and entity ID (INV-AUDIT-002)',
-  });
+export const CreateAuditLogEntrySchema = z.object({
+  userId: z.string().uuid().optional(),
+  action: z.string().min(1).max(100),
+  resource: z.string().min(1).max(100),
+  resourceId: z.string().uuid().optional(),
+  oldValues: z.record(z.unknown()).nullable().optional(),
+  newValues: z.record(z.unknown()).nullable().optional(),
+  ipAddress: z.string().max(45).optional(),
+  userAgent: z.string().max(500).optional(),
+  metadata: z.record(z.unknown()).nullable().optional(),
+});
 export type CreateAuditLogEntryRequest = z.infer<typeof CreateAuditLogEntrySchema>;
 
 // ─── Response Types ───────────────────────────────────────────────────────────

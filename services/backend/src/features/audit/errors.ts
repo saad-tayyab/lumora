@@ -36,7 +36,7 @@ export class AuditLogEntityRequiredError extends AppError {
   constructor() {
     super(
       'VALIDATION_ERROR',
-      'Audit log entry must reference an entity type and entity ID (INV-AUDIT-002)',
+      'Audit log entry must reference a resource and resource ID (INV-AUDIT-002)',
       400,
     );
   }

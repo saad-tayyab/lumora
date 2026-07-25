@@ -1,18 +1,16 @@
 import {
   boolean,
   index,
-  json,
   pgTable,
   text,
+  timestamp,
   uniqueIndex,
   uuid,
   varchar,
-  timestamp,
 } from 'drizzle-orm/pg-core';
 import { createInsertSchema, createSelectSchema, createUpdateSchema } from 'drizzle-orm/zod';
 
 import { auditFields, softDeleteFields, tenantFields } from '../common/audit';
-import { generateUUIDv7 } from '../common/uuid';
 
 // =============================================================================
 // Tables
@@ -70,7 +68,9 @@ export const sessions = pgTable(
     ...auditFields,
     ...tenantFields,
     ...softDeleteFields,
-    userId: uuid('user_id').notNull().references(() => users.id),
+    userId: uuid('user_id')
+      .notNull()
+      .references(() => users.id),
     token: varchar('token', 255).notNull().unique(),
     ipAddress: varchar('ip_address', 45),
     userAgent: varchar('user_agent', 500),
@@ -84,7 +84,9 @@ export const credentials = pgTable(
   {
     ...auditFields,
     ...tenantFields,
-    userId: uuid('user_id').notNull().references(() => users.id),
+    userId: uuid('user_id')
+      .notNull()
+      .references(() => users.id),
     passwordHash: varchar('password_hash', 255).notNull(),
     provider: varchar('provider', 50).notNull().default('email'),
   },
@@ -96,7 +98,9 @@ export const oauthProviders = pgTable(
   {
     ...auditFields,
     ...tenantFields,
-    userId: uuid('user_id').notNull().references(() => users.id),
+    userId: uuid('user_id')
+      .notNull()
+      .references(() => users.id),
     provider: varchar('provider', 50).notNull(),
     providerId: varchar('provider_id', 255).notNull(),
     accessToken: varchar('access_token', 500),
@@ -111,38 +115,23 @@ export const oauthProviders = pgTable(
 export const mfaConfig = pgTable('mfa_config', {
   ...auditFields,
   ...tenantFields,
-  userId: uuid('user_id').notNull().references(() => users.id).unique(),
+  userId: uuid('user_id')
+    .notNull()
+    .references(() => users.id)
+    .unique(),
   secret: varchar('secret', 255).notNull(),
   enabled: boolean('enabled').notNull().default(false),
   backupCodes: text('backup_codes'),
 });
-
-export const auditLog = pgTable(
-  'audit_log',
-  {
-    id: uuid('id').primaryKey().$defaultFn(() => generateUUIDv7()),
-    createdAt: timestamp('created_at').notNull().defaultNow(),
-    userId: uuid('user_id').references(() => users.id),
-    tenantId: uuid('tenant_id').notNull(),
-    action: varchar('action', 100).notNull(),
-    resource: varchar('resource', 100).notNull(),
-    resourceId: uuid('resource_id'),
-    metadata: json('metadata'),
-    ipAddress: varchar('ip_address', 45),
-  },
-  (table) => [
-    index('audit_log_user_id_idx').on(table.userId),
-    index('audit_log_action_idx').on(table.action),
-    index('audit_log_created_at_idx').on(table.createdAt),
-  ],
-);
 
 export const permissions = pgTable(
   'permissions',
   {
     ...auditFields,
     ...tenantFields,
-    roleId: uuid('role_id').notNull().references(() => roles.id),
+    roleId: uuid('role_id')
+      .notNull()
+      .references(() => roles.id),
     resource: varchar('resource', 100).notNull(),
     action: varchar('action', 100).notNull(),
   },
@@ -176,7 +165,6 @@ export const insertSessionSchema = createInsertSchema(sessions);
 export const insertCredentialSchema = createInsertSchema(credentials);
 export const insertOauthProviderSchema = createInsertSchema(oauthProviders);
 export const insertMfaConfigSchema = createInsertSchema(mfaConfig);
-export const insertAuditLogSchema = createInsertSchema(auditLog);
 export const insertPermissionSchema = createInsertSchema(permissions);
 
 // =============================================================================
@@ -190,7 +178,6 @@ export const selectSessionSchema = createSelectSchema(sessions);
 export const selectCredentialSchema = createSelectSchema(credentials);
 export const selectOauthProviderSchema = createSelectSchema(oauthProviders);
 export const selectMfaConfigSchema = createSelectSchema(mfaConfig);
-export const selectAuditLogSchema = createSelectSchema(auditLog);
 export const selectPermissionSchema = createSelectSchema(permissions);
 
 // =============================================================================
@@ -204,7 +191,6 @@ export const updateSessionSchema = createUpdateSchema(sessions);
 export const updateCredentialSchema = createUpdateSchema(credentials);
 export const updateOauthProviderSchema = createUpdateSchema(oauthProviders);
 export const updateMfaConfigSchema = createUpdateSchema(mfaConfig);
-export const updateAuditLogSchema = createUpdateSchema(auditLog);
 export const updatePermissionSchema = createUpdateSchema(permissions);
 
 // =============================================================================
@@ -231,9 +217,6 @@ export type NewOauthProvider = typeof oauthProviders.$inferInsert;
 
 export type MfaConfig = typeof mfaConfig.$inferSelect;
 export type NewMfaConfig = typeof mfaConfig.$inferInsert;
-
-export type AuditLog = typeof auditLog.$inferSelect;
-export type NewAuditLog = typeof auditLog.$inferInsert;
 
 export type Permission = typeof permissions.$inferSelect;
 export type NewPermission = typeof permissions.$inferInsert;
