@@ -1,0 +1,3 @@
+export const DEFAULT_TENANT_ID = '00000000-0000-0000-0000-000000000001';
+export const PAGE_SIZE = 20;
+export const MAX_PAGE_SIZE = 100;

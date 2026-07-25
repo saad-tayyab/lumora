@@ -1,0 +1,19 @@
+{
+  "extends": "../../tsconfig.json",
+  "compilerOptions": {
+    "outDir": "./dist",
+    "paths": {
+      "@lumora/database": ["../../packages/database/src"],
+      "@lumora/database/*": ["../../packages/database/src/*"],
+      "@lumora/auth": ["../../packages/auth/src"],
+      "@lumora/auth/*": ["../../packages/auth/src/*"],
+      "@lumora/shared": ["../../packages/shared/src"],
+      "@lumora/shared/*": ["../../packages/shared/src/*"],
+      "@lumora/config": ["../../packages/config/src"],
+      "@lumora/config/*": ["../../packages/config/src/*"],
+      "@lumora/validation": ["../../packages/validation/src"],
+      "@lumora/validation/*": ["../../packages/validation/src/*"]
+    }
+  },
+  "include": ["src"]
+}

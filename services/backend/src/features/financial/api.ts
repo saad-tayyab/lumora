@@ -1,0 +1,242 @@
+import { api } from 'encore.dev/api';
+import { ValidationError } from '../../lib/errors';
+import { authenticate } from '../../lib/middleware/auth';
+import * as service from './service';
+import type {
+  AccountResponse,
+  FiscalYearResponse,
+  JournalEntryResponse,
+  ListResponse,
+} from './types';
+import {
+  CreateAccountSchema,
+  CreateFiscalYearSchema,
+  CreateJournalEntrySchema,
+  PaginationParamsSchema,
+  UpdateAccountSchema,
+  UpdateFiscalYearSchema,
+  UpdateJournalEntrySchema,
+} from './types';
+
+// ─── Helpers ────────────────────────────────────────────────────────────────
+
+async function requireAuth(headers: Record<string, string>) {
+  const webHeaders = new Headers();
+  for (const [key, value] of Object.entries(headers)) {
+    webHeaders.set(key, value);
+  }
+  return authenticate(webHeaders);
+}
+
+function validate<T>(schema: { parse: (data: unknown) => T }, data: unknown): T {
+  try {
+    return schema.parse(data);
+  } catch (error) {
+    if (error instanceof Error) {
+      throw new ValidationError(error.message);
+    }
+    throw new ValidationError('Validation failed');
+  }
+}
+
+// ─── Account Endpoints ──────────────────────────────────────────────────────
+
+export const createAccount = api(
+  { expose: true, method: 'POST', path: '/accounts' },
+  async (
+    req: unknown,
+    { headers }: { headers: Record<string, string> },
+  ): Promise<AccountResponse> => {
+    const auth = await requireAuth(headers);
+    const data = validate(CreateAccountSchema, req);
+    return service.createAccount(data, auth.tenantId);
+  },
+);
+
+export const getAccount = api(
+  { expose: true, method: 'GET', path: '/accounts/:id' },
+  async (
+    { id }: { id: string },
+    { headers }: { headers: Record<string, string> },
+  ): Promise<AccountResponse> => {
+    const auth = await requireAuth(headers);
+    return service.getAccount(id, auth.tenantId);
+  },
+);
+
+export const listAccounts = api(
+  { expose: true, method: 'GET', path: '/accounts' },
+  async (
+    req: {
+      page?: number;
+      limit?: number;
+      type?: 'asset' | 'liability' | 'equity' | 'revenue' | 'expense';
+    },
+    { headers }: { headers: Record<string, string> },
+  ): Promise<ListResponse<AccountResponse>> => {
+    const auth = await requireAuth(headers);
+    const params = validate(PaginationParamsSchema, req);
+    return service.listAccounts(auth.tenantId, { ...params, type: req.type });
+  },
+);
+
+export const updateAccount = api(
+  { expose: true, method: 'PUT', path: '/accounts/:id' },
+  async (
+    { id, ...body }: { id: string } & Record<string, unknown>,
+    { headers }: { headers: Record<string, string> },
+  ): Promise<AccountResponse> => {
+    const auth = await requireAuth(headers);
+    const data = validate(UpdateAccountSchema, body);
+    return service.updateAccount(id, data, auth.tenantId);
+  },
+);
+
+export const deleteAccount = api(
+  { expose: true, method: 'DELETE', path: '/accounts/:id' },
+  async (
+    { id }: { id: string },
+    { headers }: { headers: Record<string, string> },
+  ): Promise<void> => {
+    const auth = await requireAuth(headers);
+    return service.deleteAccount(id, auth.tenantId);
+  },
+);
+
+// ─── Journal Entry Endpoints ────────────────────────────────────────────────
+
+export const createJournalEntry = api(
+  { expose: true, method: 'POST', path: '/journal-entries' },
+  async (
+    req: unknown,
+    { headers }: { headers: Record<string, string> },
+  ): Promise<JournalEntryResponse> => {
+    const auth = await requireAuth(headers);
+    const data = validate(CreateJournalEntrySchema, req);
+    return service.createJournalEntry(data, auth.tenantId, auth.userId);
+  },
+);
+
+export const getJournalEntry = api(
+  { expose: true, method: 'GET', path: '/journal-entries/:id' },
+  async (
+    { id }: { id: string },
+    { headers }: { headers: Record<string, string> },
+  ): Promise<JournalEntryResponse> => {
+    const auth = await requireAuth(headers);
+    return service.getJournalEntry(id, auth.tenantId);
+  },
+);
+
+export const listJournalEntries = api(
+  { expose: true, method: 'GET', path: '/journal-entries' },
+  async (
+    req: {
+      page?: number;
+      limit?: number;
+      status?: 'draft' | 'posted' | 'voided';
+    },
+    { headers }: { headers: Record<string, string> },
+  ): Promise<ListResponse<JournalEntryResponse>> => {
+    const auth = await requireAuth(headers);
+    const params = validate(PaginationParamsSchema, req);
+    return service.listJournalEntries(auth.tenantId, {
+      ...params,
+      status: req.status,
+    });
+  },
+);
+
+export const updateJournalEntry = api(
+  { expose: true, method: 'PUT', path: '/journal-entries/:id' },
+  async (
+    { id, ...body }: { id: string } & Record<string, unknown>,
+    { headers }: { headers: Record<string, string> },
+  ): Promise<JournalEntryResponse> => {
+    const auth = await requireAuth(headers);
+    const data = validate(UpdateJournalEntrySchema, body);
+    return service.updateJournalEntry(id, data, auth.tenantId);
+  },
+);
+
+export const postJournalEntry = api(
+  { expose: true, method: 'POST', path: '/journal-entries/:id/post' },
+  async (
+    { id }: { id: string },
+    { headers }: { headers: Record<string, string> },
+  ): Promise<JournalEntryResponse> => {
+    const auth = await requireAuth(headers);
+    return service.postJournalEntry(id, auth.tenantId, auth.userId);
+  },
+);
+
+export const voidJournalEntry = api(
+  { expose: true, method: 'POST', path: '/journal-entries/:id/void' },
+  async (
+    { id }: { id: string },
+    { headers }: { headers: Record<string, string> },
+  ): Promise<JournalEntryResponse> => {
+    const auth = await requireAuth(headers);
+    return service.voidJournalEntry(id, auth.tenantId);
+  },
+);
+
+// ─── Fiscal Year Endpoints ──────────────────────────────────────────────────
+
+export const createFiscalYear = api(
+  { expose: true, method: 'POST', path: '/fiscal-years' },
+  async (
+    req: unknown,
+    { headers }: { headers: Record<string, string> },
+  ): Promise<FiscalYearResponse> => {
+    const auth = await requireAuth(headers);
+    const data = validate(CreateFiscalYearSchema, req);
+    return service.createFiscalYear(data, auth.tenantId);
+  },
+);
+
+export const getFiscalYear = api(
+  { expose: true, method: 'GET', path: '/fiscal-years/:id' },
+  async (
+    { id }: { id: string },
+    { headers }: { headers: Record<string, string> },
+  ): Promise<FiscalYearResponse> => {
+    const auth = await requireAuth(headers);
+    return service.getFiscalYear(id, auth.tenantId);
+  },
+);
+
+export const listFiscalYears = api(
+  { expose: true, method: 'GET', path: '/fiscal-years' },
+  async (
+    req: { page?: number; limit?: number },
+    { headers }: { headers: Record<string, string> },
+  ): Promise<ListResponse<FiscalYearResponse>> => {
+    const auth = await requireAuth(headers);
+    const params = validate(PaginationParamsSchema, req);
+    return service.listFiscalYears(auth.tenantId, params);
+  },
+);
+
+export const updateFiscalYear = api(
+  { expose: true, method: 'PUT', path: '/fiscal-years/:id' },
+  async (
+    { id, ...body }: { id: string } & Record<string, unknown>,
+    { headers }: { headers: Record<string, string> },
+  ): Promise<FiscalYearResponse> => {
+    const auth = await requireAuth(headers);
+    const data = validate(UpdateFiscalYearSchema, body);
+    return service.updateFiscalYear(id, data, auth.tenantId);
+  },
+);
+
+export const closeFiscalYear = api(
+  { expose: true, method: 'POST', path: '/fiscal-years/:id/close' },
+  async (
+    { id }: { id: string },
+    { headers }: { headers: Record<string, string> },
+  ): Promise<FiscalYearResponse> => {
+    const auth = await requireAuth(headers);
+    return service.closeFiscalYear(id, auth.tenantId);
+  },
+);

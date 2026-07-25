@@ -1,0 +1,26 @@
+{
+  "name": "@lumora/backend",
+  "version": "0.0.1",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "encore dev",
+    "build": "encore build",
+    "typecheck": "tsc --noEmit",
+    "lint": "biome check ."
+  },
+  "dependencies": {
+    "encore.dev": "^1.57.13",
+    "@lumora/database": "workspace:*",
+    "@lumora/auth": "workspace:*",
+    "@lumora/shared": "workspace:*",
+    "@lumora/config": "workspace:*",
+    "@lumora/validation": "workspace:*",
+    "drizzle-orm": "1.0.0-rc.4",
+    "zod": "^4.4.3"
+  },
+  "devDependencies": {
+    "typescript": "^5.0.0",
+    "@biomejs/biome": "^2.5.5"
+  }
+}
