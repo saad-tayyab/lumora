@@ -10,7 +10,10 @@
     "lint": "biome check .",
     "test": "vitest run",
     "test:watch": "vitest",
-    "test:coverage": "vitest run --coverage"
+    "test:coverage": "vitest run --coverage",
+    "test:integration": "vitest run --config vitest.integration.config.ts",
+    "test:integration:watch": "vitest --config vitest.integration.config.ts",
+    "db:push": "drizzle-kit push --config=../../packages/database/drizzle.config.ts"
   },
   "dependencies": {
     "encore.dev": "^1.57.13",

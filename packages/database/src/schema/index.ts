@@ -14,3 +14,4 @@ export * from './proc';
 export * from './report';
 export * from './sales';
 export * from './tax';
+export { relations } from './relations';

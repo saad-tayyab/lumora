@@ -1,6 +1,6 @@
-import * as schema from '@lumora/database/schema';
 import { drizzle } from 'drizzle-orm/node-postgres';
 import { SQLDatabase } from 'encore.dev/storage/sqldb';
+import { relations } from '@lumora/database/schema/relations';
 
 const DB = new SQLDatabase('lumora', {
   migrations: {
@@ -9,4 +9,4 @@ const DB = new SQLDatabase('lumora', {
   },
 });
 
-export const db = drizzle(DB.connectionString, { schema });
+export const db = drizzle(DB.connectionString, { relations });

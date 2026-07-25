@@ -1,18 +1,19 @@
 export {
   insertRoleSchema,
   insertUserRoleSchema,
-  // Zod — Insert
   insertUserSchema,
   roles,
   selectRoleSchema,
   selectUserRoleSchema,
-  // Zod — Select
   selectUserSchema,
+  sessions,
+  permissions,
+  credentials,
+  oauthProviders,
+  mfaConfig,
   updateRoleSchema,
   updateUserRoleSchema,
-  // Zod — Update
   updateUserSchema,
   userRoles,
-  // Tables
   users,
 } from './schema';

@@ -8,3 +8,6 @@ export const db = new SQLDatabase('lumora', {
 export { schema };
 
 export * from './schema';
+
+import { relations } from './schema/relations';
+export { relations };
