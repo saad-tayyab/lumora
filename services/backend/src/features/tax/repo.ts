@@ -16,19 +16,27 @@ import { db } from '../../database';
 
 export const taxCodesRepo = {
   async findById(id: string, tenantId: string): Promise<TaxCode | undefined> {
-    return db.query.taxCodes.findFirst({
-      where: and(eq(taxCodes.id, id), eq(taxCodes.tenantId, tenantId), isNull(taxCodes.deletedAt)),
-    });
+    const [result] = await db
+      .select()
+      .from(taxCodes)
+      .where(and(eq(taxCodes.id, id), eq(taxCodes.tenantId, tenantId), isNull(taxCodes.deletedAt)))
+      .limit(1);
+    return result;
   },
 
   async findByCode(code: string, tenantId: string): Promise<TaxCode | undefined> {
-    return db.query.taxCodes.findFirst({
-      where: and(
-        eq(taxCodes.code, code),
-        eq(taxCodes.tenantId, tenantId),
-        isNull(taxCodes.deletedAt),
-      ),
-    });
+    const [result] = await db
+      .select()
+      .from(taxCodes)
+      .where(
+        and(
+          eq(taxCodes.code, code),
+          eq(taxCodes.tenantId, tenantId),
+          isNull(taxCodes.deletedAt),
+        ),
+      )
+      .limit(1);
+    return result;
   },
 
   async findMany(
@@ -52,12 +60,13 @@ export const taxCodesRepo = {
 
     const where = and(...conditions);
 
-    const data = await db.query.taxCodes.findMany({
-      where,
-      orderBy: asc(taxCodes.code),
-      limit,
-      offset,
-    });
+    const data = await db
+      .select()
+      .from(taxCodes)
+      .where(where)
+      .orderBy(asc(taxCodes.code))
+      .limit(limit)
+      .offset(offset);
 
     const [totalResult] = await db.select({ count: count() }).from(taxCodes).where(where);
 
@@ -112,9 +121,12 @@ export const taxCodesRepo = {
 
 export const taxRatesRepo = {
   async findById(id: string, tenantId: string): Promise<TaxRate | undefined> {
-    return db.query.taxRates.findFirst({
-      where: and(eq(taxRates.id, id), eq(taxRates.tenantId, tenantId)),
-    });
+    const [result] = await db
+      .select()
+      .from(taxRates)
+      .where(and(eq(taxRates.id, id), eq(taxRates.tenantId, tenantId)))
+      .limit(1);
+    return result;
   },
 
   async findMany(
@@ -138,12 +150,13 @@ export const taxRatesRepo = {
 
     const where = and(...conditions);
 
-    const data = await db.query.taxRates.findMany({
-      where,
-      orderBy: asc(taxRates.effectiveDate),
-      limit,
-      offset,
-    });
+    const data = await db
+      .select()
+      .from(taxRates)
+      .where(where)
+      .orderBy(asc(taxRates.effectiveDate))
+      .limit(limit)
+      .offset(offset);
 
     const [totalResult] = await db.select({ count: count() }).from(taxRates).where(where);
 
@@ -160,18 +173,23 @@ export const taxRatesRepo = {
     date: string,
     tenantId: string,
   ): Promise<TaxRate | undefined> {
-    return db.query.taxRates.findFirst({
-      where: and(
-        eq(taxRates.taxCodeId, taxCodeId),
-        eq(taxRates.tenantId, tenantId),
-        eq(taxRates.isActive, true),
-        // effectiveDate <= date
-        sql`${taxRates.effectiveDate} <= ${date}`,
-        // expiryDate is NULL or expiryDate >= date
-        sql`(${taxRates.expiryDate} IS NULL OR ${taxRates.expiryDate} >= ${date})`,
-      ),
-      orderBy: asc(taxRates.effectiveDate),
-    });
+    const [result] = await db
+      .select()
+      .from(taxRates)
+      .where(
+        and(
+          eq(taxRates.taxCodeId, taxCodeId),
+          eq(taxRates.tenantId, tenantId),
+          eq(taxRates.isActive, true),
+          // effectiveDate <= date
+          sql`${taxRates.effectiveDate} <= ${date}`,
+          // expiryDate is NULL or expiryDate >= date
+          sql`(${taxRates.expiryDate} IS NULL OR ${taxRates.expiryDate} >= ${date})`,
+        ),
+      )
+      .orderBy(asc(taxRates.effectiveDate))
+      .limit(1);
+    return result;
   },
 
   async create(data: NewTaxRate): Promise<TaxRate> {
@@ -221,13 +239,18 @@ export const taxRatesRepo = {
 
 export const taxAutoAssignmentRulesRepo = {
   async findById(id: string, tenantId: string): Promise<TaxAutoAssignmentRule | undefined> {
-    return db.query.taxAutoAssignmentRules.findFirst({
-      where: and(
-        eq(taxAutoAssignmentRules.id, id),
-        eq(taxAutoAssignmentRules.tenantId, tenantId),
-        isNull(taxAutoAssignmentRules.deletedAt),
-      ),
-    });
+    const [result] = await db
+      .select()
+      .from(taxAutoAssignmentRules)
+      .where(
+        and(
+          eq(taxAutoAssignmentRules.id, id),
+          eq(taxAutoAssignmentRules.tenantId, tenantId),
+          isNull(taxAutoAssignmentRules.deletedAt),
+        ),
+      )
+      .limit(1);
+    return result;
   },
 
   async findMany(
@@ -250,12 +273,13 @@ export const taxAutoAssignmentRulesRepo = {
 
     const where = and(...conditions);
 
-    const data = await db.query.taxAutoAssignmentRules.findMany({
-      where,
-      orderBy: asc(taxAutoAssignmentRules.priority),
-      limit,
-      offset,
-    });
+    const data = await db
+      .select()
+      .from(taxAutoAssignmentRules)
+      .where(where)
+      .orderBy(asc(taxAutoAssignmentRules.priority))
+      .limit(limit)
+      .offset(offset);
 
     const [totalResult] = await db
       .select({ count: count() })
@@ -299,10 +323,11 @@ export const taxAutoAssignmentRulesRepo = {
       conditions.push(eq(taxAutoAssignmentRules.regionCode, params.regionCode));
     }
 
-    return db.query.taxAutoAssignmentRules.findMany({
-      where: and(...conditions),
-      orderBy: asc(taxAutoAssignmentRules.priority),
-    });
+    return db
+      .select()
+      .from(taxAutoAssignmentRules)
+      .where(and(...conditions))
+      .orderBy(asc(taxAutoAssignmentRules.priority));
   },
 
   async hasPriorityConflict(

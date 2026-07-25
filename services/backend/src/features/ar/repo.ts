@@ -36,9 +36,12 @@ export interface PaginatedResult<T> {
 
 export const customersRepository = {
   async findById(id: string, tenantId: string): Promise<Customer | undefined> {
-    return db.query.customers.findFirst({
-      where: and(eq(customers.id, id), eq(customers.tenantId, tenantId)),
-    });
+    const [result] = await db
+      .select()
+      .from(customers)
+      .where(and(eq(customers.id, id), eq(customers.tenantId, tenantId)))
+      .limit(1);
+    return result;
   },
 
   async findMany(
@@ -47,7 +50,13 @@ export const customersRepository = {
   ): Promise<PaginatedResult<Customer>> {
     const { limit = 50, offset = 0, orderBy = asc(customers.name) } = args ?? {};
     const where = eq(customers.tenantId, tenantId);
-    const data = await db.query.customers.findMany({ where, limit, offset, orderBy });
+    const data = await db
+      .select()
+      .from(customers)
+      .where(where)
+      .orderBy(orderBy)
+      .limit(limit)
+      .offset(offset);
     const total = await db.select({ count: count() }).from(customers).where(where);
     return { data, total: total[0].count, limit, offset };
   },
@@ -75,16 +84,20 @@ export const customersRepository = {
   },
 
   async findActiveCustomers(tenantId: string): Promise<Customer[]> {
-    return db.query.customers.findMany({
-      where: and(eq(customers.tenantId, tenantId), eq(customers.isActive, true)),
-      orderBy: asc(customers.name),
-    });
+    return db
+      .select()
+      .from(customers)
+      .where(and(eq(customers.tenantId, tenantId), eq(customers.isActive, true)))
+      .orderBy(asc(customers.name));
   },
 
   async findByEmail(email: string, tenantId: string): Promise<Customer | undefined> {
-    return db.query.customers.findFirst({
-      where: and(eq(customers.email, email), eq(customers.tenantId, tenantId)),
-    });
+    const [result] = await db
+      .select()
+      .from(customers)
+      .where(and(eq(customers.email, email), eq(customers.tenantId, tenantId)))
+      .limit(1);
+    return result;
   },
 
   async countInvoices(customerId: string, tenantId: string): Promise<number> {
@@ -100,9 +113,12 @@ export const customersRepository = {
 
 export const invoicesRepository = {
   async findById(id: string, tenantId: string): Promise<Invoice | undefined> {
-    return db.query.invoices.findFirst({
-      where: and(eq(invoices.id, id), eq(invoices.tenantId, tenantId)),
-    });
+    const [result] = await db
+      .select()
+      .from(invoices)
+      .where(and(eq(invoices.id, id), eq(invoices.tenantId, tenantId)))
+      .limit(1);
+    return result;
   },
 
   async findMany(
@@ -129,7 +145,13 @@ export const invoicesRepository = {
 
     const where = conditions.length > 1 ? and(...conditions) : conditions[0];
 
-    const data = await db.query.invoices.findMany({ where, limit, offset, orderBy });
+    const data = await db
+      .select()
+      .from(invoices)
+      .where(where)
+      .orderBy(orderBy)
+      .limit(limit)
+      .offset(offset);
     const total = await db.select({ count: count() }).from(invoices).where(where);
     return { data, total: total[0].count, limit, offset };
   },
@@ -157,30 +179,36 @@ export const invoicesRepository = {
   },
 
   async findByCustomerId(customerId: string, tenantId: string): Promise<Invoice[]> {
-    return db.query.invoices.findMany({
-      where: and(eq(invoices.customerId, customerId), eq(invoices.tenantId, tenantId)),
-      orderBy: asc(invoices.issueDate),
-    });
+    return db
+      .select()
+      .from(invoices)
+      .where(and(eq(invoices.customerId, customerId), eq(invoices.tenantId, tenantId)))
+      .orderBy(asc(invoices.issueDate));
   },
 
   async findByStatus(status: Invoice['status'], tenantId: string): Promise<Invoice[]> {
-    return db.query.invoices.findMany({
-      where: and(eq(invoices.status, status), eq(invoices.tenantId, tenantId)),
-      orderBy: asc(invoices.issueDate),
-    });
+    return db
+      .select()
+      .from(invoices)
+      .where(and(eq(invoices.status, status), eq(invoices.tenantId, tenantId)))
+      .orderBy(asc(invoices.issueDate));
   },
 
   async findByInvoiceNumber(invoiceNumber: string, tenantId: string): Promise<Invoice | undefined> {
-    return db.query.invoices.findFirst({
-      where: and(eq(invoices.invoiceNumber, invoiceNumber), eq(invoices.tenantId, tenantId)),
-    });
+    const [result] = await db
+      .select()
+      .from(invoices)
+      .where(and(eq(invoices.invoiceNumber, invoiceNumber), eq(invoices.tenantId, tenantId)))
+      .limit(1);
+    return result;
   },
 
   async findOverdueInvoices(tenantId: string): Promise<Invoice[]> {
-    return db.query.invoices.findMany({
-      where: and(eq(invoices.status, 'overdue'), eq(invoices.tenantId, tenantId)),
-      orderBy: asc(invoices.dueDate),
-    });
+    return db
+      .select()
+      .from(invoices)
+      .where(and(eq(invoices.status, 'overdue'), eq(invoices.tenantId, tenantId)))
+      .orderBy(asc(invoices.dueDate));
   },
 
   async sumBalanceDueByCustomer(customerId: string, tenantId: string): Promise<string> {
@@ -208,19 +236,25 @@ export const invoicesRepository = {
 
 export const invoiceLineItemsRepository = {
   async findById(id: string, tenantId: string): Promise<InvoiceLineItem | undefined> {
-    return db.query.invoiceLineItems.findFirst({
-      where: and(eq(invoiceLineItems.id, id), eq(invoiceLineItems.tenantId, tenantId)),
-    });
+    const [result] = await db
+      .select()
+      .from(invoiceLineItems)
+      .where(and(eq(invoiceLineItems.id, id), eq(invoiceLineItems.tenantId, tenantId)))
+      .limit(1);
+    return result;
   },
 
   async findByInvoiceId(invoiceId: string, tenantId: string): Promise<InvoiceLineItem[]> {
-    return db.query.invoiceLineItems.findMany({
-      where: and(
-        eq(invoiceLineItems.invoiceId, invoiceId),
-        eq(invoiceLineItems.tenantId, tenantId),
-      ),
-      orderBy: asc(invoiceLineItems.sortOrder),
-    });
+    return db
+      .select()
+      .from(invoiceLineItems)
+      .where(
+        and(
+          eq(invoiceLineItems.invoiceId, invoiceId),
+          eq(invoiceLineItems.tenantId, tenantId),
+        ),
+      )
+      .orderBy(asc(invoiceLineItems.sortOrder));
   },
 
   async create(data: NewInvoiceLineItem, tenantId: string): Promise<InvoiceLineItem[]> {
@@ -267,9 +301,12 @@ export const invoiceLineItemsRepository = {
 
 export const paymentsRepository = {
   async findById(id: string, tenantId: string): Promise<Payment | undefined> {
-    return db.query.payments.findFirst({
-      where: and(eq(payments.id, id), eq(payments.tenantId, tenantId)),
-    });
+    const [result] = await db
+      .select()
+      .from(payments)
+      .where(and(eq(payments.id, id), eq(payments.tenantId, tenantId)))
+      .limit(1);
+    return result;
   },
 
   async findMany(
@@ -278,7 +315,13 @@ export const paymentsRepository = {
   ): Promise<PaginatedResult<Payment>> {
     const { limit = 50, offset = 0, orderBy = asc(payments.paymentDate) } = args ?? {};
     const where = eq(payments.tenantId, tenantId);
-    const data = await db.query.payments.findMany({ where, limit, offset, orderBy });
+    const data = await db
+      .select()
+      .from(payments)
+      .where(where)
+      .orderBy(orderBy)
+      .limit(limit)
+      .offset(offset);
     const total = await db.select({ count: count() }).from(payments).where(where);
     return { data, total: total[0].count, limit, offset };
   },
@@ -306,16 +349,20 @@ export const paymentsRepository = {
   },
 
   async findByCustomerId(customerId: string, tenantId: string): Promise<Payment[]> {
-    return db.query.payments.findMany({
-      where: and(eq(payments.customerId, customerId), eq(payments.tenantId, tenantId)),
-      orderBy: asc(payments.paymentDate),
-    });
+    return db
+      .select()
+      .from(payments)
+      .where(and(eq(payments.customerId, customerId), eq(payments.tenantId, tenantId)))
+      .orderBy(asc(payments.paymentDate));
   },
 
   async findByPaymentNumber(paymentNumber: string, tenantId: string): Promise<Payment | undefined> {
-    return db.query.payments.findFirst({
-      where: and(eq(payments.paymentNumber, paymentNumber), eq(payments.tenantId, tenantId)),
-    });
+    const [result] = await db
+      .select()
+      .from(payments)
+      .where(and(eq(payments.paymentNumber, paymentNumber), eq(payments.tenantId, tenantId)))
+      .limit(1);
+    return result;
   },
 
   async sumAppliedByPaymentId(paymentId: string, tenantId: string): Promise<string> {
@@ -338,29 +385,38 @@ export const paymentsRepository = {
 
 export const paymentApplicationsRepository = {
   async findById(id: string, tenantId: string): Promise<PaymentApplication | undefined> {
-    return db.query.paymentApplications.findFirst({
-      where: and(eq(paymentApplications.id, id), eq(paymentApplications.tenantId, tenantId)),
-    });
+    const [result] = await db
+      .select()
+      .from(paymentApplications)
+      .where(and(eq(paymentApplications.id, id), eq(paymentApplications.tenantId, tenantId)))
+      .limit(1);
+    return result;
   },
 
   async findByPaymentId(paymentId: string, tenantId: string): Promise<PaymentApplication[]> {
-    return db.query.paymentApplications.findMany({
-      where: and(
-        eq(paymentApplications.paymentId, paymentId),
-        eq(paymentApplications.tenantId, tenantId),
-      ),
-      orderBy: asc(paymentApplications.appliedDate),
-    });
+    return db
+      .select()
+      .from(paymentApplications)
+      .where(
+        and(
+          eq(paymentApplications.paymentId, paymentId),
+          eq(paymentApplications.tenantId, tenantId),
+        ),
+      )
+      .orderBy(asc(paymentApplications.appliedDate));
   },
 
   async findByInvoiceId(invoiceId: string, tenantId: string): Promise<PaymentApplication[]> {
-    return db.query.paymentApplications.findMany({
-      where: and(
-        eq(paymentApplications.invoiceId, invoiceId),
-        eq(paymentApplications.tenantId, tenantId),
-      ),
-      orderBy: asc(paymentApplications.appliedDate),
-    });
+    return db
+      .select()
+      .from(paymentApplications)
+      .where(
+        and(
+          eq(paymentApplications.invoiceId, invoiceId),
+          eq(paymentApplications.tenantId, tenantId),
+        ),
+      )
+      .orderBy(asc(paymentApplications.appliedDate));
   },
 
   async create(data: NewPaymentApplication, tenantId: string): Promise<PaymentApplication[]> {
@@ -397,9 +453,12 @@ export const paymentApplicationsRepository = {
 
 export const creditNotesRepository = {
   async findById(id: string, tenantId: string): Promise<CreditNote | undefined> {
-    return db.query.creditNotes.findFirst({
-      where: and(eq(creditNotes.id, id), eq(creditNotes.tenantId, tenantId)),
-    });
+    const [result] = await db
+      .select()
+      .from(creditNotes)
+      .where(and(eq(creditNotes.id, id), eq(creditNotes.tenantId, tenantId)))
+      .limit(1);
+    return result;
   },
 
   async findMany(
@@ -426,7 +485,13 @@ export const creditNotesRepository = {
 
     const where = conditions.length > 1 ? and(...conditions) : conditions[0];
 
-    const data = await db.query.creditNotes.findMany({ where, limit, offset, orderBy });
+    const data = await db
+      .select()
+      .from(creditNotes)
+      .where(where)
+      .orderBy(orderBy)
+      .limit(limit)
+      .offset(offset);
     const total = await db.select({ count: count() }).from(creditNotes).where(where);
     return { data, total: total[0].count, limit, offset };
   },
@@ -454,21 +519,27 @@ export const creditNotesRepository = {
   },
 
   async findByCustomerId(customerId: string, tenantId: string): Promise<CreditNote[]> {
-    return db.query.creditNotes.findMany({
-      where: and(eq(creditNotes.customerId, customerId), eq(creditNotes.tenantId, tenantId)),
-      orderBy: asc(creditNotes.issueDate),
-    });
+    return db
+      .select()
+      .from(creditNotes)
+      .where(and(eq(creditNotes.customerId, customerId), eq(creditNotes.tenantId, tenantId)))
+      .orderBy(asc(creditNotes.issueDate));
   },
 
   async findByCreditNoteNumber(
     creditNoteNumber: string,
     tenantId: string,
   ): Promise<CreditNote | undefined> {
-    return db.query.creditNotes.findFirst({
-      where: and(
-        eq(creditNotes.creditNoteNumber, creditNoteNumber),
-        eq(creditNotes.tenantId, tenantId),
-      ),
-    });
+    const [result] = await db
+      .select()
+      .from(creditNotes)
+      .where(
+        and(
+          eq(creditNotes.creditNoteNumber, creditNoteNumber),
+          eq(creditNotes.tenantId, tenantId),
+        ),
+      )
+      .limit(1);
+    return result;
   },
 };

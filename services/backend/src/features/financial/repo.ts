@@ -19,19 +19,27 @@ import { db } from '../../database';
 
 export const accountsRepo = {
   async findById(id: string, tenantId: string): Promise<Account | undefined> {
-    return db.query.accounts.findFirst({
-      where: and(eq(accounts.id, id), eq(accounts.tenantId, tenantId), isNull(accounts.deletedAt)),
-    });
+    const [result] = await db
+      .select()
+      .from(accounts)
+      .where(and(eq(accounts.id, id), eq(accounts.tenantId, tenantId), isNull(accounts.deletedAt)))
+      .limit(1);
+    return result;
   },
 
   async findByCode(code: string, tenantId: string): Promise<Account | undefined> {
-    return db.query.accounts.findFirst({
-      where: and(
-        eq(accounts.code, code),
-        eq(accounts.tenantId, tenantId),
-        isNull(accounts.deletedAt),
-      ),
-    });
+    const [result] = await db
+      .select()
+      .from(accounts)
+      .where(
+        and(
+          eq(accounts.code, code),
+          eq(accounts.tenantId, tenantId),
+          isNull(accounts.deletedAt),
+        ),
+      )
+      .limit(1);
+    return result;
   },
 
   async findMany(
@@ -50,12 +58,13 @@ export const accountsRepo = {
 
     const where = and(...conditions);
 
-    const data = await db.query.accounts.findMany({
-      where,
-      orderBy: asc(accounts.code),
-      limit,
-      offset,
-    });
+    const data = await db
+      .select()
+      .from(accounts)
+      .where(where)
+      .orderBy(asc(accounts.code))
+      .limit(limit)
+      .offset(offset);
 
     const [totalResult] = await db.select({ count: count() }).from(accounts).where(where);
 
@@ -112,13 +121,18 @@ export const accountsRepo = {
 
 export const journalEntriesRepo = {
   async findById(id: string, tenantId: string): Promise<JournalEntry | undefined> {
-    return db.query.journalEntries.findFirst({
-      where: and(
-        eq(journalEntries.id, id),
-        eq(journalEntries.tenantId, tenantId),
-        isNull(journalEntries.deletedAt),
-      ),
-    });
+    const [result] = await db
+      .select()
+      .from(journalEntries)
+      .where(
+        and(
+          eq(journalEntries.id, id),
+          eq(journalEntries.tenantId, tenantId),
+          isNull(journalEntries.deletedAt),
+        ),
+      )
+      .limit(1);
+    return result;
   },
 
   async findMany(
@@ -140,12 +154,13 @@ export const journalEntriesRepo = {
 
     const where = and(...conditions);
 
-    const data = await db.query.journalEntries.findMany({
-      where,
-      orderBy: asc(journalEntries.date),
-      limit,
-      offset,
-    });
+    const data = await db
+      .select()
+      .from(journalEntries)
+      .where(where)
+      .orderBy(asc(journalEntries.date))
+      .limit(limit)
+      .offset(offset);
 
     const [totalResult] = await db.select({ count: count() }).from(journalEntries).where(where);
 
@@ -211,14 +226,17 @@ export const journalEntryLinesRepo = {
     journalEntryId: string,
     tenantId: string,
   ): Promise<JournalEntryLine[]> {
-    return db.query.journalEntryLines.findMany({
-      where: and(
-        eq(journalEntryLines.journalEntryId, journalEntryId),
-        eq(journalEntryLines.tenantId, tenantId),
-        isNull(journalEntryLines.deletedAt),
-      ),
-      orderBy: asc(journalEntryLines.createdAt),
-    });
+    return db
+      .select()
+      .from(journalEntryLines)
+      .where(
+        and(
+          eq(journalEntryLines.journalEntryId, journalEntryId),
+          eq(journalEntryLines.tenantId, tenantId),
+          isNull(journalEntryLines.deletedAt),
+        ),
+      )
+      .orderBy(asc(journalEntryLines.createdAt));
   },
 
   async create(data: NewJournalEntryLine): Promise<JournalEntryLine> {
@@ -247,13 +265,18 @@ export const journalEntryLinesRepo = {
 
 export const fiscalYearsRepo = {
   async findById(id: string, tenantId: string): Promise<FiscalYear | undefined> {
-    return db.query.fiscalYears.findFirst({
-      where: and(
-        eq(fiscalYears.id, id),
-        eq(fiscalYears.tenantId, tenantId),
-        isNull(fiscalYears.deletedAt),
-      ),
-    });
+    const [result] = await db
+      .select()
+      .from(fiscalYears)
+      .where(
+        and(
+          eq(fiscalYears.id, id),
+          eq(fiscalYears.tenantId, tenantId),
+          isNull(fiscalYears.deletedAt),
+        ),
+      )
+      .limit(1);
+    return result;
   },
 
   async findMany(
@@ -272,12 +295,13 @@ export const fiscalYearsRepo = {
 
     const where = and(...conditions);
 
-    const data = await db.query.fiscalYears.findMany({
-      where,
-      orderBy: asc(fiscalYears.startDate),
-      limit,
-      offset,
-    });
+    const data = await db
+      .select()
+      .from(fiscalYears)
+      .where(where)
+      .orderBy(asc(fiscalYears.startDate))
+      .limit(limit)
+      .offset(offset);
 
     const [totalResult] = await db.select({ count: count() }).from(fiscalYears).where(where);
 
@@ -311,9 +335,10 @@ export const fiscalYearsRepo = {
     tenantId: string,
     excludeId?: string,
   ): Promise<boolean> {
-    const allYears = await db.query.fiscalYears.findMany({
-      where: and(eq(fiscalYears.tenantId, tenantId), isNull(fiscalYears.deletedAt)),
-    });
+    const allYears = await db
+      .select()
+      .from(fiscalYears)
+      .where(and(eq(fiscalYears.tenantId, tenantId), isNull(fiscalYears.deletedAt)));
 
     const startMs = startDate.getTime();
     const endMs = endDate.getTime();
@@ -330,13 +355,16 @@ export const fiscalYearsRepo = {
   async isDateInClosedPeriod(date: string, tenantId: string): Promise<boolean> {
     const dateMs = new Date(date).getTime();
 
-    const closedPeriods = await db.query.fiscalYears.findMany({
-      where: and(
-        eq(fiscalYears.tenantId, tenantId),
-        eq(fiscalYears.status, 'closed'),
-        isNull(fiscalYears.deletedAt),
-      ),
-    });
+    const closedPeriods = await db
+      .select()
+      .from(fiscalYears)
+      .where(
+        and(
+          eq(fiscalYears.tenantId, tenantId),
+          eq(fiscalYears.status, 'closed'),
+          isNull(fiscalYears.deletedAt),
+        ),
+      );
 
     return closedPeriods.some((fy) => {
       const start = new Date(fy.startDate).getTime();

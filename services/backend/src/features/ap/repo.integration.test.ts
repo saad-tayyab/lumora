@@ -1,4 +1,5 @@
 import { describe, expect, it, vi, beforeAll, afterAll } from 'vitest';
+import { eq } from 'drizzle-orm';
 import { testDb, TEST_TENANT_ID, cleanupTestData } from '../../lib/integration-test-utils';
 import {
   vendors,
@@ -36,19 +37,22 @@ vi.mock('encore.dev/api', () => ({
 const OTHER_TENANT_ID = '33333333-3333-4333-8333-333333333333';
 
 function randomCode(prefix: string): string {
-  return `${prefix}-${Date.now()}-${Math.random().toString(36).slice(2, 6)}`;
+  const suffix = Math.random().toString(36).slice(2, 6);
+  const ts = Date.now().toString(36).slice(-4);
+  const code = `${prefix}${ts}${suffix}`;
+  return code.slice(0, 20);
 }
 
 async function cleanupApData(): Promise<void> {
-  await testDb.delete(paymentSchedules).where(paymentSchedules.tenantId.eq(TEST_TENANT_ID));
-  await testDb.delete(paymentSchedules).where(paymentSchedules.tenantId.eq(OTHER_TENANT_ID));
-  await testDb.delete(vendorPayments).where(vendorPayments.tenantId.eq(TEST_TENANT_ID));
-  await testDb.delete(vendorPayments).where(vendorPayments.tenantId.eq(OTHER_TENANT_ID));
+  await testDb.delete(paymentSchedules).where(eq(paymentSchedules.tenantId, TEST_TENANT_ID));
+  await testDb.delete(paymentSchedules).where(eq(paymentSchedules.tenantId, OTHER_TENANT_ID));
+  await testDb.delete(vendorPayments).where(eq(vendorPayments.tenantId, TEST_TENANT_ID));
+  await testDb.delete(vendorPayments).where(eq(vendorPayments.tenantId, OTHER_TENANT_ID));
   await testDb.delete(billLineItems);
-  await testDb.delete(bills).where(bills.tenantId.eq(TEST_TENANT_ID));
-  await testDb.delete(bills).where(bills.tenantId.eq(OTHER_TENANT_ID));
-  await testDb.delete(vendors).where(vendors.tenantId.eq(TEST_TENANT_ID));
-  await testDb.delete(vendors).where(vendors.tenantId.eq(OTHER_TENANT_ID));
+  await testDb.delete(bills).where(eq(bills.tenantId, TEST_TENANT_ID));
+  await testDb.delete(bills).where(eq(bills.tenantId, OTHER_TENANT_ID));
+  await testDb.delete(vendors).where(eq(vendors.tenantId, TEST_TENANT_ID));
+  await testDb.delete(vendors).where(eq(vendors.tenantId, OTHER_TENANT_ID));
 }
 
 async function createTestVendor(overrides?: Partial<{ name: string; code: string }>) {

@@ -53,9 +53,12 @@ export interface PaginatedResult<T> {
 
 export const bankAccountRepo = {
   async findById(id: string, tenantId: string): Promise<BankAccount | undefined> {
-    return db.query.bankAccounts.findFirst({
-      where: and(eq(bankAccounts.id, id), eq(bankAccounts.tenantId, tenantId)),
-    });
+    const [result] = await db
+      .select()
+      .from(bankAccounts)
+      .where(and(eq(bankAccounts.id, id), eq(bankAccounts.tenantId, tenantId)))
+      .limit(1);
+    return result;
   },
 
   async findMany(
@@ -76,12 +79,13 @@ export const bankAccountRepo = {
 
     const where = and(...conditions);
 
-    const data = await db.query.bankAccounts.findMany({
-      where,
-      orderBy: asc(bankAccounts.bankName),
-      limit,
-      offset,
-    });
+    const data = await db
+      .select()
+      .from(bankAccounts)
+      .where(where)
+      .orderBy(asc(bankAccounts.bankName))
+      .limit(limit)
+      .offset(offset);
 
     const [{ total }] = await db.select({ total: count() }).from(bankAccounts).where(where);
 
@@ -92,25 +96,34 @@ export const bankAccountRepo = {
     accountNumber: string,
     tenantId: string,
   ): Promise<BankAccount | undefined> {
-    return db.query.bankAccounts.findFirst({
-      where: and(
-        eq(bankAccounts.accountNumber, accountNumber),
-        eq(bankAccounts.tenantId, tenantId),
-      ),
-    });
+    const [result] = await db
+      .select()
+      .from(bankAccounts)
+      .where(
+        and(
+          eq(bankAccounts.accountNumber, accountNumber),
+          eq(bankAccounts.tenantId, tenantId),
+        ),
+      )
+      .limit(1);
+    return result;
   },
 
   async findDefault(tenantId: string): Promise<BankAccount | undefined> {
-    return db.query.bankAccounts.findFirst({
-      where: and(eq(bankAccounts.tenantId, tenantId), eq(bankAccounts.isDefault, true)),
-    });
+    const [result] = await db
+      .select()
+      .from(bankAccounts)
+      .where(and(eq(bankAccounts.tenantId, tenantId), eq(bankAccounts.isDefault, true)))
+      .limit(1);
+    return result;
   },
 
   async findByStatus(tenantId: string, status: BankAccount['status']): Promise<BankAccount[]> {
-    return db.query.bankAccounts.findMany({
-      where: and(eq(bankAccounts.tenantId, tenantId), eq(bankAccounts.status, status)),
-      orderBy: asc(bankAccounts.bankName),
-    });
+    return db
+      .select()
+      .from(bankAccounts)
+      .where(and(eq(bankAccounts.tenantId, tenantId), eq(bankAccounts.status, status)))
+      .orderBy(asc(bankAccounts.bankName));
   },
 
   async create(data: NewBankAccount): Promise<BankAccount> {
@@ -155,9 +168,12 @@ export const bankAccountRepo = {
 
 export const bankTransferRepo = {
   async findById(id: string, tenantId: string): Promise<BankTransfer | undefined> {
-    return db.query.bankTransfers.findFirst({
-      where: and(eq(bankTransfers.id, id), eq(bankTransfers.tenantId, tenantId)),
-    });
+    const [result] = await db
+      .select()
+      .from(bankTransfers)
+      .where(and(eq(bankTransfers.id, id), eq(bankTransfers.tenantId, tenantId)))
+      .limit(1);
+    return result;
   },
 
   async findMany(
@@ -187,12 +203,13 @@ export const bankTransferRepo = {
 
     const where = and(...conditions);
 
-    const data = await db.query.bankTransfers.findMany({
-      where,
-      orderBy: desc(bankTransfers.createdAt),
-      limit,
-      offset,
-    });
+    const data = await db
+      .select()
+      .from(bankTransfers)
+      .where(where)
+      .orderBy(desc(bankTransfers.createdAt))
+      .limit(limit)
+      .offset(offset);
 
     const [{ total }] = await db.select({ total: count() }).from(bankTransfers).where(where);
 
@@ -200,30 +217,37 @@ export const bankTransferRepo = {
   },
 
   async findBySourceAccount(accountId: string, tenantId: string): Promise<BankTransfer[]> {
-    return db.query.bankTransfers.findMany({
-      where: and(
-        eq(bankTransfers.sourceAccountId, accountId),
-        eq(bankTransfers.tenantId, tenantId),
-      ),
-      orderBy: desc(bankTransfers.createdAt),
-    });
+    return db
+      .select()
+      .from(bankTransfers)
+      .where(
+        and(
+          eq(bankTransfers.sourceAccountId, accountId),
+          eq(bankTransfers.tenantId, tenantId),
+        ),
+      )
+      .orderBy(desc(bankTransfers.createdAt));
   },
 
   async findByDestinationAccount(accountId: string, tenantId: string): Promise<BankTransfer[]> {
-    return db.query.bankTransfers.findMany({
-      where: and(
-        eq(bankTransfers.destinationAccountId, accountId),
-        eq(bankTransfers.tenantId, tenantId),
-      ),
-      orderBy: desc(bankTransfers.createdAt),
-    });
+    return db
+      .select()
+      .from(bankTransfers)
+      .where(
+        and(
+          eq(bankTransfers.destinationAccountId, accountId),
+          eq(bankTransfers.tenantId, tenantId),
+        ),
+      )
+      .orderBy(desc(bankTransfers.createdAt));
   },
 
   async findPending(tenantId: string): Promise<BankTransfer[]> {
-    return db.query.bankTransfers.findMany({
-      where: and(eq(bankTransfers.tenantId, tenantId), eq(bankTransfers.status, 'pending')),
-      orderBy: asc(bankTransfers.scheduledDate),
-    });
+    return db
+      .select()
+      .from(bankTransfers)
+      .where(and(eq(bankTransfers.tenantId, tenantId), eq(bankTransfers.status, 'pending')))
+      .orderBy(asc(bankTransfers.scheduledDate));
   },
 
   async create(data: NewBankTransfer): Promise<BankTransfer> {
@@ -260,9 +284,12 @@ export const bankTransferRepo = {
 
 export const bankStatementRepo = {
   async findById(id: string, tenantId: string): Promise<BankStatement | undefined> {
-    return db.query.bankStatements.findFirst({
-      where: and(eq(bankStatements.id, id), eq(bankStatements.tenantId, tenantId)),
-    });
+    const [result] = await db
+      .select()
+      .from(bankStatements)
+      .where(and(eq(bankStatements.id, id), eq(bankStatements.tenantId, tenantId)))
+      .limit(1);
+    return result;
   },
 
   async findMany(
@@ -285,12 +312,13 @@ export const bankStatementRepo = {
 
     const where = and(...conditions);
 
-    const data = await db.query.bankStatements.findMany({
-      where,
-      orderBy: desc(bankStatements.statementDate),
-      limit,
-      offset,
-    });
+    const data = await db
+      .select()
+      .from(bankStatements)
+      .where(where)
+      .orderBy(desc(bankStatements.statementDate))
+      .limit(limit)
+      .offset(offset);
 
     const [{ total }] = await db.select({ total: count() }).from(bankStatements).where(where);
 
@@ -298,13 +326,16 @@ export const bankStatementRepo = {
   },
 
   async findByBankAccount(bankAccountId: string, tenantId: string): Promise<BankStatement[]> {
-    return db.query.bankStatements.findMany({
-      where: and(
-        eq(bankStatements.bankAccountId, bankAccountId),
-        eq(bankStatements.tenantId, tenantId),
-      ),
-      orderBy: desc(bankStatements.statementDate),
-    });
+    return db
+      .select()
+      .from(bankStatements)
+      .where(
+        and(
+          eq(bankStatements.bankAccountId, bankAccountId),
+          eq(bankStatements.tenantId, tenantId),
+        ),
+      )
+      .orderBy(desc(bankStatements.statementDate));
   },
 
   async findByDateRange(
@@ -313,13 +344,16 @@ export const bankStatementRepo = {
     _startDate: string,
     _endDate: string,
   ): Promise<BankStatement[]> {
-    return db.query.bankStatements.findMany({
-      where: and(
-        eq(bankStatements.tenantId, tenantId),
-        eq(bankStatements.bankAccountId, bankAccountId),
-      ),
-      orderBy: asc(bankStatements.statementDate),
-    });
+    return db
+      .select()
+      .from(bankStatements)
+      .where(
+        and(
+          eq(bankStatements.tenantId, tenantId),
+          eq(bankStatements.bankAccountId, bankAccountId),
+        ),
+      )
+      .orderBy(asc(bankStatements.statementDate));
   },
 
   async create(data: NewBankStatement): Promise<BankStatement> {
@@ -347,9 +381,12 @@ export const bankStatementRepo = {
 
 export const reconciliationEntryRepo = {
   async findById(id: string, tenantId: string): Promise<ReconciliationEntry | undefined> {
-    return db.query.reconciliationEntries.findFirst({
-      where: and(eq(reconciliationEntries.id, id), eq(reconciliationEntries.tenantId, tenantId)),
-    });
+    const [result] = await db
+      .select()
+      .from(reconciliationEntries)
+      .where(and(eq(reconciliationEntries.id, id), eq(reconciliationEntries.tenantId, tenantId)))
+      .limit(1);
+    return result;
   },
 
   async findMany(
@@ -384,12 +421,13 @@ export const reconciliationEntryRepo = {
 
     const where = and(...conditions);
 
-    const data = await db.query.reconciliationEntries.findMany({
-      where,
-      orderBy: desc(reconciliationEntries.transactionDate),
-      limit,
-      offset,
-    });
+    const data = await db
+      .select()
+      .from(reconciliationEntries)
+      .where(where)
+      .orderBy(desc(reconciliationEntries.transactionDate))
+      .limit(limit)
+      .offset(offset);
 
     const [{ total }] = await db
       .select({ total: count() })
@@ -400,33 +438,42 @@ export const reconciliationEntryRepo = {
   },
 
   async findByStatement(statementId: string, tenantId: string): Promise<ReconciliationEntry[]> {
-    return db.query.reconciliationEntries.findMany({
-      where: and(
-        eq(reconciliationEntries.statementId, statementId),
-        eq(reconciliationEntries.tenantId, tenantId),
-      ),
-      orderBy: asc(reconciliationEntries.transactionDate),
-    });
+    return db
+      .select()
+      .from(reconciliationEntries)
+      .where(
+        and(
+          eq(reconciliationEntries.statementId, statementId),
+          eq(reconciliationEntries.tenantId, tenantId),
+        ),
+      )
+      .orderBy(asc(reconciliationEntries.transactionDate));
   },
 
   async findByBankAccount(bankAccountId: string, tenantId: string): Promise<ReconciliationEntry[]> {
-    return db.query.reconciliationEntries.findMany({
-      where: and(
-        eq(reconciliationEntries.bankAccountId, bankAccountId),
-        eq(reconciliationEntries.tenantId, tenantId),
-      ),
-      orderBy: desc(reconciliationEntries.transactionDate),
-    });
+    return db
+      .select()
+      .from(reconciliationEntries)
+      .where(
+        and(
+          eq(reconciliationEntries.bankAccountId, bankAccountId),
+          eq(reconciliationEntries.tenantId, tenantId),
+        ),
+      )
+      .orderBy(desc(reconciliationEntries.transactionDate));
   },
 
   async findUnmatched(tenantId: string): Promise<ReconciliationEntry[]> {
-    return db.query.reconciliationEntries.findMany({
-      where: and(
-        eq(reconciliationEntries.tenantId, tenantId),
-        eq(reconciliationEntries.reconciliationStatus, 'unmatched'),
-      ),
-      orderBy: asc(reconciliationEntries.transactionDate),
-    });
+    return db
+      .select()
+      .from(reconciliationEntries)
+      .where(
+        and(
+          eq(reconciliationEntries.tenantId, tenantId),
+          eq(reconciliationEntries.reconciliationStatus, 'unmatched'),
+        ),
+      )
+      .orderBy(asc(reconciliationEntries.transactionDate));
   },
 
   async create(data: NewReconciliationEntry): Promise<ReconciliationEntry> {
@@ -454,20 +501,24 @@ export const reconciliationEntryRepo = {
 
 export const currencyRepo = {
   async findByCode(code: string): Promise<Currency | undefined> {
-    return db.query.currencies.findFirst({
-      where: eq(currencies.code, code),
-    });
+    const [result] = await db
+      .select()
+      .from(currencies)
+      .where(eq(currencies.code, code))
+      .limit(1);
+    return result;
   },
 
   async findMany(args?: { page?: number; limit?: number }): Promise<PaginatedResult<Currency>> {
     const { page = 1, limit = 50 } = args ?? {};
     const offset = (page - 1) * limit;
 
-    const data = await db.query.currencies.findMany({
-      orderBy: asc(currencies.code),
-      limit,
-      offset,
-    });
+    const data = await db
+      .select()
+      .from(currencies)
+      .orderBy(asc(currencies.code))
+      .limit(limit)
+      .offset(offset);
 
     const [{ total }] = await db.select({ total: count() }).from(currencies);
 
@@ -475,10 +526,11 @@ export const currencyRepo = {
   },
 
   async findActive(): Promise<Currency[]> {
-    return db.query.currencies.findMany({
-      where: eq(currencies.isActive, true),
-      orderBy: asc(currencies.code),
-    });
+    return db
+      .select()
+      .from(currencies)
+      .where(eq(currencies.isActive, true))
+      .orderBy(asc(currencies.code));
   },
 
   async create(data: NewCurrency): Promise<Currency> {
@@ -502,9 +554,12 @@ export const currencyRepo = {
 
 export const bankConnectionRepo = {
   async findById(id: string, tenantId: string): Promise<BankConnection | undefined> {
-    return db.query.bankConnections.findFirst({
-      where: and(eq(bankConnections.id, id), eq(bankConnections.tenantId, tenantId)),
-    });
+    const [result] = await db
+      .select()
+      .from(bankConnections)
+      .where(and(eq(bankConnections.id, id), eq(bankConnections.tenantId, tenantId)))
+      .limit(1);
+    return result;
   },
 
   async findMany(
@@ -525,12 +580,13 @@ export const bankConnectionRepo = {
 
     const where = and(...conditions);
 
-    const data = await db.query.bankConnections.findMany({
-      where,
-      orderBy: asc(bankConnections.institutionName),
-      limit,
-      offset,
-    });
+    const data = await db
+      .select()
+      .from(bankConnections)
+      .where(where)
+      .orderBy(asc(bankConnections.institutionName))
+      .limit(limit)
+      .offset(offset);
 
     const [{ total }] = await db.select({ total: count() }).from(bankConnections).where(where);
 
@@ -538,12 +594,15 @@ export const bankConnectionRepo = {
   },
 
   async findByBankAccount(bankAccountId: string, tenantId: string): Promise<BankConnection[]> {
-    return db.query.bankConnections.findMany({
-      where: and(
-        eq(bankConnections.bankAccountId, bankAccountId),
-        eq(bankConnections.tenantId, tenantId),
-      ),
-    });
+    return db
+      .select()
+      .from(bankConnections)
+      .where(
+        and(
+          eq(bankConnections.bankAccountId, bankAccountId),
+          eq(bankConnections.tenantId, tenantId),
+        ),
+      );
   },
 
   async findActiveByAccount(
@@ -551,14 +610,19 @@ export const bankConnectionRepo = {
     connectionType: string,
     tenantId: string,
   ): Promise<BankConnection | undefined> {
-    return db.query.bankConnections.findFirst({
-      where: and(
-        eq(bankConnections.bankAccountId, bankAccountId),
-        eq(bankConnections.connectionType, connectionType as BankConnection['connectionType']),
-        eq(bankConnections.status, 'active'),
-        eq(bankConnections.tenantId, tenantId),
-      ),
-    });
+    const [result] = await db
+      .select()
+      .from(bankConnections)
+      .where(
+        and(
+          eq(bankConnections.bankAccountId, bankAccountId),
+          eq(bankConnections.connectionType, connectionType as BankConnection['connectionType']),
+          eq(bankConnections.status, 'active'),
+          eq(bankConnections.tenantId, tenantId),
+        ),
+      )
+      .limit(1);
+    return result;
   },
 
   async create(data: NewBankConnection): Promise<BankConnection> {

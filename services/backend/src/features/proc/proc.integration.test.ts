@@ -50,7 +50,10 @@ let sharedEmployeeId: string;
 // ── Helpers ──────────────────────────────────────────────────────────────────
 
 function randomCode(prefix: string): string {
-  return `${prefix}-${Date.now()}-${Math.random().toString(36).slice(2, 6)}`;
+  const suffix = Math.random().toString(36).slice(2, 6);
+  const ts = Date.now().toString(36).slice(-4);
+  const code = `${prefix}${ts}${suffix}`;
+  return code.slice(0, 20);
 }
 
 async function cleanupProcTestData(): Promise<void> {

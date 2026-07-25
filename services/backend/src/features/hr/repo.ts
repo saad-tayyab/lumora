@@ -33,22 +33,29 @@ import { db } from '../../database';
 
 export const departmentRepo = {
   async findById(id: string): Promise<Department | undefined> {
-    return db.query.departments.findFirst({
-      where: eq(departments.id, id),
-    });
+    const [result] = await db
+      .select()
+      .from(departments)
+      .where(eq(departments.id, id))
+      .limit(1);
+    return result;
   },
 
   async findByCode(tenantId: string, code: string): Promise<Department | undefined> {
-    return db.query.departments.findFirst({
-      where: and(eq(departments.tenantId, tenantId), eq(departments.code, code)),
-    });
+    const [result] = await db
+      .select()
+      .from(departments)
+      .where(and(eq(departments.tenantId, tenantId), eq(departments.code, code)))
+      .limit(1);
+    return result;
   },
 
   async findByParentId(parentId: string): Promise<Department[]> {
-    return db.query.departments.findMany({
-      where: eq(departments.parentId, parentId),
-      orderBy: asc(departments.name),
-    });
+    return db
+      .select()
+      .from(departments)
+      .where(eq(departments.parentId, parentId))
+      .orderBy(asc(departments.name));
   },
 
   async countEmployeesByDepartment(departmentId: string): Promise<number> {
@@ -62,12 +69,13 @@ export const departmentRepo = {
   async findMany(args?: { tenantId?: string; limit?: number; offset?: number; orderBy?: SQL }) {
     const { tenantId, limit = 50, offset = 0, orderBy = asc(departments.name) } = args ?? {};
     const where = tenantId ? eq(departments.tenantId, tenantId) : undefined;
-    const data = await db.query.departments.findMany({
-      where,
-      limit,
-      offset,
-      orderBy,
-    });
+    const data = await db
+      .select()
+      .from(departments)
+      .where(where)
+      .orderBy(orderBy)
+      .limit(limit)
+      .offset(offset);
     const [{ count: total }] = await db.select({ count: count() }).from(departments).where(where);
     return { data, total, limit, offset };
   },
@@ -93,22 +101,29 @@ export const departmentRepo = {
 
 export const designationRepo = {
   async findById(id: string): Promise<Designation | undefined> {
-    return db.query.designations.findFirst({
-      where: eq(designations.id, id),
-    });
+    const [result] = await db
+      .select()
+      .from(designations)
+      .where(eq(designations.id, id))
+      .limit(1);
+    return result;
   },
 
   async findByCode(tenantId: string, code: string): Promise<Designation | undefined> {
-    return db.query.designations.findFirst({
-      where: and(eq(designations.tenantId, tenantId), eq(designations.code, code)),
-    });
+    const [result] = await db
+      .select()
+      .from(designations)
+      .where(and(eq(designations.tenantId, tenantId), eq(designations.code, code)))
+      .limit(1);
+    return result;
   },
 
   async findActiveByTenant(tenantId: string): Promise<Designation[]> {
-    return db.query.designations.findMany({
-      where: and(eq(designations.tenantId, tenantId), eq(designations.isActive, true)),
-      orderBy: asc(designations.name),
-    });
+    return db
+      .select()
+      .from(designations)
+      .where(and(eq(designations.tenantId, tenantId), eq(designations.isActive, true)))
+      .orderBy(asc(designations.name));
   },
 
   async countEmployeesByDesignation(designationId: string): Promise<number> {
@@ -122,12 +137,13 @@ export const designationRepo = {
   async findMany(args?: { tenantId?: string; limit?: number; offset?: number; orderBy?: SQL }) {
     const { tenantId, limit = 50, offset = 0, orderBy = asc(designations.name) } = args ?? {};
     const where = tenantId ? eq(designations.tenantId, tenantId) : undefined;
-    const data = await db.query.designations.findMany({
-      where,
-      limit,
-      offset,
-      orderBy,
-    });
+    const data = await db
+      .select()
+      .from(designations)
+      .where(where)
+      .orderBy(orderBy)
+      .limit(limit)
+      .offset(offset);
     const [{ count: total }] = await db.select({ count: count() }).from(designations).where(where);
     return { data, total, limit, offset };
   },
@@ -153,46 +169,58 @@ export const designationRepo = {
 
 export const employeeRepo = {
   async findById(id: string): Promise<Employee | undefined> {
-    return db.query.employees.findFirst({
-      where: eq(employees.id, id),
-    });
+    const [result] = await db
+      .select()
+      .from(employees)
+      .where(eq(employees.id, id))
+      .limit(1);
+    return result;
   },
 
   async findByEmail(email: string): Promise<Employee | undefined> {
-    return db.query.employees.findFirst({
-      where: eq(employees.email, email),
-    });
+    const [result] = await db
+      .select()
+      .from(employees)
+      .where(eq(employees.email, email))
+      .limit(1);
+    return result;
   },
 
   async findByUserId(userId: string): Promise<Employee | undefined> {
-    return db.query.employees.findFirst({
-      where: eq(employees.userId, userId),
-    });
+    const [result] = await db
+      .select()
+      .from(employees)
+      .where(eq(employees.userId, userId))
+      .limit(1);
+    return result;
   },
 
   async findByManagerId(managerId: string): Promise<Employee[]> {
-    return db.query.employees.findMany({
-      where: eq(employees.managerId, managerId),
-      orderBy: asc(employees.lastName),
-    });
+    return db
+      .select()
+      .from(employees)
+      .where(eq(employees.managerId, managerId))
+      .orderBy(asc(employees.lastName));
   },
 
   async findActiveByTenant(tenantId: string): Promise<Employee[]> {
-    return db.query.employees.findMany({
-      where: and(eq(employees.tenantId, tenantId), eq(employees.status, 'active')),
-      orderBy: asc(employees.lastName),
-    });
+    return db
+      .select()
+      .from(employees)
+      .where(and(eq(employees.tenantId, tenantId), eq(employees.status, 'active')))
+      .orderBy(asc(employees.lastName));
   },
 
   async findMany(args?: { tenantId?: string; limit?: number; offset?: number; orderBy?: SQL }) {
     const { tenantId, limit = 50, offset = 0, orderBy = asc(employees.lastName) } = args ?? {};
     const where = tenantId ? eq(employees.tenantId, tenantId) : undefined;
-    const data = await db.query.employees.findMany({
-      where,
-      limit,
-      offset,
-      orderBy,
-    });
+    const data = await db
+      .select()
+      .from(employees)
+      .where(where)
+      .orderBy(orderBy)
+      .limit(limit)
+      .offset(offset);
     const [{ count: total }] = await db.select({ count: count() }).from(employees).where(where);
     return { data, total, limit, offset };
   },
@@ -218,36 +246,44 @@ export const employeeRepo = {
 
 export const attendanceRepo = {
   async findById(id: string): Promise<AttendanceRecord | undefined> {
-    return db.query.attendance.findFirst({
-      where: eq(attendance.id, id),
-    });
+    const [result] = await db
+      .select()
+      .from(attendance)
+      .where(eq(attendance.id, id))
+      .limit(1);
+    return result;
   },
 
   async findByEmployeeAndDate(
     employeeId: string,
     date: string,
   ): Promise<AttendanceRecord | undefined> {
-    return db.query.attendance.findFirst({
-      where: and(eq(attendance.employeeId, employeeId), eq(attendance.date, date)),
-    });
+    const [result] = await db
+      .select()
+      .from(attendance)
+      .where(and(eq(attendance.employeeId, employeeId), eq(attendance.date, date)))
+      .limit(1);
+    return result;
   },
 
   async findByEmployee(employeeId: string): Promise<AttendanceRecord[]> {
-    return db.query.attendance.findMany({
-      where: eq(attendance.employeeId, employeeId),
-      orderBy: desc(attendance.date),
-    });
+    return db
+      .select()
+      .from(attendance)
+      .where(eq(attendance.employeeId, employeeId))
+      .orderBy(desc(attendance.date));
   },
 
   async findMany(args?: { tenantId?: string; limit?: number; offset?: number; orderBy?: SQL }) {
     const { tenantId, limit = 50, offset = 0, orderBy = desc(attendance.date) } = args ?? {};
     const where = tenantId ? eq(attendance.tenantId, tenantId) : undefined;
-    const data = await db.query.attendance.findMany({
-      where,
-      limit,
-      offset,
-      orderBy,
-    });
+    const data = await db
+      .select()
+      .from(attendance)
+      .where(where)
+      .orderBy(orderBy)
+      .limit(limit)
+      .offset(offset);
     const [{ count: total }] = await db.select({ count: count() }).from(attendance).where(where);
     return { data, total, limit, offset };
   },
@@ -269,22 +305,29 @@ export const attendanceRepo = {
 
 export const leaveTypeRepo = {
   async findById(id: string): Promise<LeaveType | undefined> {
-    return db.query.leaveTypes.findFirst({
-      where: eq(leaveTypes.id, id),
-    });
+    const [result] = await db
+      .select()
+      .from(leaveTypes)
+      .where(eq(leaveTypes.id, id))
+      .limit(1);
+    return result;
   },
 
   async findByCode(tenantId: string, code: string): Promise<LeaveType | undefined> {
-    return db.query.leaveTypes.findFirst({
-      where: and(eq(leaveTypes.tenantId, tenantId), eq(leaveTypes.code, code)),
-    });
+    const [result] = await db
+      .select()
+      .from(leaveTypes)
+      .where(and(eq(leaveTypes.tenantId, tenantId), eq(leaveTypes.code, code)))
+      .limit(1);
+    return result;
   },
 
   async findActiveByTenant(tenantId: string): Promise<LeaveType[]> {
-    return db.query.leaveTypes.findMany({
-      where: and(eq(leaveTypes.tenantId, tenantId), eq(leaveTypes.isActive, true)),
-      orderBy: asc(leaveTypes.name),
-    });
+    return db
+      .select()
+      .from(leaveTypes)
+      .where(and(eq(leaveTypes.tenantId, tenantId), eq(leaveTypes.isActive, true)))
+      .orderBy(asc(leaveTypes.name));
   },
 
   async countRequestsByLeaveType(leaveTypeId: string): Promise<number> {
@@ -298,12 +341,13 @@ export const leaveTypeRepo = {
   async findMany(args?: { tenantId?: string; limit?: number; offset?: number; orderBy?: SQL }) {
     const { tenantId, limit = 50, offset = 0, orderBy = asc(leaveTypes.name) } = args ?? {};
     const where = tenantId ? eq(leaveTypes.tenantId, tenantId) : undefined;
-    const data = await db.query.leaveTypes.findMany({
-      where,
-      limit,
-      offset,
-      orderBy,
-    });
+    const data = await db
+      .select()
+      .from(leaveTypes)
+      .where(where)
+      .orderBy(orderBy)
+      .limit(limit)
+      .offset(offset);
     const [{ count: total }] = await db.select({ count: count() }).from(leaveTypes).where(where);
     return { data, total, limit, offset };
   },
@@ -329,23 +373,28 @@ export const leaveTypeRepo = {
 
 export const leaveRequestRepo = {
   async findById(id: string): Promise<LeaveRequest | undefined> {
-    return db.query.leaveRequests.findFirst({
-      where: eq(leaveRequests.id, id),
-    });
+    const [result] = await db
+      .select()
+      .from(leaveRequests)
+      .where(eq(leaveRequests.id, id))
+      .limit(1);
+    return result;
   },
 
   async findByEmployee(employeeId: string): Promise<LeaveRequest[]> {
-    return db.query.leaveRequests.findMany({
-      where: eq(leaveRequests.employeeId, employeeId),
-      orderBy: desc(leaveRequests.createdAt),
-    });
+    return db
+      .select()
+      .from(leaveRequests)
+      .where(eq(leaveRequests.employeeId, employeeId))
+      .orderBy(desc(leaveRequests.createdAt));
   },
 
   async findPendingByTenant(tenantId: string): Promise<LeaveRequest[]> {
-    return db.query.leaveRequests.findMany({
-      where: and(eq(leaveRequests.tenantId, tenantId), eq(leaveRequests.status, 'pending')),
-      orderBy: asc(leaveRequests.startDate),
-    });
+    return db
+      .select()
+      .from(leaveRequests)
+      .where(and(eq(leaveRequests.tenantId, tenantId), eq(leaveRequests.status, 'pending')))
+      .orderBy(asc(leaveRequests.startDate));
   },
 
   async findMany(args?: { tenantId?: string; limit?: number; offset?: number; orderBy?: SQL }) {
@@ -356,12 +405,13 @@ export const leaveRequestRepo = {
       orderBy = desc(leaveRequests.createdAt),
     } = args ?? {};
     const where = tenantId ? eq(leaveRequests.tenantId, tenantId) : undefined;
-    const data = await db.query.leaveRequests.findMany({
-      where,
-      limit,
-      offset,
-      orderBy,
-    });
+    const data = await db
+      .select()
+      .from(leaveRequests)
+      .where(where)
+      .orderBy(orderBy)
+      .limit(limit)
+      .offset(offset);
     const [{ count: total }] = await db.select({ count: count() }).from(leaveRequests).where(where);
     return { data, total, limit, offset };
   },
@@ -387,26 +437,33 @@ export const leaveRequestRepo = {
 
 export const salaryRepo = {
   async findById(id: string): Promise<Salary | undefined> {
-    return db.query.salaries.findFirst({
-      where: eq(salaries.id, id),
-    });
+    const [result] = await db
+      .select()
+      .from(salaries)
+      .where(eq(salaries.id, id))
+      .limit(1);
+    return result;
   },
 
   async findByEmployee(employeeId: string): Promise<Salary | undefined> {
-    return db.query.salaries.findFirst({
-      where: and(eq(salaries.employeeId, employeeId), eq(salaries.isActive, true)),
-    });
+    const [result] = await db
+      .select()
+      .from(salaries)
+      .where(and(eq(salaries.employeeId, employeeId), eq(salaries.isActive, true)))
+      .limit(1);
+    return result;
   },
 
   async findMany(args?: { tenantId?: string; limit?: number; offset?: number; orderBy?: SQL }) {
     const { tenantId, limit = 50, offset = 0, orderBy = desc(salaries.effectiveDate) } = args ?? {};
     const where = tenantId ? eq(salaries.tenantId, tenantId) : undefined;
-    const data = await db.query.salaries.findMany({
-      where,
-      limit,
-      offset,
-      orderBy,
-    });
+    const data = await db
+      .select()
+      .from(salaries)
+      .where(where)
+      .orderBy(orderBy)
+      .limit(limit)
+      .offset(offset);
     const [{ count: total }] = await db.select({ count: count() }).from(salaries).where(where);
     return { data, total, limit, offset };
   },
@@ -432,9 +489,12 @@ export const salaryRepo = {
 
 export const payrollRepo = {
   async findById(id: string): Promise<PayrollRecord | undefined> {
-    return db.query.payroll.findFirst({
-      where: eq(payroll.id, id),
-    });
+    const [result] = await db
+      .select()
+      .from(payroll)
+      .where(eq(payroll.id, id))
+      .limit(1);
+    return result;
   },
 
   async findByEmployeeAndPeriod(
@@ -442,24 +502,30 @@ export const payrollRepo = {
     payPeriodStart: string,
     payPeriodEnd: string,
   ): Promise<PayrollRecord | undefined> {
-    return db.query.payroll.findFirst({
-      where: and(
-        eq(payroll.employeeId, employeeId),
-        eq(payroll.payPeriodStart, payPeriodStart),
-        eq(payroll.payPeriodEnd, payPeriodEnd),
-      ),
-    });
+    const [result] = await db
+      .select()
+      .from(payroll)
+      .where(
+        and(
+          eq(payroll.employeeId, employeeId),
+          eq(payroll.payPeriodStart, payPeriodStart),
+          eq(payroll.payPeriodEnd, payPeriodEnd),
+        ),
+      )
+      .limit(1);
+    return result;
   },
 
   async findMany(args?: { tenantId?: string; limit?: number; offset?: number; orderBy?: SQL }) {
     const { tenantId, limit = 50, offset = 0, orderBy = desc(payroll.payPeriodEnd) } = args ?? {};
     const where = tenantId ? eq(payroll.tenantId, tenantId) : undefined;
-    const data = await db.query.payroll.findMany({
-      where,
-      limit,
-      offset,
-      orderBy,
-    });
+    const data = await db
+      .select()
+      .from(payroll)
+      .where(where)
+      .orderBy(orderBy)
+      .limit(limit)
+      .offset(offset);
     const [{ count: total }] = await db.select({ count: count() }).from(payroll).where(where);
     return { data, total, limit, offset };
   },
@@ -481,34 +547,40 @@ export const payrollRepo = {
 
 export const payslipRepo = {
   async findById(id: string): Promise<Payslip | undefined> {
-    return db.query.payslips.findFirst({
-      where: eq(payslips.id, id),
-    });
+    const [result] = await db
+      .select()
+      .from(payslips)
+      .where(eq(payslips.id, id))
+      .limit(1);
+    return result;
   },
 
   async findByEmployee(employeeId: string): Promise<Payslip[]> {
-    return db.query.payslips.findMany({
-      where: eq(payslips.employeeId, employeeId),
-      orderBy: desc(payslips.generatedAt),
-    });
+    return db
+      .select()
+      .from(payslips)
+      .where(eq(payslips.employeeId, employeeId))
+      .orderBy(desc(payslips.generatedAt));
   },
 
   async findByPayroll(payrollId: string): Promise<Payslip[]> {
-    return db.query.payslips.findMany({
-      where: eq(payslips.payrollId, payrollId),
-      orderBy: desc(payslips.generatedAt),
-    });
+    return db
+      .select()
+      .from(payslips)
+      .where(eq(payslips.payrollId, payrollId))
+      .orderBy(desc(payslips.generatedAt));
   },
 
   async findMany(args?: { tenantId?: string; limit?: number; offset?: number; orderBy?: SQL }) {
     const { tenantId, limit = 50, offset = 0, orderBy = desc(payslips.generatedAt) } = args ?? {};
     const where = tenantId ? eq(payslips.tenantId, tenantId) : undefined;
-    const data = await db.query.payslips.findMany({
-      where,
-      limit,
-      offset,
-      orderBy,
-    });
+    const data = await db
+      .select()
+      .from(payslips)
+      .where(where)
+      .orderBy(orderBy)
+      .limit(limit)
+      .offset(offset);
     const [{ count: total }] = await db.select({ count: count() }).from(payslips).where(where);
     return { data, total, limit, offset };
   },

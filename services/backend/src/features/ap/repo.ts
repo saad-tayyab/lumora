@@ -50,15 +50,21 @@ export interface PaginatedResult<T> {
 
 export const vendorRepo = {
   async findById(id: string, tenantId: string): Promise<Vendor | undefined> {
-    return db.query.vendors.findFirst({
-      where: and(eq(vendors.id, id), eq(vendors.tenantId, tenantId)),
-    });
+    const [result] = await db
+      .select()
+      .from(vendors)
+      .where(and(eq(vendors.id, id), eq(vendors.tenantId, tenantId)))
+      .limit(1);
+    return result;
   },
 
   async findByCode(code: string, tenantId: string): Promise<Vendor | undefined> {
-    return db.query.vendors.findFirst({
-      where: and(eq(vendors.code, code), eq(vendors.tenantId, tenantId)),
-    });
+    const [result] = await db
+      .select()
+      .from(vendors)
+      .where(and(eq(vendors.code, code), eq(vendors.tenantId, tenantId)))
+      .limit(1);
+    return result;
   },
 
   async findMany(
@@ -80,12 +86,13 @@ export const vendorRepo = {
 
     const where = and(...conditions);
 
-    const data = await db.query.vendors.findMany({
-      where,
-      orderBy: asc(vendors.name),
-      limit,
-      offset,
-    });
+    const data = await db
+      .select()
+      .from(vendors)
+      .where(where)
+      .orderBy(asc(vendors.name))
+      .limit(limit)
+      .offset(offset);
 
     const [{ total }] = await db.select({ total: count() }).from(vendors).where(where);
 
@@ -126,9 +133,12 @@ export const vendorRepo = {
 
 export const billRepo = {
   async findById(id: string, tenantId: string): Promise<Bill | undefined> {
-    return db.query.bills.findFirst({
-      where: and(eq(bills.id, id), eq(bills.tenantId, tenantId)),
-    });
+    const [result] = await db
+      .select()
+      .from(bills)
+      .where(and(eq(bills.id, id), eq(bills.tenantId, tenantId)))
+      .limit(1);
+    return result;
   },
 
   async findByBillNumber(
@@ -136,13 +146,18 @@ export const billRepo = {
     billNumber: string,
     tenantId: string,
   ): Promise<Bill | undefined> {
-    return db.query.bills.findFirst({
-      where: and(
-        eq(bills.vendorId, vendorId),
-        eq(bills.billNumber, billNumber),
-        eq(bills.tenantId, tenantId),
-      ),
-    });
+    const [result] = await db
+      .select()
+      .from(bills)
+      .where(
+        and(
+          eq(bills.vendorId, vendorId),
+          eq(bills.billNumber, billNumber),
+          eq(bills.tenantId, tenantId),
+        ),
+      )
+      .limit(1);
+    return result;
   },
 
   async findMany(
@@ -163,12 +178,13 @@ export const billRepo = {
 
     const where = and(...conditions);
 
-    const data = await db.query.bills.findMany({
-      where,
-      orderBy: asc(bills.billDate),
-      limit,
-      offset,
-    });
+    const data = await db
+      .select()
+      .from(bills)
+      .where(where)
+      .orderBy(asc(bills.billDate))
+      .limit(limit)
+      .offset(offset);
 
     const [{ total }] = await db.select({ total: count() }).from(bills).where(where);
 
@@ -199,24 +215,27 @@ export const billRepo = {
   },
 
   async findByVendorId(vendorId: string, tenantId: string): Promise<Bill[]> {
-    return db.query.bills.findMany({
-      where: and(eq(bills.vendorId, vendorId), eq(bills.tenantId, tenantId)),
-      orderBy: asc(bills.billDate),
-    });
+    return db
+      .select()
+      .from(bills)
+      .where(and(eq(bills.vendorId, vendorId), eq(bills.tenantId, tenantId)))
+      .orderBy(asc(bills.billDate));
   },
 
   async findPendingApproval(tenantId: string): Promise<Bill[]> {
-    return db.query.bills.findMany({
-      where: and(eq(bills.status, 'pending_approval'), eq(bills.tenantId, tenantId)),
-      orderBy: asc(bills.billDate),
-    });
+    return db
+      .select()
+      .from(bills)
+      .where(and(eq(bills.status, 'pending_approval'), eq(bills.tenantId, tenantId)))
+      .orderBy(asc(bills.billDate));
   },
 
   async findByPurchaseOrderId(purchaseOrderId: string, tenantId: string): Promise<Bill[]> {
-    return db.query.bills.findMany({
-      where: and(eq(bills.purchaseOrderId, purchaseOrderId), eq(bills.tenantId, tenantId)),
-      orderBy: asc(bills.billDate),
-    });
+    return db
+      .select()
+      .from(bills)
+      .where(and(eq(bills.purchaseOrderId, purchaseOrderId), eq(bills.tenantId, tenantId)))
+      .orderBy(asc(bills.billDate));
   },
 };
 
@@ -226,16 +245,20 @@ export const billRepo = {
 
 export const billLineItemRepo = {
   async findById(id: string): Promise<BillLineItem | undefined> {
-    return db.query.billLineItems.findFirst({
-      where: eq(billLineItems.id, id),
-    });
+    const [result] = await db
+      .select()
+      .from(billLineItems)
+      .where(eq(billLineItems.id, id))
+      .limit(1);
+    return result;
   },
 
   async findByBillId(billId: string): Promise<BillLineItem[]> {
-    return db.query.billLineItems.findMany({
-      where: eq(billLineItems.billId, billId),
-      orderBy: asc(billLineItems.sortOrder),
-    });
+    return db
+      .select()
+      .from(billLineItems)
+      .where(eq(billLineItems.billId, billId))
+      .orderBy(asc(billLineItems.sortOrder));
   },
 
   async create(data: NewBillLineItem): Promise<BillLineItem> {
@@ -273,9 +296,12 @@ export const billLineItemRepo = {
 
 export const vendorPaymentRepo = {
   async findById(id: string, tenantId: string): Promise<VendorPayment | undefined> {
-    return db.query.vendorPayments.findFirst({
-      where: and(eq(vendorPayments.id, id), eq(vendorPayments.tenantId, tenantId)),
-    });
+    const [result] = await db
+      .select()
+      .from(vendorPayments)
+      .where(and(eq(vendorPayments.id, id), eq(vendorPayments.tenantId, tenantId)))
+      .limit(1);
+    return result;
   },
 
   async findMany(
@@ -296,12 +322,13 @@ export const vendorPaymentRepo = {
 
     const where = and(...conditions);
 
-    const data = await db.query.vendorPayments.findMany({
-      where,
-      orderBy: asc(vendorPayments.paymentDate),
-      limit,
-      offset,
-    });
+    const data = await db
+      .select()
+      .from(vendorPayments)
+      .where(where)
+      .orderBy(asc(vendorPayments.paymentDate))
+      .limit(limit)
+      .offset(offset);
 
     const [{ total }] = await db.select({ total: count() }).from(vendorPayments).where(where);
 
@@ -336,17 +363,19 @@ export const vendorPaymentRepo = {
   },
 
   async findByVendorId(vendorId: string, tenantId: string): Promise<VendorPayment[]> {
-    return db.query.vendorPayments.findMany({
-      where: and(eq(vendorPayments.vendorId, vendorId), eq(vendorPayments.tenantId, tenantId)),
-      orderBy: asc(vendorPayments.paymentDate),
-    });
+    return db
+      .select()
+      .from(vendorPayments)
+      .where(and(eq(vendorPayments.vendorId, vendorId), eq(vendorPayments.tenantId, tenantId)))
+      .orderBy(asc(vendorPayments.paymentDate));
   },
 
   async findByBillId(billId: string, tenantId: string): Promise<VendorPayment[]> {
-    return db.query.vendorPayments.findMany({
-      where: and(eq(vendorPayments.billId, billId), eq(vendorPayments.tenantId, tenantId)),
-      orderBy: asc(vendorPayments.paymentDate),
-    });
+    return db
+      .select()
+      .from(vendorPayments)
+      .where(and(eq(vendorPayments.billId, billId), eq(vendorPayments.tenantId, tenantId)))
+      .orderBy(asc(vendorPayments.paymentDate));
   },
 
   async sumPaymentsByBillId(billId: string, tenantId: string): Promise<string> {
@@ -364,16 +393,20 @@ export const vendorPaymentRepo = {
 
 export const paymentScheduleRepo = {
   async findById(id: string): Promise<PaymentSchedule | undefined> {
-    return db.query.paymentSchedules.findFirst({
-      where: eq(paymentSchedules.id, id),
-    });
+    const [result] = await db
+      .select()
+      .from(paymentSchedules)
+      .where(eq(paymentSchedules.id, id))
+      .limit(1);
+    return result;
   },
 
   async findByBillId(billId: string): Promise<PaymentSchedule[]> {
-    return db.query.paymentSchedules.findMany({
-      where: eq(paymentSchedules.billId, billId),
-      orderBy: asc(paymentSchedules.dueDate),
-    });
+    return db
+      .select()
+      .from(paymentSchedules)
+      .where(eq(paymentSchedules.billId, billId))
+      .orderBy(asc(paymentSchedules.dueDate));
   },
 
   async create(data: NewPaymentSchedule): Promise<PaymentSchedule> {

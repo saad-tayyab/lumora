@@ -44,7 +44,7 @@ async function cleanupInvTestData(): Promise<void> {
 
 function makeUomInput(overrides: Record<string, unknown> = {}) {
   return {
-    code: `UOM-${Date.now()}-${Math.random().toString(36).slice(2, 6)}`,
+    code: `U${Math.random().toString(36).slice(2, 6)}`.slice(0, 10),
     name: 'Pieces',
     category: 'count' as const,
     decimalPlaces: 0,
@@ -56,8 +56,8 @@ function makeUomInput(overrides: Record<string, unknown> = {}) {
 function makeCategoryInput(overrides: Record<string, unknown> = {}) {
   return {
     tenantId: TEST_TENANT_ID,
-    name: `Category-${Date.now()}-${Math.random().toString(36).slice(2, 6)}`,
-    code: `CAT-${Date.now()}-${Math.random().toString(36).slice(2, 6)}`,
+    name: 'Test Category',
+    code: `CAT${Math.random().toString(36).slice(2, 6)}`.slice(0, 20),
     description: 'Test category',
     isActive: true,
     ...overrides,
@@ -71,7 +71,7 @@ function makeItemInput(
 ) {
   return {
     tenantId: TEST_TENANT_ID,
-    sku: `SKU-${Date.now()}-${Math.random().toString(36).slice(2, 6)}`,
+    sku: `SKU${Math.random().toString(36).slice(2, 6)}`.slice(0, 50),
     name: 'Test Item',
     description: 'A test item',
     categoryId,
@@ -92,7 +92,7 @@ function makeWarehouseInput(overrides: Record<string, unknown> = {}) {
   return {
     tenantId: TEST_TENANT_ID,
     name: `Warehouse-${Date.now()}-${Math.random().toString(36).slice(2, 6)}`,
-    code: `WH-${Date.now()}-${Math.random().toString(36).slice(2, 6)}`,
+    code: `WH${Math.random().toString(36).slice(2, 6)}`.slice(0, 20),
     isActive: true,
     isDefault: false,
     ...overrides,

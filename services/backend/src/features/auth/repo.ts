@@ -17,25 +17,36 @@ import { db } from '../../database';
 
 export const usersRepo = {
   async findById(id: string, tenantId: string): Promise<User | undefined> {
-    return db.query.users.findFirst({
-      where: and(eq(users.id, id), eq(users.tenantId, tenantId), isNull(users.deletedAt)),
-    });
+    const [result] = await db
+      .select()
+      .from(users)
+      .where(and(eq(users.id, id), eq(users.tenantId, tenantId), isNull(users.deletedAt)))
+      .limit(1);
+    return result;
   },
 
   async findByEmail(email: string, tenantId: string): Promise<User | undefined> {
-    return db.query.users.findFirst({
-      where: and(eq(users.email, email), eq(users.tenantId, tenantId), isNull(users.deletedAt)),
-    });
+    const [result] = await db
+      .select()
+      .from(users)
+      .where(and(eq(users.email, email), eq(users.tenantId, tenantId), isNull(users.deletedAt)))
+      .limit(1);
+    return result;
   },
 
   async findByUsername(username: string, tenantId: string): Promise<User | undefined> {
-    return db.query.users.findFirst({
-      where: and(
-        eq(users.username, username),
-        eq(users.tenantId, tenantId),
-        isNull(users.deletedAt),
-      ),
-    });
+    const [result] = await db
+      .select()
+      .from(users)
+      .where(
+        and(
+          eq(users.username, username),
+          eq(users.tenantId, tenantId),
+          isNull(users.deletedAt),
+        ),
+      )
+      .limit(1);
+    return result;
   },
 
   async findMany(
@@ -55,12 +66,13 @@ export const usersRepo = {
 
     const where = and(...conditions);
 
-    const data = await db.query.users.findMany({
-      where,
-      orderBy: asc(users.createdAt),
-      limit,
-      offset,
-    });
+    const data = await db
+      .select()
+      .from(users)
+      .where(where)
+      .orderBy(asc(users.createdAt))
+      .limit(limit)
+      .offset(offset);
 
     const [totalResult] = await db.select({ count: count() }).from(users).where(where);
 
@@ -111,15 +123,21 @@ export const usersRepo = {
 
 export const rolesRepo = {
   async findById(id: string, tenantId: string): Promise<Role | undefined> {
-    return db.query.roles.findFirst({
-      where: and(eq(roles.id, id), eq(roles.tenantId, tenantId), isNull(roles.deletedAt)),
-    });
+    const [result] = await db
+      .select()
+      .from(roles)
+      .where(and(eq(roles.id, id), eq(roles.tenantId, tenantId), isNull(roles.deletedAt)))
+      .limit(1);
+    return result;
   },
 
   async findByName(name: string, tenantId: string): Promise<Role | undefined> {
-    return db.query.roles.findFirst({
-      where: and(eq(roles.name, name), eq(roles.tenantId, tenantId), isNull(roles.deletedAt)),
-    });
+    const [result] = await db
+      .select()
+      .from(roles)
+      .where(and(eq(roles.name, name), eq(roles.tenantId, tenantId), isNull(roles.deletedAt)))
+      .limit(1);
+    return result;
   },
 
   async findMany(
@@ -132,12 +150,13 @@ export const rolesRepo = {
     const { limit = 50, offset = 0 } = args ?? {};
     const where = and(eq(roles.tenantId, tenantId), isNull(roles.deletedAt));
 
-    const data = await db.query.roles.findMany({
-      where,
-      orderBy: asc(roles.name),
-      limit,
-      offset,
-    });
+    const data = await db
+      .select()
+      .from(roles)
+      .where(where)
+      .orderBy(asc(roles.name))
+      .limit(limit)
+      .offset(offset);
 
     const [totalResult] = await db.select({ count: count() }).from(roles).where(where);
 
@@ -179,21 +198,20 @@ export const rolesRepo = {
 
 export const userRolesRepo = {
   async findByUserAndRole(userId: string, roleId: string): Promise<UserRole | undefined> {
-    return db.query.userRoles.findFirst({
-      where: and(eq(userRoles.userId, userId), eq(userRoles.roleId, roleId)),
-    });
+    const [result] = await db
+      .select()
+      .from(userRoles)
+      .where(and(eq(userRoles.userId, userId), eq(userRoles.roleId, roleId)))
+      .limit(1);
+    return result;
   },
 
   async findByUserId(userId: string): Promise<UserRole[]> {
-    return db.query.userRoles.findMany({
-      where: eq(userRoles.userId, userId),
-    });
+    return db.select().from(userRoles).where(eq(userRoles.userId, userId));
   },
 
   async findByRoleId(roleId: string): Promise<UserRole[]> {
-    return db.query.userRoles.findMany({
-      where: eq(userRoles.roleId, roleId),
-    });
+    return db.select().from(userRoles).where(eq(userRoles.roleId, roleId));
   },
 
   async assign(data: { userId: string; roleId: string }): Promise<UserRole> {
@@ -216,16 +234,20 @@ export const userRolesRepo = {
 
 export const permissionsRepo = {
   async findById(id: string, tenantId: string): Promise<Permission | undefined> {
-    return db.query.permissions.findFirst({
-      where: and(eq(permissions.id, id), eq(permissions.tenantId, tenantId)),
-    });
+    const [result] = await db
+      .select()
+      .from(permissions)
+      .where(and(eq(permissions.id, id), eq(permissions.tenantId, tenantId)))
+      .limit(1);
+    return result;
   },
 
   async findByRoleId(roleId: string, tenantId: string): Promise<Permission[]> {
-    return db.query.permissions.findMany({
-      where: and(eq(permissions.roleId, roleId), eq(permissions.tenantId, tenantId)),
-      orderBy: asc(permissions.resource),
-    });
+    return db
+      .select()
+      .from(permissions)
+      .where(and(eq(permissions.roleId, roleId), eq(permissions.tenantId, tenantId)))
+      .orderBy(asc(permissions.resource));
   },
 
   async findByRoleAndResource(
@@ -234,14 +256,19 @@ export const permissionsRepo = {
     action: string,
     tenantId: string,
   ): Promise<Permission | undefined> {
-    return db.query.permissions.findFirst({
-      where: and(
-        eq(permissions.roleId, roleId),
-        eq(permissions.resource, resource),
-        eq(permissions.action, action),
-        eq(permissions.tenantId, tenantId),
-      ),
-    });
+    const [result] = await db
+      .select()
+      .from(permissions)
+      .where(
+        and(
+          eq(permissions.roleId, roleId),
+          eq(permissions.resource, resource),
+          eq(permissions.action, action),
+          eq(permissions.tenantId, tenantId),
+        ),
+      )
+      .limit(1);
+    return result;
   },
 
   async findMany(
@@ -254,12 +281,13 @@ export const permissionsRepo = {
     const { limit = 50, offset = 0 } = args ?? {};
     const where = eq(permissions.tenantId, tenantId);
 
-    const data = await db.query.permissions.findMany({
-      where,
-      orderBy: asc(permissions.resource),
-      limit,
-      offset,
-    });
+    const data = await db
+      .select()
+      .from(permissions)
+      .where(where)
+      .orderBy(asc(permissions.resource))
+      .limit(limit)
+      .offset(offset);
 
     const [totalResult] = await db.select({ count: count() }).from(permissions).where(where);
 
@@ -293,30 +321,41 @@ export const permissionsRepo = {
 
 export const sessionsRepo = {
   async findById(id: string, tenantId: string): Promise<Session | undefined> {
-    return db.query.sessions.findFirst({
-      where: and(eq(sessions.id, id), eq(sessions.tenantId, tenantId), isNull(sessions.deletedAt)),
-    });
+    const [result] = await db
+      .select()
+      .from(sessions)
+      .where(and(eq(sessions.id, id), eq(sessions.tenantId, tenantId), isNull(sessions.deletedAt)))
+      .limit(1);
+    return result;
   },
 
   async findByToken(token: string, tenantId: string): Promise<Session | undefined> {
-    return db.query.sessions.findFirst({
-      where: and(
-        eq(sessions.token, token),
-        eq(sessions.tenantId, tenantId),
-        isNull(sessions.deletedAt),
-      ),
-    });
+    const [result] = await db
+      .select()
+      .from(sessions)
+      .where(
+        and(
+          eq(sessions.token, token),
+          eq(sessions.tenantId, tenantId),
+          isNull(sessions.deletedAt),
+        ),
+      )
+      .limit(1);
+    return result;
   },
 
   async findManyByUserId(userId: string, tenantId: string): Promise<Session[]> {
-    return db.query.sessions.findMany({
-      where: and(
-        eq(sessions.userId, userId),
-        eq(sessions.tenantId, tenantId),
-        isNull(sessions.deletedAt),
-      ),
-      orderBy: asc(sessions.createdAt),
-    });
+    return db
+      .select()
+      .from(sessions)
+      .where(
+        and(
+          eq(sessions.userId, userId),
+          eq(sessions.tenantId, tenantId),
+          isNull(sessions.deletedAt),
+        ),
+      )
+      .orderBy(asc(sessions.createdAt));
   },
 
   async findMany(
@@ -329,12 +368,13 @@ export const sessionsRepo = {
     const { limit = 50, offset = 0 } = args ?? {};
     const where = and(eq(sessions.tenantId, tenantId), isNull(sessions.deletedAt));
 
-    const data = await db.query.sessions.findMany({
-      where,
-      orderBy: asc(sessions.createdAt),
-      limit,
-      offset,
-    });
+    const data = await db
+      .select()
+      .from(sessions)
+      .where(where)
+      .orderBy(asc(sessions.createdAt))
+      .limit(limit)
+      .offset(offset);
 
     const [totalResult] = await db.select({ count: count() }).from(sessions).where(where);
 

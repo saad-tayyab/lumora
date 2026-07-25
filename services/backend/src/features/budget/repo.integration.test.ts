@@ -1,3 +1,4 @@
+import { eq } from 'drizzle-orm';
 import * as schema from '@lumora/database/schema';
 import { afterAll, beforeAll, describe, expect, it, vi } from 'vitest';
 import { TEST_TENANT_ID, testDb } from '../../lib/integration-test-utils';
@@ -27,22 +28,22 @@ const OTHER_TENANT_ID = '33333333-3333-4333-8333-333333333333';
 async function cleanupBudgetTestData(): Promise<void> {
   await testDb
     .delete(schema.budgetConsumptions)
-    .where(schema.eq(schema.budgetConsumptions.tenantId, TEST_TENANT_ID));
+    .where(eq(schema.budgetConsumptions.tenantId, TEST_TENANT_ID));
   await testDb
     .delete(schema.budgetConsumptions)
-    .where(schema.eq(schema.budgetConsumptions.tenantId, OTHER_TENANT_ID));
+    .where(eq(schema.budgetConsumptions.tenantId, OTHER_TENANT_ID));
   await testDb
     .delete(schema.budgetLines)
-    .where(schema.eq(schema.budgetLines.tenantId, TEST_TENANT_ID));
+    .where(eq(schema.budgetLines.tenantId, TEST_TENANT_ID));
   await testDb
     .delete(schema.budgetLines)
-    .where(schema.eq(schema.budgetLines.tenantId, OTHER_TENANT_ID));
+    .where(eq(schema.budgetLines.tenantId, OTHER_TENANT_ID));
   await testDb
     .delete(schema.budgetHeaders)
-    .where(schema.eq(schema.budgetHeaders.tenantId, TEST_TENANT_ID));
+    .where(eq(schema.budgetHeaders.tenantId, TEST_TENANT_ID));
   await testDb
     .delete(schema.budgetHeaders)
-    .where(schema.eq(schema.budgetHeaders.tenantId, OTHER_TENANT_ID));
+    .where(eq(schema.budgetHeaders.tenantId, OTHER_TENANT_ID));
 }
 
 function makeHeaderInput(overrides: Record<string, unknown> = {}) {

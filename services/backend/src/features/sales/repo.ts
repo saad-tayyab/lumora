@@ -33,9 +33,12 @@ export interface PaginatedResult<T> {
 
 export const salesOrdersRepository = {
   async findById(id: string, tenantId: string): Promise<SalesOrder | undefined> {
-    return db.query.salesOrders.findFirst({
-      where: and(eq(salesOrders.id, id), eq(salesOrders.tenantId, tenantId)),
-    });
+    const [result] = await db
+      .select()
+      .from(salesOrders)
+      .where(and(eq(salesOrders.id, id), eq(salesOrders.tenantId, tenantId)))
+      .limit(1);
+    return result;
   },
 
   async findMany(
@@ -62,15 +65,24 @@ export const salesOrdersRepository = {
 
     const where = conditions.length > 1 ? and(...conditions) : conditions[0];
 
-    const data = await db.query.salesOrders.findMany({ where, limit, offset, orderBy });
+    const data = await db
+      .select()
+      .from(salesOrders)
+      .where(where)
+      .orderBy(orderBy)
+      .limit(limit)
+      .offset(offset);
     const total = await db.select({ count: count() }).from(salesOrders).where(where);
     return { data, total: total[0].count, limit, offset };
   },
 
   async findByOrderNumber(orderNumber: string, tenantId: string): Promise<SalesOrder | undefined> {
-    return db.query.salesOrders.findFirst({
-      where: and(eq(salesOrders.orderNumber, orderNumber), eq(salesOrders.tenantId, tenantId)),
-    });
+    const [result] = await db
+      .select()
+      .from(salesOrders)
+      .where(and(eq(salesOrders.orderNumber, orderNumber), eq(salesOrders.tenantId, tenantId)))
+      .limit(1);
+    return result;
   },
 
   async create(data: NewSalesOrder, tenantId: string): Promise<SalesOrder[]> {
@@ -100,18 +112,24 @@ export const salesOrdersRepository = {
 
 export const salesOrderLineItemsRepository = {
   async findById(id: string, tenantId: string): Promise<SalesOrderLineItem | undefined> {
-    return db.query.salesOrderLineItems.findFirst({
-      where: and(eq(salesOrderLineItems.id, id), eq(salesOrderLineItems.tenantId, tenantId)),
-    });
+    const [result] = await db
+      .select()
+      .from(salesOrderLineItems)
+      .where(and(eq(salesOrderLineItems.id, id), eq(salesOrderLineItems.tenantId, tenantId)))
+      .limit(1);
+    return result;
   },
 
   async findBySalesOrderId(salesOrderId: string, tenantId: string): Promise<SalesOrderLineItem[]> {
-    return db.query.salesOrderLineItems.findMany({
-      where: and(
-        eq(salesOrderLineItems.salesOrderId, salesOrderId),
-        eq(salesOrderLineItems.tenantId, tenantId),
-      ),
-    });
+    return db
+      .select()
+      .from(salesOrderLineItems)
+      .where(
+        and(
+          eq(salesOrderLineItems.salesOrderId, salesOrderId),
+          eq(salesOrderLineItems.tenantId, tenantId),
+        ),
+      );
   },
 
   async create(data: NewSalesOrderLineItem, tenantId: string): Promise<SalesOrderLineItem[]> {
@@ -164,9 +182,12 @@ export const salesOrderLineItemsRepository = {
 
 export const quotationsRepository = {
   async findById(id: string, tenantId: string): Promise<Quotation | undefined> {
-    return db.query.quotations.findFirst({
-      where: and(eq(quotations.id, id), eq(quotations.tenantId, tenantId)),
-    });
+    const [result] = await db
+      .select()
+      .from(quotations)
+      .where(and(eq(quotations.id, id), eq(quotations.tenantId, tenantId)))
+      .limit(1);
+    return result;
   },
 
   async findMany(
@@ -193,7 +214,13 @@ export const quotationsRepository = {
 
     const where = conditions.length > 1 ? and(...conditions) : conditions[0];
 
-    const data = await db.query.quotations.findMany({ where, limit, offset, orderBy });
+    const data = await db
+      .select()
+      .from(quotations)
+      .where(where)
+      .orderBy(orderBy)
+      .limit(limit)
+      .offset(offset);
     const total = await db.select({ count: count() }).from(quotations).where(where);
     return { data, total: total[0].count, limit, offset };
   },
@@ -202,23 +229,31 @@ export const quotationsRepository = {
     quotationNumber: string,
     tenantId: string,
   ): Promise<Quotation | undefined> {
-    return db.query.quotations.findFirst({
-      where: and(
-        eq(quotations.quotationNumber, quotationNumber),
-        eq(quotations.tenantId, tenantId),
-      ),
-    });
+    const [result] = await db
+      .select()
+      .from(quotations)
+      .where(
+        and(
+          eq(quotations.quotationNumber, quotationNumber),
+          eq(quotations.tenantId, tenantId),
+        ),
+      )
+      .limit(1);
+    return result;
   },
 
   async findExpired(currentDate: string, tenantId: string): Promise<Quotation[]> {
-    return db.query.quotations.findMany({
-      where: and(
-        eq(quotations.tenantId, tenantId),
-        eq(quotations.status, 'sent'),
-        lte(quotations.expiryDate, currentDate),
-      ),
-      orderBy: asc(quotations.expiryDate),
-    });
+    return db
+      .select()
+      .from(quotations)
+      .where(
+        and(
+          eq(quotations.tenantId, tenantId),
+          eq(quotations.status, 'sent'),
+          lte(quotations.expiryDate, currentDate),
+        ),
+      )
+      .orderBy(asc(quotations.expiryDate));
   },
 
   async create(data: NewQuotation, tenantId: string): Promise<Quotation[]> {
@@ -248,18 +283,24 @@ export const quotationsRepository = {
 
 export const quotationLineItemsRepository = {
   async findById(id: string, tenantId: string): Promise<QuotationLineItem | undefined> {
-    return db.query.quotationLineItems.findFirst({
-      where: and(eq(quotationLineItems.id, id), eq(quotationLineItems.tenantId, tenantId)),
-    });
+    const [result] = await db
+      .select()
+      .from(quotationLineItems)
+      .where(and(eq(quotationLineItems.id, id), eq(quotationLineItems.tenantId, tenantId)))
+      .limit(1);
+    return result;
   },
 
   async findByQuotationId(quotationId: string, tenantId: string): Promise<QuotationLineItem[]> {
-    return db.query.quotationLineItems.findMany({
-      where: and(
-        eq(quotationLineItems.quotationId, quotationId),
-        eq(quotationLineItems.tenantId, tenantId),
-      ),
-    });
+    return db
+      .select()
+      .from(quotationLineItems)
+      .where(
+        and(
+          eq(quotationLineItems.quotationId, quotationId),
+          eq(quotationLineItems.tenantId, tenantId),
+        ),
+      );
   },
 
   async create(data: NewQuotationLineItem, tenantId: string): Promise<QuotationLineItem[]> {
@@ -309,9 +350,12 @@ export const quotationLineItemsRepository = {
 
 export const discountPoliciesRepository = {
   async findById(id: string, tenantId: string): Promise<DiscountPolicy | undefined> {
-    return db.query.discountPolicies.findFirst({
-      where: and(eq(discountPolicies.id, id), eq(discountPolicies.tenantId, tenantId)),
-    });
+    const [result] = await db
+      .select()
+      .from(discountPolicies)
+      .where(and(eq(discountPolicies.id, id), eq(discountPolicies.tenantId, tenantId)))
+      .limit(1);
+    return result;
   },
 
   async findMany(
@@ -338,7 +382,13 @@ export const discountPoliciesRepository = {
 
     const where = conditions.length > 1 ? and(...conditions) : conditions[0];
 
-    const data = await db.query.discountPolicies.findMany({ where, limit, offset, orderBy });
+    const data = await db
+      .select()
+      .from(discountPolicies)
+      .where(where)
+      .orderBy(orderBy)
+      .limit(limit)
+      .offset(offset);
     const total = await db.select({ count: count() }).from(discountPolicies).where(where);
     return { data, total: total[0].count, limit, offset };
   },
@@ -355,10 +405,11 @@ export const discountPoliciesRepository = {
     if (customerId) {
       conditions.push(eq(discountPolicies.customerId, customerId));
     }
-    return db.query.discountPolicies.findMany({
-      where: and(...conditions),
-      orderBy: asc(discountPolicies.validFrom),
-    });
+    return db
+      .select()
+      .from(discountPolicies)
+      .where(and(...conditions))
+      .orderBy(asc(discountPolicies.validFrom));
   },
 
   async create(data: NewDiscountPolicy, tenantId: string): Promise<DiscountPolicy[]> {

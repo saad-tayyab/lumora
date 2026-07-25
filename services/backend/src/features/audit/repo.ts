@@ -32,9 +32,12 @@ export const auditLogEntriesRepository = {
    * Find an audit log entry by ID, scoped to tenant.
    */
   async findById(id: string, tenantId: string): Promise<AuditLogEntry | undefined> {
-    return db.query.auditLogEntries.findFirst({
-      where: and(eq(auditLogEntries.id, id), eq(auditLogEntries.tenantId, tenantId)),
-    });
+    const [result] = await db
+      .select()
+      .from(auditLogEntries)
+      .where(and(eq(auditLogEntries.id, id), eq(auditLogEntries.tenantId, tenantId)))
+      .limit(1);
+    return result;
   },
 
   /**
@@ -77,12 +80,13 @@ export const auditLogEntriesRepository = {
 
     const where = conditions.length > 1 ? and(...conditions) : conditions[0];
 
-    const data = await db.query.auditLogEntries.findMany({
-      where,
-      limit,
-      offset,
-      orderBy,
-    });
+    const data = await db
+      .select()
+      .from(auditLogEntries)
+      .where(where)
+      .orderBy(orderBy)
+      .limit(limit)
+      .offset(offset);
 
     const total = await db.select({ count: count() }).from(auditLogEntries).where(where);
 

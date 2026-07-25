@@ -23,24 +23,31 @@ import { db } from '../../database';
 
 export const unitOfMeasureRepo = {
   async findById(id: string): Promise<UnitOfMeasure | undefined> {
-    return db.query.unitOfMeasures.findFirst({
-      where: eq(unitOfMeasures.id, id),
-    });
+    const [result] = await db
+      .select()
+      .from(unitOfMeasures)
+      .where(eq(unitOfMeasures.id, id))
+      .limit(1);
+    return result;
   },
 
   async findByCode(code: string): Promise<UnitOfMeasure | undefined> {
-    return db.query.unitOfMeasures.findFirst({
-      where: eq(unitOfMeasures.code, code),
-    });
+    const [result] = await db
+      .select()
+      .from(unitOfMeasures)
+      .where(eq(unitOfMeasures.code, code))
+      .limit(1);
+    return result;
   },
 
   async findMany(args?: { limit?: number; offset?: number; orderBy?: SQL }) {
     const { limit = 50, offset = 0, orderBy = asc(unitOfMeasures.code) } = args ?? {};
-    const data = await db.query.unitOfMeasures.findMany({
-      limit,
-      offset,
-      orderBy,
-    });
+    const data = await db
+      .select()
+      .from(unitOfMeasures)
+      .orderBy(orderBy)
+      .limit(limit)
+      .offset(offset);
     const [{ count: total }] = await db.select({ count: count() }).from(unitOfMeasures);
     return { data, total, limit, offset };
   },
@@ -50,29 +57,37 @@ export const unitOfMeasureRepo = {
 
 export const itemCategoryRepo = {
   async findById(id: string): Promise<ItemCategory | undefined> {
-    return db.query.itemCategories.findFirst({
-      where: eq(itemCategories.id, id),
-    });
+    const [result] = await db
+      .select()
+      .from(itemCategories)
+      .where(eq(itemCategories.id, id))
+      .limit(1);
+    return result;
   },
 
   async findByCode(tenantId: string, code: string): Promise<ItemCategory | undefined> {
-    return db.query.itemCategories.findFirst({
-      where: and(eq(itemCategories.tenantId, tenantId), eq(itemCategories.code, code)),
-    });
+    const [result] = await db
+      .select()
+      .from(itemCategories)
+      .where(and(eq(itemCategories.tenantId, tenantId), eq(itemCategories.code, code)))
+      .limit(1);
+    return result;
   },
 
   async findActiveByTenant(tenantId: string): Promise<ItemCategory[]> {
-    return db.query.itemCategories.findMany({
-      where: and(eq(itemCategories.tenantId, tenantId), eq(itemCategories.isActive, true)),
-      orderBy: asc(itemCategories.name),
-    });
+    return db
+      .select()
+      .from(itemCategories)
+      .where(and(eq(itemCategories.tenantId, tenantId), eq(itemCategories.isActive, true)))
+      .orderBy(asc(itemCategories.name));
   },
 
   async findByParentId(parentId: string): Promise<ItemCategory[]> {
-    return db.query.itemCategories.findMany({
-      where: eq(itemCategories.parentId, parentId),
-      orderBy: asc(itemCategories.name),
-    });
+    return db
+      .select()
+      .from(itemCategories)
+      .where(eq(itemCategories.parentId, parentId))
+      .orderBy(asc(itemCategories.name));
   },
 
   async countItemsByCategory(categoryId: string): Promise<number> {
@@ -86,12 +101,13 @@ export const itemCategoryRepo = {
   async findMany(args?: { tenantId?: string; limit?: number; offset?: number; orderBy?: SQL }) {
     const { tenantId, limit = 50, offset = 0, orderBy = asc(itemCategories.name) } = args ?? {};
     const where = tenantId ? eq(itemCategories.tenantId, tenantId) : undefined;
-    const data = await db.query.itemCategories.findMany({
-      where,
-      limit,
-      offset,
-      orderBy,
-    });
+    const data = await db
+      .select()
+      .from(itemCategories)
+      .where(where)
+      .orderBy(orderBy)
+      .limit(limit)
+      .offset(offset);
     const [{ count: total }] = await db
       .select({ count: count() })
       .from(itemCategories)
@@ -120,39 +136,50 @@ export const itemCategoryRepo = {
 
 export const itemRepo = {
   async findById(id: string): Promise<Item | undefined> {
-    return db.query.items.findFirst({
-      where: eq(items.id, id),
-    });
+    const [result] = await db
+      .select()
+      .from(items)
+      .where(eq(items.id, id))
+      .limit(1);
+    return result;
   },
 
   async findBySku(sku: string): Promise<Item | undefined> {
-    return db.query.items.findFirst({
-      where: eq(items.sku, sku),
-    });
+    const [result] = await db
+      .select()
+      .from(items)
+      .where(eq(items.sku, sku))
+      .limit(1);
+    return result;
   },
 
   async findByBarcode(barcode: string): Promise<Item | undefined> {
-    return db.query.items.findFirst({
-      where: eq(items.barcode, barcode),
-    });
+    const [result] = await db
+      .select()
+      .from(items)
+      .where(eq(items.barcode, barcode))
+      .limit(1);
+    return result;
   },
 
   async findActiveByTenant(tenantId: string): Promise<Item[]> {
-    return db.query.items.findMany({
-      where: and(eq(items.tenantId, tenantId), eq(items.isActive, true)),
-      orderBy: asc(items.name),
-    });
+    return db
+      .select()
+      .from(items)
+      .where(and(eq(items.tenantId, tenantId), eq(items.isActive, true)))
+      .orderBy(asc(items.name));
   },
 
   async findMany(args?: { tenantId?: string; limit?: number; offset?: number; orderBy?: SQL }) {
     const { tenantId, limit = 50, offset = 0, orderBy = asc(items.name) } = args ?? {};
     const where = tenantId ? eq(items.tenantId, tenantId) : undefined;
-    const data = await db.query.items.findMany({
-      where,
-      limit,
-      offset,
-      orderBy,
-    });
+    const data = await db
+      .select()
+      .from(items)
+      .where(where)
+      .orderBy(orderBy)
+      .limit(limit)
+      .offset(offset);
     const [{ count: total }] = await db.select({ count: count() }).from(items).where(where);
     return { data, total, limit, offset };
   },
@@ -174,33 +201,41 @@ export const itemRepo = {
 
 export const warehouseRepo = {
   async findById(id: string): Promise<Warehouse | undefined> {
-    return db.query.warehouses.findFirst({
-      where: eq(warehouses.id, id),
-    });
+    const [result] = await db
+      .select()
+      .from(warehouses)
+      .where(eq(warehouses.id, id))
+      .limit(1);
+    return result;
   },
 
   async findByCode(tenantId: string, code: string): Promise<Warehouse | undefined> {
-    return db.query.warehouses.findFirst({
-      where: and(eq(warehouses.tenantId, tenantId), eq(warehouses.code, code)),
-    });
+    const [result] = await db
+      .select()
+      .from(warehouses)
+      .where(and(eq(warehouses.tenantId, tenantId), eq(warehouses.code, code)))
+      .limit(1);
+    return result;
   },
 
   async findActiveByTenant(tenantId: string): Promise<Warehouse[]> {
-    return db.query.warehouses.findMany({
-      where: and(eq(warehouses.tenantId, tenantId), eq(warehouses.isActive, true)),
-      orderBy: asc(warehouses.name),
-    });
+    return db
+      .select()
+      .from(warehouses)
+      .where(and(eq(warehouses.tenantId, tenantId), eq(warehouses.isActive, true)))
+      .orderBy(asc(warehouses.name));
   },
 
   async findMany(args?: { tenantId?: string; limit?: number; offset?: number; orderBy?: SQL }) {
     const { tenantId, limit = 50, offset = 0, orderBy = asc(warehouses.name) } = args ?? {};
     const where = tenantId ? eq(warehouses.tenantId, tenantId) : undefined;
-    const data = await db.query.warehouses.findMany({
-      where,
-      limit,
-      offset,
-      orderBy,
-    });
+    const data = await db
+      .select()
+      .from(warehouses)
+      .where(where)
+      .orderBy(orderBy)
+      .limit(limit)
+      .offset(offset);
     const [{ count: total }] = await db.select({ count: count() }).from(warehouses).where(where);
     return { data, total, limit, offset };
   },
@@ -226,43 +261,52 @@ export const warehouseRepo = {
 
 export const stockLevelRepo = {
   async findById(id: string): Promise<StockLevel | undefined> {
-    return db.query.stockLevels.findFirst({
-      where: eq(stockLevels.id, id),
-    });
+    const [result] = await db
+      .select()
+      .from(stockLevels)
+      .where(eq(stockLevels.id, id))
+      .limit(1);
+    return result;
   },
 
   async findByItemAndWarehouse(
     itemId: string,
     warehouseId: string,
   ): Promise<StockLevel | undefined> {
-    return db.query.stockLevels.findFirst({
-      where: and(eq(stockLevels.itemId, itemId), eq(stockLevels.warehouseId, warehouseId)),
-    });
+    const [result] = await db
+      .select()
+      .from(stockLevels)
+      .where(and(eq(stockLevels.itemId, itemId), eq(stockLevels.warehouseId, warehouseId)))
+      .limit(1);
+    return result;
   },
 
   async findByItem(itemId: string): Promise<StockLevel[]> {
-    return db.query.stockLevels.findMany({
-      where: eq(stockLevels.itemId, itemId),
-      orderBy: asc(stockLevels.warehouseId),
-    });
+    return db
+      .select()
+      .from(stockLevels)
+      .where(eq(stockLevels.itemId, itemId))
+      .orderBy(asc(stockLevels.warehouseId));
   },
 
   async findByWarehouse(warehouseId: string): Promise<StockLevel[]> {
-    return db.query.stockLevels.findMany({
-      where: eq(stockLevels.warehouseId, warehouseId),
-      orderBy: asc(stockLevels.itemId),
-    });
+    return db
+      .select()
+      .from(stockLevels)
+      .where(eq(stockLevels.warehouseId, warehouseId))
+      .orderBy(asc(stockLevels.itemId));
   },
 
   async findMany(args?: { tenantId?: string; limit?: number; offset?: number; orderBy?: SQL }) {
     const { tenantId, limit = 50, offset = 0, orderBy = asc(stockLevels.id) } = args ?? {};
     const where = tenantId ? eq(stockLevels.tenantId, tenantId) : undefined;
-    const data = await db.query.stockLevels.findMany({
-      where,
-      limit,
-      offset,
-      orderBy,
-    });
+    const data = await db
+      .select()
+      .from(stockLevels)
+      .where(where)
+      .orderBy(orderBy)
+      .limit(limit)
+      .offset(offset);
     const [{ count: total }] = await db.select({ count: count() }).from(stockLevels).where(where);
     return { data, total, limit, offset };
   },
@@ -287,36 +331,44 @@ export const stockLevelRepo = {
 
 export const stockMovementRepo = {
   async findById(id: string): Promise<StockMovement | undefined> {
-    return db.query.stockMovements.findFirst({
-      where: eq(stockMovements.id, id),
-    });
+    const [result] = await db
+      .select()
+      .from(stockMovements)
+      .where(eq(stockMovements.id, id))
+      .limit(1);
+    return result;
   },
 
   async findByItem(itemId: string): Promise<StockMovement[]> {
-    return db.query.stockMovements.findMany({
-      where: eq(stockMovements.itemId, itemId),
-      orderBy: desc(stockMovements.movementDate),
-    });
+    return db
+      .select()
+      .from(stockMovements)
+      .where(eq(stockMovements.itemId, itemId))
+      .orderBy(desc(stockMovements.movementDate));
   },
 
   async findByWarehouse(warehouseId: string): Promise<StockMovement[]> {
-    return db.query.stockMovements.findMany({
-      where: eq(stockMovements.warehouseId, warehouseId),
-      orderBy: desc(stockMovements.movementDate),
-    });
+    return db
+      .select()
+      .from(stockMovements)
+      .where(eq(stockMovements.warehouseId, warehouseId))
+      .orderBy(desc(stockMovements.movementDate));
   },
 
   async findBySourceDocument(
     sourceDocumentType: string,
     sourceDocumentId: string,
   ): Promise<StockMovement[]> {
-    return db.query.stockMovements.findMany({
-      where: and(
-        eq(stockMovements.sourceDocumentType, sourceDocumentType),
-        eq(stockMovements.sourceDocumentId, sourceDocumentId),
-      ),
-      orderBy: asc(stockMovements.createdAt),
-    });
+    return db
+      .select()
+      .from(stockMovements)
+      .where(
+        and(
+          eq(stockMovements.sourceDocumentType, sourceDocumentType),
+          eq(stockMovements.sourceDocumentId, sourceDocumentId),
+        ),
+      )
+      .orderBy(asc(stockMovements.createdAt));
   },
 
   async findMany(args?: { tenantId?: string; limit?: number; offset?: number; orderBy?: SQL }) {
@@ -327,12 +379,13 @@ export const stockMovementRepo = {
       orderBy = desc(stockMovements.movementDate),
     } = args ?? {};
     const where = tenantId ? eq(stockMovements.tenantId, tenantId) : undefined;
-    const data = await db.query.stockMovements.findMany({
-      where,
-      limit,
-      offset,
-      orderBy,
-    });
+    const data = await db
+      .select()
+      .from(stockMovements)
+      .where(where)
+      .orderBy(orderBy)
+      .limit(limit)
+      .offset(offset);
     const [{ count: total }] = await db
       .select({ count: count() })
       .from(stockMovements)

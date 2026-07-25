@@ -47,15 +47,21 @@ export interface PaginatedResult<T> {
 
 export const purchaseOrderRepo = {
   async findById(id: string, tenantId: string): Promise<PurchaseOrder | undefined> {
-    return db.query.purchaseOrders.findFirst({
-      where: and(eq(purchaseOrders.id, id), eq(purchaseOrders.tenantId, tenantId)),
-    });
+    const [result] = await db
+      .select()
+      .from(purchaseOrders)
+      .where(and(eq(purchaseOrders.id, id), eq(purchaseOrders.tenantId, tenantId)))
+      .limit(1);
+    return result;
   },
 
   async findByPoNumber(poNumber: string, tenantId: string): Promise<PurchaseOrder | undefined> {
-    return db.query.purchaseOrders.findFirst({
-      where: and(eq(purchaseOrders.poNumber, poNumber), eq(purchaseOrders.tenantId, tenantId)),
-    });
+    const [result] = await db
+      .select()
+      .from(purchaseOrders)
+      .where(and(eq(purchaseOrders.poNumber, poNumber), eq(purchaseOrders.tenantId, tenantId)))
+      .limit(1);
+    return result;
   },
 
   async findMany(
@@ -76,12 +82,13 @@ export const purchaseOrderRepo = {
 
     const where = and(...conditions);
 
-    const data = await db.query.purchaseOrders.findMany({
-      where,
-      orderBy: desc(purchaseOrders.orderDate),
-      limit,
-      offset,
-    });
+    const data = await db
+      .select()
+      .from(purchaseOrders)
+      .where(where)
+      .orderBy(desc(purchaseOrders.orderDate))
+      .limit(limit)
+      .offset(offset);
 
     const [{ total }] = await db.select({ total: count() }).from(purchaseOrders).where(where);
 
@@ -116,31 +123,38 @@ export const purchaseOrderRepo = {
   },
 
   async findByVendor(vendorId: string, tenantId: string): Promise<PurchaseOrder[]> {
-    return db.query.purchaseOrders.findMany({
-      where: and(eq(purchaseOrders.vendorId, vendorId), eq(purchaseOrders.tenantId, tenantId)),
-      orderBy: desc(purchaseOrders.orderDate),
-    });
+    return db
+      .select()
+      .from(purchaseOrders)
+      .where(and(eq(purchaseOrders.vendorId, vendorId), eq(purchaseOrders.tenantId, tenantId)))
+      .orderBy(desc(purchaseOrders.orderDate));
   },
 
   async findPendingApproval(tenantId: string): Promise<PurchaseOrder[]> {
-    return db.query.purchaseOrders.findMany({
-      where: and(
-        eq(purchaseOrders.status, 'pending_approval'),
-        eq(purchaseOrders.tenantId, tenantId),
-      ),
-      orderBy: desc(purchaseOrders.orderDate),
-    });
+    return db
+      .select()
+      .from(purchaseOrders)
+      .where(
+        and(
+          eq(purchaseOrders.status, 'pending_approval'),
+          eq(purchaseOrders.tenantId, tenantId),
+        ),
+      )
+      .orderBy(desc(purchaseOrders.orderDate));
   },
 
   async findActiveByVendor(vendorId: string, tenantId: string): Promise<PurchaseOrder[]> {
-    return db.query.purchaseOrders.findMany({
-      where: and(
-        eq(purchaseOrders.vendorId, vendorId),
-        eq(purchaseOrders.tenantId, tenantId),
-        eq(purchaseOrders.status, 'approved'),
-      ),
-      orderBy: desc(purchaseOrders.orderDate),
-    });
+    return db
+      .select()
+      .from(purchaseOrders)
+      .where(
+        and(
+          eq(purchaseOrders.vendorId, vendorId),
+          eq(purchaseOrders.tenantId, tenantId),
+          eq(purchaseOrders.status, 'approved'),
+        ),
+      )
+      .orderBy(desc(purchaseOrders.orderDate));
   },
 };
 
@@ -150,23 +164,28 @@ export const purchaseOrderRepo = {
 
 export const poLineItemRepo = {
   async findById(id: string): Promise<PoLineItem | undefined> {
-    return db.query.poLineItems.findFirst({
-      where: eq(poLineItems.id, id),
-    });
+    const [result] = await db
+      .select()
+      .from(poLineItems)
+      .where(eq(poLineItems.id, id))
+      .limit(1);
+    return result;
   },
 
   async findByPoId(poId: string): Promise<PoLineItem[]> {
-    return db.query.poLineItems.findMany({
-      where: eq(poLineItems.poId, poId),
-      orderBy: asc(poLineItems.lineNumber),
-    });
+    return db
+      .select()
+      .from(poLineItems)
+      .where(eq(poLineItems.poId, poId))
+      .orderBy(asc(poLineItems.lineNumber));
   },
 
   async findByItemId(itemId: string): Promise<PoLineItem[]> {
-    return db.query.poLineItems.findMany({
-      where: eq(poLineItems.itemId, itemId),
-      orderBy: desc(poLineItems.createdAt),
-    });
+    return db
+      .select()
+      .from(poLineItems)
+      .where(eq(poLineItems.itemId, itemId))
+      .orderBy(desc(poLineItems.createdAt));
   },
 
   async create(data: NewPoLineItem): Promise<PoLineItem> {
@@ -204,15 +223,21 @@ export const poLineItemRepo = {
 
 export const receivingReportRepo = {
   async findById(id: string, tenantId: string): Promise<ReceivingReport | undefined> {
-    return db.query.receivingReports.findFirst({
-      where: and(eq(receivingReports.id, id), eq(receivingReports.tenantId, tenantId)),
-    });
+    const [result] = await db
+      .select()
+      .from(receivingReports)
+      .where(and(eq(receivingReports.id, id), eq(receivingReports.tenantId, tenantId)))
+      .limit(1);
+    return result;
   },
 
   async findByRrNumber(rrNumber: string, tenantId: string): Promise<ReceivingReport | undefined> {
-    return db.query.receivingReports.findFirst({
-      where: and(eq(receivingReports.rrNumber, rrNumber), eq(receivingReports.tenantId, tenantId)),
-    });
+    const [result] = await db
+      .select()
+      .from(receivingReports)
+      .where(and(eq(receivingReports.rrNumber, rrNumber), eq(receivingReports.tenantId, tenantId)))
+      .limit(1);
+    return result;
   },
 
   async findMany(
@@ -236,12 +261,13 @@ export const receivingReportRepo = {
 
     const where = and(...conditions);
 
-    const data = await db.query.receivingReports.findMany({
-      where,
-      orderBy: desc(receivingReports.receivedDate),
-      limit,
-      offset,
-    });
+    const data = await db
+      .select()
+      .from(receivingReports)
+      .where(where)
+      .orderBy(desc(receivingReports.receivedDate))
+      .limit(limit)
+      .offset(offset);
 
     const [{ total }] = await db.select({ total: count() }).from(receivingReports).where(where);
 
@@ -276,17 +302,19 @@ export const receivingReportRepo = {
   },
 
   async findByPoId(poId: string, tenantId: string): Promise<ReceivingReport[]> {
-    return db.query.receivingReports.findMany({
-      where: and(eq(receivingReports.poId, poId), eq(receivingReports.tenantId, tenantId)),
-      orderBy: desc(receivingReports.receivedDate),
-    });
+    return db
+      .select()
+      .from(receivingReports)
+      .where(and(eq(receivingReports.poId, poId), eq(receivingReports.tenantId, tenantId)))
+      .orderBy(desc(receivingReports.receivedDate));
   },
 
   async findByVendor(vendorId: string, tenantId: string): Promise<ReceivingReport[]> {
-    return db.query.receivingReports.findMany({
-      where: and(eq(receivingReports.vendorId, vendorId), eq(receivingReports.tenantId, tenantId)),
-      orderBy: desc(receivingReports.receivedDate),
-    });
+    return db
+      .select()
+      .from(receivingReports)
+      .where(and(eq(receivingReports.vendorId, vendorId), eq(receivingReports.tenantId, tenantId)))
+      .orderBy(desc(receivingReports.receivedDate));
   },
 };
 
@@ -296,21 +324,29 @@ export const receivingReportRepo = {
 
 export const vendorCatalogItemRepo = {
   async findById(id: string): Promise<VendorCatalogItem | undefined> {
-    return db.query.vendorCatalogItems.findFirst({
-      where: eq(vendorCatalogItems.id, id),
-    });
+    const [result] = await db
+      .select()
+      .from(vendorCatalogItems)
+      .where(eq(vendorCatalogItems.id, id))
+      .limit(1);
+    return result;
   },
 
   async findByVendorAndCode(
     vendorId: string,
     vendorItemCode: string,
   ): Promise<VendorCatalogItem | undefined> {
-    return db.query.vendorCatalogItems.findFirst({
-      where: and(
-        eq(vendorCatalogItems.vendorId, vendorId),
-        eq(vendorCatalogItems.vendorItemCode, vendorItemCode),
-      ),
-    });
+    const [result] = await db
+      .select()
+      .from(vendorCatalogItems)
+      .where(
+        and(
+          eq(vendorCatalogItems.vendorId, vendorId),
+          eq(vendorCatalogItems.vendorItemCode, vendorItemCode),
+        ),
+      )
+      .limit(1);
+    return result;
   },
 
   async findMany(args?: {
@@ -328,12 +364,13 @@ export const vendorCatalogItemRepo = {
 
     const where = conditions.length > 0 ? and(...conditions) : undefined;
 
-    const data = await db.query.vendorCatalogItems.findMany({
-      where,
-      orderBy: asc(vendorCatalogItems.vendorItemCode),
-      limit,
-      offset,
-    });
+    const data = await db
+      .select()
+      .from(vendorCatalogItems)
+      .where(where)
+      .orderBy(asc(vendorCatalogItems.vendorItemCode))
+      .limit(limit)
+      .offset(offset);
 
     const [{ total }] = await db.select({ total: count() }).from(vendorCatalogItems).where(where);
 
@@ -341,27 +378,32 @@ export const vendorCatalogItemRepo = {
   },
 
   async findByVendor(vendorId: string): Promise<VendorCatalogItem[]> {
-    return db.query.vendorCatalogItems.findMany({
-      where: eq(vendorCatalogItems.vendorId, vendorId),
-      orderBy: asc(vendorCatalogItems.vendorItemCode),
-    });
+    return db
+      .select()
+      .from(vendorCatalogItems)
+      .where(eq(vendorCatalogItems.vendorId, vendorId))
+      .orderBy(asc(vendorCatalogItems.vendorItemCode));
   },
 
   async findByInternalItemId(internalItemId: string): Promise<VendorCatalogItem[]> {
-    return db.query.vendorCatalogItems.findMany({
-      where: eq(vendorCatalogItems.internalItemId, internalItemId),
-      orderBy: asc(vendorCatalogItems.unitPrice),
-    });
+    return db
+      .select()
+      .from(vendorCatalogItems)
+      .where(eq(vendorCatalogItems.internalItemId, internalItemId))
+      .orderBy(asc(vendorCatalogItems.unitPrice));
   },
 
   async findEffective(vendorId: string, asOfDate: string): Promise<VendorCatalogItem[]> {
-    return db.query.vendorCatalogItems.findMany({
-      where: and(
-        eq(vendorCatalogItems.vendorId, vendorId),
-        eq(vendorCatalogItems.effectiveDate, asOfDate),
-      ),
-      orderBy: asc(vendorCatalogItems.vendorItemCode),
-    });
+    return db
+      .select()
+      .from(vendorCatalogItems)
+      .where(
+        and(
+          eq(vendorCatalogItems.vendorId, vendorId),
+          eq(vendorCatalogItems.effectiveDate, asOfDate),
+        ),
+      )
+      .orderBy(asc(vendorCatalogItems.vendorItemCode));
   },
 
   async create(data: NewVendorCatalogItem): Promise<VendorCatalogItem> {
