@@ -1,4 +1,3 @@
-import { db } from '@lumora/database';
 import {
   type Permission,
   permissions,
@@ -12,6 +11,7 @@ import {
   users,
 } from '@lumora/database/schema';
 import { and, asc, count, eq, isNull, type SQL } from 'drizzle-orm';
+import { db } from '../../database';
 
 // ─── Users Repository ───────────────────────────────────────────────────────
 

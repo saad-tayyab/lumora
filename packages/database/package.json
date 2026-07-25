@@ -3,19 +3,31 @@
   "version": "0.0.1",
   "private": true,
   "type": "module",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
   "exports": {
-    ".": "./src/index.ts",
-    "./schema": "./src/schema/index.ts"
+    ".": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    },
+    "./schema": {
+      "types": "./dist/schema/index.d.ts",
+      "default": "./dist/schema/index.js"
+    }
   },
+  "files": ["dist"],
   "scripts": {
+    "build": "tsc",
     "db:generate": "drizzle-kit generate",
     "db:migrate": "drizzle-kit migrate",
     "db:seed": "bun src/seed.ts",
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
-    "@neondatabase/serverless": "^1.1.0",
+    "encore.dev": "^1.57.13",
     "drizzle-orm": "1.0.0-rc.4",
+    "pg": "^8.13.1",
+    "@types/pg": "^8.11.10",
     "uuid": "^11.1.0",
     "zod": "^4.4.3"
   },

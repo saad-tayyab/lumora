@@ -1,4 +1,3 @@
-import { db } from '@lumora/database';
 import {
   type AssetAdjustment,
   type AssetCategory,
@@ -17,6 +16,7 @@ import {
   type NewFixedAsset,
 } from '@lumora/database/schema/asset';
 import { and, asc, count, desc, eq, type SQL } from 'drizzle-orm';
+import { db } from '../../database';
 
 // ─── Asset Categories ─────────────────────────────────────────────────────────
 

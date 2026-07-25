@@ -1,4 +1,3 @@
-import { db } from '@lumora/database';
 import {
   type AttendanceRecord,
   attendance,
@@ -28,6 +27,7 @@ import {
   salaries,
 } from '@lumora/database/schema/hr';
 import { and, asc, count, desc, eq, type SQL } from 'drizzle-orm';
+import { db } from '../../database';
 
 // ─── Departments ─────────────────────────────────────────────────────────────
 

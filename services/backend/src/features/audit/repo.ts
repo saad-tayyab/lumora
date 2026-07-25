@@ -1,7 +1,7 @@
-import { db } from '@lumora/database';
 import type { AuditLogEntry, NewAuditLogEntry } from '@lumora/database/schema';
 import { auditLogEntries } from '@lumora/database/schema';
 import { and, asc, count, eq, gte, lte, type SQL } from 'drizzle-orm';
+import { db } from '../../database';
 
 // ─── Pagination Result Type ──────────────────────────────────────────────────
 

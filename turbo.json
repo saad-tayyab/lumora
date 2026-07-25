@@ -5,6 +5,7 @@
   "tasks": {
     "build": {
       "dependsOn": ["^build"],
+      "inputs": ["src/**", "package.json", "tsconfig.json"],
       "outputs": ["dist/**", ".svelte-kit/output/**"]
     },
     "dev": {
@@ -12,19 +13,25 @@
       "persistent": true
     },
     "lint": {
-      "dependsOn": ["^build"]
+      "dependsOn": ["^build"],
+      "inputs": ["src/**", "package.json", "biome.json"]
     },
     "typecheck": {
-      "dependsOn": ["^build"]
+      "dependsOn": ["^build"],
+      "inputs": ["src/**", "package.json", "tsconfig.json"]
     },
     "test": {
-      "dependsOn": ["^build"]
+      "dependsOn": ["^build"],
+      "inputs": ["src/**", "package.json", "tsconfig.json", "vitest.config.ts"]
     },
     "test:unit": {
-      "dependsOn": ["^build"]
+      "dependsOn": ["^build"],
+      "inputs": ["src/**", "package.json", "tsconfig.json", "vitest.config.ts"]
     },
     "test:e2e": {
-      "dependsOn": ["build"]
+      "dependsOn": ["build"],
+      "inputs": ["src/**", "package.json"],
+      "env": ["DATABASE_URL"]
     },
     "db:generate": {
       "cache": false,

@@ -15,6 +15,7 @@ import {
   IncompleteAcquisitionError,
   LandIsNotDepreciableError,
 } from './errors';
+import { depreciationPosted } from './events';
 import * as repo from './repo';
 import type {
   AssetAdjustmentResponse,
@@ -526,6 +527,13 @@ export async function postDepreciationEntry(
 
     await repo.fixedAssetRepo.update(entry.assetId, updateData);
   }
+
+  await depreciationPosted.publish({
+    assetId: updated.assetId,
+    periodId: updated.id,
+    amount: Number(updated.depreciationAmount),
+    tenantId: updated.tenantId,
+  });
 
   return updated;
 }

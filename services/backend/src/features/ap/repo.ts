@@ -11,7 +11,6 @@
  * @see packages/database/src/schema/ap/repository.ts — Base repository
  */
 
-import { db } from '@lumora/database';
 import type {
   Bill,
   BillLineItem,
@@ -32,6 +31,7 @@ import {
   vendors,
 } from '@lumora/database/schema';
 import { and, asc, count, eq, type SQL } from 'drizzle-orm';
+import { db } from '../../database';
 
 // =============================================================================
 // Pagination Result

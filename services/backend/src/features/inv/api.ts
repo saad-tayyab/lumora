@@ -1,7 +1,7 @@
-import { api, getCurrentContext } from 'encore.dev/api';
+import { APIError, api } from 'encore.dev/api';
 import { z } from 'zod';
+import { getAuthData } from '~encore/auth';
 import { ValidationError } from '../../lib/errors';
-import { authenticate } from '../../lib/middleware/auth';
 import * as service from './service';
 import type {
   CreateItemCategoryRequest,
@@ -121,11 +121,6 @@ const createStockMovementSchema = z.object({
 
 // ─── Helpers ──────────────────────────────────────────────────────────────────
 
-async function getAuthContext() {
-  const ctx = getCurrentContext();
-  return authenticate(ctx.request?.headers);
-}
-
 function validate<T>(schema: z.ZodSchema<T>, data: unknown): T {
   const result = schema.safeParse(data);
   if (!result.success) {
@@ -142,44 +137,49 @@ function validate<T>(schema: z.ZodSchema<T>, data: unknown): T {
 // ─── Items ────────────────────────────────────────────────────────────────────
 
 export const getItem = api(
-  { expose: true, method: 'GET', path: '/inv/items/:id' },
+  { expose: true, auth: true, method: 'GET', path: '/inv/items/:id' },
   async ({ id }: { id: string }): Promise<ItemResponse> => {
-    await getAuthContext();
+    const auth = getAuthData();
+    if (!auth) throw APIError.unauthenticated('not authenticated');
     return service.getItem(id);
   },
 );
 
 export const listItems = api(
-  { expose: true, method: 'GET', path: '/inv/items' },
+  { expose: true, auth: true, method: 'GET', path: '/inv/items' },
   async (params: { page?: number; limit?: number }): Promise<ListItemsResponse> => {
-    const auth = await getAuthContext();
+    const auth = getAuthData();
+    if (!auth) throw APIError.unauthenticated('not authenticated');
     const query = validate(paginationSchema, params);
     return service.listItems(auth.tenantId, query);
   },
 );
 
 export const createItem = api(
-  { expose: true, method: 'POST', path: '/inv/items' },
+  { expose: true, auth: true, method: 'POST', path: '/inv/items' },
   async (req: CreateItemRequest): Promise<ItemResponse> => {
-    const auth = await getAuthContext();
+    const auth = getAuthData();
+    if (!auth) throw APIError.unauthenticated('not authenticated');
     const input = validate(createItemSchema, req);
     return service.createItem(auth.tenantId, auth.userId, input);
   },
 );
 
 export const updateItem = api(
-  { expose: true, method: 'PATCH', path: '/inv/items/:id' },
+  { expose: true, auth: true, method: 'PATCH', path: '/inv/items/:id' },
   async ({ id, ...body }: { id: string } & UpdateItemRequest): Promise<ItemResponse> => {
-    await getAuthContext();
+    const auth = getAuthData();
+    if (!auth) throw APIError.unauthenticated('not authenticated');
     const input = validate(updateItemSchema, body);
     return service.updateItem(id, input);
   },
 );
 
 export const deleteItem = api(
-  { expose: true, method: 'DELETE', path: '/inv/items/:id' },
+  { expose: true, auth: true, method: 'DELETE', path: '/inv/items/:id' },
   async ({ id }: { id: string }): Promise<void> => {
-    await getAuthContext();
+    const auth = getAuthData();
+    if (!auth) throw APIError.unauthenticated('not authenticated');
     return service.deleteItem(id);
   },
 );
@@ -187,44 +187,49 @@ export const deleteItem = api(
 // ─── Warehouses ───────────────────────────────────────────────────────────────
 
 export const getWarehouse = api(
-  { expose: true, method: 'GET', path: '/inv/warehouses/:id' },
+  { expose: true, auth: true, method: 'GET', path: '/inv/warehouses/:id' },
   async ({ id }: { id: string }): Promise<WarehouseResponse> => {
-    await getAuthContext();
+    const auth = getAuthData();
+    if (!auth) throw APIError.unauthenticated('not authenticated');
     return service.getWarehouse(id);
   },
 );
 
 export const listWarehouses = api(
-  { expose: true, method: 'GET', path: '/inv/warehouses' },
+  { expose: true, auth: true, method: 'GET', path: '/inv/warehouses' },
   async (params: { page?: number; limit?: number }): Promise<ListWarehousesResponse> => {
-    const auth = await getAuthContext();
+    const auth = getAuthData();
+    if (!auth) throw APIError.unauthenticated('not authenticated');
     const query = validate(paginationSchema, params);
     return service.listWarehouses(auth.tenantId, query);
   },
 );
 
 export const createWarehouse = api(
-  { expose: true, method: 'POST', path: '/inv/warehouses' },
+  { expose: true, auth: true, method: 'POST', path: '/inv/warehouses' },
   async (req: CreateWarehouseRequest): Promise<WarehouseResponse> => {
-    const auth = await getAuthContext();
+    const auth = getAuthData();
+    if (!auth) throw APIError.unauthenticated('not authenticated');
     const input = validate(createWarehouseSchema, req);
     return service.createWarehouse(auth.tenantId, input);
   },
 );
 
 export const updateWarehouse = api(
-  { expose: true, method: 'PATCH', path: '/inv/warehouses/:id' },
+  { expose: true, auth: true, method: 'PATCH', path: '/inv/warehouses/:id' },
   async ({ id, ...body }: { id: string } & UpdateWarehouseRequest): Promise<WarehouseResponse> => {
-    await getAuthContext();
+    const auth = getAuthData();
+    if (!auth) throw APIError.unauthenticated('not authenticated');
     const input = validate(updateWarehouseSchema, body);
     return service.updateWarehouse(id, input);
   },
 );
 
 export const deleteWarehouse = api(
-  { expose: true, method: 'DELETE', path: '/inv/warehouses/:id' },
+  { expose: true, auth: true, method: 'DELETE', path: '/inv/warehouses/:id' },
   async ({ id }: { id: string }): Promise<void> => {
-    await getAuthContext();
+    const auth = getAuthData();
+    if (!auth) throw APIError.unauthenticated('not authenticated');
     return service.deleteWarehouse(id);
   },
 );
@@ -232,47 +237,52 @@ export const deleteWarehouse = api(
 // ─── Item Categories ──────────────────────────────────────────────────────────
 
 export const getItemCategory = api(
-  { expose: true, method: 'GET', path: '/inv/item-categories/:id' },
+  { expose: true, auth: true, method: 'GET', path: '/inv/item-categories/:id' },
   async ({ id }: { id: string }): Promise<ItemCategoryResponse> => {
-    await getAuthContext();
+    const auth = getAuthData();
+    if (!auth) throw APIError.unauthenticated('not authenticated');
     return service.getItemCategory(id);
   },
 );
 
 export const listItemCategories = api(
-  { expose: true, method: 'GET', path: '/inv/item-categories' },
+  { expose: true, auth: true, method: 'GET', path: '/inv/item-categories' },
   async (params: { page?: number; limit?: number }): Promise<ListItemCategoriesResponse> => {
-    const auth = await getAuthContext();
+    const auth = getAuthData();
+    if (!auth) throw APIError.unauthenticated('not authenticated');
     const query = validate(paginationSchema, params);
     return service.listItemCategories(auth.tenantId, query);
   },
 );
 
 export const createItemCategory = api(
-  { expose: true, method: 'POST', path: '/inv/item-categories' },
+  { expose: true, auth: true, method: 'POST', path: '/inv/item-categories' },
   async (req: CreateItemCategoryRequest): Promise<ItemCategoryResponse> => {
-    const auth = await getAuthContext();
+    const auth = getAuthData();
+    if (!auth) throw APIError.unauthenticated('not authenticated');
     const input = validate(createItemCategorySchema, req);
     return service.createItemCategory(auth.tenantId, input);
   },
 );
 
 export const updateItemCategory = api(
-  { expose: true, method: 'PATCH', path: '/inv/item-categories/:id' },
+  { expose: true, auth: true, method: 'PATCH', path: '/inv/item-categories/:id' },
   async ({
     id,
     ...body
   }: { id: string } & UpdateItemCategoryRequest): Promise<ItemCategoryResponse> => {
-    await getAuthContext();
+    const auth = getAuthData();
+    if (!auth) throw APIError.unauthenticated('not authenticated');
     const input = validate(updateItemCategorySchema, body);
     return service.updateItemCategory(id, input);
   },
 );
 
 export const deleteItemCategory = api(
-  { expose: true, method: 'DELETE', path: '/inv/item-categories/:id' },
+  { expose: true, auth: true, method: 'DELETE', path: '/inv/item-categories/:id' },
   async ({ id }: { id: string }): Promise<void> => {
-    await getAuthContext();
+    const auth = getAuthData();
+    if (!auth) throw APIError.unauthenticated('not authenticated');
     return service.deleteItemCategory(id);
   },
 );
@@ -280,17 +290,19 @@ export const deleteItemCategory = api(
 // ─── Unit of Measures ─────────────────────────────────────────────────────────
 
 export const getUnitOfMeasure = api(
-  { expose: true, method: 'GET', path: '/inv/unit-of-measures/:id' },
+  { expose: true, auth: true, method: 'GET', path: '/inv/unit-of-measures/:id' },
   async ({ id }: { id: string }): Promise<UnitOfMeasureResponse> => {
-    await getAuthContext();
+    const auth = getAuthData();
+    if (!auth) throw APIError.unauthenticated('not authenticated');
     return service.getUnitOfMeasure(id);
   },
 );
 
 export const listUnitOfMeasures = api(
-  { expose: true, method: 'GET', path: '/inv/unit-of-measures' },
+  { expose: true, auth: true, method: 'GET', path: '/inv/unit-of-measures' },
   async (params: { page?: number; limit?: number }): Promise<ListUnitOfMeasuresResponse> => {
-    await getAuthContext();
+    const auth = getAuthData();
+    if (!auth) throw APIError.unauthenticated('not authenticated');
     const query = validate(paginationSchema, params);
     return service.listUnitOfMeasures(query);
   },
@@ -299,17 +311,19 @@ export const listUnitOfMeasures = api(
 // ─── Stock Levels ─────────────────────────────────────────────────────────────
 
 export const getStockLevel = api(
-  { expose: true, method: 'GET', path: '/inv/stock-levels' },
+  { expose: true, auth: true, method: 'GET', path: '/inv/stock-levels' },
   async (params: { itemId: string; warehouseId: string }): Promise<StockLevelResponse> => {
-    await getAuthContext();
+    const auth = getAuthData();
+    if (!auth) throw APIError.unauthenticated('not authenticated');
     return service.getStockLevel(params.itemId, params.warehouseId);
   },
 );
 
 export const listStockLevels = api(
-  { expose: true, method: 'GET', path: '/inv/stock-levels/list' },
+  { expose: true, auth: true, method: 'GET', path: '/inv/stock-levels/list' },
   async (params: { page?: number; limit?: number }): Promise<ListStockLevelsResponse> => {
-    const auth = await getAuthContext();
+    const auth = getAuthData();
+    if (!auth) throw APIError.unauthenticated('not authenticated');
     const query = validate(paginationSchema, params);
     return service.listStockLevels(auth.tenantId, query);
   },
@@ -318,26 +332,29 @@ export const listStockLevels = api(
 // ─── Stock Movements ──────────────────────────────────────────────────────────
 
 export const getStockMovement = api(
-  { expose: true, method: 'GET', path: '/inv/stock-movements/:id' },
+  { expose: true, auth: true, method: 'GET', path: '/inv/stock-movements/:id' },
   async ({ id }: { id: string }): Promise<StockMovementResponse> => {
-    await getAuthContext();
+    const auth = getAuthData();
+    if (!auth) throw APIError.unauthenticated('not authenticated');
     return service.getStockMovement(id);
   },
 );
 
 export const listStockMovements = api(
-  { expose: true, method: 'GET', path: '/inv/stock-movements' },
+  { expose: true, auth: true, method: 'GET', path: '/inv/stock-movements' },
   async (params: { page?: number; limit?: number }): Promise<ListStockMovementsResponse> => {
-    const auth = await getAuthContext();
+    const auth = getAuthData();
+    if (!auth) throw APIError.unauthenticated('not authenticated');
     const query = validate(paginationSchema, params);
     return service.listStockMovements(auth.tenantId, query);
   },
 );
 
 export const createStockMovement = api(
-  { expose: true, method: 'POST', path: '/inv/stock-movements' },
+  { expose: true, auth: true, method: 'POST', path: '/inv/stock-movements' },
   async (req: CreateStockMovementRequest): Promise<StockMovementResponse> => {
-    const auth = await getAuthContext();
+    const auth = getAuthData();
+    if (!auth) throw APIError.unauthenticated('not authenticated');
     const input = validate(createStockMovementSchema, req);
     return service.createStockMovement(auth.tenantId, auth.userId, input);
   },

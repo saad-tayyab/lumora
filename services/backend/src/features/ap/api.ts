@@ -12,7 +12,7 @@
 
 import { APIError, api } from 'encore.dev/api';
 import { z } from 'zod';
-import { authenticate } from '../../lib/middleware/auth';
+import { getAuthData } from '~encore/auth';
 import * as service from './service';
 import type {
   BillLineItemResponse,
@@ -167,9 +167,10 @@ function validate<T>(schema: z.ZodSchema<T>, data: unknown): T {
 
 /** Create a new vendor */
 export const createVendor = api(
-  { expose: true, method: 'POST', path: '/ap/vendors' },
+  { expose: true, auth: true, method: 'POST', path: '/ap/vendors', sensitive: true },
   async (req: CreateVendorRequest): Promise<VendorResponse> => {
-    const auth = await authenticate(new Headers());
+    const auth = getAuthData();
+    if (!auth) throw APIError.unauthenticated('not authenticated');
     const input = validate(CreateVendorSchema, req);
     return service.createVendor(input, auth.tenantId, auth.userId);
   },
@@ -177,18 +178,20 @@ export const createVendor = api(
 
 /** Get a vendor by ID */
 export const getVendor = api(
-  { expose: true, method: 'GET', path: '/ap/vendors/:id' },
+  { expose: true, auth: true, method: 'GET', path: '/ap/vendors/:id' },
   async ({ id }: { id: string }): Promise<VendorResponse> => {
-    const auth = await authenticate(new Headers());
+    const auth = getAuthData();
+    if (!auth) throw APIError.unauthenticated('not authenticated');
     return service.getVendor(id, auth.tenantId);
   },
 );
 
 /** List vendors with pagination and search */
 export const listVendors = api(
-  { expose: true, method: 'GET', path: '/ap/vendors' },
+  { expose: true, auth: true, method: 'GET', path: '/ap/vendors' },
   async (params: PaginationParams & { search?: string }): Promise<ListResponse<VendorResponse>> => {
-    const auth = await authenticate(new Headers());
+    const auth = getAuthData();
+    if (!auth) throw APIError.unauthenticated('not authenticated');
     const { page, limit, search } = validate(
       PaginationSchema.extend({ search: z.string().optional() }),
       params,
@@ -199,9 +202,10 @@ export const listVendors = api(
 
 /** Update a vendor */
 export const updateVendor = api(
-  { expose: true, method: 'PATCH', path: '/ap/vendors/:id' },
+  { expose: true, auth: true, method: 'PATCH', path: '/ap/vendors/:id', sensitive: true },
   async ({ id, ...data }: { id: string } & UpdateVendorRequest): Promise<VendorResponse> => {
-    const auth = await authenticate(new Headers());
+    const auth = getAuthData();
+    if (!auth) throw APIError.unauthenticated('not authenticated');
     const input = validate(UpdateVendorSchema, data);
     return service.updateVendor(id, input, auth.tenantId);
   },
@@ -209,9 +213,10 @@ export const updateVendor = api(
 
 /** Soft-delete a vendor */
 export const deleteVendor = api(
-  { expose: true, method: 'DELETE', path: '/ap/vendors/:id' },
+  { expose: true, auth: true, method: 'DELETE', path: '/ap/vendors/:id' },
   async ({ id }: { id: string }): Promise<void> => {
-    const auth = await authenticate(new Headers());
+    const auth = getAuthData();
+    if (!auth) throw APIError.unauthenticated('not authenticated');
     return service.deleteVendor(id, auth.tenantId);
   },
 );
@@ -222,9 +227,10 @@ export const deleteVendor = api(
 
 /** Create a new bill with optional line items */
 export const createBill = api(
-  { expose: true, method: 'POST', path: '/ap/bills' },
+  { expose: true, auth: true, method: 'POST', path: '/ap/bills' },
   async (req: CreateBillRequest): Promise<BillResponse> => {
-    const auth = await authenticate(new Headers());
+    const auth = getAuthData();
+    if (!auth) throw APIError.unauthenticated('not authenticated');
     const input = validate(CreateBillSchema, req);
     return service.createBill(input, auth.tenantId, auth.userId);
   },
@@ -232,20 +238,22 @@ export const createBill = api(
 
 /** Get a bill by ID with line items and payments */
 export const getBill = api(
-  { expose: true, method: 'GET', path: '/ap/bills/:id' },
+  { expose: true, auth: true, method: 'GET', path: '/ap/bills/:id' },
   async ({ id }: { id: string }): Promise<BillResponse> => {
-    const auth = await authenticate(new Headers());
+    const auth = getAuthData();
+    if (!auth) throw APIError.unauthenticated('not authenticated');
     return service.getBill(id, auth.tenantId);
   },
 );
 
 /** List bills with pagination, status, and vendor filters */
 export const listBills = api(
-  { expose: true, method: 'GET', path: '/ap/bills' },
+  { expose: true, auth: true, method: 'GET', path: '/ap/bills' },
   async (
     params: PaginationParams & { status?: string; vendorId?: string },
   ): Promise<ListResponse<BillResponse>> => {
-    const auth = await authenticate(new Headers());
+    const auth = getAuthData();
+    if (!auth) throw APIError.unauthenticated('not authenticated');
     const { page, limit, status, vendorId } = validate(
       PaginationSchema.extend({
         status: z.string().optional(),
@@ -259,9 +267,10 @@ export const listBills = api(
 
 /** Update a draft bill */
 export const updateBill = api(
-  { expose: true, method: 'PATCH', path: '/ap/bills/:id' },
+  { expose: true, auth: true, method: 'PATCH', path: '/ap/bills/:id' },
   async ({ id, ...data }: { id: string } & UpdateBillRequest): Promise<BillResponse> => {
-    const auth = await authenticate(new Headers());
+    const auth = getAuthData();
+    if (!auth) throw APIError.unauthenticated('not authenticated');
     const input = validate(UpdateBillSchema, data);
     return service.updateBill(id, input, auth.tenantId);
   },
@@ -269,9 +278,10 @@ export const updateBill = api(
 
 /** Soft-delete a draft bill */
 export const deleteBill = api(
-  { expose: true, method: 'DELETE', path: '/ap/bills/:id' },
+  { expose: true, auth: true, method: 'DELETE', path: '/ap/bills/:id' },
   async ({ id }: { id: string }): Promise<void> => {
-    const auth = await authenticate(new Headers());
+    const auth = getAuthData();
+    if (!auth) throw APIError.unauthenticated('not authenticated');
     return service.deleteBill(id, auth.tenantId);
   },
 );
@@ -282,27 +292,30 @@ export const deleteBill = api(
 
 /** Submit a bill for approval (triggers BR-004 three-way matching for PO bills) */
 export const submitBillForApproval = api(
-  { expose: true, method: 'POST', path: '/ap/bills/:id/submit-for-approval' },
+  { expose: true, auth: true, method: 'POST', path: '/ap/bills/:id/submit-for-approval' },
   async ({ id }: { id: string }): Promise<BillResponse> => {
-    const auth = await authenticate(new Headers());
+    const auth = getAuthData();
+    if (!auth) throw APIError.unauthenticated('not authenticated');
     return service.submitBillForApproval(id, auth.tenantId);
   },
 );
 
 /** Approve a pending bill */
 export const approveBill = api(
-  { expose: true, method: 'POST', path: '/ap/bills/:id/approve' },
+  { expose: true, auth: true, method: 'POST', path: '/ap/bills/:id/approve' },
   async ({ id }: { id: string }): Promise<BillResponse> => {
-    const auth = await authenticate(new Headers());
+    const auth = getAuthData();
+    if (!auth) throw APIError.unauthenticated('not authenticated');
     return service.approveBill(id, auth.tenantId);
   },
 );
 
 /** Void a bill */
 export const voidBill = api(
-  { expose: true, method: 'POST', path: '/ap/bills/:id/void' },
+  { expose: true, auth: true, method: 'POST', path: '/ap/bills/:id/void' },
   async ({ id }: { id: string }): Promise<BillResponse> => {
-    const auth = await authenticate(new Headers());
+    const auth = getAuthData();
+    if (!auth) throw APIError.unauthenticated('not authenticated');
     return service.voidBill(id, auth.tenantId);
   },
 );
@@ -313,9 +326,10 @@ export const voidBill = api(
 
 /** List line items for a bill */
 export const listBillLineItems = api(
-  { expose: true, method: 'GET', path: '/ap/bills/:billId/line-items' },
+  { expose: true, auth: true, method: 'GET', path: '/ap/bills/:billId/line-items' },
   async ({ billId }: { billId: string }): Promise<BillLineItemResponse[]> => {
-    const auth = await authenticate(new Headers());
+    const auth = getAuthData();
+    if (!auth) throw APIError.unauthenticated('not authenticated');
     // Verify bill exists and tenant matches
     await service.getBill(billId, auth.tenantId);
     const { billLineItemRepo } = await import('./repo');
@@ -325,12 +339,13 @@ export const listBillLineItems = api(
 
 /** Add a line item to a draft bill */
 export const addBillLineItem = api(
-  { expose: true, method: 'POST', path: '/ap/bills/:billId/line-items' },
+  { expose: true, auth: true, method: 'POST', path: '/ap/bills/:billId/line-items' },
   async ({
     billId,
     ...data
   }: { billId: string } & CreateBillLineItemRequest): Promise<BillLineItemResponse> => {
-    const auth = await authenticate(new Headers());
+    const auth = getAuthData();
+    if (!auth) throw APIError.unauthenticated('not authenticated');
     const input = validate(CreateBillLineItemSchema, data);
     return service.addBillLineItem(billId, input, auth.tenantId);
   },
@@ -340,6 +355,7 @@ export const addBillLineItem = api(
 export const updateBillLineItem = api(
   {
     expose: true,
+    auth: true,
     method: 'PATCH',
     path: '/ap/bills/:billId/line-items/:lineItemId',
   },
@@ -351,7 +367,8 @@ export const updateBillLineItem = api(
     billId: string;
     lineItemId: string;
   } & UpdateBillLineItemRequest): Promise<BillLineItemResponse> => {
-    const auth = await authenticate(new Headers());
+    const auth = getAuthData();
+    if (!auth) throw APIError.unauthenticated('not authenticated');
     const input = validate(UpdateBillLineItemSchema, data);
     return service.updateBillLineItem(lineItemId, input, billId, auth.tenantId);
   },
@@ -361,11 +378,13 @@ export const updateBillLineItem = api(
 export const deleteBillLineItem = api(
   {
     expose: true,
+    auth: true,
     method: 'DELETE',
     path: '/ap/bills/:billId/line-items/:lineItemId',
   },
   async ({ billId, lineItemId }: { billId: string; lineItemId: string }): Promise<void> => {
-    const auth = await authenticate(new Headers());
+    const auth = getAuthData();
+    if (!auth) throw APIError.unauthenticated('not authenticated');
     return service.deleteBillLineItem(lineItemId, billId, auth.tenantId);
   },
 );
@@ -376,9 +395,10 @@ export const deleteBillLineItem = api(
 
 /** Create a vendor payment */
 export const createVendorPayment = api(
-  { expose: true, method: 'POST', path: '/ap/payments' },
+  { expose: true, auth: true, method: 'POST', path: '/ap/payments' },
   async (req: CreateVendorPaymentRequest): Promise<VendorPaymentResponse> => {
-    const auth = await authenticate(new Headers());
+    const auth = getAuthData();
+    if (!auth) throw APIError.unauthenticated('not authenticated');
     const input = validate(CreateVendorPaymentSchema, req);
     return service.createVendorPayment(input, auth.tenantId, auth.userId);
   },
@@ -386,20 +406,22 @@ export const createVendorPayment = api(
 
 /** Get a vendor payment by ID */
 export const getVendorPayment = api(
-  { expose: true, method: 'GET', path: '/ap/payments/:id' },
+  { expose: true, auth: true, method: 'GET', path: '/ap/payments/:id' },
   async ({ id }: { id: string }): Promise<VendorPaymentResponse> => {
-    const auth = await authenticate(new Headers());
+    const auth = getAuthData();
+    if (!auth) throw APIError.unauthenticated('not authenticated');
     return service.getVendorPayment(id, auth.tenantId);
   },
 );
 
 /** List vendor payments with pagination and filters */
 export const listVendorPayments = api(
-  { expose: true, method: 'GET', path: '/ap/payments' },
+  { expose: true, auth: true, method: 'GET', path: '/ap/payments' },
   async (
     params: PaginationParams & { vendorId?: string; billId?: string },
   ): Promise<ListResponse<VendorPaymentResponse>> => {
-    const auth = await authenticate(new Headers());
+    const auth = getAuthData();
+    if (!auth) throw APIError.unauthenticated('not authenticated');
     const { page, limit, vendorId, billId } = validate(
       PaginationSchema.extend({
         vendorId: z.string().uuid().optional(),
@@ -418,9 +440,10 @@ export const listVendorPayments = api(
 
 /** Soft-delete a vendor payment */
 export const deleteVendorPayment = api(
-  { expose: true, method: 'DELETE', path: '/ap/payments/:id' },
+  { expose: true, auth: true, method: 'DELETE', path: '/ap/payments/:id' },
   async ({ id }: { id: string }): Promise<void> => {
-    const auth = await authenticate(new Headers());
+    const auth = getAuthData();
+    if (!auth) throw APIError.unauthenticated('not authenticated');
     return service.deleteVendorPayment(id, auth.tenantId);
   },
 );

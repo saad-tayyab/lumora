@@ -1,19 +1,11 @@
-import { api } from 'encore.dev/api';
+import { APIError, api } from 'encore.dev/api';
+import { getAuthData } from '~encore/auth';
 import { ValidationError } from '../../lib/errors';
-import { authenticate } from '../../lib/middleware/auth';
 import * as service from './service';
 import type { AuditLogEntryQuery, AuditLogEntryResponse, PaginatedResponse } from './types';
 import { AuditLogEntryQuerySchema } from './types';
 
 // ─── Helpers ─────────────────────────────────────────────────────────────────
-
-async function requireAuth(headers: Record<string, string>) {
-  const webHeaders = new Headers();
-  for (const [key, value] of Object.entries(headers)) {
-    webHeaders.set(key, value);
-  }
-  return authenticate(webHeaders);
-}
 
 function validate<T>(schema: { parse: (data: unknown) => T }, data: unknown): T {
   try {
@@ -36,12 +28,10 @@ function validate<T>(schema: { parse: (data: unknown) => T }, data: unknown): T 
  * INV-AUDIT-001: Audit log entries are append-only — read-only API.
  */
 export const listLogEntries = api(
-  { expose: true, method: 'GET', path: '/audit/entries' },
-  async (
-    req: AuditLogEntryQuery,
-    { headers }: { headers: Record<string, string> },
-  ): Promise<PaginatedResponse<AuditLogEntryResponse>> => {
-    const auth = await requireAuth(headers);
+  { expose: true, auth: true, method: 'GET', path: '/audit/entries' },
+  async (req: AuditLogEntryQuery): Promise<PaginatedResponse<AuditLogEntryResponse>> => {
+    const auth = getAuthData();
+    if (!auth) throw APIError.unauthenticated('not authenticated');
     const query = validate(AuditLogEntryQuerySchema, req);
     return service.listLogEntries(auth.tenantId, query);
   },
@@ -52,12 +42,10 @@ export const listLogEntries = api(
  * Get a single audit log entry by ID.
  */
 export const getLogEntry = api(
-  { expose: true, method: 'GET', path: '/audit/entries/:id' },
-  async (
-    { id }: { id: string },
-    { headers }: { headers: Record<string, string> },
-  ): Promise<AuditLogEntryResponse> => {
-    const auth = await requireAuth(headers);
+  { expose: true, auth: true, method: 'GET', path: '/audit/entries/:id' },
+  async ({ id }: { id: string }): Promise<AuditLogEntryResponse> => {
+    const auth = getAuthData();
+    if (!auth) throw APIError.unauthenticated('not authenticated');
     return service.getLogEntry(id, auth.tenantId);
   },
 );
@@ -70,24 +58,23 @@ export const getLogEntry = api(
 export const getLogEntriesByResource = api(
   {
     expose: true,
+    auth: true,
     method: 'GET',
     path: '/audit/entries/resource/:resource/:resourceId',
   },
-  async (
-    {
-      resource,
-      resourceId,
-      limit,
-      offset,
-    }: {
-      resource: string;
-      resourceId: string;
-      limit?: number;
-      offset?: number;
-    },
-    { headers }: { headers: Record<string, string> },
-  ): Promise<PaginatedResponse<AuditLogEntryResponse>> => {
-    const auth = await requireAuth(headers);
+  async ({
+    resource,
+    resourceId,
+    limit,
+    offset,
+  }: {
+    resource: string;
+    resourceId: string;
+    limit?: number;
+    offset?: number;
+  }): Promise<PaginatedResponse<AuditLogEntryResponse>> => {
+    const auth = getAuthData();
+    if (!auth) throw APIError.unauthenticated('not authenticated');
     return service.getLogEntriesByResource(resource, resourceId, auth.tenantId, {
       limit: limit ?? 50,
       offset: offset ?? 0,
@@ -103,22 +90,21 @@ export const getLogEntriesByResource = api(
 export const getLogEntriesByUser = api(
   {
     expose: true,
+    auth: true,
     method: 'GET',
     path: '/audit/entries/user/:userId',
   },
-  async (
-    {
-      userId,
-      limit,
-      offset,
-    }: {
-      userId: string;
-      limit?: number;
-      offset?: number;
-    },
-    { headers }: { headers: Record<string, string> },
-  ): Promise<PaginatedResponse<AuditLogEntryResponse>> => {
-    const auth = await requireAuth(headers);
+  async ({
+    userId,
+    limit,
+    offset,
+  }: {
+    userId: string;
+    limit?: number;
+    offset?: number;
+  }): Promise<PaginatedResponse<AuditLogEntryResponse>> => {
+    const auth = getAuthData();
+    if (!auth) throw APIError.unauthenticated('not authenticated');
     return service.getLogEntriesByUser(userId, auth.tenantId, {
       limit: limit ?? 50,
       offset: offset ?? 0,

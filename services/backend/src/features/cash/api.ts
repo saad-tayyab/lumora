@@ -12,7 +12,7 @@
 
 import { APIError, api } from 'encore.dev/api';
 import { z } from 'zod';
-import { authenticate } from '../../lib/middleware/auth';
+import { getAuthData } from '~encore/auth';
 import * as service from './service';
 import type {
   BankAccountResponse,
@@ -141,9 +141,10 @@ function validate<T>(schema: z.ZodSchema<T>, data: unknown): T {
 
 /** Create a new bank account (BR-610: account number encrypted at rest) */
 export const createBankAccount = api(
-  { expose: true, method: 'POST', path: '/cash/bank-accounts' },
+  { expose: true, auth: true, method: 'POST', path: '/cash/bank-accounts' },
   async (req: CreateBankAccountRequest): Promise<BankAccountResponse> => {
-    const auth = await authenticate(new Headers());
+    const auth = getAuthData();
+    if (!auth) throw APIError.unauthenticated('not authenticated');
     const input = validate(CreateBankAccountSchema, req);
     return service.createBankAccount(input, auth.tenantId);
   },
@@ -151,20 +152,22 @@ export const createBankAccount = api(
 
 /** Get a bank account by ID */
 export const getBankAccount = api(
-  { expose: true, method: 'GET', path: '/cash/bank-accounts/:id' },
+  { expose: true, auth: true, method: 'GET', path: '/cash/bank-accounts/:id' },
   async ({ id }: { id: string }): Promise<BankAccountResponse> => {
-    const auth = await authenticate(new Headers());
+    const auth = getAuthData();
+    if (!auth) throw APIError.unauthenticated('not authenticated');
     return service.getBankAccount(id, auth.tenantId);
   },
 );
 
 /** List bank accounts with pagination, status, and search filters */
 export const listBankAccounts = api(
-  { expose: true, method: 'GET', path: '/cash/bank-accounts' },
+  { expose: true, auth: true, method: 'GET', path: '/cash/bank-accounts' },
   async (
     params: PaginationParams & { status?: string; search?: string },
   ): Promise<ListResponse<BankAccountResponse>> => {
-    const auth = await authenticate(new Headers());
+    const auth = getAuthData();
+    if (!auth) throw APIError.unauthenticated('not authenticated');
     const { page, limit, status, search } = validate(
       PaginationSchema.extend({
         status: z.string().optional(),
@@ -178,12 +181,13 @@ export const listBankAccounts = api(
 
 /** Update a bank account */
 export const updateBankAccount = api(
-  { expose: true, method: 'PATCH', path: '/cash/bank-accounts/:id' },
+  { expose: true, auth: true, method: 'PATCH', path: '/cash/bank-accounts/:id' },
   async ({
     id,
     ...data
   }: { id: string } & UpdateBankAccountRequest): Promise<BankAccountResponse> => {
-    const auth = await authenticate(new Headers());
+    const auth = getAuthData();
+    if (!auth) throw APIError.unauthenticated('not authenticated');
     const input = validate(UpdateBankAccountSchema, data);
     return service.updateBankAccount(id, input, auth.tenantId);
   },
@@ -191,9 +195,10 @@ export const updateBankAccount = api(
 
 /** Soft-delete a bank account */
 export const deleteBankAccount = api(
-  { expose: true, method: 'DELETE', path: '/cash/bank-accounts/:id' },
+  { expose: true, auth: true, method: 'DELETE', path: '/cash/bank-accounts/:id' },
   async ({ id }: { id: string }): Promise<void> => {
-    const auth = await authenticate(new Headers());
+    const auth = getAuthData();
+    if (!auth) throw APIError.unauthenticated('not authenticated');
     return service.deleteBankAccount(id, auth.tenantId);
   },
 );
@@ -204,9 +209,10 @@ export const deleteBankAccount = api(
 
 /** Create a new bank transfer */
 export const createBankTransfer = api(
-  { expose: true, method: 'POST', path: '/cash/transfers' },
+  { expose: true, auth: true, method: 'POST', path: '/cash/transfers' },
   async (req: CreateBankTransferRequest): Promise<BankTransferResponse> => {
-    const auth = await authenticate(new Headers());
+    const auth = getAuthData();
+    if (!auth) throw APIError.unauthenticated('not authenticated');
     const input = validate(CreateBankTransferSchema, req);
     return service.createBankTransfer(input, auth.tenantId, auth.userId);
   },
@@ -214,16 +220,17 @@ export const createBankTransfer = api(
 
 /** Get a bank transfer by ID */
 export const getBankTransfer = api(
-  { expose: true, method: 'GET', path: '/cash/transfers/:id' },
+  { expose: true, auth: true, method: 'GET', path: '/cash/transfers/:id' },
   async ({ id }: { id: string }): Promise<BankTransferResponse> => {
-    const auth = await authenticate(new Headers());
+    const auth = getAuthData();
+    if (!auth) throw APIError.unauthenticated('not authenticated');
     return service.getBankTransfer(id, auth.tenantId);
   },
 );
 
 /** List bank transfers with pagination and filters */
 export const listBankTransfers = api(
-  { expose: true, method: 'GET', path: '/cash/transfers' },
+  { expose: true, auth: true, method: 'GET', path: '/cash/transfers' },
   async (
     params: PaginationParams & {
       status?: string;
@@ -231,7 +238,8 @@ export const listBankTransfers = api(
       destinationAccountId?: string;
     },
   ): Promise<ListResponse<BankTransferResponse>> => {
-    const auth = await authenticate(new Headers());
+    const auth = getAuthData();
+    if (!auth) throw APIError.unauthenticated('not authenticated');
     const { page, limit, status, sourceAccountId, destinationAccountId } = validate(
       PaginationSchema.extend({
         status: z.string().optional(),
@@ -252,18 +260,20 @@ export const listBankTransfers = api(
 
 /** Complete a pending bank transfer */
 export const completeBankTransfer = api(
-  { expose: true, method: 'POST', path: '/cash/transfers/:id/complete' },
+  { expose: true, auth: true, method: 'POST', path: '/cash/transfers/:id/complete' },
   async ({ id }: { id: string }): Promise<BankTransferResponse> => {
-    const auth = await authenticate(new Headers());
+    const auth = getAuthData();
+    if (!auth) throw APIError.unauthenticated('not authenticated');
     return service.completeBankTransfer(id, auth.tenantId);
   },
 );
 
 /** Cancel a pending bank transfer */
 export const cancelBankTransfer = api(
-  { expose: true, method: 'POST', path: '/cash/transfers/:id/cancel' },
+  { expose: true, auth: true, method: 'POST', path: '/cash/transfers/:id/cancel' },
   async ({ id }: { id: string }): Promise<BankTransferResponse> => {
-    const auth = await authenticate(new Headers());
+    const auth = getAuthData();
+    if (!auth) throw APIError.unauthenticated('not authenticated');
     return service.cancelBankTransfer(id, auth.tenantId);
   },
 );
@@ -274,9 +284,10 @@ export const cancelBankTransfer = api(
 
 /** Create a new bank statement */
 export const createBankStatement = api(
-  { expose: true, method: 'POST', path: '/cash/statements' },
+  { expose: true, auth: true, method: 'POST', path: '/cash/statements' },
   async (req: CreateBankStatementRequest): Promise<BankStatementResponse> => {
-    const auth = await authenticate(new Headers());
+    const auth = getAuthData();
+    if (!auth) throw APIError.unauthenticated('not authenticated');
     const input = validate(CreateBankStatementSchema, req);
     return service.createBankStatement(input, auth.tenantId, auth.userId);
   },
@@ -284,20 +295,22 @@ export const createBankStatement = api(
 
 /** Get a bank statement by ID */
 export const getBankStatement = api(
-  { expose: true, method: 'GET', path: '/cash/statements/:id' },
+  { expose: true, auth: true, method: 'GET', path: '/cash/statements/:id' },
   async ({ id }: { id: string }): Promise<BankStatementResponse> => {
-    const auth = await authenticate(new Headers());
+    const auth = getAuthData();
+    if (!auth) throw APIError.unauthenticated('not authenticated');
     return service.getBankStatement(id, auth.tenantId);
   },
 );
 
 /** List bank statements with pagination and filters */
 export const listBankStatements = api(
-  { expose: true, method: 'GET', path: '/cash/statements' },
+  { expose: true, auth: true, method: 'GET', path: '/cash/statements' },
   async (
     params: PaginationParams & { bankAccountId?: string; importStatus?: string },
   ): Promise<ListResponse<BankStatementResponse>> => {
-    const auth = await authenticate(new Headers());
+    const auth = getAuthData();
+    if (!auth) throw APIError.unauthenticated('not authenticated');
     const { page, limit, bankAccountId, importStatus } = validate(
       PaginationSchema.extend({
         bankAccountId: z.string().uuid().optional(),
@@ -311,12 +324,13 @@ export const listBankStatements = api(
 
 /** Update a bank statement (only pending/failed statements) */
 export const updateBankStatement = api(
-  { expose: true, method: 'PATCH', path: '/cash/statements/:id' },
+  { expose: true, auth: true, method: 'PATCH', path: '/cash/statements/:id' },
   async ({
     id,
     ...data
   }: { id: string } & UpdateBankStatementRequest): Promise<BankStatementResponse> => {
-    const auth = await authenticate(new Headers());
+    const auth = getAuthData();
+    if (!auth) throw APIError.unauthenticated('not authenticated');
     return service.updateBankStatement(id, data, auth.tenantId);
   },
 );
@@ -327,9 +341,10 @@ export const updateBankStatement = api(
 
 /** Create a new reconciliation entry */
 export const createReconciliationEntry = api(
-  { expose: true, method: 'POST', path: '/cash/reconciliation-entries' },
+  { expose: true, auth: true, method: 'POST', path: '/cash/reconciliation-entries' },
   async (req: CreateReconciliationEntryRequest): Promise<ReconciliationEntryResponse> => {
-    const auth = await authenticate(new Headers());
+    const auth = getAuthData();
+    if (!auth) throw APIError.unauthenticated('not authenticated');
     const input = validate(CreateReconciliationEntrySchema, req);
     return service.createReconciliationEntry(input, auth.tenantId);
   },
@@ -337,16 +352,17 @@ export const createReconciliationEntry = api(
 
 /** Get a reconciliation entry by ID */
 export const getReconciliationEntry = api(
-  { expose: true, method: 'GET', path: '/cash/reconciliation-entries/:id' },
+  { expose: true, auth: true, method: 'GET', path: '/cash/reconciliation-entries/:id' },
   async ({ id }: { id: string }): Promise<ReconciliationEntryResponse> => {
-    const auth = await authenticate(new Headers());
+    const auth = getAuthData();
+    if (!auth) throw APIError.unauthenticated('not authenticated');
     return service.getReconciliationEntry(id, auth.tenantId);
   },
 );
 
 /** List reconciliation entries with pagination and filters */
 export const listReconciliationEntries = api(
-  { expose: true, method: 'GET', path: '/cash/reconciliation-entries' },
+  { expose: true, auth: true, method: 'GET', path: '/cash/reconciliation-entries' },
   async (
     params: PaginationParams & {
       statementId?: string;
@@ -354,7 +370,8 @@ export const listReconciliationEntries = api(
       reconciliationStatus?: string;
     },
   ): Promise<ListResponse<ReconciliationEntryResponse>> => {
-    const auth = await authenticate(new Headers());
+    const auth = getAuthData();
+    if (!auth) throw APIError.unauthenticated('not authenticated');
     const { page, limit, statementId, bankAccountId, reconciliationStatus } = validate(
       PaginationSchema.extend({
         statementId: z.string().uuid().optional(),
@@ -375,12 +392,13 @@ export const listReconciliationEntries = api(
 
 /** BR-008: Match a reconciliation entry to an internal record with tolerance */
 export const matchReconciliationEntry = api(
-  { expose: true, method: 'POST', path: '/cash/reconciliation-entries/:id/match' },
+  { expose: true, auth: true, method: 'POST', path: '/cash/reconciliation-entries/:id/match' },
   async ({
     id,
     ...data
   }: { id: string } & MatchReconciliationEntryRequest): Promise<ReconciliationEntryResponse> => {
-    const auth = await authenticate(new Headers());
+    const auth = getAuthData();
+    if (!auth) throw APIError.unauthenticated('not authenticated');
     const input = validate(MatchReconciliationEntrySchema, data);
     return service.matchReconciliationEntry(id, input, auth.tenantId, auth.userId);
   },
@@ -388,31 +406,34 @@ export const matchReconciliationEntry = api(
 
 /** Exclude a reconciliation entry from matching */
 export const excludeReconciliationEntry = api(
-  { expose: true, method: 'POST', path: '/cash/reconciliation-entries/:id/exclude' },
+  { expose: true, auth: true, method: 'POST', path: '/cash/reconciliation-entries/:id/exclude' },
   async ({ id }: { id: string }): Promise<ReconciliationEntryResponse> => {
-    const auth = await authenticate(new Headers());
+    const auth = getAuthData();
+    if (!auth) throw APIError.unauthenticated('not authenticated');
     return service.excludeReconciliationEntry(id, auth.tenantId, auth.userId);
   },
 );
 
 /** Dispute a reconciliation entry */
 export const disputeReconciliationEntry = api(
-  { expose: true, method: 'POST', path: '/cash/reconciliation-entries/:id/dispute' },
+  { expose: true, auth: true, method: 'POST', path: '/cash/reconciliation-entries/:id/dispute' },
   async ({ id }: { id: string }): Promise<ReconciliationEntryResponse> => {
-    const auth = await authenticate(new Headers());
+    const auth = getAuthData();
+    if (!auth) throw APIError.unauthenticated('not authenticated');
     return service.disputeReconciliationEntry(id, auth.tenantId, auth.userId);
   },
 );
 
 /** BR-008: Auto-match reconciliation entries for a statement */
 export const autoMatchReconciliationEntries = api(
-  { expose: true, method: 'POST', path: '/cash/statements/:statementId/auto-match' },
+  { expose: true, auth: true, method: 'POST', path: '/cash/statements/:statementId/auto-match' },
   async ({
     statementId,
   }: {
     statementId: string;
   }): Promise<{ matched: number; unmatched: number }> => {
-    const auth = await authenticate(new Headers());
+    const auth = getAuthData();
+    if (!auth) throw APIError.unauthenticated('not authenticated');
     return service.autoMatchReconciliationEntries(statementId, auth.tenantId, auth.userId);
   },
 );
@@ -423,18 +444,20 @@ export const autoMatchReconciliationEntries = api(
 
 /** Get a currency by code */
 export const getCurrency = api(
-  { expose: true, method: 'GET', path: '/cash/currencies/:code' },
+  { expose: true, auth: true, method: 'GET', path: '/cash/currencies/:code' },
   async ({ code }: { code: string }): Promise<CurrencyResponse> => {
-    const _auth = await authenticate(new Headers());
+    const auth = getAuthData();
+    if (!auth) throw APIError.unauthenticated('not authenticated');
     return service.getCurrency(code);
   },
 );
 
 /** List all currencies */
 export const listCurrencies = api(
-  { expose: true, method: 'GET', path: '/cash/currencies' },
+  { expose: true, auth: true, method: 'GET', path: '/cash/currencies' },
   async (params: PaginationParams): Promise<ListResponse<CurrencyResponse>> => {
-    const _auth = await authenticate(new Headers());
+    const auth = getAuthData();
+    if (!auth) throw APIError.unauthenticated('not authenticated');
     const { page, limit } = validate(PaginationSchema, params);
     return service.listCurrencies({ page, limit });
   },
@@ -446,9 +469,10 @@ export const listCurrencies = api(
 
 /** Create a new bank connection */
 export const createBankConnection = api(
-  { expose: true, method: 'POST', path: '/cash/connections' },
+  { expose: true, auth: true, method: 'POST', path: '/cash/connections' },
   async (req: CreateBankConnectionRequest): Promise<BankConnectionResponse> => {
-    const auth = await authenticate(new Headers());
+    const auth = getAuthData();
+    if (!auth) throw APIError.unauthenticated('not authenticated');
     const input = validate(CreateBankConnectionSchema, req);
     return service.createBankConnection(input, auth.tenantId, auth.userId);
   },
@@ -456,20 +480,22 @@ export const createBankConnection = api(
 
 /** Get a bank connection by ID */
 export const getBankConnection = api(
-  { expose: true, method: 'GET', path: '/cash/connections/:id' },
+  { expose: true, auth: true, method: 'GET', path: '/cash/connections/:id' },
   async ({ id }: { id: string }): Promise<BankConnectionResponse> => {
-    const auth = await authenticate(new Headers());
+    const auth = getAuthData();
+    if (!auth) throw APIError.unauthenticated('not authenticated');
     return service.getBankConnection(id, auth.tenantId);
   },
 );
 
 /** List bank connections with pagination and filters */
 export const listBankConnections = api(
-  { expose: true, method: 'GET', path: '/cash/connections' },
+  { expose: true, auth: true, method: 'GET', path: '/cash/connections' },
   async (
     params: PaginationParams & { bankAccountId?: string; status?: string },
   ): Promise<ListResponse<BankConnectionResponse>> => {
-    const auth = await authenticate(new Headers());
+    const auth = getAuthData();
+    if (!auth) throw APIError.unauthenticated('not authenticated');
     const { page, limit, bankAccountId, status } = validate(
       PaginationSchema.extend({
         bankAccountId: z.string().uuid().optional(),
@@ -483,21 +509,23 @@ export const listBankConnections = api(
 
 /** Update a bank connection */
 export const updateBankConnection = api(
-  { expose: true, method: 'PATCH', path: '/cash/connections/:id' },
+  { expose: true, auth: true, method: 'PATCH', path: '/cash/connections/:id' },
   async ({
     id,
     ...data
   }: { id: string } & UpdateBankConnectionRequest): Promise<BankConnectionResponse> => {
-    const auth = await authenticate(new Headers());
+    const auth = getAuthData();
+    if (!auth) throw APIError.unauthenticated('not authenticated');
     return service.updateBankConnection(id, data, auth.tenantId);
   },
 );
 
 /** Disable a bank connection */
 export const disableBankConnection = api(
-  { expose: true, method: 'POST', path: '/cash/connections/:id/disable' },
+  { expose: true, auth: true, method: 'POST', path: '/cash/connections/:id/disable' },
   async ({ id }: { id: string }): Promise<BankConnectionResponse> => {
-    const auth = await authenticate(new Headers());
+    const auth = getAuthData();
+    if (!auth) throw APIError.unauthenticated('not authenticated');
     return service.disableBankConnection(id, auth.tenantId);
   },
 );

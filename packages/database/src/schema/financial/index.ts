@@ -1,9 +1,3 @@
-// Repositories
-export {
-  accountsRepository,
-  journalEntriesRepository,
-  journalEntryLinesRepository,
-} from './repository';
 export type {
   Account,
   FiscalYear,

@@ -1,11 +1,3 @@
-export {
-  aiModelsRepository,
-  anomalyDetectionsRepository,
-  predictionsRepository,
-  trainingDataRepository,
-  workflowStepsRepository,
-  workflowsRepository,
-} from './repository';
 export type {
   AiModel,
   AnomalyDetection,

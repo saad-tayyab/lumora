@@ -1,4 +1,3 @@
-import { db } from '@lumora/database';
 import type {
   DiscountPolicy,
   NewDiscountPolicy,
@@ -19,6 +18,7 @@ import {
   salesOrders,
 } from '@lumora/database/schema';
 import { and, asc, count, eq, lte, type SQL } from 'drizzle-orm';
+import { db } from '../../database';
 
 // ─── Pagination Result Type ─────────────────────────────────────────────────────
 

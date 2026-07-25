@@ -1,4 +1,3 @@
-import { db } from '@lumora/database';
 import {
   type NewTaxAutoAssignmentRule,
   type NewTaxCode,
@@ -11,6 +10,7 @@ import {
   taxRates,
 } from '@lumora/database/schema';
 import { and, asc, count, eq, isNull, type SQL, sql } from 'drizzle-orm';
+import { db } from '../../database';
 
 // ─── Tax Codes Repository ──────────────────────────────────────────────────
 

@@ -1,6 +1,6 @@
-import { db } from '@lumora/database';
 import { accounts, journalEntries, journalEntryLines } from '@lumora/database/schema';
 import { eq } from 'drizzle-orm';
+import { db } from '../../database';
 import {
   AccountCodeAlreadyExistsError,
   AccountHasChildAccountsError,
@@ -15,6 +15,7 @@ import {
   JournalEntryNotDraftError,
   JournalEntryNotFoundError,
 } from './errors';
+import { journalEntryPosted } from './events';
 import { accountsRepo, fiscalYearsRepo, journalEntriesRepo, journalEntryLinesRepo } from './repo';
 import type {
   AccountResponse,
@@ -362,6 +363,12 @@ export async function postJournalEntry(
       .update(journalEntries)
       .set({ status: 'posted', updatedAt: new Date() })
       .where(eq(journalEntries.id, id));
+  });
+
+  await journalEntryPosted.publish({
+    entryId: id,
+    periodId: entry.periodId || '',
+    tenantId,
   });
 
   return getJournalEntry(id, tenantId);

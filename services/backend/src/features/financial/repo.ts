@@ -1,4 +1,3 @@
-import { db } from '@lumora/database';
 import {
   type Account,
   accounts,
@@ -14,6 +13,7 @@ import {
   type NewJournalEntryLine,
 } from '@lumora/database/schema';
 import { and, asc, count, eq, isNull, type SQL, sum } from 'drizzle-orm';
+import { db } from '../../database';
 
 // ─── Accounts Repository ────────────────────────────────────────────────────
 

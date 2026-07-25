@@ -11,7 +11,6 @@
  * @see packages/database/src/schema/cash/repository.ts — Base repository
  */
 
-import { db } from '@lumora/database';
 import type {
   BankAccount,
   BankConnection,
@@ -35,6 +34,7 @@ import {
   reconciliationEntries,
 } from '@lumora/database/schema';
 import { and, asc, count, desc, eq, type SQL } from 'drizzle-orm';
+import { db } from '../../database';
 
 // =============================================================================
 // Pagination Result

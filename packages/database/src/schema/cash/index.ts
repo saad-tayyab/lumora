@@ -1,12 +1,3 @@
-export {
-  bankAccountsRepository,
-  bankConnectionsRepository,
-  bankStatementsRepository,
-  bankTransfersRepository,
-  currenciesRepository,
-  reconciliationEntriesRepository,
-} from './repository';
-
 export type {
   BankAccount,
   BankConnection,

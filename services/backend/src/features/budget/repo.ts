@@ -1,4 +1,3 @@
-import { db } from '@lumora/database';
 import {
   type BudgetConsumption,
   type BudgetHeader,
@@ -11,6 +10,7 @@ import {
   type NewBudgetLine,
 } from '@lumora/database/schema';
 import { and, asc, count, eq, isNull, type SQL, sum } from 'drizzle-orm';
+import { db } from '../../database';
 
 // ─── Budget Headers Repository ──────────────────────────────────────────
 

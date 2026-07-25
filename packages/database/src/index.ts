@@ -1,15 +1,10 @@
-import { neon } from '@neondatabase/serverless';
-import { drizzle } from 'drizzle-orm/neon-http';
-
+import { SQLDatabase } from 'encore.dev/storage/sqldb';
 import * as schema from './schema';
 
-const databaseUrl = process.env.DATABASE_URL;
-if (!databaseUrl) {
-  throw new Error('DATABASE_URL environment variable is required');
-}
+export const db = new SQLDatabase('lumora', {
+  migrations: './encore-migrations',
+});
 
-const sql = neon(databaseUrl);
+export { schema };
 
-export const db = drizzle(sql, { schema, jit: true });
-
-export type Database = typeof db;
+export * from './schema';

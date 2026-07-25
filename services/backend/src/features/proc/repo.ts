@@ -11,7 +11,6 @@
  * @see packages/database/src/schema/proc/repository.ts — Base repository
  */
 
-import { db } from '@lumora/database';
 import type {
   NewPoLineItem,
   NewPurchaseOrder,
@@ -29,6 +28,7 @@ import {
   vendorCatalogItems,
 } from '@lumora/database/schema/proc';
 import { and, asc, count, desc, eq, type SQL } from 'drizzle-orm';
+import { db } from '../../database';
 
 // =============================================================================
 // Pagination Result

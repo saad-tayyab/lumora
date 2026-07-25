@@ -6,6 +6,7 @@ export default defineConfig({
     globals: true,
     environment: 'node',
     include: ['src/**/*.test.ts', 'src/**/*.integration.test.ts'],
+    fileParallelism: false,
     coverage: {
       provider: 'v8',
       reporter: ['text', 'html', 'lcov'],
@@ -21,6 +22,7 @@ export default defineConfig({
   },
   resolve: {
     alias: {
+      '~encore': path.resolve(__dirname, './encore.gen'),
       '@lumora/database': path.resolve(__dirname, '../../packages/database/src'),
       '@lumora/database/*': path.resolve(__dirname, '../../packages/database/src/*'),
       '@lumora/auth': path.resolve(__dirname, '../../packages/auth/src'),

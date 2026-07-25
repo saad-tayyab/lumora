@@ -28,6 +28,7 @@ import {
   VendorPaymentExceedsBillError,
   VendorPaymentNotFoundError,
 } from './errors';
+import { billReceived } from './events';
 import { billLineItemRepo, billRepo, vendorPaymentRepo, vendorRepo } from './repo';
 import type {
   BillLineItemResponse,
@@ -201,8 +202,20 @@ export async function createBill(
       totalAmount,
     });
 
+    await billReceived.publish({
+      billId: bill.id,
+      vendorId: bill.vendorId,
+      tenantId,
+    });
+
     return { ...bill, subtotal, taxAmount, totalAmount, lineItems };
   }
+
+  await billReceived.publish({
+    billId: bill.id,
+    vendorId: bill.vendorId,
+    tenantId,
+  });
 
   return { ...bill, lineItems };
 }

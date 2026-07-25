@@ -15,6 +15,7 @@ import {
   UnitOfMeasureNotFoundError,
   WarehouseNotFoundError,
 } from './errors';
+import { stockAdjusted } from './events';
 import * as repo from './repo';
 import type {
   CreateItemCategoryRequest,
@@ -531,6 +532,13 @@ export async function createStockMovement(
       lastMovementAt: new Date(),
     });
   }
+
+  await stockAdjusted.publish({
+    itemId: movement.itemId,
+    warehouseId: movement.warehouseId,
+    quantity: movement.quantity,
+    tenantId,
+  });
 
   return movement;
 }

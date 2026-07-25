@@ -18,6 +18,7 @@ import {
   PaymentDuplicateNumberError,
   PaymentNotFoundError,
 } from './errors';
+import { invoiceCreated } from './events';
 import {
   creditNotesRepository,
   customersRepository,
@@ -315,6 +316,12 @@ export async function createInvoice(
     })),
     tenantId,
   );
+
+  await invoiceCreated.publish({
+    invoiceId: invoice.id,
+    customerId: invoice.customerId,
+    tenantId,
+  });
 
   return invoice;
 }

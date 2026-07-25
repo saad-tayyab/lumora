@@ -1,11 +1,4 @@
 export {
-  poLineItemsRepository,
-  purchaseOrdersRepository,
-  receivingReportsRepository,
-  vendorCatalogItemsRepository,
-} from './repository';
-
-export {
   insertPoLineItemSchema,
   // Zod — Insert
   insertPurchaseOrderSchema,

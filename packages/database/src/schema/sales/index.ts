@@ -1,11 +1,4 @@
 export {
-  discountPoliciesRepository,
-  quotationLineItemsRepository,
-  quotationsRepository,
-  salesOrderLineItemsRepository,
-  salesOrdersRepository,
-} from './repository';
-export {
   type DiscountPolicy,
   discountPolicies,
   insertDiscountPolicySchema,

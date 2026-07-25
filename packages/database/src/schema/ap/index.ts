@@ -1,12 +1,3 @@
-export type { PaginatedResult } from './repository';
-
-export {
-  billLineItemsRepository,
-  billsRepository,
-  paymentSchedulesRepository,
-  vendorsRepository,
-  vendorPaymentsRepository,
-} from './repository';
 export {
   billLineItems,
   // Enums

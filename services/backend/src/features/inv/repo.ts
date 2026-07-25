@@ -1,4 +1,3 @@
-import { db } from '@lumora/database';
 import {
   type Item,
   type ItemCategory,
@@ -18,6 +17,7 @@ import {
   warehouses,
 } from '@lumora/database/schema/inv';
 import { and, asc, count, desc, eq, type SQL } from 'drizzle-orm';
+import { db } from '../../database';
 
 // ─── Unit of Measures ─────────────────────────────────────────────────────────
 

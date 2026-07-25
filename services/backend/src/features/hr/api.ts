@@ -1,7 +1,7 @@
-import { api, getCurrentContext } from 'encore.dev/api';
+import { APIError, api } from 'encore.dev/api';
 import { z } from 'zod';
+import { getAuthData } from '~encore/auth';
 import { ValidationError } from '../../lib/errors';
-import { authenticate } from '../../lib/middleware/auth';
 import * as service from './service';
 import type {
   ApproveRejectLeaveRequest,
@@ -214,11 +214,6 @@ const updatePayrollSchema = z.object({
 
 // ─── Helpers ──────────────────────────────────────────────────────────────────
 
-async function getAuthContext() {
-  const ctx = getCurrentContext();
-  return authenticate(ctx.request?.headers);
-}
-
 function validate<T>(schema: z.ZodSchema<T>, data: unknown): T {
   const result = schema.safeParse(data);
   if (!result.success) {
@@ -235,47 +230,52 @@ function validate<T>(schema: z.ZodSchema<T>, data: unknown): T {
 // ─── Departments ─────────────────────────────────────────────────────────────
 
 export const getDepartment = api(
-  { expose: true, method: 'GET', path: '/hr/departments/:id' },
+  { expose: true, auth: true, method: 'GET', path: '/hr/departments/:id' },
   async ({ id }: { id: string }): Promise<DepartmentResponse> => {
-    await getAuthContext();
+    const auth = getAuthData();
+    if (!auth) throw APIError.unauthenticated('not authenticated');
     return service.getDepartment(id);
   },
 );
 
 export const listDepartments = api(
-  { expose: true, method: 'GET', path: '/hr/departments' },
+  { expose: true, auth: true, method: 'GET', path: '/hr/departments' },
   async (params: { page?: number; limit?: number }): Promise<ListDepartmentsResponse> => {
-    const auth = await getAuthContext();
+    const auth = getAuthData();
+    if (!auth) throw APIError.unauthenticated('not authenticated');
     const query = validate(paginationSchema, params);
     return service.listDepartments(auth.tenantId, query);
   },
 );
 
 export const createDepartment = api(
-  { expose: true, method: 'POST', path: '/hr/departments' },
+  { expose: true, auth: true, method: 'POST', path: '/hr/departments' },
   async (req: CreateDepartmentRequest): Promise<DepartmentResponse> => {
-    const auth = await getAuthContext();
+    const auth = getAuthData();
+    if (!auth) throw APIError.unauthenticated('not authenticated');
     const input = validate(createDepartmentSchema, req);
     return service.createDepartment(auth.tenantId, input);
   },
 );
 
 export const updateDepartment = api(
-  { expose: true, method: 'PATCH', path: '/hr/departments/:id' },
+  { expose: true, auth: true, method: 'PATCH', path: '/hr/departments/:id' },
   async ({
     id,
     ...body
   }: { id: string } & UpdateDepartmentRequest): Promise<DepartmentResponse> => {
-    await getAuthContext();
+    const auth = getAuthData();
+    if (!auth) throw APIError.unauthenticated('not authenticated');
     const input = validate(updateDepartmentSchema, body);
     return service.updateDepartment(id, input);
   },
 );
 
 export const deleteDepartment = api(
-  { expose: true, method: 'DELETE', path: '/hr/departments/:id' },
+  { expose: true, auth: true, method: 'DELETE', path: '/hr/departments/:id' },
   async ({ id }: { id: string }): Promise<void> => {
-    await getAuthContext();
+    const auth = getAuthData();
+    if (!auth) throw APIError.unauthenticated('not authenticated');
     return service.deleteDepartment(id);
   },
 );
@@ -283,47 +283,52 @@ export const deleteDepartment = api(
 // ─── Designations ────────────────────────────────────────────────────────────
 
 export const getDesignation = api(
-  { expose: true, method: 'GET', path: '/hr/designations/:id' },
+  { expose: true, auth: true, method: 'GET', path: '/hr/designations/:id' },
   async ({ id }: { id: string }): Promise<DesignationResponse> => {
-    await getAuthContext();
+    const auth = getAuthData();
+    if (!auth) throw APIError.unauthenticated('not authenticated');
     return service.getDesignation(id);
   },
 );
 
 export const listDesignations = api(
-  { expose: true, method: 'GET', path: '/hr/designations' },
+  { expose: true, auth: true, method: 'GET', path: '/hr/designations' },
   async (params: { page?: number; limit?: number }): Promise<ListDesignationsResponse> => {
-    const auth = await getAuthContext();
+    const auth = getAuthData();
+    if (!auth) throw APIError.unauthenticated('not authenticated');
     const query = validate(paginationSchema, params);
     return service.listDesignations(auth.tenantId, query);
   },
 );
 
 export const createDesignation = api(
-  { expose: true, method: 'POST', path: '/hr/designations' },
+  { expose: true, auth: true, method: 'POST', path: '/hr/designations' },
   async (req: CreateDesignationRequest): Promise<DesignationResponse> => {
-    const auth = await getAuthContext();
+    const auth = getAuthData();
+    if (!auth) throw APIError.unauthenticated('not authenticated');
     const input = validate(createDesignationSchema, req);
     return service.createDesignation(auth.tenantId, input);
   },
 );
 
 export const updateDesignation = api(
-  { expose: true, method: 'PATCH', path: '/hr/designations/:id' },
+  { expose: true, auth: true, method: 'PATCH', path: '/hr/designations/:id' },
   async ({
     id,
     ...body
   }: { id: string } & UpdateDesignationRequest): Promise<DesignationResponse> => {
-    await getAuthContext();
+    const auth = getAuthData();
+    if (!auth) throw APIError.unauthenticated('not authenticated');
     const input = validate(updateDesignationSchema, body);
     return service.updateDesignation(id, input);
   },
 );
 
 export const deleteDesignation = api(
-  { expose: true, method: 'DELETE', path: '/hr/designations/:id' },
+  { expose: true, auth: true, method: 'DELETE', path: '/hr/designations/:id' },
   async ({ id }: { id: string }): Promise<void> => {
-    await getAuthContext();
+    const auth = getAuthData();
+    if (!auth) throw APIError.unauthenticated('not authenticated');
     return service.deleteDesignation(id);
   },
 );
@@ -331,44 +336,49 @@ export const deleteDesignation = api(
 // ─── Employees ───────────────────────────────────────────────────────────────
 
 export const getEmployee = api(
-  { expose: true, method: 'GET', path: '/hr/employees/:id' },
+  { expose: true, auth: true, method: 'GET', path: '/hr/employees/:id' },
   async ({ id }: { id: string }): Promise<EmployeeResponse> => {
-    await getAuthContext();
+    const auth = getAuthData();
+    if (!auth) throw APIError.unauthenticated('not authenticated');
     return service.getEmployee(id);
   },
 );
 
 export const listEmployees = api(
-  { expose: true, method: 'GET', path: '/hr/employees' },
+  { expose: true, auth: true, method: 'GET', path: '/hr/employees' },
   async (params: { page?: number; limit?: number }): Promise<ListEmployeesResponse> => {
-    const auth = await getAuthContext();
+    const auth = getAuthData();
+    if (!auth) throw APIError.unauthenticated('not authenticated');
     const query = validate(paginationSchema, params);
     return service.listEmployees(auth.tenantId, query);
   },
 );
 
 export const createEmployee = api(
-  { expose: true, method: 'POST', path: '/hr/employees' },
+  { expose: true, auth: true, method: 'POST', path: '/hr/employees', sensitive: true },
   async (req: CreateEmployeeRequest): Promise<EmployeeResponse> => {
-    const auth = await getAuthContext();
+    const auth = getAuthData();
+    if (!auth) throw APIError.unauthenticated('not authenticated');
     const input = validate(createEmployeeSchema, req);
     return service.createEmployee(auth.tenantId, input);
   },
 );
 
 export const updateEmployee = api(
-  { expose: true, method: 'PATCH', path: '/hr/employees/:id' },
+  { expose: true, auth: true, method: 'PATCH', path: '/hr/employees/:id', sensitive: true },
   async ({ id, ...body }: { id: string } & UpdateEmployeeRequest): Promise<EmployeeResponse> => {
-    await getAuthContext();
+    const auth = getAuthData();
+    if (!auth) throw APIError.unauthenticated('not authenticated');
     const input = validate(updateEmployeeSchema, body);
     return service.updateEmployee(id, input);
   },
 );
 
 export const deleteEmployee = api(
-  { expose: true, method: 'DELETE', path: '/hr/employees/:id' },
+  { expose: true, auth: true, method: 'DELETE', path: '/hr/employees/:id' },
   async ({ id }: { id: string }): Promise<void> => {
-    await getAuthContext();
+    const auth = getAuthData();
+    if (!auth) throw APIError.unauthenticated('not authenticated');
     return service.deleteEmployee(id);
   },
 );
@@ -376,47 +386,52 @@ export const deleteEmployee = api(
 // ─── Attendance ──────────────────────────────────────────────────────────────
 
 export const getAttendance = api(
-  { expose: true, method: 'GET', path: '/hr/attendance/:id' },
+  { expose: true, auth: true, method: 'GET', path: '/hr/attendance/:id' },
   async ({ id }: { id: string }): Promise<AttendanceResponse> => {
-    await getAuthContext();
+    const auth = getAuthData();
+    if (!auth) throw APIError.unauthenticated('not authenticated');
     return service.getAttendance(id);
   },
 );
 
 export const listAttendance = api(
-  { expose: true, method: 'GET', path: '/hr/attendance' },
+  { expose: true, auth: true, method: 'GET', path: '/hr/attendance' },
   async (params: { page?: number; limit?: number }): Promise<ListAttendanceResponse> => {
-    const auth = await getAuthContext();
+    const auth = getAuthData();
+    if (!auth) throw APIError.unauthenticated('not authenticated');
     const query = validate(paginationSchema, params);
     return service.listAttendance(auth.tenantId, query);
   },
 );
 
 export const createAttendance = api(
-  { expose: true, method: 'POST', path: '/hr/attendance' },
+  { expose: true, auth: true, method: 'POST', path: '/hr/attendance' },
   async (req: CreateAttendanceRequest): Promise<AttendanceResponse> => {
-    const auth = await getAuthContext();
+    const auth = getAuthData();
+    if (!auth) throw APIError.unauthenticated('not authenticated');
     const input = validate(createAttendanceSchema, req);
     return service.createAttendance(auth.tenantId, input);
   },
 );
 
 export const updateAttendance = api(
-  { expose: true, method: 'PATCH', path: '/hr/attendance/:id' },
+  { expose: true, auth: true, method: 'PATCH', path: '/hr/attendance/:id' },
   async ({
     id,
     ...body
   }: { id: string } & UpdateAttendanceRequest): Promise<AttendanceResponse> => {
-    await getAuthContext();
+    const auth = getAuthData();
+    if (!auth) throw APIError.unauthenticated('not authenticated');
     const input = validate(updateAttendanceSchema, body);
     return service.updateAttendance(id, input);
   },
 );
 
 export const deleteAttendance = api(
-  { expose: true, method: 'DELETE', path: '/hr/attendance/:id' },
+  { expose: true, auth: true, method: 'DELETE', path: '/hr/attendance/:id' },
   async ({ id }: { id: string }): Promise<void> => {
-    await getAuthContext();
+    const auth = getAuthData();
+    if (!auth) throw APIError.unauthenticated('not authenticated');
     return service.deleteAttendance(id);
   },
 );
@@ -424,44 +439,49 @@ export const deleteAttendance = api(
 // ─── Leave Types ─────────────────────────────────────────────────────────────
 
 export const getLeaveType = api(
-  { expose: true, method: 'GET', path: '/hr/leave-types/:id' },
+  { expose: true, auth: true, method: 'GET', path: '/hr/leave-types/:id' },
   async ({ id }: { id: string }): Promise<LeaveTypeResponse> => {
-    await getAuthContext();
+    const auth = getAuthData();
+    if (!auth) throw APIError.unauthenticated('not authenticated');
     return service.getLeaveType(id);
   },
 );
 
 export const listLeaveTypes = api(
-  { expose: true, method: 'GET', path: '/hr/leave-types' },
+  { expose: true, auth: true, method: 'GET', path: '/hr/leave-types' },
   async (params: { page?: number; limit?: number }): Promise<ListLeaveTypesResponse> => {
-    const auth = await getAuthContext();
+    const auth = getAuthData();
+    if (!auth) throw APIError.unauthenticated('not authenticated');
     const query = validate(paginationSchema, params);
     return service.listLeaveTypes(auth.tenantId, query);
   },
 );
 
 export const createLeaveType = api(
-  { expose: true, method: 'POST', path: '/hr/leave-types' },
+  { expose: true, auth: true, method: 'POST', path: '/hr/leave-types' },
   async (req: CreateLeaveTypeRequest): Promise<LeaveTypeResponse> => {
-    const auth = await getAuthContext();
+    const auth = getAuthData();
+    if (!auth) throw APIError.unauthenticated('not authenticated');
     const input = validate(createLeaveTypeSchema, req);
     return service.createLeaveType(auth.tenantId, input);
   },
 );
 
 export const updateLeaveType = api(
-  { expose: true, method: 'PATCH', path: '/hr/leave-types/:id' },
+  { expose: true, auth: true, method: 'PATCH', path: '/hr/leave-types/:id' },
   async ({ id, ...body }: { id: string } & UpdateLeaveTypeRequest): Promise<LeaveTypeResponse> => {
-    await getAuthContext();
+    const auth = getAuthData();
+    if (!auth) throw APIError.unauthenticated('not authenticated');
     const input = validate(updateLeaveTypeSchema, body);
     return service.updateLeaveType(id, input);
   },
 );
 
 export const deleteLeaveType = api(
-  { expose: true, method: 'DELETE', path: '/hr/leave-types/:id' },
+  { expose: true, auth: true, method: 'DELETE', path: '/hr/leave-types/:id' },
   async ({ id }: { id: string }): Promise<void> => {
-    await getAuthContext();
+    const auth = getAuthData();
+    if (!auth) throw APIError.unauthenticated('not authenticated');
     return service.deleteLeaveType(id);
   },
 );
@@ -469,38 +489,42 @@ export const deleteLeaveType = api(
 // ─── Leave Requests ──────────────────────────────────────────────────────────
 
 export const getLeaveRequest = api(
-  { expose: true, method: 'GET', path: '/hr/leave-requests/:id' },
+  { expose: true, auth: true, method: 'GET', path: '/hr/leave-requests/:id' },
   async ({ id }: { id: string }): Promise<LeaveRequestResponse> => {
-    await getAuthContext();
+    const auth = getAuthData();
+    if (!auth) throw APIError.unauthenticated('not authenticated');
     return service.getLeaveRequest(id);
   },
 );
 
 export const listLeaveRequests = api(
-  { expose: true, method: 'GET', path: '/hr/leave-requests' },
+  { expose: true, auth: true, method: 'GET', path: '/hr/leave-requests' },
   async (params: { page?: number; limit?: number }): Promise<ListLeaveRequestsResponse> => {
-    const auth = await getAuthContext();
+    const auth = getAuthData();
+    if (!auth) throw APIError.unauthenticated('not authenticated');
     const query = validate(paginationSchema, params);
     return service.listLeaveRequests(auth.tenantId, query);
   },
 );
 
 export const createLeaveRequest = api(
-  { expose: true, method: 'POST', path: '/hr/leave-requests' },
+  { expose: true, auth: true, method: 'POST', path: '/hr/leave-requests' },
   async (req: CreateLeaveRequestRequest): Promise<LeaveRequestResponse> => {
-    const auth = await getAuthContext();
+    const auth = getAuthData();
+    if (!auth) throw APIError.unauthenticated('not authenticated');
     const input = validate(createLeaveRequestSchema, req);
     return service.createLeaveRequest(auth.tenantId, input);
   },
 );
 
 export const approveRejectLeaveRequest = api(
-  { expose: true, method: 'PATCH', path: '/hr/leave-requests/:id/approve' },
+  { expose: true, auth: true, method: 'PATCH', path: '/hr/leave-requests/:id/approve' },
   async ({
     id,
     ...body
   }: { id: string } & ApproveRejectLeaveRequest): Promise<LeaveRequestResponse> => {
-    const auth = await getAuthContext();
+    const auth = getAuthData();
+    if (!auth) throw APIError.unauthenticated('not authenticated');
     const input = validate(approveRejectLeaveRequestSchema, body);
     return service.approveRejectLeaveRequest(id, auth.userId, input);
   },
@@ -509,44 +533,49 @@ export const approveRejectLeaveRequest = api(
 // ─── Salaries ────────────────────────────────────────────────────────────────
 
 export const getSalary = api(
-  { expose: true, method: 'GET', path: '/hr/salaries/:id' },
+  { expose: true, auth: true, method: 'GET', path: '/hr/salaries/:id' },
   async ({ id }: { id: string }): Promise<SalaryResponse> => {
-    await getAuthContext();
+    const auth = getAuthData();
+    if (!auth) throw APIError.unauthenticated('not authenticated');
     return service.getSalary(id);
   },
 );
 
 export const listSalaries = api(
-  { expose: true, method: 'GET', path: '/hr/salaries' },
+  { expose: true, auth: true, method: 'GET', path: '/hr/salaries' },
   async (params: { page?: number; limit?: number }): Promise<ListSalariesResponse> => {
-    const auth = await getAuthContext();
+    const auth = getAuthData();
+    if (!auth) throw APIError.unauthenticated('not authenticated');
     const query = validate(paginationSchema, params);
     return service.listSalaries(auth.tenantId, query);
   },
 );
 
 export const createSalary = api(
-  { expose: true, method: 'POST', path: '/hr/salaries' },
+  { expose: true, auth: true, method: 'POST', path: '/hr/salaries' },
   async (req: CreateSalaryRequest): Promise<SalaryResponse> => {
-    const auth = await getAuthContext();
+    const auth = getAuthData();
+    if (!auth) throw APIError.unauthenticated('not authenticated');
     const input = validate(createSalarySchema, req);
     return service.createSalary(auth.tenantId, input);
   },
 );
 
 export const updateSalary = api(
-  { expose: true, method: 'PATCH', path: '/hr/salaries/:id' },
+  { expose: true, auth: true, method: 'PATCH', path: '/hr/salaries/:id' },
   async ({ id, ...body }: { id: string } & UpdateSalaryRequest): Promise<SalaryResponse> => {
-    await getAuthContext();
+    const auth = getAuthData();
+    if (!auth) throw APIError.unauthenticated('not authenticated');
     const input = validate(updateSalarySchema, body);
     return service.updateSalary(id, input);
   },
 );
 
 export const deleteSalary = api(
-  { expose: true, method: 'DELETE', path: '/hr/salaries/:id' },
+  { expose: true, auth: true, method: 'DELETE', path: '/hr/salaries/:id' },
   async ({ id }: { id: string }): Promise<void> => {
-    await getAuthContext();
+    const auth = getAuthData();
+    if (!auth) throw APIError.unauthenticated('not authenticated');
     return service.deleteSalary(id);
   },
 );
@@ -554,52 +583,58 @@ export const deleteSalary = api(
 // ─── Payroll ─────────────────────────────────────────────────────────────────
 
 export const getPayroll = api(
-  { expose: true, method: 'GET', path: '/hr/payroll/:id' },
+  { expose: true, auth: true, method: 'GET', path: '/hr/payroll/:id' },
   async ({ id }: { id: string }): Promise<PayrollResponse> => {
-    await getAuthContext();
+    const auth = getAuthData();
+    if (!auth) throw APIError.unauthenticated('not authenticated');
     return service.getPayroll(id);
   },
 );
 
 export const listPayroll = api(
-  { expose: true, method: 'GET', path: '/hr/payroll' },
+  { expose: true, auth: true, method: 'GET', path: '/hr/payroll' },
   async (params: { page?: number; limit?: number }): Promise<ListPayrollResponse> => {
-    const auth = await getAuthContext();
+    const auth = getAuthData();
+    if (!auth) throw APIError.unauthenticated('not authenticated');
     const query = validate(paginationSchema, params);
     return service.listPayroll(auth.tenantId, query);
   },
 );
 
 export const createPayroll = api(
-  { expose: true, method: 'POST', path: '/hr/payroll' },
+  { expose: true, auth: true, method: 'POST', path: '/hr/payroll' },
   async (req: CreatePayrollRequest): Promise<PayrollResponse> => {
-    const auth = await getAuthContext();
+    const auth = getAuthData();
+    if (!auth) throw APIError.unauthenticated('not authenticated');
     const input = validate(createPayrollSchema, req);
     return service.createPayroll(auth.tenantId, input);
   },
 );
 
 export const updatePayroll = api(
-  { expose: true, method: 'PATCH', path: '/hr/payroll/:id' },
+  { expose: true, auth: true, method: 'PATCH', path: '/hr/payroll/:id' },
   async ({ id, ...body }: { id: string } & UpdatePayrollRequest): Promise<PayrollResponse> => {
-    await getAuthContext();
+    const auth = getAuthData();
+    if (!auth) throw APIError.unauthenticated('not authenticated');
     const input = validate(updatePayrollSchema, body);
     return service.updatePayroll(id, input);
   },
 );
 
 export const processPayroll = api(
-  { expose: true, method: 'POST', path: '/hr/payroll/:id/process' },
+  { expose: true, auth: true, method: 'POST', path: '/hr/payroll/:id/process' },
   async ({ id }: { id: string }): Promise<PayrollResponse> => {
-    await getAuthContext();
+    const auth = getAuthData();
+    if (!auth) throw APIError.unauthenticated('not authenticated');
     return service.processPayroll(id);
   },
 );
 
 export const deletePayroll = api(
-  { expose: true, method: 'DELETE', path: '/hr/payroll/:id' },
+  { expose: true, auth: true, method: 'DELETE', path: '/hr/payroll/:id' },
   async ({ id }: { id: string }): Promise<void> => {
-    await getAuthContext();
+    const auth = getAuthData();
+    if (!auth) throw APIError.unauthenticated('not authenticated');
     return service.deletePayroll(id);
   },
 );
@@ -607,17 +642,19 @@ export const deletePayroll = api(
 // ─── Payslips ────────────────────────────────────────────────────────────────
 
 export const getPayslip = api(
-  { expose: true, method: 'GET', path: '/hr/payslips/:id' },
+  { expose: true, auth: true, method: 'GET', path: '/hr/payslips/:id' },
   async ({ id }: { id: string }): Promise<PayslipResponse> => {
-    await getAuthContext();
+    const auth = getAuthData();
+    if (!auth) throw APIError.unauthenticated('not authenticated');
     return service.getPayslip(id);
   },
 );
 
 export const listPayslips = api(
-  { expose: true, method: 'GET', path: '/hr/payslips' },
+  { expose: true, auth: true, method: 'GET', path: '/hr/payslips' },
   async (params: { page?: number; limit?: number }): Promise<ListPayslipsResponse> => {
-    const auth = await getAuthContext();
+    const auth = getAuthData();
+    if (!auth) throw APIError.unauthenticated('not authenticated');
     const query = validate(paginationSchema, params);
     return service.listPayslips(auth.tenantId, query);
   },

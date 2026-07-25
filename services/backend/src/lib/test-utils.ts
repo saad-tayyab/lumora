@@ -1,4 +1,5 @@
 import { vi } from 'vitest';
+import type { AuthData } from '../auth';
 
 // ─── Mock Auth Session ─────────────────────────────────────────────────────
 
@@ -6,14 +7,20 @@ export const TEST_TENANT_ID = 'test-tenant-id-00000000-0000-0000-0000';
 export const TEST_USER_ID = 'test-user-id-00000000-0000-0000-0000';
 export const OTHER_TENANT_ID = 'other-tenant-id-00000000-0000-0000-0000';
 
-export const mockSession = {
-  userId: TEST_USER_ID,
+export const mockSession: AuthData = {
+  userID: TEST_USER_ID,
   tenantId: TEST_TENANT_ID,
+  userId: TEST_USER_ID,
 };
 
-export function createMockSession(overrides: Partial<typeof mockSession> = {}) {
+export function createMockSession(overrides: Partial<AuthData> = {}): AuthData {
   return { ...mockSession, ...overrides };
 }
+
+// ─── Encore Auth Mock ──────────────────────────────────────────────────────
+// Usage in tests:
+//   import * as auth from '~encore/auth';
+//   vi.spyOn(auth, 'getAuthData').mockReturnValue({ userID: '...', tenantId: '...', userId: '...' });
 
 // ─── Mock Database ─────────────────────────────────────────────────────────
 

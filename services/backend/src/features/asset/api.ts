@@ -1,7 +1,7 @@
-import { api, getCurrentContext } from 'encore.dev/api';
+import { APIError, api } from 'encore.dev/api';
 import { z } from 'zod';
+import { getAuthData } from '~encore/auth';
 import { ValidationError } from '../../lib/errors';
-import { authenticate } from '../../lib/middleware/auth';
 import * as service from './service';
 import type {
   AssetAdjustmentResponse,
@@ -138,11 +138,6 @@ const postAssetAdjustmentSchema = z.object({
 
 // ─── Helpers ──────────────────────────────────────────────────────────────────
 
-async function getAuthContext() {
-  const ctx = getCurrentContext();
-  return authenticate(ctx.request?.headers);
-}
-
 function validate<T>(schema: z.ZodSchema<T>, data: unknown): T {
   const result = schema.safeParse(data);
   if (!result.success) {
@@ -159,47 +154,52 @@ function validate<T>(schema: z.ZodSchema<T>, data: unknown): T {
 // ─── Asset Categories ─────────────────────────────────────────────────────────
 
 export const getAssetCategory = api(
-  { expose: true, method: 'GET', path: '/asset/categories/:id' },
+  { expose: true, auth: true, method: 'GET', path: '/asset/categories/:id' },
   async ({ id }: { id: string }): Promise<AssetCategoryResponse> => {
-    await getAuthContext();
+    const auth = getAuthData();
+    if (!auth) throw APIError.unauthenticated('not authenticated');
     return service.getAssetCategory(id);
   },
 );
 
 export const listAssetCategories = api(
-  { expose: true, method: 'GET', path: '/asset/categories' },
+  { expose: true, auth: true, method: 'GET', path: '/asset/categories' },
   async (params: { page?: number; limit?: number }): Promise<ListAssetCategoriesResponse> => {
-    const auth = await getAuthContext();
+    const auth = getAuthData();
+    if (!auth) throw APIError.unauthenticated('not authenticated');
     const query = validate(paginationSchema, params);
     return service.listAssetCategories(auth.tenantId, query);
   },
 );
 
 export const createAssetCategory = api(
-  { expose: true, method: 'POST', path: '/asset/categories' },
+  { expose: true, auth: true, method: 'POST', path: '/asset/categories' },
   async (req: CreateAssetCategoryRequest): Promise<AssetCategoryResponse> => {
-    const auth = await getAuthContext();
+    const auth = getAuthData();
+    if (!auth) throw APIError.unauthenticated('not authenticated');
     const input = validate(createAssetCategorySchema, req);
     return service.createAssetCategory(auth.tenantId, input);
   },
 );
 
 export const updateAssetCategory = api(
-  { expose: true, method: 'PATCH', path: '/asset/categories/:id' },
+  { expose: true, auth: true, method: 'PATCH', path: '/asset/categories/:id' },
   async ({
     id,
     ...body
   }: { id: string } & UpdateAssetCategoryRequest): Promise<AssetCategoryResponse> => {
-    await getAuthContext();
+    const auth = getAuthData();
+    if (!auth) throw APIError.unauthenticated('not authenticated');
     const input = validate(updateAssetCategorySchema, body);
     return service.updateAssetCategory(id, input);
   },
 );
 
 export const deleteAssetCategory = api(
-  { expose: true, method: 'DELETE', path: '/asset/categories/:id' },
+  { expose: true, auth: true, method: 'DELETE', path: '/asset/categories/:id' },
   async ({ id }: { id: string }): Promise<void> => {
-    await getAuthContext();
+    const auth = getAuthData();
+    if (!auth) throw APIError.unauthenticated('not authenticated');
     return service.deleteAssetCategory(id);
   },
 );
@@ -207,55 +207,61 @@ export const deleteAssetCategory = api(
 // ─── Fixed Assets ─────────────────────────────────────────────────────────────
 
 export const getFixedAsset = api(
-  { expose: true, method: 'GET', path: '/asset/fixed-assets/:id' },
+  { expose: true, auth: true, method: 'GET', path: '/asset/fixed-assets/:id' },
   async ({ id }: { id: string }): Promise<FixedAssetResponse> => {
-    await getAuthContext();
+    const auth = getAuthData();
+    if (!auth) throw APIError.unauthenticated('not authenticated');
     return service.getFixedAsset(id);
   },
 );
 
 export const listFixedAssets = api(
-  { expose: true, method: 'GET', path: '/asset/fixed-assets' },
+  { expose: true, auth: true, method: 'GET', path: '/asset/fixed-assets' },
   async (params: { page?: number; limit?: number }): Promise<ListFixedAssetsResponse> => {
-    const auth = await getAuthContext();
+    const auth = getAuthData();
+    if (!auth) throw APIError.unauthenticated('not authenticated');
     const query = validate(paginationSchema, params);
     return service.listFixedAssets(auth.tenantId, query);
   },
 );
 
 export const createFixedAsset = api(
-  { expose: true, method: 'POST', path: '/asset/fixed-assets' },
+  { expose: true, auth: true, method: 'POST', path: '/asset/fixed-assets' },
   async (req: CreateFixedAssetRequest): Promise<FixedAssetResponse> => {
-    const auth = await getAuthContext();
+    const auth = getAuthData();
+    if (!auth) throw APIError.unauthenticated('not authenticated');
     const input = validate(createFixedAssetSchema, req);
     return service.createFixedAsset(auth.tenantId, auth.userId, input);
   },
 );
 
 export const updateFixedAsset = api(
-  { expose: true, method: 'PATCH', path: '/asset/fixed-assets/:id' },
+  { expose: true, auth: true, method: 'PATCH', path: '/asset/fixed-assets/:id' },
   async ({
     id,
     ...body
   }: { id: string } & UpdateFixedAssetRequest): Promise<FixedAssetResponse> => {
-    await getAuthContext();
+    const auth = getAuthData();
+    if (!auth) throw APIError.unauthenticated('not authenticated');
     const input = validate(updateFixedAssetSchema, body);
     return service.updateFixedAsset(id, input);
   },
 );
 
 export const deleteFixedAsset = api(
-  { expose: true, method: 'DELETE', path: '/asset/fixed-assets/:id' },
+  { expose: true, auth: true, method: 'DELETE', path: '/asset/fixed-assets/:id' },
   async ({ id }: { id: string }): Promise<void> => {
-    await getAuthContext();
+    const auth = getAuthData();
+    if (!auth) throw APIError.unauthenticated('not authenticated');
     return service.deleteFixedAsset(id);
   },
 );
 
 export const disposeFixedAsset = api(
-  { expose: true, method: 'POST', path: '/asset/fixed-assets/:id/dispose' },
+  { expose: true, auth: true, method: 'POST', path: '/asset/fixed-assets/:id/dispose' },
   async ({ id, ...body }: { id: string } & DisposeAssetRequest): Promise<FixedAssetResponse> => {
-    await getAuthContext();
+    const auth = getAuthData();
+    if (!auth) throw APIError.unauthenticated('not authenticated');
     const input = validate(disposeAssetSchema, body);
     return service.disposeFixedAsset(id, input);
   },
@@ -264,26 +270,29 @@ export const disposeFixedAsset = api(
 // ─── Depreciation Schedules ───────────────────────────────────────────────────
 
 export const getDepreciationSchedule = api(
-  { expose: true, method: 'GET', path: '/asset/depreciation-schedules/:id' },
+  { expose: true, auth: true, method: 'GET', path: '/asset/depreciation-schedules/:id' },
   async ({ id }: { id: string }): Promise<DepreciationScheduleResponse> => {
-    await getAuthContext();
+    const auth = getAuthData();
+    if (!auth) throw APIError.unauthenticated('not authenticated');
     return service.getDepreciationSchedule(id);
   },
 );
 
 export const listDepreciationSchedules = api(
-  { expose: true, method: 'GET', path: '/asset/depreciation-schedules' },
+  { expose: true, auth: true, method: 'GET', path: '/asset/depreciation-schedules' },
   async (params: { page?: number; limit?: number }): Promise<ListDepreciationSchedulesResponse> => {
-    const auth = await getAuthContext();
+    const auth = getAuthData();
+    if (!auth) throw APIError.unauthenticated('not authenticated');
     const query = validate(paginationSchema, params);
     return service.listDepreciationSchedules(auth.tenantId, query);
   },
 );
 
 export const createDepreciationSchedule = api(
-  { expose: true, method: 'POST', path: '/asset/depreciation-schedules' },
+  { expose: true, auth: true, method: 'POST', path: '/asset/depreciation-schedules' },
   async (req: CreateDepreciationScheduleRequest): Promise<DepreciationScheduleResponse> => {
-    const auth = await getAuthContext();
+    const auth = getAuthData();
+    if (!auth) throw APIError.unauthenticated('not authenticated');
     const input = validate(createDepreciationScheduleSchema, req);
     return service.createDepreciationSchedule(auth.tenantId, input);
   },
@@ -292,47 +301,52 @@ export const createDepreciationSchedule = api(
 // ─── Depreciation Entries ─────────────────────────────────────────────────────
 
 export const getDepreciationEntry = api(
-  { expose: true, method: 'GET', path: '/asset/depreciation-entries/:id' },
+  { expose: true, auth: true, method: 'GET', path: '/asset/depreciation-entries/:id' },
   async ({ id }: { id: string }): Promise<DepreciationEntryResponse> => {
-    await getAuthContext();
+    const auth = getAuthData();
+    if (!auth) throw APIError.unauthenticated('not authenticated');
     return service.getDepreciationEntry(id);
   },
 );
 
 export const listDepreciationEntries = api(
-  { expose: true, method: 'GET', path: '/asset/depreciation-entries' },
+  { expose: true, auth: true, method: 'GET', path: '/asset/depreciation-entries' },
   async (params: { page?: number; limit?: number }): Promise<ListDepreciationEntriesResponse> => {
-    const auth = await getAuthContext();
+    const auth = getAuthData();
+    if (!auth) throw APIError.unauthenticated('not authenticated');
     const query = validate(paginationSchema, params);
     return service.listDepreciationEntries(auth.tenantId, query);
   },
 );
 
 export const createDepreciationEntry = api(
-  { expose: true, method: 'POST', path: '/asset/depreciation-entries' },
+  { expose: true, auth: true, method: 'POST', path: '/asset/depreciation-entries' },
   async (req: CreateDepreciationEntryRequest): Promise<DepreciationEntryResponse> => {
-    const auth = await getAuthContext();
+    const auth = getAuthData();
+    if (!auth) throw APIError.unauthenticated('not authenticated');
     const input = validate(createDepreciationEntrySchema, req);
     return service.createDepreciationEntry(auth.tenantId, auth.userId, input);
   },
 );
 
 export const postDepreciationEntry = api(
-  { expose: true, method: 'POST', path: '/asset/depreciation-entries/:id/post' },
+  { expose: true, auth: true, method: 'POST', path: '/asset/depreciation-entries/:id/post' },
   async ({
     id,
     ...body
   }: { id: string } & PostDepreciationEntryRequest): Promise<DepreciationEntryResponse> => {
-    await getAuthContext();
+    const auth = getAuthData();
+    if (!auth) throw APIError.unauthenticated('not authenticated');
     const input = validate(postDepreciationEntrySchema, body);
     return service.postDepreciationEntry(id, input);
   },
 );
 
 export const voidDepreciationEntry = api(
-  { expose: true, method: 'POST', path: '/asset/depreciation-entries/:id/void' },
+  { expose: true, auth: true, method: 'POST', path: '/asset/depreciation-entries/:id/void' },
   async ({ id }: { id: string }): Promise<DepreciationEntryResponse> => {
-    await getAuthContext();
+    const auth = getAuthData();
+    if (!auth) throw APIError.unauthenticated('not authenticated');
     return service.voidDepreciationEntry(id);
   },
 );
@@ -340,38 +354,42 @@ export const voidDepreciationEntry = api(
 // ─── Asset Adjustments ────────────────────────────────────────────────────────
 
 export const getAssetAdjustment = api(
-  { expose: true, method: 'GET', path: '/asset/adjustments/:id' },
+  { expose: true, auth: true, method: 'GET', path: '/asset/adjustments/:id' },
   async ({ id }: { id: string }): Promise<AssetAdjustmentResponse> => {
-    await getAuthContext();
+    const auth = getAuthData();
+    if (!auth) throw APIError.unauthenticated('not authenticated');
     return service.getAssetAdjustment(id);
   },
 );
 
 export const listAssetAdjustments = api(
-  { expose: true, method: 'GET', path: '/asset/adjustments' },
+  { expose: true, auth: true, method: 'GET', path: '/asset/adjustments' },
   async (params: { page?: number; limit?: number }): Promise<ListAssetAdjustmentsResponse> => {
-    const auth = await getAuthContext();
+    const auth = getAuthData();
+    if (!auth) throw APIError.unauthenticated('not authenticated');
     const query = validate(paginationSchema, params);
     return service.listAssetAdjustments(auth.tenantId, query);
   },
 );
 
 export const createAssetAdjustment = api(
-  { expose: true, method: 'POST', path: '/asset/adjustments' },
+  { expose: true, auth: true, method: 'POST', path: '/asset/adjustments' },
   async (req: CreateAssetAdjustmentRequest): Promise<AssetAdjustmentResponse> => {
-    const auth = await getAuthContext();
+    const auth = getAuthData();
+    if (!auth) throw APIError.unauthenticated('not authenticated');
     const input = validate(createAssetAdjustmentSchema, req);
     return service.createAssetAdjustment(auth.tenantId, auth.userId, input);
   },
 );
 
 export const postAssetAdjustment = api(
-  { expose: true, method: 'POST', path: '/asset/adjustments/:id/post' },
+  { expose: true, auth: true, method: 'POST', path: '/asset/adjustments/:id/post' },
   async ({
     id,
     ...body
   }: { id: string } & PostAssetAdjustmentRequest): Promise<AssetAdjustmentResponse> => {
-    await getAuthContext();
+    const auth = getAuthData();
+    if (!auth) throw APIError.unauthenticated('not authenticated');
     const input = validate(postAssetAdjustmentSchema, body);
     return service.postAssetAdjustment(id, input);
   },

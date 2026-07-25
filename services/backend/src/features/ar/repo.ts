@@ -1,4 +1,3 @@
-import { db } from '@lumora/database';
 import type {
   CreditNote,
   Customer,
@@ -22,6 +21,7 @@ import {
   payments,
 } from '@lumora/database/schema';
 import { and, asc, count, eq, or, type SQL, sql } from 'drizzle-orm';
+import { db } from '../../database';
 
 // ─── Pagination Result Type ─────────────────────────────────────────────────────
 

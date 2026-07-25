@@ -12,7 +12,7 @@
 
 import { APIError, api } from 'encore.dev/api';
 import { z } from 'zod';
-import { authenticate } from '../../lib/middleware/auth';
+import { getAuthData } from '~encore/auth';
 import * as service from './service';
 import type {
   CreatePurchaseOrderRequest,
@@ -160,9 +160,10 @@ function validate<T>(schema: z.ZodSchema<T>, data: unknown): T {
 
 /** Create a new purchase order with optional line items */
 export const createPurchaseOrder = api(
-  { expose: true, method: 'POST', path: '/proc/purchase-orders' },
+  { expose: true, auth: true, method: 'POST', path: '/proc/purchase-orders' },
   async (req: CreatePurchaseOrderRequest): Promise<PurchaseOrderResponse> => {
-    const auth = await authenticate(new Headers());
+    const auth = getAuthData();
+    if (!auth) throw APIError.unauthenticated('not authenticated');
     const input = validate(CreatePurchaseOrderSchema, req);
     return service.createPurchaseOrder(input, auth.tenantId, auth.userId);
   },
@@ -170,20 +171,22 @@ export const createPurchaseOrder = api(
 
 /** Get a purchase order by ID with line items */
 export const getPurchaseOrder = api(
-  { expose: true, method: 'GET', path: '/proc/purchase-orders/:id' },
+  { expose: true, auth: true, method: 'GET', path: '/proc/purchase-orders/:id' },
   async ({ id }: { id: string }): Promise<PurchaseOrderResponse> => {
-    const auth = await authenticate(new Headers());
+    const auth = getAuthData();
+    if (!auth) throw APIError.unauthenticated('not authenticated');
     return service.getPurchaseOrder(id, auth.tenantId);
   },
 );
 
 /** List purchase orders with pagination and optional status/vendor filters */
 export const listPurchaseOrders = api(
-  { expose: true, method: 'GET', path: '/proc/purchase-orders' },
+  { expose: true, auth: true, method: 'GET', path: '/proc/purchase-orders' },
   async (
     params: PaginationParams & { status?: string; vendorId?: string },
   ): Promise<ListResponse<PurchaseOrderResponse>> => {
-    const auth = await authenticate(new Headers());
+    const auth = getAuthData();
+    if (!auth) throw APIError.unauthenticated('not authenticated');
     const { page, limit, status, vendorId } = validate(
       PaginationSchema.extend({
         status: z.string().optional(),
@@ -197,12 +200,13 @@ export const listPurchaseOrders = api(
 
 /** Update a draft purchase order */
 export const updatePurchaseOrder = api(
-  { expose: true, method: 'PATCH', path: '/proc/purchase-orders/:id' },
+  { expose: true, auth: true, method: 'PATCH', path: '/proc/purchase-orders/:id' },
   async ({
     id,
     ...data
   }: { id: string } & UpdatePurchaseOrderRequest): Promise<PurchaseOrderResponse> => {
-    const auth = await authenticate(new Headers());
+    const auth = getAuthData();
+    if (!auth) throw APIError.unauthenticated('not authenticated');
     const input = validate(UpdatePurchaseOrderSchema, data);
     return service.updatePurchaseOrder(id, input, auth.tenantId);
   },
@@ -210,9 +214,10 @@ export const updatePurchaseOrder = api(
 
 /** Soft-delete a draft purchase order */
 export const deletePurchaseOrder = api(
-  { expose: true, method: 'DELETE', path: '/proc/purchase-orders/:id' },
+  { expose: true, auth: true, method: 'DELETE', path: '/proc/purchase-orders/:id' },
   async ({ id }: { id: string }): Promise<void> => {
-    const auth = await authenticate(new Headers());
+    const auth = getAuthData();
+    if (!auth) throw APIError.unauthenticated('not authenticated');
     return service.deletePurchaseOrder(id, auth.tenantId);
   },
 );
@@ -223,36 +228,45 @@ export const deletePurchaseOrder = api(
 
 /** Submit a purchase order for approval */
 export const submitPoForApproval = api(
-  { expose: true, method: 'POST', path: '/proc/purchase-orders/:id/submit-for-approval' },
+  {
+    expose: true,
+    auth: true,
+    method: 'POST',
+    path: '/proc/purchase-orders/:id/submit-for-approval',
+  },
   async ({ id }: { id: string }): Promise<PurchaseOrderResponse> => {
-    const auth = await authenticate(new Headers());
+    const auth = getAuthData();
+    if (!auth) throw APIError.unauthenticated('not authenticated');
     return service.submitPoForApproval(id, auth.tenantId);
   },
 );
 
 /** Approve a pending purchase order */
 export const approvePo = api(
-  { expose: true, method: 'POST', path: '/proc/purchase-orders/:id/approve' },
+  { expose: true, auth: true, method: 'POST', path: '/proc/purchase-orders/:id/approve' },
   async ({ id }: { id: string }): Promise<PurchaseOrderResponse> => {
-    const auth = await authenticate(new Headers());
+    const auth = getAuthData();
+    if (!auth) throw APIError.unauthenticated('not authenticated');
     return service.approvePo(id, auth.tenantId, auth.userId);
   },
 );
 
 /** Cancel a purchase order */
 export const cancelPo = api(
-  { expose: true, method: 'POST', path: '/proc/purchase-orders/:id/cancel' },
+  { expose: true, auth: true, method: 'POST', path: '/proc/purchase-orders/:id/cancel' },
   async ({ id }: { id: string }): Promise<PurchaseOrderResponse> => {
-    const auth = await authenticate(new Headers());
+    const auth = getAuthData();
+    if (!auth) throw APIError.unauthenticated('not authenticated');
     return service.cancelPo(id, auth.tenantId);
   },
 );
 
 /** Close a purchase order */
 export const closePo = api(
-  { expose: true, method: 'POST', path: '/proc/purchase-orders/:id/close' },
+  { expose: true, auth: true, method: 'POST', path: '/proc/purchase-orders/:id/close' },
   async ({ id }: { id: string }): Promise<PurchaseOrderResponse> => {
-    const auth = await authenticate(new Headers());
+    const auth = getAuthData();
+    if (!auth) throw APIError.unauthenticated('not authenticated');
     return service.closePo(id, auth.tenantId);
   },
 );
@@ -263,9 +277,10 @@ export const closePo = api(
 
 /** List line items for a purchase order */
 export const listPoLineItems = api(
-  { expose: true, method: 'GET', path: '/proc/purchase-orders/:poId/line-items' },
+  { expose: true, auth: true, method: 'GET', path: '/proc/purchase-orders/:poId/line-items' },
   async ({ poId }: { poId: string }): Promise<PoLineItemResponse[]> => {
-    const auth = await authenticate(new Headers());
+    const auth = getAuthData();
+    if (!auth) throw APIError.unauthenticated('not authenticated');
     // Verify PO exists and tenant matches
     await service.getPurchaseOrder(poId, auth.tenantId);
     const { poLineItemRepo } = await import('./repo');
@@ -275,12 +290,13 @@ export const listPoLineItems = api(
 
 /** Add a line item to a draft purchase order */
 export const addPoLineItem = api(
-  { expose: true, method: 'POST', path: '/proc/purchase-orders/:poId/line-items' },
+  { expose: true, auth: true, method: 'POST', path: '/proc/purchase-orders/:poId/line-items' },
   async ({
     poId,
     ...data
   }: { poId: string } & CreatePoLineItemRequest): Promise<PoLineItemResponse> => {
-    const auth = await authenticate(new Headers());
+    const auth = getAuthData();
+    if (!auth) throw APIError.unauthenticated('not authenticated');
     const input = validate(CreatePoLineItemSchema, data);
     return service.addPoLineItem(poId, input, auth.tenantId);
   },
@@ -290,6 +306,7 @@ export const addPoLineItem = api(
 export const updatePoLineItem = api(
   {
     expose: true,
+    auth: true,
     method: 'PATCH',
     path: '/proc/purchase-orders/:poId/line-items/:lineItemId',
   },
@@ -301,7 +318,8 @@ export const updatePoLineItem = api(
     poId: string;
     lineItemId: string;
   } & UpdatePoLineItemRequest): Promise<PoLineItemResponse> => {
-    const auth = await authenticate(new Headers());
+    const auth = getAuthData();
+    if (!auth) throw APIError.unauthenticated('not authenticated');
     const input = validate(UpdatePoLineItemSchema, data);
     return service.updatePoLineItem(lineItemId, input, poId, auth.tenantId);
   },
@@ -311,11 +329,13 @@ export const updatePoLineItem = api(
 export const deletePoLineItem = api(
   {
     expose: true,
+    auth: true,
     method: 'DELETE',
     path: '/proc/purchase-orders/:poId/line-items/:lineItemId',
   },
   async ({ poId, lineItemId }: { poId: string; lineItemId: string }): Promise<void> => {
-    const auth = await authenticate(new Headers());
+    const auth = getAuthData();
+    if (!auth) throw APIError.unauthenticated('not authenticated');
     return service.deletePoLineItem(lineItemId, poId, auth.tenantId);
   },
 );
@@ -326,9 +346,10 @@ export const deletePoLineItem = api(
 
 /** Create a new receiving report */
 export const createReceivingReport = api(
-  { expose: true, method: 'POST', path: '/proc/receiving-reports' },
+  { expose: true, auth: true, method: 'POST', path: '/proc/receiving-reports' },
   async (req: CreateReceivingReportRequest): Promise<ReceivingReportResponse> => {
-    const auth = await authenticate(new Headers());
+    const auth = getAuthData();
+    if (!auth) throw APIError.unauthenticated('not authenticated');
     const input = validate(CreateReceivingReportSchema, req);
     return service.createReceivingReport(input, auth.tenantId, auth.userId);
   },
@@ -336,20 +357,22 @@ export const createReceivingReport = api(
 
 /** Get a receiving report by ID */
 export const getReceivingReport = api(
-  { expose: true, method: 'GET', path: '/proc/receiving-reports/:id' },
+  { expose: true, auth: true, method: 'GET', path: '/proc/receiving-reports/:id' },
   async ({ id }: { id: string }): Promise<ReceivingReportResponse> => {
-    const auth = await authenticate(new Headers());
+    const auth = getAuthData();
+    if (!auth) throw APIError.unauthenticated('not authenticated');
     return service.getReceivingReport(id, auth.tenantId);
   },
 );
 
 /** List receiving reports with pagination and optional filters */
 export const listReceivingReports = api(
-  { expose: true, method: 'GET', path: '/proc/receiving-reports' },
+  { expose: true, auth: true, method: 'GET', path: '/proc/receiving-reports' },
   async (
     params: PaginationParams & { status?: string; poId?: string; vendorId?: string },
   ): Promise<ListResponse<ReceivingReportResponse>> => {
-    const auth = await authenticate(new Headers());
+    const auth = getAuthData();
+    if (!auth) throw APIError.unauthenticated('not authenticated');
     const { page, limit, status, poId, vendorId } = validate(
       PaginationSchema.extend({
         status: z.string().optional(),
@@ -364,12 +387,13 @@ export const listReceivingReports = api(
 
 /** Update a draft receiving report */
 export const updateReceivingReport = api(
-  { expose: true, method: 'PATCH', path: '/proc/receiving-reports/:id' },
+  { expose: true, auth: true, method: 'PATCH', path: '/proc/receiving-reports/:id' },
   async ({
     id,
     ...data
   }: { id: string } & UpdateReceivingReportRequest): Promise<ReceivingReportResponse> => {
-    const auth = await authenticate(new Headers());
+    const auth = getAuthData();
+    if (!auth) throw APIError.unauthenticated('not authenticated');
     const input = validate(UpdateReceivingReportSchema, data);
     return service.updateReceivingReport(id, input, auth.tenantId);
   },
@@ -377,27 +401,30 @@ export const updateReceivingReport = api(
 
 /** Confirm a receiving report — updates PO line item received quantities */
 export const confirmReceivingReport = api(
-  { expose: true, method: 'POST', path: '/proc/receiving-reports/:id/confirm' },
+  { expose: true, auth: true, method: 'POST', path: '/proc/receiving-reports/:id/confirm' },
   async ({ id }: { id: string }): Promise<ReceivingReportResponse> => {
-    const auth = await authenticate(new Headers());
+    const auth = getAuthData();
+    if (!auth) throw APIError.unauthenticated('not authenticated');
     return service.confirmReceivingReport(id, auth.tenantId);
   },
 );
 
 /** Reject a receiving report */
 export const rejectReceivingReport = api(
-  { expose: true, method: 'POST', path: '/proc/receiving-reports/:id/reject' },
+  { expose: true, auth: true, method: 'POST', path: '/proc/receiving-reports/:id/reject' },
   async ({ id }: { id: string }): Promise<ReceivingReportResponse> => {
-    const auth = await authenticate(new Headers());
+    const auth = getAuthData();
+    if (!auth) throw APIError.unauthenticated('not authenticated');
     return service.rejectReceivingReport(id, auth.tenantId);
   },
 );
 
 /** Delete a draft receiving report */
 export const deleteReceivingReport = api(
-  { expose: true, method: 'DELETE', path: '/proc/receiving-reports/:id' },
+  { expose: true, auth: true, method: 'DELETE', path: '/proc/receiving-reports/:id' },
   async ({ id }: { id: string }): Promise<void> => {
-    const auth = await authenticate(new Headers());
+    const auth = getAuthData();
+    if (!auth) throw APIError.unauthenticated('not authenticated');
     return service.deleteReceivingReport(id, auth.tenantId);
   },
 );
@@ -408,9 +435,10 @@ export const deleteReceivingReport = api(
 
 /** Create a vendor catalog item */
 export const createVendorCatalogItem = api(
-  { expose: true, method: 'POST', path: '/proc/vendor-catalog-items' },
+  { expose: true, auth: true, method: 'POST', path: '/proc/vendor-catalog-items' },
   async (req: CreateVendorCatalogItemRequest): Promise<VendorCatalogItemResponse> => {
-    const _auth = await authenticate(new Headers());
+    const auth = getAuthData();
+    if (!auth) throw APIError.unauthenticated('not authenticated');
     const input = validate(CreateVendorCatalogItemSchema, req);
     return service.createVendorCatalogItem(input);
   },
@@ -418,20 +446,22 @@ export const createVendorCatalogItem = api(
 
 /** Get a vendor catalog item by ID */
 export const getVendorCatalogItem = api(
-  { expose: true, method: 'GET', path: '/proc/vendor-catalog-items/:id' },
+  { expose: true, auth: true, method: 'GET', path: '/proc/vendor-catalog-items/:id' },
   async ({ id }: { id: string }): Promise<VendorCatalogItemResponse> => {
-    const _auth = await authenticate(new Headers());
+    const auth = getAuthData();
+    if (!auth) throw APIError.unauthenticated('not authenticated');
     return service.getVendorCatalogItem(id);
   },
 );
 
 /** List vendor catalog items with optional vendor filter */
 export const listVendorCatalogItems = api(
-  { expose: true, method: 'GET', path: '/proc/vendor-catalog-items' },
+  { expose: true, auth: true, method: 'GET', path: '/proc/vendor-catalog-items' },
   async (
     params: PaginationParams & { vendorId?: string },
   ): Promise<ListResponse<VendorCatalogItemResponse>> => {
-    const _auth = await authenticate(new Headers());
+    const auth = getAuthData();
+    if (!auth) throw APIError.unauthenticated('not authenticated');
     const { page, limit, vendorId } = validate(
       PaginationSchema.extend({
         vendorId: z.string().uuid().optional(),
@@ -444,12 +474,13 @@ export const listVendorCatalogItems = api(
 
 /** Update a vendor catalog item */
 export const updateVendorCatalogItem = api(
-  { expose: true, method: 'PATCH', path: '/proc/vendor-catalog-items/:id' },
+  { expose: true, auth: true, method: 'PATCH', path: '/proc/vendor-catalog-items/:id' },
   async ({
     id,
     ...data
   }: { id: string } & UpdateVendorCatalogItemRequest): Promise<VendorCatalogItemResponse> => {
-    const _auth = await authenticate(new Headers());
+    const auth = getAuthData();
+    if (!auth) throw APIError.unauthenticated('not authenticated');
     const input = validate(UpdateVendorCatalogItemSchema, data);
     return service.updateVendorCatalogItem(id, input);
   },
@@ -457,9 +488,10 @@ export const updateVendorCatalogItem = api(
 
 /** Soft-delete a vendor catalog item */
 export const deleteVendorCatalogItem = api(
-  { expose: true, method: 'DELETE', path: '/proc/vendor-catalog-items/:id' },
+  { expose: true, auth: true, method: 'DELETE', path: '/proc/vendor-catalog-items/:id' },
   async ({ id }: { id: string }): Promise<void> => {
-    const _auth = await authenticate(new Headers());
+    const auth = getAuthData();
+    if (!auth) throw APIError.unauthenticated('not authenticated');
     return service.deleteVendorCatalogItem(id);
   },
 );

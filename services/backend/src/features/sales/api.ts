@@ -10,8 +10,8 @@
  * @see knowledge/constitution/DOMAIN.md — BR-007 (quotation expiry)
  */
 
-import { api } from 'encore.dev/api';
-import { authenticate } from '../../lib/middleware/auth';
+import { APIError, api } from 'encore.dev/api';
+import { getAuthData } from '~encore/auth';
 import * as service from './service';
 import type {
   CreateDiscountPolicyRequest,
@@ -50,15 +50,16 @@ function validate<T>(schema: { parse: (data: unknown) => T }, data: unknown): T 
 // ═══════════════════════════════════════════════════════════════════════════════
 
 export const listSalesOrders = api(
-  { expose: true, method: 'GET', path: '/sales/orders' },
+  { expose: true, auth: true, method: 'GET', path: '/sales/orders' },
   async ({
     customerId,
     status,
     limit,
     offset,
   }: SalesOrderQuery): Promise<PaginatedResponse<SalesOrder>> => {
-    const ctx = await authenticate(/* headers */);
-    return service.listSalesOrders(ctx.tenantId, {
+    const auth = getAuthData();
+    if (!auth) throw APIError.unauthenticated('not authenticated');
+    return service.listSalesOrders(auth.tenantId, {
       customerId,
       status,
       limit: limit ?? 50,
@@ -68,57 +69,63 @@ export const listSalesOrders = api(
 );
 
 export const getSalesOrder = api(
-  { expose: true, method: 'GET', path: '/sales/orders/:id' },
+  { expose: true, auth: true, method: 'GET', path: '/sales/orders/:id' },
   async ({ id }: { id: string }): Promise<SalesOrder> => {
-    const ctx = await authenticate(/* headers */);
-    return service.getSalesOrder(id, ctx.tenantId);
+    const auth = getAuthData();
+    if (!auth) throw APIError.unauthenticated('not authenticated');
+    return service.getSalesOrder(id, auth.tenantId);
   },
 );
 
 export const getSalesOrderLineItems = api(
-  { expose: true, method: 'GET', path: '/sales/orders/:id/line-items' },
+  { expose: true, auth: true, method: 'GET', path: '/sales/orders/:id/line-items' },
   async ({ id }: { id: string }): Promise<SalesOrderLineItem[]> => {
-    const ctx = await authenticate(/* headers */);
-    return service.getSalesOrderLineItems(id, ctx.tenantId);
+    const auth = getAuthData();
+    if (!auth) throw APIError.unauthenticated('not authenticated');
+    return service.getSalesOrderLineItems(id, auth.tenantId);
   },
 );
 
 export const createSalesOrder = api(
-  { expose: true, method: 'POST', path: '/sales/orders' },
+  { expose: true, auth: true, method: 'POST', path: '/sales/orders' },
   async (req: CreateSalesOrderRequest): Promise<SalesOrder> => {
-    const ctx = await authenticate(/* headers */);
+    const auth = getAuthData();
+    if (!auth) throw APIError.unauthenticated('not authenticated');
     const data = validate(CreateSalesOrderRequestSchema, req);
-    return service.createSalesOrder(data, ctx.tenantId);
+    return service.createSalesOrder(data, auth.tenantId);
   },
 );
 
 export const updateSalesOrder = api(
-  { expose: true, method: 'PUT', path: '/sales/orders/:id' },
+  { expose: true, auth: true, method: 'PUT', path: '/sales/orders/:id' },
   async ({
     id,
     ...req
   }: {
     id: string;
   } & UpdateSalesOrderRequest): Promise<SalesOrder> => {
-    const ctx = await authenticate(/* headers */);
+    const auth = getAuthData();
+    if (!auth) throw APIError.unauthenticated('not authenticated');
     const data = validate(UpdateSalesOrderRequestSchema, req);
-    return service.updateSalesOrder(id, data, ctx.tenantId);
+    return service.updateSalesOrder(id, data, auth.tenantId);
   },
 );
 
 export const updateSalesOrderStatus = api(
-  { expose: true, method: 'PUT', path: '/sales/orders/:id/status' },
+  { expose: true, auth: true, method: 'PUT', path: '/sales/orders/:id/status' },
   async ({ id, status }: { id: string; status: string }): Promise<SalesOrder> => {
-    const ctx = await authenticate(/* headers */);
-    return service.updateSalesOrderStatus(id, status, ctx.tenantId);
+    const auth = getAuthData();
+    if (!auth) throw APIError.unauthenticated('not authenticated');
+    return service.updateSalesOrderStatus(id, status, auth.tenantId);
   },
 );
 
 export const deleteSalesOrder = api(
-  { expose: true, method: 'DELETE', path: '/sales/orders/:id' },
+  { expose: true, auth: true, method: 'DELETE', path: '/sales/orders/:id' },
   async ({ id }: { id: string }): Promise<void> => {
-    const ctx = await authenticate(/* headers */);
-    return service.deleteSalesOrder(id, ctx.tenantId);
+    const auth = getAuthData();
+    if (!auth) throw APIError.unauthenticated('not authenticated');
+    return service.deleteSalesOrder(id, auth.tenantId);
   },
 );
 
@@ -127,6 +134,7 @@ export const deleteSalesOrder = api(
 export const createSalesOrderLineItem = api(
   {
     expose: true,
+    auth: true,
     method: 'POST',
     path: '/sales/orders/:orderId/line-items',
   },
@@ -144,14 +152,16 @@ export const createSalesOrderLineItem = api(
     taxRate?: string;
     taxAmount?: string;
   }): Promise<SalesOrderLineItem> => {
-    const ctx = await authenticate(/* headers */);
-    return service.createSalesOrderLineItem(orderId, req, ctx.tenantId);
+    const auth = getAuthData();
+    if (!auth) throw APIError.unauthenticated('not authenticated');
+    return service.createSalesOrderLineItem(orderId, req, auth.tenantId);
   },
 );
 
 export const updateSalesOrderLineItem = api(
   {
     expose: true,
+    auth: true,
     method: 'PUT',
     path: '/sales/orders/line-items/:id',
   },
@@ -169,20 +179,23 @@ export const updateSalesOrderLineItem = api(
     taxRate?: string;
     taxAmount?: string;
   }): Promise<SalesOrderLineItem> => {
-    const ctx = await authenticate(/* headers */);
-    return service.updateSalesOrderLineItem(id, req, ctx.tenantId);
+    const auth = getAuthData();
+    if (!auth) throw APIError.unauthenticated('not authenticated');
+    return service.updateSalesOrderLineItem(id, req, auth.tenantId);
   },
 );
 
 export const deleteSalesOrderLineItem = api(
   {
     expose: true,
+    auth: true,
     method: 'DELETE',
     path: '/sales/orders/line-items/:id',
   },
   async ({ id }: { id: string }): Promise<void> => {
-    const ctx = await authenticate(/* headers */);
-    return service.deleteSalesOrderLineItem(id, ctx.tenantId);
+    const auth = getAuthData();
+    if (!auth) throw APIError.unauthenticated('not authenticated');
+    return service.deleteSalesOrderLineItem(id, auth.tenantId);
   },
 );
 
@@ -191,15 +204,16 @@ export const deleteSalesOrderLineItem = api(
 // ═══════════════════════════════════════════════════════════════════════════════
 
 export const listQuotations = api(
-  { expose: true, method: 'GET', path: '/sales/quotations' },
+  { expose: true, auth: true, method: 'GET', path: '/sales/quotations' },
   async ({
     customerId,
     status,
     limit,
     offset,
   }: QuotationQuery): Promise<PaginatedResponse<Quotation>> => {
-    const ctx = await authenticate(/* headers */);
-    return service.listQuotations(ctx.tenantId, {
+    const auth = getAuthData();
+    if (!auth) throw APIError.unauthenticated('not authenticated');
+    return service.listQuotations(auth.tenantId, {
       customerId,
       status,
       limit: limit ?? 50,
@@ -209,57 +223,63 @@ export const listQuotations = api(
 );
 
 export const getQuotation = api(
-  { expose: true, method: 'GET', path: '/sales/quotations/:id' },
+  { expose: true, auth: true, method: 'GET', path: '/sales/quotations/:id' },
   async ({ id }: { id: string }): Promise<Quotation> => {
-    const ctx = await authenticate(/* headers */);
-    return service.getQuotation(id, ctx.tenantId);
+    const auth = getAuthData();
+    if (!auth) throw APIError.unauthenticated('not authenticated');
+    return service.getQuotation(id, auth.tenantId);
   },
 );
 
 export const getQuotationLineItems = api(
-  { expose: true, method: 'GET', path: '/sales/quotations/:id/line-items' },
+  { expose: true, auth: true, method: 'GET', path: '/sales/quotations/:id/line-items' },
   async ({ id }: { id: string }): Promise<QuotationLineItem[]> => {
-    const ctx = await authenticate(/* headers */);
-    return service.getQuotationLineItems(id, ctx.tenantId);
+    const auth = getAuthData();
+    if (!auth) throw APIError.unauthenticated('not authenticated');
+    return service.getQuotationLineItems(id, auth.tenantId);
   },
 );
 
 export const createQuotation = api(
-  { expose: true, method: 'POST', path: '/sales/quotations' },
+  { expose: true, auth: true, method: 'POST', path: '/sales/quotations' },
   async (req: CreateQuotationRequest): Promise<Quotation> => {
-    const ctx = await authenticate(/* headers */);
+    const auth = getAuthData();
+    if (!auth) throw APIError.unauthenticated('not authenticated');
     const data = validate(CreateQuotationRequestSchema, req);
-    return service.createQuotation(data, ctx.tenantId);
+    return service.createQuotation(data, auth.tenantId);
   },
 );
 
 export const updateQuotation = api(
-  { expose: true, method: 'PUT', path: '/sales/quotations/:id' },
+  { expose: true, auth: true, method: 'PUT', path: '/sales/quotations/:id' },
   async ({
     id,
     ...req
   }: {
     id: string;
   } & UpdateQuotationRequest): Promise<Quotation> => {
-    const ctx = await authenticate(/* headers */);
+    const auth = getAuthData();
+    if (!auth) throw APIError.unauthenticated('not authenticated');
     const data = validate(UpdateQuotationRequestSchema, req);
-    return service.updateQuotation(id, data, ctx.tenantId);
+    return service.updateQuotation(id, data, auth.tenantId);
   },
 );
 
 export const updateQuotationStatus = api(
-  { expose: true, method: 'PUT', path: '/sales/quotations/:id/status' },
+  { expose: true, auth: true, method: 'PUT', path: '/sales/quotations/:id/status' },
   async ({ id, status }: { id: string; status: string }): Promise<Quotation> => {
-    const ctx = await authenticate(/* headers */);
-    return service.updateQuotationStatus(id, status, ctx.tenantId);
+    const auth = getAuthData();
+    if (!auth) throw APIError.unauthenticated('not authenticated');
+    return service.updateQuotationStatus(id, status, auth.tenantId);
   },
 );
 
 export const deleteQuotation = api(
-  { expose: true, method: 'DELETE', path: '/sales/quotations/:id' },
+  { expose: true, auth: true, method: 'DELETE', path: '/sales/quotations/:id' },
   async ({ id }: { id: string }): Promise<void> => {
-    const ctx = await authenticate(/* headers */);
-    return service.deleteQuotation(id, ctx.tenantId);
+    const auth = getAuthData();
+    if (!auth) throw APIError.unauthenticated('not authenticated');
+    return service.deleteQuotation(id, auth.tenantId);
   },
 );
 
@@ -268,6 +288,7 @@ export const deleteQuotation = api(
 export const createQuotationLineItem = api(
   {
     expose: true,
+    auth: true,
     method: 'POST',
     path: '/sales/quotations/:quotationId/line-items',
   },
@@ -285,14 +306,16 @@ export const createQuotationLineItem = api(
     taxRate?: string;
     taxAmount?: string;
   }): Promise<QuotationLineItem> => {
-    const ctx = await authenticate(/* headers */);
-    return service.createQuotationLineItem(quotationId, req, ctx.tenantId);
+    const auth = getAuthData();
+    if (!auth) throw APIError.unauthenticated('not authenticated');
+    return service.createQuotationLineItem(quotationId, req, auth.tenantId);
   },
 );
 
 export const updateQuotationLineItem = api(
   {
     expose: true,
+    auth: true,
     method: 'PUT',
     path: '/sales/quotations/line-items/:id',
   },
@@ -310,20 +333,23 @@ export const updateQuotationLineItem = api(
     taxRate?: string;
     taxAmount?: string;
   }): Promise<QuotationLineItem> => {
-    const ctx = await authenticate(/* headers */);
-    return service.updateQuotationLineItem(id, req, ctx.tenantId);
+    const auth = getAuthData();
+    if (!auth) throw APIError.unauthenticated('not authenticated');
+    return service.updateQuotationLineItem(id, req, auth.tenantId);
   },
 );
 
 export const deleteQuotationLineItem = api(
   {
     expose: true,
+    auth: true,
     method: 'DELETE',
     path: '/sales/quotations/line-items/:id',
   },
   async ({ id }: { id: string }): Promise<void> => {
-    const ctx = await authenticate(/* headers */);
-    return service.deleteQuotationLineItem(id, ctx.tenantId);
+    const auth = getAuthData();
+    if (!auth) throw APIError.unauthenticated('not authenticated');
+    return service.deleteQuotationLineItem(id, auth.tenantId);
   },
 );
 
@@ -332,15 +358,16 @@ export const deleteQuotationLineItem = api(
 // ═══════════════════════════════════════════════════════════════════════════════
 
 export const listDiscountPolicies = api(
-  { expose: true, method: 'GET', path: '/sales/discount-policies' },
+  { expose: true, auth: true, method: 'GET', path: '/sales/discount-policies' },
   async ({
     customerId,
     type,
     limit,
     offset,
   }: DiscountPolicyQuery): Promise<PaginatedResponse<DiscountPolicy>> => {
-    const ctx = await authenticate(/* headers */);
-    return service.listDiscountPolicies(ctx.tenantId, {
+    const auth = getAuthData();
+    if (!auth) throw APIError.unauthenticated('not authenticated');
+    return service.listDiscountPolicies(auth.tenantId, {
       customerId,
       type,
       limit: limit ?? 50,
@@ -350,40 +377,44 @@ export const listDiscountPolicies = api(
 );
 
 export const getDiscountPolicy = api(
-  { expose: true, method: 'GET', path: '/sales/discount-policies/:id' },
+  { expose: true, auth: true, method: 'GET', path: '/sales/discount-policies/:id' },
   async ({ id }: { id: string }): Promise<DiscountPolicy> => {
-    const ctx = await authenticate(/* headers */);
-    return service.getDiscountPolicy(id, ctx.tenantId);
+    const auth = getAuthData();
+    if (!auth) throw APIError.unauthenticated('not authenticated');
+    return service.getDiscountPolicy(id, auth.tenantId);
   },
 );
 
 export const createDiscountPolicy = api(
-  { expose: true, method: 'POST', path: '/sales/discount-policies' },
+  { expose: true, auth: true, method: 'POST', path: '/sales/discount-policies' },
   async (req: CreateDiscountPolicyRequest): Promise<DiscountPolicy> => {
-    const ctx = await authenticate(/* headers */);
+    const auth = getAuthData();
+    if (!auth) throw APIError.unauthenticated('not authenticated');
     const data = validate(CreateDiscountPolicyRequestSchema, req);
-    return service.createDiscountPolicy(data, ctx.tenantId);
+    return service.createDiscountPolicy(data, auth.tenantId);
   },
 );
 
 export const updateDiscountPolicy = api(
-  { expose: true, method: 'PUT', path: '/sales/discount-policies/:id' },
+  { expose: true, auth: true, method: 'PUT', path: '/sales/discount-policies/:id' },
   async ({
     id,
     ...req
   }: {
     id: string;
   } & UpdateDiscountPolicyRequest): Promise<DiscountPolicy> => {
-    const ctx = await authenticate(/* headers */);
+    const auth = getAuthData();
+    if (!auth) throw APIError.unauthenticated('not authenticated');
     const data = validate(UpdateDiscountPolicyRequestSchema, req);
-    return service.updateDiscountPolicy(id, data, ctx.tenantId);
+    return service.updateDiscountPolicy(id, data, auth.tenantId);
   },
 );
 
 export const deleteDiscountPolicy = api(
-  { expose: true, method: 'DELETE', path: '/sales/discount-policies/:id' },
+  { expose: true, auth: true, method: 'DELETE', path: '/sales/discount-policies/:id' },
   async ({ id }: { id: string }): Promise<void> => {
-    const ctx = await authenticate(/* headers */);
-    return service.deleteDiscountPolicy(id, ctx.tenantId);
+    const auth = getAuthData();
+    if (!auth) throw APIError.unauthenticated('not authenticated');
+    return service.deleteDiscountPolicy(id, auth.tenantId);
   },
 );

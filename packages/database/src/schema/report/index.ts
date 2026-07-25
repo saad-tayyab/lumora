@@ -1,13 +1,4 @@
 export {
-  dashboardsRepository,
-  dataSourcesRepository,
-  kpisRepository,
-  reportExportsRepository,
-  reportSchedulesRepository,
-  reportsRepository,
-  reportTemplatesRepository,
-} from './repository';
-export {
   dashboards,
   dataSources,
   insertDashboardSchema,

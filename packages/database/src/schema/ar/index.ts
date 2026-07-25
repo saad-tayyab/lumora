@@ -1,13 +1,3 @@
-export type { PaginatedResult } from './repository';
-
-export {
-  creditNotesRepository,
-  customersRepository,
-  invoiceLineItemsRepository,
-  invoicesRepository,
-  paymentApplicationsRepository,
-  paymentsRepository,
-} from './repository';
 export {
   creditNoteStatusEnum,
   creditNotes,

@@ -1,5 +1,3 @@
-// Repositories
-export { rolesRepository, userRolesRepository, usersRepository } from './repository';
 export {
   insertRoleSchema,
   insertUserRoleSchema,
