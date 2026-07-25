@@ -1,4 +1,5 @@
 import { db } from '@lumora/database';
+import { accounts, journalEntries, journalEntryLines } from '@lumora/database/schema';
 import { eq } from 'drizzle-orm';
 import {
   AccountCodeAlreadyExistsError,
