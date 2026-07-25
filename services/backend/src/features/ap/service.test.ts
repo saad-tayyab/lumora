@@ -53,6 +53,19 @@ vi.mock('encore.dev/api', () => ({
   api: vi.fn(),
 }));
 
+vi.mock('encore.dev/pubsub', () => ({
+  Topic: class MockTopic {
+    constructor(_name: string, _config?: unknown) {}
+    async publish(_data: unknown) {
+      return 'mock-message-id';
+    }
+  },
+}));
+
+vi.mock('./events', () => ({
+  billReceived: { publish: vi.fn().mockResolvedValue('mock-message-id') },
+}));
+
 // ─── Mock Schema (used directly in service transactions) ──────────────────
 
 const { createMockTable } = vi.hoisted(() => ({

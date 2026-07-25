@@ -1,5 +1,5 @@
 import { getSession } from '@lumora/auth/middleware';
-import { UnauthorizedError } from './errors';
+import { UnauthorizedError } from '../errors';
 
 export interface AuthContext {
   userId: string;

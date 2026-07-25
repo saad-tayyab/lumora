@@ -6,6 +6,7 @@
       "name": "lumora-erp",
       "devDependencies": {
         "@biomejs/biome": "^2.5.5",
+        "@types/node": "^22.0.0",
         "husky": "^9.1.7",
         "lint-staged": "^17.2.0",
         "turbo": "^2.10.6",
@@ -19,7 +20,7 @@
         "drizzle-orm": "1.0.0-rc.4",
       },
       "devDependencies": {
-        "typescript": "^5.0.0",
+        "typescript": "^6.0.0",
       },
     },
     "packages/config": {
@@ -30,7 +31,7 @@
       },
       "devDependencies": {
         "@types/node": "^22.0.0",
-        "typescript": "^5.0.0",
+        "typescript": "^6.0.0",
       },
     },
     "packages/database": {
@@ -47,14 +48,14 @@
       "devDependencies": {
         "drizzle-kit": "1.0.0-rc.4",
         "tsx": "^4.0.0",
-        "typescript": "^5.0.0",
+        "typescript": "^6.0.0",
       },
     },
     "packages/shared": {
       "name": "@lumora/shared",
       "version": "0.0.1",
       "devDependencies": {
-        "typescript": "^5.0.0",
+        "typescript": "^6.0.0",
       },
     },
     "packages/validation": {
@@ -64,7 +65,7 @@
         "zod": "^4.4.3",
       },
       "devDependencies": {
-        "typescript": "^5.0.0",
+        "typescript": "^6.0.0",
       },
     },
     "services/backend": {
@@ -83,7 +84,7 @@
       "devDependencies": {
         "@biomejs/biome": "^2.5.5",
         "@vitest/coverage-v8": "^4.1.10",
-        "typescript": "^5.0.0",
+        "typescript": "^6.0.0",
         "vitest": "^4.1.10",
       },
     },
@@ -467,7 +468,7 @@
 
     "turbo": ["turbo@2.10.6", "", { "optionalDependencies": { "@turbo/darwin-64": "2.10.6", "@turbo/darwin-arm64": "2.10.6", "@turbo/linux-64": "2.10.6", "@turbo/linux-arm64": "2.10.6", "@turbo/windows-64": "2.10.6", "@turbo/windows-arm64": "2.10.6" }, "bin": { "turbo": "bin/turbo" } }, "sha512-3VfH7fK7WQ/ZHYjvfWyVnPRpcNaX3ZqXfGDMdc82eGdM0ESATyxFK4R4PM3wNsVFsdkUFZ4pZpkNeG37dxOv+g=="],
 
-    "typescript": ["typescript@5.9.3", "", { "bin": { "tsc": "bin/tsc", "tsserver": "bin/tsserver" } }, "sha512-jl1vZzPDinLr9eUt3J/t7V6FgNEw9QjvBPdysz9KfQDD41fQrC2Y4vKQdiaUpFT4bXlb1RHhLpp8wtm6M5TgSw=="],
+    "typescript": ["typescript@6.0.3", "", { "bin": { "tsc": "bin/tsc", "tsserver": "bin/tsserver" } }, "sha512-y2TvuxSZPDyQakkFRPZHKFm+KKVqIisdg9/CZwm9ftvKXLP8NRWj38/ODjNbr43SsoXqNuAisEf1GdCxqWcdBw=="],
 
     "undici-types": ["undici-types@6.21.0", "", {}, "sha512-iwDZqg0QAGrg9Rav5H4n0M64c3mkR59cJ6wQp+7C4nI0gsmExaedaYLNO44eT4AtBBwjbTiGPMlt2Md0T9H9JQ=="],
 

@@ -32,6 +32,19 @@ vi.mock('encore.dev/api', () => ({
   api: vi.fn((_config: unknown, handler: unknown) => handler),
 }));
 
+vi.mock('encore.dev/pubsub', () => ({
+  Topic: class MockTopic {
+    constructor(_name: string, _config?: unknown) {}
+    async publish(_data: unknown) {
+      return 'mock-message-id';
+    }
+  },
+}));
+
+vi.mock('./events', () => ({
+  depreciationPosted: { publish: vi.fn().mockResolvedValue('mock-message-id') },
+}));
+
 // ─── Mock Database Module ─────────────────────────────────────────────────
 
 const mockTx = {

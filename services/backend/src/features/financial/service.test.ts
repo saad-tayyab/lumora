@@ -22,31 +22,64 @@ vi.mock('encore.dev/api', () => ({
   api: vi.fn((_config: unknown, handler: unknown) => handler),
 }));
 
+vi.mock('encore.dev/pubsub', () => ({
+  Topic: class MockTopic {
+    constructor(_name: string, _config?: unknown) {}
+    async publish(_data: unknown) {
+      return 'mock-message-id';
+    }
+  },
+}));
+
+vi.mock('encore.dev/storage/sqldb', () => ({
+  SQLDatabase: class MockSQLDatabase {
+    connectionString = 'postgresql://mock';
+    constructor(_name: string, _config?: unknown) {}
+  },
+}));
+
+vi.mock('./events', () => ({
+  journalEntryPosted: { publish: vi.fn().mockResolvedValue('mock-message-id') },
+}));
+
 // ─── Mock Database Module ─────────────────────────────────────────────────
 
-const mockTx = {
-  insert: vi.fn().mockReturnValue({
-    values: vi.fn().mockReturnValue({
-      returning: vi
-        .fn()
-        .mockResolvedValue([{ id: 'je-00000000-0000-0000-000000000001', status: 'draft' }]),
+const { mockTx } = vi.hoisted(() => ({
+  mockTx: {
+    insert: vi.fn().mockReturnValue({
+      values: vi.fn().mockReturnValue({
+        returning: vi
+          .fn()
+          .mockResolvedValue([{ id: 'je-00000000-0000-0000-000000000001', status: 'draft' }]),
+      }),
     }),
-  }),
-  update: vi.fn().mockReturnValue({
-    set: vi.fn().mockReturnValue({ where: vi.fn().mockResolvedValue(undefined) }),
-  }),
-  delete: vi.fn().mockReturnValue({ where: vi.fn().mockResolvedValue(undefined) }),
-  query: {
-    journalEntryLines: {
-      findMany: vi.fn().mockResolvedValue([]),
-    },
-    accounts: {
-      findFirst: vi.fn().mockResolvedValue({ id: 'account-1', balance: '0' }),
+    update: vi.fn().mockReturnValue({
+      set: vi.fn().mockReturnValue({ where: vi.fn().mockResolvedValue(undefined) }),
+    }),
+    delete: vi.fn().mockReturnValue({ where: vi.fn().mockResolvedValue(undefined) }),
+    query: {
+      journalEntryLines: {
+        findMany: vi.fn().mockResolvedValue([]),
+      },
+      accounts: {
+        findFirst: vi.fn().mockResolvedValue({ id: 'account-1', balance: '0' }),
+      },
     },
   },
-};
+}));
 
 vi.mock('@lumora/database', () => ({
+  db: {
+    query: {},
+    insert: vi.fn(),
+    update: vi.fn(),
+    delete: vi.fn(),
+    select: vi.fn(),
+    transaction: vi.fn(async (fn: (tx: typeof mockTx) => Promise<unknown>) => fn(mockTx)),
+  },
+}));
+
+vi.mock('../../database', () => ({
   db: {
     query: {},
     insert: vi.fn(),
