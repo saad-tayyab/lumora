@@ -111,7 +111,7 @@ This constitution defines how AI operates within the Lumora development ecosyste
 | PR-007 | Architecture Generation | 1.0 | Architect Agent |
 | PR-008 | Database Generation | 1.0 | Code Agent |
 | PR-010 | Frontend Generation | 1.0 | Code Agent |
-| PR-011 | Backend Generation | 1.0 | Code Agent |
+| PR-011 | Backend Generation | 4.0 | Code Agent |
 | PR-012 | Testing Generation | 1.0 | Test Agent |
 | PR-013 | Security Review | 1.0 | Review Agent |
 | PR-014 | Deployment | 1.0 | Code Agent |

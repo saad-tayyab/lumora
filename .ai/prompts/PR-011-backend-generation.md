@@ -1,7 +1,7 @@
 # Backend Generation Prompt
 
 > **Prompt ID:** PR-011  
-> **Version:** 3.1.0  
+> **Version:** 4.0.0  
 > **Agent:** Code Agent  
 > **Updated:** 2026-07-25
 
@@ -28,6 +28,38 @@ Example: For Accounts Receivable → `{CONTEXT}` = `ar`, `{CTX}` = `AR`, `{BC-ID
 ## Data Flow
 
 Before generating code, the agent must read these files in order:
+
+### Step 0: Auth & Shared Packages (Prerequisites)
+
+If no backend code exists yet, these foundational packages must be scaffolded first.
+
+Check: `packages/auth/src/index.ts`
+If missing, scaffold `packages/auth/`:
+- Install `better-auth` and `@better-auth/drizzle`
+- Create `src/index.ts` — Better Auth server config with email/password provider, session management, organization plugin (multi-tenant)
+- Create `src/client.ts` — Auth client helper for frontend
+- Create `src/middleware.ts` — Session extraction helper for Encore.ts
+- Create `src/rbac.ts` — Role-based access control utility (`requireRole(ctx, role)`)
+- Create `src/permissions.ts` — Permission definitions per resource/action
+- Follow `better-auth-best-practices` and `better-auth-security-best-practices` skills
+
+Check: `packages/shared/src/index.ts`
+If missing, scaffold `packages/shared/`:
+- Create `src/types.ts` — Shared types: `TenantId`, `UserId`, `Pagination`, `SortOrder`, `ApiResponse<T>`
+- Create `src/utils.ts` — Utility functions: `formatCurrency()`, `formatDate()`, `generateId()`
+- Create `src/constants.ts` — Constants: `DEFAULT_TENANT_ID`, `PAGE_SIZE`, `MAX_PAGE_SIZE`
+
+Check: `packages/config/src/index.ts`
+If missing, scaffold `packages/config/`:
+- Create `src/env.ts` — Zod-validated environment variables (DATABASE_URL, BETTER_AUTH_SECRET, etc.)
+- Create `src/index.ts` — Re-exports
+
+Check: `packages/validation/src/index.ts`
+If missing, scaffold `packages/validation/`:
+- Create `src/index.ts` — Re-export Zod schemas from `@lumora/database/schema`
+- Create `src/helpers.ts` — Shared validation helpers: `dateRange()`, `positiveAmount()`, `nonEmptyArray()`
+
+After scaffolding, proceed to Step 1.
 
 ### Step 1: Database Schema (Source of Truth for data model)
 
@@ -79,10 +111,12 @@ Check: `services/backend/src/features/{CONTEXT}/`
 
 If no backend code exists for this context yet, this will be the **first reference implementation** for the Lumora ERP backend.
 
+- Run Step 0 first to ensure auth and shared packages exist
 - Follow the patterns from `engineering/backend/STANDARDS.md` strictly
 - The generated code will serve as the template for all subsequent contexts
 - Prioritize clarity and completeness over speed — future code will mirror this structure
 - Include all layers (API, service, repository, types, errors) even if some are thin
+- Every endpoint must have auth and tenant isolation from day one
 
 ---
 
@@ -98,6 +132,20 @@ The code must follow engineering/backend/STANDARDS.md and engineering/api/STANDA
 
 # INSTRUCTIONS
 
+## 0. Prerequisites Check (Run once)
+1. Check if `packages/auth/src/index.ts` exists
+2. If not, scaffold auth package using `create-auth` skill:
+   a. Install `better-auth` and `@better-auth/drizzle`
+   b. Create server config, session helper, RBAC utility
+   c. Load `better-auth-best-practices` and `better-auth-security-best-practices` skills
+3. Check if `packages/shared/src/index.ts` exists
+4. If not, create shared types (TenantId, UserId, Pagination), utils, constants
+5. Check if `packages/config/src/index.ts` exists
+6. If not, create Zod-validated env config
+7. Check if `packages/validation/src/index.ts` exists
+8. If not, create shared Zod schema re-exports and helpers
+9. Proceed to Step 1 only after all prerequisites exist
+
 ## 1. Read Data Sources
 1. Read `packages/database/src/schema/{CONTEXT}/schema.ts` to get the table definitions
 2. Read all files matching `knowledge/ontology/contexts/{BC-ID}/CON-{CTX}-*.md` for business concepts
@@ -107,18 +155,19 @@ The code must follow engineering/backend/STANDARDS.md and engineering/api/STANDA
 
 ## 2. API Endpoint Design
 1. Design CRUD endpoints for each entity in the schema:
-   a. GET /resources (list with pagination)
-   b. GET /resources/:id (get by ID)
-   c. POST /resources (create)
-   d. PUT /resources/:id (update)
-   e. DELETE /resources/:id (soft delete)
+   a. GET /resources (list with pagination, filtered by tenantId)
+   b. GET /resources/:id (get by ID, filtered by tenantId)
+   c. POST /resources (create, tenantId from session)
+   d. PUT /resources/:id (update, filtered by tenantId)
+   e. DELETE /resources/:id (soft delete, filtered by tenantId)
 2. For each endpoint:
    a. Define request schema with Zod (use drizzle-orm/zod to derive from schema)
    b. Define response schema
    c. Define error responses (use structured error codes from `errors.ts`)
-   d. Add authentication (Better Auth session)
-   e. Add authorization (RBAC)
+   d. Add authentication: extract session, get userId and tenantId
+   e. Add authorization: check RBAC roles via `requireRole(ctx, 'role_name')`
    f. Add input validation (enforce business rules from Step 3)
+   g. Ensure tenantId is NEVER accepted from request body — always from session
 
 ## 3. Generate Service Files
 Generate all files in `services/backend/src/features/{CONTEXT}/`:
@@ -133,11 +182,36 @@ Generate all files in `services/backend/src/features/{CONTEXT}/`:
 
 5. `errors.ts` — Typed domain errors extending `APIError`. One error class per domain error. Include error code and HTTP status.
 
-## 4. Middleware
-1. Authentication: Better Auth session validation on all endpoints
-2. Authorization: Role-based access control (check user roles from session)
-3. Error handling: Structured error responses (use errors from `errors.ts`)
-4. Logging: Structured JSON logging
+## 4. Authentication & Authorization
+
+1. Authentication:
+   a. Import `getSession` from `@lumora/auth/middleware`
+   b. Extract session from request at the start of every endpoint handler
+   c. Attach `userId` and `tenantId` to the request context
+   d. Return `APIError('Unauthorized', 'Valid session required', 401)` if no valid session
+
+2. Authorization (RBAC):
+   a. Import `requireRole` from `@lumora/auth/rbac`
+   b. Call `requireRole(ctx, 'role_name')` before any business logic
+   c. Define required roles per endpoint in a comment or constant at the top of the handler
+   d. Return `APIError('Forbidden', 'Insufficient permissions', 403)` if role check fails
+
+3. Tenant isolation:
+   a. ALL database queries must filter by `ctx.tenantId` from the auth session
+   b. NEVER accept `tenantId` from the request body — it comes from the session only
+   c. Pass `tenantId` to every repository call as a required parameter
+   d. Log a warning if a request attempts to set `tenantId` in the body (defensive check)
+
+4. Error handling:
+   a. Use typed `APIError` classes from `./errors` (defined per domain)
+   b. Map domain errors to HTTP status codes (400, 404, 409, etc.)
+   c. Never expose internal error messages or stack traces to clients
+   d. Log full error details server-side for debugging
+
+5. Logging:
+   a. Use structured JSON logging for all operations
+   b. Include `userId`, `tenantId`, and `action` in log context
+   c. Never log sensitive data (passwords, tokens, secrets)
 
 ## 5. Quality
 1. Run `bunx @biomejs/biome check services/backend/src/features/{CONTEXT}/`
@@ -150,9 +224,14 @@ Generate all files in `services/backend/src/features/{CONTEXT}/`:
 - Always use service layer pattern (never skip layers)
 - Always handle errors with typed APIError classes
 - Always use parameterized queries (Drizzle ORM enforces this)
+- Always extract tenantId from auth session, never from request body
+- Always check RBAC permissions before processing
+- Always filter queries by tenantId for tenant isolation
 - Never expose internal errors to clients
 - Never skip authentication on any endpoint
+- Never allow cross-tenant data access
 - Never put business logic in API layer or repository layer
+- Never log sensitive data (passwords, tokens, secrets)
 
 # OUTPUT FORMAT
 - API files in `services/backend/src/features/{CONTEXT}/`
@@ -171,7 +250,9 @@ Before executing this prompt, load these agent skills:
 |-------|---------|
 | `better-auth-best-practices` | Auth middleware integration, session handling, cookie configuration |
 | `better-auth-security-best-practices` | Security hardening: rate limiting, CSRF, trusted origins, session security |
-| `create-auth` | If scaffolding auth for the first time in this service |
+| `create-auth` | Scaffolding auth packages from scratch (Step 0) |
+| `email-and-password-best-practices` | Email verification, password reset, credential management |
+| `turborepo` | Monorepo task orchestration and build pipeline |
 
 ---
 
