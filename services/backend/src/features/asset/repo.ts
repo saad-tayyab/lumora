@@ -15,7 +15,7 @@ import {
   type NewDepreciationSchedule,
   type NewFixedAsset,
 } from '@lumora/database/schema/asset';
-import { and, asc, count, desc, eq, type SQL } from 'drizzle-orm';
+import { and, asc, count, desc, eq, isNull, type SQL } from 'drizzle-orm';
 import { db } from '../../database';
 
 // ─── Asset Categories ─────────────────────────────────────────────────────────
@@ -43,7 +43,13 @@ export const assetCategoryRepo = {
     return db
       .select()
       .from(assetCategories)
-      .where(and(eq(assetCategories.tenantId, tenantId), eq(assetCategories.isActive, true)))
+      .where(
+        and(
+          eq(assetCategories.tenantId, tenantId),
+          eq(assetCategories.isActive, true),
+          isNull(assetCategories.deletedAt),
+        ),
+      )
       .orderBy(asc(assetCategories.name));
   },
 
@@ -115,7 +121,13 @@ export const fixedAssetRepo = {
     return db
       .select()
       .from(fixedAssets)
-      .where(and(eq(fixedAssets.tenantId, tenantId), eq(fixedAssets.status, 'active')))
+      .where(
+        and(
+          eq(fixedAssets.tenantId, tenantId),
+          eq(fixedAssets.status, 'active'),
+          isNull(fixedAssets.deletedAt),
+        ),
+      )
       .orderBy(asc(fixedAssets.name));
   },
 

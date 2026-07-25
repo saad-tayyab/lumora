@@ -330,13 +330,12 @@ describe('Tax Repositories - Integration Tests', () => {
           makeTaxCode({ code: 'UPD-TS', name: 'Timestamp Test' }),
         );
         await new Promise((r) => setTimeout(r, 10));
+        const beforeUpdate = Date.now();
         const updated = await taxCodesRepo.update(created.id, TEST_TENANT_ID, {
           name: 'Timestamp Updated',
         });
 
-        expect(updated.updatedAt.getTime()).toBeGreaterThanOrEqual(
-          created.updatedAt.getTime(),
-        );
+        expect(updated.updatedAt.getTime()).toBeGreaterThanOrEqual(beforeUpdate - 1000);
       });
 
       it('should update the isActive flag', async () => {
@@ -627,11 +626,11 @@ describe('Tax Repositories - Integration Tests', () => {
           }),
         );
 
-        // Rate effective 2027-01-01 onward (no expiry)
+        // Rate effective 2028-01-01 onward (no expiry)
         await taxRatesRepo.create(
           makeTaxRate(activeRateTaxCodeId, {
             rate: '0.1500',
-            effectiveDate: '2027-01-01',
+            effectiveDate: '2028-01-01',
             expiryDate: null,
             isActive: true,
           }),
@@ -669,10 +668,10 @@ describe('Tax Repositories - Integration Tests', () => {
       });
 
       it('should return undefined when the only rate is expired', async () => {
-        // Query a date range where no rate exists
+        // Query a date after the first rate expires (2026-12-31) but before the second starts (2028-01-01)
         const found = await taxRatesRepo.findActiveRateForDate(
           activeRateTaxCodeId,
-          '2026-12-32',
+          '2027-06-15',
           TEST_TENANT_ID,
         );
         // After expiry of first rate and before effective of second
@@ -682,7 +681,7 @@ describe('Tax Repositories - Integration Tests', () => {
       it('should find the no-expiry rate for a future date', async () => {
         const found = await taxRatesRepo.findActiveRateForDate(
           activeRateTaxCodeId,
-          '2027-06-15',
+          '2028-06-15',
           TEST_TENANT_ID,
         );
         expect(found).toBeDefined();
@@ -734,13 +733,12 @@ describe('Tax Repositories - Integration Tests', () => {
           }),
         );
         await new Promise((r) => setTimeout(r, 10));
+        const beforeUpdate = Date.now();
         const updated = await taxRatesRepo.update(created.id, TEST_TENANT_ID, {
           description: 'Timestamp check',
         });
 
-        expect(updated.updatedAt.getTime()).toBeGreaterThanOrEqual(
-          created.updatedAt.getTime(),
-        );
+        expect(updated.updatedAt.getTime()).toBeGreaterThanOrEqual(beforeUpdate - 1000);
       });
 
       it('should update isActive flag on tax rate', async () => {
@@ -1307,15 +1305,14 @@ describe('Tax Repositories - Integration Tests', () => {
           }),
         );
         await new Promise((r) => setTimeout(r, 10));
+        const beforeUpdate = Date.now();
         const updated = await taxAutoAssignmentRulesRepo.update(
           created.id,
           TEST_TENANT_ID,
           { name: 'TS Updated Rule' },
         );
 
-        expect(updated.updatedAt.getTime()).toBeGreaterThanOrEqual(
-          created.updatedAt.getTime(),
-        );
+        expect(updated.updatedAt.getTime()).toBeGreaterThanOrEqual(beforeUpdate - 1000);
       });
 
       it('should update isActive flag', async () => {

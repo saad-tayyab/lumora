@@ -1,5 +1,5 @@
 import { describe, expect, it, vi, beforeAll, afterAll } from 'vitest';
-import { testDb, TEST_TENANT_ID } from '../../lib/integration-test-utils';
+import { testDb, TEST_TENANT_ID, TEST_USER_ID } from '../../lib/integration-test-utils';
 
 vi.mock('encore.dev/api', () => ({
   APIError: class MockAPIError extends Error {
@@ -95,6 +95,7 @@ async function seedPrerequisites(): Promise<void> {
       categoryId: cat.id,
       unitOfMeasureId: uom.id,
       isActive: true,
+      createdBy: TEST_USER_ID,
     })
     .returning();
 

@@ -1,6 +1,6 @@
 import { describe, expect, it, vi, beforeAll, afterAll } from 'vitest';
 import { eq } from 'drizzle-orm';
-import { testDb, TEST_TENANT_ID, cleanupTestData } from '../../lib/integration-test-utils';
+import { testDb, TEST_TENANT_ID, TEST_USER_ID, cleanupTestData } from '../../lib/integration-test-utils';
 import {
   vendors,
   bills,
@@ -62,6 +62,7 @@ async function createTestVendor(overrides?: Partial<{ name: string; code: string
     name: overrides?.name ?? `Vendor ${code}`,
     code,
     currency: 'USD',
+    createdBy: TEST_USER_ID,
   });
 }
 
@@ -78,6 +79,7 @@ async function createTestBill(vendorId: string, overrides?: Partial<{ billNumber
     totalAmount: '1100.0000',
     currency: 'USD',
     status: (overrides?.status ?? 'draft') as 'draft' | 'pending_approval' | 'approved' | 'partially_paid' | 'paid' | 'voided',
+    createdBy: TEST_USER_ID,
   });
 }
 
@@ -101,6 +103,7 @@ describe('vendorsRepo', () => {
       name: 'Acme Supplies',
       code: 'ACME',
       currency: 'USD',
+      createdBy: TEST_USER_ID,
     });
 
     expect(vendor).toBeDefined();
@@ -118,6 +121,7 @@ describe('vendorsRepo', () => {
       name: 'Find By ID Vendor',
       code: randomCode('FBID'),
       currency: 'USD',
+      createdBy: TEST_USER_ID,
     });
 
     const found = await vendorsRepo.findById(created.id, TEST_TENANT_ID);
@@ -143,6 +147,7 @@ describe('vendorsRepo', () => {
       name: 'Find By Code Vendor',
       code,
       currency: 'USD',
+      createdBy: TEST_USER_ID,
     });
 
     const found = await vendorsRepo.findByCode(code, TEST_TENANT_ID);
@@ -167,6 +172,7 @@ describe('vendorsRepo', () => {
         name: `${prefix}-vendor-${i}`,
         code: `${prefix}-${i}`,
         currency: 'USD',
+        createdBy: TEST_USER_ID,
       });
       created.push(v);
     }
@@ -254,6 +260,7 @@ describe('vendorsRepo', () => {
       name: 'Tenant Code Isolation',
       code,
       currency: 'USD',
+      createdBy: TEST_USER_ID,
     });
 
     const found = await vendorsRepo.findByCode(code, OTHER_TENANT_ID);
@@ -291,6 +298,7 @@ describe('billsRepo', () => {
       totalAmount: '550.0000',
       currency: 'USD',
       status: 'draft',
+      createdBy: TEST_USER_ID,
     });
 
     expect(bill).toBeDefined();

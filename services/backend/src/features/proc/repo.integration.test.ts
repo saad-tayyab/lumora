@@ -1,5 +1,5 @@
 import { describe, expect, it, vi, beforeAll, afterAll } from 'vitest';
-import { testDb, TEST_TENANT_ID } from '../../lib/integration-test-utils';
+import { testDb, TEST_TENANT_ID, TEST_USER_ID } from '../../lib/integration-test-utils';
 import * as schema from '@lumora/database/schema';
 import * as repos from './repo';
 import { eq } from 'drizzle-orm';
@@ -36,6 +36,13 @@ const {
   designations,
 } = schema;
 
+const {
+  salesOrderLineItems,
+  quotationLineItems,
+  salesOrders,
+  quotations,
+} = schema;
+
 const OTHER_TENANT_ID = '33333333-3333-4333-8333-333333333333';
 
 // ── Helpers ──────────────────────────────────────────────────────────────────
@@ -49,11 +56,19 @@ async function cleanupProcTestData(): Promise<void> {
   await testDb.delete(vendorCatalogItems).where(eq(vendorCatalogItems.vendorId, sharedVendorId));
   await testDb.delete(receivingReports).where(eq(receivingReports.tenantId, TEST_TENANT_ID));
   await testDb.delete(receivingReports).where(eq(receivingReports.tenantId, OTHER_TENANT_ID));
-  await testDb.delete(poLineItems).where(eq(poLineItems.poId, 'noop'));
+  await testDb.delete(poLineItems);
   await testDb.delete(purchaseOrders).where(eq(purchaseOrders.tenantId, TEST_TENANT_ID));
   await testDb.delete(purchaseOrders).where(eq(purchaseOrders.tenantId, OTHER_TENANT_ID));
   await testDb.delete(vendors).where(eq(vendors.tenantId, TEST_TENANT_ID));
   await testDb.delete(vendors).where(eq(vendors.tenantId, OTHER_TENANT_ID));
+  await testDb.delete(salesOrderLineItems).where(eq(salesOrderLineItems.tenantId, TEST_TENANT_ID));
+  await testDb.delete(salesOrderLineItems).where(eq(salesOrderLineItems.tenantId, OTHER_TENANT_ID));
+  await testDb.delete(quotationLineItems).where(eq(quotationLineItems.tenantId, TEST_TENANT_ID));
+  await testDb.delete(quotationLineItems).where(eq(quotationLineItems.tenantId, OTHER_TENANT_ID));
+  await testDb.delete(salesOrders).where(eq(salesOrders.tenantId, TEST_TENANT_ID));
+  await testDb.delete(salesOrders).where(eq(salesOrders.tenantId, OTHER_TENANT_ID));
+  await testDb.delete(quotations).where(eq(quotations.tenantId, TEST_TENANT_ID));
+  await testDb.delete(quotations).where(eq(quotations.tenantId, OTHER_TENANT_ID));
   await testDb.delete(items).where(eq(items.tenantId, TEST_TENANT_ID));
   await testDb.delete(items).where(eq(items.tenantId, OTHER_TENANT_ID));
   await testDb.delete(itemCategories).where(eq(itemCategories.tenantId, TEST_TENANT_ID));
@@ -87,7 +102,7 @@ async function seedPrerequisites(tenantId: string) {
     .onConflictDoNothing({ target: unitOfMeasures.code });
 
   const existingUom = uom ?? (
-    await testDb.query.unitOfMeasures.findFirst({ where: eq(unitOfMeasures.code, 'TEST-UOM') })
+    await testDb.select().from(unitOfMeasures).where(eq(unitOfMeasures.code, 'TEST-UOM')).then(r => r[0])
   );
 
   const [dept] = await testDb
@@ -102,7 +117,7 @@ async function seedPrerequisites(tenantId: string) {
     .onConflictDoNothing({ target: departments.code });
 
   const existingDept = dept ?? (
-    await testDb.query.departments.findFirst({ where: eq(departments.code, 'TEST-DEPT') })
+    await testDb.select().from(departments).where(eq(departments.code, 'TEST-DEPT')).then(r => r[0])
   );
 
   const [desig] = await testDb
@@ -112,12 +127,13 @@ async function seedPrerequisites(tenantId: string) {
       code: 'TEST-DESIG',
       level: 1,
       isActive: true,
+      tenantId: tenantId,
     })
     .returning()
     .onConflictDoNothing({ target: designations.code });
 
   const existingDesig = desig ?? (
-    await testDb.query.designations.findFirst({ where: eq(designations.code, 'TEST-DESIG') })
+    await testDb.select().from(designations).where(eq(designations.code, 'TEST-DESIG')).then(r => r[0])
   );
 
   const [employee] = await testDb
@@ -166,7 +182,7 @@ async function seedPrerequisites(tenantId: string) {
       categoryId: cat.id,
       unitOfMeasureId: existingUom!.id,
       tenantId,
-      createdBy: '00000000-0000-0000-0000-000000000000',
+      createdBy: TEST_USER_ID,
     })
     .returning();
   sharedItemId = item.id;
@@ -479,6 +495,7 @@ describe('poLineItemRepo', () => {
 
   beforeAll(async () => {
     await cleanupPOTestData();
+    await seedPrerequisites(TEST_TENANT_ID);
     const po = await repos.purchaseOrderRepo.create(
       makePoInput({ poNumber: `PO-LINE-PARENT-${Date.now()}` }),
     );
@@ -498,7 +515,7 @@ describe('poLineItemRepo', () => {
     expect(created.poId).toBe(testPoId);
     expect(created.lineNumber).toBe(100);
     expect(created.description).toBe('Test Line Item');
-    expect(created.quantity).toBe('10');
+    expect(created.quantity).toBe('10.0000');
   });
 
   it('should find a PO line item by id', async () => {
@@ -578,7 +595,7 @@ describe('poLineItemRepo', () => {
 
     expect(updated).toBeDefined();
     expect(updated!.description).toBe('After Update');
-    expect(updated!.quantity).toBe('25');
+    expect(updated!.quantity).toBe('25.0000');
   });
 
   it('should return undefined when updating non-existent line item', async () => {

@@ -230,84 +230,98 @@ describe('budgetHeadersRepo', () => {
     expect(allActive).toBe(true);
   });
 
-  it('should find active budget by overlapping period', async () => {
-    const input = makeHeaderInput({
-      name: `OVERLAP-${Date.now()}`,
-      periodStart: '2026-04-01',
-      periodEnd: '2026-09-30',
-      isActive: true,
-      status: 'active',
+  describe('findActiveByPeriod', () => {
+    beforeAll(async () => {
+      await cleanupBudgetTestData();
     });
-    const created = await repos.budgetHeadersRepo.create(input);
 
-    const found = await repos.budgetHeadersRepo.findActiveByPeriod(
-      '2026-06-01',
-      '2026-08-31',
-      TEST_TENANT_ID,
-    );
+    afterEach(async () => {
+      await cleanupBudgetTestData();
+    });
 
-    expect(found).toBeDefined();
-    expect(found!.id).toBe(created.id);
-  });
+    afterAll(async () => {
+      await cleanupBudgetTestData();
+    });
 
-  it('should return undefined when no period overlap exists', async () => {
-    await repos.budgetHeadersRepo.create(
-      makeHeaderInput({
-        name: `NO-OVERLAP-${Date.now()}`,
-        periodStart: '2026-01-01',
-        periodEnd: '2026-03-31',
+    it('should find active budget by overlapping period', async () => {
+      const input = makeHeaderInput({
+        name: `OVERLAP-${Date.now()}`,
+        periodStart: '2026-04-01',
+        periodEnd: '2026-09-30',
         isActive: true,
         status: 'active',
-      }),
-    );
+      });
+      const created = await repos.budgetHeadersRepo.create(input);
 
-    const found = await repos.budgetHeadersRepo.findActiveByPeriod(
-      '2026-07-01',
-      '2026-09-30',
-      TEST_TENANT_ID,
-    );
+      const found = await repos.budgetHeadersRepo.findActiveByPeriod(
+        '2026-06-01',
+        '2026-08-31',
+        TEST_TENANT_ID,
+      );
 
-    expect(found).toBeUndefined();
-  });
-
-  it('should exclude specified id from findActiveByPeriod', async () => {
-    const input = makeHeaderInput({
-      name: `EXCLUDE-${Date.now()}`,
-      periodStart: '2026-01-01',
-      periodEnd: '2026-12-31',
-      isActive: true,
-      status: 'active',
+      expect(found).toBeDefined();
+      expect(found!.id).toBe(created.id);
     });
-    const created = await repos.budgetHeadersRepo.create(input);
 
-    const found = await repos.budgetHeadersRepo.findActiveByPeriod(
-      '2026-06-01',
-      '2026-08-31',
-      TEST_TENANT_ID,
-      created.id,
-    );
+    it('should return undefined when no period overlap exists', async () => {
+      await repos.budgetHeadersRepo.create(
+        makeHeaderInput({
+          name: `NO-OVERLAP-${Date.now()}`,
+          periodStart: '2026-01-01',
+          periodEnd: '2026-03-31',
+          isActive: true,
+          status: 'active',
+        }),
+      );
 
-    expect(found).toBeUndefined();
-  });
+      const found = await repos.budgetHeadersRepo.findActiveByPeriod(
+        '2026-07-01',
+        '2026-09-30',
+        TEST_TENANT_ID,
+      );
 
-  it('should not find inactive budget headers via findActiveByPeriod', async () => {
-    await repos.budgetHeadersRepo.create(
-      makeHeaderInput({
-        name: `INACTIVE-${Date.now()}`,
+      expect(found).toBeUndefined();
+    });
+
+    it('should exclude specified id from findActiveByPeriod', async () => {
+      const input = makeHeaderInput({
+        name: `EXCLUDE-${Date.now()}`,
         periodStart: '2026-01-01',
         periodEnd: '2026-12-31',
-        isActive: false,
-        status: 'draft',
-      }),
-    );
+        isActive: true,
+        status: 'active',
+      });
+      const created = await repos.budgetHeadersRepo.create(input);
 
-    const found = await repos.budgetHeadersRepo.findActiveByPeriod(
-      '2026-06-01',
-      '2026-08-31',
-      TEST_TENANT_ID,
-    );
+      const found = await repos.budgetHeadersRepo.findActiveByPeriod(
+        '2026-06-01',
+        '2026-08-31',
+        TEST_TENANT_ID,
+        created.id,
+      );
 
-    expect(found).toBeUndefined();
+      expect(found).toBeUndefined();
+    });
+
+    it('should not find inactive budget headers via findActiveByPeriod', async () => {
+      await repos.budgetHeadersRepo.create(
+        makeHeaderInput({
+          name: `INACTIVE-${Date.now()}`,
+          periodStart: '2026-01-01',
+          periodEnd: '2026-12-31',
+          isActive: false,
+          status: 'draft',
+        }),
+      );
+
+      const found = await repos.budgetHeadersRepo.findActiveByPeriod(
+        '2026-06-01',
+        '2026-08-31',
+        TEST_TENANT_ID,
+      );
+
+      expect(found).toBeUndefined();
+    });
   });
 });
 
@@ -344,17 +358,17 @@ describe('budgetLinesRepo', () => {
   });
 
   it('should create many budget lines at once', async () => {
-    const prefix = `MANY-${Date.now()}`;
+    const suffix = Date.now().toString(16).slice(-8).padStart(8, '0');
     const lines = [
-      makeLineInput(headerId, `00000000-0000-0000-0000-${prefix}0001`, {
+      makeLineInput(headerId, `00000000-0000-0000-0000-${suffix}0001`, {
         description: 'Line A',
         budgetAmount: '5000.0000',
       }),
-      makeLineInput(headerId, `00000000-0000-0000-0000-${prefix}0002`, {
+      makeLineInput(headerId, `00000000-0000-0000-0000-${suffix}0002`, {
         description: 'Line B',
         budgetAmount: '3000.0000',
       }),
-      makeLineInput(headerId, `00000000-0000-0000-0000-${prefix}0003`, {
+      makeLineInput(headerId, `00000000-0000-0000-0000-${suffix}0003`, {
         description: 'Line C',
         budgetAmount: '2000.0000',
       }),
@@ -399,14 +413,14 @@ describe('budgetLinesRepo', () => {
   });
 
   it('should find budget lines by budget header id', async () => {
-    const prefix = `BYHEADER-${Date.now()}`;
+    const suffix = Date.now().toString(16).slice(-8).padStart(8, '0');
     await repos.budgetLinesRepo.create(
-      makeLineInput(headerId, `00000000-0000-0000-0000-${prefix}0001`, {
+      makeLineInput(headerId, `00000000-0000-0000-0000-${suffix}0001`, {
         description: 'HeaderFind A',
       }),
     );
     await repos.budgetLinesRepo.create(
-      makeLineInput(headerId, `00000000-0000-0000-0000-${prefix}0002`, {
+      makeLineInput(headerId, `00000000-0000-0000-0000-${suffix}0002`, {
         description: 'HeaderFind B',
       }),
     );
@@ -494,12 +508,12 @@ describe('budgetLinesRepo', () => {
     const header = await repos.budgetHeadersRepo.create(
       makeHeaderInput({ name: `DeleteByHeader-${Date.now()}` }),
     );
-    const prefix = `DELBY-${Date.now()}`;
+    const suffix = Date.now().toString(16).slice(-8).padStart(8, '0');
     await repos.budgetLinesRepo.createMany([
-      makeLineInput(header.id, `00000000-0000-0000-0000-${prefix}0001`, {
+      makeLineInput(header.id, `00000000-0000-0000-0000-${suffix}0001`, {
         description: 'Del A',
       }),
-      makeLineInput(header.id, `00000000-0000-0000-0000-${prefix}0002`, {
+      makeLineInput(header.id, `00000000-0000-0000-0000-${suffix}0002`, {
         description: 'Del B',
       }),
     ]);
@@ -514,15 +528,15 @@ describe('budgetLinesRepo', () => {
     const header = await repos.budgetHeadersRepo.create(
       makeHeaderInput({ name: `TotalTest-${Date.now()}` }),
     );
-    const prefix = `TOTAL-${Date.now()}`;
+    const suffix = Date.now().toString(16).slice(-8).padStart(8, '0');
     await repos.budgetLinesRepo.createMany([
-      makeLineInput(header.id, `00000000-0000-0000-0000-${prefix}0001`, {
+      makeLineInput(header.id, `00000000-0000-0000-0000-${suffix}0001`, {
         budgetAmount: '5000.0000',
       }),
-      makeLineInput(header.id, `00000000-0000-0000-0000-${prefix}0002`, {
+      makeLineInput(header.id, `00000000-0000-0000-0000-${suffix}0002`, {
         budgetAmount: '3000.0000',
       }),
-      makeLineInput(header.id, `00000000-0000-0000-0000-${prefix}0003`, {
+      makeLineInput(header.id, `00000000-0000-0000-0000-${suffix}0003`, {
         budgetAmount: '2000.0000',
       }),
     ]);

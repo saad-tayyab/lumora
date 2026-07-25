@@ -60,7 +60,6 @@ function makeCategory(overrides?: Record<string, unknown>) {
     name: `Category ${Date.now()}`,
     defaultDepreciationMethod: 'straight_line' as const,
     defaultUsefulLifeMonths: 60,
-    defaultSalvageValuePercent: '10',
     isDepreciable: true,
     isActive: true,
     ...overrides,
@@ -199,7 +198,7 @@ describe('Asset Repositories - Integration Tests', () => {
         const created = await assetCategoryRepo.create(makeCategory({ name: 'Defaults' }));
         expect(created[0].defaultDepreciationMethod).toBe('straight_line');
         expect(created[0].defaultUsefulLifeMonths).toBe(60);
-        expect(created[0].defaultSalvageValuePercent).toBe('0');
+        expect(created[0].defaultSalvageValuePercent).toBe('0.00');
       });
     });
 
@@ -591,7 +590,7 @@ describe('Asset Repositories - Integration Tests', () => {
         const updated = await depreciationScheduleRepo.update(scheduleId, {
           monthlyAmount: '2000',
         });
-        expect(updated[0].monthlyAmount).toBe('2000');
+        expect(updated[0].monthlyAmount).toBe('2000.0000');
         await depreciationScheduleRepo.update(scheduleId, { monthlyAmount: '1500' });
       });
     });
@@ -717,7 +716,7 @@ describe('Asset Repositories - Integration Tests', () => {
         const updated = await depreciationEntryRepo.update(created[0].id, {
           depreciationAmount: '2000',
         });
-        expect(updated[0].depreciationAmount).toBe('2000');
+        expect(updated[0].depreciationAmount).toBe('2000.0000');
       });
     });
   });
@@ -833,7 +832,7 @@ describe('Asset Repositories - Integration Tests', () => {
         const updated = await assetAdjustmentRepo.update(created[0].id, {
           adjustmentAmount: '10000',
         });
-        expect(updated[0].adjustmentAmount).toBe('10000');
+        expect(updated[0].adjustmentAmount).toBe('10000.0000');
       });
     });
   });

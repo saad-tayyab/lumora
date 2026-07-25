@@ -1,5 +1,5 @@
 import { describe, expect, it, vi, beforeAll, afterAll } from 'vitest';
-import { testDb, TEST_TENANT_ID } from '../../lib/integration-test-utils';
+import { testDb, TEST_TENANT_ID, TEST_USER_ID } from '../../lib/integration-test-utils';
 import * as schema from '@lumora/database/schema';
 import * as repos from './repo';
 import { eq } from 'drizzle-orm';
@@ -41,8 +41,9 @@ async function cleanupHrTestData(): Promise<void> {
 function makeDepartmentInput(overrides: Record<string, unknown> = {}) {
   return {
     tenantId: TEST_TENANT_ID,
+    createdBy: TEST_USER_ID,
     name: 'Engineering',
-    code: `DEPT-${Date.now()}-${Math.random().toString(36).slice(2, 6)}`,
+    code: `DEPT-${Math.random().toString(36).slice(2, 8)}`.slice(0, 20),
     status: 'active' as const,
     ...overrides,
   };
@@ -51,8 +52,9 @@ function makeDepartmentInput(overrides: Record<string, unknown> = {}) {
 function makeDesignationInput(overrides: Record<string, unknown> = {}) {
   return {
     tenantId: TEST_TENANT_ID,
+    createdBy: TEST_USER_ID,
     name: 'Software Engineer',
-    code: `DES-${Date.now()}-${Math.random().toString(36).slice(2, 6)}`,
+    code: `DES-${Math.random().toString(36).slice(2, 8)}`.slice(0, 20),
     level: 3,
     isActive: true,
     ...overrides,
@@ -66,6 +68,7 @@ function makeEmployeeInput(
 ) {
   return {
     tenantId: TEST_TENANT_ID,
+    createdBy: TEST_USER_ID,
     firstName: 'John',
     lastName: 'Doe',
     email: `emp-${Date.now()}-${Math.random().toString(36).slice(2, 6)}@test.com`,
@@ -81,6 +84,7 @@ function makeEmployeeInput(
 function makeAttendanceInput(employeeId: string, overrides: Record<string, unknown> = {}) {
   return {
     tenantId: TEST_TENANT_ID,
+    createdBy: TEST_USER_ID,
     employeeId,
     date: '2026-07-15',
     status: 'present' as const,
@@ -92,8 +96,9 @@ function makeAttendanceInput(employeeId: string, overrides: Record<string, unkno
 function makeLeaveTypeInput(overrides: Record<string, unknown> = {}) {
   return {
     tenantId: TEST_TENANT_ID,
+    createdBy: TEST_USER_ID,
     name: 'Annual Leave',
-    code: `LT-${Date.now()}-${Math.random().toString(36).slice(2, 6)}`,
+    code: `LT-${Math.random().toString(36).slice(2, 8)}`.slice(0, 20),
     daysPerYear: 20,
     isPaid: true,
     carryForward: false,
@@ -109,6 +114,7 @@ function makeLeaveRequestInput(
 ) {
   return {
     tenantId: TEST_TENANT_ID,
+    createdBy: TEST_USER_ID,
     employeeId,
     leaveTypeId,
     startDate: '2026-08-01',
@@ -122,6 +128,7 @@ function makeLeaveRequestInput(
 function makeSalaryInput(employeeId: string, overrides: Record<string, unknown> = {}) {
   return {
     tenantId: TEST_TENANT_ID,
+    createdBy: TEST_USER_ID,
     employeeId,
     basicSalary: '75000.0000',
     currency: 'USD',
@@ -135,6 +142,7 @@ function makeSalaryInput(employeeId: string, overrides: Record<string, unknown> 
 function makePayrollInput(employeeId: string, overrides: Record<string, unknown> = {}) {
   return {
     tenantId: TEST_TENANT_ID,
+    createdBy: TEST_USER_ID,
     employeeId,
     payPeriodStart: '2026-07-01',
     payPeriodEnd: '2026-07-31',
@@ -154,6 +162,7 @@ function makePayslipInput(
 ) {
   return {
     tenantId: TEST_TENANT_ID,
+    createdBy: TEST_USER_ID,
     employeeId,
     period,
     grossPay: '7000.0000',
@@ -648,7 +657,7 @@ describe('leaveTypeRepo', () => {
   });
 
   it('should find leave type by code and tenant', async () => {
-    const input = makeLeaveTypeInput({ name: 'Sick Leave', code: `SL-${Date.now()}` });
+    const input = makeLeaveTypeInput({ name: 'Sick Leave', code: `SL-${Date.now().toString().slice(-6)}`.slice(0, 20) });
     const [created] = await repos.leaveTypeRepo.create(input);
 
     const found = await repos.leaveTypeRepo.findByCode(TEST_TENANT_ID, created.code);
@@ -891,13 +900,7 @@ describe('salaryRepo', () => {
   });
 
   it('should soft delete a salary', async () => {
-    const input = makeSalaryInput(empId, {
-      basicSalary: '60000.0000',
-      effectiveDate: '2025-06-01',
-    });
-    const [created] = await repos.salaryRepo.create(input);
-
-    const deleted = await repos.salaryRepo.softDelete(created.id);
+    const deleted = await repos.salaryRepo.softDelete(salaryId);
     expect(deleted).toHaveLength(1);
     expect(deleted[0].deletedAt).not.toBeNull();
   });

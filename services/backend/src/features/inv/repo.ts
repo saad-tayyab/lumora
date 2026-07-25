@@ -91,11 +91,11 @@ export const itemCategoryRepo = {
   },
 
   async countItemsByCategory(categoryId: string): Promise<number> {
-    const [{ count }] = await db
-      .select({ count: count() })
+    const [{ cnt }] = await db
+      .select({ cnt: count() })
       .from(items)
       .where(eq(items.categoryId, categoryId));
-    return count;
+    return cnt;
   },
 
   async findMany(args?: { tenantId?: string; limit?: number; offset?: number; orderBy?: SQL }) {

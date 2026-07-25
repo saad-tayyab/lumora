@@ -130,6 +130,9 @@ describe('usersRepo', () => {
       const user = await usersRepo.findById(testUserId, TEST_TENANT_ID);
       expect(user).toBeUndefined();
 
+      // Hard-delete to allow re-creation with same email/username
+      await testDb.delete(users).where(eq(users.id, testUserId));
+
       // Re-create for subsequent tests
       const recreated = await usersRepo.create({
         email: 'alice@example.com',
@@ -264,9 +267,8 @@ describe('usersRepo', () => {
       });
       await usersRepo.softDelete(temp.id, TEST_TENANT_ID);
 
-      await expect(
-        usersRepo.update(temp.id, TEST_TENANT_ID, { name: 'Should Not Work' }),
-      ).rejects.toThrow();
+      const result = await usersRepo.update(temp.id, TEST_TENANT_ID, { name: 'Should Not Work' });
+      expect(result).toBeUndefined();
     });
   });
 
@@ -280,9 +282,11 @@ describe('usersRepo', () => {
       });
       await usersRepo.softDelete(temp.id, TEST_TENANT_ID);
 
-      const found = await testDb.query.users.findFirst({
-        where: eq(users.id, temp.id),
-      });
+      const [found] = await testDb
+        .select()
+        .from(users)
+        .where(eq(users.id, temp.id))
+        .limit(1);
       expect(found).toBeDefined();
       expect(found!.deletedAt).not.toBeNull();
     });
@@ -453,9 +457,11 @@ describe('rolesRepo', () => {
       });
       await rolesRepo.softDelete(temp.id, TEST_TENANT_ID);
 
-      const found = await testDb.query.roles.findFirst({
-        where: eq(roles.id, temp.id),
-      });
+      const [found] = await testDb
+        .select()
+        .from(roles)
+        .where(eq(roles.id, temp.id))
+        .limit(1);
       expect(found).toBeDefined();
       expect(found!.deletedAt).not.toBeNull();
     });
@@ -876,9 +882,11 @@ describe('sessionsRepo', () => {
     it('should set deletedAt on the session', async () => {
       await sessionsRepo.softDelete(testSessionId, TEST_TENANT_ID);
 
-      const found = await testDb.query.sessions.findFirst({
-        where: eq(sessions.id, testSessionId),
-      });
+      const [found] = await testDb
+        .select()
+        .from(sessions)
+        .where(eq(sessions.id, testSessionId))
+        .limit(1);
       expect(found).toBeDefined();
       expect(found!.deletedAt).not.toBeNull();
     });
@@ -911,9 +919,11 @@ describe('sessionsRepo', () => {
       expect(after.length).toBe(0);
 
       // Verify sessions exist but are soft-deleted
-      const raw = await testDb.query.sessions.findFirst({
-        where: eq(sessions.id, freshSession.id),
-      });
+      const [raw] = await testDb
+        .select()
+        .from(sessions)
+        .where(eq(sessions.id, freshSession.id))
+        .limit(1);
       expect(raw).toBeDefined();
       expect(raw!.deletedAt).not.toBeNull();
     });
@@ -931,9 +941,11 @@ describe('sessionsRepo', () => {
 
       await sessionsRepo.deleteAllForUser(testUserId, OTHER_TENANT_ID);
 
-      const found = await testDb.query.sessions.findFirst({
-        where: eq(sessions.id, otherSession.id),
-      });
+      const [found] = await testDb
+        .select()
+        .from(sessions)
+        .where(eq(sessions.id, otherSession.id))
+        .limit(1);
       expect(found).toBeDefined();
       expect(found!.deletedAt).not.toBeNull();
     });

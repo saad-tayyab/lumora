@@ -1,5 +1,5 @@
 import { describe, expect, it, vi, beforeAll, afterAll } from 'vitest';
-import { testDb, TEST_TENANT_ID } from '../../lib/integration-test-utils';
+import { testDb, TEST_TENANT_ID, TEST_USER_ID } from '../../lib/integration-test-utils';
 import * as schema from '@lumora/database/schema';
 import {
   unitOfMeasures,
@@ -71,6 +71,7 @@ function makeItemInput(
 ) {
   return {
     tenantId: TEST_TENANT_ID,
+    createdBy: TEST_USER_ID,
     sku: `SKU${Math.random().toString(36).slice(2, 6)}`.slice(0, 50),
     name: 'Test Item',
     description: 'A test item',
@@ -123,6 +124,7 @@ function makeStockMovementInput(
 ) {
   return {
     tenantId: TEST_TENANT_ID,
+    createdBy: TEST_USER_ID,
     itemId,
     warehouseId,
     movementType: 'inbound' as const,
@@ -173,7 +175,7 @@ describe('unitOfMeasureRepo', () => {
   });
 
   it('should find a unit of measure by code', async () => {
-    const input = makeUomInput({ code: `UOM-CODE-${Date.now()}` });
+    const input = makeUomInput({ code: `UOM-C${Date.now().toString().slice(-4)}`.slice(0, 10) });
     const [created] = await testDb.insert(unitOfMeasures).values(input).returning();
 
     const found = await unitOfMeasureRepo.findByCode(input.code);
@@ -249,7 +251,7 @@ describe('itemCategoryRepo', () => {
   });
 
   it('should find a category by tenant and code', async () => {
-    const input = makeCategoryInput({ code: `CAT-UNIQUE-${Date.now()}` });
+    const input = makeCategoryInput({ code: `CAT-U${Date.now().toString().slice(-8)}`.slice(0, 20) });
     const [created] = await itemCategoryRepo.create(input);
 
     const found = await itemCategoryRepo.findByCode(TEST_TENANT_ID, input.code);
@@ -300,7 +302,7 @@ describe('itemCategoryRepo', () => {
     // Create a UOM for items
     const [uom] = await testDb
       .insert(unitOfMeasures)
-      .values(makeUomInput({ code: `UOM-${prefix}` }))
+      .values(makeUomInput({ code: `UOM-CC${Date.now().toString().slice(-4)}`.slice(0, 10) }))
       .returning();
 
     await itemRepo.create(makeItemInput(category.id, uom.id, { name: `${prefix}-Item1` }));
@@ -334,10 +336,10 @@ describe('itemCategoryRepo', () => {
   });
 
   it('should find many categories with pagination', async () => {
-    const prefix = `CAT-PAGE-${Date.now()}`;
+    const prefix = `CAT-P${Date.now().toString().slice(-4)}`;
     for (let i = 0; i < 5; i++) {
       await itemCategoryRepo.create(
-        makeCategoryInput({ name: `${prefix}-${i}`, code: `${prefix}-${i}` }),
+        makeCategoryInput({ name: `${prefix}-${i}`, code: `${prefix}-${i}`.slice(0, 20) }),
       );
     }
 
@@ -360,9 +362,9 @@ describe('itemCategoryRepo', () => {
   });
 
   it('should filter categories by tenant', async () => {
-    const prefix = `CAT-TENANT-${Date.now()}`;
+    const prefix = `CAT-T${Date.now().toString().slice(-4)}`;
     await itemCategoryRepo.create(
-      makeCategoryInput({ name: `${prefix}-MINE`, code: `${prefix}-MINE` }),
+      makeCategoryInput({ name: `${prefix}-MINE`, code: `${prefix}`.slice(0, 20) }),
     );
 
     const filtered = await itemCategoryRepo.findMany({ tenantId: TEST_TENANT_ID });
@@ -383,11 +385,11 @@ describe('itemRepo', () => {
     await cleanupInvTestData();
     const [uom] = await testDb
       .insert(unitOfMeasures)
-      .values(makeUomInput({ code: `UOM-ITEM-${Date.now()}` }))
+      .values(makeUomInput({ code: `UOM-IT${Date.now().toString().slice(-4)}`.slice(0, 10) }))
       .returning();
     uomId = uom.id;
     const [cat] = await itemCategoryRepo.create(
-      makeCategoryInput({ code: `CAT-ITEM-${Date.now()}` }),
+      makeCategoryInput({ code: `CAT-IT${Date.now().toString().slice(-4)}`.slice(0, 20) }),
     );
     categoryId = cat.id;
   });
@@ -581,7 +583,7 @@ describe('warehouseRepo', () => {
   });
 
   it('should find a warehouse by tenant and code', async () => {
-    const input = makeWarehouseInput({ code: `WH-UNIQUE-${Date.now()}` });
+    const input = makeWarehouseInput({ code: `WH-U${Date.now().toString().slice(-8)}`.slice(0, 20) });
     const [created] = await warehouseRepo.create(input);
 
     const found = await warehouseRepo.findByCode(TEST_TENANT_ID, input.code);
@@ -630,10 +632,10 @@ describe('warehouseRepo', () => {
   });
 
   it('should find many warehouses with pagination', async () => {
-    const prefix = `WH-PAGE-${Date.now()}`;
+    const prefix = `WH-P${Date.now().toString().slice(-4)}`;
     for (let i = 0; i < 5; i++) {
       await warehouseRepo.create(
-        makeWarehouseInput({ name: `${prefix}-${i}`, code: `${prefix}-${i}` }),
+        makeWarehouseInput({ name: `${prefix}-${i}`, code: `${prefix}-${i}`.slice(0, 20) }),
       );
     }
 
@@ -656,9 +658,9 @@ describe('warehouseRepo', () => {
   });
 
   it('should filter warehouses by tenant', async () => {
-    const prefix = `WH-TENANT-${Date.now()}`;
+    const prefix = `WH-T${Date.now().toString().slice(-4)}`;
     await warehouseRepo.create(
-      makeWarehouseInput({ name: `${prefix}-MINE`, code: `${prefix}-MINE` }),
+      makeWarehouseInput({ name: `${prefix}-MINE`, code: `${prefix}`.slice(0, 20) }),
     );
 
     const filtered = await warehouseRepo.findMany({ tenantId: TEST_TENANT_ID });
@@ -682,22 +684,22 @@ describe('stockLevelRepo', () => {
 
     const [uom] = await testDb
       .insert(unitOfMeasures)
-      .values(makeUomInput({ code: `UOM-STOCK-${Date.now()}` }))
+      .values(makeUomInput({ code: `UOM-SK${Date.now().toString().slice(-4)}`.slice(0, 10) }))
       .returning();
     uomId = uom.id;
 
     const [cat] = await itemCategoryRepo.create(
-      makeCategoryInput({ code: `CAT-STOCK-${Date.now()}` }),
+      makeCategoryInput({ code: `CAT-SK${Date.now().toString().slice(-4)}`.slice(0, 20) }),
     );
     categoryId = cat.id;
 
     const [item] = await itemRepo.create(
-      makeItemInput(categoryId, uomId, { sku: `SKU-STOCK-${Date.now()}` }),
+      makeItemInput(categoryId, uomId, { sku: `SKU-STOCK-${Date.now()}`.slice(0, 50) }),
     );
     itemId = item.id;
 
     const [wh] = await warehouseRepo.create(
-      makeWarehouseInput({ code: `WH-STOCK-${Date.now()}` }),
+      makeWarehouseInput({ code: `WH-SK${Date.now().toString().slice(-4)}`.slice(0, 20) }),
     );
     warehouseId = wh.id;
   });
@@ -708,6 +710,7 @@ describe('stockLevelRepo', () => {
 
   it('should create a stock level via upsert and return it', async () => {
     const result = await stockLevelRepo.upsertByItemAndWarehouse(itemId, warehouseId, {
+      tenantId: TEST_TENANT_ID,
       quantityOnHand: 100,
       quantityAvailable: 100,
     });
@@ -720,6 +723,7 @@ describe('stockLevelRepo', () => {
 
   it('should find a stock level by id', async () => {
     const result = await stockLevelRepo.upsertByItemAndWarehouse(itemId, warehouseId, {
+      tenantId: TEST_TENANT_ID,
       quantityOnHand: 50,
     });
     const found = await stockLevelRepo.findById(result[0].id);
@@ -735,6 +739,7 @@ describe('stockLevelRepo', () => {
 
   it('should find stock level by item and warehouse', async () => {
     const result = await stockLevelRepo.upsertByItemAndWarehouse(itemId, warehouseId, {
+      tenantId: TEST_TENANT_ID,
       quantityOnHand: 75,
     });
 
@@ -762,10 +767,12 @@ describe('stockLevelRepo', () => {
 
   it('should upsert (update) an existing stock level', async () => {
     const [initial] = await stockLevelRepo.upsertByItemAndWarehouse(itemId, warehouseId, {
+      tenantId: TEST_TENANT_ID,
       quantityOnHand: 200,
     });
 
     const [updated] = await stockLevelRepo.upsertByItemAndWarehouse(itemId, warehouseId, {
+      tenantId: TEST_TENANT_ID,
       quantityOnHand: 300,
     });
 
@@ -807,22 +814,22 @@ describe('stockMovementRepo', () => {
 
     const [uom] = await testDb
       .insert(unitOfMeasures)
-      .values(makeUomInput({ code: `UOM-MOV-${Date.now()}` }))
+      .values(makeUomInput({ code: `UOM-MV${Date.now().toString().slice(-4)}`.slice(0, 10) }))
       .returning();
     uomId = uom.id;
 
     const [cat] = await itemCategoryRepo.create(
-      makeCategoryInput({ code: `CAT-MOV-${Date.now()}` }),
+      makeCategoryInput({ code: `CAT-MV${Date.now().toString().slice(-4)}`.slice(0, 20) }),
     );
     categoryId = cat.id;
 
     const [item] = await itemRepo.create(
-      makeItemInput(categoryId, uomId, { sku: `SKU-MOV-${Date.now()}` }),
+      makeItemInput(categoryId, uomId, { sku: `SKU-MOV-${Date.now()}`.slice(0, 50) }),
     );
     itemId = item.id;
 
     const [wh] = await warehouseRepo.create(
-      makeWarehouseInput({ code: `WH-MOV-${Date.now()}` }),
+      makeWarehouseInput({ code: `WH-MV${Date.now().toString().slice(-4)}`.slice(0, 20) }),
     );
     warehouseId = wh.id;
   });

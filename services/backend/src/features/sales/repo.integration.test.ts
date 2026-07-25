@@ -1,5 +1,5 @@
 import { describe, expect, it, vi, beforeAll, afterAll } from 'vitest';
-import { testDb, TEST_TENANT_ID } from '../../lib/integration-test-utils';
+import { testDb, TEST_TENANT_ID, TEST_USER_ID } from '../../lib/integration-test-utils';
 import * as schema from '@lumora/database/schema';
 import * as repos from './repo';
 import { eq } from 'drizzle-orm';
@@ -43,18 +43,17 @@ async function cleanupSalesTestData(): Promise<void> {
   await testDb.delete(schema.quotations).where(eq(schema.quotations.tenantId, TEST_TENANT_ID));
   await testDb.delete(schema.salesOrders).where(eq(schema.salesOrders.tenantId, TEST_TENANT_ID));
   await testDb.delete(schema.discountPolicies).where(eq(schema.discountPolicies.tenantId, TEST_TENANT_ID));
-  await testDb.delete(schema.items).where(eq(schema.items.tenantId, TEST_TENANT_ID));
-  await testDb.delete(schema.itemCategories).where(eq(schema.itemCategories.tenantId, TEST_TENANT_ID));
-  await testDb.delete(schema.unitOfMeasures);
-  await testDb.delete(schema.customers).where(eq(schema.customers.tenantId, TEST_TENANT_ID));
-
   await testDb.delete(schema.quotationLineItems).where(eq(schema.quotationLineItems.tenantId, OTHER_TENANT_ID));
   await testDb.delete(schema.salesOrderLineItems).where(eq(schema.salesOrderLineItems.tenantId, OTHER_TENANT_ID));
   await testDb.delete(schema.quotations).where(eq(schema.quotations.tenantId, OTHER_TENANT_ID));
   await testDb.delete(schema.salesOrders).where(eq(schema.salesOrders.tenantId, OTHER_TENANT_ID));
   await testDb.delete(schema.discountPolicies).where(eq(schema.discountPolicies.tenantId, OTHER_TENANT_ID));
+  await testDb.delete(schema.items).where(eq(schema.items.tenantId, TEST_TENANT_ID));
   await testDb.delete(schema.items).where(eq(schema.items.tenantId, OTHER_TENANT_ID));
+  await testDb.delete(schema.itemCategories).where(eq(schema.itemCategories.tenantId, TEST_TENANT_ID));
   await testDb.delete(schema.itemCategories).where(eq(schema.itemCategories.tenantId, OTHER_TENANT_ID));
+  await testDb.delete(schema.unitOfMeasures);
+  await testDb.delete(schema.customers).where(eq(schema.customers.tenantId, TEST_TENANT_ID));
   await testDb.delete(schema.customers).where(eq(schema.customers.tenantId, OTHER_TENANT_ID));
 }
 
@@ -106,6 +105,7 @@ async function seedPrerequisites(): Promise<void> {
       categoryId: cat.id,
       unitOfMeasureId: uom.id,
       isActive: true,
+      createdBy: TEST_USER_ID,
     })
     .returning();
 
@@ -143,6 +143,7 @@ async function seedPrerequisites(): Promise<void> {
       categoryId: otherCat.id,
       unitOfMeasureId: uom.id,
       isActive: true,
+      createdBy: TEST_USER_ID,
     })
     .returning();
 
@@ -436,7 +437,7 @@ describe('salesOrderLineItemsRepository', () => {
     expect(created.salesOrderId).toBe(salesOrderId);
     expect(created.itemId).toBe(itemId);
     expect(created.description).toBe('Widget A');
-    expect(created.quantity).toBe('10');
+    expect(created.quantity).toBe('10.00');
     expect(created.unitPrice).toBe('100.0000');
     expect(created.tenantId).toBe(TEST_TENANT_ID);
   });
@@ -518,7 +519,7 @@ describe('salesOrderLineItemsRepository', () => {
 
     expect(updated).toHaveLength(1);
     expect(updated[0].description).toBe('Updated Description');
-    expect(updated[0].quantity).toBe('20');
+    expect(updated[0].quantity).toBe('20.00');
   });
 
   it('should return empty array when updating non-existent line item', async () => {
@@ -860,7 +861,7 @@ describe('quotationLineItemsRepository', () => {
     expect(created.quotationId).toBe(quotationId);
     expect(created.itemId).toBe(itemId);
     expect(created.description).toBe('Quote Widget');
-    expect(created.quantity).toBe('5');
+    expect(created.quantity).toBe('5.00');
     expect(created.unitPrice).toBe('100.0000');
     expect(created.tenantId).toBe(TEST_TENANT_ID);
   });
@@ -942,7 +943,7 @@ describe('quotationLineItemsRepository', () => {
 
     expect(updated).toHaveLength(1);
     expect(updated[0].description).toBe('Updated Quote Line');
-    expect(updated[0].quantity).toBe('15');
+    expect(updated[0].quantity).toBe('15.00');
   });
 
   it('should return empty array when updating non-existent quotation line item', async () => {

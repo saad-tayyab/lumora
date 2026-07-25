@@ -140,9 +140,11 @@ describe('auditLogEntriesRepository', () => {
 
   it('should return paginated results with limit and offset', async () => {
     const prefix = `page-${Date.now()}`;
+    const baseTs = Date.now();
     for (let i = 0; i < 5; i++) {
+      const rid = `00000000-0000-0000-0000-${(baseTs + i).toString().slice(-12).padStart(12, '0')}`;
       await repos.auditLogEntriesRepository.create(
-        makeAuditEntry({ resource: prefix, resourceId: `res-${i}` }),
+        makeAuditEntry({ resource: prefix, resourceId: rid }),
         TEST_TENANT_ID,
       );
     }
@@ -343,6 +345,7 @@ describe('auditLogEntriesRepository', () => {
     const prefix = `combo-${Date.now()}`;
     const userId = `00000000-0000-0000-0000-${Date.now().toString().slice(-12).padStart(12, '0')}`;
     const resourceId = `00000000-0000-0000-0000-${(Date.now() + 5).toString().slice(-12).padStart(12, '0')}`;
+    const otherUserId = `00000000-0000-0000-0000-${(Date.now() + 3).toString().slice(-12).padStart(12, '0')}`;
 
     await repos.auditLogEntriesRepository.create(
       makeAuditEntry({ resource: prefix, action: 'create', userId, resourceId }),
@@ -353,7 +356,7 @@ describe('auditLogEntriesRepository', () => {
       TEST_TENANT_ID,
     );
     await repos.auditLogEntriesRepository.create(
-      makeAuditEntry({ resource: prefix, action: 'create', userId: 'other-user', resourceId }),
+      makeAuditEntry({ resource: prefix, action: 'create', userId: otherUserId, resourceId }),
       TEST_TENANT_ID,
     );
 
@@ -396,9 +399,11 @@ describe('auditLogEntriesRepository', () => {
   it('should return correct total count', async () => {
     const prefix = `count-${Date.now()}`;
     const count = 3;
+    const baseTs = Date.now();
     for (let i = 0; i < count; i++) {
+      const rid = `00000000-0000-0000-0000-${(baseTs + i).toString().slice(-12).padStart(12, '0')}`;
       await repos.auditLogEntriesRepository.create(
-        makeAuditEntry({ resource: prefix, resourceId: `res-${i}` }),
+        makeAuditEntry({ resource: prefix, resourceId: rid }),
         TEST_TENANT_ID,
       );
     }

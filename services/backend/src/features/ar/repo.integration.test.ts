@@ -589,7 +589,7 @@ describe('invoiceLineItemsRepository', () => {
     expect(created.id).toBeDefined();
     expect(created.invoiceId).toBe(invoiceId);
     expect(created.description).toBe('Service A');
-    expect(created.quantity).toBe('10');
+    expect(Number(created.quantity)).toBe(10);
     expect(created.tenantId).toBe(TEST_TENANT_ID);
   });
 
@@ -668,7 +668,7 @@ describe('invoiceLineItemsRepository', () => {
 
     expect(updated).toHaveLength(1);
     expect(updated[0].description).toBe('Updated Description');
-    expect(updated[0].quantity).toBe('20');
+    expect(Number(updated[0].quantity)).toBe(20);
   });
 
   it('should delete a line item by id', async () => {
