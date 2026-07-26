@@ -21,7 +21,7 @@ export function createAuth(db: any, schema?: Record<string, any>) {
         tenantId: {
           type: 'string',
           required: true,
-          defaultValue: 'default',
+          defaultValue: '00000000-0000-0000-0000-000000000001',
           input: false,
         },
         username: {

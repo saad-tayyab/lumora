@@ -65,8 +65,8 @@ import {
   roles,
   userRoles,
   sessions,
-  credentials,
-  oauthProviders,
+  account,
+  verification,
   mfaConfig,
   permissions,
 } from './auth/schema';
@@ -166,8 +166,8 @@ export const relations = defineRelations(
     roles,
     userRoles,
     sessions,
-    credentials,
-    oauthProviders,
+    account,
+    verification,
     mfaConfig,
     permissions,
     // Asset
@@ -395,8 +395,7 @@ export const relations = defineRelations(
     users: {
       roles: r.many.userRoles({ from: r.users.id, to: r.userRoles.userId }),
       sessions: r.many.sessions({ from: r.users.id, to: r.sessions.userId }),
-      credentials: r.many.credentials({ from: r.users.id, to: r.credentials.userId }),
-      oauthProviders: r.many.oauthProviders({ from: r.users.id, to: r.oauthProviders.userId }),
+      accounts: r.many.account({ from: r.users.id, to: r.account.userId }),
       mfaConfig: r.many.mfaConfig({ from: r.users.id, to: r.mfaConfig.userId }),
     },
     roles: {
@@ -410,12 +409,10 @@ export const relations = defineRelations(
     sessions: {
       user: r.one.users({ from: r.sessions.userId, to: r.users.id }),
     },
-    credentials: {
-      user: r.one.users({ from: r.credentials.userId, to: r.users.id }),
+    account: {
+      user: r.one.users({ from: r.account.userId, to: r.users.id }),
     },
-    oauthProviders: {
-      user: r.one.users({ from: r.oauthProviders.userId, to: r.users.id }),
-    },
+    verification: {},
     mfaConfig: {
       user: r.one.users({ from: r.mfaConfig.userId, to: r.users.id }),
     },

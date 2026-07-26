@@ -8,5 +8,6 @@ const DB = new SQLDatabase('lumora', {
   },
 });
 
-export const db = drizzle(DB.connectionString);
+// Pass auth schema so Drizzle's relational query API (used by Better Auth) works
+export const db = drizzle(DB.connectionString, { schema: authSchema });
 export { authSchema };

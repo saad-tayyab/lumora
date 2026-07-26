@@ -2,6 +2,11 @@ CREATE TYPE "bill_status" AS ENUM('draft', 'pending_approval', 'approved', 'part
 CREATE TYPE "credit_note_status" AS ENUM('draft', 'issued', 'applied', 'voided');--> statement-breakpoint
 CREATE TYPE "invoice_status" AS ENUM('draft', 'sent', 'paid', 'overdue', 'voided');--> statement-breakpoint
 CREATE TYPE "payment_method" AS ENUM('cash', 'check', 'bank_transfer', 'credit_card', 'online');--> statement-breakpoint
+CREATE TYPE "adjustment_direction" AS ENUM('increase', 'decrease');--> statement-breakpoint
+CREATE TYPE "asset_adjustment_type" AS ENUM('revaluation', 'impairment', 'restoration', 'transfer', 'reclassification');--> statement-breakpoint
+CREATE TYPE "asset_status" AS ENUM('active', 'fully_depreciated', 'disposed', 'under_construction');--> statement-breakpoint
+CREATE TYPE "depreciation_entry_status" AS ENUM('draft', 'posted', 'voided');--> statement-breakpoint
+CREATE TYPE "depreciation_method" AS ENUM('straight_line', 'declining_balance', 'units_of_activity', 'sum_of_years_digits');--> statement-breakpoint
 CREATE TYPE "bank_account_status" AS ENUM('active', 'inactive', 'frozen', 'closed');--> statement-breakpoint
 CREATE TYPE "bank_account_type" AS ENUM('checking', 'savings', 'money_market', 'credit_line');--> statement-breakpoint
 CREATE TYPE "connection_status" AS ENUM('active', 'expired', 'error', 'disabled');--> statement-breakpoint
@@ -29,6 +34,8 @@ CREATE TYPE "po_status" AS ENUM('draft', 'pending_approval', 'approved', 'partia
 CREATE TYPE "receiving_report_status" AS ENUM('draft', 'confirmed', 'rejected');--> statement-breakpoint
 CREATE TYPE "quotation_status" AS ENUM('draft', 'sent', 'accepted', 'rejected', 'expired', 'cancelled');--> statement-breakpoint
 CREATE TYPE "sales_order_status" AS ENUM('draft', 'confirmed', 'processing', 'shipped', 'delivered', 'cancelled', 'closed');--> statement-breakpoint
+CREATE TYPE "tax_posting_rule" AS ENUM('output_liability', 'input_asset', 'expense');--> statement-breakpoint
+CREATE TYPE "tax_type" AS ENUM('sales_tax', 'vat', 'gst', 'excise', 'withholding');--> statement-breakpoint
 CREATE TABLE "ai_models" (
 	"id" uuid PRIMARY KEY,
 	"name" varchar(200) NOT NULL,
@@ -161,7 +168,7 @@ CREATE TABLE "payment_schedules" (
 	"bill_id" uuid NOT NULL,
 	"due_date" timestamp NOT NULL,
 	"amount" numeric(19,4) NOT NULL,
-	"status" varchar DEFAULT 'pending' NOT NULL
+	"status" varchar(20) DEFAULT 'pending' NOT NULL
 );
 --> statement-breakpoint
 CREATE TABLE "vendor_payments" (
@@ -174,8 +181,8 @@ CREATE TABLE "vendor_payments" (
 	"bill_id" uuid,
 	"amount" numeric(19,4) NOT NULL,
 	"payment_date" timestamp NOT NULL,
-	"payment_method" varchar NOT NULL,
-	"reference_number" varchar,
+	"payment_method" varchar(50) NOT NULL,
+	"reference_number" varchar(100),
 	"bank_account_id" uuid,
 	"currency" varchar(3) DEFAULT 'USD' NOT NULL,
 	"notes" text
@@ -305,26 +312,126 @@ CREATE TABLE "payments" (
 	"notes" text
 );
 --> statement-breakpoint
-CREATE TABLE "audit_log" (
-	"id" uuid PRIMARY KEY,
-	"created_at" timestamp DEFAULT now() NOT NULL,
-	"user_id" uuid,
-	"tenant_id" uuid NOT NULL,
-	"action" varchar NOT NULL,
-	"resource" varchar NOT NULL,
-	"resource_id" uuid,
-	"metadata" json,
-	"ip_address" varchar
-);
---> statement-breakpoint
-CREATE TABLE "credentials" (
+CREATE TABLE "asset_adjustments" (
 	"id" uuid PRIMARY KEY,
 	"created_at" timestamp DEFAULT now() NOT NULL,
 	"updated_at" timestamp DEFAULT now() NOT NULL,
 	"tenant_id" uuid NOT NULL,
+	"asset_id" uuid NOT NULL,
+	"adjustment_type" "asset_adjustment_type" NOT NULL,
+	"adjustment_date" date NOT NULL,
+	"adjustment_amount" numeric(19,4) NOT NULL,
+	"direction" "adjustment_direction" NOT NULL,
+	"journal_entry_id" uuid,
+	"description" text NOT NULL,
+	"revised_useful_life_months" integer,
+	"revised_salvage_value" numeric(19,4),
+	"status" "depreciation_entry_status" DEFAULT 'draft'::"depreciation_entry_status" NOT NULL,
+	"created_by" uuid NOT NULL
+);
+--> statement-breakpoint
+CREATE TABLE "asset_categories" (
+	"id" uuid PRIMARY KEY,
+	"created_at" timestamp DEFAULT now() NOT NULL,
+	"updated_at" timestamp DEFAULT now() NOT NULL,
+	"tenant_id" uuid NOT NULL,
+	"deleted_at" timestamp,
+	"name" varchar(100) NOT NULL,
+	"code" varchar(20) NOT NULL,
+	"description" text,
+	"default_depreciation_method" "depreciation_method" DEFAULT 'straight_line'::"depreciation_method" NOT NULL,
+	"default_useful_life_months" integer DEFAULT 60 NOT NULL,
+	"default_salvage_value_percent" numeric(5,2) DEFAULT '0' NOT NULL,
+	"is_depreciable" boolean DEFAULT true NOT NULL,
+	"gl_account_id" uuid,
+	"is_active" boolean DEFAULT true NOT NULL
+);
+--> statement-breakpoint
+CREATE TABLE "depreciation_entries" (
+	"id" uuid PRIMARY KEY,
+	"created_at" timestamp DEFAULT now() NOT NULL,
+	"updated_at" timestamp DEFAULT now() NOT NULL,
+	"tenant_id" uuid NOT NULL,
+	"asset_id" uuid NOT NULL,
+	"schedule_id" uuid,
+	"period_start_date" date NOT NULL,
+	"period_end_date" date NOT NULL,
+	"depreciation_amount" numeric(19,4) NOT NULL,
+	"accumulated_depreciation" numeric(19,4) NOT NULL,
+	"net_book_value" numeric(19,4) NOT NULL,
+	"journal_entry_id" uuid,
+	"status" "depreciation_entry_status" DEFAULT 'draft'::"depreciation_entry_status" NOT NULL,
+	"created_by" uuid NOT NULL
+);
+--> statement-breakpoint
+CREATE TABLE "depreciation_schedules" (
+	"id" uuid PRIMARY KEY,
+	"created_at" timestamp DEFAULT now() NOT NULL,
+	"updated_at" timestamp DEFAULT now() NOT NULL,
+	"tenant_id" uuid NOT NULL,
+	"asset_id" uuid NOT NULL,
+	"start_date" date NOT NULL,
+	"end_date" date NOT NULL,
+	"total_depreciable_cost" numeric(19,4) NOT NULL,
+	"monthly_amount" numeric(19,4) NOT NULL,
+	"method" "depreciation_method" NOT NULL,
+	"status" varchar(20) DEFAULT 'active' NOT NULL
+);
+--> statement-breakpoint
+CREATE TABLE "fixed_assets" (
+	"id" uuid PRIMARY KEY,
+	"created_at" timestamp DEFAULT now() NOT NULL,
+	"updated_at" timestamp DEFAULT now() NOT NULL,
+	"tenant_id" uuid NOT NULL,
+	"deleted_at" timestamp,
+	"name" varchar(200) NOT NULL,
+	"asset_number" varchar(50) NOT NULL,
+	"description" text,
+	"category_id" uuid NOT NULL,
+	"acquisition_date" date NOT NULL,
+	"acquisition_cost" numeric(19,4) DEFAULT '0' NOT NULL,
+	"salvage_value" numeric(19,4) DEFAULT '0' NOT NULL,
+	"useful_life_months" integer DEFAULT 60 NOT NULL,
+	"depreciation_method" "depreciation_method" DEFAULT 'straight_line'::"depreciation_method" NOT NULL,
+	"status" "asset_status" DEFAULT 'active'::"asset_status" NOT NULL,
+	"accumulated_depreciation" numeric(19,4) DEFAULT '0' NOT NULL,
+	"net_book_value" numeric(19,4) DEFAULT '0' NOT NULL,
+	"gl_account_id" uuid,
+	"is_depreciable" boolean DEFAULT true NOT NULL,
+	"disposal_date" date,
+	"disposal_proceeds" numeric(19,4),
+	"created_by" uuid NOT NULL
+);
+--> statement-breakpoint
+CREATE TABLE "audit_log_entries" (
+	"id" uuid PRIMARY KEY,
+	"created_at" timestamp DEFAULT now() NOT NULL,
+	"user_id" uuid,
+	"tenant_id" uuid NOT NULL,
+	"action" varchar(100) NOT NULL,
+	"resource" varchar(100) NOT NULL,
+	"resource_id" uuid,
+	"old_values" json,
+	"new_values" json,
+	"ip_address" varchar(45),
+	"user_agent" varchar(500),
+	"metadata" json
+);
+--> statement-breakpoint
+CREATE TABLE "account" (
+	"id" uuid PRIMARY KEY,
+	"account_id" varchar(255) NOT NULL,
+	"provider_id" varchar(255) NOT NULL,
 	"user_id" uuid NOT NULL,
-	"password_hash" varchar NOT NULL,
-	"provider" varchar DEFAULT 'email' NOT NULL
+	"access_token" text,
+	"refresh_token" text,
+	"id_token" text,
+	"access_token_expires_at" timestamp,
+	"refresh_token_expires_at" timestamp,
+	"scope" text,
+	"password" text,
+	"created_at" timestamp DEFAULT now() NOT NULL,
+	"updated_at" timestamp DEFAULT now() NOT NULL
 );
 --> statement-breakpoint
 CREATE TABLE "mfa_config" (
@@ -333,21 +440,9 @@ CREATE TABLE "mfa_config" (
 	"updated_at" timestamp DEFAULT now() NOT NULL,
 	"tenant_id" uuid NOT NULL,
 	"user_id" uuid NOT NULL UNIQUE,
-	"secret" varchar NOT NULL,
+	"secret" varchar(255) NOT NULL,
 	"enabled" boolean DEFAULT false NOT NULL,
 	"backup_codes" text
-);
---> statement-breakpoint
-CREATE TABLE "oauth_providers" (
-	"id" uuid PRIMARY KEY,
-	"created_at" timestamp DEFAULT now() NOT NULL,
-	"updated_at" timestamp DEFAULT now() NOT NULL,
-	"tenant_id" uuid NOT NULL,
-	"user_id" uuid NOT NULL,
-	"provider" varchar NOT NULL,
-	"provider_id" varchar NOT NULL,
-	"access_token" varchar,
-	"refresh_token" varchar
 );
 --> statement-breakpoint
 CREATE TABLE "permissions" (
@@ -356,8 +451,8 @@ CREATE TABLE "permissions" (
 	"updated_at" timestamp DEFAULT now() NOT NULL,
 	"tenant_id" uuid NOT NULL,
 	"role_id" uuid NOT NULL,
-	"resource" varchar NOT NULL,
-	"action" varchar NOT NULL
+	"resource" varchar(100) NOT NULL,
+	"action" varchar(100) NOT NULL
 );
 --> statement-breakpoint
 CREATE TABLE "roles" (
@@ -378,9 +473,9 @@ CREATE TABLE "sessions" (
 	"tenant_id" uuid NOT NULL,
 	"deleted_at" timestamp,
 	"user_id" uuid NOT NULL,
-	"token" varchar NOT NULL UNIQUE,
-	"ip_address" varchar,
-	"user_agent" varchar,
+	"token" varchar(255) NOT NULL UNIQUE,
+	"ip_address" varchar(45),
+	"user_agent" varchar(500),
 	"expires_at" timestamp NOT NULL
 );
 --> statement-breakpoint
@@ -400,10 +495,61 @@ CREATE TABLE "users" (
 	"tenant_id" uuid NOT NULL,
 	"email" varchar(255) NOT NULL,
 	"name" varchar(100) NOT NULL,
-	"username" varchar(50) NOT NULL,
+	"image" text,
+	"username" varchar(50) DEFAULT '' NOT NULL,
 	"status" varchar(20) DEFAULT 'active' NOT NULL,
 	"email_verified" boolean DEFAULT false NOT NULL,
 	"mfa_enabled" boolean DEFAULT false NOT NULL
+);
+--> statement-breakpoint
+CREATE TABLE "verification" (
+	"id" text PRIMARY KEY,
+	"identifier" text NOT NULL,
+	"value" text NOT NULL,
+	"expires_at" timestamp NOT NULL,
+	"created_at" timestamp DEFAULT now() NOT NULL,
+	"updated_at" timestamp DEFAULT now() NOT NULL
+);
+--> statement-breakpoint
+CREATE TABLE "budget_consumptions" (
+	"id" uuid PRIMARY KEY,
+	"created_at" timestamp DEFAULT now() NOT NULL,
+	"updated_at" timestamp DEFAULT now() NOT NULL,
+	"tenant_id" uuid NOT NULL,
+	"budget_line_id" uuid NOT NULL,
+	"journal_entry_id" uuid,
+	"amount" numeric(19,4) NOT NULL,
+	"description" text,
+	"consumption_date" date NOT NULL
+);
+--> statement-breakpoint
+CREATE TABLE "budget_headers" (
+	"id" uuid PRIMARY KEY,
+	"created_at" timestamp DEFAULT now() NOT NULL,
+	"updated_at" timestamp DEFAULT now() NOT NULL,
+	"tenant_id" uuid NOT NULL,
+	"deleted_at" timestamp,
+	"name" varchar(100) NOT NULL,
+	"description" text,
+	"period_start" date NOT NULL,
+	"period_end" date NOT NULL,
+	"total_amount" numeric(19,4) DEFAULT '0' NOT NULL,
+	"status" varchar(20) DEFAULT 'draft' NOT NULL,
+	"is_active" boolean DEFAULT true NOT NULL
+);
+--> statement-breakpoint
+CREATE TABLE "budget_lines" (
+	"id" uuid PRIMARY KEY,
+	"created_at" timestamp DEFAULT now() NOT NULL,
+	"updated_at" timestamp DEFAULT now() NOT NULL,
+	"tenant_id" uuid NOT NULL,
+	"budget_header_id" uuid NOT NULL,
+	"gl_account_id" uuid NOT NULL,
+	"description" varchar(200),
+	"budget_amount" numeric(19,4) DEFAULT '0' NOT NULL,
+	"consumed_amount" numeric(19,4) DEFAULT '0' NOT NULL,
+	"variance_amount" numeric(19,4) DEFAULT '0' NOT NULL,
+	"is_active" boolean DEFAULT true NOT NULL
 );
 --> statement-breakpoint
 CREATE TABLE "bank_accounts" (
@@ -536,10 +682,10 @@ CREATE TABLE "fiscal_years" (
 	"updated_at" timestamp DEFAULT now() NOT NULL,
 	"tenant_id" uuid NOT NULL,
 	"deleted_at" timestamp,
-	"name" varchar NOT NULL,
+	"name" varchar(100) NOT NULL,
 	"start_date" timestamp NOT NULL,
 	"end_date" timestamp NOT NULL,
-	"status" varchar DEFAULT 'open' NOT NULL
+	"status" varchar(20) DEFAULT 'open' NOT NULL
 );
 --> statement-breakpoint
 CREATE TABLE "journal_entries" (
@@ -688,7 +834,7 @@ CREATE TABLE "payslips" (
 	"tenant_id" uuid NOT NULL,
 	"employee_id" uuid NOT NULL,
 	"payroll_id" uuid,
-	"period" varchar NOT NULL,
+	"period" varchar(50) NOT NULL,
 	"gross_pay" numeric(19,4) NOT NULL,
 	"deductions" numeric(19,4) DEFAULT '0' NOT NULL,
 	"net_pay" numeric(19,4) NOT NULL,
@@ -1087,6 +1233,53 @@ CREATE TABLE "sales_orders" (
 	"notes" text
 );
 --> statement-breakpoint
+CREATE TABLE "tax_auto_assignment_rules" (
+	"id" uuid PRIMARY KEY,
+	"created_at" timestamp DEFAULT now() NOT NULL,
+	"updated_at" timestamp DEFAULT now() NOT NULL,
+	"tenant_id" uuid NOT NULL,
+	"deleted_at" timestamp,
+	"name" varchar(100) NOT NULL,
+	"description" text,
+	"priority" integer DEFAULT 0 NOT NULL,
+	"tax_code_id" uuid NOT NULL,
+	"entity_type" varchar(50) NOT NULL,
+	"entity_category_id" uuid,
+	"customer_group_id" uuid,
+	"item_category_id" uuid,
+	"region_code" varchar(10),
+	"is_active" boolean DEFAULT true NOT NULL
+);
+--> statement-breakpoint
+CREATE TABLE "tax_codes" (
+	"id" uuid PRIMARY KEY,
+	"created_at" timestamp DEFAULT now() NOT NULL,
+	"updated_at" timestamp DEFAULT now() NOT NULL,
+	"tenant_id" uuid NOT NULL,
+	"deleted_at" timestamp,
+	"code" varchar(20) NOT NULL,
+	"name" varchar(100) NOT NULL,
+	"type" "tax_type" NOT NULL,
+	"gl_account_id" uuid NOT NULL,
+	"is_claimable" boolean DEFAULT false NOT NULL,
+	"posting_rule" "tax_posting_rule" DEFAULT 'output_liability'::"tax_posting_rule" NOT NULL,
+	"is_active" boolean DEFAULT true NOT NULL,
+	"description" text
+);
+--> statement-breakpoint
+CREATE TABLE "tax_rates" (
+	"id" uuid PRIMARY KEY,
+	"created_at" timestamp DEFAULT now() NOT NULL,
+	"updated_at" timestamp DEFAULT now() NOT NULL,
+	"tenant_id" uuid NOT NULL,
+	"tax_code_id" uuid NOT NULL,
+	"rate" numeric(7,4) NOT NULL,
+	"effective_date" date NOT NULL,
+	"expiry_date" date,
+	"description" text,
+	"is_active" boolean DEFAULT true NOT NULL
+);
+--> statement-breakpoint
 CREATE INDEX "idx_ai_models_tenant_id" ON "ai_models" ("tenant_id");--> statement-breakpoint
 CREATE INDEX "idx_ai_models_status" ON "ai_models" ("status");--> statement-breakpoint
 CREATE INDEX "idx_ai_models_model_type" ON "ai_models" ("model_type");--> statement-breakpoint
@@ -1131,18 +1324,39 @@ CREATE INDEX "idx_payment_applications_invoice_id" ON "payment_applications" ("i
 CREATE INDEX "idx_payments_customer_id" ON "payments" ("customer_id");--> statement-breakpoint
 CREATE INDEX "idx_payments_payment_date" ON "payments" ("payment_date");--> statement-breakpoint
 CREATE INDEX "idx_payments_payment_method" ON "payments" ("payment_method");--> statement-breakpoint
-CREATE INDEX "audit_log_user_id_idx" ON "audit_log" ("user_id");--> statement-breakpoint
-CREATE INDEX "audit_log_action_idx" ON "audit_log" ("action");--> statement-breakpoint
-CREATE INDEX "audit_log_created_at_idx" ON "audit_log" ("created_at");--> statement-breakpoint
-CREATE INDEX "credentials_user_id_idx" ON "credentials" ("user_id");--> statement-breakpoint
-CREATE UNIQUE INDEX "oauth_providers_provider_provider_id_unique" ON "oauth_providers" ("provider","provider_id");--> statement-breakpoint
-CREATE INDEX "oauth_providers_user_id_idx" ON "oauth_providers" ("user_id");--> statement-breakpoint
+CREATE INDEX "idx_asset_adjustments_asset_id" ON "asset_adjustments" ("asset_id");--> statement-breakpoint
+CREATE INDEX "idx_asset_adjustments_tenant_id" ON "asset_adjustments" ("tenant_id");--> statement-breakpoint
+CREATE INDEX "idx_asset_categories_tenant_id" ON "asset_categories" ("tenant_id");--> statement-breakpoint
+CREATE INDEX "idx_asset_categories_code" ON "asset_categories" ("code");--> statement-breakpoint
+CREATE INDEX "idx_depreciation_entries_asset_id" ON "depreciation_entries" ("asset_id");--> statement-breakpoint
+CREATE INDEX "idx_depreciation_entries_schedule_id" ON "depreciation_entries" ("schedule_id");--> statement-breakpoint
+CREATE INDEX "idx_depreciation_entries_tenant_id" ON "depreciation_entries" ("tenant_id");--> statement-breakpoint
+CREATE INDEX "idx_depreciation_entries_status" ON "depreciation_entries" ("status");--> statement-breakpoint
+CREATE INDEX "idx_depreciation_schedules_asset_id" ON "depreciation_schedules" ("asset_id");--> statement-breakpoint
+CREATE INDEX "idx_depreciation_schedules_tenant_id" ON "depreciation_schedules" ("tenant_id");--> statement-breakpoint
+CREATE INDEX "idx_fixed_assets_tenant_id" ON "fixed_assets" ("tenant_id");--> statement-breakpoint
+CREATE INDEX "idx_fixed_assets_category_id" ON "fixed_assets" ("category_id");--> statement-breakpoint
+CREATE INDEX "idx_fixed_assets_status" ON "fixed_assets" ("status");--> statement-breakpoint
+CREATE INDEX "idx_fixed_assets_asset_number" ON "fixed_assets" ("asset_number");--> statement-breakpoint
+CREATE INDEX "idx_audit_log_entries_tenant_id" ON "audit_log_entries" ("tenant_id");--> statement-breakpoint
+CREATE INDEX "idx_audit_log_entries_user_id" ON "audit_log_entries" ("user_id");--> statement-breakpoint
+CREATE INDEX "idx_audit_log_entries_resource_resource_id" ON "audit_log_entries" ("resource","resource_id");--> statement-breakpoint
+CREATE INDEX "idx_audit_log_entries_action" ON "audit_log_entries" ("action");--> statement-breakpoint
+CREATE INDEX "idx_audit_log_entries_created_at" ON "audit_log_entries" ("created_at");--> statement-breakpoint
 CREATE UNIQUE INDEX "permissions_role_id_resource_action_unique" ON "permissions" ("role_id","resource","action");--> statement-breakpoint
 CREATE UNIQUE INDEX "roles_tenant_id_name_unique" ON "roles" ("tenant_id","name");--> statement-breakpoint
 CREATE INDEX "sessions_user_id_idx" ON "sessions" ("user_id");--> statement-breakpoint
 CREATE UNIQUE INDEX "user_roles_user_id_role_id_unique" ON "user_roles" ("user_id","role_id");--> statement-breakpoint
 CREATE UNIQUE INDEX "users_email_unique" ON "users" ("email");--> statement-breakpoint
 CREATE UNIQUE INDEX "users_username_unique" ON "users" ("username");--> statement-breakpoint
+CREATE INDEX "idx_budget_consumptions_budget_line_id" ON "budget_consumptions" ("budget_line_id");--> statement-breakpoint
+CREATE INDEX "idx_budget_consumptions_tenant_id" ON "budget_consumptions" ("tenant_id");--> statement-breakpoint
+CREATE INDEX "idx_budget_headers_tenant_id" ON "budget_headers" ("tenant_id");--> statement-breakpoint
+CREATE INDEX "idx_budget_headers_period_start" ON "budget_headers" ("period_start");--> statement-breakpoint
+CREATE INDEX "idx_budget_headers_status" ON "budget_headers" ("status");--> statement-breakpoint
+CREATE INDEX "idx_budget_lines_budget_header_id" ON "budget_lines" ("budget_header_id");--> statement-breakpoint
+CREATE INDEX "idx_budget_lines_gl_account_id" ON "budget_lines" ("gl_account_id");--> statement-breakpoint
+CREATE INDEX "idx_budget_lines_tenant_id" ON "budget_lines" ("tenant_id");--> statement-breakpoint
 CREATE INDEX "idx_bank_accounts_tenant_id" ON "bank_accounts" ("tenant_id");--> statement-breakpoint
 CREATE INDEX "idx_bank_accounts_account_number" ON "bank_accounts" ("account_number");--> statement-breakpoint
 CREATE INDEX "idx_bank_accounts_status" ON "bank_accounts" ("status");--> statement-breakpoint
@@ -1260,6 +1474,14 @@ CREATE INDEX "idx_sales_order_line_items_item_id" ON "sales_order_line_items" ("
 CREATE INDEX "idx_sales_orders_customer_id" ON "sales_orders" ("customer_id");--> statement-breakpoint
 CREATE INDEX "idx_sales_orders_status" ON "sales_orders" ("status");--> statement-breakpoint
 CREATE INDEX "idx_sales_orders_order_date" ON "sales_orders" ("order_date");--> statement-breakpoint
+CREATE INDEX "idx_tax_auto_assignment_rules_tenant_id" ON "tax_auto_assignment_rules" ("tenant_id");--> statement-breakpoint
+CREATE INDEX "idx_tax_auto_assignment_rules_priority" ON "tax_auto_assignment_rules" ("priority");--> statement-breakpoint
+CREATE INDEX "idx_tax_codes_tenant_id" ON "tax_codes" ("tenant_id");--> statement-breakpoint
+CREATE INDEX "idx_tax_codes_code" ON "tax_codes" ("code");--> statement-breakpoint
+CREATE INDEX "idx_tax_codes_type" ON "tax_codes" ("type");--> statement-breakpoint
+CREATE INDEX "idx_tax_rates_tax_code_id" ON "tax_rates" ("tax_code_id");--> statement-breakpoint
+CREATE INDEX "idx_tax_rates_effective_date" ON "tax_rates" ("effective_date");--> statement-breakpoint
+CREATE INDEX "idx_tax_rates_tenant_id" ON "tax_rates" ("tenant_id");--> statement-breakpoint
 ALTER TABLE "ai_models" ADD CONSTRAINT "ai_models_training_data_id_training_data_id_fkey" FOREIGN KEY ("training_data_id") REFERENCES "training_data"("id");--> statement-breakpoint
 ALTER TABLE "anomaly_detections" ADD CONSTRAINT "anomaly_detections_model_id_ai_models_id_fkey" FOREIGN KEY ("model_id") REFERENCES "ai_models"("id");--> statement-breakpoint
 ALTER TABLE "predictions" ADD CONSTRAINT "predictions_model_id_ai_models_id_fkey" FOREIGN KEY ("model_id") REFERENCES "ai_models"("id");--> statement-breakpoint
@@ -1276,14 +1498,19 @@ ALTER TABLE "payment_applications" ADD CONSTRAINT "payment_applications_payment_
 ALTER TABLE "payment_applications" ADD CONSTRAINT "payment_applications_invoice_id_invoices_id_fkey" FOREIGN KEY ("invoice_id") REFERENCES "invoices"("id");--> statement-breakpoint
 ALTER TABLE "payments" ADD CONSTRAINT "payments_customer_id_customers_id_fkey" FOREIGN KEY ("customer_id") REFERENCES "customers"("id");--> statement-breakpoint
 ALTER TABLE "payments" ADD CONSTRAINT "payments_bank_account_id_bank_accounts_id_fkey" FOREIGN KEY ("bank_account_id") REFERENCES "bank_accounts"("id");--> statement-breakpoint
-ALTER TABLE "audit_log" ADD CONSTRAINT "audit_log_user_id_users_id_fkey" FOREIGN KEY ("user_id") REFERENCES "users"("id");--> statement-breakpoint
-ALTER TABLE "credentials" ADD CONSTRAINT "credentials_user_id_users_id_fkey" FOREIGN KEY ("user_id") REFERENCES "users"("id");--> statement-breakpoint
+ALTER TABLE "asset_adjustments" ADD CONSTRAINT "asset_adjustments_asset_id_fixed_assets_id_fkey" FOREIGN KEY ("asset_id") REFERENCES "fixed_assets"("id");--> statement-breakpoint
+ALTER TABLE "depreciation_entries" ADD CONSTRAINT "depreciation_entries_asset_id_fixed_assets_id_fkey" FOREIGN KEY ("asset_id") REFERENCES "fixed_assets"("id");--> statement-breakpoint
+ALTER TABLE "depreciation_entries" ADD CONSTRAINT "depreciation_entries_schedule_id_depreciation_schedules_id_fkey" FOREIGN KEY ("schedule_id") REFERENCES "depreciation_schedules"("id");--> statement-breakpoint
+ALTER TABLE "depreciation_schedules" ADD CONSTRAINT "depreciation_schedules_asset_id_fixed_assets_id_fkey" FOREIGN KEY ("asset_id") REFERENCES "fixed_assets"("id");--> statement-breakpoint
+ALTER TABLE "fixed_assets" ADD CONSTRAINT "fixed_assets_category_id_asset_categories_id_fkey" FOREIGN KEY ("category_id") REFERENCES "asset_categories"("id");--> statement-breakpoint
+ALTER TABLE "account" ADD CONSTRAINT "account_user_id_users_id_fkey" FOREIGN KEY ("user_id") REFERENCES "users"("id") ON DELETE CASCADE;--> statement-breakpoint
 ALTER TABLE "mfa_config" ADD CONSTRAINT "mfa_config_user_id_users_id_fkey" FOREIGN KEY ("user_id") REFERENCES "users"("id");--> statement-breakpoint
-ALTER TABLE "oauth_providers" ADD CONSTRAINT "oauth_providers_user_id_users_id_fkey" FOREIGN KEY ("user_id") REFERENCES "users"("id");--> statement-breakpoint
 ALTER TABLE "permissions" ADD CONSTRAINT "permissions_role_id_roles_id_fkey" FOREIGN KEY ("role_id") REFERENCES "roles"("id");--> statement-breakpoint
 ALTER TABLE "sessions" ADD CONSTRAINT "sessions_user_id_users_id_fkey" FOREIGN KEY ("user_id") REFERENCES "users"("id");--> statement-breakpoint
 ALTER TABLE "user_roles" ADD CONSTRAINT "user_roles_user_id_users_id_fkey" FOREIGN KEY ("user_id") REFERENCES "users"("id") ON DELETE CASCADE;--> statement-breakpoint
 ALTER TABLE "user_roles" ADD CONSTRAINT "user_roles_role_id_roles_id_fkey" FOREIGN KEY ("role_id") REFERENCES "roles"("id") ON DELETE CASCADE;--> statement-breakpoint
+ALTER TABLE "budget_consumptions" ADD CONSTRAINT "budget_consumptions_budget_line_id_budget_lines_id_fkey" FOREIGN KEY ("budget_line_id") REFERENCES "budget_lines"("id");--> statement-breakpoint
+ALTER TABLE "budget_lines" ADD CONSTRAINT "budget_lines_budget_header_id_budget_headers_id_fkey" FOREIGN KEY ("budget_header_id") REFERENCES "budget_headers"("id") ON DELETE CASCADE;--> statement-breakpoint
 ALTER TABLE "bank_connections" ADD CONSTRAINT "bank_connections_bank_account_id_bank_accounts_id_fkey" FOREIGN KEY ("bank_account_id") REFERENCES "bank_accounts"("id");--> statement-breakpoint
 ALTER TABLE "bank_statements" ADD CONSTRAINT "bank_statements_bank_account_id_bank_accounts_id_fkey" FOREIGN KEY ("bank_account_id") REFERENCES "bank_accounts"("id");--> statement-breakpoint
 ALTER TABLE "bank_transfers" ADD CONSTRAINT "bank_transfers_source_account_id_bank_accounts_id_fkey" FOREIGN KEY ("source_account_id") REFERENCES "bank_accounts"("id");--> statement-breakpoint
@@ -1333,4 +1560,6 @@ ALTER TABLE "quotation_line_items" ADD CONSTRAINT "quotation_line_items_item_id_
 ALTER TABLE "quotations" ADD CONSTRAINT "quotations_customer_id_customers_id_fkey" FOREIGN KEY ("customer_id") REFERENCES "customers"("id");--> statement-breakpoint
 ALTER TABLE "sales_order_line_items" ADD CONSTRAINT "sales_order_line_items_sales_order_id_sales_orders_id_fkey" FOREIGN KEY ("sales_order_id") REFERENCES "sales_orders"("id") ON DELETE CASCADE;--> statement-breakpoint
 ALTER TABLE "sales_order_line_items" ADD CONSTRAINT "sales_order_line_items_item_id_items_id_fkey" FOREIGN KEY ("item_id") REFERENCES "items"("id");--> statement-breakpoint
-ALTER TABLE "sales_orders" ADD CONSTRAINT "sales_orders_customer_id_customers_id_fkey" FOREIGN KEY ("customer_id") REFERENCES "customers"("id");
+ALTER TABLE "sales_orders" ADD CONSTRAINT "sales_orders_customer_id_customers_id_fkey" FOREIGN KEY ("customer_id") REFERENCES "customers"("id");--> statement-breakpoint
+ALTER TABLE "tax_auto_assignment_rules" ADD CONSTRAINT "tax_auto_assignment_rules_tax_code_id_tax_codes_id_fkey" FOREIGN KEY ("tax_code_id") REFERENCES "tax_codes"("id");--> statement-breakpoint
+ALTER TABLE "tax_rates" ADD CONSTRAINT "tax_rates_tax_code_id_tax_codes_id_fkey" FOREIGN KEY ("tax_code_id") REFERENCES "tax_codes"("id");

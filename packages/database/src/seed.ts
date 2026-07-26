@@ -313,15 +313,15 @@ async function seed() {
     ON CONFLICT DO NOTHING
   `;
   console.log('  User roles assigned');
-  // ─── BC-AUTH: Credentials (password hashes for login) ──────────────────────
+  // ─── BC-AUTH: Account (Better Auth password storage for login) ──────────────
   const DEV_PASSWORD_HASH = 's2:bf6897d60422b84c96e432dc4f9404e5:a0c4eb1e22135da7844c711028a0e1c1529e1d3d5fb10e30c37c5b0f3dd58832';
   await sql`
-    INSERT INTO credentials (id, tenant_id, user_id, password_hash, provider, created_at, updated_at)
+    INSERT INTO "account" (id, account_id, provider_id, user_id, password, created_at, updated_at)
     VALUES
-      ('00000000-0000-0000-0000-000000000040', ${T}, ${DEV}, ${DEV_PASSWORD_HASH}, 'email', NOW(), NOW())
+      ('00000000-0000-0000-0000-000000000040', 'dev@lumora.app', 'email', ${DEV}, ${DEV_PASSWORD_HASH}, NOW(), NOW())
     ON CONFLICT DO NOTHING
   `;
-  console.log('  Credentials: dev@lumora.app / 123456');
+  console.log('  Account: dev@lumora.app / 123456');
   // ─── BC-AUTH: Permissions ─────────────────────────────────────────────────
   await sql`
     INSERT INTO permissions (id, tenant_id, role_id, resource, action, created_at, updated_at)

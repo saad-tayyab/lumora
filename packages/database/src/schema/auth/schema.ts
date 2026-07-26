@@ -24,7 +24,8 @@ export const users = pgTable(
     ...tenantFields,
     email: varchar('email', { length: 255 }).notNull(),
     name: varchar('name', { length: 100 }).notNull(),
-    username: varchar('username', { length: 50 }).notNull(),
+    image: text('image'),
+    username: varchar('username', { length: 50 }).notNull().default(''),
     status: varchar('status', { length: 20 }).notNull().default('active'),
     emailVerified: boolean('email_verified').notNull().default(false),
     mfaEnabled: boolean('mfa_enabled').notNull().default(false),
@@ -79,38 +80,32 @@ export const sessions = pgTable(
   (table) => [index('sessions_user_id_idx').on(table.userId)],
 );
 
-export const credentials = pgTable(
-  'credentials',
-  {
-    ...auditFields,
-    ...tenantFields,
-    userId: uuid('user_id')
-      .notNull()
-      .references(() => users.id),
-    passwordHash: varchar('password_hash', { length: 255 }).notNull(),
-    provider: varchar('provider', { length: 50 }).notNull().default('email'),
-  },
-  (table) => [index('credentials_user_id_idx').on(table.userId)],
-);
+export const account = pgTable('account', {
+  id: uuid('id').primaryKey(),
+  accountId: varchar('account_id', { length: 255 }).notNull(),
+  providerId: varchar('provider_id', { length: 255 }).notNull(),
+  userId: uuid('user_id')
+    .notNull()
+    .references(() => users.id, { onDelete: 'cascade' }),
+  accessToken: text('access_token'),
+  refreshToken: text('refresh_token'),
+  idToken: text('id_token'),
+  accessTokenExpiresAt: timestamp('access_token_expires_at'),
+  refreshTokenExpiresAt: timestamp('refresh_token_expires_at'),
+  scope: text('scope'),
+  password: text('password'),
+  createdAt: timestamp('created_at').notNull().defaultNow(),
+  updatedAt: timestamp('updated_at').notNull().defaultNow(),
+});
 
-export const oauthProviders = pgTable(
-  'oauth_providers',
-  {
-    ...auditFields,
-    ...tenantFields,
-    userId: uuid('user_id')
-      .notNull()
-      .references(() => users.id),
-    provider: varchar('provider', { length: 50 }).notNull(),
-    providerId: varchar('provider_id', { length: 255 }).notNull(),
-    accessToken: varchar('access_token', { length: 500 }),
-    refreshToken: varchar('refresh_token', { length: 500 }),
-  },
-  (table) => [
-    uniqueIndex('oauth_providers_provider_provider_id_unique').on(table.provider, table.providerId),
-    index('oauth_providers_user_id_idx').on(table.userId),
-  ],
-);
+export const verification = pgTable('verification', {
+  id: text('id').primaryKey(),
+  identifier: text('identifier').notNull(),
+  value: text('value').notNull(),
+  expiresAt: timestamp('expires_at').notNull(),
+  createdAt: timestamp('created_at').notNull().defaultNow(),
+  updatedAt: timestamp('updated_at').notNull().defaultNow(),
+});
 
 export const mfaConfig = pgTable('mfa_config', {
   ...auditFields,
@@ -162,8 +157,8 @@ export const insertRoleSchema = createInsertSchema(roles, {
 export const insertUserRoleSchema = createInsertSchema(userRoles);
 
 export const insertSessionSchema = createInsertSchema(sessions);
-export const insertCredentialSchema = createInsertSchema(credentials);
-export const insertOauthProviderSchema = createInsertSchema(oauthProviders);
+export const insertAccountSchema = createInsertSchema(account);
+export const insertVerificationSchema = createInsertSchema(verification);
 export const insertMfaConfigSchema = createInsertSchema(mfaConfig);
 export const insertPermissionSchema = createInsertSchema(permissions);
 
@@ -175,8 +170,8 @@ export const selectUserSchema = createSelectSchema(users);
 export const selectRoleSchema = createSelectSchema(roles);
 export const selectUserRoleSchema = createSelectSchema(userRoles);
 export const selectSessionSchema = createSelectSchema(sessions);
-export const selectCredentialSchema = createSelectSchema(credentials);
-export const selectOauthProviderSchema = createSelectSchema(oauthProviders);
+export const selectAccountSchema = createSelectSchema(account);
+export const selectVerificationSchema = createSelectSchema(verification);
 export const selectMfaConfigSchema = createSelectSchema(mfaConfig);
 export const selectPermissionSchema = createSelectSchema(permissions);
 
@@ -188,8 +183,8 @@ export const updateUserSchema = createUpdateSchema(users);
 export const updateRoleSchema = createUpdateSchema(roles);
 export const updateUserRoleSchema = createUpdateSchema(userRoles);
 export const updateSessionSchema = createUpdateSchema(sessions);
-export const updateCredentialSchema = createUpdateSchema(credentials);
-export const updateOauthProviderSchema = createUpdateSchema(oauthProviders);
+export const updateAccountSchema = createUpdateSchema(account);
+export const updateVerificationSchema = createUpdateSchema(verification);
 export const updateMfaConfigSchema = createUpdateSchema(mfaConfig);
 export const updatePermissionSchema = createUpdateSchema(permissions);
 
@@ -209,11 +204,11 @@ export type NewUserRole = typeof userRoles.$inferInsert;
 export type Session = typeof sessions.$inferSelect;
 export type NewSession = typeof sessions.$inferInsert;
 
-export type Credential = typeof credentials.$inferSelect;
-export type NewCredential = typeof credentials.$inferInsert;
+export type Account = typeof account.$inferSelect;
+export type NewAccount = typeof account.$inferInsert;
 
-export type OauthProvider = typeof oauthProviders.$inferSelect;
-export type NewOauthProvider = typeof oauthProviders.$inferInsert;
+export type Verification = typeof verification.$inferSelect;
+export type NewVerification = typeof verification.$inferInsert;
 
 export type MfaConfig = typeof mfaConfig.$inferSelect;
 export type NewMfaConfig = typeof mfaConfig.$inferInsert;

@@ -14,7 +14,8 @@
     "test:integration": "vitest run --config vitest.integration.config.ts",
     "test:integration:watch": "vitest --config vitest.integration.config.ts",
     "db:generate": "drizzle-kit generate --config=../../packages/database/drizzle.config.ts",
-    "db:push": "drizzle-kit push --config=../../packages/database/drizzle.config.ts"
+    "db:push": "drizzle-kit push --config=../../packages/database/drizzle.config.ts",
+    "db:seed:local": "DATABASE_URL=$(encore db conn-uri lumora) bun seed-local.ts"
   },
   "dependencies": {
     "encore.dev": "^1.57.13",
@@ -26,8 +27,7 @@
     "@lumora/validation": "workspace:*",
     "drizzle-orm": "1.0.0-rc.4",
     "zod": "^4.4.3",
-    "uuid": "^14.0.0",
-    "pg": "^8.13.1"
+    "uuid": "^14.0.0"
   },
   "devDependencies": {
     "@biomejs/biome": "^2.5.5",

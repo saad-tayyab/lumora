@@ -1,6 +1,7 @@
 import { readFileSync } from 'node:fs';
 import { resolve } from 'node:path';
-import { Pool } from 'pg';
+import { drizzle } from 'drizzle-orm/node-postgres';
+import { sql } from 'drizzle-orm';
 import { afterAll, beforeAll, describe, expect, it } from 'vitest';
 
 function loadEnv() {
@@ -30,11 +31,6 @@ function loadEnv() {
   }
 }
 
-async function query<T = Record<string, unknown>>(pool: Pool, text: string, params?: unknown[]) {
-  const result = await pool.query<T>(text, params);
-  return result.rows;
-}
-
 const EXPECTED_TABLES = [
   'accounts', 'journal_entries', 'journal_entry_lines', 'fiscal_years',
   'customers', 'invoices', 'invoice_line_items', 'payments',
@@ -49,8 +45,8 @@ const EXPECTED_TABLES = [
   'quotation_line_items', 'discount_policies', 'departments',
   'designations', 'employees', 'attendance', 'leave_types',
   'leave_requests', 'salaries', 'payroll', 'payslips',
-  'users', 'roles', 'user_roles', 'sessions', 'credentials',
-  'oauth_providers', 'mfa_config', 'permissions',
+  'users', 'roles', 'user_roles', 'sessions', 'account',
+  'verification', 'mfa_config', 'permissions',
   'asset_categories', 'fixed_assets', 'depreciation_schedules',
   'depreciation_entries', 'asset_adjustments', 'tax_codes',
   'tax_rates', 'tax_auto_assignment_rules', 'budget_headers',
@@ -61,7 +57,7 @@ const EXPECTED_TABLES = [
   'predictions', 'anomaly_detections',
 ];
 
-let pool: Pool;
+let db: ReturnType<typeof drizzle>;
 
 beforeAll(async () => {
   loadEnv();
@@ -69,32 +65,26 @@ beforeAll(async () => {
   if (!databaseUrl) {
     throw new Error(`DATABASE_URL not found. CWD: ${process.cwd()}`);
   }
-  pool = new Pool({ connectionString: databaseUrl });
-});
-
-afterAll(async () => {
-  await pool?.end();
+  db = drizzle(databaseUrl);
 });
 
 describe('Migration Safety — Schema Integrity', () => {
   describe('1. All expected tables exist', () => {
-    it('should have all 78 tables in the database', async () => {
-      const rows = await query<{ table_name: string }>(
-        pool,
-        `SELECT table_name FROM information_schema.tables WHERE table_schema = 'public' AND table_type = 'BASE TABLE' ORDER BY table_name`,
+    it('should have all expected tables in the database', async () => {
+      const result = await db.execute<{ table_name: string }>(
+        sql`SELECT table_name FROM information_schema.tables WHERE table_schema = 'public' AND table_type = 'BASE TABLE' ORDER BY table_name`,
       );
-      const actualTables = rows.map((r) => r.table_name);
+      const actualTables = result.rows.map((r) => r.table_name);
       for (const expected of EXPECTED_TABLES) {
         expect(actualTables).toContain(expected);
       }
     });
 
-    it('should have exactly 78 tables', async () => {
-      const rows = await query<{ count: string }>(
-        pool,
-        `SELECT COUNT(*) as count FROM information_schema.tables WHERE table_schema = 'public' AND table_type = 'BASE TABLE'`,
+    it('should have exactly the expected number of tables', async () => {
+      const result = await db.execute<{ count: string }>(
+        sql`SELECT COUNT(*) as count FROM information_schema.tables WHERE table_schema = 'public' AND table_type = 'BASE TABLE'`,
       );
-      expect(Number(rows[0].count)).toBe(78);
+      expect(Number(result.rows[0].count)).toBe(EXPECTED_TABLES.length);
     });
   });
 
@@ -109,12 +99,10 @@ describe('Migration Safety — Schema Integrity', () => {
 
     for (const { table, column, expectedType } of checks) {
       it(`${table}.${column} should be ${expectedType}`, async () => {
-        const rows = await query<{ data_type: string }>(
-          pool,
-          `SELECT data_type FROM information_schema.columns WHERE table_schema = 'public' AND table_name = $1 AND column_name = $2`,
-          [table, column],
+        const result = await db.execute<{ data_type: string }>(
+          sql`SELECT data_type FROM information_schema.columns WHERE table_schema = 'public' AND table_name = ${table} AND column_name = ${column}`,
         );
-        expect(rows[0]?.data_type).toBe(expectedType);
+        expect(result.rows[0]?.data_type).toBe(expectedType);
       });
     }
   });
@@ -128,14 +116,12 @@ describe('Migration Safety — Schema Integrity', () => {
 
     for (const { table, column } of uniqueChecks) {
       it(`${table}.${column} should have a unique constraint`, async () => {
-        const rows = await query<{ indexname: string }>(
-          pool,
-          `SELECT indexname FROM pg_indexes
-           WHERE schemaname = 'public' AND tablename = $1
-             AND indexdef LIKE '%UNIQUE%' AND indexdef LIKE '%' || $2 || '%'`,
-          [table, column],
+        const result = await db.execute<{ indexname: string }>(
+          sql`SELECT indexname FROM pg_indexes
+           WHERE schemaname = 'public' AND tablename = ${table}
+             AND indexdef LIKE '%UNIQUE%' AND indexdef LIKE ${'%' + column + '%'}`,
         );
-        expect(rows.length).toBeGreaterThan(0);
+        expect(result.rows.length).toBeGreaterThan(0);
       });
     }
   });
@@ -149,17 +135,15 @@ describe('Migration Safety — Schema Integrity', () => {
 
     for (const { table, column, refTable } of fkChecks) {
       it(`${table}.${column} → ${refTable}.id`, async () => {
-        const rows = await query<{ constraint_name: string }>(
-          pool,
-          `SELECT tc.constraint_name
+        const result = await db.execute<{ constraint_name: string }>(
+          sql`SELECT tc.constraint_name
            FROM information_schema.table_constraints tc
            JOIN information_schema.key_column_usage kcu ON tc.constraint_name = kcu.constraint_name
            JOIN information_schema.constraint_column_usage ccu ON ccu.constraint_name = tc.constraint_name
            WHERE tc.constraint_type = 'FOREIGN KEY' AND tc.table_schema = 'public'
-             AND tc.table_name = $1 AND kcu.column_name = $2 AND ccu.table_name = $3`,
-          [table, column, refTable],
+             AND tc.table_name = ${table} AND kcu.column_name = ${column} AND ccu.table_name = ${refTable}`,
         );
-        expect(rows.length).toBeGreaterThan(0);
+        expect(result.rows.length).toBeGreaterThan(0);
       });
     }
   });
@@ -172,15 +156,13 @@ describe('Migration Safety — Schema Integrity', () => {
 
     for (const { table, column, expectedPrecision, expectedScale } of decimalChecks) {
       it(`${table}.${column} should be numeric(${expectedPrecision},${expectedScale})`, async () => {
-        const rows = await query<{ numeric_precision: string; numeric_scale: string }>(
-          pool,
-          `SELECT numeric_precision, numeric_scale
+        const result = await db.execute<{ numeric_precision: string; numeric_scale: string }>(
+          sql`SELECT numeric_precision, numeric_scale
            FROM information_schema.columns
-           WHERE table_schema = 'public' AND table_name = $1 AND column_name = $2`,
-          [table, column],
+           WHERE table_schema = 'public' AND table_name = ${table} AND column_name = ${column}`,
         );
-        expect(Number(rows[0]?.numeric_precision)).toBe(expectedPrecision);
-        expect(Number(rows[0]?.numeric_scale)).toBe(expectedScale);
+        expect(Number(result.rows[0]?.numeric_precision)).toBe(expectedPrecision);
+        expect(Number(result.rows[0]?.numeric_scale)).toBe(expectedScale);
       });
     }
   });
@@ -190,13 +172,11 @@ describe('Migration Safety — Schema Integrity', () => {
 
     for (const table of softDeleteTables) {
       it(`${table} should have a deleted_at column`, async () => {
-        const rows = await query<{ column_name: string }>(
-          pool,
-          `SELECT column_name FROM information_schema.columns
-           WHERE table_schema = 'public' AND table_name = $1 AND column_name = 'deleted_at'`,
-          [table],
+        const result = await db.execute<{ column_name: string }>(
+          sql`SELECT column_name FROM information_schema.columns
+           WHERE table_schema = 'public' AND table_name = ${table} AND column_name = 'deleted_at'`,
         );
-        expect(rows.length).toBe(1);
+        expect(result.rows.length).toBe(1);
       });
     }
   });
@@ -206,26 +186,23 @@ describe('Migration Safety — Schema Integrity', () => {
 
     for (const table of tenantTables) {
       it(`${table} should have a tenant_id column`, async () => {
-        const rows = await query<{ column_name: string }>(
-          pool,
-          `SELECT column_name FROM information_schema.columns
-           WHERE table_schema = 'public' AND table_name = $1 AND column_name = 'tenant_id'`,
-          [table],
+        const result = await db.execute<{ column_name: string }>(
+          sql`SELECT column_name FROM information_schema.columns
+           WHERE table_schema = 'public' AND table_name = ${table} AND column_name = 'tenant_id'`,
         );
-        expect(rows.length).toBe(1);
+        expect(result.rows.length).toBe(1);
       });
     }
   });
 
   describe('8. Relations file covers all tables', () => {
-    it('should have relation entries for all 78 tables', async () => {
+    it('should have relation entries for all tables', async () => {
       const { relations } = await import('./schema/relations');
-      const rows = await query<{ table_name: string }>(
-        pool,
-        `SELECT table_name FROM information_schema.tables
+      const result = await db.execute<{ table_name: string }>(
+        sql`SELECT table_name FROM information_schema.tables
          WHERE table_schema = 'public' AND table_type = 'BASE TABLE' ORDER BY table_name`,
       );
-      const dbTables = rows.map((r) => r.table_name);
+      const dbTables = result.rows.map((r) => r.table_name);
       const relationKeys = Object.keys(relations);
       for (const table of dbTables) {
         const camelCase = table.replace(/_([a-z])/g, (_: string, c: string) => c.toUpperCase());
