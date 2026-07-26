@@ -22,7 +22,7 @@
     "jsdom": "^29.1.1",
     "svelte": "^5.56.8",
     "svelte-check": "^4.7.3",
-    "typescript": "^5.7.0",
+    "typescript": "^6.0.0",
     "vite": "^8.1.5",
     "vitest": "^4.1.10"
   },
@@ -32,11 +32,11 @@
     "@lumora/validation": "workspace:*",
     "bits-ui": "^2.18.1",
     "clsx": "^2.1.0",
-    "lucide-svelte": "^1.0.1",
+    "@lucide/svelte": "^1.27.0",
     "tailwind-merge": "^3.6.0",
     "tailwindcss": "^4.3.3",
     "@tailwindcss/vite": "^4.3.3",
     "svelte-sonner": "^1.1.1",
-    "zod": "^3.24.0"
+    "zod": "^4.4.3"
   }
 }

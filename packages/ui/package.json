@@ -18,13 +18,13 @@
     "clean": "rm -rf dist node_modules"
   },
   "devDependencies": {
-    "typescript": "^5.7.0"
+    "typescript": "^7.0.0"
   },
   "dependencies": {
     "clsx": "^2.1.0",
     "tailwind-merge": "^3.6.0",
     "bits-ui": "^2.18.1",
-    "lucide-svelte": "^1.0.1"
+    "@lucide/svelte": "^1.27.0"
   },
   "peerDependencies": {
     "svelte": "^5.0.0"
