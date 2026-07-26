@@ -1,5 +1,12 @@
+import { randomBytes, scryptSync } from 'node:crypto';
 import { drizzle } from 'drizzle-orm/node-postgres';
 import { users, roles, userRoles, permissions, account } from '@lumora/database/schema';
+
+function hashPassword(password: string): string {
+  const salt = randomBytes(16).toString('hex');
+  const key = scryptSync(password.normalize('NFKC'), salt, 64, { N: 16384, r: 16, p: 1, maxmem: 128 * 1024 * 1024 });
+  return `${salt}:${key.toString('hex')}`;
+}
 
 const DATABASE_URL = process.env.DATABASE_URL;
 if (!DATABASE_URL) {
@@ -31,7 +38,7 @@ const PERM_7 = '00000000-0000-0000-0000-000000000056';
 const PERM_8 = '00000000-0000-0000-0000-000000000057';
 const PERM_9 = '00000000-0000-0000-0000-000000000058';
 const DEV_ACCOUNT = '00000000-0000-0000-0000-000000000040';
-const DEV_PASSWORD_HASH = 's2:bf6897d60422b84c96e432dc4f9404e5:a0c4eb1e22135da7844c711028a0e1c1529e1d3d5fb10e30c37c5b0f3dd58832';
+const DEV_PASSWORD_HASH = hashPassword('123456');
 
 async function seed() {
   console.log('Seeding local database...');

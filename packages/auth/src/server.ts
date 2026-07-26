@@ -63,7 +63,7 @@ export function createAuth(db: any, schema?: Record<string, any>) {
       },
     },
     baseURL: process.env.BETTER_AUTH_URL || 'http://localhost:4000',
-    trustedOrigins: [process.env.BETTER_AUTH_URL || 'http://localhost:3000'],
+    trustedOrigins: [process.env.BETTER_AUTH_URL || 'http://localhost:4000'],
   });
 }
 
