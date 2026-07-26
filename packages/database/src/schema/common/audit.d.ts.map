@@ -1,1 +1,1 @@
-{"version":3,"file":"audit.d.ts","sourceRoot":"","sources":["audit.ts"],"names":[],"mappings":"AAIA,eAAO,MAAM,WAAW;;;;CAIvB,CAAC;AAEF,eAAO,MAAM,gBAAgB;;CAE5B,CAAC;AAEF,eAAO,MAAM,YAAY;;CAExB,CAAC;AAEF,eAAO,MAAM,eAAe;;CAE3B,CAAC"}
+{"version":3,"file":"audit.d.ts","sourceRoot":"","sources":["audit.ts"],"names":[],"mappings":"AAIA,eAAO,MAAM,WAAW;IACtB,EAAE;IACF,SAAS;IACT,SAAS;CACV,CAAC;AAEF,eAAO,MAAM,gBAAgB;IAC3B,SAAS;CACV,CAAC;AAEF,eAAO,MAAM,YAAY;IACvB,QAAQ;CACT,CAAC;AAEF,eAAO,MAAM,eAAe;IAC1B,SAAS;CACV,CAAC"}

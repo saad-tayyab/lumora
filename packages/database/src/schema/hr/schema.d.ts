@@ -9,6 +9,81 @@ export declare const departments: import("drizzle-orm/pg-core").PgTableWithColum
     name: "departments";
     schema: undefined;
     columns: {
+        id: import("drizzle-orm/pg-core").PgBuildColumn<"departments", import("drizzle-orm/pg-core").SetHasRuntimeDefault<import("drizzle-orm/pg-core").SetIsPrimaryKey<import("drizzle-orm/pg-core").PgUUIDBuilder>>, {
+            name: string;
+            tableName: "departments";
+            dataType: "string uuid";
+            data: string;
+            driverParam: string;
+            notNull: true;
+            hasDefault: true;
+            isPrimaryKey: false;
+            isAutoincrement: false;
+            hasRuntimeDefault: false;
+            enumValues: undefined;
+            identity: undefined;
+            generated: undefined;
+        }>;
+        createdAt: import("drizzle-orm/pg-core").PgBuildColumn<"departments", import("drizzle-orm/pg-core").SetHasDefault<import("drizzle-orm/pg-core").SetNotNull<import("drizzle-orm/pg-core").PgTimestampBuilder>>, {
+            name: string;
+            tableName: "departments";
+            dataType: "object date";
+            data: Date;
+            driverParam: string;
+            notNull: true;
+            hasDefault: true;
+            isPrimaryKey: false;
+            isAutoincrement: false;
+            hasRuntimeDefault: false;
+            enumValues: undefined;
+            identity: undefined;
+            generated: undefined;
+        }>;
+        updatedAt: import("drizzle-orm/pg-core").PgBuildColumn<"departments", import("drizzle-orm/pg-core").SetHasDefault<import("drizzle-orm/pg-core").SetNotNull<import("drizzle-orm/pg-core").PgTimestampBuilder>>, {
+            name: string;
+            tableName: "departments";
+            dataType: "object date";
+            data: Date;
+            driverParam: string;
+            notNull: true;
+            hasDefault: true;
+            isPrimaryKey: false;
+            isAutoincrement: false;
+            hasRuntimeDefault: false;
+            enumValues: undefined;
+            identity: undefined;
+            generated: undefined;
+        }>;
+        deletedAt: import("drizzle-orm/pg-core").PgBuildColumn<"departments", import("drizzle-orm/pg-core").PgTimestampBuilder, {
+            name: string;
+            tableName: "departments";
+            dataType: "object date";
+            data: Date;
+            driverParam: string;
+            notNull: false;
+            hasDefault: false;
+            isPrimaryKey: false;
+            isAutoincrement: false;
+            hasRuntimeDefault: false;
+            enumValues: undefined;
+            identity: undefined;
+            generated: undefined;
+        }>;
+        tenantId: import("drizzle-orm/pg-core").PgBuildColumn<"departments", import("drizzle-orm/pg-core").SetNotNull<import("drizzle-orm/pg-core").PgUUIDBuilder>, {
+            name: string;
+            tableName: "departments";
+            dataType: "string uuid";
+            data: string;
+            driverParam: string;
+            notNull: true;
+            hasDefault: false;
+            isPrimaryKey: false;
+            isAutoincrement: false;
+            hasRuntimeDefault: false;
+            enumValues: undefined;
+            identity: undefined;
+            generated: undefined;
+        }>;
         name: import("drizzle-orm/pg-core").PgBuildColumn<"departments", import("drizzle-orm/pg-core").SetNotNull<import("drizzle-orm/pg-core").PgVarcharBuilder<[string, ...string[]]>>, {
             name: string;
             tableName: "departments";
@@ -99,9 +174,61 @@ export declare const departments: import("drizzle-orm/pg-core").PgTableWithColum
             identity: undefined;
             generated: undefined;
         }>;
-        deletedAt: import("drizzle-orm/pg-core").PgBuildColumn<"departments", import("drizzle-orm/pg-core").PgTimestampBuilder, {
+    };
+    dialect: 'pg';
+}>;
+export declare const designations: import("drizzle-orm/pg-core").PgTableWithColumns<{
+    name: "designations";
+    schema: undefined;
+    columns: {
+        id: import("drizzle-orm/pg-core").PgBuildColumn<"designations", import("drizzle-orm/pg-core").SetHasRuntimeDefault<import("drizzle-orm/pg-core").SetIsPrimaryKey<import("drizzle-orm/pg-core").PgUUIDBuilder>>, {
             name: string;
-            tableName: "departments";
+            tableName: "designations";
+            dataType: "string uuid";
+            data: string;
+            driverParam: string;
+            notNull: true;
+            hasDefault: true;
+            isPrimaryKey: false;
+            isAutoincrement: false;
+            hasRuntimeDefault: false;
+            enumValues: undefined;
+            identity: undefined;
+            generated: undefined;
+        }>;
+        createdAt: import("drizzle-orm/pg-core").PgBuildColumn<"designations", import("drizzle-orm/pg-core").SetHasDefault<import("drizzle-orm/pg-core").SetNotNull<import("drizzle-orm/pg-core").PgTimestampBuilder>>, {
+            name: string;
+            tableName: "designations";
+            dataType: "object date";
+            data: Date;
+            driverParam: string;
+            notNull: true;
+            hasDefault: true;
+            isPrimaryKey: false;
+            isAutoincrement: false;
+            hasRuntimeDefault: false;
+            enumValues: undefined;
+            identity: undefined;
+            generated: undefined;
+        }>;
+        updatedAt: import("drizzle-orm/pg-core").PgBuildColumn<"designations", import("drizzle-orm/pg-core").SetHasDefault<import("drizzle-orm/pg-core").SetNotNull<import("drizzle-orm/pg-core").PgTimestampBuilder>>, {
+            name: string;
+            tableName: "designations";
+            dataType: "object date";
+            data: Date;
+            driverParam: string;
+            notNull: true;
+            hasDefault: true;
+            isPrimaryKey: false;
+            isAutoincrement: false;
+            hasRuntimeDefault: false;
+            enumValues: undefined;
+            identity: undefined;
+            generated: undefined;
+        }>;
+        deletedAt: import("drizzle-orm/pg-core").PgBuildColumn<"designations", import("drizzle-orm/pg-core").PgTimestampBuilder, {
+            name: string;
+            tableName: "designations";
             dataType: "object date";
             data: Date;
             driverParam: string;
@@ -114,9 +241,9 @@ export declare const departments: import("drizzle-orm/pg-core").PgTableWithColum
             identity: undefined;
             generated: undefined;
         }>;
-        tenantId: import("drizzle-orm/pg-core").PgBuildColumn<"departments", import("drizzle-orm/pg-core").SetNotNull<import("drizzle-orm/pg-core").PgUUIDBuilder>, {
+        tenantId: import("drizzle-orm/pg-core").PgBuildColumn<"designations", import("drizzle-orm/pg-core").SetNotNull<import("drizzle-orm/pg-core").PgUUIDBuilder>, {
             name: string;
-            tableName: "departments";
+            tableName: "designations";
             dataType: "string uuid";
             data: string;
             driverParam: string;
@@ -129,58 +256,6 @@ export declare const departments: import("drizzle-orm/pg-core").PgTableWithColum
             identity: undefined;
             generated: undefined;
         }>;
-        id: import("drizzle-orm/pg-core").PgBuildColumn<"departments", import("drizzle-orm/pg-core").SetHasRuntimeDefault<import("drizzle-orm/pg-core").SetIsPrimaryKey<import("drizzle-orm/pg-core").PgUUIDBuilder>>, {
-            name: string;
-            tableName: "departments";
-            dataType: "string uuid";
-            data: string;
-            driverParam: string;
-            notNull: true;
-            hasDefault: true;
-            isPrimaryKey: false;
-            isAutoincrement: false;
-            hasRuntimeDefault: false;
-            enumValues: undefined;
-            identity: undefined;
-            generated: undefined;
-        }>;
-        createdAt: import("drizzle-orm/pg-core").PgBuildColumn<"departments", import("drizzle-orm/pg-core").SetHasDefault<import("drizzle-orm/pg-core").SetNotNull<import("drizzle-orm/pg-core").PgTimestampBuilder>>, {
-            name: string;
-            tableName: "departments";
-            dataType: "object date";
-            data: Date;
-            driverParam: string;
-            notNull: true;
-            hasDefault: true;
-            isPrimaryKey: false;
-            isAutoincrement: false;
-            hasRuntimeDefault: false;
-            enumValues: undefined;
-            identity: undefined;
-            generated: undefined;
-        }>;
-        updatedAt: import("drizzle-orm/pg-core").PgBuildColumn<"departments", import("drizzle-orm/pg-core").SetHasDefault<import("drizzle-orm/pg-core").SetNotNull<import("drizzle-orm/pg-core").PgTimestampBuilder>>, {
-            name: string;
-            tableName: "departments";
-            dataType: "object date";
-            data: Date;
-            driverParam: string;
-            notNull: true;
-            hasDefault: true;
-            isPrimaryKey: false;
-            isAutoincrement: false;
-            hasRuntimeDefault: false;
-            enumValues: undefined;
-            identity: undefined;
-            generated: undefined;
-        }>;
-    };
-    dialect: "pg";
-}>;
-export declare const designations: import("drizzle-orm/pg-core").PgTableWithColumns<{
-    name: "designations";
-    schema: undefined;
-    columns: {
         name: import("drizzle-orm/pg-core").PgBuildColumn<"designations", import("drizzle-orm/pg-core").SetNotNull<import("drizzle-orm/pg-core").PgVarcharBuilder<[string, ...string[]]>>, {
             name: string;
             tableName: "designations";
@@ -286,9 +361,61 @@ export declare const designations: import("drizzle-orm/pg-core").PgTableWithColu
             identity: undefined;
             generated: undefined;
         }>;
-        deletedAt: import("drizzle-orm/pg-core").PgBuildColumn<"designations", import("drizzle-orm/pg-core").PgTimestampBuilder, {
+    };
+    dialect: 'pg';
+}>;
+export declare const employees: import("drizzle-orm/pg-core").PgTableWithColumns<{
+    name: "employees";
+    schema: undefined;
+    columns: {
+        id: import("drizzle-orm/pg-core").PgBuildColumn<"employees", import("drizzle-orm/pg-core").SetHasRuntimeDefault<import("drizzle-orm/pg-core").SetIsPrimaryKey<import("drizzle-orm/pg-core").PgUUIDBuilder>>, {
             name: string;
-            tableName: "designations";
+            tableName: "employees";
+            dataType: "string uuid";
+            data: string;
+            driverParam: string;
+            notNull: true;
+            hasDefault: true;
+            isPrimaryKey: false;
+            isAutoincrement: false;
+            hasRuntimeDefault: false;
+            enumValues: undefined;
+            identity: undefined;
+            generated: undefined;
+        }>;
+        createdAt: import("drizzle-orm/pg-core").PgBuildColumn<"employees", import("drizzle-orm/pg-core").SetHasDefault<import("drizzle-orm/pg-core").SetNotNull<import("drizzle-orm/pg-core").PgTimestampBuilder>>, {
+            name: string;
+            tableName: "employees";
+            dataType: "object date";
+            data: Date;
+            driverParam: string;
+            notNull: true;
+            hasDefault: true;
+            isPrimaryKey: false;
+            isAutoincrement: false;
+            hasRuntimeDefault: false;
+            enumValues: undefined;
+            identity: undefined;
+            generated: undefined;
+        }>;
+        updatedAt: import("drizzle-orm/pg-core").PgBuildColumn<"employees", import("drizzle-orm/pg-core").SetHasDefault<import("drizzle-orm/pg-core").SetNotNull<import("drizzle-orm/pg-core").PgTimestampBuilder>>, {
+            name: string;
+            tableName: "employees";
+            dataType: "object date";
+            data: Date;
+            driverParam: string;
+            notNull: true;
+            hasDefault: true;
+            isPrimaryKey: false;
+            isAutoincrement: false;
+            hasRuntimeDefault: false;
+            enumValues: undefined;
+            identity: undefined;
+            generated: undefined;
+        }>;
+        deletedAt: import("drizzle-orm/pg-core").PgBuildColumn<"employees", import("drizzle-orm/pg-core").PgTimestampBuilder, {
+            name: string;
+            tableName: "employees";
             dataType: "object date";
             data: Date;
             driverParam: string;
@@ -301,9 +428,9 @@ export declare const designations: import("drizzle-orm/pg-core").PgTableWithColu
             identity: undefined;
             generated: undefined;
         }>;
-        tenantId: import("drizzle-orm/pg-core").PgBuildColumn<"designations", import("drizzle-orm/pg-core").SetNotNull<import("drizzle-orm/pg-core").PgUUIDBuilder>, {
+        tenantId: import("drizzle-orm/pg-core").PgBuildColumn<"employees", import("drizzle-orm/pg-core").SetNotNull<import("drizzle-orm/pg-core").PgUUIDBuilder>, {
             name: string;
-            tableName: "designations";
+            tableName: "employees";
             dataType: "string uuid";
             data: string;
             driverParam: string;
@@ -316,58 +443,6 @@ export declare const designations: import("drizzle-orm/pg-core").PgTableWithColu
             identity: undefined;
             generated: undefined;
         }>;
-        id: import("drizzle-orm/pg-core").PgBuildColumn<"designations", import("drizzle-orm/pg-core").SetHasRuntimeDefault<import("drizzle-orm/pg-core").SetIsPrimaryKey<import("drizzle-orm/pg-core").PgUUIDBuilder>>, {
-            name: string;
-            tableName: "designations";
-            dataType: "string uuid";
-            data: string;
-            driverParam: string;
-            notNull: true;
-            hasDefault: true;
-            isPrimaryKey: false;
-            isAutoincrement: false;
-            hasRuntimeDefault: false;
-            enumValues: undefined;
-            identity: undefined;
-            generated: undefined;
-        }>;
-        createdAt: import("drizzle-orm/pg-core").PgBuildColumn<"designations", import("drizzle-orm/pg-core").SetHasDefault<import("drizzle-orm/pg-core").SetNotNull<import("drizzle-orm/pg-core").PgTimestampBuilder>>, {
-            name: string;
-            tableName: "designations";
-            dataType: "object date";
-            data: Date;
-            driverParam: string;
-            notNull: true;
-            hasDefault: true;
-            isPrimaryKey: false;
-            isAutoincrement: false;
-            hasRuntimeDefault: false;
-            enumValues: undefined;
-            identity: undefined;
-            generated: undefined;
-        }>;
-        updatedAt: import("drizzle-orm/pg-core").PgBuildColumn<"designations", import("drizzle-orm/pg-core").SetHasDefault<import("drizzle-orm/pg-core").SetNotNull<import("drizzle-orm/pg-core").PgTimestampBuilder>>, {
-            name: string;
-            tableName: "designations";
-            dataType: "object date";
-            data: Date;
-            driverParam: string;
-            notNull: true;
-            hasDefault: true;
-            isPrimaryKey: false;
-            isAutoincrement: false;
-            hasRuntimeDefault: false;
-            enumValues: undefined;
-            identity: undefined;
-            generated: undefined;
-        }>;
-    };
-    dialect: "pg";
-}>;
-export declare const employees: import("drizzle-orm/pg-core").PgTableWithColumns<{
-    name: "employees";
-    schema: undefined;
-    columns: {
         userId: import("drizzle-orm/pg-core").PgBuildColumn<"employees", import("drizzle-orm/pg-core").PgUUIDBuilder, {
             name: string;
             tableName: "employees";
@@ -507,7 +582,7 @@ export declare const employees: import("drizzle-orm/pg-core").PgTableWithColumns
             name: string;
             tableName: "employees";
             dataType: "string enum";
-            data: "full_time" | "part_time" | "contract" | "intern";
+            data: "contract" | "full_time" | "intern" | "part_time";
             driverParam: string;
             notNull: true;
             hasDefault: false;
@@ -533,88 +608,43 @@ export declare const employees: import("drizzle-orm/pg-core").PgTableWithColumns
             identity: undefined;
             generated: undefined;
         }>;
-        deletedAt: import("drizzle-orm/pg-core").PgBuildColumn<"employees", import("drizzle-orm/pg-core").PgTimestampBuilder, {
-            name: string;
-            tableName: "employees";
-            dataType: "object date";
-            data: Date;
-            driverParam: string;
-            notNull: false;
-            hasDefault: false;
-            isPrimaryKey: false;
-            isAutoincrement: false;
-            hasRuntimeDefault: false;
-            enumValues: undefined;
-            identity: undefined;
-            generated: undefined;
-        }>;
-        tenantId: import("drizzle-orm/pg-core").PgBuildColumn<"employees", import("drizzle-orm/pg-core").SetNotNull<import("drizzle-orm/pg-core").PgUUIDBuilder>, {
-            name: string;
-            tableName: "employees";
-            dataType: "string uuid";
-            data: string;
-            driverParam: string;
-            notNull: true;
-            hasDefault: false;
-            isPrimaryKey: false;
-            isAutoincrement: false;
-            hasRuntimeDefault: false;
-            enumValues: undefined;
-            identity: undefined;
-            generated: undefined;
-        }>;
-        id: import("drizzle-orm/pg-core").PgBuildColumn<"employees", import("drizzle-orm/pg-core").SetHasRuntimeDefault<import("drizzle-orm/pg-core").SetIsPrimaryKey<import("drizzle-orm/pg-core").PgUUIDBuilder>>, {
-            name: string;
-            tableName: "employees";
-            dataType: "string uuid";
-            data: string;
-            driverParam: string;
-            notNull: true;
-            hasDefault: true;
-            isPrimaryKey: false;
-            isAutoincrement: false;
-            hasRuntimeDefault: false;
-            enumValues: undefined;
-            identity: undefined;
-            generated: undefined;
-        }>;
-        createdAt: import("drizzle-orm/pg-core").PgBuildColumn<"employees", import("drizzle-orm/pg-core").SetHasDefault<import("drizzle-orm/pg-core").SetNotNull<import("drizzle-orm/pg-core").PgTimestampBuilder>>, {
-            name: string;
-            tableName: "employees";
-            dataType: "object date";
-            data: Date;
-            driverParam: string;
-            notNull: true;
-            hasDefault: true;
-            isPrimaryKey: false;
-            isAutoincrement: false;
-            hasRuntimeDefault: false;
-            enumValues: undefined;
-            identity: undefined;
-            generated: undefined;
-        }>;
-        updatedAt: import("drizzle-orm/pg-core").PgBuildColumn<"employees", import("drizzle-orm/pg-core").SetHasDefault<import("drizzle-orm/pg-core").SetNotNull<import("drizzle-orm/pg-core").PgTimestampBuilder>>, {
-            name: string;
-            tableName: "employees";
-            dataType: "object date";
-            data: Date;
-            driverParam: string;
-            notNull: true;
-            hasDefault: true;
-            isPrimaryKey: false;
-            isAutoincrement: false;
-            hasRuntimeDefault: false;
-            enumValues: undefined;
-            identity: undefined;
-            generated: undefined;
-        }>;
     };
-    dialect: "pg";
+    dialect: 'pg';
 }>;
 export declare const attendance: import("drizzle-orm/pg-core").PgTableWithColumns<{
     name: "attendance";
     schema: undefined;
     columns: {
+        tenantId: import("drizzle-orm/pg-core").PgBuildColumn<"attendance", import("drizzle-orm/pg-core").SetNotNull<import("drizzle-orm/pg-core").PgUUIDBuilder>, {
+            name: string;
+            tableName: "attendance";
+            dataType: "string uuid";
+            data: string;
+            driverParam: string;
+            notNull: true;
+            hasDefault: false;
+            isPrimaryKey: false;
+            isAutoincrement: false;
+            hasRuntimeDefault: false;
+            enumValues: undefined;
+            identity: undefined;
+            generated: undefined;
+        }>;
+        id: import("drizzle-orm/pg-core").PgBuildColumn<"attendance", import("drizzle-orm/pg-core").SetHasRuntimeDefault<import("drizzle-orm/pg-core").SetIsPrimaryKey<import("drizzle-orm/pg-core").PgUUIDBuilder>>, {
+            name: string;
+            tableName: "attendance";
+            dataType: "string uuid";
+            data: string;
+            driverParam: string;
+            notNull: true;
+            hasDefault: true;
+            isPrimaryKey: false;
+            isAutoincrement: false;
+            hasRuntimeDefault: false;
+            enumValues: undefined;
+            identity: undefined;
+            generated: undefined;
+        }>;
         employeeId: import("drizzle-orm/pg-core").PgBuildColumn<"attendance", import("drizzle-orm/pg-core").SetNotNull<import("drizzle-orm/pg-core").PgUUIDBuilder>, {
             name: string;
             tableName: "attendance";
@@ -679,7 +709,7 @@ export declare const attendance: import("drizzle-orm/pg-core").PgTableWithColumn
             name: string;
             tableName: "attendance";
             dataType: "string enum";
-            data: "present" | "absent" | "half_day" | "work_from_home";
+            data: "absent" | "half_day" | "present" | "work_from_home";
             driverParam: string;
             notNull: true;
             hasDefault: false;
@@ -765,24 +795,16 @@ export declare const attendance: import("drizzle-orm/pg-core").PgTableWithColumn
             identity: undefined;
             generated: undefined;
         }>;
-        tenantId: import("drizzle-orm/pg-core").PgBuildColumn<"attendance", import("drizzle-orm/pg-core").SetNotNull<import("drizzle-orm/pg-core").PgUUIDBuilder>, {
+    };
+    dialect: 'pg';
+}>;
+export declare const leaveTypes: import("drizzle-orm/pg-core").PgTableWithColumns<{
+    name: "leave_types";
+    schema: undefined;
+    columns: {
+        id: import("drizzle-orm/pg-core").PgBuildColumn<"leave_types", import("drizzle-orm/pg-core").SetHasRuntimeDefault<import("drizzle-orm/pg-core").SetIsPrimaryKey<import("drizzle-orm/pg-core").PgUUIDBuilder>>, {
             name: string;
-            tableName: "attendance";
-            dataType: "string uuid";
-            data: string;
-            driverParam: string;
-            notNull: true;
-            hasDefault: false;
-            isPrimaryKey: false;
-            isAutoincrement: false;
-            hasRuntimeDefault: false;
-            enumValues: undefined;
-            identity: undefined;
-            generated: undefined;
-        }>;
-        id: import("drizzle-orm/pg-core").PgBuildColumn<"attendance", import("drizzle-orm/pg-core").SetHasRuntimeDefault<import("drizzle-orm/pg-core").SetIsPrimaryKey<import("drizzle-orm/pg-core").PgUUIDBuilder>>, {
-            name: string;
-            tableName: "attendance";
+            tableName: "leave_types";
             dataType: "string uuid";
             data: string;
             driverParam: string;
@@ -795,13 +817,66 @@ export declare const attendance: import("drizzle-orm/pg-core").PgTableWithColumn
             identity: undefined;
             generated: undefined;
         }>;
-    };
-    dialect: "pg";
-}>;
-export declare const leaveTypes: import("drizzle-orm/pg-core").PgTableWithColumns<{
-    name: "leave_types";
-    schema: undefined;
-    columns: {
+        createdAt: import("drizzle-orm/pg-core").PgBuildColumn<"leave_types", import("drizzle-orm/pg-core").SetHasDefault<import("drizzle-orm/pg-core").SetNotNull<import("drizzle-orm/pg-core").PgTimestampBuilder>>, {
+            name: string;
+            tableName: "leave_types";
+            dataType: "object date";
+            data: Date;
+            driverParam: string;
+            notNull: true;
+            hasDefault: true;
+            isPrimaryKey: false;
+            isAutoincrement: false;
+            hasRuntimeDefault: false;
+            enumValues: undefined;
+            identity: undefined;
+            generated: undefined;
+        }>;
+        updatedAt: import("drizzle-orm/pg-core").PgBuildColumn<"leave_types", import("drizzle-orm/pg-core").SetHasDefault<import("drizzle-orm/pg-core").SetNotNull<import("drizzle-orm/pg-core").PgTimestampBuilder>>, {
+            name: string;
+            tableName: "leave_types";
+            dataType: "object date";
+            data: Date;
+            driverParam: string;
+            notNull: true;
+            hasDefault: true;
+            isPrimaryKey: false;
+            isAutoincrement: false;
+            hasRuntimeDefault: false;
+            enumValues: undefined;
+            identity: undefined;
+            generated: undefined;
+        }>;
+        deletedAt: import("drizzle-orm/pg-core").PgBuildColumn<"leave_types", import("drizzle-orm/pg-core").PgTimestampBuilder, {
+            name: string;
+            tableName: "leave_types";
+            dataType: "object date";
+            data: Date;
+            driverParam: string;
+            notNull: false;
+            hasDefault: false;
+            isPrimaryKey: false;
+            isAutoincrement: false;
+            hasRuntimeDefault: false;
+            enumValues: undefined;
+            identity: undefined;
+            generated: undefined;
+        }>;
+        tenantId: import("drizzle-orm/pg-core").PgBuildColumn<"leave_types", import("drizzle-orm/pg-core").SetNotNull<import("drizzle-orm/pg-core").PgUUIDBuilder>, {
+            name: string;
+            tableName: "leave_types";
+            dataType: "string uuid";
+            data: string;
+            driverParam: string;
+            notNull: true;
+            hasDefault: false;
+            isPrimaryKey: false;
+            isAutoincrement: false;
+            hasRuntimeDefault: false;
+            enumValues: undefined;
+            identity: undefined;
+            generated: undefined;
+        }>;
         name: import("drizzle-orm/pg-core").PgBuildColumn<"leave_types", import("drizzle-orm/pg-core").SetNotNull<import("drizzle-orm/pg-core").PgVarcharBuilder<[string, ...string[]]>>, {
             name: string;
             tableName: "leave_types";
@@ -892,9 +967,61 @@ export declare const leaveTypes: import("drizzle-orm/pg-core").PgTableWithColumn
             identity: undefined;
             generated: undefined;
         }>;
-        deletedAt: import("drizzle-orm/pg-core").PgBuildColumn<"leave_types", import("drizzle-orm/pg-core").PgTimestampBuilder, {
+    };
+    dialect: 'pg';
+}>;
+export declare const leaveRequests: import("drizzle-orm/pg-core").PgTableWithColumns<{
+    name: "leave_requests";
+    schema: undefined;
+    columns: {
+        id: import("drizzle-orm/pg-core").PgBuildColumn<"leave_requests", import("drizzle-orm/pg-core").SetHasRuntimeDefault<import("drizzle-orm/pg-core").SetIsPrimaryKey<import("drizzle-orm/pg-core").PgUUIDBuilder>>, {
             name: string;
-            tableName: "leave_types";
+            tableName: "leave_requests";
+            dataType: "string uuid";
+            data: string;
+            driverParam: string;
+            notNull: true;
+            hasDefault: true;
+            isPrimaryKey: false;
+            isAutoincrement: false;
+            hasRuntimeDefault: false;
+            enumValues: undefined;
+            identity: undefined;
+            generated: undefined;
+        }>;
+        createdAt: import("drizzle-orm/pg-core").PgBuildColumn<"leave_requests", import("drizzle-orm/pg-core").SetHasDefault<import("drizzle-orm/pg-core").SetNotNull<import("drizzle-orm/pg-core").PgTimestampBuilder>>, {
+            name: string;
+            tableName: "leave_requests";
+            dataType: "object date";
+            data: Date;
+            driverParam: string;
+            notNull: true;
+            hasDefault: true;
+            isPrimaryKey: false;
+            isAutoincrement: false;
+            hasRuntimeDefault: false;
+            enumValues: undefined;
+            identity: undefined;
+            generated: undefined;
+        }>;
+        updatedAt: import("drizzle-orm/pg-core").PgBuildColumn<"leave_requests", import("drizzle-orm/pg-core").SetHasDefault<import("drizzle-orm/pg-core").SetNotNull<import("drizzle-orm/pg-core").PgTimestampBuilder>>, {
+            name: string;
+            tableName: "leave_requests";
+            dataType: "object date";
+            data: Date;
+            driverParam: string;
+            notNull: true;
+            hasDefault: true;
+            isPrimaryKey: false;
+            isAutoincrement: false;
+            hasRuntimeDefault: false;
+            enumValues: undefined;
+            identity: undefined;
+            generated: undefined;
+        }>;
+        deletedAt: import("drizzle-orm/pg-core").PgBuildColumn<"leave_requests", import("drizzle-orm/pg-core").PgTimestampBuilder, {
+            name: string;
+            tableName: "leave_requests";
             dataType: "object date";
             data: Date;
             driverParam: string;
@@ -907,9 +1034,9 @@ export declare const leaveTypes: import("drizzle-orm/pg-core").PgTableWithColumn
             identity: undefined;
             generated: undefined;
         }>;
-        tenantId: import("drizzle-orm/pg-core").PgBuildColumn<"leave_types", import("drizzle-orm/pg-core").SetNotNull<import("drizzle-orm/pg-core").PgUUIDBuilder>, {
+        tenantId: import("drizzle-orm/pg-core").PgBuildColumn<"leave_requests", import("drizzle-orm/pg-core").SetNotNull<import("drizzle-orm/pg-core").PgUUIDBuilder>, {
             name: string;
-            tableName: "leave_types";
+            tableName: "leave_requests";
             dataType: "string uuid";
             data: string;
             driverParam: string;
@@ -922,58 +1049,6 @@ export declare const leaveTypes: import("drizzle-orm/pg-core").PgTableWithColumn
             identity: undefined;
             generated: undefined;
         }>;
-        id: import("drizzle-orm/pg-core").PgBuildColumn<"leave_types", import("drizzle-orm/pg-core").SetHasRuntimeDefault<import("drizzle-orm/pg-core").SetIsPrimaryKey<import("drizzle-orm/pg-core").PgUUIDBuilder>>, {
-            name: string;
-            tableName: "leave_types";
-            dataType: "string uuid";
-            data: string;
-            driverParam: string;
-            notNull: true;
-            hasDefault: true;
-            isPrimaryKey: false;
-            isAutoincrement: false;
-            hasRuntimeDefault: false;
-            enumValues: undefined;
-            identity: undefined;
-            generated: undefined;
-        }>;
-        createdAt: import("drizzle-orm/pg-core").PgBuildColumn<"leave_types", import("drizzle-orm/pg-core").SetHasDefault<import("drizzle-orm/pg-core").SetNotNull<import("drizzle-orm/pg-core").PgTimestampBuilder>>, {
-            name: string;
-            tableName: "leave_types";
-            dataType: "object date";
-            data: Date;
-            driverParam: string;
-            notNull: true;
-            hasDefault: true;
-            isPrimaryKey: false;
-            isAutoincrement: false;
-            hasRuntimeDefault: false;
-            enumValues: undefined;
-            identity: undefined;
-            generated: undefined;
-        }>;
-        updatedAt: import("drizzle-orm/pg-core").PgBuildColumn<"leave_types", import("drizzle-orm/pg-core").SetHasDefault<import("drizzle-orm/pg-core").SetNotNull<import("drizzle-orm/pg-core").PgTimestampBuilder>>, {
-            name: string;
-            tableName: "leave_types";
-            dataType: "object date";
-            data: Date;
-            driverParam: string;
-            notNull: true;
-            hasDefault: true;
-            isPrimaryKey: false;
-            isAutoincrement: false;
-            hasRuntimeDefault: false;
-            enumValues: undefined;
-            identity: undefined;
-            generated: undefined;
-        }>;
-    };
-    dialect: "pg";
-}>;
-export declare const leaveRequests: import("drizzle-orm/pg-core").PgTableWithColumns<{
-    name: "leave_requests";
-    schema: undefined;
-    columns: {
         employeeId: import("drizzle-orm/pg-core").PgBuildColumn<"leave_requests", import("drizzle-orm/pg-core").SetNotNull<import("drizzle-orm/pg-core").PgUUIDBuilder>, {
             name: string;
             tableName: "leave_requests";
@@ -1068,7 +1143,7 @@ export declare const leaveRequests: import("drizzle-orm/pg-core").PgTableWithCol
             name: string;
             tableName: "leave_requests";
             dataType: "string enum";
-            data: "approved" | "pending" | "cancelled" | "rejected";
+            data: "approved" | "cancelled" | "pending" | "rejected";
             driverParam: string;
             notNull: true;
             hasDefault: true;
@@ -1124,9 +1199,61 @@ export declare const leaveRequests: import("drizzle-orm/pg-core").PgTableWithCol
             identity: undefined;
             generated: undefined;
         }>;
-        deletedAt: import("drizzle-orm/pg-core").PgBuildColumn<"leave_requests", import("drizzle-orm/pg-core").PgTimestampBuilder, {
+    };
+    dialect: 'pg';
+}>;
+export declare const salaries: import("drizzle-orm/pg-core").PgTableWithColumns<{
+    name: "salaries";
+    schema: undefined;
+    columns: {
+        id: import("drizzle-orm/pg-core").PgBuildColumn<"salaries", import("drizzle-orm/pg-core").SetHasRuntimeDefault<import("drizzle-orm/pg-core").SetIsPrimaryKey<import("drizzle-orm/pg-core").PgUUIDBuilder>>, {
             name: string;
-            tableName: "leave_requests";
+            tableName: "salaries";
+            dataType: "string uuid";
+            data: string;
+            driverParam: string;
+            notNull: true;
+            hasDefault: true;
+            isPrimaryKey: false;
+            isAutoincrement: false;
+            hasRuntimeDefault: false;
+            enumValues: undefined;
+            identity: undefined;
+            generated: undefined;
+        }>;
+        createdAt: import("drizzle-orm/pg-core").PgBuildColumn<"salaries", import("drizzle-orm/pg-core").SetHasDefault<import("drizzle-orm/pg-core").SetNotNull<import("drizzle-orm/pg-core").PgTimestampBuilder>>, {
+            name: string;
+            tableName: "salaries";
+            dataType: "object date";
+            data: Date;
+            driverParam: string;
+            notNull: true;
+            hasDefault: true;
+            isPrimaryKey: false;
+            isAutoincrement: false;
+            hasRuntimeDefault: false;
+            enumValues: undefined;
+            identity: undefined;
+            generated: undefined;
+        }>;
+        updatedAt: import("drizzle-orm/pg-core").PgBuildColumn<"salaries", import("drizzle-orm/pg-core").SetHasDefault<import("drizzle-orm/pg-core").SetNotNull<import("drizzle-orm/pg-core").PgTimestampBuilder>>, {
+            name: string;
+            tableName: "salaries";
+            dataType: "object date";
+            data: Date;
+            driverParam: string;
+            notNull: true;
+            hasDefault: true;
+            isPrimaryKey: false;
+            isAutoincrement: false;
+            hasRuntimeDefault: false;
+            enumValues: undefined;
+            identity: undefined;
+            generated: undefined;
+        }>;
+        deletedAt: import("drizzle-orm/pg-core").PgBuildColumn<"salaries", import("drizzle-orm/pg-core").PgTimestampBuilder, {
+            name: string;
+            tableName: "salaries";
             dataType: "object date";
             data: Date;
             driverParam: string;
@@ -1139,9 +1266,9 @@ export declare const leaveRequests: import("drizzle-orm/pg-core").PgTableWithCol
             identity: undefined;
             generated: undefined;
         }>;
-        tenantId: import("drizzle-orm/pg-core").PgBuildColumn<"leave_requests", import("drizzle-orm/pg-core").SetNotNull<import("drizzle-orm/pg-core").PgUUIDBuilder>, {
+        tenantId: import("drizzle-orm/pg-core").PgBuildColumn<"salaries", import("drizzle-orm/pg-core").SetNotNull<import("drizzle-orm/pg-core").PgUUIDBuilder>, {
             name: string;
-            tableName: "leave_requests";
+            tableName: "salaries";
             dataType: "string uuid";
             data: string;
             driverParam: string;
@@ -1154,58 +1281,6 @@ export declare const leaveRequests: import("drizzle-orm/pg-core").PgTableWithCol
             identity: undefined;
             generated: undefined;
         }>;
-        id: import("drizzle-orm/pg-core").PgBuildColumn<"leave_requests", import("drizzle-orm/pg-core").SetHasRuntimeDefault<import("drizzle-orm/pg-core").SetIsPrimaryKey<import("drizzle-orm/pg-core").PgUUIDBuilder>>, {
-            name: string;
-            tableName: "leave_requests";
-            dataType: "string uuid";
-            data: string;
-            driverParam: string;
-            notNull: true;
-            hasDefault: true;
-            isPrimaryKey: false;
-            isAutoincrement: false;
-            hasRuntimeDefault: false;
-            enumValues: undefined;
-            identity: undefined;
-            generated: undefined;
-        }>;
-        createdAt: import("drizzle-orm/pg-core").PgBuildColumn<"leave_requests", import("drizzle-orm/pg-core").SetHasDefault<import("drizzle-orm/pg-core").SetNotNull<import("drizzle-orm/pg-core").PgTimestampBuilder>>, {
-            name: string;
-            tableName: "leave_requests";
-            dataType: "object date";
-            data: Date;
-            driverParam: string;
-            notNull: true;
-            hasDefault: true;
-            isPrimaryKey: false;
-            isAutoincrement: false;
-            hasRuntimeDefault: false;
-            enumValues: undefined;
-            identity: undefined;
-            generated: undefined;
-        }>;
-        updatedAt: import("drizzle-orm/pg-core").PgBuildColumn<"leave_requests", import("drizzle-orm/pg-core").SetHasDefault<import("drizzle-orm/pg-core").SetNotNull<import("drizzle-orm/pg-core").PgTimestampBuilder>>, {
-            name: string;
-            tableName: "leave_requests";
-            dataType: "object date";
-            data: Date;
-            driverParam: string;
-            notNull: true;
-            hasDefault: true;
-            isPrimaryKey: false;
-            isAutoincrement: false;
-            hasRuntimeDefault: false;
-            enumValues: undefined;
-            identity: undefined;
-            generated: undefined;
-        }>;
-    };
-    dialect: "pg";
-}>;
-export declare const salaries: import("drizzle-orm/pg-core").PgTableWithColumns<{
-    name: "salaries";
-    schema: undefined;
-    columns: {
         employeeId: import("drizzle-orm/pg-core").PgBuildColumn<"salaries", import("drizzle-orm/pg-core").SetNotNull<import("drizzle-orm/pg-core").PgUUIDBuilder>, {
             name: string;
             tableName: "salaries";
@@ -1255,7 +1330,7 @@ export declare const salaries: import("drizzle-orm/pg-core").PgTableWithColumns<
             name: string;
             tableName: "salaries";
             dataType: "string enum";
-            data: "monthly" | "bi_weekly" | "weekly";
+            data: "bi_weekly" | "monthly" | "weekly";
             driverParam: string;
             notNull: true;
             hasDefault: true;
@@ -1296,9 +1371,61 @@ export declare const salaries: import("drizzle-orm/pg-core").PgTableWithColumns<
             identity: undefined;
             generated: undefined;
         }>;
-        deletedAt: import("drizzle-orm/pg-core").PgBuildColumn<"salaries", import("drizzle-orm/pg-core").PgTimestampBuilder, {
+    };
+    dialect: 'pg';
+}>;
+export declare const payroll: import("drizzle-orm/pg-core").PgTableWithColumns<{
+    name: "payroll";
+    schema: undefined;
+    columns: {
+        id: import("drizzle-orm/pg-core").PgBuildColumn<"payroll", import("drizzle-orm/pg-core").SetHasRuntimeDefault<import("drizzle-orm/pg-core").SetIsPrimaryKey<import("drizzle-orm/pg-core").PgUUIDBuilder>>, {
             name: string;
-            tableName: "salaries";
+            tableName: "payroll";
+            dataType: "string uuid";
+            data: string;
+            driverParam: string;
+            notNull: true;
+            hasDefault: true;
+            isPrimaryKey: false;
+            isAutoincrement: false;
+            hasRuntimeDefault: false;
+            enumValues: undefined;
+            identity: undefined;
+            generated: undefined;
+        }>;
+        createdAt: import("drizzle-orm/pg-core").PgBuildColumn<"payroll", import("drizzle-orm/pg-core").SetHasDefault<import("drizzle-orm/pg-core").SetNotNull<import("drizzle-orm/pg-core").PgTimestampBuilder>>, {
+            name: string;
+            tableName: "payroll";
+            dataType: "object date";
+            data: Date;
+            driverParam: string;
+            notNull: true;
+            hasDefault: true;
+            isPrimaryKey: false;
+            isAutoincrement: false;
+            hasRuntimeDefault: false;
+            enumValues: undefined;
+            identity: undefined;
+            generated: undefined;
+        }>;
+        updatedAt: import("drizzle-orm/pg-core").PgBuildColumn<"payroll", import("drizzle-orm/pg-core").SetHasDefault<import("drizzle-orm/pg-core").SetNotNull<import("drizzle-orm/pg-core").PgTimestampBuilder>>, {
+            name: string;
+            tableName: "payroll";
+            dataType: "object date";
+            data: Date;
+            driverParam: string;
+            notNull: true;
+            hasDefault: true;
+            isPrimaryKey: false;
+            isAutoincrement: false;
+            hasRuntimeDefault: false;
+            enumValues: undefined;
+            identity: undefined;
+            generated: undefined;
+        }>;
+        deletedAt: import("drizzle-orm/pg-core").PgBuildColumn<"payroll", import("drizzle-orm/pg-core").PgTimestampBuilder, {
+            name: string;
+            tableName: "payroll";
             dataType: "object date";
             data: Date;
             driverParam: string;
@@ -1311,9 +1438,9 @@ export declare const salaries: import("drizzle-orm/pg-core").PgTableWithColumns<
             identity: undefined;
             generated: undefined;
         }>;
-        tenantId: import("drizzle-orm/pg-core").PgBuildColumn<"salaries", import("drizzle-orm/pg-core").SetNotNull<import("drizzle-orm/pg-core").PgUUIDBuilder>, {
+        tenantId: import("drizzle-orm/pg-core").PgBuildColumn<"payroll", import("drizzle-orm/pg-core").SetNotNull<import("drizzle-orm/pg-core").PgUUIDBuilder>, {
             name: string;
-            tableName: "salaries";
+            tableName: "payroll";
             dataType: "string uuid";
             data: string;
             driverParam: string;
@@ -1326,58 +1453,6 @@ export declare const salaries: import("drizzle-orm/pg-core").PgTableWithColumns<
             identity: undefined;
             generated: undefined;
         }>;
-        id: import("drizzle-orm/pg-core").PgBuildColumn<"salaries", import("drizzle-orm/pg-core").SetHasRuntimeDefault<import("drizzle-orm/pg-core").SetIsPrimaryKey<import("drizzle-orm/pg-core").PgUUIDBuilder>>, {
-            name: string;
-            tableName: "salaries";
-            dataType: "string uuid";
-            data: string;
-            driverParam: string;
-            notNull: true;
-            hasDefault: true;
-            isPrimaryKey: false;
-            isAutoincrement: false;
-            hasRuntimeDefault: false;
-            enumValues: undefined;
-            identity: undefined;
-            generated: undefined;
-        }>;
-        createdAt: import("drizzle-orm/pg-core").PgBuildColumn<"salaries", import("drizzle-orm/pg-core").SetHasDefault<import("drizzle-orm/pg-core").SetNotNull<import("drizzle-orm/pg-core").PgTimestampBuilder>>, {
-            name: string;
-            tableName: "salaries";
-            dataType: "object date";
-            data: Date;
-            driverParam: string;
-            notNull: true;
-            hasDefault: true;
-            isPrimaryKey: false;
-            isAutoincrement: false;
-            hasRuntimeDefault: false;
-            enumValues: undefined;
-            identity: undefined;
-            generated: undefined;
-        }>;
-        updatedAt: import("drizzle-orm/pg-core").PgBuildColumn<"salaries", import("drizzle-orm/pg-core").SetHasDefault<import("drizzle-orm/pg-core").SetNotNull<import("drizzle-orm/pg-core").PgTimestampBuilder>>, {
-            name: string;
-            tableName: "salaries";
-            dataType: "object date";
-            data: Date;
-            driverParam: string;
-            notNull: true;
-            hasDefault: true;
-            isPrimaryKey: false;
-            isAutoincrement: false;
-            hasRuntimeDefault: false;
-            enumValues: undefined;
-            identity: undefined;
-            generated: undefined;
-        }>;
-    };
-    dialect: "pg";
-}>;
-export declare const payroll: import("drizzle-orm/pg-core").PgTableWithColumns<{
-    name: "payroll";
-    schema: undefined;
-    columns: {
         employeeId: import("drizzle-orm/pg-core").PgBuildColumn<"payroll", import("drizzle-orm/pg-core").SetNotNull<import("drizzle-orm/pg-core").PgUUIDBuilder>, {
             name: string;
             tableName: "payroll";
@@ -1528,88 +1603,73 @@ export declare const payroll: import("drizzle-orm/pg-core").PgTableWithColumns<{
             identity: undefined;
             generated: undefined;
         }>;
-        deletedAt: import("drizzle-orm/pg-core").PgBuildColumn<"payroll", import("drizzle-orm/pg-core").PgTimestampBuilder, {
-            name: string;
-            tableName: "payroll";
-            dataType: "object date";
-            data: Date;
-            driverParam: string;
-            notNull: false;
-            hasDefault: false;
-            isPrimaryKey: false;
-            isAutoincrement: false;
-            hasRuntimeDefault: false;
-            enumValues: undefined;
-            identity: undefined;
-            generated: undefined;
-        }>;
-        tenantId: import("drizzle-orm/pg-core").PgBuildColumn<"payroll", import("drizzle-orm/pg-core").SetNotNull<import("drizzle-orm/pg-core").PgUUIDBuilder>, {
-            name: string;
-            tableName: "payroll";
-            dataType: "string uuid";
-            data: string;
-            driverParam: string;
-            notNull: true;
-            hasDefault: false;
-            isPrimaryKey: false;
-            isAutoincrement: false;
-            hasRuntimeDefault: false;
-            enumValues: undefined;
-            identity: undefined;
-            generated: undefined;
-        }>;
-        id: import("drizzle-orm/pg-core").PgBuildColumn<"payroll", import("drizzle-orm/pg-core").SetHasRuntimeDefault<import("drizzle-orm/pg-core").SetIsPrimaryKey<import("drizzle-orm/pg-core").PgUUIDBuilder>>, {
-            name: string;
-            tableName: "payroll";
-            dataType: "string uuid";
-            data: string;
-            driverParam: string;
-            notNull: true;
-            hasDefault: true;
-            isPrimaryKey: false;
-            isAutoincrement: false;
-            hasRuntimeDefault: false;
-            enumValues: undefined;
-            identity: undefined;
-            generated: undefined;
-        }>;
-        createdAt: import("drizzle-orm/pg-core").PgBuildColumn<"payroll", import("drizzle-orm/pg-core").SetHasDefault<import("drizzle-orm/pg-core").SetNotNull<import("drizzle-orm/pg-core").PgTimestampBuilder>>, {
-            name: string;
-            tableName: "payroll";
-            dataType: "object date";
-            data: Date;
-            driverParam: string;
-            notNull: true;
-            hasDefault: true;
-            isPrimaryKey: false;
-            isAutoincrement: false;
-            hasRuntimeDefault: false;
-            enumValues: undefined;
-            identity: undefined;
-            generated: undefined;
-        }>;
-        updatedAt: import("drizzle-orm/pg-core").PgBuildColumn<"payroll", import("drizzle-orm/pg-core").SetHasDefault<import("drizzle-orm/pg-core").SetNotNull<import("drizzle-orm/pg-core").PgTimestampBuilder>>, {
-            name: string;
-            tableName: "payroll";
-            dataType: "object date";
-            data: Date;
-            driverParam: string;
-            notNull: true;
-            hasDefault: true;
-            isPrimaryKey: false;
-            isAutoincrement: false;
-            hasRuntimeDefault: false;
-            enumValues: undefined;
-            identity: undefined;
-            generated: undefined;
-        }>;
     };
-    dialect: "pg";
+    dialect: 'pg';
 }>;
 export declare const payslips: import("drizzle-orm/pg-core").PgTableWithColumns<{
     name: "payslips";
     schema: undefined;
     columns: {
+        id: import("drizzle-orm/pg-core").PgBuildColumn<"payslips", import("drizzle-orm/pg-core").SetHasRuntimeDefault<import("drizzle-orm/pg-core").SetIsPrimaryKey<import("drizzle-orm/pg-core").PgUUIDBuilder>>, {
+            name: string;
+            tableName: "payslips";
+            dataType: "string uuid";
+            data: string;
+            driverParam: string;
+            notNull: true;
+            hasDefault: true;
+            isPrimaryKey: false;
+            isAutoincrement: false;
+            hasRuntimeDefault: false;
+            enumValues: undefined;
+            identity: undefined;
+            generated: undefined;
+        }>;
+        createdAt: import("drizzle-orm/pg-core").PgBuildColumn<"payslips", import("drizzle-orm/pg-core").SetHasDefault<import("drizzle-orm/pg-core").SetNotNull<import("drizzle-orm/pg-core").PgTimestampBuilder>>, {
+            name: string;
+            tableName: "payslips";
+            dataType: "object date";
+            data: Date;
+            driverParam: string;
+            notNull: true;
+            hasDefault: true;
+            isPrimaryKey: false;
+            isAutoincrement: false;
+            hasRuntimeDefault: false;
+            enumValues: undefined;
+            identity: undefined;
+            generated: undefined;
+        }>;
+        updatedAt: import("drizzle-orm/pg-core").PgBuildColumn<"payslips", import("drizzle-orm/pg-core").SetHasDefault<import("drizzle-orm/pg-core").SetNotNull<import("drizzle-orm/pg-core").PgTimestampBuilder>>, {
+            name: string;
+            tableName: "payslips";
+            dataType: "object date";
+            data: Date;
+            driverParam: string;
+            notNull: true;
+            hasDefault: true;
+            isPrimaryKey: false;
+            isAutoincrement: false;
+            hasRuntimeDefault: false;
+            enumValues: undefined;
+            identity: undefined;
+            generated: undefined;
+        }>;
+        tenantId: import("drizzle-orm/pg-core").PgBuildColumn<"payslips", import("drizzle-orm/pg-core").SetNotNull<import("drizzle-orm/pg-core").PgUUIDBuilder>, {
+            name: string;
+            tableName: "payslips";
+            dataType: "string uuid";
+            data: string;
+            driverParam: string;
+            notNull: true;
+            hasDefault: false;
+            isPrimaryKey: false;
+            isAutoincrement: false;
+            hasRuntimeDefault: false;
+            enumValues: undefined;
+            identity: undefined;
+            generated: undefined;
+        }>;
         employeeId: import("drizzle-orm/pg-core").PgBuildColumn<"payslips", import("drizzle-orm/pg-core").SetNotNull<import("drizzle-orm/pg-core").PgUUIDBuilder>, {
             name: string;
             tableName: "payslips";
@@ -1715,70 +1775,85 @@ export declare const payslips: import("drizzle-orm/pg-core").PgTableWithColumns<
             identity: undefined;
             generated: undefined;
         }>;
-        tenantId: import("drizzle-orm/pg-core").PgBuildColumn<"payslips", import("drizzle-orm/pg-core").SetNotNull<import("drizzle-orm/pg-core").PgUUIDBuilder>, {
-            name: string;
-            tableName: "payslips";
-            dataType: "string uuid";
-            data: string;
-            driverParam: string;
-            notNull: true;
-            hasDefault: false;
-            isPrimaryKey: false;
-            isAutoincrement: false;
-            hasRuntimeDefault: false;
-            enumValues: undefined;
-            identity: undefined;
-            generated: undefined;
-        }>;
-        id: import("drizzle-orm/pg-core").PgBuildColumn<"payslips", import("drizzle-orm/pg-core").SetHasRuntimeDefault<import("drizzle-orm/pg-core").SetIsPrimaryKey<import("drizzle-orm/pg-core").PgUUIDBuilder>>, {
-            name: string;
-            tableName: "payslips";
-            dataType: "string uuid";
-            data: string;
-            driverParam: string;
-            notNull: true;
-            hasDefault: true;
-            isPrimaryKey: false;
-            isAutoincrement: false;
-            hasRuntimeDefault: false;
-            enumValues: undefined;
-            identity: undefined;
-            generated: undefined;
-        }>;
-        createdAt: import("drizzle-orm/pg-core").PgBuildColumn<"payslips", import("drizzle-orm/pg-core").SetHasDefault<import("drizzle-orm/pg-core").SetNotNull<import("drizzle-orm/pg-core").PgTimestampBuilder>>, {
-            name: string;
-            tableName: "payslips";
-            dataType: "object date";
-            data: Date;
-            driverParam: string;
-            notNull: true;
-            hasDefault: true;
-            isPrimaryKey: false;
-            isAutoincrement: false;
-            hasRuntimeDefault: false;
-            enumValues: undefined;
-            identity: undefined;
-            generated: undefined;
-        }>;
-        updatedAt: import("drizzle-orm/pg-core").PgBuildColumn<"payslips", import("drizzle-orm/pg-core").SetHasDefault<import("drizzle-orm/pg-core").SetNotNull<import("drizzle-orm/pg-core").PgTimestampBuilder>>, {
-            name: string;
-            tableName: "payslips";
-            dataType: "object date";
-            data: Date;
-            driverParam: string;
-            notNull: true;
-            hasDefault: true;
-            isPrimaryKey: false;
-            isAutoincrement: false;
-            hasRuntimeDefault: false;
-            enumValues: undefined;
-            identity: undefined;
-            generated: undefined;
-        }>;
     };
-    dialect: "pg";
+    dialect: 'pg';
 }>;
 export declare const insertDepartmentSchema: import("drizzle-orm/zod").BuildSchema<"insert", {
+    id: import("drizzle-orm/pg-core").PgBuildColumn<"departments", import("drizzle-orm/pg-core").SetHasRuntimeDefault<import("drizzle-orm/pg-core").SetIsPrimaryKey<import("drizzle-orm/pg-core").PgUUIDBuilder>>, {
+        name: string;
+        tableName: "departments";
+        dataType: "string uuid";
+        data: string;
+        driverParam: string;
+        notNull: true;
+        hasDefault: true;
+        isPrimaryKey: false;
+        isAutoincrement: false;
+        hasRuntimeDefault: false;
+        enumValues: undefined;
+        identity: undefined;
+        generated: undefined;
+    }>;
+    createdAt: import("drizzle-orm/pg-core").PgBuildColumn<"departments", import("drizzle-orm/pg-core").SetHasDefault<import("drizzle-orm/pg-core").SetNotNull<import("drizzle-orm/pg-core").PgTimestampBuilder>>, {
+        name: string;
+        tableName: "departments";
+        dataType: "object date";
+        data: Date;
+        driverParam: string;
+        notNull: true;
+        hasDefault: true;
+        isPrimaryKey: false;
+        isAutoincrement: false;
+        hasRuntimeDefault: false;
+        enumValues: undefined;
+        identity: undefined;
+        generated: undefined;
+    }>;
+    updatedAt: import("drizzle-orm/pg-core").PgBuildColumn<"departments", import("drizzle-orm/pg-core").SetHasDefault<import("drizzle-orm/pg-core").SetNotNull<import("drizzle-orm/pg-core").PgTimestampBuilder>>, {
+        name: string;
+        tableName: "departments";
+        dataType: "object date";
+        data: Date;
+        driverParam: string;
+        notNull: true;
+        hasDefault: true;
+        isPrimaryKey: false;
+        isAutoincrement: false;
+        hasRuntimeDefault: false;
+        enumValues: undefined;
+        identity: undefined;
+        generated: undefined;
+    }>;
+    deletedAt: import("drizzle-orm/pg-core").PgBuildColumn<"departments", import("drizzle-orm/pg-core").PgTimestampBuilder, {
+        name: string;
+        tableName: "departments";
+        dataType: "object date";
+        data: Date;
+        driverParam: string;
+        notNull: false;
+        hasDefault: false;
+        isPrimaryKey: false;
+        isAutoincrement: false;
+        hasRuntimeDefault: false;
+        enumValues: undefined;
+        identity: undefined;
+        generated: undefined;
+    }>;
+    tenantId: import("drizzle-orm/pg-core").PgBuildColumn<"departments", import("drizzle-orm/pg-core").SetNotNull<import("drizzle-orm/pg-core").PgUUIDBuilder>, {
+        name: string;
+        tableName: "departments";
+        dataType: "string uuid";
+        data: string;
+        driverParam: string;
+        notNull: true;
+        hasDefault: false;
+        isPrimaryKey: false;
+        isAutoincrement: false;
+        hasRuntimeDefault: false;
+        enumValues: undefined;
+        identity: undefined;
+        generated: undefined;
+    }>;
     name: import("drizzle-orm/pg-core").PgBuildColumn<"departments", import("drizzle-orm/pg-core").SetNotNull<import("drizzle-orm/pg-core").PgVarcharBuilder<[string, ...string[]]>>, {
         name: string;
         tableName: "departments";
@@ -1866,81 +1941,6 @@ export declare const insertDepartmentSchema: import("drizzle-orm/zod").BuildSche
         isAutoincrement: false;
         hasRuntimeDefault: false;
         enumValues: ["active", "inactive"];
-        identity: undefined;
-        generated: undefined;
-    }>;
-    deletedAt: import("drizzle-orm/pg-core").PgBuildColumn<"departments", import("drizzle-orm/pg-core").PgTimestampBuilder, {
-        name: string;
-        tableName: "departments";
-        dataType: "object date";
-        data: Date;
-        driverParam: string;
-        notNull: false;
-        hasDefault: false;
-        isPrimaryKey: false;
-        isAutoincrement: false;
-        hasRuntimeDefault: false;
-        enumValues: undefined;
-        identity: undefined;
-        generated: undefined;
-    }>;
-    tenantId: import("drizzle-orm/pg-core").PgBuildColumn<"departments", import("drizzle-orm/pg-core").SetNotNull<import("drizzle-orm/pg-core").PgUUIDBuilder>, {
-        name: string;
-        tableName: "departments";
-        dataType: "string uuid";
-        data: string;
-        driverParam: string;
-        notNull: true;
-        hasDefault: false;
-        isPrimaryKey: false;
-        isAutoincrement: false;
-        hasRuntimeDefault: false;
-        enumValues: undefined;
-        identity: undefined;
-        generated: undefined;
-    }>;
-    id: import("drizzle-orm/pg-core").PgBuildColumn<"departments", import("drizzle-orm/pg-core").SetHasRuntimeDefault<import("drizzle-orm/pg-core").SetIsPrimaryKey<import("drizzle-orm/pg-core").PgUUIDBuilder>>, {
-        name: string;
-        tableName: "departments";
-        dataType: "string uuid";
-        data: string;
-        driverParam: string;
-        notNull: true;
-        hasDefault: true;
-        isPrimaryKey: false;
-        isAutoincrement: false;
-        hasRuntimeDefault: false;
-        enumValues: undefined;
-        identity: undefined;
-        generated: undefined;
-    }>;
-    createdAt: import("drizzle-orm/pg-core").PgBuildColumn<"departments", import("drizzle-orm/pg-core").SetHasDefault<import("drizzle-orm/pg-core").SetNotNull<import("drizzle-orm/pg-core").PgTimestampBuilder>>, {
-        name: string;
-        tableName: "departments";
-        dataType: "object date";
-        data: Date;
-        driverParam: string;
-        notNull: true;
-        hasDefault: true;
-        isPrimaryKey: false;
-        isAutoincrement: false;
-        hasRuntimeDefault: false;
-        enumValues: undefined;
-        identity: undefined;
-        generated: undefined;
-    }>;
-    updatedAt: import("drizzle-orm/pg-core").PgBuildColumn<"departments", import("drizzle-orm/pg-core").SetHasDefault<import("drizzle-orm/pg-core").SetNotNull<import("drizzle-orm/pg-core").PgTimestampBuilder>>, {
-        name: string;
-        tableName: "departments";
-        dataType: "object date";
-        data: Date;
-        driverParam: string;
-        notNull: true;
-        hasDefault: true;
-        isPrimaryKey: false;
-        isAutoincrement: false;
-        hasRuntimeDefault: false;
-        enumValues: undefined;
         identity: undefined;
         generated: undefined;
     }>;
@@ -1949,6 +1949,81 @@ export declare const insertDepartmentSchema: import("drizzle-orm/zod").BuildSche
     code: (schema: import("zod").ZodString) => import("zod").ZodString;
 }, undefined>;
 export declare const selectDepartmentSchema: import("drizzle-orm/zod").BuildSchema<"select", {
+    id: import("drizzle-orm/pg-core").PgBuildColumn<"departments", import("drizzle-orm/pg-core").SetHasRuntimeDefault<import("drizzle-orm/pg-core").SetIsPrimaryKey<import("drizzle-orm/pg-core").PgUUIDBuilder>>, {
+        name: string;
+        tableName: "departments";
+        dataType: "string uuid";
+        data: string;
+        driverParam: string;
+        notNull: true;
+        hasDefault: true;
+        isPrimaryKey: false;
+        isAutoincrement: false;
+        hasRuntimeDefault: false;
+        enumValues: undefined;
+        identity: undefined;
+        generated: undefined;
+    }>;
+    createdAt: import("drizzle-orm/pg-core").PgBuildColumn<"departments", import("drizzle-orm/pg-core").SetHasDefault<import("drizzle-orm/pg-core").SetNotNull<import("drizzle-orm/pg-core").PgTimestampBuilder>>, {
+        name: string;
+        tableName: "departments";
+        dataType: "object date";
+        data: Date;
+        driverParam: string;
+        notNull: true;
+        hasDefault: true;
+        isPrimaryKey: false;
+        isAutoincrement: false;
+        hasRuntimeDefault: false;
+        enumValues: undefined;
+        identity: undefined;
+        generated: undefined;
+    }>;
+    updatedAt: import("drizzle-orm/pg-core").PgBuildColumn<"departments", import("drizzle-orm/pg-core").SetHasDefault<import("drizzle-orm/pg-core").SetNotNull<import("drizzle-orm/pg-core").PgTimestampBuilder>>, {
+        name: string;
+        tableName: "departments";
+        dataType: "object date";
+        data: Date;
+        driverParam: string;
+        notNull: true;
+        hasDefault: true;
+        isPrimaryKey: false;
+        isAutoincrement: false;
+        hasRuntimeDefault: false;
+        enumValues: undefined;
+        identity: undefined;
+        generated: undefined;
+    }>;
+    deletedAt: import("drizzle-orm/pg-core").PgBuildColumn<"departments", import("drizzle-orm/pg-core").PgTimestampBuilder, {
+        name: string;
+        tableName: "departments";
+        dataType: "object date";
+        data: Date;
+        driverParam: string;
+        notNull: false;
+        hasDefault: false;
+        isPrimaryKey: false;
+        isAutoincrement: false;
+        hasRuntimeDefault: false;
+        enumValues: undefined;
+        identity: undefined;
+        generated: undefined;
+    }>;
+    tenantId: import("drizzle-orm/pg-core").PgBuildColumn<"departments", import("drizzle-orm/pg-core").SetNotNull<import("drizzle-orm/pg-core").PgUUIDBuilder>, {
+        name: string;
+        tableName: "departments";
+        dataType: "string uuid";
+        data: string;
+        driverParam: string;
+        notNull: true;
+        hasDefault: false;
+        isPrimaryKey: false;
+        isAutoincrement: false;
+        hasRuntimeDefault: false;
+        enumValues: undefined;
+        identity: undefined;
+        generated: undefined;
+    }>;
     name: import("drizzle-orm/pg-core").PgBuildColumn<"departments", import("drizzle-orm/pg-core").SetNotNull<import("drizzle-orm/pg-core").PgVarcharBuilder<[string, ...string[]]>>, {
         name: string;
         tableName: "departments";
@@ -2039,9 +2114,56 @@ export declare const selectDepartmentSchema: import("drizzle-orm/zod").BuildSche
         identity: undefined;
         generated: undefined;
     }>;
-    deletedAt: import("drizzle-orm/pg-core").PgBuildColumn<"departments", import("drizzle-orm/pg-core").PgTimestampBuilder, {
+}, undefined, undefined>;
+export declare const insertDesignationSchema: import("drizzle-orm/zod").BuildSchema<"insert", {
+    id: import("drizzle-orm/pg-core").PgBuildColumn<"designations", import("drizzle-orm/pg-core").SetHasRuntimeDefault<import("drizzle-orm/pg-core").SetIsPrimaryKey<import("drizzle-orm/pg-core").PgUUIDBuilder>>, {
         name: string;
-        tableName: "departments";
+        tableName: "designations";
+        dataType: "string uuid";
+        data: string;
+        driverParam: string;
+        notNull: true;
+        hasDefault: true;
+        isPrimaryKey: false;
+        isAutoincrement: false;
+        hasRuntimeDefault: false;
+        enumValues: undefined;
+        identity: undefined;
+        generated: undefined;
+    }>;
+    createdAt: import("drizzle-orm/pg-core").PgBuildColumn<"designations", import("drizzle-orm/pg-core").SetHasDefault<import("drizzle-orm/pg-core").SetNotNull<import("drizzle-orm/pg-core").PgTimestampBuilder>>, {
+        name: string;
+        tableName: "designations";
+        dataType: "object date";
+        data: Date;
+        driverParam: string;
+        notNull: true;
+        hasDefault: true;
+        isPrimaryKey: false;
+        isAutoincrement: false;
+        hasRuntimeDefault: false;
+        enumValues: undefined;
+        identity: undefined;
+        generated: undefined;
+    }>;
+    updatedAt: import("drizzle-orm/pg-core").PgBuildColumn<"designations", import("drizzle-orm/pg-core").SetHasDefault<import("drizzle-orm/pg-core").SetNotNull<import("drizzle-orm/pg-core").PgTimestampBuilder>>, {
+        name: string;
+        tableName: "designations";
+        dataType: "object date";
+        data: Date;
+        driverParam: string;
+        notNull: true;
+        hasDefault: true;
+        isPrimaryKey: false;
+        isAutoincrement: false;
+        hasRuntimeDefault: false;
+        enumValues: undefined;
+        identity: undefined;
+        generated: undefined;
+    }>;
+    deletedAt: import("drizzle-orm/pg-core").PgBuildColumn<"designations", import("drizzle-orm/pg-core").PgTimestampBuilder, {
+        name: string;
+        tableName: "designations";
         dataType: "object date";
         data: Date;
         driverParam: string;
@@ -2054,9 +2176,9 @@ export declare const selectDepartmentSchema: import("drizzle-orm/zod").BuildSche
         identity: undefined;
         generated: undefined;
     }>;
-    tenantId: import("drizzle-orm/pg-core").PgBuildColumn<"departments", import("drizzle-orm/pg-core").SetNotNull<import("drizzle-orm/pg-core").PgUUIDBuilder>, {
+    tenantId: import("drizzle-orm/pg-core").PgBuildColumn<"designations", import("drizzle-orm/pg-core").SetNotNull<import("drizzle-orm/pg-core").PgUUIDBuilder>, {
         name: string;
-        tableName: "departments";
+        tableName: "designations";
         dataType: "string uuid";
         data: string;
         driverParam: string;
@@ -2069,53 +2191,6 @@ export declare const selectDepartmentSchema: import("drizzle-orm/zod").BuildSche
         identity: undefined;
         generated: undefined;
     }>;
-    id: import("drizzle-orm/pg-core").PgBuildColumn<"departments", import("drizzle-orm/pg-core").SetHasRuntimeDefault<import("drizzle-orm/pg-core").SetIsPrimaryKey<import("drizzle-orm/pg-core").PgUUIDBuilder>>, {
-        name: string;
-        tableName: "departments";
-        dataType: "string uuid";
-        data: string;
-        driverParam: string;
-        notNull: true;
-        hasDefault: true;
-        isPrimaryKey: false;
-        isAutoincrement: false;
-        hasRuntimeDefault: false;
-        enumValues: undefined;
-        identity: undefined;
-        generated: undefined;
-    }>;
-    createdAt: import("drizzle-orm/pg-core").PgBuildColumn<"departments", import("drizzle-orm/pg-core").SetHasDefault<import("drizzle-orm/pg-core").SetNotNull<import("drizzle-orm/pg-core").PgTimestampBuilder>>, {
-        name: string;
-        tableName: "departments";
-        dataType: "object date";
-        data: Date;
-        driverParam: string;
-        notNull: true;
-        hasDefault: true;
-        isPrimaryKey: false;
-        isAutoincrement: false;
-        hasRuntimeDefault: false;
-        enumValues: undefined;
-        identity: undefined;
-        generated: undefined;
-    }>;
-    updatedAt: import("drizzle-orm/pg-core").PgBuildColumn<"departments", import("drizzle-orm/pg-core").SetHasDefault<import("drizzle-orm/pg-core").SetNotNull<import("drizzle-orm/pg-core").PgTimestampBuilder>>, {
-        name: string;
-        tableName: "departments";
-        dataType: "object date";
-        data: Date;
-        driverParam: string;
-        notNull: true;
-        hasDefault: true;
-        isPrimaryKey: false;
-        isAutoincrement: false;
-        hasRuntimeDefault: false;
-        enumValues: undefined;
-        identity: undefined;
-        generated: undefined;
-    }>;
-}, undefined, undefined>;
-export declare const insertDesignationSchema: import("drizzle-orm/zod").BuildSchema<"insert", {
     name: import("drizzle-orm/pg-core").PgBuildColumn<"designations", import("drizzle-orm/pg-core").SetNotNull<import("drizzle-orm/pg-core").PgVarcharBuilder<[string, ...string[]]>>, {
         name: string;
         tableName: "designations";
@@ -2212,81 +2287,6 @@ export declare const insertDesignationSchema: import("drizzle-orm/zod").BuildSch
         dataType: "boolean";
         data: boolean;
         driverParam: boolean;
-        notNull: true;
-        hasDefault: true;
-        isPrimaryKey: false;
-        isAutoincrement: false;
-        hasRuntimeDefault: false;
-        enumValues: undefined;
-        identity: undefined;
-        generated: undefined;
-    }>;
-    deletedAt: import("drizzle-orm/pg-core").PgBuildColumn<"designations", import("drizzle-orm/pg-core").PgTimestampBuilder, {
-        name: string;
-        tableName: "designations";
-        dataType: "object date";
-        data: Date;
-        driverParam: string;
-        notNull: false;
-        hasDefault: false;
-        isPrimaryKey: false;
-        isAutoincrement: false;
-        hasRuntimeDefault: false;
-        enumValues: undefined;
-        identity: undefined;
-        generated: undefined;
-    }>;
-    tenantId: import("drizzle-orm/pg-core").PgBuildColumn<"designations", import("drizzle-orm/pg-core").SetNotNull<import("drizzle-orm/pg-core").PgUUIDBuilder>, {
-        name: string;
-        tableName: "designations";
-        dataType: "string uuid";
-        data: string;
-        driverParam: string;
-        notNull: true;
-        hasDefault: false;
-        isPrimaryKey: false;
-        isAutoincrement: false;
-        hasRuntimeDefault: false;
-        enumValues: undefined;
-        identity: undefined;
-        generated: undefined;
-    }>;
-    id: import("drizzle-orm/pg-core").PgBuildColumn<"designations", import("drizzle-orm/pg-core").SetHasRuntimeDefault<import("drizzle-orm/pg-core").SetIsPrimaryKey<import("drizzle-orm/pg-core").PgUUIDBuilder>>, {
-        name: string;
-        tableName: "designations";
-        dataType: "string uuid";
-        data: string;
-        driverParam: string;
-        notNull: true;
-        hasDefault: true;
-        isPrimaryKey: false;
-        isAutoincrement: false;
-        hasRuntimeDefault: false;
-        enumValues: undefined;
-        identity: undefined;
-        generated: undefined;
-    }>;
-    createdAt: import("drizzle-orm/pg-core").PgBuildColumn<"designations", import("drizzle-orm/pg-core").SetHasDefault<import("drizzle-orm/pg-core").SetNotNull<import("drizzle-orm/pg-core").PgTimestampBuilder>>, {
-        name: string;
-        tableName: "designations";
-        dataType: "object date";
-        data: Date;
-        driverParam: string;
-        notNull: true;
-        hasDefault: true;
-        isPrimaryKey: false;
-        isAutoincrement: false;
-        hasRuntimeDefault: false;
-        enumValues: undefined;
-        identity: undefined;
-        generated: undefined;
-    }>;
-    updatedAt: import("drizzle-orm/pg-core").PgBuildColumn<"designations", import("drizzle-orm/pg-core").SetHasDefault<import("drizzle-orm/pg-core").SetNotNull<import("drizzle-orm/pg-core").PgTimestampBuilder>>, {
-        name: string;
-        tableName: "designations";
-        dataType: "object date";
-        data: Date;
-        driverParam: string;
         notNull: true;
         hasDefault: true;
         isPrimaryKey: false;
@@ -2301,6 +2301,81 @@ export declare const insertDesignationSchema: import("drizzle-orm/zod").BuildSch
     code: (schema: import("zod").ZodString) => import("zod").ZodString;
 }, undefined>;
 export declare const selectDesignationSchema: import("drizzle-orm/zod").BuildSchema<"select", {
+    id: import("drizzle-orm/pg-core").PgBuildColumn<"designations", import("drizzle-orm/pg-core").SetHasRuntimeDefault<import("drizzle-orm/pg-core").SetIsPrimaryKey<import("drizzle-orm/pg-core").PgUUIDBuilder>>, {
+        name: string;
+        tableName: "designations";
+        dataType: "string uuid";
+        data: string;
+        driverParam: string;
+        notNull: true;
+        hasDefault: true;
+        isPrimaryKey: false;
+        isAutoincrement: false;
+        hasRuntimeDefault: false;
+        enumValues: undefined;
+        identity: undefined;
+        generated: undefined;
+    }>;
+    createdAt: import("drizzle-orm/pg-core").PgBuildColumn<"designations", import("drizzle-orm/pg-core").SetHasDefault<import("drizzle-orm/pg-core").SetNotNull<import("drizzle-orm/pg-core").PgTimestampBuilder>>, {
+        name: string;
+        tableName: "designations";
+        dataType: "object date";
+        data: Date;
+        driverParam: string;
+        notNull: true;
+        hasDefault: true;
+        isPrimaryKey: false;
+        isAutoincrement: false;
+        hasRuntimeDefault: false;
+        enumValues: undefined;
+        identity: undefined;
+        generated: undefined;
+    }>;
+    updatedAt: import("drizzle-orm/pg-core").PgBuildColumn<"designations", import("drizzle-orm/pg-core").SetHasDefault<import("drizzle-orm/pg-core").SetNotNull<import("drizzle-orm/pg-core").PgTimestampBuilder>>, {
+        name: string;
+        tableName: "designations";
+        dataType: "object date";
+        data: Date;
+        driverParam: string;
+        notNull: true;
+        hasDefault: true;
+        isPrimaryKey: false;
+        isAutoincrement: false;
+        hasRuntimeDefault: false;
+        enumValues: undefined;
+        identity: undefined;
+        generated: undefined;
+    }>;
+    deletedAt: import("drizzle-orm/pg-core").PgBuildColumn<"designations", import("drizzle-orm/pg-core").PgTimestampBuilder, {
+        name: string;
+        tableName: "designations";
+        dataType: "object date";
+        data: Date;
+        driverParam: string;
+        notNull: false;
+        hasDefault: false;
+        isPrimaryKey: false;
+        isAutoincrement: false;
+        hasRuntimeDefault: false;
+        enumValues: undefined;
+        identity: undefined;
+        generated: undefined;
+    }>;
+    tenantId: import("drizzle-orm/pg-core").PgBuildColumn<"designations", import("drizzle-orm/pg-core").SetNotNull<import("drizzle-orm/pg-core").PgUUIDBuilder>, {
+        name: string;
+        tableName: "designations";
+        dataType: "string uuid";
+        data: string;
+        driverParam: string;
+        notNull: true;
+        hasDefault: false;
+        isPrimaryKey: false;
+        isAutoincrement: false;
+        hasRuntimeDefault: false;
+        enumValues: undefined;
+        identity: undefined;
+        generated: undefined;
+    }>;
     name: import("drizzle-orm/pg-core").PgBuildColumn<"designations", import("drizzle-orm/pg-core").SetNotNull<import("drizzle-orm/pg-core").PgVarcharBuilder<[string, ...string[]]>>, {
         name: string;
         tableName: "designations";
@@ -2406,9 +2481,56 @@ export declare const selectDesignationSchema: import("drizzle-orm/zod").BuildSch
         identity: undefined;
         generated: undefined;
     }>;
-    deletedAt: import("drizzle-orm/pg-core").PgBuildColumn<"designations", import("drizzle-orm/pg-core").PgTimestampBuilder, {
+}, undefined, undefined>;
+export declare const insertEmployeeSchema: import("drizzle-orm/zod").BuildSchema<"insert", {
+    id: import("drizzle-orm/pg-core").PgBuildColumn<"employees", import("drizzle-orm/pg-core").SetHasRuntimeDefault<import("drizzle-orm/pg-core").SetIsPrimaryKey<import("drizzle-orm/pg-core").PgUUIDBuilder>>, {
         name: string;
-        tableName: "designations";
+        tableName: "employees";
+        dataType: "string uuid";
+        data: string;
+        driverParam: string;
+        notNull: true;
+        hasDefault: true;
+        isPrimaryKey: false;
+        isAutoincrement: false;
+        hasRuntimeDefault: false;
+        enumValues: undefined;
+        identity: undefined;
+        generated: undefined;
+    }>;
+    createdAt: import("drizzle-orm/pg-core").PgBuildColumn<"employees", import("drizzle-orm/pg-core").SetHasDefault<import("drizzle-orm/pg-core").SetNotNull<import("drizzle-orm/pg-core").PgTimestampBuilder>>, {
+        name: string;
+        tableName: "employees";
+        dataType: "object date";
+        data: Date;
+        driverParam: string;
+        notNull: true;
+        hasDefault: true;
+        isPrimaryKey: false;
+        isAutoincrement: false;
+        hasRuntimeDefault: false;
+        enumValues: undefined;
+        identity: undefined;
+        generated: undefined;
+    }>;
+    updatedAt: import("drizzle-orm/pg-core").PgBuildColumn<"employees", import("drizzle-orm/pg-core").SetHasDefault<import("drizzle-orm/pg-core").SetNotNull<import("drizzle-orm/pg-core").PgTimestampBuilder>>, {
+        name: string;
+        tableName: "employees";
+        dataType: "object date";
+        data: Date;
+        driverParam: string;
+        notNull: true;
+        hasDefault: true;
+        isPrimaryKey: false;
+        isAutoincrement: false;
+        hasRuntimeDefault: false;
+        enumValues: undefined;
+        identity: undefined;
+        generated: undefined;
+    }>;
+    deletedAt: import("drizzle-orm/pg-core").PgBuildColumn<"employees", import("drizzle-orm/pg-core").PgTimestampBuilder, {
+        name: string;
+        tableName: "employees";
         dataType: "object date";
         data: Date;
         driverParam: string;
@@ -2421,9 +2543,9 @@ export declare const selectDesignationSchema: import("drizzle-orm/zod").BuildSch
         identity: undefined;
         generated: undefined;
     }>;
-    tenantId: import("drizzle-orm/pg-core").PgBuildColumn<"designations", import("drizzle-orm/pg-core").SetNotNull<import("drizzle-orm/pg-core").PgUUIDBuilder>, {
+    tenantId: import("drizzle-orm/pg-core").PgBuildColumn<"employees", import("drizzle-orm/pg-core").SetNotNull<import("drizzle-orm/pg-core").PgUUIDBuilder>, {
         name: string;
-        tableName: "designations";
+        tableName: "employees";
         dataType: "string uuid";
         data: string;
         driverParam: string;
@@ -2436,53 +2558,6 @@ export declare const selectDesignationSchema: import("drizzle-orm/zod").BuildSch
         identity: undefined;
         generated: undefined;
     }>;
-    id: import("drizzle-orm/pg-core").PgBuildColumn<"designations", import("drizzle-orm/pg-core").SetHasRuntimeDefault<import("drizzle-orm/pg-core").SetIsPrimaryKey<import("drizzle-orm/pg-core").PgUUIDBuilder>>, {
-        name: string;
-        tableName: "designations";
-        dataType: "string uuid";
-        data: string;
-        driverParam: string;
-        notNull: true;
-        hasDefault: true;
-        isPrimaryKey: false;
-        isAutoincrement: false;
-        hasRuntimeDefault: false;
-        enumValues: undefined;
-        identity: undefined;
-        generated: undefined;
-    }>;
-    createdAt: import("drizzle-orm/pg-core").PgBuildColumn<"designations", import("drizzle-orm/pg-core").SetHasDefault<import("drizzle-orm/pg-core").SetNotNull<import("drizzle-orm/pg-core").PgTimestampBuilder>>, {
-        name: string;
-        tableName: "designations";
-        dataType: "object date";
-        data: Date;
-        driverParam: string;
-        notNull: true;
-        hasDefault: true;
-        isPrimaryKey: false;
-        isAutoincrement: false;
-        hasRuntimeDefault: false;
-        enumValues: undefined;
-        identity: undefined;
-        generated: undefined;
-    }>;
-    updatedAt: import("drizzle-orm/pg-core").PgBuildColumn<"designations", import("drizzle-orm/pg-core").SetHasDefault<import("drizzle-orm/pg-core").SetNotNull<import("drizzle-orm/pg-core").PgTimestampBuilder>>, {
-        name: string;
-        tableName: "designations";
-        dataType: "object date";
-        data: Date;
-        driverParam: string;
-        notNull: true;
-        hasDefault: true;
-        isPrimaryKey: false;
-        isAutoincrement: false;
-        hasRuntimeDefault: false;
-        enumValues: undefined;
-        identity: undefined;
-        generated: undefined;
-    }>;
-}, undefined, undefined>;
-export declare const insertEmployeeSchema: import("drizzle-orm/zod").BuildSchema<"insert", {
     userId: import("drizzle-orm/pg-core").PgBuildColumn<"employees", import("drizzle-orm/pg-core").PgUUIDBuilder, {
         name: string;
         tableName: "employees";
@@ -2622,7 +2697,7 @@ export declare const insertEmployeeSchema: import("drizzle-orm/zod").BuildSchema
         name: string;
         tableName: "employees";
         dataType: "string enum";
-        data: "full_time" | "part_time" | "contract" | "intern";
+        data: "contract" | "full_time" | "intern" | "part_time";
         driverParam: string;
         notNull: true;
         hasDefault: false;
@@ -2645,81 +2720,6 @@ export declare const insertEmployeeSchema: import("drizzle-orm/zod").BuildSchema
         isAutoincrement: false;
         hasRuntimeDefault: false;
         enumValues: ["active", "on_leave", "terminated"];
-        identity: undefined;
-        generated: undefined;
-    }>;
-    deletedAt: import("drizzle-orm/pg-core").PgBuildColumn<"employees", import("drizzle-orm/pg-core").PgTimestampBuilder, {
-        name: string;
-        tableName: "employees";
-        dataType: "object date";
-        data: Date;
-        driverParam: string;
-        notNull: false;
-        hasDefault: false;
-        isPrimaryKey: false;
-        isAutoincrement: false;
-        hasRuntimeDefault: false;
-        enumValues: undefined;
-        identity: undefined;
-        generated: undefined;
-    }>;
-    tenantId: import("drizzle-orm/pg-core").PgBuildColumn<"employees", import("drizzle-orm/pg-core").SetNotNull<import("drizzle-orm/pg-core").PgUUIDBuilder>, {
-        name: string;
-        tableName: "employees";
-        dataType: "string uuid";
-        data: string;
-        driverParam: string;
-        notNull: true;
-        hasDefault: false;
-        isPrimaryKey: false;
-        isAutoincrement: false;
-        hasRuntimeDefault: false;
-        enumValues: undefined;
-        identity: undefined;
-        generated: undefined;
-    }>;
-    id: import("drizzle-orm/pg-core").PgBuildColumn<"employees", import("drizzle-orm/pg-core").SetHasRuntimeDefault<import("drizzle-orm/pg-core").SetIsPrimaryKey<import("drizzle-orm/pg-core").PgUUIDBuilder>>, {
-        name: string;
-        tableName: "employees";
-        dataType: "string uuid";
-        data: string;
-        driverParam: string;
-        notNull: true;
-        hasDefault: true;
-        isPrimaryKey: false;
-        isAutoincrement: false;
-        hasRuntimeDefault: false;
-        enumValues: undefined;
-        identity: undefined;
-        generated: undefined;
-    }>;
-    createdAt: import("drizzle-orm/pg-core").PgBuildColumn<"employees", import("drizzle-orm/pg-core").SetHasDefault<import("drizzle-orm/pg-core").SetNotNull<import("drizzle-orm/pg-core").PgTimestampBuilder>>, {
-        name: string;
-        tableName: "employees";
-        dataType: "object date";
-        data: Date;
-        driverParam: string;
-        notNull: true;
-        hasDefault: true;
-        isPrimaryKey: false;
-        isAutoincrement: false;
-        hasRuntimeDefault: false;
-        enumValues: undefined;
-        identity: undefined;
-        generated: undefined;
-    }>;
-    updatedAt: import("drizzle-orm/pg-core").PgBuildColumn<"employees", import("drizzle-orm/pg-core").SetHasDefault<import("drizzle-orm/pg-core").SetNotNull<import("drizzle-orm/pg-core").PgTimestampBuilder>>, {
-        name: string;
-        tableName: "employees";
-        dataType: "object date";
-        data: Date;
-        driverParam: string;
-        notNull: true;
-        hasDefault: true;
-        isPrimaryKey: false;
-        isAutoincrement: false;
-        hasRuntimeDefault: false;
-        enumValues: undefined;
         identity: undefined;
         generated: undefined;
     }>;
@@ -2729,6 +2729,81 @@ export declare const insertEmployeeSchema: import("drizzle-orm/zod").BuildSchema
     email: (schema: import("zod").ZodString) => import("zod").ZodString;
 }, undefined>;
 export declare const selectEmployeeSchema: import("drizzle-orm/zod").BuildSchema<"select", {
+    id: import("drizzle-orm/pg-core").PgBuildColumn<"employees", import("drizzle-orm/pg-core").SetHasRuntimeDefault<import("drizzle-orm/pg-core").SetIsPrimaryKey<import("drizzle-orm/pg-core").PgUUIDBuilder>>, {
+        name: string;
+        tableName: "employees";
+        dataType: "string uuid";
+        data: string;
+        driverParam: string;
+        notNull: true;
+        hasDefault: true;
+        isPrimaryKey: false;
+        isAutoincrement: false;
+        hasRuntimeDefault: false;
+        enumValues: undefined;
+        identity: undefined;
+        generated: undefined;
+    }>;
+    createdAt: import("drizzle-orm/pg-core").PgBuildColumn<"employees", import("drizzle-orm/pg-core").SetHasDefault<import("drizzle-orm/pg-core").SetNotNull<import("drizzle-orm/pg-core").PgTimestampBuilder>>, {
+        name: string;
+        tableName: "employees";
+        dataType: "object date";
+        data: Date;
+        driverParam: string;
+        notNull: true;
+        hasDefault: true;
+        isPrimaryKey: false;
+        isAutoincrement: false;
+        hasRuntimeDefault: false;
+        enumValues: undefined;
+        identity: undefined;
+        generated: undefined;
+    }>;
+    updatedAt: import("drizzle-orm/pg-core").PgBuildColumn<"employees", import("drizzle-orm/pg-core").SetHasDefault<import("drizzle-orm/pg-core").SetNotNull<import("drizzle-orm/pg-core").PgTimestampBuilder>>, {
+        name: string;
+        tableName: "employees";
+        dataType: "object date";
+        data: Date;
+        driverParam: string;
+        notNull: true;
+        hasDefault: true;
+        isPrimaryKey: false;
+        isAutoincrement: false;
+        hasRuntimeDefault: false;
+        enumValues: undefined;
+        identity: undefined;
+        generated: undefined;
+    }>;
+    deletedAt: import("drizzle-orm/pg-core").PgBuildColumn<"employees", import("drizzle-orm/pg-core").PgTimestampBuilder, {
+        name: string;
+        tableName: "employees";
+        dataType: "object date";
+        data: Date;
+        driverParam: string;
+        notNull: false;
+        hasDefault: false;
+        isPrimaryKey: false;
+        isAutoincrement: false;
+        hasRuntimeDefault: false;
+        enumValues: undefined;
+        identity: undefined;
+        generated: undefined;
+    }>;
+    tenantId: import("drizzle-orm/pg-core").PgBuildColumn<"employees", import("drizzle-orm/pg-core").SetNotNull<import("drizzle-orm/pg-core").PgUUIDBuilder>, {
+        name: string;
+        tableName: "employees";
+        dataType: "string uuid";
+        data: string;
+        driverParam: string;
+        notNull: true;
+        hasDefault: false;
+        isPrimaryKey: false;
+        isAutoincrement: false;
+        hasRuntimeDefault: false;
+        enumValues: undefined;
+        identity: undefined;
+        generated: undefined;
+    }>;
     userId: import("drizzle-orm/pg-core").PgBuildColumn<"employees", import("drizzle-orm/pg-core").PgUUIDBuilder, {
         name: string;
         tableName: "employees";
@@ -2868,7 +2943,7 @@ export declare const selectEmployeeSchema: import("drizzle-orm/zod").BuildSchema
         name: string;
         tableName: "employees";
         dataType: "string enum";
-        data: "full_time" | "part_time" | "contract" | "intern";
+        data: "contract" | "full_time" | "intern" | "part_time";
         driverParam: string;
         notNull: true;
         hasDefault: false;
@@ -2894,83 +2969,38 @@ export declare const selectEmployeeSchema: import("drizzle-orm/zod").BuildSchema
         identity: undefined;
         generated: undefined;
     }>;
-    deletedAt: import("drizzle-orm/pg-core").PgBuildColumn<"employees", import("drizzle-orm/pg-core").PgTimestampBuilder, {
-        name: string;
-        tableName: "employees";
-        dataType: "object date";
-        data: Date;
-        driverParam: string;
-        notNull: false;
-        hasDefault: false;
-        isPrimaryKey: false;
-        isAutoincrement: false;
-        hasRuntimeDefault: false;
-        enumValues: undefined;
-        identity: undefined;
-        generated: undefined;
-    }>;
-    tenantId: import("drizzle-orm/pg-core").PgBuildColumn<"employees", import("drizzle-orm/pg-core").SetNotNull<import("drizzle-orm/pg-core").PgUUIDBuilder>, {
-        name: string;
-        tableName: "employees";
-        dataType: "string uuid";
-        data: string;
-        driverParam: string;
-        notNull: true;
-        hasDefault: false;
-        isPrimaryKey: false;
-        isAutoincrement: false;
-        hasRuntimeDefault: false;
-        enumValues: undefined;
-        identity: undefined;
-        generated: undefined;
-    }>;
-    id: import("drizzle-orm/pg-core").PgBuildColumn<"employees", import("drizzle-orm/pg-core").SetHasRuntimeDefault<import("drizzle-orm/pg-core").SetIsPrimaryKey<import("drizzle-orm/pg-core").PgUUIDBuilder>>, {
-        name: string;
-        tableName: "employees";
-        dataType: "string uuid";
-        data: string;
-        driverParam: string;
-        notNull: true;
-        hasDefault: true;
-        isPrimaryKey: false;
-        isAutoincrement: false;
-        hasRuntimeDefault: false;
-        enumValues: undefined;
-        identity: undefined;
-        generated: undefined;
-    }>;
-    createdAt: import("drizzle-orm/pg-core").PgBuildColumn<"employees", import("drizzle-orm/pg-core").SetHasDefault<import("drizzle-orm/pg-core").SetNotNull<import("drizzle-orm/pg-core").PgTimestampBuilder>>, {
-        name: string;
-        tableName: "employees";
-        dataType: "object date";
-        data: Date;
-        driverParam: string;
-        notNull: true;
-        hasDefault: true;
-        isPrimaryKey: false;
-        isAutoincrement: false;
-        hasRuntimeDefault: false;
-        enumValues: undefined;
-        identity: undefined;
-        generated: undefined;
-    }>;
-    updatedAt: import("drizzle-orm/pg-core").PgBuildColumn<"employees", import("drizzle-orm/pg-core").SetHasDefault<import("drizzle-orm/pg-core").SetNotNull<import("drizzle-orm/pg-core").PgTimestampBuilder>>, {
-        name: string;
-        tableName: "employees";
-        dataType: "object date";
-        data: Date;
-        driverParam: string;
-        notNull: true;
-        hasDefault: true;
-        isPrimaryKey: false;
-        isAutoincrement: false;
-        hasRuntimeDefault: false;
-        enumValues: undefined;
-        identity: undefined;
-        generated: undefined;
-    }>;
 }, undefined, undefined>;
 export declare const insertAttendanceSchema: import("drizzle-orm/zod").BuildSchema<"insert", {
+    tenantId: import("drizzle-orm/pg-core").PgBuildColumn<"attendance", import("drizzle-orm/pg-core").SetNotNull<import("drizzle-orm/pg-core").PgUUIDBuilder>, {
+        name: string;
+        tableName: "attendance";
+        dataType: "string uuid";
+        data: string;
+        driverParam: string;
+        notNull: true;
+        hasDefault: false;
+        isPrimaryKey: false;
+        isAutoincrement: false;
+        hasRuntimeDefault: false;
+        enumValues: undefined;
+        identity: undefined;
+        generated: undefined;
+    }>;
+    id: import("drizzle-orm/pg-core").PgBuildColumn<"attendance", import("drizzle-orm/pg-core").SetHasRuntimeDefault<import("drizzle-orm/pg-core").SetIsPrimaryKey<import("drizzle-orm/pg-core").PgUUIDBuilder>>, {
+        name: string;
+        tableName: "attendance";
+        dataType: "string uuid";
+        data: string;
+        driverParam: string;
+        notNull: true;
+        hasDefault: true;
+        isPrimaryKey: false;
+        isAutoincrement: false;
+        hasRuntimeDefault: false;
+        enumValues: undefined;
+        identity: undefined;
+        generated: undefined;
+    }>;
     employeeId: import("drizzle-orm/pg-core").PgBuildColumn<"attendance", import("drizzle-orm/pg-core").SetNotNull<import("drizzle-orm/pg-core").PgUUIDBuilder>, {
         name: string;
         tableName: "attendance";
@@ -3035,7 +3065,7 @@ export declare const insertAttendanceSchema: import("drizzle-orm/zod").BuildSche
         name: string;
         tableName: "attendance";
         dataType: "string enum";
-        data: "present" | "absent" | "half_day" | "work_from_home";
+        data: "absent" | "half_day" | "present" | "work_from_home";
         driverParam: string;
         notNull: true;
         hasDefault: false;
@@ -3111,36 +3141,6 @@ export declare const insertAttendanceSchema: import("drizzle-orm/zod").BuildSche
         tableName: "attendance";
         dataType: "object date";
         data: Date;
-        driverParam: string;
-        notNull: true;
-        hasDefault: true;
-        isPrimaryKey: false;
-        isAutoincrement: false;
-        hasRuntimeDefault: false;
-        enumValues: undefined;
-        identity: undefined;
-        generated: undefined;
-    }>;
-    tenantId: import("drizzle-orm/pg-core").PgBuildColumn<"attendance", import("drizzle-orm/pg-core").SetNotNull<import("drizzle-orm/pg-core").PgUUIDBuilder>, {
-        name: string;
-        tableName: "attendance";
-        dataType: "string uuid";
-        data: string;
-        driverParam: string;
-        notNull: true;
-        hasDefault: false;
-        isPrimaryKey: false;
-        isAutoincrement: false;
-        hasRuntimeDefault: false;
-        enumValues: undefined;
-        identity: undefined;
-        generated: undefined;
-    }>;
-    id: import("drizzle-orm/pg-core").PgBuildColumn<"attendance", import("drizzle-orm/pg-core").SetHasRuntimeDefault<import("drizzle-orm/pg-core").SetIsPrimaryKey<import("drizzle-orm/pg-core").PgUUIDBuilder>>, {
-        name: string;
-        tableName: "attendance";
-        dataType: "string uuid";
-        data: string;
         driverParam: string;
         notNull: true;
         hasDefault: true;
@@ -3153,6 +3153,36 @@ export declare const insertAttendanceSchema: import("drizzle-orm/zod").BuildSche
     }>;
 }, undefined, undefined>;
 export declare const selectAttendanceSchema: import("drizzle-orm/zod").BuildSchema<"select", {
+    tenantId: import("drizzle-orm/pg-core").PgBuildColumn<"attendance", import("drizzle-orm/pg-core").SetNotNull<import("drizzle-orm/pg-core").PgUUIDBuilder>, {
+        name: string;
+        tableName: "attendance";
+        dataType: "string uuid";
+        data: string;
+        driverParam: string;
+        notNull: true;
+        hasDefault: false;
+        isPrimaryKey: false;
+        isAutoincrement: false;
+        hasRuntimeDefault: false;
+        enumValues: undefined;
+        identity: undefined;
+        generated: undefined;
+    }>;
+    id: import("drizzle-orm/pg-core").PgBuildColumn<"attendance", import("drizzle-orm/pg-core").SetHasRuntimeDefault<import("drizzle-orm/pg-core").SetIsPrimaryKey<import("drizzle-orm/pg-core").PgUUIDBuilder>>, {
+        name: string;
+        tableName: "attendance";
+        dataType: "string uuid";
+        data: string;
+        driverParam: string;
+        notNull: true;
+        hasDefault: true;
+        isPrimaryKey: false;
+        isAutoincrement: false;
+        hasRuntimeDefault: false;
+        enumValues: undefined;
+        identity: undefined;
+        generated: undefined;
+    }>;
     employeeId: import("drizzle-orm/pg-core").PgBuildColumn<"attendance", import("drizzle-orm/pg-core").SetNotNull<import("drizzle-orm/pg-core").PgUUIDBuilder>, {
         name: string;
         tableName: "attendance";
@@ -3217,7 +3247,7 @@ export declare const selectAttendanceSchema: import("drizzle-orm/zod").BuildSche
         name: string;
         tableName: "attendance";
         dataType: "string enum";
-        data: "present" | "absent" | "half_day" | "work_from_home";
+        data: "absent" | "half_day" | "present" | "work_from_home";
         driverParam: string;
         notNull: true;
         hasDefault: false;
@@ -3303,24 +3333,11 @@ export declare const selectAttendanceSchema: import("drizzle-orm/zod").BuildSche
         identity: undefined;
         generated: undefined;
     }>;
-    tenantId: import("drizzle-orm/pg-core").PgBuildColumn<"attendance", import("drizzle-orm/pg-core").SetNotNull<import("drizzle-orm/pg-core").PgUUIDBuilder>, {
+}, undefined, undefined>;
+export declare const insertLeaveTypeSchema: import("drizzle-orm/zod").BuildSchema<"insert", {
+    id: import("drizzle-orm/pg-core").PgBuildColumn<"leave_types", import("drizzle-orm/pg-core").SetHasRuntimeDefault<import("drizzle-orm/pg-core").SetIsPrimaryKey<import("drizzle-orm/pg-core").PgUUIDBuilder>>, {
         name: string;
-        tableName: "attendance";
-        dataType: "string uuid";
-        data: string;
-        driverParam: string;
-        notNull: true;
-        hasDefault: false;
-        isPrimaryKey: false;
-        isAutoincrement: false;
-        hasRuntimeDefault: false;
-        enumValues: undefined;
-        identity: undefined;
-        generated: undefined;
-    }>;
-    id: import("drizzle-orm/pg-core").PgBuildColumn<"attendance", import("drizzle-orm/pg-core").SetHasRuntimeDefault<import("drizzle-orm/pg-core").SetIsPrimaryKey<import("drizzle-orm/pg-core").PgUUIDBuilder>>, {
-        name: string;
-        tableName: "attendance";
+        tableName: "leave_types";
         dataType: "string uuid";
         data: string;
         driverParam: string;
@@ -3333,8 +3350,66 @@ export declare const selectAttendanceSchema: import("drizzle-orm/zod").BuildSche
         identity: undefined;
         generated: undefined;
     }>;
-}, undefined, undefined>;
-export declare const insertLeaveTypeSchema: import("drizzle-orm/zod").BuildSchema<"insert", {
+    createdAt: import("drizzle-orm/pg-core").PgBuildColumn<"leave_types", import("drizzle-orm/pg-core").SetHasDefault<import("drizzle-orm/pg-core").SetNotNull<import("drizzle-orm/pg-core").PgTimestampBuilder>>, {
+        name: string;
+        tableName: "leave_types";
+        dataType: "object date";
+        data: Date;
+        driverParam: string;
+        notNull: true;
+        hasDefault: true;
+        isPrimaryKey: false;
+        isAutoincrement: false;
+        hasRuntimeDefault: false;
+        enumValues: undefined;
+        identity: undefined;
+        generated: undefined;
+    }>;
+    updatedAt: import("drizzle-orm/pg-core").PgBuildColumn<"leave_types", import("drizzle-orm/pg-core").SetHasDefault<import("drizzle-orm/pg-core").SetNotNull<import("drizzle-orm/pg-core").PgTimestampBuilder>>, {
+        name: string;
+        tableName: "leave_types";
+        dataType: "object date";
+        data: Date;
+        driverParam: string;
+        notNull: true;
+        hasDefault: true;
+        isPrimaryKey: false;
+        isAutoincrement: false;
+        hasRuntimeDefault: false;
+        enumValues: undefined;
+        identity: undefined;
+        generated: undefined;
+    }>;
+    deletedAt: import("drizzle-orm/pg-core").PgBuildColumn<"leave_types", import("drizzle-orm/pg-core").PgTimestampBuilder, {
+        name: string;
+        tableName: "leave_types";
+        dataType: "object date";
+        data: Date;
+        driverParam: string;
+        notNull: false;
+        hasDefault: false;
+        isPrimaryKey: false;
+        isAutoincrement: false;
+        hasRuntimeDefault: false;
+        enumValues: undefined;
+        identity: undefined;
+        generated: undefined;
+    }>;
+    tenantId: import("drizzle-orm/pg-core").PgBuildColumn<"leave_types", import("drizzle-orm/pg-core").SetNotNull<import("drizzle-orm/pg-core").PgUUIDBuilder>, {
+        name: string;
+        tableName: "leave_types";
+        dataType: "string uuid";
+        data: string;
+        driverParam: string;
+        notNull: true;
+        hasDefault: false;
+        isPrimaryKey: false;
+        isAutoincrement: false;
+        hasRuntimeDefault: false;
+        enumValues: undefined;
+        identity: undefined;
+        generated: undefined;
+    }>;
     name: import("drizzle-orm/pg-core").PgBuildColumn<"leave_types", import("drizzle-orm/pg-core").SetNotNull<import("drizzle-orm/pg-core").PgVarcharBuilder<[string, ...string[]]>>, {
         name: string;
         tableName: "leave_types";
@@ -3416,81 +3491,6 @@ export declare const insertLeaveTypeSchema: import("drizzle-orm/zod").BuildSchem
         dataType: "boolean";
         data: boolean;
         driverParam: boolean;
-        notNull: true;
-        hasDefault: true;
-        isPrimaryKey: false;
-        isAutoincrement: false;
-        hasRuntimeDefault: false;
-        enumValues: undefined;
-        identity: undefined;
-        generated: undefined;
-    }>;
-    deletedAt: import("drizzle-orm/pg-core").PgBuildColumn<"leave_types", import("drizzle-orm/pg-core").PgTimestampBuilder, {
-        name: string;
-        tableName: "leave_types";
-        dataType: "object date";
-        data: Date;
-        driverParam: string;
-        notNull: false;
-        hasDefault: false;
-        isPrimaryKey: false;
-        isAutoincrement: false;
-        hasRuntimeDefault: false;
-        enumValues: undefined;
-        identity: undefined;
-        generated: undefined;
-    }>;
-    tenantId: import("drizzle-orm/pg-core").PgBuildColumn<"leave_types", import("drizzle-orm/pg-core").SetNotNull<import("drizzle-orm/pg-core").PgUUIDBuilder>, {
-        name: string;
-        tableName: "leave_types";
-        dataType: "string uuid";
-        data: string;
-        driverParam: string;
-        notNull: true;
-        hasDefault: false;
-        isPrimaryKey: false;
-        isAutoincrement: false;
-        hasRuntimeDefault: false;
-        enumValues: undefined;
-        identity: undefined;
-        generated: undefined;
-    }>;
-    id: import("drizzle-orm/pg-core").PgBuildColumn<"leave_types", import("drizzle-orm/pg-core").SetHasRuntimeDefault<import("drizzle-orm/pg-core").SetIsPrimaryKey<import("drizzle-orm/pg-core").PgUUIDBuilder>>, {
-        name: string;
-        tableName: "leave_types";
-        dataType: "string uuid";
-        data: string;
-        driverParam: string;
-        notNull: true;
-        hasDefault: true;
-        isPrimaryKey: false;
-        isAutoincrement: false;
-        hasRuntimeDefault: false;
-        enumValues: undefined;
-        identity: undefined;
-        generated: undefined;
-    }>;
-    createdAt: import("drizzle-orm/pg-core").PgBuildColumn<"leave_types", import("drizzle-orm/pg-core").SetHasDefault<import("drizzle-orm/pg-core").SetNotNull<import("drizzle-orm/pg-core").PgTimestampBuilder>>, {
-        name: string;
-        tableName: "leave_types";
-        dataType: "object date";
-        data: Date;
-        driverParam: string;
-        notNull: true;
-        hasDefault: true;
-        isPrimaryKey: false;
-        isAutoincrement: false;
-        hasRuntimeDefault: false;
-        enumValues: undefined;
-        identity: undefined;
-        generated: undefined;
-    }>;
-    updatedAt: import("drizzle-orm/pg-core").PgBuildColumn<"leave_types", import("drizzle-orm/pg-core").SetHasDefault<import("drizzle-orm/pg-core").SetNotNull<import("drizzle-orm/pg-core").PgTimestampBuilder>>, {
-        name: string;
-        tableName: "leave_types";
-        dataType: "object date";
-        data: Date;
-        driverParam: string;
         notNull: true;
         hasDefault: true;
         isPrimaryKey: false;
@@ -3505,6 +3505,81 @@ export declare const insertLeaveTypeSchema: import("drizzle-orm/zod").BuildSchem
     code: (schema: import("zod").ZodString) => import("zod").ZodString;
 }, undefined>;
 export declare const selectLeaveTypeSchema: import("drizzle-orm/zod").BuildSchema<"select", {
+    id: import("drizzle-orm/pg-core").PgBuildColumn<"leave_types", import("drizzle-orm/pg-core").SetHasRuntimeDefault<import("drizzle-orm/pg-core").SetIsPrimaryKey<import("drizzle-orm/pg-core").PgUUIDBuilder>>, {
+        name: string;
+        tableName: "leave_types";
+        dataType: "string uuid";
+        data: string;
+        driverParam: string;
+        notNull: true;
+        hasDefault: true;
+        isPrimaryKey: false;
+        isAutoincrement: false;
+        hasRuntimeDefault: false;
+        enumValues: undefined;
+        identity: undefined;
+        generated: undefined;
+    }>;
+    createdAt: import("drizzle-orm/pg-core").PgBuildColumn<"leave_types", import("drizzle-orm/pg-core").SetHasDefault<import("drizzle-orm/pg-core").SetNotNull<import("drizzle-orm/pg-core").PgTimestampBuilder>>, {
+        name: string;
+        tableName: "leave_types";
+        dataType: "object date";
+        data: Date;
+        driverParam: string;
+        notNull: true;
+        hasDefault: true;
+        isPrimaryKey: false;
+        isAutoincrement: false;
+        hasRuntimeDefault: false;
+        enumValues: undefined;
+        identity: undefined;
+        generated: undefined;
+    }>;
+    updatedAt: import("drizzle-orm/pg-core").PgBuildColumn<"leave_types", import("drizzle-orm/pg-core").SetHasDefault<import("drizzle-orm/pg-core").SetNotNull<import("drizzle-orm/pg-core").PgTimestampBuilder>>, {
+        name: string;
+        tableName: "leave_types";
+        dataType: "object date";
+        data: Date;
+        driverParam: string;
+        notNull: true;
+        hasDefault: true;
+        isPrimaryKey: false;
+        isAutoincrement: false;
+        hasRuntimeDefault: false;
+        enumValues: undefined;
+        identity: undefined;
+        generated: undefined;
+    }>;
+    deletedAt: import("drizzle-orm/pg-core").PgBuildColumn<"leave_types", import("drizzle-orm/pg-core").PgTimestampBuilder, {
+        name: string;
+        tableName: "leave_types";
+        dataType: "object date";
+        data: Date;
+        driverParam: string;
+        notNull: false;
+        hasDefault: false;
+        isPrimaryKey: false;
+        isAutoincrement: false;
+        hasRuntimeDefault: false;
+        enumValues: undefined;
+        identity: undefined;
+        generated: undefined;
+    }>;
+    tenantId: import("drizzle-orm/pg-core").PgBuildColumn<"leave_types", import("drizzle-orm/pg-core").SetNotNull<import("drizzle-orm/pg-core").PgUUIDBuilder>, {
+        name: string;
+        tableName: "leave_types";
+        dataType: "string uuid";
+        data: string;
+        driverParam: string;
+        notNull: true;
+        hasDefault: false;
+        isPrimaryKey: false;
+        isAutoincrement: false;
+        hasRuntimeDefault: false;
+        enumValues: undefined;
+        identity: undefined;
+        generated: undefined;
+    }>;
     name: import("drizzle-orm/pg-core").PgBuildColumn<"leave_types", import("drizzle-orm/pg-core").SetNotNull<import("drizzle-orm/pg-core").PgVarcharBuilder<[string, ...string[]]>>, {
         name: string;
         tableName: "leave_types";
@@ -3595,9 +3670,56 @@ export declare const selectLeaveTypeSchema: import("drizzle-orm/zod").BuildSchem
         identity: undefined;
         generated: undefined;
     }>;
-    deletedAt: import("drizzle-orm/pg-core").PgBuildColumn<"leave_types", import("drizzle-orm/pg-core").PgTimestampBuilder, {
+}, undefined, undefined>;
+export declare const insertLeaveRequestSchema: import("drizzle-orm/zod").BuildSchema<"insert", {
+    id: import("drizzle-orm/pg-core").PgBuildColumn<"leave_requests", import("drizzle-orm/pg-core").SetHasRuntimeDefault<import("drizzle-orm/pg-core").SetIsPrimaryKey<import("drizzle-orm/pg-core").PgUUIDBuilder>>, {
         name: string;
-        tableName: "leave_types";
+        tableName: "leave_requests";
+        dataType: "string uuid";
+        data: string;
+        driverParam: string;
+        notNull: true;
+        hasDefault: true;
+        isPrimaryKey: false;
+        isAutoincrement: false;
+        hasRuntimeDefault: false;
+        enumValues: undefined;
+        identity: undefined;
+        generated: undefined;
+    }>;
+    createdAt: import("drizzle-orm/pg-core").PgBuildColumn<"leave_requests", import("drizzle-orm/pg-core").SetHasDefault<import("drizzle-orm/pg-core").SetNotNull<import("drizzle-orm/pg-core").PgTimestampBuilder>>, {
+        name: string;
+        tableName: "leave_requests";
+        dataType: "object date";
+        data: Date;
+        driverParam: string;
+        notNull: true;
+        hasDefault: true;
+        isPrimaryKey: false;
+        isAutoincrement: false;
+        hasRuntimeDefault: false;
+        enumValues: undefined;
+        identity: undefined;
+        generated: undefined;
+    }>;
+    updatedAt: import("drizzle-orm/pg-core").PgBuildColumn<"leave_requests", import("drizzle-orm/pg-core").SetHasDefault<import("drizzle-orm/pg-core").SetNotNull<import("drizzle-orm/pg-core").PgTimestampBuilder>>, {
+        name: string;
+        tableName: "leave_requests";
+        dataType: "object date";
+        data: Date;
+        driverParam: string;
+        notNull: true;
+        hasDefault: true;
+        isPrimaryKey: false;
+        isAutoincrement: false;
+        hasRuntimeDefault: false;
+        enumValues: undefined;
+        identity: undefined;
+        generated: undefined;
+    }>;
+    deletedAt: import("drizzle-orm/pg-core").PgBuildColumn<"leave_requests", import("drizzle-orm/pg-core").PgTimestampBuilder, {
+        name: string;
+        tableName: "leave_requests";
         dataType: "object date";
         data: Date;
         driverParam: string;
@@ -3610,9 +3732,9 @@ export declare const selectLeaveTypeSchema: import("drizzle-orm/zod").BuildSchem
         identity: undefined;
         generated: undefined;
     }>;
-    tenantId: import("drizzle-orm/pg-core").PgBuildColumn<"leave_types", import("drizzle-orm/pg-core").SetNotNull<import("drizzle-orm/pg-core").PgUUIDBuilder>, {
+    tenantId: import("drizzle-orm/pg-core").PgBuildColumn<"leave_requests", import("drizzle-orm/pg-core").SetNotNull<import("drizzle-orm/pg-core").PgUUIDBuilder>, {
         name: string;
-        tableName: "leave_types";
+        tableName: "leave_requests";
         dataType: "string uuid";
         data: string;
         driverParam: string;
@@ -3625,53 +3747,6 @@ export declare const selectLeaveTypeSchema: import("drizzle-orm/zod").BuildSchem
         identity: undefined;
         generated: undefined;
     }>;
-    id: import("drizzle-orm/pg-core").PgBuildColumn<"leave_types", import("drizzle-orm/pg-core").SetHasRuntimeDefault<import("drizzle-orm/pg-core").SetIsPrimaryKey<import("drizzle-orm/pg-core").PgUUIDBuilder>>, {
-        name: string;
-        tableName: "leave_types";
-        dataType: "string uuid";
-        data: string;
-        driverParam: string;
-        notNull: true;
-        hasDefault: true;
-        isPrimaryKey: false;
-        isAutoincrement: false;
-        hasRuntimeDefault: false;
-        enumValues: undefined;
-        identity: undefined;
-        generated: undefined;
-    }>;
-    createdAt: import("drizzle-orm/pg-core").PgBuildColumn<"leave_types", import("drizzle-orm/pg-core").SetHasDefault<import("drizzle-orm/pg-core").SetNotNull<import("drizzle-orm/pg-core").PgTimestampBuilder>>, {
-        name: string;
-        tableName: "leave_types";
-        dataType: "object date";
-        data: Date;
-        driverParam: string;
-        notNull: true;
-        hasDefault: true;
-        isPrimaryKey: false;
-        isAutoincrement: false;
-        hasRuntimeDefault: false;
-        enumValues: undefined;
-        identity: undefined;
-        generated: undefined;
-    }>;
-    updatedAt: import("drizzle-orm/pg-core").PgBuildColumn<"leave_types", import("drizzle-orm/pg-core").SetHasDefault<import("drizzle-orm/pg-core").SetNotNull<import("drizzle-orm/pg-core").PgTimestampBuilder>>, {
-        name: string;
-        tableName: "leave_types";
-        dataType: "object date";
-        data: Date;
-        driverParam: string;
-        notNull: true;
-        hasDefault: true;
-        isPrimaryKey: false;
-        isAutoincrement: false;
-        hasRuntimeDefault: false;
-        enumValues: undefined;
-        identity: undefined;
-        generated: undefined;
-    }>;
-}, undefined, undefined>;
-export declare const insertLeaveRequestSchema: import("drizzle-orm/zod").BuildSchema<"insert", {
     employeeId: import("drizzle-orm/pg-core").PgBuildColumn<"leave_requests", import("drizzle-orm/pg-core").SetNotNull<import("drizzle-orm/pg-core").PgUUIDBuilder>, {
         name: string;
         tableName: "leave_requests";
@@ -3766,7 +3841,7 @@ export declare const insertLeaveRequestSchema: import("drizzle-orm/zod").BuildSc
         name: string;
         tableName: "leave_requests";
         dataType: "string enum";
-        data: "approved" | "pending" | "cancelled" | "rejected";
+        data: "approved" | "cancelled" | "pending" | "rejected";
         driverParam: string;
         notNull: true;
         hasDefault: true;
@@ -3815,81 +3890,6 @@ export declare const insertLeaveRequestSchema: import("drizzle-orm/zod").BuildSc
         driverParam: string;
         notNull: false;
         hasDefault: false;
-        isPrimaryKey: false;
-        isAutoincrement: false;
-        hasRuntimeDefault: false;
-        enumValues: undefined;
-        identity: undefined;
-        generated: undefined;
-    }>;
-    deletedAt: import("drizzle-orm/pg-core").PgBuildColumn<"leave_requests", import("drizzle-orm/pg-core").PgTimestampBuilder, {
-        name: string;
-        tableName: "leave_requests";
-        dataType: "object date";
-        data: Date;
-        driverParam: string;
-        notNull: false;
-        hasDefault: false;
-        isPrimaryKey: false;
-        isAutoincrement: false;
-        hasRuntimeDefault: false;
-        enumValues: undefined;
-        identity: undefined;
-        generated: undefined;
-    }>;
-    tenantId: import("drizzle-orm/pg-core").PgBuildColumn<"leave_requests", import("drizzle-orm/pg-core").SetNotNull<import("drizzle-orm/pg-core").PgUUIDBuilder>, {
-        name: string;
-        tableName: "leave_requests";
-        dataType: "string uuid";
-        data: string;
-        driverParam: string;
-        notNull: true;
-        hasDefault: false;
-        isPrimaryKey: false;
-        isAutoincrement: false;
-        hasRuntimeDefault: false;
-        enumValues: undefined;
-        identity: undefined;
-        generated: undefined;
-    }>;
-    id: import("drizzle-orm/pg-core").PgBuildColumn<"leave_requests", import("drizzle-orm/pg-core").SetHasRuntimeDefault<import("drizzle-orm/pg-core").SetIsPrimaryKey<import("drizzle-orm/pg-core").PgUUIDBuilder>>, {
-        name: string;
-        tableName: "leave_requests";
-        dataType: "string uuid";
-        data: string;
-        driverParam: string;
-        notNull: true;
-        hasDefault: true;
-        isPrimaryKey: false;
-        isAutoincrement: false;
-        hasRuntimeDefault: false;
-        enumValues: undefined;
-        identity: undefined;
-        generated: undefined;
-    }>;
-    createdAt: import("drizzle-orm/pg-core").PgBuildColumn<"leave_requests", import("drizzle-orm/pg-core").SetHasDefault<import("drizzle-orm/pg-core").SetNotNull<import("drizzle-orm/pg-core").PgTimestampBuilder>>, {
-        name: string;
-        tableName: "leave_requests";
-        dataType: "object date";
-        data: Date;
-        driverParam: string;
-        notNull: true;
-        hasDefault: true;
-        isPrimaryKey: false;
-        isAutoincrement: false;
-        hasRuntimeDefault: false;
-        enumValues: undefined;
-        identity: undefined;
-        generated: undefined;
-    }>;
-    updatedAt: import("drizzle-orm/pg-core").PgBuildColumn<"leave_requests", import("drizzle-orm/pg-core").SetHasDefault<import("drizzle-orm/pg-core").SetNotNull<import("drizzle-orm/pg-core").PgTimestampBuilder>>, {
-        name: string;
-        tableName: "leave_requests";
-        dataType: "object date";
-        data: Date;
-        driverParam: string;
-        notNull: true;
-        hasDefault: true;
         isPrimaryKey: false;
         isAutoincrement: false;
         hasRuntimeDefault: false;
@@ -3899,6 +3899,81 @@ export declare const insertLeaveRequestSchema: import("drizzle-orm/zod").BuildSc
     }>;
 }, undefined, undefined>;
 export declare const selectLeaveRequestSchema: import("drizzle-orm/zod").BuildSchema<"select", {
+    id: import("drizzle-orm/pg-core").PgBuildColumn<"leave_requests", import("drizzle-orm/pg-core").SetHasRuntimeDefault<import("drizzle-orm/pg-core").SetIsPrimaryKey<import("drizzle-orm/pg-core").PgUUIDBuilder>>, {
+        name: string;
+        tableName: "leave_requests";
+        dataType: "string uuid";
+        data: string;
+        driverParam: string;
+        notNull: true;
+        hasDefault: true;
+        isPrimaryKey: false;
+        isAutoincrement: false;
+        hasRuntimeDefault: false;
+        enumValues: undefined;
+        identity: undefined;
+        generated: undefined;
+    }>;
+    createdAt: import("drizzle-orm/pg-core").PgBuildColumn<"leave_requests", import("drizzle-orm/pg-core").SetHasDefault<import("drizzle-orm/pg-core").SetNotNull<import("drizzle-orm/pg-core").PgTimestampBuilder>>, {
+        name: string;
+        tableName: "leave_requests";
+        dataType: "object date";
+        data: Date;
+        driverParam: string;
+        notNull: true;
+        hasDefault: true;
+        isPrimaryKey: false;
+        isAutoincrement: false;
+        hasRuntimeDefault: false;
+        enumValues: undefined;
+        identity: undefined;
+        generated: undefined;
+    }>;
+    updatedAt: import("drizzle-orm/pg-core").PgBuildColumn<"leave_requests", import("drizzle-orm/pg-core").SetHasDefault<import("drizzle-orm/pg-core").SetNotNull<import("drizzle-orm/pg-core").PgTimestampBuilder>>, {
+        name: string;
+        tableName: "leave_requests";
+        dataType: "object date";
+        data: Date;
+        driverParam: string;
+        notNull: true;
+        hasDefault: true;
+        isPrimaryKey: false;
+        isAutoincrement: false;
+        hasRuntimeDefault: false;
+        enumValues: undefined;
+        identity: undefined;
+        generated: undefined;
+    }>;
+    deletedAt: import("drizzle-orm/pg-core").PgBuildColumn<"leave_requests", import("drizzle-orm/pg-core").PgTimestampBuilder, {
+        name: string;
+        tableName: "leave_requests";
+        dataType: "object date";
+        data: Date;
+        driverParam: string;
+        notNull: false;
+        hasDefault: false;
+        isPrimaryKey: false;
+        isAutoincrement: false;
+        hasRuntimeDefault: false;
+        enumValues: undefined;
+        identity: undefined;
+        generated: undefined;
+    }>;
+    tenantId: import("drizzle-orm/pg-core").PgBuildColumn<"leave_requests", import("drizzle-orm/pg-core").SetNotNull<import("drizzle-orm/pg-core").PgUUIDBuilder>, {
+        name: string;
+        tableName: "leave_requests";
+        dataType: "string uuid";
+        data: string;
+        driverParam: string;
+        notNull: true;
+        hasDefault: false;
+        isPrimaryKey: false;
+        isAutoincrement: false;
+        hasRuntimeDefault: false;
+        enumValues: undefined;
+        identity: undefined;
+        generated: undefined;
+    }>;
     employeeId: import("drizzle-orm/pg-core").PgBuildColumn<"leave_requests", import("drizzle-orm/pg-core").SetNotNull<import("drizzle-orm/pg-core").PgUUIDBuilder>, {
         name: string;
         tableName: "leave_requests";
@@ -3993,7 +4068,7 @@ export declare const selectLeaveRequestSchema: import("drizzle-orm/zod").BuildSc
         name: string;
         tableName: "leave_requests";
         dataType: "string enum";
-        data: "approved" | "pending" | "cancelled" | "rejected";
+        data: "approved" | "cancelled" | "pending" | "rejected";
         driverParam: string;
         notNull: true;
         hasDefault: true;
@@ -4049,9 +4124,56 @@ export declare const selectLeaveRequestSchema: import("drizzle-orm/zod").BuildSc
         identity: undefined;
         generated: undefined;
     }>;
-    deletedAt: import("drizzle-orm/pg-core").PgBuildColumn<"leave_requests", import("drizzle-orm/pg-core").PgTimestampBuilder, {
+}, undefined, undefined>;
+export declare const insertSalarySchema: import("drizzle-orm/zod").BuildSchema<"insert", {
+    id: import("drizzle-orm/pg-core").PgBuildColumn<"salaries", import("drizzle-orm/pg-core").SetHasRuntimeDefault<import("drizzle-orm/pg-core").SetIsPrimaryKey<import("drizzle-orm/pg-core").PgUUIDBuilder>>, {
         name: string;
-        tableName: "leave_requests";
+        tableName: "salaries";
+        dataType: "string uuid";
+        data: string;
+        driverParam: string;
+        notNull: true;
+        hasDefault: true;
+        isPrimaryKey: false;
+        isAutoincrement: false;
+        hasRuntimeDefault: false;
+        enumValues: undefined;
+        identity: undefined;
+        generated: undefined;
+    }>;
+    createdAt: import("drizzle-orm/pg-core").PgBuildColumn<"salaries", import("drizzle-orm/pg-core").SetHasDefault<import("drizzle-orm/pg-core").SetNotNull<import("drizzle-orm/pg-core").PgTimestampBuilder>>, {
+        name: string;
+        tableName: "salaries";
+        dataType: "object date";
+        data: Date;
+        driverParam: string;
+        notNull: true;
+        hasDefault: true;
+        isPrimaryKey: false;
+        isAutoincrement: false;
+        hasRuntimeDefault: false;
+        enumValues: undefined;
+        identity: undefined;
+        generated: undefined;
+    }>;
+    updatedAt: import("drizzle-orm/pg-core").PgBuildColumn<"salaries", import("drizzle-orm/pg-core").SetHasDefault<import("drizzle-orm/pg-core").SetNotNull<import("drizzle-orm/pg-core").PgTimestampBuilder>>, {
+        name: string;
+        tableName: "salaries";
+        dataType: "object date";
+        data: Date;
+        driverParam: string;
+        notNull: true;
+        hasDefault: true;
+        isPrimaryKey: false;
+        isAutoincrement: false;
+        hasRuntimeDefault: false;
+        enumValues: undefined;
+        identity: undefined;
+        generated: undefined;
+    }>;
+    deletedAt: import("drizzle-orm/pg-core").PgBuildColumn<"salaries", import("drizzle-orm/pg-core").PgTimestampBuilder, {
+        name: string;
+        tableName: "salaries";
         dataType: "object date";
         data: Date;
         driverParam: string;
@@ -4064,9 +4186,9 @@ export declare const selectLeaveRequestSchema: import("drizzle-orm/zod").BuildSc
         identity: undefined;
         generated: undefined;
     }>;
-    tenantId: import("drizzle-orm/pg-core").PgBuildColumn<"leave_requests", import("drizzle-orm/pg-core").SetNotNull<import("drizzle-orm/pg-core").PgUUIDBuilder>, {
+    tenantId: import("drizzle-orm/pg-core").PgBuildColumn<"salaries", import("drizzle-orm/pg-core").SetNotNull<import("drizzle-orm/pg-core").PgUUIDBuilder>, {
         name: string;
-        tableName: "leave_requests";
+        tableName: "salaries";
         dataType: "string uuid";
         data: string;
         driverParam: string;
@@ -4079,53 +4201,6 @@ export declare const selectLeaveRequestSchema: import("drizzle-orm/zod").BuildSc
         identity: undefined;
         generated: undefined;
     }>;
-    id: import("drizzle-orm/pg-core").PgBuildColumn<"leave_requests", import("drizzle-orm/pg-core").SetHasRuntimeDefault<import("drizzle-orm/pg-core").SetIsPrimaryKey<import("drizzle-orm/pg-core").PgUUIDBuilder>>, {
-        name: string;
-        tableName: "leave_requests";
-        dataType: "string uuid";
-        data: string;
-        driverParam: string;
-        notNull: true;
-        hasDefault: true;
-        isPrimaryKey: false;
-        isAutoincrement: false;
-        hasRuntimeDefault: false;
-        enumValues: undefined;
-        identity: undefined;
-        generated: undefined;
-    }>;
-    createdAt: import("drizzle-orm/pg-core").PgBuildColumn<"leave_requests", import("drizzle-orm/pg-core").SetHasDefault<import("drizzle-orm/pg-core").SetNotNull<import("drizzle-orm/pg-core").PgTimestampBuilder>>, {
-        name: string;
-        tableName: "leave_requests";
-        dataType: "object date";
-        data: Date;
-        driverParam: string;
-        notNull: true;
-        hasDefault: true;
-        isPrimaryKey: false;
-        isAutoincrement: false;
-        hasRuntimeDefault: false;
-        enumValues: undefined;
-        identity: undefined;
-        generated: undefined;
-    }>;
-    updatedAt: import("drizzle-orm/pg-core").PgBuildColumn<"leave_requests", import("drizzle-orm/pg-core").SetHasDefault<import("drizzle-orm/pg-core").SetNotNull<import("drizzle-orm/pg-core").PgTimestampBuilder>>, {
-        name: string;
-        tableName: "leave_requests";
-        dataType: "object date";
-        data: Date;
-        driverParam: string;
-        notNull: true;
-        hasDefault: true;
-        isPrimaryKey: false;
-        isAutoincrement: false;
-        hasRuntimeDefault: false;
-        enumValues: undefined;
-        identity: undefined;
-        generated: undefined;
-    }>;
-}, undefined, undefined>;
-export declare const insertSalarySchema: import("drizzle-orm/zod").BuildSchema<"insert", {
     employeeId: import("drizzle-orm/pg-core").PgBuildColumn<"salaries", import("drizzle-orm/pg-core").SetNotNull<import("drizzle-orm/pg-core").PgUUIDBuilder>, {
         name: string;
         tableName: "salaries";
@@ -4175,7 +4250,7 @@ export declare const insertSalarySchema: import("drizzle-orm/zod").BuildSchema<"
         name: string;
         tableName: "salaries";
         dataType: "string enum";
-        data: "monthly" | "bi_weekly" | "weekly";
+        data: "bi_weekly" | "monthly" | "weekly";
         driverParam: string;
         notNull: true;
         hasDefault: true;
@@ -4207,81 +4282,6 @@ export declare const insertSalarySchema: import("drizzle-orm/zod").BuildSchema<"
         dataType: "boolean";
         data: boolean;
         driverParam: boolean;
-        notNull: true;
-        hasDefault: true;
-        isPrimaryKey: false;
-        isAutoincrement: false;
-        hasRuntimeDefault: false;
-        enumValues: undefined;
-        identity: undefined;
-        generated: undefined;
-    }>;
-    deletedAt: import("drizzle-orm/pg-core").PgBuildColumn<"salaries", import("drizzle-orm/pg-core").PgTimestampBuilder, {
-        name: string;
-        tableName: "salaries";
-        dataType: "object date";
-        data: Date;
-        driverParam: string;
-        notNull: false;
-        hasDefault: false;
-        isPrimaryKey: false;
-        isAutoincrement: false;
-        hasRuntimeDefault: false;
-        enumValues: undefined;
-        identity: undefined;
-        generated: undefined;
-    }>;
-    tenantId: import("drizzle-orm/pg-core").PgBuildColumn<"salaries", import("drizzle-orm/pg-core").SetNotNull<import("drizzle-orm/pg-core").PgUUIDBuilder>, {
-        name: string;
-        tableName: "salaries";
-        dataType: "string uuid";
-        data: string;
-        driverParam: string;
-        notNull: true;
-        hasDefault: false;
-        isPrimaryKey: false;
-        isAutoincrement: false;
-        hasRuntimeDefault: false;
-        enumValues: undefined;
-        identity: undefined;
-        generated: undefined;
-    }>;
-    id: import("drizzle-orm/pg-core").PgBuildColumn<"salaries", import("drizzle-orm/pg-core").SetHasRuntimeDefault<import("drizzle-orm/pg-core").SetIsPrimaryKey<import("drizzle-orm/pg-core").PgUUIDBuilder>>, {
-        name: string;
-        tableName: "salaries";
-        dataType: "string uuid";
-        data: string;
-        driverParam: string;
-        notNull: true;
-        hasDefault: true;
-        isPrimaryKey: false;
-        isAutoincrement: false;
-        hasRuntimeDefault: false;
-        enumValues: undefined;
-        identity: undefined;
-        generated: undefined;
-    }>;
-    createdAt: import("drizzle-orm/pg-core").PgBuildColumn<"salaries", import("drizzle-orm/pg-core").SetHasDefault<import("drizzle-orm/pg-core").SetNotNull<import("drizzle-orm/pg-core").PgTimestampBuilder>>, {
-        name: string;
-        tableName: "salaries";
-        dataType: "object date";
-        data: Date;
-        driverParam: string;
-        notNull: true;
-        hasDefault: true;
-        isPrimaryKey: false;
-        isAutoincrement: false;
-        hasRuntimeDefault: false;
-        enumValues: undefined;
-        identity: undefined;
-        generated: undefined;
-    }>;
-    updatedAt: import("drizzle-orm/pg-core").PgBuildColumn<"salaries", import("drizzle-orm/pg-core").SetHasDefault<import("drizzle-orm/pg-core").SetNotNull<import("drizzle-orm/pg-core").PgTimestampBuilder>>, {
-        name: string;
-        tableName: "salaries";
-        dataType: "object date";
-        data: Date;
-        driverParam: string;
         notNull: true;
         hasDefault: true;
         isPrimaryKey: false;
@@ -4293,6 +4293,81 @@ export declare const insertSalarySchema: import("drizzle-orm/zod").BuildSchema<"
     }>;
 }, undefined, undefined>;
 export declare const selectSalarySchema: import("drizzle-orm/zod").BuildSchema<"select", {
+    id: import("drizzle-orm/pg-core").PgBuildColumn<"salaries", import("drizzle-orm/pg-core").SetHasRuntimeDefault<import("drizzle-orm/pg-core").SetIsPrimaryKey<import("drizzle-orm/pg-core").PgUUIDBuilder>>, {
+        name: string;
+        tableName: "salaries";
+        dataType: "string uuid";
+        data: string;
+        driverParam: string;
+        notNull: true;
+        hasDefault: true;
+        isPrimaryKey: false;
+        isAutoincrement: false;
+        hasRuntimeDefault: false;
+        enumValues: undefined;
+        identity: undefined;
+        generated: undefined;
+    }>;
+    createdAt: import("drizzle-orm/pg-core").PgBuildColumn<"salaries", import("drizzle-orm/pg-core").SetHasDefault<import("drizzle-orm/pg-core").SetNotNull<import("drizzle-orm/pg-core").PgTimestampBuilder>>, {
+        name: string;
+        tableName: "salaries";
+        dataType: "object date";
+        data: Date;
+        driverParam: string;
+        notNull: true;
+        hasDefault: true;
+        isPrimaryKey: false;
+        isAutoincrement: false;
+        hasRuntimeDefault: false;
+        enumValues: undefined;
+        identity: undefined;
+        generated: undefined;
+    }>;
+    updatedAt: import("drizzle-orm/pg-core").PgBuildColumn<"salaries", import("drizzle-orm/pg-core").SetHasDefault<import("drizzle-orm/pg-core").SetNotNull<import("drizzle-orm/pg-core").PgTimestampBuilder>>, {
+        name: string;
+        tableName: "salaries";
+        dataType: "object date";
+        data: Date;
+        driverParam: string;
+        notNull: true;
+        hasDefault: true;
+        isPrimaryKey: false;
+        isAutoincrement: false;
+        hasRuntimeDefault: false;
+        enumValues: undefined;
+        identity: undefined;
+        generated: undefined;
+    }>;
+    deletedAt: import("drizzle-orm/pg-core").PgBuildColumn<"salaries", import("drizzle-orm/pg-core").PgTimestampBuilder, {
+        name: string;
+        tableName: "salaries";
+        dataType: "object date";
+        data: Date;
+        driverParam: string;
+        notNull: false;
+        hasDefault: false;
+        isPrimaryKey: false;
+        isAutoincrement: false;
+        hasRuntimeDefault: false;
+        enumValues: undefined;
+        identity: undefined;
+        generated: undefined;
+    }>;
+    tenantId: import("drizzle-orm/pg-core").PgBuildColumn<"salaries", import("drizzle-orm/pg-core").SetNotNull<import("drizzle-orm/pg-core").PgUUIDBuilder>, {
+        name: string;
+        tableName: "salaries";
+        dataType: "string uuid";
+        data: string;
+        driverParam: string;
+        notNull: true;
+        hasDefault: false;
+        isPrimaryKey: false;
+        isAutoincrement: false;
+        hasRuntimeDefault: false;
+        enumValues: undefined;
+        identity: undefined;
+        generated: undefined;
+    }>;
     employeeId: import("drizzle-orm/pg-core").PgBuildColumn<"salaries", import("drizzle-orm/pg-core").SetNotNull<import("drizzle-orm/pg-core").PgUUIDBuilder>, {
         name: string;
         tableName: "salaries";
@@ -4342,7 +4417,7 @@ export declare const selectSalarySchema: import("drizzle-orm/zod").BuildSchema<"
         name: string;
         tableName: "salaries";
         dataType: "string enum";
-        data: "monthly" | "bi_weekly" | "weekly";
+        data: "bi_weekly" | "monthly" | "weekly";
         driverParam: string;
         notNull: true;
         hasDefault: true;
@@ -4383,9 +4458,56 @@ export declare const selectSalarySchema: import("drizzle-orm/zod").BuildSchema<"
         identity: undefined;
         generated: undefined;
     }>;
-    deletedAt: import("drizzle-orm/pg-core").PgBuildColumn<"salaries", import("drizzle-orm/pg-core").PgTimestampBuilder, {
+}, undefined, undefined>;
+export declare const insertPayrollSchema: import("drizzle-orm/zod").BuildSchema<"insert", {
+    id: import("drizzle-orm/pg-core").PgBuildColumn<"payroll", import("drizzle-orm/pg-core").SetHasRuntimeDefault<import("drizzle-orm/pg-core").SetIsPrimaryKey<import("drizzle-orm/pg-core").PgUUIDBuilder>>, {
         name: string;
-        tableName: "salaries";
+        tableName: "payroll";
+        dataType: "string uuid";
+        data: string;
+        driverParam: string;
+        notNull: true;
+        hasDefault: true;
+        isPrimaryKey: false;
+        isAutoincrement: false;
+        hasRuntimeDefault: false;
+        enumValues: undefined;
+        identity: undefined;
+        generated: undefined;
+    }>;
+    createdAt: import("drizzle-orm/pg-core").PgBuildColumn<"payroll", import("drizzle-orm/pg-core").SetHasDefault<import("drizzle-orm/pg-core").SetNotNull<import("drizzle-orm/pg-core").PgTimestampBuilder>>, {
+        name: string;
+        tableName: "payroll";
+        dataType: "object date";
+        data: Date;
+        driverParam: string;
+        notNull: true;
+        hasDefault: true;
+        isPrimaryKey: false;
+        isAutoincrement: false;
+        hasRuntimeDefault: false;
+        enumValues: undefined;
+        identity: undefined;
+        generated: undefined;
+    }>;
+    updatedAt: import("drizzle-orm/pg-core").PgBuildColumn<"payroll", import("drizzle-orm/pg-core").SetHasDefault<import("drizzle-orm/pg-core").SetNotNull<import("drizzle-orm/pg-core").PgTimestampBuilder>>, {
+        name: string;
+        tableName: "payroll";
+        dataType: "object date";
+        data: Date;
+        driverParam: string;
+        notNull: true;
+        hasDefault: true;
+        isPrimaryKey: false;
+        isAutoincrement: false;
+        hasRuntimeDefault: false;
+        enumValues: undefined;
+        identity: undefined;
+        generated: undefined;
+    }>;
+    deletedAt: import("drizzle-orm/pg-core").PgBuildColumn<"payroll", import("drizzle-orm/pg-core").PgTimestampBuilder, {
+        name: string;
+        tableName: "payroll";
         dataType: "object date";
         data: Date;
         driverParam: string;
@@ -4398,9 +4520,9 @@ export declare const selectSalarySchema: import("drizzle-orm/zod").BuildSchema<"
         identity: undefined;
         generated: undefined;
     }>;
-    tenantId: import("drizzle-orm/pg-core").PgBuildColumn<"salaries", import("drizzle-orm/pg-core").SetNotNull<import("drizzle-orm/pg-core").PgUUIDBuilder>, {
+    tenantId: import("drizzle-orm/pg-core").PgBuildColumn<"payroll", import("drizzle-orm/pg-core").SetNotNull<import("drizzle-orm/pg-core").PgUUIDBuilder>, {
         name: string;
-        tableName: "salaries";
+        tableName: "payroll";
         dataType: "string uuid";
         data: string;
         driverParam: string;
@@ -4413,53 +4535,6 @@ export declare const selectSalarySchema: import("drizzle-orm/zod").BuildSchema<"
         identity: undefined;
         generated: undefined;
     }>;
-    id: import("drizzle-orm/pg-core").PgBuildColumn<"salaries", import("drizzle-orm/pg-core").SetHasRuntimeDefault<import("drizzle-orm/pg-core").SetIsPrimaryKey<import("drizzle-orm/pg-core").PgUUIDBuilder>>, {
-        name: string;
-        tableName: "salaries";
-        dataType: "string uuid";
-        data: string;
-        driverParam: string;
-        notNull: true;
-        hasDefault: true;
-        isPrimaryKey: false;
-        isAutoincrement: false;
-        hasRuntimeDefault: false;
-        enumValues: undefined;
-        identity: undefined;
-        generated: undefined;
-    }>;
-    createdAt: import("drizzle-orm/pg-core").PgBuildColumn<"salaries", import("drizzle-orm/pg-core").SetHasDefault<import("drizzle-orm/pg-core").SetNotNull<import("drizzle-orm/pg-core").PgTimestampBuilder>>, {
-        name: string;
-        tableName: "salaries";
-        dataType: "object date";
-        data: Date;
-        driverParam: string;
-        notNull: true;
-        hasDefault: true;
-        isPrimaryKey: false;
-        isAutoincrement: false;
-        hasRuntimeDefault: false;
-        enumValues: undefined;
-        identity: undefined;
-        generated: undefined;
-    }>;
-    updatedAt: import("drizzle-orm/pg-core").PgBuildColumn<"salaries", import("drizzle-orm/pg-core").SetHasDefault<import("drizzle-orm/pg-core").SetNotNull<import("drizzle-orm/pg-core").PgTimestampBuilder>>, {
-        name: string;
-        tableName: "salaries";
-        dataType: "object date";
-        data: Date;
-        driverParam: string;
-        notNull: true;
-        hasDefault: true;
-        isPrimaryKey: false;
-        isAutoincrement: false;
-        hasRuntimeDefault: false;
-        enumValues: undefined;
-        identity: undefined;
-        generated: undefined;
-    }>;
-}, undefined, undefined>;
-export declare const insertPayrollSchema: import("drizzle-orm/zod").BuildSchema<"insert", {
     employeeId: import("drizzle-orm/pg-core").PgBuildColumn<"payroll", import("drizzle-orm/pg-core").SetNotNull<import("drizzle-orm/pg-core").PgUUIDBuilder>, {
         name: string;
         tableName: "payroll";
@@ -4603,81 +4678,6 @@ export declare const insertPayrollSchema: import("drizzle-orm/zod").BuildSchema<
         driverParam: string;
         notNull: false;
         hasDefault: false;
-        isPrimaryKey: false;
-        isAutoincrement: false;
-        hasRuntimeDefault: false;
-        enumValues: undefined;
-        identity: undefined;
-        generated: undefined;
-    }>;
-    deletedAt: import("drizzle-orm/pg-core").PgBuildColumn<"payroll", import("drizzle-orm/pg-core").PgTimestampBuilder, {
-        name: string;
-        tableName: "payroll";
-        dataType: "object date";
-        data: Date;
-        driverParam: string;
-        notNull: false;
-        hasDefault: false;
-        isPrimaryKey: false;
-        isAutoincrement: false;
-        hasRuntimeDefault: false;
-        enumValues: undefined;
-        identity: undefined;
-        generated: undefined;
-    }>;
-    tenantId: import("drizzle-orm/pg-core").PgBuildColumn<"payroll", import("drizzle-orm/pg-core").SetNotNull<import("drizzle-orm/pg-core").PgUUIDBuilder>, {
-        name: string;
-        tableName: "payroll";
-        dataType: "string uuid";
-        data: string;
-        driverParam: string;
-        notNull: true;
-        hasDefault: false;
-        isPrimaryKey: false;
-        isAutoincrement: false;
-        hasRuntimeDefault: false;
-        enumValues: undefined;
-        identity: undefined;
-        generated: undefined;
-    }>;
-    id: import("drizzle-orm/pg-core").PgBuildColumn<"payroll", import("drizzle-orm/pg-core").SetHasRuntimeDefault<import("drizzle-orm/pg-core").SetIsPrimaryKey<import("drizzle-orm/pg-core").PgUUIDBuilder>>, {
-        name: string;
-        tableName: "payroll";
-        dataType: "string uuid";
-        data: string;
-        driverParam: string;
-        notNull: true;
-        hasDefault: true;
-        isPrimaryKey: false;
-        isAutoincrement: false;
-        hasRuntimeDefault: false;
-        enumValues: undefined;
-        identity: undefined;
-        generated: undefined;
-    }>;
-    createdAt: import("drizzle-orm/pg-core").PgBuildColumn<"payroll", import("drizzle-orm/pg-core").SetHasDefault<import("drizzle-orm/pg-core").SetNotNull<import("drizzle-orm/pg-core").PgTimestampBuilder>>, {
-        name: string;
-        tableName: "payroll";
-        dataType: "object date";
-        data: Date;
-        driverParam: string;
-        notNull: true;
-        hasDefault: true;
-        isPrimaryKey: false;
-        isAutoincrement: false;
-        hasRuntimeDefault: false;
-        enumValues: undefined;
-        identity: undefined;
-        generated: undefined;
-    }>;
-    updatedAt: import("drizzle-orm/pg-core").PgBuildColumn<"payroll", import("drizzle-orm/pg-core").SetHasDefault<import("drizzle-orm/pg-core").SetNotNull<import("drizzle-orm/pg-core").PgTimestampBuilder>>, {
-        name: string;
-        tableName: "payroll";
-        dataType: "object date";
-        data: Date;
-        driverParam: string;
-        notNull: true;
-        hasDefault: true;
         isPrimaryKey: false;
         isAutoincrement: false;
         hasRuntimeDefault: false;
@@ -4687,6 +4687,81 @@ export declare const insertPayrollSchema: import("drizzle-orm/zod").BuildSchema<
     }>;
 }, undefined, undefined>;
 export declare const selectPayrollSchema: import("drizzle-orm/zod").BuildSchema<"select", {
+    id: import("drizzle-orm/pg-core").PgBuildColumn<"payroll", import("drizzle-orm/pg-core").SetHasRuntimeDefault<import("drizzle-orm/pg-core").SetIsPrimaryKey<import("drizzle-orm/pg-core").PgUUIDBuilder>>, {
+        name: string;
+        tableName: "payroll";
+        dataType: "string uuid";
+        data: string;
+        driverParam: string;
+        notNull: true;
+        hasDefault: true;
+        isPrimaryKey: false;
+        isAutoincrement: false;
+        hasRuntimeDefault: false;
+        enumValues: undefined;
+        identity: undefined;
+        generated: undefined;
+    }>;
+    createdAt: import("drizzle-orm/pg-core").PgBuildColumn<"payroll", import("drizzle-orm/pg-core").SetHasDefault<import("drizzle-orm/pg-core").SetNotNull<import("drizzle-orm/pg-core").PgTimestampBuilder>>, {
+        name: string;
+        tableName: "payroll";
+        dataType: "object date";
+        data: Date;
+        driverParam: string;
+        notNull: true;
+        hasDefault: true;
+        isPrimaryKey: false;
+        isAutoincrement: false;
+        hasRuntimeDefault: false;
+        enumValues: undefined;
+        identity: undefined;
+        generated: undefined;
+    }>;
+    updatedAt: import("drizzle-orm/pg-core").PgBuildColumn<"payroll", import("drizzle-orm/pg-core").SetHasDefault<import("drizzle-orm/pg-core").SetNotNull<import("drizzle-orm/pg-core").PgTimestampBuilder>>, {
+        name: string;
+        tableName: "payroll";
+        dataType: "object date";
+        data: Date;
+        driverParam: string;
+        notNull: true;
+        hasDefault: true;
+        isPrimaryKey: false;
+        isAutoincrement: false;
+        hasRuntimeDefault: false;
+        enumValues: undefined;
+        identity: undefined;
+        generated: undefined;
+    }>;
+    deletedAt: import("drizzle-orm/pg-core").PgBuildColumn<"payroll", import("drizzle-orm/pg-core").PgTimestampBuilder, {
+        name: string;
+        tableName: "payroll";
+        dataType: "object date";
+        data: Date;
+        driverParam: string;
+        notNull: false;
+        hasDefault: false;
+        isPrimaryKey: false;
+        isAutoincrement: false;
+        hasRuntimeDefault: false;
+        enumValues: undefined;
+        identity: undefined;
+        generated: undefined;
+    }>;
+    tenantId: import("drizzle-orm/pg-core").PgBuildColumn<"payroll", import("drizzle-orm/pg-core").SetNotNull<import("drizzle-orm/pg-core").PgUUIDBuilder>, {
+        name: string;
+        tableName: "payroll";
+        dataType: "string uuid";
+        data: string;
+        driverParam: string;
+        notNull: true;
+        hasDefault: false;
+        isPrimaryKey: false;
+        isAutoincrement: false;
+        hasRuntimeDefault: false;
+        enumValues: undefined;
+        identity: undefined;
+        generated: undefined;
+    }>;
     employeeId: import("drizzle-orm/pg-core").PgBuildColumn<"payroll", import("drizzle-orm/pg-core").SetNotNull<import("drizzle-orm/pg-core").PgUUIDBuilder>, {
         name: string;
         tableName: "payroll";
@@ -4837,83 +4912,68 @@ export declare const selectPayrollSchema: import("drizzle-orm/zod").BuildSchema<
         identity: undefined;
         generated: undefined;
     }>;
-    deletedAt: import("drizzle-orm/pg-core").PgBuildColumn<"payroll", import("drizzle-orm/pg-core").PgTimestampBuilder, {
-        name: string;
-        tableName: "payroll";
-        dataType: "object date";
-        data: Date;
-        driverParam: string;
-        notNull: false;
-        hasDefault: false;
-        isPrimaryKey: false;
-        isAutoincrement: false;
-        hasRuntimeDefault: false;
-        enumValues: undefined;
-        identity: undefined;
-        generated: undefined;
-    }>;
-    tenantId: import("drizzle-orm/pg-core").PgBuildColumn<"payroll", import("drizzle-orm/pg-core").SetNotNull<import("drizzle-orm/pg-core").PgUUIDBuilder>, {
-        name: string;
-        tableName: "payroll";
-        dataType: "string uuid";
-        data: string;
-        driverParam: string;
-        notNull: true;
-        hasDefault: false;
-        isPrimaryKey: false;
-        isAutoincrement: false;
-        hasRuntimeDefault: false;
-        enumValues: undefined;
-        identity: undefined;
-        generated: undefined;
-    }>;
-    id: import("drizzle-orm/pg-core").PgBuildColumn<"payroll", import("drizzle-orm/pg-core").SetHasRuntimeDefault<import("drizzle-orm/pg-core").SetIsPrimaryKey<import("drizzle-orm/pg-core").PgUUIDBuilder>>, {
-        name: string;
-        tableName: "payroll";
-        dataType: "string uuid";
-        data: string;
-        driverParam: string;
-        notNull: true;
-        hasDefault: true;
-        isPrimaryKey: false;
-        isAutoincrement: false;
-        hasRuntimeDefault: false;
-        enumValues: undefined;
-        identity: undefined;
-        generated: undefined;
-    }>;
-    createdAt: import("drizzle-orm/pg-core").PgBuildColumn<"payroll", import("drizzle-orm/pg-core").SetHasDefault<import("drizzle-orm/pg-core").SetNotNull<import("drizzle-orm/pg-core").PgTimestampBuilder>>, {
-        name: string;
-        tableName: "payroll";
-        dataType: "object date";
-        data: Date;
-        driverParam: string;
-        notNull: true;
-        hasDefault: true;
-        isPrimaryKey: false;
-        isAutoincrement: false;
-        hasRuntimeDefault: false;
-        enumValues: undefined;
-        identity: undefined;
-        generated: undefined;
-    }>;
-    updatedAt: import("drizzle-orm/pg-core").PgBuildColumn<"payroll", import("drizzle-orm/pg-core").SetHasDefault<import("drizzle-orm/pg-core").SetNotNull<import("drizzle-orm/pg-core").PgTimestampBuilder>>, {
-        name: string;
-        tableName: "payroll";
-        dataType: "object date";
-        data: Date;
-        driverParam: string;
-        notNull: true;
-        hasDefault: true;
-        isPrimaryKey: false;
-        isAutoincrement: false;
-        hasRuntimeDefault: false;
-        enumValues: undefined;
-        identity: undefined;
-        generated: undefined;
-    }>;
 }, undefined, undefined>;
 export declare const insertPayslipSchema: import("drizzle-orm/zod").BuildSchema<"insert", {
+    id: import("drizzle-orm/pg-core").PgBuildColumn<"payslips", import("drizzle-orm/pg-core").SetHasRuntimeDefault<import("drizzle-orm/pg-core").SetIsPrimaryKey<import("drizzle-orm/pg-core").PgUUIDBuilder>>, {
+        name: string;
+        tableName: "payslips";
+        dataType: "string uuid";
+        data: string;
+        driverParam: string;
+        notNull: true;
+        hasDefault: true;
+        isPrimaryKey: false;
+        isAutoincrement: false;
+        hasRuntimeDefault: false;
+        enumValues: undefined;
+        identity: undefined;
+        generated: undefined;
+    }>;
+    createdAt: import("drizzle-orm/pg-core").PgBuildColumn<"payslips", import("drizzle-orm/pg-core").SetHasDefault<import("drizzle-orm/pg-core").SetNotNull<import("drizzle-orm/pg-core").PgTimestampBuilder>>, {
+        name: string;
+        tableName: "payslips";
+        dataType: "object date";
+        data: Date;
+        driverParam: string;
+        notNull: true;
+        hasDefault: true;
+        isPrimaryKey: false;
+        isAutoincrement: false;
+        hasRuntimeDefault: false;
+        enumValues: undefined;
+        identity: undefined;
+        generated: undefined;
+    }>;
+    updatedAt: import("drizzle-orm/pg-core").PgBuildColumn<"payslips", import("drizzle-orm/pg-core").SetHasDefault<import("drizzle-orm/pg-core").SetNotNull<import("drizzle-orm/pg-core").PgTimestampBuilder>>, {
+        name: string;
+        tableName: "payslips";
+        dataType: "object date";
+        data: Date;
+        driverParam: string;
+        notNull: true;
+        hasDefault: true;
+        isPrimaryKey: false;
+        isAutoincrement: false;
+        hasRuntimeDefault: false;
+        enumValues: undefined;
+        identity: undefined;
+        generated: undefined;
+    }>;
+    tenantId: import("drizzle-orm/pg-core").PgBuildColumn<"payslips", import("drizzle-orm/pg-core").SetNotNull<import("drizzle-orm/pg-core").PgUUIDBuilder>, {
+        name: string;
+        tableName: "payslips";
+        dataType: "string uuid";
+        data: string;
+        driverParam: string;
+        notNull: true;
+        hasDefault: false;
+        isPrimaryKey: false;
+        isAutoincrement: false;
+        hasRuntimeDefault: false;
+        enumValues: undefined;
+        identity: undefined;
+        generated: undefined;
+    }>;
     employeeId: import("drizzle-orm/pg-core").PgBuildColumn<"payslips", import("drizzle-orm/pg-core").SetNotNull<import("drizzle-orm/pg-core").PgUUIDBuilder>, {
         name: string;
         tableName: "payslips";
@@ -5005,66 +5065,6 @@ export declare const insertPayslipSchema: import("drizzle-orm/zod").BuildSchema<
         generated: undefined;
     }>;
     generatedAt: import("drizzle-orm/pg-core").PgBuildColumn<"payslips", import("drizzle-orm/pg-core").SetHasDefault<import("drizzle-orm/pg-core").SetNotNull<import("drizzle-orm/pg-core").PgTimestampBuilder>>, {
-        name: string;
-        tableName: "payslips";
-        dataType: "object date";
-        data: Date;
-        driverParam: string;
-        notNull: true;
-        hasDefault: true;
-        isPrimaryKey: false;
-        isAutoincrement: false;
-        hasRuntimeDefault: false;
-        enumValues: undefined;
-        identity: undefined;
-        generated: undefined;
-    }>;
-    tenantId: import("drizzle-orm/pg-core").PgBuildColumn<"payslips", import("drizzle-orm/pg-core").SetNotNull<import("drizzle-orm/pg-core").PgUUIDBuilder>, {
-        name: string;
-        tableName: "payslips";
-        dataType: "string uuid";
-        data: string;
-        driverParam: string;
-        notNull: true;
-        hasDefault: false;
-        isPrimaryKey: false;
-        isAutoincrement: false;
-        hasRuntimeDefault: false;
-        enumValues: undefined;
-        identity: undefined;
-        generated: undefined;
-    }>;
-    id: import("drizzle-orm/pg-core").PgBuildColumn<"payslips", import("drizzle-orm/pg-core").SetHasRuntimeDefault<import("drizzle-orm/pg-core").SetIsPrimaryKey<import("drizzle-orm/pg-core").PgUUIDBuilder>>, {
-        name: string;
-        tableName: "payslips";
-        dataType: "string uuid";
-        data: string;
-        driverParam: string;
-        notNull: true;
-        hasDefault: true;
-        isPrimaryKey: false;
-        isAutoincrement: false;
-        hasRuntimeDefault: false;
-        enumValues: undefined;
-        identity: undefined;
-        generated: undefined;
-    }>;
-    createdAt: import("drizzle-orm/pg-core").PgBuildColumn<"payslips", import("drizzle-orm/pg-core").SetHasDefault<import("drizzle-orm/pg-core").SetNotNull<import("drizzle-orm/pg-core").PgTimestampBuilder>>, {
-        name: string;
-        tableName: "payslips";
-        dataType: "object date";
-        data: Date;
-        driverParam: string;
-        notNull: true;
-        hasDefault: true;
-        isPrimaryKey: false;
-        isAutoincrement: false;
-        hasRuntimeDefault: false;
-        enumValues: undefined;
-        identity: undefined;
-        generated: undefined;
-    }>;
-    updatedAt: import("drizzle-orm/pg-core").PgBuildColumn<"payslips", import("drizzle-orm/pg-core").SetHasDefault<import("drizzle-orm/pg-core").SetNotNull<import("drizzle-orm/pg-core").PgTimestampBuilder>>, {
         name: string;
         tableName: "payslips";
         dataType: "object date";
@@ -5081,6 +5081,66 @@ export declare const insertPayslipSchema: import("drizzle-orm/zod").BuildSchema<
     }>;
 }, undefined, undefined>;
 export declare const selectPayslipSchema: import("drizzle-orm/zod").BuildSchema<"select", {
+    id: import("drizzle-orm/pg-core").PgBuildColumn<"payslips", import("drizzle-orm/pg-core").SetHasRuntimeDefault<import("drizzle-orm/pg-core").SetIsPrimaryKey<import("drizzle-orm/pg-core").PgUUIDBuilder>>, {
+        name: string;
+        tableName: "payslips";
+        dataType: "string uuid";
+        data: string;
+        driverParam: string;
+        notNull: true;
+        hasDefault: true;
+        isPrimaryKey: false;
+        isAutoincrement: false;
+        hasRuntimeDefault: false;
+        enumValues: undefined;
+        identity: undefined;
+        generated: undefined;
+    }>;
+    createdAt: import("drizzle-orm/pg-core").PgBuildColumn<"payslips", import("drizzle-orm/pg-core").SetHasDefault<import("drizzle-orm/pg-core").SetNotNull<import("drizzle-orm/pg-core").PgTimestampBuilder>>, {
+        name: string;
+        tableName: "payslips";
+        dataType: "object date";
+        data: Date;
+        driverParam: string;
+        notNull: true;
+        hasDefault: true;
+        isPrimaryKey: false;
+        isAutoincrement: false;
+        hasRuntimeDefault: false;
+        enumValues: undefined;
+        identity: undefined;
+        generated: undefined;
+    }>;
+    updatedAt: import("drizzle-orm/pg-core").PgBuildColumn<"payslips", import("drizzle-orm/pg-core").SetHasDefault<import("drizzle-orm/pg-core").SetNotNull<import("drizzle-orm/pg-core").PgTimestampBuilder>>, {
+        name: string;
+        tableName: "payslips";
+        dataType: "object date";
+        data: Date;
+        driverParam: string;
+        notNull: true;
+        hasDefault: true;
+        isPrimaryKey: false;
+        isAutoincrement: false;
+        hasRuntimeDefault: false;
+        enumValues: undefined;
+        identity: undefined;
+        generated: undefined;
+    }>;
+    tenantId: import("drizzle-orm/pg-core").PgBuildColumn<"payslips", import("drizzle-orm/pg-core").SetNotNull<import("drizzle-orm/pg-core").PgUUIDBuilder>, {
+        name: string;
+        tableName: "payslips";
+        dataType: "string uuid";
+        data: string;
+        driverParam: string;
+        notNull: true;
+        hasDefault: false;
+        isPrimaryKey: false;
+        isAutoincrement: false;
+        hasRuntimeDefault: false;
+        enumValues: undefined;
+        identity: undefined;
+        generated: undefined;
+    }>;
     employeeId: import("drizzle-orm/pg-core").PgBuildColumn<"payslips", import("drizzle-orm/pg-core").SetNotNull<import("drizzle-orm/pg-core").PgUUIDBuilder>, {
         name: string;
         tableName: "payslips";
@@ -5186,9 +5246,71 @@ export declare const selectPayslipSchema: import("drizzle-orm/zod").BuildSchema<
         identity: undefined;
         generated: undefined;
     }>;
-    tenantId: import("drizzle-orm/pg-core").PgBuildColumn<"payslips", import("drizzle-orm/pg-core").SetNotNull<import("drizzle-orm/pg-core").PgUUIDBuilder>, {
+}, undefined, undefined>;
+export declare const updateDepartmentSchema: import("drizzle-orm/zod").BuildSchema<"update", {
+    id: import("drizzle-orm/pg-core").PgBuildColumn<"departments", import("drizzle-orm/pg-core").SetHasRuntimeDefault<import("drizzle-orm/pg-core").SetIsPrimaryKey<import("drizzle-orm/pg-core").PgUUIDBuilder>>, {
         name: string;
-        tableName: "payslips";
+        tableName: "departments";
+        dataType: "string uuid";
+        data: string;
+        driverParam: string;
+        notNull: true;
+        hasDefault: true;
+        isPrimaryKey: false;
+        isAutoincrement: false;
+        hasRuntimeDefault: false;
+        enumValues: undefined;
+        identity: undefined;
+        generated: undefined;
+    }>;
+    createdAt: import("drizzle-orm/pg-core").PgBuildColumn<"departments", import("drizzle-orm/pg-core").SetHasDefault<import("drizzle-orm/pg-core").SetNotNull<import("drizzle-orm/pg-core").PgTimestampBuilder>>, {
+        name: string;
+        tableName: "departments";
+        dataType: "object date";
+        data: Date;
+        driverParam: string;
+        notNull: true;
+        hasDefault: true;
+        isPrimaryKey: false;
+        isAutoincrement: false;
+        hasRuntimeDefault: false;
+        enumValues: undefined;
+        identity: undefined;
+        generated: undefined;
+    }>;
+    updatedAt: import("drizzle-orm/pg-core").PgBuildColumn<"departments", import("drizzle-orm/pg-core").SetHasDefault<import("drizzle-orm/pg-core").SetNotNull<import("drizzle-orm/pg-core").PgTimestampBuilder>>, {
+        name: string;
+        tableName: "departments";
+        dataType: "object date";
+        data: Date;
+        driverParam: string;
+        notNull: true;
+        hasDefault: true;
+        isPrimaryKey: false;
+        isAutoincrement: false;
+        hasRuntimeDefault: false;
+        enumValues: undefined;
+        identity: undefined;
+        generated: undefined;
+    }>;
+    deletedAt: import("drizzle-orm/pg-core").PgBuildColumn<"departments", import("drizzle-orm/pg-core").PgTimestampBuilder, {
+        name: string;
+        tableName: "departments";
+        dataType: "object date";
+        data: Date;
+        driverParam: string;
+        notNull: false;
+        hasDefault: false;
+        isPrimaryKey: false;
+        isAutoincrement: false;
+        hasRuntimeDefault: false;
+        enumValues: undefined;
+        identity: undefined;
+        generated: undefined;
+    }>;
+    tenantId: import("drizzle-orm/pg-core").PgBuildColumn<"departments", import("drizzle-orm/pg-core").SetNotNull<import("drizzle-orm/pg-core").PgUUIDBuilder>, {
+        name: string;
+        tableName: "departments";
         dataType: "string uuid";
         data: string;
         driverParam: string;
@@ -5201,53 +5323,6 @@ export declare const selectPayslipSchema: import("drizzle-orm/zod").BuildSchema<
         identity: undefined;
         generated: undefined;
     }>;
-    id: import("drizzle-orm/pg-core").PgBuildColumn<"payslips", import("drizzle-orm/pg-core").SetHasRuntimeDefault<import("drizzle-orm/pg-core").SetIsPrimaryKey<import("drizzle-orm/pg-core").PgUUIDBuilder>>, {
-        name: string;
-        tableName: "payslips";
-        dataType: "string uuid";
-        data: string;
-        driverParam: string;
-        notNull: true;
-        hasDefault: true;
-        isPrimaryKey: false;
-        isAutoincrement: false;
-        hasRuntimeDefault: false;
-        enumValues: undefined;
-        identity: undefined;
-        generated: undefined;
-    }>;
-    createdAt: import("drizzle-orm/pg-core").PgBuildColumn<"payslips", import("drizzle-orm/pg-core").SetHasDefault<import("drizzle-orm/pg-core").SetNotNull<import("drizzle-orm/pg-core").PgTimestampBuilder>>, {
-        name: string;
-        tableName: "payslips";
-        dataType: "object date";
-        data: Date;
-        driverParam: string;
-        notNull: true;
-        hasDefault: true;
-        isPrimaryKey: false;
-        isAutoincrement: false;
-        hasRuntimeDefault: false;
-        enumValues: undefined;
-        identity: undefined;
-        generated: undefined;
-    }>;
-    updatedAt: import("drizzle-orm/pg-core").PgBuildColumn<"payslips", import("drizzle-orm/pg-core").SetHasDefault<import("drizzle-orm/pg-core").SetNotNull<import("drizzle-orm/pg-core").PgTimestampBuilder>>, {
-        name: string;
-        tableName: "payslips";
-        dataType: "object date";
-        data: Date;
-        driverParam: string;
-        notNull: true;
-        hasDefault: true;
-        isPrimaryKey: false;
-        isAutoincrement: false;
-        hasRuntimeDefault: false;
-        enumValues: undefined;
-        identity: undefined;
-        generated: undefined;
-    }>;
-}, undefined, undefined>;
-export declare const updateDepartmentSchema: import("drizzle-orm/zod").BuildSchema<"update", {
     name: import("drizzle-orm/pg-core").PgBuildColumn<"departments", import("drizzle-orm/pg-core").SetNotNull<import("drizzle-orm/pg-core").PgVarcharBuilder<[string, ...string[]]>>, {
         name: string;
         tableName: "departments";
@@ -5338,9 +5413,56 @@ export declare const updateDepartmentSchema: import("drizzle-orm/zod").BuildSche
         identity: undefined;
         generated: undefined;
     }>;
-    deletedAt: import("drizzle-orm/pg-core").PgBuildColumn<"departments", import("drizzle-orm/pg-core").PgTimestampBuilder, {
+}, undefined, undefined>;
+export declare const updateDesignationSchema: import("drizzle-orm/zod").BuildSchema<"update", {
+    id: import("drizzle-orm/pg-core").PgBuildColumn<"designations", import("drizzle-orm/pg-core").SetHasRuntimeDefault<import("drizzle-orm/pg-core").SetIsPrimaryKey<import("drizzle-orm/pg-core").PgUUIDBuilder>>, {
         name: string;
-        tableName: "departments";
+        tableName: "designations";
+        dataType: "string uuid";
+        data: string;
+        driverParam: string;
+        notNull: true;
+        hasDefault: true;
+        isPrimaryKey: false;
+        isAutoincrement: false;
+        hasRuntimeDefault: false;
+        enumValues: undefined;
+        identity: undefined;
+        generated: undefined;
+    }>;
+    createdAt: import("drizzle-orm/pg-core").PgBuildColumn<"designations", import("drizzle-orm/pg-core").SetHasDefault<import("drizzle-orm/pg-core").SetNotNull<import("drizzle-orm/pg-core").PgTimestampBuilder>>, {
+        name: string;
+        tableName: "designations";
+        dataType: "object date";
+        data: Date;
+        driverParam: string;
+        notNull: true;
+        hasDefault: true;
+        isPrimaryKey: false;
+        isAutoincrement: false;
+        hasRuntimeDefault: false;
+        enumValues: undefined;
+        identity: undefined;
+        generated: undefined;
+    }>;
+    updatedAt: import("drizzle-orm/pg-core").PgBuildColumn<"designations", import("drizzle-orm/pg-core").SetHasDefault<import("drizzle-orm/pg-core").SetNotNull<import("drizzle-orm/pg-core").PgTimestampBuilder>>, {
+        name: string;
+        tableName: "designations";
+        dataType: "object date";
+        data: Date;
+        driverParam: string;
+        notNull: true;
+        hasDefault: true;
+        isPrimaryKey: false;
+        isAutoincrement: false;
+        hasRuntimeDefault: false;
+        enumValues: undefined;
+        identity: undefined;
+        generated: undefined;
+    }>;
+    deletedAt: import("drizzle-orm/pg-core").PgBuildColumn<"designations", import("drizzle-orm/pg-core").PgTimestampBuilder, {
+        name: string;
+        tableName: "designations";
         dataType: "object date";
         data: Date;
         driverParam: string;
@@ -5353,9 +5475,9 @@ export declare const updateDepartmentSchema: import("drizzle-orm/zod").BuildSche
         identity: undefined;
         generated: undefined;
     }>;
-    tenantId: import("drizzle-orm/pg-core").PgBuildColumn<"departments", import("drizzle-orm/pg-core").SetNotNull<import("drizzle-orm/pg-core").PgUUIDBuilder>, {
+    tenantId: import("drizzle-orm/pg-core").PgBuildColumn<"designations", import("drizzle-orm/pg-core").SetNotNull<import("drizzle-orm/pg-core").PgUUIDBuilder>, {
         name: string;
-        tableName: "departments";
+        tableName: "designations";
         dataType: "string uuid";
         data: string;
         driverParam: string;
@@ -5368,53 +5490,6 @@ export declare const updateDepartmentSchema: import("drizzle-orm/zod").BuildSche
         identity: undefined;
         generated: undefined;
     }>;
-    id: import("drizzle-orm/pg-core").PgBuildColumn<"departments", import("drizzle-orm/pg-core").SetHasRuntimeDefault<import("drizzle-orm/pg-core").SetIsPrimaryKey<import("drizzle-orm/pg-core").PgUUIDBuilder>>, {
-        name: string;
-        tableName: "departments";
-        dataType: "string uuid";
-        data: string;
-        driverParam: string;
-        notNull: true;
-        hasDefault: true;
-        isPrimaryKey: false;
-        isAutoincrement: false;
-        hasRuntimeDefault: false;
-        enumValues: undefined;
-        identity: undefined;
-        generated: undefined;
-    }>;
-    createdAt: import("drizzle-orm/pg-core").PgBuildColumn<"departments", import("drizzle-orm/pg-core").SetHasDefault<import("drizzle-orm/pg-core").SetNotNull<import("drizzle-orm/pg-core").PgTimestampBuilder>>, {
-        name: string;
-        tableName: "departments";
-        dataType: "object date";
-        data: Date;
-        driverParam: string;
-        notNull: true;
-        hasDefault: true;
-        isPrimaryKey: false;
-        isAutoincrement: false;
-        hasRuntimeDefault: false;
-        enumValues: undefined;
-        identity: undefined;
-        generated: undefined;
-    }>;
-    updatedAt: import("drizzle-orm/pg-core").PgBuildColumn<"departments", import("drizzle-orm/pg-core").SetHasDefault<import("drizzle-orm/pg-core").SetNotNull<import("drizzle-orm/pg-core").PgTimestampBuilder>>, {
-        name: string;
-        tableName: "departments";
-        dataType: "object date";
-        data: Date;
-        driverParam: string;
-        notNull: true;
-        hasDefault: true;
-        isPrimaryKey: false;
-        isAutoincrement: false;
-        hasRuntimeDefault: false;
-        enumValues: undefined;
-        identity: undefined;
-        generated: undefined;
-    }>;
-}, undefined, undefined>;
-export declare const updateDesignationSchema: import("drizzle-orm/zod").BuildSchema<"update", {
     name: import("drizzle-orm/pg-core").PgBuildColumn<"designations", import("drizzle-orm/pg-core").SetNotNull<import("drizzle-orm/pg-core").PgVarcharBuilder<[string, ...string[]]>>, {
         name: string;
         tableName: "designations";
@@ -5520,9 +5595,56 @@ export declare const updateDesignationSchema: import("drizzle-orm/zod").BuildSch
         identity: undefined;
         generated: undefined;
     }>;
-    deletedAt: import("drizzle-orm/pg-core").PgBuildColumn<"designations", import("drizzle-orm/pg-core").PgTimestampBuilder, {
+}, undefined, undefined>;
+export declare const updateEmployeeSchema: import("drizzle-orm/zod").BuildSchema<"update", {
+    id: import("drizzle-orm/pg-core").PgBuildColumn<"employees", import("drizzle-orm/pg-core").SetHasRuntimeDefault<import("drizzle-orm/pg-core").SetIsPrimaryKey<import("drizzle-orm/pg-core").PgUUIDBuilder>>, {
         name: string;
-        tableName: "designations";
+        tableName: "employees";
+        dataType: "string uuid";
+        data: string;
+        driverParam: string;
+        notNull: true;
+        hasDefault: true;
+        isPrimaryKey: false;
+        isAutoincrement: false;
+        hasRuntimeDefault: false;
+        enumValues: undefined;
+        identity: undefined;
+        generated: undefined;
+    }>;
+    createdAt: import("drizzle-orm/pg-core").PgBuildColumn<"employees", import("drizzle-orm/pg-core").SetHasDefault<import("drizzle-orm/pg-core").SetNotNull<import("drizzle-orm/pg-core").PgTimestampBuilder>>, {
+        name: string;
+        tableName: "employees";
+        dataType: "object date";
+        data: Date;
+        driverParam: string;
+        notNull: true;
+        hasDefault: true;
+        isPrimaryKey: false;
+        isAutoincrement: false;
+        hasRuntimeDefault: false;
+        enumValues: undefined;
+        identity: undefined;
+        generated: undefined;
+    }>;
+    updatedAt: import("drizzle-orm/pg-core").PgBuildColumn<"employees", import("drizzle-orm/pg-core").SetHasDefault<import("drizzle-orm/pg-core").SetNotNull<import("drizzle-orm/pg-core").PgTimestampBuilder>>, {
+        name: string;
+        tableName: "employees";
+        dataType: "object date";
+        data: Date;
+        driverParam: string;
+        notNull: true;
+        hasDefault: true;
+        isPrimaryKey: false;
+        isAutoincrement: false;
+        hasRuntimeDefault: false;
+        enumValues: undefined;
+        identity: undefined;
+        generated: undefined;
+    }>;
+    deletedAt: import("drizzle-orm/pg-core").PgBuildColumn<"employees", import("drizzle-orm/pg-core").PgTimestampBuilder, {
+        name: string;
+        tableName: "employees";
         dataType: "object date";
         data: Date;
         driverParam: string;
@@ -5535,9 +5657,9 @@ export declare const updateDesignationSchema: import("drizzle-orm/zod").BuildSch
         identity: undefined;
         generated: undefined;
     }>;
-    tenantId: import("drizzle-orm/pg-core").PgBuildColumn<"designations", import("drizzle-orm/pg-core").SetNotNull<import("drizzle-orm/pg-core").PgUUIDBuilder>, {
+    tenantId: import("drizzle-orm/pg-core").PgBuildColumn<"employees", import("drizzle-orm/pg-core").SetNotNull<import("drizzle-orm/pg-core").PgUUIDBuilder>, {
         name: string;
-        tableName: "designations";
+        tableName: "employees";
         dataType: "string uuid";
         data: string;
         driverParam: string;
@@ -5550,53 +5672,6 @@ export declare const updateDesignationSchema: import("drizzle-orm/zod").BuildSch
         identity: undefined;
         generated: undefined;
     }>;
-    id: import("drizzle-orm/pg-core").PgBuildColumn<"designations", import("drizzle-orm/pg-core").SetHasRuntimeDefault<import("drizzle-orm/pg-core").SetIsPrimaryKey<import("drizzle-orm/pg-core").PgUUIDBuilder>>, {
-        name: string;
-        tableName: "designations";
-        dataType: "string uuid";
-        data: string;
-        driverParam: string;
-        notNull: true;
-        hasDefault: true;
-        isPrimaryKey: false;
-        isAutoincrement: false;
-        hasRuntimeDefault: false;
-        enumValues: undefined;
-        identity: undefined;
-        generated: undefined;
-    }>;
-    createdAt: import("drizzle-orm/pg-core").PgBuildColumn<"designations", import("drizzle-orm/pg-core").SetHasDefault<import("drizzle-orm/pg-core").SetNotNull<import("drizzle-orm/pg-core").PgTimestampBuilder>>, {
-        name: string;
-        tableName: "designations";
-        dataType: "object date";
-        data: Date;
-        driverParam: string;
-        notNull: true;
-        hasDefault: true;
-        isPrimaryKey: false;
-        isAutoincrement: false;
-        hasRuntimeDefault: false;
-        enumValues: undefined;
-        identity: undefined;
-        generated: undefined;
-    }>;
-    updatedAt: import("drizzle-orm/pg-core").PgBuildColumn<"designations", import("drizzle-orm/pg-core").SetHasDefault<import("drizzle-orm/pg-core").SetNotNull<import("drizzle-orm/pg-core").PgTimestampBuilder>>, {
-        name: string;
-        tableName: "designations";
-        dataType: "object date";
-        data: Date;
-        driverParam: string;
-        notNull: true;
-        hasDefault: true;
-        isPrimaryKey: false;
-        isAutoincrement: false;
-        hasRuntimeDefault: false;
-        enumValues: undefined;
-        identity: undefined;
-        generated: undefined;
-    }>;
-}, undefined, undefined>;
-export declare const updateEmployeeSchema: import("drizzle-orm/zod").BuildSchema<"update", {
     userId: import("drizzle-orm/pg-core").PgBuildColumn<"employees", import("drizzle-orm/pg-core").PgUUIDBuilder, {
         name: string;
         tableName: "employees";
@@ -5736,7 +5811,7 @@ export declare const updateEmployeeSchema: import("drizzle-orm/zod").BuildSchema
         name: string;
         tableName: "employees";
         dataType: "string enum";
-        data: "full_time" | "part_time" | "contract" | "intern";
+        data: "contract" | "full_time" | "intern" | "part_time";
         driverParam: string;
         notNull: true;
         hasDefault: false;
@@ -5762,83 +5837,38 @@ export declare const updateEmployeeSchema: import("drizzle-orm/zod").BuildSchema
         identity: undefined;
         generated: undefined;
     }>;
-    deletedAt: import("drizzle-orm/pg-core").PgBuildColumn<"employees", import("drizzle-orm/pg-core").PgTimestampBuilder, {
-        name: string;
-        tableName: "employees";
-        dataType: "object date";
-        data: Date;
-        driverParam: string;
-        notNull: false;
-        hasDefault: false;
-        isPrimaryKey: false;
-        isAutoincrement: false;
-        hasRuntimeDefault: false;
-        enumValues: undefined;
-        identity: undefined;
-        generated: undefined;
-    }>;
-    tenantId: import("drizzle-orm/pg-core").PgBuildColumn<"employees", import("drizzle-orm/pg-core").SetNotNull<import("drizzle-orm/pg-core").PgUUIDBuilder>, {
-        name: string;
-        tableName: "employees";
-        dataType: "string uuid";
-        data: string;
-        driverParam: string;
-        notNull: true;
-        hasDefault: false;
-        isPrimaryKey: false;
-        isAutoincrement: false;
-        hasRuntimeDefault: false;
-        enumValues: undefined;
-        identity: undefined;
-        generated: undefined;
-    }>;
-    id: import("drizzle-orm/pg-core").PgBuildColumn<"employees", import("drizzle-orm/pg-core").SetHasRuntimeDefault<import("drizzle-orm/pg-core").SetIsPrimaryKey<import("drizzle-orm/pg-core").PgUUIDBuilder>>, {
-        name: string;
-        tableName: "employees";
-        dataType: "string uuid";
-        data: string;
-        driverParam: string;
-        notNull: true;
-        hasDefault: true;
-        isPrimaryKey: false;
-        isAutoincrement: false;
-        hasRuntimeDefault: false;
-        enumValues: undefined;
-        identity: undefined;
-        generated: undefined;
-    }>;
-    createdAt: import("drizzle-orm/pg-core").PgBuildColumn<"employees", import("drizzle-orm/pg-core").SetHasDefault<import("drizzle-orm/pg-core").SetNotNull<import("drizzle-orm/pg-core").PgTimestampBuilder>>, {
-        name: string;
-        tableName: "employees";
-        dataType: "object date";
-        data: Date;
-        driverParam: string;
-        notNull: true;
-        hasDefault: true;
-        isPrimaryKey: false;
-        isAutoincrement: false;
-        hasRuntimeDefault: false;
-        enumValues: undefined;
-        identity: undefined;
-        generated: undefined;
-    }>;
-    updatedAt: import("drizzle-orm/pg-core").PgBuildColumn<"employees", import("drizzle-orm/pg-core").SetHasDefault<import("drizzle-orm/pg-core").SetNotNull<import("drizzle-orm/pg-core").PgTimestampBuilder>>, {
-        name: string;
-        tableName: "employees";
-        dataType: "object date";
-        data: Date;
-        driverParam: string;
-        notNull: true;
-        hasDefault: true;
-        isPrimaryKey: false;
-        isAutoincrement: false;
-        hasRuntimeDefault: false;
-        enumValues: undefined;
-        identity: undefined;
-        generated: undefined;
-    }>;
 }, undefined, undefined>;
 export declare const updateAttendanceSchema: import("drizzle-orm/zod").BuildSchema<"update", {
+    tenantId: import("drizzle-orm/pg-core").PgBuildColumn<"attendance", import("drizzle-orm/pg-core").SetNotNull<import("drizzle-orm/pg-core").PgUUIDBuilder>, {
+        name: string;
+        tableName: "attendance";
+        dataType: "string uuid";
+        data: string;
+        driverParam: string;
+        notNull: true;
+        hasDefault: false;
+        isPrimaryKey: false;
+        isAutoincrement: false;
+        hasRuntimeDefault: false;
+        enumValues: undefined;
+        identity: undefined;
+        generated: undefined;
+    }>;
+    id: import("drizzle-orm/pg-core").PgBuildColumn<"attendance", import("drizzle-orm/pg-core").SetHasRuntimeDefault<import("drizzle-orm/pg-core").SetIsPrimaryKey<import("drizzle-orm/pg-core").PgUUIDBuilder>>, {
+        name: string;
+        tableName: "attendance";
+        dataType: "string uuid";
+        data: string;
+        driverParam: string;
+        notNull: true;
+        hasDefault: true;
+        isPrimaryKey: false;
+        isAutoincrement: false;
+        hasRuntimeDefault: false;
+        enumValues: undefined;
+        identity: undefined;
+        generated: undefined;
+    }>;
     employeeId: import("drizzle-orm/pg-core").PgBuildColumn<"attendance", import("drizzle-orm/pg-core").SetNotNull<import("drizzle-orm/pg-core").PgUUIDBuilder>, {
         name: string;
         tableName: "attendance";
@@ -5903,7 +5933,7 @@ export declare const updateAttendanceSchema: import("drizzle-orm/zod").BuildSche
         name: string;
         tableName: "attendance";
         dataType: "string enum";
-        data: "present" | "absent" | "half_day" | "work_from_home";
+        data: "absent" | "half_day" | "present" | "work_from_home";
         driverParam: string;
         notNull: true;
         hasDefault: false;
@@ -5989,24 +6019,11 @@ export declare const updateAttendanceSchema: import("drizzle-orm/zod").BuildSche
         identity: undefined;
         generated: undefined;
     }>;
-    tenantId: import("drizzle-orm/pg-core").PgBuildColumn<"attendance", import("drizzle-orm/pg-core").SetNotNull<import("drizzle-orm/pg-core").PgUUIDBuilder>, {
+}, undefined, undefined>;
+export declare const updateLeaveTypeSchema: import("drizzle-orm/zod").BuildSchema<"update", {
+    id: import("drizzle-orm/pg-core").PgBuildColumn<"leave_types", import("drizzle-orm/pg-core").SetHasRuntimeDefault<import("drizzle-orm/pg-core").SetIsPrimaryKey<import("drizzle-orm/pg-core").PgUUIDBuilder>>, {
         name: string;
-        tableName: "attendance";
-        dataType: "string uuid";
-        data: string;
-        driverParam: string;
-        notNull: true;
-        hasDefault: false;
-        isPrimaryKey: false;
-        isAutoincrement: false;
-        hasRuntimeDefault: false;
-        enumValues: undefined;
-        identity: undefined;
-        generated: undefined;
-    }>;
-    id: import("drizzle-orm/pg-core").PgBuildColumn<"attendance", import("drizzle-orm/pg-core").SetHasRuntimeDefault<import("drizzle-orm/pg-core").SetIsPrimaryKey<import("drizzle-orm/pg-core").PgUUIDBuilder>>, {
-        name: string;
-        tableName: "attendance";
+        tableName: "leave_types";
         dataType: "string uuid";
         data: string;
         driverParam: string;
@@ -6019,8 +6036,66 @@ export declare const updateAttendanceSchema: import("drizzle-orm/zod").BuildSche
         identity: undefined;
         generated: undefined;
     }>;
-}, undefined, undefined>;
-export declare const updateLeaveTypeSchema: import("drizzle-orm/zod").BuildSchema<"update", {
+    createdAt: import("drizzle-orm/pg-core").PgBuildColumn<"leave_types", import("drizzle-orm/pg-core").SetHasDefault<import("drizzle-orm/pg-core").SetNotNull<import("drizzle-orm/pg-core").PgTimestampBuilder>>, {
+        name: string;
+        tableName: "leave_types";
+        dataType: "object date";
+        data: Date;
+        driverParam: string;
+        notNull: true;
+        hasDefault: true;
+        isPrimaryKey: false;
+        isAutoincrement: false;
+        hasRuntimeDefault: false;
+        enumValues: undefined;
+        identity: undefined;
+        generated: undefined;
+    }>;
+    updatedAt: import("drizzle-orm/pg-core").PgBuildColumn<"leave_types", import("drizzle-orm/pg-core").SetHasDefault<import("drizzle-orm/pg-core").SetNotNull<import("drizzle-orm/pg-core").PgTimestampBuilder>>, {
+        name: string;
+        tableName: "leave_types";
+        dataType: "object date";
+        data: Date;
+        driverParam: string;
+        notNull: true;
+        hasDefault: true;
+        isPrimaryKey: false;
+        isAutoincrement: false;
+        hasRuntimeDefault: false;
+        enumValues: undefined;
+        identity: undefined;
+        generated: undefined;
+    }>;
+    deletedAt: import("drizzle-orm/pg-core").PgBuildColumn<"leave_types", import("drizzle-orm/pg-core").PgTimestampBuilder, {
+        name: string;
+        tableName: "leave_types";
+        dataType: "object date";
+        data: Date;
+        driverParam: string;
+        notNull: false;
+        hasDefault: false;
+        isPrimaryKey: false;
+        isAutoincrement: false;
+        hasRuntimeDefault: false;
+        enumValues: undefined;
+        identity: undefined;
+        generated: undefined;
+    }>;
+    tenantId: import("drizzle-orm/pg-core").PgBuildColumn<"leave_types", import("drizzle-orm/pg-core").SetNotNull<import("drizzle-orm/pg-core").PgUUIDBuilder>, {
+        name: string;
+        tableName: "leave_types";
+        dataType: "string uuid";
+        data: string;
+        driverParam: string;
+        notNull: true;
+        hasDefault: false;
+        isPrimaryKey: false;
+        isAutoincrement: false;
+        hasRuntimeDefault: false;
+        enumValues: undefined;
+        identity: undefined;
+        generated: undefined;
+    }>;
     name: import("drizzle-orm/pg-core").PgBuildColumn<"leave_types", import("drizzle-orm/pg-core").SetNotNull<import("drizzle-orm/pg-core").PgVarcharBuilder<[string, ...string[]]>>, {
         name: string;
         tableName: "leave_types";
@@ -6111,9 +6186,56 @@ export declare const updateLeaveTypeSchema: import("drizzle-orm/zod").BuildSchem
         identity: undefined;
         generated: undefined;
     }>;
-    deletedAt: import("drizzle-orm/pg-core").PgBuildColumn<"leave_types", import("drizzle-orm/pg-core").PgTimestampBuilder, {
+}, undefined, undefined>;
+export declare const updateLeaveRequestSchema: import("drizzle-orm/zod").BuildSchema<"update", {
+    id: import("drizzle-orm/pg-core").PgBuildColumn<"leave_requests", import("drizzle-orm/pg-core").SetHasRuntimeDefault<import("drizzle-orm/pg-core").SetIsPrimaryKey<import("drizzle-orm/pg-core").PgUUIDBuilder>>, {
         name: string;
-        tableName: "leave_types";
+        tableName: "leave_requests";
+        dataType: "string uuid";
+        data: string;
+        driverParam: string;
+        notNull: true;
+        hasDefault: true;
+        isPrimaryKey: false;
+        isAutoincrement: false;
+        hasRuntimeDefault: false;
+        enumValues: undefined;
+        identity: undefined;
+        generated: undefined;
+    }>;
+    createdAt: import("drizzle-orm/pg-core").PgBuildColumn<"leave_requests", import("drizzle-orm/pg-core").SetHasDefault<import("drizzle-orm/pg-core").SetNotNull<import("drizzle-orm/pg-core").PgTimestampBuilder>>, {
+        name: string;
+        tableName: "leave_requests";
+        dataType: "object date";
+        data: Date;
+        driverParam: string;
+        notNull: true;
+        hasDefault: true;
+        isPrimaryKey: false;
+        isAutoincrement: false;
+        hasRuntimeDefault: false;
+        enumValues: undefined;
+        identity: undefined;
+        generated: undefined;
+    }>;
+    updatedAt: import("drizzle-orm/pg-core").PgBuildColumn<"leave_requests", import("drizzle-orm/pg-core").SetHasDefault<import("drizzle-orm/pg-core").SetNotNull<import("drizzle-orm/pg-core").PgTimestampBuilder>>, {
+        name: string;
+        tableName: "leave_requests";
+        dataType: "object date";
+        data: Date;
+        driverParam: string;
+        notNull: true;
+        hasDefault: true;
+        isPrimaryKey: false;
+        isAutoincrement: false;
+        hasRuntimeDefault: false;
+        enumValues: undefined;
+        identity: undefined;
+        generated: undefined;
+    }>;
+    deletedAt: import("drizzle-orm/pg-core").PgBuildColumn<"leave_requests", import("drizzle-orm/pg-core").PgTimestampBuilder, {
+        name: string;
+        tableName: "leave_requests";
         dataType: "object date";
         data: Date;
         driverParam: string;
@@ -6126,9 +6248,9 @@ export declare const updateLeaveTypeSchema: import("drizzle-orm/zod").BuildSchem
         identity: undefined;
         generated: undefined;
     }>;
-    tenantId: import("drizzle-orm/pg-core").PgBuildColumn<"leave_types", import("drizzle-orm/pg-core").SetNotNull<import("drizzle-orm/pg-core").PgUUIDBuilder>, {
+    tenantId: import("drizzle-orm/pg-core").PgBuildColumn<"leave_requests", import("drizzle-orm/pg-core").SetNotNull<import("drizzle-orm/pg-core").PgUUIDBuilder>, {
         name: string;
-        tableName: "leave_types";
+        tableName: "leave_requests";
         dataType: "string uuid";
         data: string;
         driverParam: string;
@@ -6141,53 +6263,6 @@ export declare const updateLeaveTypeSchema: import("drizzle-orm/zod").BuildSchem
         identity: undefined;
         generated: undefined;
     }>;
-    id: import("drizzle-orm/pg-core").PgBuildColumn<"leave_types", import("drizzle-orm/pg-core").SetHasRuntimeDefault<import("drizzle-orm/pg-core").SetIsPrimaryKey<import("drizzle-orm/pg-core").PgUUIDBuilder>>, {
-        name: string;
-        tableName: "leave_types";
-        dataType: "string uuid";
-        data: string;
-        driverParam: string;
-        notNull: true;
-        hasDefault: true;
-        isPrimaryKey: false;
-        isAutoincrement: false;
-        hasRuntimeDefault: false;
-        enumValues: undefined;
-        identity: undefined;
-        generated: undefined;
-    }>;
-    createdAt: import("drizzle-orm/pg-core").PgBuildColumn<"leave_types", import("drizzle-orm/pg-core").SetHasDefault<import("drizzle-orm/pg-core").SetNotNull<import("drizzle-orm/pg-core").PgTimestampBuilder>>, {
-        name: string;
-        tableName: "leave_types";
-        dataType: "object date";
-        data: Date;
-        driverParam: string;
-        notNull: true;
-        hasDefault: true;
-        isPrimaryKey: false;
-        isAutoincrement: false;
-        hasRuntimeDefault: false;
-        enumValues: undefined;
-        identity: undefined;
-        generated: undefined;
-    }>;
-    updatedAt: import("drizzle-orm/pg-core").PgBuildColumn<"leave_types", import("drizzle-orm/pg-core").SetHasDefault<import("drizzle-orm/pg-core").SetNotNull<import("drizzle-orm/pg-core").PgTimestampBuilder>>, {
-        name: string;
-        tableName: "leave_types";
-        dataType: "object date";
-        data: Date;
-        driverParam: string;
-        notNull: true;
-        hasDefault: true;
-        isPrimaryKey: false;
-        isAutoincrement: false;
-        hasRuntimeDefault: false;
-        enumValues: undefined;
-        identity: undefined;
-        generated: undefined;
-    }>;
-}, undefined, undefined>;
-export declare const updateLeaveRequestSchema: import("drizzle-orm/zod").BuildSchema<"update", {
     employeeId: import("drizzle-orm/pg-core").PgBuildColumn<"leave_requests", import("drizzle-orm/pg-core").SetNotNull<import("drizzle-orm/pg-core").PgUUIDBuilder>, {
         name: string;
         tableName: "leave_requests";
@@ -6282,7 +6357,7 @@ export declare const updateLeaveRequestSchema: import("drizzle-orm/zod").BuildSc
         name: string;
         tableName: "leave_requests";
         dataType: "string enum";
-        data: "approved" | "pending" | "cancelled" | "rejected";
+        data: "approved" | "cancelled" | "pending" | "rejected";
         driverParam: string;
         notNull: true;
         hasDefault: true;
@@ -6338,9 +6413,56 @@ export declare const updateLeaveRequestSchema: import("drizzle-orm/zod").BuildSc
         identity: undefined;
         generated: undefined;
     }>;
-    deletedAt: import("drizzle-orm/pg-core").PgBuildColumn<"leave_requests", import("drizzle-orm/pg-core").PgTimestampBuilder, {
+}, undefined, undefined>;
+export declare const updateSalarySchema: import("drizzle-orm/zod").BuildSchema<"update", {
+    id: import("drizzle-orm/pg-core").PgBuildColumn<"salaries", import("drizzle-orm/pg-core").SetHasRuntimeDefault<import("drizzle-orm/pg-core").SetIsPrimaryKey<import("drizzle-orm/pg-core").PgUUIDBuilder>>, {
         name: string;
-        tableName: "leave_requests";
+        tableName: "salaries";
+        dataType: "string uuid";
+        data: string;
+        driverParam: string;
+        notNull: true;
+        hasDefault: true;
+        isPrimaryKey: false;
+        isAutoincrement: false;
+        hasRuntimeDefault: false;
+        enumValues: undefined;
+        identity: undefined;
+        generated: undefined;
+    }>;
+    createdAt: import("drizzle-orm/pg-core").PgBuildColumn<"salaries", import("drizzle-orm/pg-core").SetHasDefault<import("drizzle-orm/pg-core").SetNotNull<import("drizzle-orm/pg-core").PgTimestampBuilder>>, {
+        name: string;
+        tableName: "salaries";
+        dataType: "object date";
+        data: Date;
+        driverParam: string;
+        notNull: true;
+        hasDefault: true;
+        isPrimaryKey: false;
+        isAutoincrement: false;
+        hasRuntimeDefault: false;
+        enumValues: undefined;
+        identity: undefined;
+        generated: undefined;
+    }>;
+    updatedAt: import("drizzle-orm/pg-core").PgBuildColumn<"salaries", import("drizzle-orm/pg-core").SetHasDefault<import("drizzle-orm/pg-core").SetNotNull<import("drizzle-orm/pg-core").PgTimestampBuilder>>, {
+        name: string;
+        tableName: "salaries";
+        dataType: "object date";
+        data: Date;
+        driverParam: string;
+        notNull: true;
+        hasDefault: true;
+        isPrimaryKey: false;
+        isAutoincrement: false;
+        hasRuntimeDefault: false;
+        enumValues: undefined;
+        identity: undefined;
+        generated: undefined;
+    }>;
+    deletedAt: import("drizzle-orm/pg-core").PgBuildColumn<"salaries", import("drizzle-orm/pg-core").PgTimestampBuilder, {
+        name: string;
+        tableName: "salaries";
         dataType: "object date";
         data: Date;
         driverParam: string;
@@ -6353,9 +6475,9 @@ export declare const updateLeaveRequestSchema: import("drizzle-orm/zod").BuildSc
         identity: undefined;
         generated: undefined;
     }>;
-    tenantId: import("drizzle-orm/pg-core").PgBuildColumn<"leave_requests", import("drizzle-orm/pg-core").SetNotNull<import("drizzle-orm/pg-core").PgUUIDBuilder>, {
+    tenantId: import("drizzle-orm/pg-core").PgBuildColumn<"salaries", import("drizzle-orm/pg-core").SetNotNull<import("drizzle-orm/pg-core").PgUUIDBuilder>, {
         name: string;
-        tableName: "leave_requests";
+        tableName: "salaries";
         dataType: "string uuid";
         data: string;
         driverParam: string;
@@ -6368,53 +6490,6 @@ export declare const updateLeaveRequestSchema: import("drizzle-orm/zod").BuildSc
         identity: undefined;
         generated: undefined;
     }>;
-    id: import("drizzle-orm/pg-core").PgBuildColumn<"leave_requests", import("drizzle-orm/pg-core").SetHasRuntimeDefault<import("drizzle-orm/pg-core").SetIsPrimaryKey<import("drizzle-orm/pg-core").PgUUIDBuilder>>, {
-        name: string;
-        tableName: "leave_requests";
-        dataType: "string uuid";
-        data: string;
-        driverParam: string;
-        notNull: true;
-        hasDefault: true;
-        isPrimaryKey: false;
-        isAutoincrement: false;
-        hasRuntimeDefault: false;
-        enumValues: undefined;
-        identity: undefined;
-        generated: undefined;
-    }>;
-    createdAt: import("drizzle-orm/pg-core").PgBuildColumn<"leave_requests", import("drizzle-orm/pg-core").SetHasDefault<import("drizzle-orm/pg-core").SetNotNull<import("drizzle-orm/pg-core").PgTimestampBuilder>>, {
-        name: string;
-        tableName: "leave_requests";
-        dataType: "object date";
-        data: Date;
-        driverParam: string;
-        notNull: true;
-        hasDefault: true;
-        isPrimaryKey: false;
-        isAutoincrement: false;
-        hasRuntimeDefault: false;
-        enumValues: undefined;
-        identity: undefined;
-        generated: undefined;
-    }>;
-    updatedAt: import("drizzle-orm/pg-core").PgBuildColumn<"leave_requests", import("drizzle-orm/pg-core").SetHasDefault<import("drizzle-orm/pg-core").SetNotNull<import("drizzle-orm/pg-core").PgTimestampBuilder>>, {
-        name: string;
-        tableName: "leave_requests";
-        dataType: "object date";
-        data: Date;
-        driverParam: string;
-        notNull: true;
-        hasDefault: true;
-        isPrimaryKey: false;
-        isAutoincrement: false;
-        hasRuntimeDefault: false;
-        enumValues: undefined;
-        identity: undefined;
-        generated: undefined;
-    }>;
-}, undefined, undefined>;
-export declare const updateSalarySchema: import("drizzle-orm/zod").BuildSchema<"update", {
     employeeId: import("drizzle-orm/pg-core").PgBuildColumn<"salaries", import("drizzle-orm/pg-core").SetNotNull<import("drizzle-orm/pg-core").PgUUIDBuilder>, {
         name: string;
         tableName: "salaries";
@@ -6464,7 +6539,7 @@ export declare const updateSalarySchema: import("drizzle-orm/zod").BuildSchema<"
         name: string;
         tableName: "salaries";
         dataType: "string enum";
-        data: "monthly" | "bi_weekly" | "weekly";
+        data: "bi_weekly" | "monthly" | "weekly";
         driverParam: string;
         notNull: true;
         hasDefault: true;
@@ -6505,9 +6580,56 @@ export declare const updateSalarySchema: import("drizzle-orm/zod").BuildSchema<"
         identity: undefined;
         generated: undefined;
     }>;
-    deletedAt: import("drizzle-orm/pg-core").PgBuildColumn<"salaries", import("drizzle-orm/pg-core").PgTimestampBuilder, {
+}, undefined, undefined>;
+export declare const updatePayrollSchema: import("drizzle-orm/zod").BuildSchema<"update", {
+    id: import("drizzle-orm/pg-core").PgBuildColumn<"payroll", import("drizzle-orm/pg-core").SetHasRuntimeDefault<import("drizzle-orm/pg-core").SetIsPrimaryKey<import("drizzle-orm/pg-core").PgUUIDBuilder>>, {
         name: string;
-        tableName: "salaries";
+        tableName: "payroll";
+        dataType: "string uuid";
+        data: string;
+        driverParam: string;
+        notNull: true;
+        hasDefault: true;
+        isPrimaryKey: false;
+        isAutoincrement: false;
+        hasRuntimeDefault: false;
+        enumValues: undefined;
+        identity: undefined;
+        generated: undefined;
+    }>;
+    createdAt: import("drizzle-orm/pg-core").PgBuildColumn<"payroll", import("drizzle-orm/pg-core").SetHasDefault<import("drizzle-orm/pg-core").SetNotNull<import("drizzle-orm/pg-core").PgTimestampBuilder>>, {
+        name: string;
+        tableName: "payroll";
+        dataType: "object date";
+        data: Date;
+        driverParam: string;
+        notNull: true;
+        hasDefault: true;
+        isPrimaryKey: false;
+        isAutoincrement: false;
+        hasRuntimeDefault: false;
+        enumValues: undefined;
+        identity: undefined;
+        generated: undefined;
+    }>;
+    updatedAt: import("drizzle-orm/pg-core").PgBuildColumn<"payroll", import("drizzle-orm/pg-core").SetHasDefault<import("drizzle-orm/pg-core").SetNotNull<import("drizzle-orm/pg-core").PgTimestampBuilder>>, {
+        name: string;
+        tableName: "payroll";
+        dataType: "object date";
+        data: Date;
+        driverParam: string;
+        notNull: true;
+        hasDefault: true;
+        isPrimaryKey: false;
+        isAutoincrement: false;
+        hasRuntimeDefault: false;
+        enumValues: undefined;
+        identity: undefined;
+        generated: undefined;
+    }>;
+    deletedAt: import("drizzle-orm/pg-core").PgBuildColumn<"payroll", import("drizzle-orm/pg-core").PgTimestampBuilder, {
+        name: string;
+        tableName: "payroll";
         dataType: "object date";
         data: Date;
         driverParam: string;
@@ -6520,9 +6642,9 @@ export declare const updateSalarySchema: import("drizzle-orm/zod").BuildSchema<"
         identity: undefined;
         generated: undefined;
     }>;
-    tenantId: import("drizzle-orm/pg-core").PgBuildColumn<"salaries", import("drizzle-orm/pg-core").SetNotNull<import("drizzle-orm/pg-core").PgUUIDBuilder>, {
+    tenantId: import("drizzle-orm/pg-core").PgBuildColumn<"payroll", import("drizzle-orm/pg-core").SetNotNull<import("drizzle-orm/pg-core").PgUUIDBuilder>, {
         name: string;
-        tableName: "salaries";
+        tableName: "payroll";
         dataType: "string uuid";
         data: string;
         driverParam: string;
@@ -6535,53 +6657,6 @@ export declare const updateSalarySchema: import("drizzle-orm/zod").BuildSchema<"
         identity: undefined;
         generated: undefined;
     }>;
-    id: import("drizzle-orm/pg-core").PgBuildColumn<"salaries", import("drizzle-orm/pg-core").SetHasRuntimeDefault<import("drizzle-orm/pg-core").SetIsPrimaryKey<import("drizzle-orm/pg-core").PgUUIDBuilder>>, {
-        name: string;
-        tableName: "salaries";
-        dataType: "string uuid";
-        data: string;
-        driverParam: string;
-        notNull: true;
-        hasDefault: true;
-        isPrimaryKey: false;
-        isAutoincrement: false;
-        hasRuntimeDefault: false;
-        enumValues: undefined;
-        identity: undefined;
-        generated: undefined;
-    }>;
-    createdAt: import("drizzle-orm/pg-core").PgBuildColumn<"salaries", import("drizzle-orm/pg-core").SetHasDefault<import("drizzle-orm/pg-core").SetNotNull<import("drizzle-orm/pg-core").PgTimestampBuilder>>, {
-        name: string;
-        tableName: "salaries";
-        dataType: "object date";
-        data: Date;
-        driverParam: string;
-        notNull: true;
-        hasDefault: true;
-        isPrimaryKey: false;
-        isAutoincrement: false;
-        hasRuntimeDefault: false;
-        enumValues: undefined;
-        identity: undefined;
-        generated: undefined;
-    }>;
-    updatedAt: import("drizzle-orm/pg-core").PgBuildColumn<"salaries", import("drizzle-orm/pg-core").SetHasDefault<import("drizzle-orm/pg-core").SetNotNull<import("drizzle-orm/pg-core").PgTimestampBuilder>>, {
-        name: string;
-        tableName: "salaries";
-        dataType: "object date";
-        data: Date;
-        driverParam: string;
-        notNull: true;
-        hasDefault: true;
-        isPrimaryKey: false;
-        isAutoincrement: false;
-        hasRuntimeDefault: false;
-        enumValues: undefined;
-        identity: undefined;
-        generated: undefined;
-    }>;
-}, undefined, undefined>;
-export declare const updatePayrollSchema: import("drizzle-orm/zod").BuildSchema<"update", {
     employeeId: import("drizzle-orm/pg-core").PgBuildColumn<"payroll", import("drizzle-orm/pg-core").SetNotNull<import("drizzle-orm/pg-core").PgUUIDBuilder>, {
         name: string;
         tableName: "payroll";
@@ -6732,83 +6807,68 @@ export declare const updatePayrollSchema: import("drizzle-orm/zod").BuildSchema<
         identity: undefined;
         generated: undefined;
     }>;
-    deletedAt: import("drizzle-orm/pg-core").PgBuildColumn<"payroll", import("drizzle-orm/pg-core").PgTimestampBuilder, {
-        name: string;
-        tableName: "payroll";
-        dataType: "object date";
-        data: Date;
-        driverParam: string;
-        notNull: false;
-        hasDefault: false;
-        isPrimaryKey: false;
-        isAutoincrement: false;
-        hasRuntimeDefault: false;
-        enumValues: undefined;
-        identity: undefined;
-        generated: undefined;
-    }>;
-    tenantId: import("drizzle-orm/pg-core").PgBuildColumn<"payroll", import("drizzle-orm/pg-core").SetNotNull<import("drizzle-orm/pg-core").PgUUIDBuilder>, {
-        name: string;
-        tableName: "payroll";
-        dataType: "string uuid";
-        data: string;
-        driverParam: string;
-        notNull: true;
-        hasDefault: false;
-        isPrimaryKey: false;
-        isAutoincrement: false;
-        hasRuntimeDefault: false;
-        enumValues: undefined;
-        identity: undefined;
-        generated: undefined;
-    }>;
-    id: import("drizzle-orm/pg-core").PgBuildColumn<"payroll", import("drizzle-orm/pg-core").SetHasRuntimeDefault<import("drizzle-orm/pg-core").SetIsPrimaryKey<import("drizzle-orm/pg-core").PgUUIDBuilder>>, {
-        name: string;
-        tableName: "payroll";
-        dataType: "string uuid";
-        data: string;
-        driverParam: string;
-        notNull: true;
-        hasDefault: true;
-        isPrimaryKey: false;
-        isAutoincrement: false;
-        hasRuntimeDefault: false;
-        enumValues: undefined;
-        identity: undefined;
-        generated: undefined;
-    }>;
-    createdAt: import("drizzle-orm/pg-core").PgBuildColumn<"payroll", import("drizzle-orm/pg-core").SetHasDefault<import("drizzle-orm/pg-core").SetNotNull<import("drizzle-orm/pg-core").PgTimestampBuilder>>, {
-        name: string;
-        tableName: "payroll";
-        dataType: "object date";
-        data: Date;
-        driverParam: string;
-        notNull: true;
-        hasDefault: true;
-        isPrimaryKey: false;
-        isAutoincrement: false;
-        hasRuntimeDefault: false;
-        enumValues: undefined;
-        identity: undefined;
-        generated: undefined;
-    }>;
-    updatedAt: import("drizzle-orm/pg-core").PgBuildColumn<"payroll", import("drizzle-orm/pg-core").SetHasDefault<import("drizzle-orm/pg-core").SetNotNull<import("drizzle-orm/pg-core").PgTimestampBuilder>>, {
-        name: string;
-        tableName: "payroll";
-        dataType: "object date";
-        data: Date;
-        driverParam: string;
-        notNull: true;
-        hasDefault: true;
-        isPrimaryKey: false;
-        isAutoincrement: false;
-        hasRuntimeDefault: false;
-        enumValues: undefined;
-        identity: undefined;
-        generated: undefined;
-    }>;
 }, undefined, undefined>;
 export declare const updatePayslipSchema: import("drizzle-orm/zod").BuildSchema<"update", {
+    id: import("drizzle-orm/pg-core").PgBuildColumn<"payslips", import("drizzle-orm/pg-core").SetHasRuntimeDefault<import("drizzle-orm/pg-core").SetIsPrimaryKey<import("drizzle-orm/pg-core").PgUUIDBuilder>>, {
+        name: string;
+        tableName: "payslips";
+        dataType: "string uuid";
+        data: string;
+        driverParam: string;
+        notNull: true;
+        hasDefault: true;
+        isPrimaryKey: false;
+        isAutoincrement: false;
+        hasRuntimeDefault: false;
+        enumValues: undefined;
+        identity: undefined;
+        generated: undefined;
+    }>;
+    createdAt: import("drizzle-orm/pg-core").PgBuildColumn<"payslips", import("drizzle-orm/pg-core").SetHasDefault<import("drizzle-orm/pg-core").SetNotNull<import("drizzle-orm/pg-core").PgTimestampBuilder>>, {
+        name: string;
+        tableName: "payslips";
+        dataType: "object date";
+        data: Date;
+        driverParam: string;
+        notNull: true;
+        hasDefault: true;
+        isPrimaryKey: false;
+        isAutoincrement: false;
+        hasRuntimeDefault: false;
+        enumValues: undefined;
+        identity: undefined;
+        generated: undefined;
+    }>;
+    updatedAt: import("drizzle-orm/pg-core").PgBuildColumn<"payslips", import("drizzle-orm/pg-core").SetHasDefault<import("drizzle-orm/pg-core").SetNotNull<import("drizzle-orm/pg-core").PgTimestampBuilder>>, {
+        name: string;
+        tableName: "payslips";
+        dataType: "object date";
+        data: Date;
+        driverParam: string;
+        notNull: true;
+        hasDefault: true;
+        isPrimaryKey: false;
+        isAutoincrement: false;
+        hasRuntimeDefault: false;
+        enumValues: undefined;
+        identity: undefined;
+        generated: undefined;
+    }>;
+    tenantId: import("drizzle-orm/pg-core").PgBuildColumn<"payslips", import("drizzle-orm/pg-core").SetNotNull<import("drizzle-orm/pg-core").PgUUIDBuilder>, {
+        name: string;
+        tableName: "payslips";
+        dataType: "string uuid";
+        data: string;
+        driverParam: string;
+        notNull: true;
+        hasDefault: false;
+        isPrimaryKey: false;
+        isAutoincrement: false;
+        hasRuntimeDefault: false;
+        enumValues: undefined;
+        identity: undefined;
+        generated: undefined;
+    }>;
     employeeId: import("drizzle-orm/pg-core").PgBuildColumn<"payslips", import("drizzle-orm/pg-core").SetNotNull<import("drizzle-orm/pg-core").PgUUIDBuilder>, {
         name: string;
         tableName: "payslips";
@@ -6900,66 +6960,6 @@ export declare const updatePayslipSchema: import("drizzle-orm/zod").BuildSchema<
         generated: undefined;
     }>;
     generatedAt: import("drizzle-orm/pg-core").PgBuildColumn<"payslips", import("drizzle-orm/pg-core").SetHasDefault<import("drizzle-orm/pg-core").SetNotNull<import("drizzle-orm/pg-core").PgTimestampBuilder>>, {
-        name: string;
-        tableName: "payslips";
-        dataType: "object date";
-        data: Date;
-        driverParam: string;
-        notNull: true;
-        hasDefault: true;
-        isPrimaryKey: false;
-        isAutoincrement: false;
-        hasRuntimeDefault: false;
-        enumValues: undefined;
-        identity: undefined;
-        generated: undefined;
-    }>;
-    tenantId: import("drizzle-orm/pg-core").PgBuildColumn<"payslips", import("drizzle-orm/pg-core").SetNotNull<import("drizzle-orm/pg-core").PgUUIDBuilder>, {
-        name: string;
-        tableName: "payslips";
-        dataType: "string uuid";
-        data: string;
-        driverParam: string;
-        notNull: true;
-        hasDefault: false;
-        isPrimaryKey: false;
-        isAutoincrement: false;
-        hasRuntimeDefault: false;
-        enumValues: undefined;
-        identity: undefined;
-        generated: undefined;
-    }>;
-    id: import("drizzle-orm/pg-core").PgBuildColumn<"payslips", import("drizzle-orm/pg-core").SetHasRuntimeDefault<import("drizzle-orm/pg-core").SetIsPrimaryKey<import("drizzle-orm/pg-core").PgUUIDBuilder>>, {
-        name: string;
-        tableName: "payslips";
-        dataType: "string uuid";
-        data: string;
-        driverParam: string;
-        notNull: true;
-        hasDefault: true;
-        isPrimaryKey: false;
-        isAutoincrement: false;
-        hasRuntimeDefault: false;
-        enumValues: undefined;
-        identity: undefined;
-        generated: undefined;
-    }>;
-    createdAt: import("drizzle-orm/pg-core").PgBuildColumn<"payslips", import("drizzle-orm/pg-core").SetHasDefault<import("drizzle-orm/pg-core").SetNotNull<import("drizzle-orm/pg-core").PgTimestampBuilder>>, {
-        name: string;
-        tableName: "payslips";
-        dataType: "object date";
-        data: Date;
-        driverParam: string;
-        notNull: true;
-        hasDefault: true;
-        isPrimaryKey: false;
-        isAutoincrement: false;
-        hasRuntimeDefault: false;
-        enumValues: undefined;
-        identity: undefined;
-        generated: undefined;
-    }>;
-    updatedAt: import("drizzle-orm/pg-core").PgBuildColumn<"payslips", import("drizzle-orm/pg-core").SetHasDefault<import("drizzle-orm/pg-core").SetNotNull<import("drizzle-orm/pg-core").PgTimestampBuilder>>, {
         name: string;
         tableName: "payslips";
         dataType: "object date";

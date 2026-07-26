@@ -10,17 +10,6 @@
     "sourceMap": true,
     "strict": true,
     "moduleResolution": "bundler",
-    "paths": {
-      "@lumora/auth": ["../../packages/auth/src"],
-      "@lumora/auth/*": ["../../packages/auth/src/*"],
-      "@lumora/shared": ["../../packages/shared/src"],
-      "@lumora/shared/*": ["../../packages/shared/src/*"],
-      "@lumora/validation": ["../../packages/validation/src"],
-      "@lumora/validation/*": ["../../packages/validation/src/*"],
-      "@lumora/database": ["../../packages/database/src"],
-      "@lumora/database/*": ["../../packages/database/src/*"],
-      "@lumora/config": ["../../packages/config/src"],
-      "@lumora/config/*": ["../../packages/config/src/*"]
-    }
+    "verbatimModuleSyntax": false
   }
 }

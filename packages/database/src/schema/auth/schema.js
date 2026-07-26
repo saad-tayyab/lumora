@@ -42,9 +42,9 @@ export const sessions = pgTable('sessions', {
     userId: uuid('user_id')
         .notNull()
         .references(() => users.id),
-    token: varchar('token', 255).notNull().unique(),
-    ipAddress: varchar('ip_address', 45),
-    userAgent: varchar('user_agent', 500),
+    token: varchar('token', { length: 255 }).notNull().unique(),
+    ipAddress: varchar('ip_address', { length: 45 }),
+    userAgent: varchar('user_agent', { length: 500 }),
     expiresAt: timestamp('expires_at').notNull(),
 }, (table) => [index('sessions_user_id_idx').on(table.userId)]);
 export const credentials = pgTable('credentials', {
@@ -53,8 +53,8 @@ export const credentials = pgTable('credentials', {
     userId: uuid('user_id')
         .notNull()
         .references(() => users.id),
-    passwordHash: varchar('password_hash', 255).notNull(),
-    provider: varchar('provider', 50).notNull().default('email'),
+    passwordHash: varchar('password_hash', { length: 255 }).notNull(),
+    provider: varchar('provider', { length: 50 }).notNull().default('email'),
 }, (table) => [index('credentials_user_id_idx').on(table.userId)]);
 export const oauthProviders = pgTable('oauth_providers', {
     ...auditFields,
@@ -62,10 +62,10 @@ export const oauthProviders = pgTable('oauth_providers', {
     userId: uuid('user_id')
         .notNull()
         .references(() => users.id),
-    provider: varchar('provider', 50).notNull(),
-    providerId: varchar('provider_id', 255).notNull(),
-    accessToken: varchar('access_token', 500),
-    refreshToken: varchar('refresh_token', 500),
+    provider: varchar('provider', { length: 50 }).notNull(),
+    providerId: varchar('provider_id', { length: 255 }).notNull(),
+    accessToken: varchar('access_token', { length: 500 }),
+    refreshToken: varchar('refresh_token', { length: 500 }),
 }, (table) => [
     uniqueIndex('oauth_providers_provider_provider_id_unique').on(table.provider, table.providerId),
     index('oauth_providers_user_id_idx').on(table.userId),
@@ -77,7 +77,7 @@ export const mfaConfig = pgTable('mfa_config', {
         .notNull()
         .references(() => users.id)
         .unique(),
-    secret: varchar('secret', 255).notNull(),
+    secret: varchar('secret', { length: 255 }).notNull(),
     enabled: boolean('enabled').notNull().default(false),
     backupCodes: text('backup_codes'),
 });
@@ -87,8 +87,8 @@ export const permissions = pgTable('permissions', {
     roleId: uuid('role_id')
         .notNull()
         .references(() => roles.id),
-    resource: varchar('resource', 100).notNull(),
-    action: varchar('action', 100).notNull(),
+    resource: varchar('resource', { length: 100 }).notNull(),
+    action: varchar('action', { length: 100 }).notNull(),
 }, (table) => [
     uniqueIndex('permissions_role_id_resource_action_unique').on(table.roleId, table.resource, table.action),
 ]);

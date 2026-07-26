@@ -188,7 +188,7 @@ export const payslips = pgTable('payslips', {
     ...tenantFields,
     employeeId: uuid('employee_id').notNull().references(() => employees.id),
     payrollId: uuid('payroll_id').references(() => payroll.id),
-    period: varchar('period', 50).notNull(),
+    period: varchar('period', { length: 50 }).notNull(),
     grossPay: decimal('gross_pay', { precision: 19, scale: 4 }).notNull(),
     deductions: decimal('deductions', { precision: 19, scale: 4 }).notNull().default('0'),
     netPay: decimal('net_pay', { precision: 19, scale: 4 }).notNull(),

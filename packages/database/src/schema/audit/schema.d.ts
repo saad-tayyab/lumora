@@ -183,7 +183,7 @@ export declare const auditLogEntries: import("drizzle-orm/pg-core").PgTableWithC
             generated: undefined;
         }>;
     };
-    dialect: "pg";
+    dialect: 'pg';
 }>;
 export declare const insertAuditLogEntrySchema: import("drizzle-orm/zod").BuildSchema<"insert", {
     id: import("drizzle-orm/pg-core").PgBuildColumn<"audit_log_entries", import("drizzle-orm/pg-core").SetHasRuntimeDefault<import("drizzle-orm/pg-core").SetIsPrimaryKey<import("drizzle-orm/pg-core").PgUUIDBuilder>>, {

@@ -62,10 +62,10 @@ export const fiscalYears = pgTable('fiscal_years', {
     ...auditFields,
     ...tenantFields,
     ...softDeleteFields,
-    name: varchar('name', 100).notNull(),
+    name: varchar('name', { length: 100 }).notNull(),
     startDate: timestamp('start_date').notNull(),
     endDate: timestamp('end_date').notNull(),
-    status: varchar('status', 20).notNull().default('open'),
+    status: varchar('status', { length: 20 }).notNull().default('open'),
 }, (table) => [
     index('idx_fiscal_years_tenant_id').on(table.tenantId),
     index('idx_fiscal_years_status').on(table.status),
