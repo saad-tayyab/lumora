@@ -1,0 +1,1 @@
+export { default as component } from "../../../../src/routes/(app)/ap/payments/new/+page.svelte";

@@ -6,13 +6,7 @@ steps: 50
 permission:
   edit: allow
   bash:
-    bun *: allow
-    bunx *: allow
-    git *: allow
-    ls *: allow
-    find *: allow
-    cat *: allow
-    "*": ask
+    "*": allow
   read: allow
   glob: allow
   grep: allow

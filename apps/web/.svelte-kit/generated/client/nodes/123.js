@@ -1,0 +1,1 @@
+export { default as component } from "../../../../src/routes/(app)/tax/rules/+page.svelte";

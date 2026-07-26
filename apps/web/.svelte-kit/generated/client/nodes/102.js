@@ -1,0 +1,1 @@
+export { default as component } from "../../../../src/routes/(app)/sales/discount-policies/new/+page.svelte";

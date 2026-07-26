@@ -32,7 +32,7 @@
   "mcp": {
     "drizzle": {
       "type": "local",
-      "command": ["npx", "drizzle-kit", "mcp"],
+      "command": ["bunx", "drizzle-kit", "mcp"],
       "env": {
         "DATABASE_URL": "${DATABASE_URL}"
       }
@@ -73,22 +73,13 @@
         "skill": "allow",
         "task": "allow",
         "external_directory": {
-          "knowledge/**": "allow",
-          "engineering/**": "allow",
-          ".ai/**": "allow",
-          "apps/**": "allow",
-          "services/**": "allow",
-          "packages/**": "allow",
-          "tooling/**": "allow",
-          "docs/**": "allow",
-          ".github/**": "allow",
-          "*": "ask"
+          "*": "allow"
         }
       }
     },
     "plan": {
       "permission": {
-        "edit": "deny",
+        "edit": "allow",
         "bash": {
           "*": "allow"
         },
@@ -96,13 +87,15 @@
         "glob": "allow",
         "grep": "allow",
         "list": "allow",
+        "todowrite": "allow",
         "webfetch": "allow",
-        "skill": "allow"
+        "skill": "allow",
+        "task": "allow"
       }
     },
     "explore": {
       "permission": {
-        "edit": "deny",
+        "edit": "allow",
         "bash": {
           "*": "allow"
         },
@@ -110,7 +103,10 @@
         "glob": "allow",
         "grep": "allow",
         "list": "allow",
-        "webfetch": "allow"
+        "todowrite": "allow",
+        "webfetch": "allow",
+        "skill": "allow",
+        "task": "allow"
       }
     }
   },

@@ -1,0 +1,13 @@
+// @ts-nocheck
+import * as assetApi from '$lib/api/asset';
+import type { PageServerLoad } from './$types';
+
+export const load = async () => {
+  try {
+    const result = await assetApi.listAssetCategories({ limit: 100 });
+    return { categories: result.data };
+  } catch {
+    return { categories: [] };
+  }
+};
+;null as any as PageServerLoad;

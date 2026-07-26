@@ -1,0 +1,24 @@
+// @ts-nocheck
+import { error } from '@sveltejs/kit';
+import type { PageServerLoad } from './$types';
+
+const BASE_URL = 'http://localhost:4000';
+
+export const load = async ({ url }: Parameters<PageServerLoad>[0]) => {
+  const limit = Number(url.searchParams.get('limit')) || 20;
+  const offset = Number(url.searchParams.get('offset')) || 0;
+
+  try {
+    const res = await fetch(`${BASE_URL}/ar/customers?limit=${limit}&offset=${offset}`, {
+      credentials: 'include',
+    });
+    if (!res.ok) throw new Error('Failed to fetch customers');
+    const data = await res.json();
+    return { customers: data.data, total: data.total, limit, offset };
+  } catch (e) {
+    throw error(500, {
+      code: 'SERVER_ERROR',
+      message: e instanceof Error ? e.message : 'Failed to load customers',
+    });
+  }
+};

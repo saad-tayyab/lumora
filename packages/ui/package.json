@@ -1,0 +1,32 @@
+{
+  "name": "@lumora/ui",
+  "version": "0.0.1",
+  "private": true,
+  "type": "module",
+  "exports": {
+    ".": "./src/index.ts",
+    "./utils/cn": "./src/lib/utils/cn.ts",
+    "./utils/format": "./src/lib/utils/format.ts",
+    "./components/layout/*": "./src/lib/components/layout/*.svelte",
+    "./components/data/*": "./src/lib/components/data/*.svelte",
+    "./components/form/*": "./src/lib/components/form/*.svelte",
+    "./components/display/*": "./src/lib/components/display/*.svelte"
+  },
+  "scripts": {
+    "typecheck": "tsc --noEmit",
+    "lint": "biome check src/",
+    "clean": "rm -rf dist node_modules"
+  },
+  "devDependencies": {
+    "typescript": "^5.7.0"
+  },
+  "dependencies": {
+    "clsx": "^2.1.0",
+    "tailwind-merge": "^3.6.0",
+    "bits-ui": "^2.18.1",
+    "lucide-svelte": "^1.0.1"
+  },
+  "peerDependencies": {
+    "svelte": "^5.0.0"
+  }
+}
