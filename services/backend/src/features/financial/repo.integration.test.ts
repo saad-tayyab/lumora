@@ -540,8 +540,8 @@ describe('Financial Repositories - Integration Tests', () => {
       });
 
       it('should paginate with offset', async () => {
-        await journalEntriesRepo.create(makeJournalEntry({ description: 'Page1 JE' }));
-        await journalEntriesRepo.create(makeJournalEntry({ description: 'Page2 JE' }));
+        await journalEntriesRepo.create(makeJournalEntry({ description: 'Page1 JE', date: '2026-01-15' }));
+        await journalEntriesRepo.create(makeJournalEntry({ description: 'Page2 JE', date: '2026-01-16' }));
         const page1 = await journalEntriesRepo.findMany(TEST_TENANT_ID, { limit: 1, offset: 0 });
         const page2 = await journalEntriesRepo.findMany(TEST_TENANT_ID, { limit: 1, offset: 1 });
 
