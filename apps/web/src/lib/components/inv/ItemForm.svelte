@@ -39,6 +39,7 @@ let isSubmitting = $state(false);
 			<div>
 				<label for="sku" class="block text-sm font-medium text-card-foreground">SKU *</label>
 				<input id="sku" name="sku" type="text" required bind:value={sku} class="mt-1 block w-full rounded-md border border-input bg-background px-3 py-2 text-sm text-foreground placeholder:text-muted-foreground focus:border-ring focus:outline-none focus:ring-1 focus:ring-ring" placeholder="SKU-001" />
+				{#if errors.sku}<p class="mt-1 text-xs text-destructive">{errors.sku[0]}</p>{/if}
 			</div>
 			<div>
 				<label for="categoryId" class="block text-sm font-medium text-card-foreground">Category ID</label>

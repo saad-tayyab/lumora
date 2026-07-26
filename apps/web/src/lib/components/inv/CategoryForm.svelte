@@ -26,6 +26,7 @@ let isSubmitting = $state(false);
 			<div>
 				<label for="code" class="block text-sm font-medium text-card-foreground">Code *</label>
 				<input id="code" name="code" type="text" required maxlength="20" bind:value={code} class="mt-1 block w-full rounded-md border border-input bg-background px-3 py-2 text-sm text-foreground placeholder:text-muted-foreground focus:border-ring focus:outline-none focus:ring-1 focus:ring-ring" placeholder="e.g. RAW" />
+				{#if errors.code}<p class="mt-1 text-xs text-destructive">{errors.code[0]}</p>{/if}
 			</div>
 		</div>
 

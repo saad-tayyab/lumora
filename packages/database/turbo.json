@@ -2,7 +2,7 @@
   "extends": ["//"],
   "tasks": {
     "test:integration": {
-      "inputs": ["src/**", "package.json", "tsconfig.json", "vitest.config.ts"]
+      "inputs": ["src/**", "package.json", "tsconfig.json", "vitest.integration.config.ts"]
     }
   }
 }

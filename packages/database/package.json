@@ -24,7 +24,7 @@
     "db:seed": "bun src/seed.ts",
     "typecheck": "tsc --noEmit",
     "test": "vitest run",
-    "test:integration": "vitest run --config vitest.config.ts src/**/*.integration.test.ts"
+    "test:integration": "vitest run --config vitest.integration.config.ts"
   },
   "dependencies": {
     "encore.dev": "^1.57.13",

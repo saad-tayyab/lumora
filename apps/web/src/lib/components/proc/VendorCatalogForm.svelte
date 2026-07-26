@@ -30,6 +30,7 @@ let isSubmitting = $state(false);
 			<div>
 				<label for="vendorId" class="block text-sm font-medium text-card-foreground">Vendor ID *</label>
 				<input id="vendorId" name="vendorId" type="text" required bind:value={vendorId} class="mt-1 block w-full rounded-md border border-input bg-background px-3 py-2 text-sm text-foreground placeholder:text-muted-foreground focus:border-ring focus:outline-none focus:ring-1 focus:ring-ring" />
+				{#if errors.vendorId}<p class="mt-1 text-xs text-destructive">{errors.vendorId[0]}</p>{/if}
 			</div>
 			<div>
 				<label for="itemId" class="block text-sm font-medium text-card-foreground">Item ID *</label>
@@ -42,6 +43,7 @@ let isSubmitting = $state(false);
 			<div>
 				<label for="unitPrice" class="block text-sm font-medium text-card-foreground">Unit Price *</label>
 				<input id="unitPrice" name="unitPrice" type="number" step="0.01" min="0" required bind:value={unitPrice} class="mt-1 block w-full rounded-md border border-input bg-background px-3 py-2 text-sm text-foreground focus:border-ring focus:outline-none focus:ring-1 focus:ring-ring" />
+				{#if errors.unitPrice}<p class="mt-1 text-xs text-destructive">{errors.unitPrice[0]}</p>{/if}
 			</div>
 			<div>
 				<label for="leadTimeDays" class="block text-sm font-medium text-card-foreground">Lead Time (days)</label>

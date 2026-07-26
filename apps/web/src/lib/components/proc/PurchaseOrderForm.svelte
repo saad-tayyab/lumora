@@ -52,6 +52,7 @@ let isSubmitting = $state(false);
 						<option value={vendor.id}>{vendor.name}</option>
 					{/each}
 				</select>
+				{#if errors.vendorId}<p class="mt-1 text-xs text-destructive">{errors.vendorId[0]}</p>{/if}
 			</div>
 			<div>
 				<label for="expectedDeliveryDate" class="block text-sm font-medium text-card-foreground">Expected Delivery</label>

@@ -33,7 +33,7 @@ function updateLine(index: number, field: string, value: string) {
 			</div>
 			<div>
 				{#if index === 0}<label class="block text-xs font-medium text-muted-foreground">Description</label>{/if}
-				<input type="text" value={item.description} oninput={(e) => updateLine(index, 'description', (e.target as HTMLInputElement).value)} class="mt-1 block w-full rounded-md border border-input bg-background px-3 py-2 text-sm text-foreground placeholder:text-muted-foreground focus:border-ring focus:outline-none focus:ring-1 focus:ring-ring" />
+				<input type="text" value={item.description} oninput={(e) => updateLine(index, 'description', (e.target as HTMLInputElement).value)} class="mt-1 block w-full rounded-md border border-input bg-background px-3 py-2 text-sm text-foreground placeholder:text-muted-foreground focus:border-ring focus:outline-none focus:ring-1 focus:ring-ring" placeholder="Description" />
 			</div>
 			<div>
 				{#if index === 0}<label class="block text-xs font-medium text-muted-foreground">Quantity *</label>{/if}
