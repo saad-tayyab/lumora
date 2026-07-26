@@ -2,9 +2,10 @@ import { getSession } from '@lumora/auth/middleware';
 import { createAuth } from '@lumora/auth/server';
 import { APIError, type Header } from 'encore.dev/api';
 import { authHandler } from 'encore.dev/auth';
-import { db } from './database';
+import { db, authSchema } from './database';
 
-const betterAuth = createAuth(db);
+const betterAuthInstance = createAuth(db, authSchema);
+export { betterAuthInstance as betterAuth };
 
 interface AuthParams {
   authorization: Header<'Authorization'>;
@@ -22,7 +23,7 @@ export const auth = authHandler<AuthParams, AuthData>(async (params) => {
   if (params.authorization) headers.set('Authorization', params.authorization);
   if (params.cookie) headers.set('Cookie', params.cookie);
 
-  const session = await getSession(betterAuth, headers);
+  const session = await getSession(betterAuthInstance, headers);
 
   if (!session) {
     throw APIError.unauthenticated('Valid session required');

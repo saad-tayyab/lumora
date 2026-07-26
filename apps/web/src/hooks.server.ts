@@ -13,7 +13,7 @@ export const handle: Handle = async ({ event, resolve }) => {
   try {
     const cookie = event.request.headers.get('cookie') || '';
     const res = await fetch(`${backendUrl}/api/auth/session`, {
-      headers: { cookie },
+      headers: { cookie, Authorization: 'Bearer session' },
     });
 
     if (!res.ok) throw redirect(303, '/login');

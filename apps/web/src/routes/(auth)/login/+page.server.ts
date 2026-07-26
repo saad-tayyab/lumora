@@ -1,8 +1,10 @@
 import { fail, redirect } from '@sveltejs/kit';
 import type { Actions } from './$types';
 
+const backendUrl = 'http://localhost:4000';
+
 export const actions: Actions = {
-  default: async ({ request }) => {
+  default: async ({ request, cookies }) => {
     const formData = await request.formData();
     const email = formData.get('email') as string;
     const password = formData.get('password') as string;
@@ -12,16 +14,26 @@ export const actions: Actions = {
     }
 
     try {
-      const res = await fetch('http://localhost:4000/api/auth/sign-in/email', {
+      const res = await fetch(`${backendUrl}/api/auth/sign-in/email`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ email, password }),
-        credentials: 'include',
       });
 
+      const data = await res.json();
+
       if (!res.ok) {
-        const error = await res.json().catch(() => ({ message: 'Invalid credentials' }));
-        return fail(400, { error: error.message || 'Invalid credentials' });
+        return fail(400, { error: data.message || 'Invalid credentials' });
+      }
+
+      if (data.sessionToken) {
+        cookies.set('better-auth.session_token', data.sessionToken, {
+          path: '/',
+          httpOnly: true,
+          secure: false,
+          sameSite: 'lax',
+          maxAge: 60 * 60 * 24 * 7,
+        });
       }
 
       return redirect(303, '/dashboard');

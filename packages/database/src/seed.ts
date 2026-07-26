@@ -12,6 +12,7 @@ const T = '00000000-0000-0000-0000-000000000001'; // tenant
 const ADMIN = '00000000-0000-0000-0000-000000000002';
 const MANAGER = '00000000-0000-0000-0000-000000000003';
 const USER = '00000000-0000-0000-0000-000000000004';
+const DEV = '00000000-0000-0000-0000-000000000005';
 
 // ─── Roles ────────────────────────────────────────────────────────────────────
 const ROLE_ADMIN = '00000000-0000-0000-0000-000000000010';
@@ -296,20 +297,31 @@ async function seed() {
     VALUES
       (${ADMIN}, ${T}, 'admin@lumora.app', 'System Admin', 'admin', 'active', true, false, NOW(), NOW()),
       (${MANAGER}, ${T}, 'manager@lumora.app', 'Jane Manager', 'jane.manager', 'active', true, false, NOW(), NOW()),
-      (${USER}, ${T}, 'user@lumora.app', 'John User', 'john.user', 'active', true, false, NOW(), NOW())
+      (${USER}, ${T}, 'user@lumora.app', 'John User', 'john.user', 'active', true, false, NOW(), NOW()),
+      (${DEV}, ${T}, 'dev@lumora.app', 'Dev User', 'dev', 'active', true, false, NOW(), NOW())
     ON CONFLICT DO NOTHING
   `;
-  console.log('  Users: admin@lumora.app, manager@lumora.app, user@lumora.app');
+  console.log('  Users: admin@lumora.app, manager@lumora.app, user@lumora.app, dev@lumora.app');
   // ─── BC-AUTH: User Roles ──────────────────────────────────────────────────
   await sql`
     INSERT INTO user_roles (id, user_id, role_id, created_at, updated_at)
     VALUES
       (${UR_1}, ${ADMIN}, ${ROLE_ADMIN}, NOW(), NOW()),
       (${UR_2}, ${MANAGER}, ${ROLE_MGR}, NOW(), NOW()),
-      (${UR_3}, ${USER}, ${ROLE_USER}, NOW(), NOW())
+      (${UR_3}, ${USER}, ${ROLE_USER}, NOW(), NOW()),
+      ('00000000-0000-0000-0000-000000000033', ${DEV}, ${ROLE_ADMIN}, NOW(), NOW())
     ON CONFLICT DO NOTHING
   `;
   console.log('  User roles assigned');
+  // ─── BC-AUTH: Credentials (password hashes for login) ──────────────────────
+  const DEV_PASSWORD_HASH = 's2:bf6897d60422b84c96e432dc4f9404e5:a0c4eb1e22135da7844c711028a0e1c1529e1d3d5fb10e30c37c5b0f3dd58832';
+  await sql`
+    INSERT INTO credentials (id, tenant_id, user_id, password_hash, provider, created_at, updated_at)
+    VALUES
+      ('00000000-0000-0000-0000-000000000040', ${T}, ${DEV}, ${DEV_PASSWORD_HASH}, 'email', NOW(), NOW())
+    ON CONFLICT DO NOTHING
+  `;
+  console.log('  Credentials: dev@lumora.app / 123456');
   // ─── BC-AUTH: Permissions ─────────────────────────────────────────────────
   await sql`
     INSERT INTO permissions (id, tenant_id, role_id, resource, action, created_at, updated_at)

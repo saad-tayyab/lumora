@@ -1,15 +1,15 @@
-import type { NodePgDatabase } from 'drizzle-orm/node-postgres';
 import { betterAuth } from 'better-auth';
 import { drizzleAdapter } from 'better-auth/adapters/drizzle';
-import type schema from '@lumora/database/schema';
 
-export function createAuth(db: NodePgDatabase<typeof schema>) {
+export function createAuth(db: any, schema?: Record<string, any>) {
   return betterAuth({
     database: drizzleAdapter(db, {
       provider: 'pg',
+      ...(schema ? { schema } : {}),
     }),
     emailAndPassword: {
       enabled: true,
+      minPasswordLength: 6,
     },
     session: {
       expiresIn: 60 * 60 * 24 * 7,
@@ -20,4 +20,3 @@ export function createAuth(db: NodePgDatabase<typeof schema>) {
 }
 
 export type Auth = ReturnType<typeof createAuth>;
-export type Session = Auth['$Infer']['Session'];

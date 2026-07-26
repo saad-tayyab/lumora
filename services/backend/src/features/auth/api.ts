@@ -1,4 +1,5 @@
 import { APIError, api } from 'encore.dev/api';
+import { betterAuth } from '../../auth';
 import { getAuthData } from 'encore.dev/internal/codegen/auth';
 import { ValidationError } from '../../lib/errors';
 import * as service from './service';
@@ -30,13 +31,70 @@ import {
   UpdateUserSchema,
 } from './types';
 
+// ─── Better Auth Proxy Endpoints ─────────────────────────────────────────────
+
+export const signInEmail = api(
+  { expose: true, auth: false, method: 'POST', path: '/api/auth/sign-in/email' },
+  async (req: { email: string; password: string }): Promise<{ user: any; sessionToken: string | null }> => {
+    try {
+      const response = await betterAuth.api.signInEmail({
+        body: { email: req.email, password: req.password },
+        asResponse: true,
+      });
+
+      const setCookie = response.headers.get('set-cookie') || '';
+      const tokenMatch = setCookie.match(/better-auth\.session_token=([^;]+)/);
+      const sessionToken = tokenMatch ? tokenMatch[1] : null;
+
+      const data = await response.json().catch(() => ({}));
+
+      return {
+        user: data?.user || null,
+        sessionToken,
+      };
+    } catch (e: any) {
+      throw APIError.unauthenticated(e.message || 'Invalid credentials');
+    }
+  },
+);
+
+export const signUpEmail = api(
+  { expose: true, auth: false, method: 'POST', path: '/api/auth/sign-up/email' },
+  async (req: {
+    email: string;
+    password: string;
+    name: string;
+  }): Promise<{ user: any; session: any }> => {
+    try {
+      const result = await betterAuth.api.signUpEmail({
+        body: { email: req.email, password: req.password, name: req.name },
+      });
+      return result as any;
+    } catch (e: any) {
+      throw APIError.invalidArgument(e.message || 'Registration failed');
+    }
+  },
+);
+
 export const getSession = api(
   { expose: true, auth: true, method: 'GET', path: '/api/auth/session' },
-  async (): Promise<{ user: UserResponse }> => {
-    const auth = getAuthData();
-    if (!auth) throw APIError.unauthenticated('not authenticated');
-    const user = await service.getUser(auth.userId, auth.tenantId);
-    return { user };
+  async (): Promise<{ user: any }> => {
+    const authData = getAuthData();
+    if (!authData) throw APIError.unauthenticated('not authenticated');
+
+    return {
+      user: {
+        id: (authData as any).userID || (authData as any).userId || '',
+        tenantId: (authData as any).tenantId || '',
+      },
+    };
+  },
+);
+
+export const signOut = api(
+  { expose: true, auth: false, method: 'POST', path: '/api/auth/sign-out' },
+  async (): Promise<{ success: boolean }> => {
+    return { success: true };
   },
 );
 
