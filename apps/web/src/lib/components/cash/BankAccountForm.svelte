@@ -8,27 +8,24 @@ let {
   bankAccount?: {
     id?: string;
     bankName: string;
-    accountName: string;
+    name?: string;
     accountNumber: string;
-    routingNumber: string;
-    accountType: string;
-    currencyCode: string;
-    currentBalance: string;
-    availableBalance: string;
-    isDefault: boolean;
+    routingNumber?: string | null;
+    currency?: string;
+    balance?: string;
   };
   errors?: Record<string, string[]>;
 } = $props();
 
 let bankName = $state(bankAccount?.bankName ?? '');
-let accountName = $state(bankAccount?.accountName ?? '');
+let accountName = $state(bankAccount?.name ?? '');
 let accountNumber = $state(bankAccount?.accountNumber ?? '');
 let routingNumber = $state(bankAccount?.routingNumber ?? '');
-let accountType = $state(bankAccount?.accountType ?? 'checking');
-let currencyCode = $state(bankAccount?.currencyCode ?? 'USD');
-let currentBalance = $state(bankAccount?.currentBalance ?? '0');
-let availableBalance = $state(bankAccount?.availableBalance ?? '0');
-let isDefault = $state(bankAccount?.isDefault ?? false);
+let accountType = $state('checking');
+let currencyCode = $state(bankAccount?.currency ?? 'USD');
+let currentBalance = $state(bankAccount?.balance ?? '0');
+let availableBalance = $state('0');
+let isDefault = $state(false);
 
 let isSubmitting = $state(false);
 </script>

@@ -53,7 +53,7 @@ describe('WarehouseForm', () => {
 
 	test('submit button shows Update Warehouse in edit mode', () => {
 		render(WarehouseForm, {
-			props: { warehouse: { name: 'Main WH', code: 'WH-01', address: '123 St', city: 'NYC', country: 'USA', isActive: true } },
+			props: { warehouse: { name: 'Main WH', code: 'WH-01', address: '123 St', city: 'NYC', country: 'USA', status: 'active' as const } },
 		});
 		expect(screen.getByRole('button', { name: 'Update Warehouse' })).toBeInTheDocument();
 	});
@@ -65,7 +65,7 @@ describe('WarehouseForm', () => {
 
 	test('prefills fields from warehouse prop', () => {
 		render(WarehouseForm, {
-			props: { warehouse: { name: 'Main WH', code: 'WH-01', address: '123 Industrial Blvd', city: 'Chicago', country: 'USA', isActive: true } },
+			props: { warehouse: { name: 'Main WH', code: 'WH-01', address: '123 Industrial Blvd', city: 'Chicago', country: 'USA', status: 'active' as const } },
 		});
 		expect(screen.getByLabelText('Name *')).toHaveValue('Main WH');
 		expect(screen.getByLabelText('Code *')).toHaveValue('WH-01');

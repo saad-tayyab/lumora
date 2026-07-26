@@ -9,7 +9,7 @@ let {
     address: string | null;
     city: string | null;
     country: string | null;
-    isActive: boolean;
+    status?: 'active' | 'inactive';
   };
   errors?: Record<string, string[]>;
 } = $props();
@@ -19,7 +19,7 @@ let code = $state(warehouse?.code ?? '');
 let address = $state(warehouse?.address ?? '');
 let city = $state(warehouse?.city ?? '');
 let country = $state(warehouse?.country ?? '');
-let isActive = $state(warehouse?.isActive ?? true);
+let isActive = $state(warehouse?.status !== 'inactive');
 
 let isSubmitting = $state(false);
 </script>

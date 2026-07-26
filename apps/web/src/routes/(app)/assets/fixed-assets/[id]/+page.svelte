@@ -1,13 +1,13 @@
 <script lang="ts">
 import { toast } from 'svelte-sonner';
-import { invalidateAll } from '$app/navigation';
+import { goto, invalidateAll } from '$app/navigation';
 import { formatCurrency, formatDate } from '$lib/utils/format';
+import DisposeAssetDialog from '$lib/components/asset/DisposeAssetDialog.svelte';
 import type { PageData } from './$types';
 
 let { data }: { data: PageData } = $props();
+let disposeOpen = $state(false);
 let disposing = $state(false);
-let disposalDate = $state('');
-let disposalProceeds = $state('');
 
 function methodLabel(method: string): string {
   const labels: Record<string, string> = {
@@ -29,16 +29,14 @@ function statusColor(status: string): string {
   return colors[status] || 'bg-gray-100 text-gray-800';
 }
 
-async function handleDispose() {
-  if (!disposalDate || !disposalProceeds) {
-    toast.error('Fill in disposal details');
-    return;
-  }
+async function handleDispose(detail: { disposalDate: string; disposalProceeds: string }) {
+  if (!data.asset) return;
   disposing = true;
   try {
     const { disposeFixedAsset } = await import('$lib/api/asset');
-    await disposeFixedAsset(data.asset!.id, { disposalDate, disposalProceeds });
+    await disposeFixedAsset(data.asset.id, detail);
     toast.success('Asset disposed');
+    disposeOpen = false;
     await invalidateAll();
   } catch (e: any) {
     toast.error(e.message || 'Failed to dispose');
@@ -130,35 +128,30 @@ async function handleDispose() {
     {#if asset.status === 'active'}
       <div class="rounded-lg border bg-card p-6 shadow-sm space-y-4">
         <h2 class="text-lg font-semibold text-card-foreground">Dispose Asset</h2>
-        <div class="grid gap-4 md:grid-cols-2">
-          <div class="space-y-1.5">
-            <label for="disposalDate" class="text-sm font-medium text-foreground">Disposal Date</label>
-            <input
-              id="disposalDate"
-              type="date"
-              bind:value={disposalDate}
-              class="w-full rounded-md border bg-background px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-ring"
-            />
-          </div>
-          <div class="space-y-1.5">
-            <label for="proceeds" class="text-sm font-medium text-foreground">Proceeds</label>
-            <input
-              id="proceeds"
-              bind:value={disposalProceeds}
-              class="w-full rounded-md border bg-background px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-ring"
-            />
-          </div>
-        </div>
+        <p class="text-sm text-muted-foreground">
+          Permanently dispose this asset. This action will update the depreciation schedule and record any gain or loss.
+        </p>
         <button
-          onclick={handleDispose}
+          onclick={() => (disposeOpen = true)}
           disabled={disposing}
           class="rounded-md bg-destructive px-4 py-2 text-sm font-medium text-destructive-foreground hover:bg-destructive/90 disabled:opacity-50"
         >
-          {disposing ? 'Disposing...' : 'Dispose Asset'}
+          Dispose Asset
         </button>
       </div>
     {/if}
   </div>
+
+  <DisposeAssetDialog
+    open={disposeOpen}
+    asset={{
+      name: asset.name,
+      assetNumber: asset.assetNumber,
+      netBookValue: formatCurrency(asset.netBookValue),
+    }}
+    onConfirm={handleDispose}
+    onCancel={() => (disposeOpen = false)}
+  />
 {:else}
   <div class="flex items-center justify-center py-12">
     <div class="text-muted-foreground">Asset not found</div>
