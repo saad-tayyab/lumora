@@ -48,7 +48,13 @@ async function handleDispose(detail: { disposalDate: string; disposalProceeds: s
 
 {#if data.asset}
   {@const asset = data.asset}
-  <div class="space-y-6">
+  <div class="mx-auto max-w-4xl space-y-6">
+    <nav class="mb-4 text-sm text-muted-foreground">
+      <a href="/assets/fixed-assets" class="hover:underline">Fixed Assets</a>
+      <span class="mx-2">/</span>
+      <span class="text-foreground">{asset.name}</span>
+    </nav>
+
     <div class="flex items-center justify-between">
       <div>
         <div class="flex items-center gap-3">

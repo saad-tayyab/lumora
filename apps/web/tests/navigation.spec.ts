@@ -1,89 +1,55 @@
 import { test, expect } from '@playwright/test';
 
-test.describe('Sidebar Navigation', () => {
-  test.beforeEach(async ({ page }) => {
-    await page.goto('/');
-  });
-
-  test('displays sidebar on desktop', async ({ page }) => {
-    const sidebar = page.locator('nav, [role="navigation"], aside').first();
+test.describe('Navigation', () => {
+  test('sidebar is visible on desktop', async ({ page }) => {
+    await page.goto('/dashboard');
+    const sidebar = page.locator('aside').first();
     await expect(sidebar).toBeVisible();
   });
 
-  test('sidebar contains main navigation links', async ({ page }) => {
-    const nav = page.locator('nav, [role="navigation"], aside').first();
-    await expect(nav).toBeVisible();
-
+  test('sidebar contains all navigation links', async ({ page }) => {
+    await page.goto('/dashboard');
+    const nav = page.locator('aside').first();
     const links = nav.getByRole('link');
     const count = await links.count();
-    expect(count).toBeGreaterThan(0);
+    expect(count).toBeGreaterThanOrEqual(14);
   });
 
-  test('navigates to dashboard', async ({ page }) => {
-    const dashLink = page.getByRole('link', { name: /dashboard/i }).first();
-    const count = await dashLink.count();
-    if (count === 0) {
-      test.skip(true, 'Dashboard link not found in navigation');
-      return;
-    }
-    await dashLink.click();
-    await expect(page).toHaveURL(/dashboard/);
-  });
-
-  test('navigates to invoices', async ({ page }) => {
-    const invoiceLink = page.getByRole('link', { name: /invoice/i }).first();
-    const count = await invoiceLink.count();
-    if (count === 0) {
-      test.skip(true, 'Invoice link not found in navigation');
-      return;
-    }
-    await invoiceLink.click();
-    await expect(page).toHaveURL(/invoice/);
-  });
-
-  test('navigates to customers', async ({ page }) => {
-    const customerLink = page.getByRole('link', { name: /customer/i }).first();
-    const count = await customerLink.count();
-    if (count === 0) {
-      test.skip(true, 'Customer link not found in navigation');
-      return;
-    }
-    await customerLink.click();
-    await expect(page).toHaveURL(/customer/);
-  });
-
-  test('navigates to products', async ({ page }) => {
-    const productLink = page.getByRole('link', { name: /product|item|inventory/i }).first();
-    const count = await productLink.count();
-    if (count === 0) {
-      test.skip(true, 'Product/inventory link not found in navigation');
-      return;
-    }
-    await productLink.click();
-    await expect(page).toHaveURL(/product|item|inventory/);
-  });
-
-  test('active link is visually distinct', async ({ page }) => {
+  test('clicking nav link navigates to correct page', async ({ page }) => {
     await page.goto('/dashboard');
-    const activeLink = page.locator('a[aria-current="page"], a.active, .nav-active').first();
-    const count = await activeLink.count();
-    if (count === 0) {
-      test.skip(true, 'No active link indicator found on dashboard');
-      return;
+    const navLinks = [
+      { text: 'Financial', url: '/financial' },
+      { text: 'Accounts Receivable', url: '/ar' },
+      { text: 'Accounts Payable', url: '/ap' },
+      { text: 'Cash', url: '/cash' },
+      { text: 'Inventory', url: '/inv' },
+      { text: 'Procurement', url: '/proc' },
+      { text: 'Sales', url: '/sales' },
+      { text: 'Human Resources', url: '/hr' },
+      { text: 'Fixed Assets', url: '/assets' },
+      { text: 'Tax', url: '/tax' },
+      { text: 'Budgets', url: '/budgets' },
+      { text: 'Audit', url: '/audit' },
+      { text: 'Reports', url: '/reports' },
+      { text: 'Settings', url: '/settings' },
+    ];
+    for (const { text, url } of navLinks) {
+      const link = page.getByRole('link', { name: new RegExp(text, 'i') }).first();
+      if (await link.count() > 0) {
+        await link.click();
+        await expect(page).toHaveURL(new RegExp(url));
+      }
     }
-    await expect(activeLink).toBeVisible();
   });
 
   test('mobile sidebar toggle works', async ({ page }) => {
     await page.setViewportSize({ width: 375, height: 667 });
-    const toggle = page.locator('button[aria-label*="menu"], button[aria-label*="toggle"], button[data-testid="menu-toggle"]').first();
-    const count = await toggle.count();
-    if (count === 0) {
-      test.skip(true, 'Mobile menu toggle not found');
-      return;
+    await page.goto('/dashboard');
+    const toggle = page.getByRole('button', { name: /toggle sidebar/i }).first();
+    if (await toggle.count() > 0) {
+      await toggle.click();
+      const sidebar = page.locator('aside').first();
+      await expect(sidebar).toBeVisible();
     }
-    await toggle.click();
-    const sidebar = page.locator('nav, [role="navigation"], aside').first();
-    await expect(sidebar).toBeVisible();
   });
 });

@@ -11,11 +11,11 @@ let customer = $derived(data.customer);
 let updating = $state(false);
 
 const statusStyles: Record<string, string> = {
-  draft: 'bg-gray-100 text-gray-800',
-  sent: 'bg-blue-100 text-blue-800',
-  paid: 'bg-green-100 text-green-800',
-  overdue: 'bg-red-100 text-red-800',
-  voided: 'bg-gray-100 text-gray-800',
+  draft: 'bg-gray-100 text-gray-800 dark:bg-gray-800 dark:text-gray-300',
+  sent: 'bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-300',
+  paid: 'bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-300',
+  overdue: 'bg-red-100 text-red-800 dark:bg-red-900 dark:text-red-300',
+  voided: 'bg-gray-100 text-gray-800 dark:bg-gray-800 dark:text-gray-300',
 };
 
 async function handleStatusChange(newStatus: string) {
@@ -32,15 +32,16 @@ async function handleStatusChange(newStatus: string) {
 }
 </script>
 
-<div class="space-y-6">
+<div class="mx-auto max-w-4xl space-y-6">
+	<nav class="mb-4 text-sm text-muted-foreground">
+		<a href="/ar/invoices" class="hover:underline">Invoices</a>
+		<span class="mx-2">/</span>
+		<span class="text-foreground">{invoice.invoiceNumber}</span>
+	</nav>
+
 	<div class="flex items-center justify-between">
 		<div>
-			<div class="flex items-center gap-2 text-sm text-muted-foreground">
-				<a href="/ar/invoices" class="hover:underline">Invoices</a>
-				<span>/</span>
-				<span>{invoice.invoiceNumber}</span>
-			</div>
-			<h1 class="mt-2 text-3xl font-bold text-foreground">
+			<h1 class="text-3xl font-bold text-foreground">
 				Invoice {invoice.invoiceNumber}
 			</h1>
 		</div>

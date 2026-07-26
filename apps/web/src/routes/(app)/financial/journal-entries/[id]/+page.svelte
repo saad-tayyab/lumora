@@ -1,12 +1,17 @@
 <script lang="ts">
 import { toast } from 'svelte-sonner';
 import { goto } from '$app/navigation';
+import { financialApi } from '$lib/api/financial';
 import { formatCurrency, formatDate } from '$lib/utils/format';
 import type { PageData } from './$types';
 
 let { data }: { data: PageData } = $props();
 
 const { entry } = data;
+
+let loading = $state(false);
+let posting = $state(false);
+let voiding = $state(false);
 
 const statusBadgeColors: Record<string, string> = {
   draft: 'bg-gray-100 text-gray-800 dark:bg-gray-800 dark:text-gray-300',
@@ -17,22 +22,12 @@ const statusBadgeColors: Record<string, string> = {
 const totalDebit = $derived(entry.lines.reduce((sum, l) => sum + (parseFloat(l.debit) || 0), 0));
 const totalCredit = $derived(entry.lines.reduce((sum, l) => sum + (parseFloat(l.credit) || 0), 0));
 
-let posting = $state(false);
-let voiding = $state(false);
-
 async function handlePost() {
   posting = true;
   try {
-    const res = await fetch(`/journal-entries/${entry.id}/post`, {
-      method: 'POST',
-      credentials: 'include',
-    });
-    if (res.ok) {
-      toast.success('Journal entry posted');
-      goto('/financial/journal-entries');
-    } else {
-      toast.error('Failed to post entry');
-    }
+    await financialApi.journalEntries.post(entry.id);
+    toast.success('Journal entry posted');
+    goto('/financial/journal-entries');
   } catch {
     toast.error('Failed to post entry');
   }
@@ -42,16 +37,9 @@ async function handlePost() {
 async function handleVoid() {
   voiding = true;
   try {
-    const res = await fetch(`/journal-entries/${entry.id}/void`, {
-      method: 'POST',
-      credentials: 'include',
-    });
-    if (res.ok) {
-      toast.success('Journal entry voided');
-      goto('/financial/journal-entries');
-    } else {
-      toast.error('Failed to void entry');
-    }
+    await financialApi.journalEntries.void(entry.id);
+    toast.success('Journal entry voided');
+    goto('/financial/journal-entries');
   } catch {
     toast.error('Failed to void entry');
   }
@@ -59,12 +47,20 @@ async function handleVoid() {
 }
 </script>
 
-<div class="mx-auto max-w-3xl space-y-6">
+<div class="mx-auto max-w-4xl space-y-6">
+  <nav class="mb-4 text-sm text-muted-foreground">
+    <a href="/financial/journal-entries" class="hover:underline">Journal Entries</a>
+    <span class="mx-2">/</span>
+    <span class="text-foreground">{entry.entryNumber}</span>
+  </nav>
+
+  {#if loading}
+    <div class="flex items-center justify-center py-12">
+      <div class="h-8 w-8 animate-spin rounded-full border-4 border-primary border-t-transparent"></div>
+    </div>
+  {:else}
   <div>
-    <a href="/financial/journal-entries" class="text-sm text-muted-foreground hover:text-foreground">
-      ← Back to Journal Entries
-    </a>
-    <div class="mt-2 flex items-center justify-between">
+    <div class="flex items-center justify-between">
       <div>
         <h1 class="text-3xl font-bold text-foreground">Journal Entry {entry.entryNumber}</h1>
         <p class="mt-1 text-muted-foreground">{entry.description}</p>
@@ -167,4 +163,5 @@ async function handleVoid() {
       {/if}
     </div>
   </div>
+  {/if}
 </div>

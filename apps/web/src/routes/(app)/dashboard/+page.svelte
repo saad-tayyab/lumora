@@ -3,73 +3,80 @@ import { formatCurrency } from '$lib/utils/format';
 import type { PageData } from './$types';
 
 let { data }: { data: PageData } = $props();
+let loading = $state(false);
 </script>
 
 <div class="space-y-6">
-  <div>
-    <h1 class="text-3xl font-bold text-foreground">Dashboard</h1>
-    <p class="text-muted-foreground">Welcome to Lumora ERP</p>
-  </div>
+  {#if loading}
+    <div class="flex items-center justify-center py-12">
+      <div class="h-8 w-8 animate-spin rounded-full border-4 border-primary border-t-transparent"></div>
+    </div>
+  {:else}
+    <div>
+      <h1 class="text-3xl font-bold text-foreground">Dashboard</h1>
+      <p class="text-muted-foreground">Welcome to Lumora ERP</p>
+    </div>
 
-  <div class="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
-    <div class="rounded-lg border bg-card p-6 shadow-sm">
-      <div class="text-sm font-medium text-muted-foreground">Outstanding Invoices</div>
-      <div class="mt-2 text-3xl font-bold text-card-foreground">
-        {formatCurrency(data.outstandingInvoicesTotal)}
+    <div class="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
+      <div class="rounded-lg border bg-card p-6 shadow-sm">
+        <div class="text-sm font-medium text-muted-foreground">Outstanding Invoices</div>
+        <div class="mt-2 text-3xl font-bold text-card-foreground">
+          {formatCurrency(data.outstandingInvoicesTotal)}
+        </div>
+        <p class="mt-1 text-xs text-muted-foreground">{data.outstandingInvoicesCount} invoices pending</p>
       </div>
-      <p class="mt-1 text-xs text-muted-foreground">{data.outstandingInvoicesCount} invoices pending</p>
-    </div>
 
-    <div class="rounded-lg border bg-card p-6 shadow-sm">
-      <div class="text-sm font-medium text-muted-foreground">Pending Bills</div>
-      <div class="mt-2 text-3xl font-bold text-card-foreground">
-        {formatCurrency(data.pendingBillsTotal)}
+      <div class="rounded-lg border bg-card p-6 shadow-sm">
+        <div class="text-sm font-medium text-muted-foreground">Pending Bills</div>
+        <div class="mt-2 text-3xl font-bold text-card-foreground">
+          {formatCurrency(data.pendingBillsTotal)}
+        </div>
+        <p class="mt-1 text-xs text-muted-foreground">{data.pendingBillsCount} bills pending</p>
       </div>
-      <p class="mt-1 text-xs text-muted-foreground">{data.pendingBillsCount} bills pending</p>
-    </div>
 
-    <div class="rounded-lg border bg-card p-6 shadow-sm">
-      <div class="text-sm font-medium text-muted-foreground">Total Employees</div>
-      <div class="mt-2 text-3xl font-bold text-card-foreground">{data.employeeCount}</div>
-      <p class="mt-1 text-xs text-muted-foreground">Active workforce</p>
-    </div>
-
-    <div class="rounded-lg border bg-card p-6 shadow-sm">
-      <div class="text-sm font-medium text-muted-foreground">Quick Stats</div>
-      <div class="mt-2 text-3xl font-bold text-card-foreground">
-        {data.outstandingInvoicesCount + data.pendingBillsCount}
+      <div class="rounded-lg border bg-card p-6 shadow-sm">
+        <div class="text-sm font-medium text-muted-foreground">Total Employees</div>
+        <div class="mt-2 text-3xl font-bold text-card-foreground">{data.employeeCount}</div>
+        <p class="mt-1 text-xs text-muted-foreground">Active workforce</p>
       </div>
-      <p class="mt-1 text-xs text-muted-foreground">Open items requiring attention</p>
-    </div>
-  </div>
 
-  <div class="rounded-lg border bg-card p-6 shadow-sm">
-    <h2 class="mb-4 text-lg font-semibold text-card-foreground">Quick Actions</h2>
-    <div class="grid gap-3 md:grid-cols-2 lg:grid-cols-4">
-      <a
-        href="/ar/invoices/new"
-        class="flex items-center gap-2 rounded-md border p-3 text-sm font-medium text-card-foreground hover:bg-accent"
-      >
-        📄 Create Invoice
-      </a>
-      <a
-        href="/ap/bills/new"
-        class="flex items-center gap-2 rounded-md border p-3 text-sm font-medium text-card-foreground hover:bg-accent"
-      >
-        📄 Record Bill
-      </a>
-      <a
-        href="/ar/payments/new"
-        class="flex items-center gap-2 rounded-md border p-3 text-sm font-medium text-card-foreground hover:bg-accent"
-      >
-        💵 Record Payment
-      </a>
-      <a
-        href="/financial/journal-entries/new"
-        class="flex items-center gap-2 rounded-md border p-3 text-sm font-medium text-card-foreground hover:bg-accent"
-      >
-        📝 Journal Entry
-      </a>
+      <div class="rounded-lg border bg-card p-6 shadow-sm">
+        <div class="text-sm font-medium text-muted-foreground">Quick Stats</div>
+        <div class="mt-2 text-3xl font-bold text-card-foreground">
+          {data.outstandingInvoicesCount + data.pendingBillsCount}
+        </div>
+        <p class="mt-1 text-xs text-muted-foreground">Open items requiring attention</p>
+      </div>
     </div>
-  </div>
+
+    <div class="rounded-lg border bg-card p-6 shadow-sm">
+      <h2 class="mb-4 text-lg font-semibold text-card-foreground">Quick Actions</h2>
+      <div class="grid gap-3 md:grid-cols-2 lg:grid-cols-4">
+        <a
+          href="/ar/invoices/new"
+          class="flex items-center gap-2 rounded-md border p-3 text-sm font-medium text-card-foreground hover:bg-accent"
+        >
+          📄 Create Invoice
+        </a>
+        <a
+          href="/ap/bills/new"
+          class="flex items-center gap-2 rounded-md border p-3 text-sm font-medium text-card-foreground hover:bg-accent"
+        >
+          📄 Record Bill
+        </a>
+        <a
+          href="/ar/payments/new"
+          class="flex items-center gap-2 rounded-md border p-3 text-sm font-medium text-card-foreground hover:bg-accent"
+        >
+          💵 Record Payment
+        </a>
+        <a
+          href="/financial/journal-entries/new"
+          class="flex items-center gap-2 rounded-md border p-3 text-sm font-medium text-card-foreground hover:bg-accent"
+        >
+          📝 Journal Entry
+        </a>
+      </div>
+    </div>
+  {/if}
 </div>

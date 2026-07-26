@@ -64,3 +64,8 @@ services/*/src/**/*.d.ts.map
 *.cert
 secrets/
 credentials/
+
+# Playwright
+apps/web/playwright/.auth/
+apps/web/playwright-report/
+apps/web/test-results/

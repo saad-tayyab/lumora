@@ -12,15 +12,15 @@ let loading = $state(false);
 
 function poStatusColor(status: string): string {
   const colors: Record<string, string> = {
-    draft: 'bg-gray-100 text-gray-800',
-    pending_approval: 'bg-yellow-100 text-yellow-800',
-    approved: 'bg-blue-100 text-blue-800',
-    partially_received: 'bg-orange-100 text-orange-800',
-    fully_received: 'bg-green-100 text-green-800',
-    closed: 'bg-gray-100 text-gray-800',
-    cancelled: 'bg-red-100 text-red-800',
+    draft: 'bg-gray-100 text-gray-800 dark:bg-gray-800 dark:text-gray-300',
+    pending_approval: 'bg-yellow-100 text-yellow-800 dark:bg-yellow-900 dark:text-yellow-300',
+    approved: 'bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-300',
+    partially_received: 'bg-orange-100 text-orange-800 dark:bg-orange-900 dark:text-orange-300',
+    fully_received: 'bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-300',
+    closed: 'bg-gray-100 text-gray-800 dark:bg-gray-800 dark:text-gray-300',
+    cancelled: 'bg-red-100 text-red-800 dark:bg-red-900 dark:text-red-300',
   };
-  return colors[status] || 'bg-gray-100 text-gray-800';
+  return colors[status] || 'bg-gray-100 text-gray-800 dark:bg-gray-800 dark:text-gray-300';
 }
 
 function formatStatus(status: string): string {
@@ -100,8 +100,18 @@ async function deleteLineItem(lineItemId: string) {
 }
 </script>
 
-<div class="space-y-6">
-  {#if !purchaseOrder}
+<div class="mx-auto max-w-4xl space-y-6">
+  <nav class="mb-4 text-sm text-muted-foreground">
+    <a href="/proc/purchase-orders" class="hover:underline">Purchase Orders</a>
+    <span class="mx-2">/</span>
+    <span class="text-foreground">{purchaseOrder?.poNumber || ''}</span>
+  </nav>
+
+  {#if loading}
+    <div class="flex items-center justify-center py-12">
+      <div class="h-8 w-8 animate-spin rounded-full border-4 border-primary border-t-transparent"></div>
+    </div>
+  {:else if !purchaseOrder}
     <div class="py-12 text-center text-muted-foreground">Purchase order not found</div>
   {:else}
     <div class="flex items-center justify-between">

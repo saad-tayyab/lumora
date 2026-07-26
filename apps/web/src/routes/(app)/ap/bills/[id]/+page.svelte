@@ -11,12 +11,12 @@ let deleting = $state(false);
 let actionLoading = $state('');
 
 const billStatusColor: Record<string, string> = {
-  draft: 'bg-gray-100 text-gray-800',
-  pending_approval: 'bg-yellow-100 text-yellow-800',
-  approved: 'bg-blue-100 text-blue-800',
-  partially_paid: 'bg-orange-100 text-orange-800',
-  paid: 'bg-green-100 text-green-800',
-  voided: 'bg-red-100 text-red-800',
+  draft: 'bg-gray-100 text-gray-800 dark:bg-gray-800 dark:text-gray-300',
+  pending_approval: 'bg-yellow-100 text-yellow-800 dark:bg-yellow-900 dark:text-yellow-300',
+  approved: 'bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-300',
+  partially_paid: 'bg-orange-100 text-orange-800 dark:bg-orange-900 dark:text-orange-300',
+  paid: 'bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-300',
+  voided: 'bg-red-100 text-red-800 dark:bg-red-900 dark:text-red-300',
 };
 </script>
 
@@ -168,6 +168,11 @@ const billStatusColor: Record<string, string> = {
           </tbody>
         </table>
       </div>
+    </div>
+  {:else}
+    <div class="rounded-lg border bg-card p-6 shadow-sm">
+      <h2 class="mb-4 text-lg font-semibold text-card-foreground">Line Items</h2>
+      <p class="py-4 text-center text-sm text-muted-foreground">No line items added to this bill yet.</p>
     </div>
   {/if}
 </div>

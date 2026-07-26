@@ -1,6 +1,5 @@
 <script lang="ts">
 import { enhance } from '$app/forms';
-import { loading } from '$lib/stores/theme';
 
 let isLoading = $state(true);
 

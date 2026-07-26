@@ -16,7 +16,13 @@ function statusColor(status: string): string {
 
 {#if data.budget}
   {@const budget = data.budget}
-  <div class="space-y-6">
+  <div class="mx-auto max-w-4xl space-y-6">
+    <nav class="mb-4 text-sm text-muted-foreground">
+      <a href="/budgets" class="hover:underline">Budgets</a>
+      <span class="mx-2">/</span>
+      <span class="text-foreground">{budget.name}</span>
+    </nav>
+
     <div class="flex items-center justify-between">
       <div>
         <div class="flex items-center gap-3">

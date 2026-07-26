@@ -85,7 +85,13 @@ async function deleteLineItem(lineItemId: string) {
 }
 </script>
 
-<div class="space-y-6">
+<div class="mx-auto max-w-4xl space-y-6">
+  <nav class="mb-4 text-sm text-muted-foreground">
+    <a href="/sales/orders" class="hover:underline">Sales Orders</a>
+    <span class="mx-2">/</span>
+    <span class="text-foreground">{order?.orderNumber || ''}</span>
+  </nav>
+
   {#if !order}
     <div class="py-12 text-center text-muted-foreground">Sales order not found</div>
   {:else}
