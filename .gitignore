@@ -43,16 +43,20 @@ docker-compose.override.yml
 
 # Bun
 bun.lockb
+bun.lock
 
 # Database
 *.db
 *.sqlite
 .neon
 
-# Database TypeScript build artifacts (output goes to dist/, not src/)
-packages/database/src/**/*.js
-packages/database/src/**/*.d.ts
-packages/database/src/**/*.d.ts.map
+# TypeScript build artifacts in package src/ (output goes to dist/, not src/)
+packages/*/src/**/*.js
+packages/*/src/**/*.d.ts
+packages/*/src/**/*.d.ts.map
+services/*/src/**/*.js
+services/*/src/**/*.d.ts
+services/*/src/**/*.d.ts.map
 
 # Secrets - NEVER commit
 *.pem
