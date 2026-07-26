@@ -28,7 +28,7 @@ vi.mock('encore.dev/api', () => {
   };
 });
 
-vi.mock('~encore/auth', () => ({
+vi.mock('encore.dev/internal/codegen/auth', () => ({
   getAuthData: vi.fn(),
 }));
 
@@ -63,7 +63,7 @@ vi.mock('./service', () => ({
   disableBankConnection: vi.fn(),
 }));
 
-import { getAuthData } from '~encore/auth';
+import { getAuthData } from 'encore.dev/internal/codegen/auth';
 import * as service from './service';
 import {
   createBankAccount,

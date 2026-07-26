@@ -32,7 +32,7 @@ vi.mock('encore.dev/api', () => {
 });
 
 const mockGetAuthData = vi.fn();
-vi.mock('~encore/auth', () => ({
+vi.mock('encore.dev/internal/codegen/auth', () => ({
   getAuthData: () => mockGetAuthData(),
 }));
 

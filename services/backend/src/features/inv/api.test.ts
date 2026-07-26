@@ -68,7 +68,7 @@ vi.mock('encore.dev/api', () => ({
 
 // ─── Mock ~encore/auth ────────────────────────────────────────────────────
 
-vi.mock('~encore/auth', () => ({ getAuthData: () => mockGetAuthData() }));
+vi.mock('encore.dev/internal/codegen/auth', () => ({ getAuthData: () => mockGetAuthData() }));
 
 // ─── Mock ../../lib/errors ────────────────────────────────────────────────
 

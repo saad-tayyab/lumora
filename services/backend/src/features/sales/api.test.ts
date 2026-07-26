@@ -26,7 +26,7 @@ vi.mock('encore.dev/api', () => {
   };
 });
 
-vi.mock('~encore/auth', () => ({
+vi.mock('encore.dev/internal/codegen/auth', () => ({
   getAuthData: vi.fn(),
 }));
 
@@ -58,7 +58,7 @@ vi.mock('./service', () => ({
   deleteDiscountPolicy: vi.fn(),
 }));
 
-import { getAuthData } from '~encore/auth';
+import { getAuthData } from 'encore.dev/internal/codegen/auth';
 import * as service from './service';
 import {
   listSalesOrders,
@@ -186,7 +186,7 @@ describe('getSalesOrderLineItems', () => {
     const res = await (getSalesOrderLineItems as Function)({ id: 'so-1' });
 
     expect(service.getSalesOrderLineItems).toHaveBeenCalledWith('so-1', TEST_TENANT_ID);
-    expect(res).toEqual(items);
+    expect(res).toEqual({ items });
   });
 
   it('throws when unauthenticated', async () => {
@@ -649,7 +649,7 @@ describe('getQuotationLineItems', () => {
     const res = await (getQuotationLineItems as Function)({ id: 'qt-1' });
 
     expect(service.getQuotationLineItems).toHaveBeenCalledWith('qt-1', TEST_TENANT_ID);
-    expect(res).toEqual(items);
+    expect(res).toEqual({ items });
   });
 
   it('throws when unauthenticated', async () => {

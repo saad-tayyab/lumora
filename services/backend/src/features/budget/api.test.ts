@@ -33,7 +33,7 @@ vi.mock('encore.dev/api', () => {
 });
 
 const mockGetAuthData = vi.fn();
-vi.mock('~encore/auth', () => ({
+vi.mock('encore.dev/internal/codegen/auth', () => ({
   getAuthData: () => mockGetAuthData(),
 }));
 
@@ -991,7 +991,7 @@ describe('Budget API Handlers', () => {
       const result = await (api.getBudgetVariance as Function)({ headerId: UUID });
 
       expect(service.getBudgetVariance).toHaveBeenCalledWith(UUID, TEST_TENANT_ID);
-      expect(result).toEqual([mockVariance]);
+      expect(result).toEqual({ items: [mockVariance] });
     });
 
     it('throws when unauthenticated', async () => {
@@ -1017,7 +1017,7 @@ describe('Budget API Handlers', () => {
 
       const result = await (api.getBudgetVariance as Function)({ headerId: UUID });
 
-      expect(result).toEqual([]);
+      expect(result).toEqual({ items: [] });
     });
 
     it('propagates service errors', async () => {

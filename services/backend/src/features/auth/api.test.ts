@@ -36,7 +36,7 @@ vi.mock('encore.dev/api', () => {
 });
 
 const mockGetAuthData = vi.fn();
-vi.mock('~encore/auth', () => ({
+vi.mock('encore.dev/internal/codegen/auth', () => ({
   getAuthData: () => mockGetAuthData(),
 }));
 
@@ -513,7 +513,7 @@ describe('listUserRoles', () => {
     const result = await listUserRoles({ userId: UUID });
 
     expect(svc.listUserRoles).toHaveBeenCalledWith(UUID, TEST_TENANT_ID);
-    expect(result).toEqual(roles);
+    expect(result).toEqual({ items: roles });
   });
 
   it('throws unauthenticated when no auth data', async () => {

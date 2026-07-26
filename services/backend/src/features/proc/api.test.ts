@@ -31,7 +31,7 @@ vi.mock('encore.dev/api', () => ({
 }));
 
 const mockGetAuthData = vi.fn();
-vi.mock('~encore/auth', () => ({ getAuthData: () => mockGetAuthData() }));
+vi.mock('encore.dev/internal/codegen/auth', () => ({ getAuthData: () => mockGetAuthData() }));
 
 const { mockService } = vi.hoisted(() => ({
   mockService: {
@@ -537,7 +537,7 @@ describe('listPoLineItems', () => {
 
     const result = await listPoLineItems({ poId: UUID });
 
-    expect(result).toEqual(lineItems);
+    expect(result).toEqual({ items: lineItems });
     expect(mockService.getPurchaseOrder).toHaveBeenCalledWith(UUID, TEST_TENANT_ID);
     expect(mockPoLineItemRepo.findByPoId).toHaveBeenCalledWith(UUID);
   });
@@ -560,7 +560,7 @@ describe('listPoLineItems', () => {
 
     const result = await listPoLineItems({ poId: UUID });
 
-    expect(result).toEqual([]);
+    expect(result).toEqual({ items: [] });
   });
 });
 

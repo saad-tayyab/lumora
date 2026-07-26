@@ -39,7 +39,7 @@ vi.mock('encore.dev/api', () => ({
 }));
 
 const mockGetAuthData = vi.fn();
-vi.mock('~encore/auth', () => ({ getAuthData: () => mockGetAuthData() }));
+vi.mock('encore.dev/internal/codegen/auth', () => ({ getAuthData: () => mockGetAuthData() }));
 
 vi.mock('./service', () => ({
   createVendor: vi.fn(),
@@ -711,7 +711,7 @@ describe('listBillLineItems', () => {
 
     expect(service.getBill).toHaveBeenCalledWith(mockBill.id, TEST_TENANT_ID);
     expect(billLineItemRepo.findByBillId).toHaveBeenCalledWith(mockBill.id);
-    expect(result).toEqual([mockLineItem]);
+    expect(result).toEqual({ items: [mockLineItem] });
   });
 
   it('throws unauthenticated when auth is missing', async () => {

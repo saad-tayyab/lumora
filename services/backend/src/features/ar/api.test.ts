@@ -26,7 +26,7 @@ vi.mock('encore.dev/api', () => {
   };
 });
 
-vi.mock('~encore/auth', () => ({
+vi.mock('encore.dev/internal/codegen/auth', () => ({
   getAuthData: vi.fn(),
 }));
 
@@ -55,7 +55,7 @@ vi.mock('./service', () => ({
   applyCreditNote: vi.fn(),
 }));
 
-import { getAuthData } from '~encore/auth';
+import { getAuthData } from 'encore.dev/internal/codegen/auth';
 import * as service from './service';
 import {
   listCustomers,
@@ -298,7 +298,7 @@ describe('getInvoiceLineItems', () => {
     const res = await (getInvoiceLineItems as Function)({ id: 'inv-1' });
 
     expect(service.getInvoiceLineItems).toHaveBeenCalledWith('inv-1', TEST_TENANT_ID);
-    expect(res).toEqual(items);
+    expect(res).toEqual({ items });
   });
 
   it('throws when unauthenticated', async () => {

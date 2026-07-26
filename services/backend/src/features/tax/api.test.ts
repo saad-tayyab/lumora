@@ -31,7 +31,7 @@ vi.mock('encore.dev/api', () => ({
 }));
 
 const mockGetAuthData = vi.fn();
-vi.mock('~encore/auth', () => ({ getAuthData: () => mockGetAuthData() }));
+vi.mock('encore.dev/internal/codegen/auth', () => ({ getAuthData: () => mockGetAuthData() }));
 
 const { mockService } = vi.hoisted(() => ({
   mockService: {
@@ -805,12 +805,10 @@ describe('resolveAutoAssignment', () => {
     );
   });
 
-  it('returns undefined when no rules match', async () => {
+  it('throws notFound when no rules match', async () => {
     mockService.resolveAutoAssignment.mockResolvedValue(undefined);
 
-    const result = await resolveAutoAssignment(validResolveBody);
-
-    expect(result).toBeUndefined();
+    await expect(resolveAutoAssignment(validResolveBody)).rejects.toThrow();
   });
 
   it('throws when unauthenticated', async () => {
@@ -948,7 +946,9 @@ describe('auth edge cases', () => {
     );
 
     mockService.resolveAutoAssignment.mockResolvedValue(undefined);
-    await resolveAutoAssignment({ entityType: 'x', transactionDate: '2026-01-01' });
+    await expect(
+      resolveAutoAssignment({ entityType: 'x', transactionDate: '2026-01-01' }),
+    ).rejects.toThrow();
     expect(mockService.resolveAutoAssignment).toHaveBeenCalledWith(
       expect.anything(),
       'custom-tenant',
