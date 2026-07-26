@@ -1,5 +1,3 @@
-import { APIError } from 'encore.dev/api';
-
 const roleHierarchy: Record<string, string[]> = {
   super_admin: ['admin', 'manager', 'user'],
   admin: ['manager', 'user'],
@@ -7,11 +5,18 @@ const roleHierarchy: Record<string, string[]> = {
   user: [],
 };
 
+export class ForbiddenError extends Error {
+  constructor(message = 'Insufficient permissions') {
+    super(message);
+    this.name = 'ForbiddenError';
+  }
+}
+
 export function requireRole(userRole: string, requiredRole: string): void {
   const allowedRoles = roleHierarchy[userRole] || [];
 
   if (userRole !== requiredRole && !allowedRoles.includes(requiredRole)) {
-    throw new APIError('Forbidden', 'Insufficient permissions', 403);
+    throw new ForbiddenError();
   }
 }
 

@@ -259,6 +259,7 @@
 		"src/routes/+layout.server.ts"
 	],
 	"/(app)/dashboard": [
+		"src/routes/(app)/dashboard/+page.server.ts",
 		"src/routes/(app)/+layout.server.ts",
 		"src/routes/+layout.server.ts"
 	],
@@ -477,10 +478,12 @@
 		"src/routes/+layout.server.ts"
 	],
 	"/(app)/reports/financial": [
+		"src/routes/(app)/reports/financial/+page.server.ts",
 		"src/routes/(app)/+layout.server.ts",
 		"src/routes/+layout.server.ts"
 	],
 	"/(app)/reports/operational": [
+		"src/routes/(app)/reports/operational/+page.server.ts",
 		"src/routes/(app)/+layout.server.ts",
 		"src/routes/+layout.server.ts"
 	],

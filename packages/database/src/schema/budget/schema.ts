@@ -3,16 +3,13 @@ import {
   date,
   decimal,
   index,
-  integer,
   pgTable,
   text,
-  timestamp,
   uuid,
   varchar,
 } from 'drizzle-orm/pg-core';
 import { createInsertSchema, createSelectSchema, createUpdateSchema } from 'drizzle-orm/zod';
 import { auditFields, softDeleteFields, tenantFields } from '../common/audit';
-import { generateUUIDv7 } from '../common/uuid';
 
 // ─── Tables ───────────────────────────────────────────────────────────────────
 

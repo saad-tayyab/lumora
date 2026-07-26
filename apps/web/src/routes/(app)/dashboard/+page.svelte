@@ -1,5 +1,8 @@
 <script lang="ts">
 import { formatCurrency } from '$lib/utils/format';
+import type { PageData } from './$types';
+
+let { data }: { data: PageData } = $props();
 </script>
 
 <div class="space-y-6">
@@ -10,27 +13,33 @@ import { formatCurrency } from '$lib/utils/format';
 
   <div class="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
     <div class="rounded-lg border bg-card p-6 shadow-sm">
-      <div class="text-sm font-medium text-muted-foreground">Total Revenue</div>
-      <div class="mt-2 text-3xl font-bold text-card-foreground">{formatCurrency('0')}</div>
-      <p class="mt-1 text-xs text-muted-foreground">Coming soon</p>
-    </div>
-
-    <div class="rounded-lg border bg-card p-6 shadow-sm">
       <div class="text-sm font-medium text-muted-foreground">Outstanding Invoices</div>
-      <div class="mt-2 text-3xl font-bold text-card-foreground">{formatCurrency('0')}</div>
-      <p class="mt-1 text-xs text-muted-foreground">Coming soon</p>
+      <div class="mt-2 text-3xl font-bold text-card-foreground">
+        {formatCurrency(data.outstandingInvoicesTotal)}
+      </div>
+      <p class="mt-1 text-xs text-muted-foreground">{data.outstandingInvoicesCount} invoices pending</p>
     </div>
 
     <div class="rounded-lg border bg-card p-6 shadow-sm">
       <div class="text-sm font-medium text-muted-foreground">Pending Bills</div>
-      <div class="mt-2 text-3xl font-bold text-card-foreground">{formatCurrency('0')}</div>
-      <p class="mt-1 text-xs text-muted-foreground">Coming soon</p>
+      <div class="mt-2 text-3xl font-bold text-card-foreground">
+        {formatCurrency(data.pendingBillsTotal)}
+      </div>
+      <p class="mt-1 text-xs text-muted-foreground">{data.pendingBillsCount} bills pending</p>
     </div>
 
     <div class="rounded-lg border bg-card p-6 shadow-sm">
-      <div class="text-sm font-medium text-muted-foreground">Total Assets</div>
-      <div class="mt-2 text-3xl font-bold text-card-foreground">{formatCurrency('0')}</div>
-      <p class="mt-1 text-xs text-muted-foreground">Coming soon</p>
+      <div class="text-sm font-medium text-muted-foreground">Total Employees</div>
+      <div class="mt-2 text-3xl font-bold text-card-foreground">{data.employeeCount}</div>
+      <p class="mt-1 text-xs text-muted-foreground">Active workforce</p>
+    </div>
+
+    <div class="rounded-lg border bg-card p-6 shadow-sm">
+      <div class="text-sm font-medium text-muted-foreground">Quick Stats</div>
+      <div class="mt-2 text-3xl font-bold text-card-foreground">
+        {data.outstandingInvoicesCount + data.pendingBillsCount}
+      </div>
+      <p class="mt-1 text-xs text-muted-foreground">Open items requiring attention</p>
     </div>
   </div>
 
