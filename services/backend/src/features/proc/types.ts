@@ -8,32 +8,6 @@
  * @see packages/database/src/schema/proc/schema.ts — Source schema
  */
 
-import type {
-  NewPoLineItem,
-  NewPurchaseOrder,
-  NewReceivingReport,
-  NewVendorCatalogItem,
-  PoLineItem,
-  PurchaseOrder,
-  ReceivingReport,
-  VendorCatalogItem,
-} from '@lumora/database/schema/proc';
-
-// =============================================================================
-// Re-export Schema Types
-// =============================================================================
-
-export type {
-  NewPoLineItem,
-  NewPurchaseOrder,
-  NewReceivingReport,
-  NewVendorCatalogItem,
-  PoLineItem,
-  PurchaseOrder,
-  ReceivingReport,
-  VendorCatalogItem,
-};
-
 // =============================================================================
 // Purchase Order — API Types
 // =============================================================================
@@ -70,7 +44,32 @@ export interface UpdatePurchaseOrderRequest {
   notes?: string;
 }
 
-export interface PurchaseOrderResponse extends PurchaseOrder {
+export interface PurchaseOrderResponse {
+  id: string;
+  createdAt: Date;
+  updatedAt: Date;
+  tenantId: string;
+  deletedAt: Date | null;
+  createdBy: string;
+  poNumber: string;
+  vendorId: string;
+  status: 'draft' | 'pending_approval' | 'approved' | 'partially_received' | 'fully_received' | 'closed' | 'cancelled';
+  orderDate: string;
+  expectedDeliveryDate: string | null;
+  shippingAddressLine1: string;
+  shippingAddressLine2: string | null;
+  shippingCity: string;
+  shippingState: string;
+  shippingPostalCode: string;
+  shippingCountry: string;
+  currency: string;
+  subtotal: string;
+  taxAmount: string;
+  total: string;
+  paymentTerms: string;
+  notes: string | null;
+  approvedBy: string | null;
+  approvedAt: Date | null;
   lineItems?: PoLineItemResponse[];
 }
 
@@ -112,7 +111,24 @@ export interface UpdatePoLineItemRequest {
   notes?: string;
 }
 
-export type PoLineItemResponse = PoLineItem;
+export interface PoLineItemResponse {
+  id: string;
+  createdAt: Date;
+  updatedAt: Date;
+  tenantId: string;
+  poId: string;
+  lineNumber: number;
+  itemId: string;
+  description: string;
+  quantity: string;
+  unitOfMeasure: string;
+  unitPrice: string;
+  amount: string;
+  taxRate: string | null;
+  taxAmount: string | null;
+  receivedQuantity: string;
+  notes: string | null;
+}
 
 // =============================================================================
 // Receiving Report — API Types
@@ -134,9 +150,22 @@ export interface UpdateReceivingReportRequest {
   notes?: string;
 }
 
-export type ReceivingReportResponse = ReceivingReport & {
+export interface ReceivingReportResponse {
+  id: string;
+  createdAt: Date;
+  updatedAt: Date;
+  tenantId: string;
+  deletedAt: Date | null;
+  rrNumber: string;
+  poId: string;
+  vendorId: string;
+  receivedDate: string;
+  receivedBy: string;
+  warehouseId: string;
+  status: 'draft' | 'confirmed' | 'rejected';
+  notes: string | null;
   lineItems?: ReceivingReportLineItemResponse[];
-};
+}
 
 export type ReceivingReportStatus = 'draft' | 'confirmed' | 'rejected';
 
@@ -182,7 +211,32 @@ export interface UpdateVendorCatalogItemRequest {
   expiryDate?: string;
 }
 
-export type VendorCatalogItemResponse = VendorCatalogItem;
+export interface VendorCatalogItemResponse {
+  id: string;
+  createdAt: Date;
+  updatedAt: Date;
+  tenantId: string;
+  deletedAt: Date | null;
+  vendorId: string;
+  vendorItemCode: string;
+  internalItemId: string | null;
+  description: string;
+  unitPrice: string;
+  currency: string;
+  unitOfMeasure: string;
+  leadTimeDays: number | null;
+  minimumOrderQuantity: string | null;
+  effectiveDate: string;
+  expiryDate: string | null;
+}
+
+// =============================================================================
+// List Wrapper (Encore array return workaround)
+// =============================================================================
+
+export interface PoLineItemListResponse {
+  items: PoLineItemResponse[];
+}
 
 // =============================================================================
 // List / Pagination

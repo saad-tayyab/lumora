@@ -1,5 +1,5 @@
 import { APIError, api } from 'encore.dev/api';
-import { getAuthData } from '~encore/auth';
+import { getAuthData } from 'encore.dev/internal/codegen/auth';
 import { ValidationError } from '../../lib/errors';
 import * as service from './service';
 import type { AuditLogEntryQuery, AuditLogEntryResponse, PaginatedResponse } from './types';

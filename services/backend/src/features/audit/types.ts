@@ -1,9 +1,8 @@
-import type { AuditLogEntry } from '@lumora/database/schema';
 import { z } from 'zod';
 
-// ─── Re-export DB Types ───────────────────────────────────────────────────────
+// ─── Re-export DB Types (plain interfaces) ────────────────────────────────────
 
-export type { AuditLogEntry };
+export type AuditLogEntry = AuditLogEntryResponse;
 
 // ─── Pagination ───────────────────────────────────────────────────────────────
 
@@ -37,7 +36,16 @@ export const AuditLogEntryQuerySchema = z.object({
   limit: z.coerce.number().int().positive().max(100).default(50),
   offset: z.coerce.number().int().min(0).default(0),
 });
-export type AuditLogEntryQuery = z.infer<typeof AuditLogEntryQuerySchema>;
+export interface AuditLogEntryQuery {
+  userId?: string;
+  resource?: string;
+  resourceId?: string;
+  action?: string;
+  startDate?: string;
+  endDate?: string;
+  limit?: number;
+  offset?: number;
+}
 
 // ─── Create Audit Log Entry (Internal) ────────────────────────────────────────
 // Used by other bounded contexts to create audit log entries internally.
@@ -54,8 +62,31 @@ export const CreateAuditLogEntrySchema = z.object({
   userAgent: z.string().max(500).optional(),
   metadata: z.record(z.unknown()).nullable().optional(),
 });
-export type CreateAuditLogEntryRequest = z.infer<typeof CreateAuditLogEntrySchema>;
+export interface CreateAuditLogEntryRequest {
+  userId?: string;
+  action: string;
+  resource: string;
+  resourceId?: string;
+  oldValues?: Record<string, unknown> | null;
+  newValues?: Record<string, unknown> | null;
+  ipAddress?: string;
+  userAgent?: string;
+  metadata?: Record<string, unknown> | null;
+}
 
 // ─── Response Types ───────────────────────────────────────────────────────────
 
-export type AuditLogEntryResponse = AuditLogEntry;
+export interface AuditLogEntryResponse {
+  id: string;
+  createdAt: Date;
+  userId: string | null;
+  tenantId: string;
+  action: string;
+  resource: string;
+  resourceId: string | null;
+  oldValues: Record<string, unknown> | null;
+  newValues: Record<string, unknown> | null;
+  ipAddress: string | null;
+  userAgent: string | null;
+  metadata: Record<string, unknown> | null;
+}

@@ -1,15 +1,14 @@
-import type {
-  DiscountPolicy,
-  Quotation,
-  QuotationLineItem,
-  SalesOrder,
-  SalesOrderLineItem,
-} from '@lumora/database/schema';
 import { z } from 'zod';
 
-// ─── Re-export DB Types ───────────────────────────────────────────────────────
+// ─── List Wrapper (Encore array return workaround) ────────────────────────────
 
-export type { DiscountPolicy, Quotation, QuotationLineItem, SalesOrder, SalesOrderLineItem };
+export interface SalesOrderLineItemListResponse {
+  items: SalesOrderLineItemResponse[];
+}
+
+export interface QuotationLineItemListResponse {
+  items: QuotationLineItemResponse[];
+}
 
 // ─── Pagination ───────────────────────────────────────────────────────────────
 
@@ -37,7 +36,16 @@ export const CreateSalesOrderLineItemRequestSchema = z.object({
   taxRate: z.string().optional(),
   taxAmount: z.string().optional(),
 });
-export type CreateSalesOrderLineItemRequest = z.infer<typeof CreateSalesOrderLineItemRequestSchema>;
+export interface CreateSalesOrderLineItemRequest {
+  itemId: string;
+  description?: string;
+  quantity: string;
+  unitPrice: string;
+  discountPercent?: string;
+  discountAmount?: string;
+  taxRate?: string;
+  taxAmount?: string;
+}
 
 export const UpdateSalesOrderLineItemRequestSchema = z.object({
   itemId: z.string().uuid().optional(),
@@ -49,7 +57,33 @@ export const UpdateSalesOrderLineItemRequestSchema = z.object({
   taxRate: z.string().optional(),
   taxAmount: z.string().optional(),
 });
-export type UpdateSalesOrderLineItemRequest = z.infer<typeof UpdateSalesOrderLineItemRequestSchema>;
+export interface UpdateSalesOrderLineItemRequest {
+  itemId?: string;
+  description?: string;
+  quantity?: string;
+  unitPrice?: string;
+  discountPercent?: string;
+  discountAmount?: string;
+  taxRate?: string;
+  taxAmount?: string;
+}
+
+export interface SalesOrderLineItemResponse {
+  id: string;
+  tenantId: string;
+  salesOrderId: string;
+  itemId: string;
+  description: string | null;
+  quantity: string;
+  unitPrice: string;
+  discountPercent: string | null;
+  discountAmount: string | null;
+  taxRate: string | null;
+  taxAmount: string | null;
+  total: string;
+  createdAt: Date;
+  updatedAt: Date;
+}
 
 // ─── Sales Order Types ────────────────────────────────────────────────────────
 
@@ -67,7 +101,15 @@ export const CreateSalesOrderRequestSchema = z.object({
     .array(CreateSalesOrderLineItemRequestSchema)
     .min(1, 'At least one line item required'),
 });
-export type CreateSalesOrderRequest = z.infer<typeof CreateSalesOrderRequestSchema>;
+export interface CreateSalesOrderRequest {
+  orderNumber: string;
+  customerId: string;
+  orderDate: string;
+  expectedDeliveryDate?: string;
+  currency?: string;
+  notes?: string;
+  lineItems: CreateSalesOrderLineItemRequest[];
+}
 
 export const UpdateSalesOrderRequestSchema = z.object({
   customerId: z.string().uuid().optional(),
@@ -83,7 +125,14 @@ export const UpdateSalesOrderRequestSchema = z.object({
   notes: z.string().optional(),
   lineItems: z.array(CreateSalesOrderLineItemRequestSchema).optional(),
 });
-export type UpdateSalesOrderRequest = z.infer<typeof UpdateSalesOrderRequestSchema>;
+export interface UpdateSalesOrderRequest {
+  customerId?: string;
+  orderDate?: string;
+  expectedDeliveryDate?: string;
+  currency?: string;
+  notes?: string;
+  lineItems?: CreateSalesOrderLineItemRequest[];
+}
 
 export const SalesOrderQuerySchema = z.object({
   customerId: z.string().uuid().optional(),
@@ -93,7 +142,31 @@ export const SalesOrderQuerySchema = z.object({
   limit: z.coerce.number().int().positive().max(100).default(50),
   offset: z.coerce.number().int().min(0).default(0),
 });
-export type SalesOrderQuery = z.infer<typeof SalesOrderQuerySchema>;
+export interface SalesOrderQuery {
+  customerId?: string;
+  status?: 'draft' | 'confirmed' | 'processing' | 'shipped' | 'delivered' | 'cancelled' | 'closed';
+  limit?: number;
+  offset?: number;
+}
+
+export interface SalesOrderResponse {
+  id: string;
+  createdAt: Date;
+  updatedAt: Date;
+  tenantId: string;
+  deletedAt: Date | null;
+  orderNumber: string;
+  customerId: string;
+  status: 'draft' | 'confirmed' | 'processing' | 'shipped' | 'delivered' | 'cancelled' | 'closed';
+  orderDate: string;
+  expectedDeliveryDate: string | null;
+  subtotal: string;
+  discountAmount: string;
+  taxAmount: string;
+  total: string;
+  currency: string;
+  notes: string | null;
+}
 
 // ─── Quotation Line Item Types ────────────────────────────────────────────────
 
@@ -107,7 +180,16 @@ export const CreateQuotationLineItemRequestSchema = z.object({
   taxRate: z.string().optional(),
   taxAmount: z.string().optional(),
 });
-export type CreateQuotationLineItemRequest = z.infer<typeof CreateQuotationLineItemRequestSchema>;
+export interface CreateQuotationLineItemRequest {
+  itemId: string;
+  description?: string;
+  quantity: string;
+  unitPrice: string;
+  discountPercent?: string;
+  discountAmount?: string;
+  taxRate?: string;
+  taxAmount?: string;
+}
 
 export const UpdateQuotationLineItemRequestSchema = z.object({
   itemId: z.string().uuid().optional(),
@@ -119,7 +201,33 @@ export const UpdateQuotationLineItemRequestSchema = z.object({
   taxRate: z.string().optional(),
   taxAmount: z.string().optional(),
 });
-export type UpdateQuotationLineItemRequest = z.infer<typeof UpdateQuotationLineItemRequestSchema>;
+export interface UpdateQuotationLineItemRequest {
+  itemId?: string;
+  description?: string;
+  quantity?: string;
+  unitPrice?: string;
+  discountPercent?: string;
+  discountAmount?: string;
+  taxRate?: string;
+  taxAmount?: string;
+}
+
+export interface QuotationLineItemResponse {
+  id: string;
+  tenantId: string;
+  quotationId: string;
+  itemId: string;
+  description: string | null;
+  quantity: string;
+  unitPrice: string;
+  discountPercent: string | null;
+  discountAmount: string | null;
+  taxRate: string | null;
+  taxAmount: string | null;
+  total: string;
+  createdAt: Date;
+  updatedAt: Date;
+}
 
 // ─── Quotation Types ──────────────────────────────────────────────────────────
 
@@ -135,7 +243,16 @@ export const CreateQuotationRequestSchema = z.object({
     .array(CreateQuotationLineItemRequestSchema)
     .min(1, 'At least one line item required'),
 });
-export type CreateQuotationRequest = z.infer<typeof CreateQuotationRequestSchema>;
+export interface CreateQuotationRequest {
+  quotationNumber: string;
+  customerId: string;
+  issueDate: string;
+  expiryDate: string;
+  validDays?: number;
+  currency?: string;
+  notes?: string;
+  lineItems: CreateQuotationLineItemRequest[];
+}
 
 export const UpdateQuotationRequestSchema = z.object({
   customerId: z.string().uuid().optional(),
@@ -152,7 +269,15 @@ export const UpdateQuotationRequestSchema = z.object({
   notes: z.string().optional(),
   lineItems: z.array(CreateQuotationLineItemRequestSchema).optional(),
 });
-export type UpdateQuotationRequest = z.infer<typeof UpdateQuotationRequestSchema>;
+export interface UpdateQuotationRequest {
+  customerId?: string;
+  issueDate?: string;
+  expiryDate?: string;
+  validDays?: number;
+  currency?: string;
+  notes?: string;
+  lineItems?: CreateQuotationLineItemRequest[];
+}
 
 export const QuotationQuerySchema = z.object({
   customerId: z.string().uuid().optional(),
@@ -160,7 +285,32 @@ export const QuotationQuerySchema = z.object({
   limit: z.coerce.number().int().positive().max(100).default(50),
   offset: z.coerce.number().int().min(0).default(0),
 });
-export type QuotationQuery = z.infer<typeof QuotationQuerySchema>;
+export interface QuotationQuery {
+  customerId?: string;
+  status?: 'draft' | 'sent' | 'accepted' | 'rejected' | 'expired' | 'cancelled';
+  limit?: number;
+  offset?: number;
+}
+
+export interface QuotationResponse {
+  id: string;
+  createdAt: Date;
+  updatedAt: Date;
+  tenantId: string;
+  deletedAt: Date | null;
+  quotationNumber: string;
+  customerId: string;
+  status: 'draft' | 'sent' | 'accepted' | 'rejected' | 'expired' | 'cancelled';
+  issueDate: string;
+  expiryDate: string;
+  subtotal: string;
+  discountAmount: string;
+  taxAmount: string;
+  total: string;
+  currency: string;
+  validDays: number;
+  notes: string | null;
+}
 
 // ─── Discount Policy Types ────────────────────────────────────────────────────
 
@@ -177,7 +327,16 @@ export const CreateDiscountPolicyRequestSchema = z.object({
     .optional(),
   customerId: z.string().uuid().optional(),
 });
-export type CreateDiscountPolicyRequest = z.infer<typeof CreateDiscountPolicyRequestSchema>;
+export interface CreateDiscountPolicyRequest {
+  name: string;
+  type: 'percentage' | 'fixed_amount' | 'tiered';
+  value: string;
+  minQuantity?: string;
+  maxDiscountAmount?: string;
+  validFrom: string;
+  validUntil?: string;
+  customerId?: string;
+}
 
 export const UpdateDiscountPolicyRequestSchema = z.object({
   name: z.string().min(1).max(100).optional(),
@@ -195,7 +354,16 @@ export const UpdateDiscountPolicyRequestSchema = z.object({
     .optional(),
   customerId: z.string().uuid().optional(),
 });
-export type UpdateDiscountPolicyRequest = z.infer<typeof UpdateDiscountPolicyRequestSchema>;
+export interface UpdateDiscountPolicyRequest {
+  name?: string;
+  type?: 'percentage' | 'fixed_amount' | 'tiered';
+  value?: string;
+  minQuantity?: string;
+  maxDiscountAmount?: string;
+  validFrom?: string;
+  validUntil?: string;
+  customerId?: string;
+}
 
 export const DiscountPolicyQuerySchema = z.object({
   customerId: z.string().uuid().optional(),
@@ -203,4 +371,25 @@ export const DiscountPolicyQuerySchema = z.object({
   limit: z.coerce.number().int().positive().max(100).default(50),
   offset: z.coerce.number().int().min(0).default(0),
 });
-export type DiscountPolicyQuery = z.infer<typeof DiscountPolicyQuerySchema>;
+export interface DiscountPolicyQuery {
+  customerId?: string;
+  type?: 'percentage' | 'fixed_amount' | 'tiered';
+  limit?: number;
+  offset?: number;
+}
+
+export interface DiscountPolicyResponse {
+  id: string;
+  createdAt: Date;
+  updatedAt: Date;
+  tenantId: string;
+  deletedAt: Date | null;
+  name: string;
+  type: string;
+  value: string;
+  minQuantity: string | null;
+  maxDiscountAmount: string | null;
+  validFrom: string;
+  validUntil: string | null;
+  customerId: string | null;
+}

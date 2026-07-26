@@ -84,6 +84,11 @@ export class TransferAmountZeroError extends AppError {
   }
 }
 
+export class BankTransferInvalidStatusTransitionError extends AppError {
+  constructor(currentStatus: string, targetStatus: string) {
+    super('INVALID_STATUS_TRANSITION', `Cannot transition bank transfer from '${currentStatus}' to '${targetStatus}'`, 400);
+  }
+}
 export class TransferInvalidStatusTransitionError extends AppError {
   constructor(currentStatus: string, targetStatus: string) {
     super(

@@ -1,31 +1,3 @@
-import type {
-  AssetAdjustment,
-  AssetCategory,
-  DepreciationEntry,
-  DepreciationSchedule,
-  FixedAsset,
-  NewAssetAdjustment,
-  NewAssetCategory,
-  NewDepreciationEntry,
-  NewDepreciationSchedule,
-  NewFixedAsset,
-} from '@lumora/database/schema/asset';
-
-// ─── Re-export Domain Types ───────────────────────────────────────────────────
-
-export type {
-  AssetAdjustment,
-  AssetCategory,
-  DepreciationEntry,
-  DepreciationSchedule,
-  FixedAsset,
-  NewAssetAdjustment,
-  NewAssetCategory,
-  NewDepreciationEntry,
-  NewDepreciationSchedule,
-  NewFixedAsset,
-};
-
 // ─── Pagination ───────────────────────────────────────────────────────────────
 
 export interface PaginationParams {
@@ -47,7 +19,7 @@ export interface CreateAssetCategoryRequest {
   name: string;
   code: string;
   description?: string;
-  defaultDepreciationMethod?: AssetCategory['defaultDepreciationMethod'];
+  defaultDepreciationMethod?: 'straight_line' | 'declining_balance' | 'units_of_activity' | 'sum_of_years_digits';
   defaultUsefulLifeMonths?: number;
   defaultSalvageValuePercent?: string;
   isDepreciable?: boolean;
@@ -58,7 +30,7 @@ export interface CreateAssetCategoryRequest {
 export interface UpdateAssetCategoryRequest {
   name?: string;
   description?: string;
-  defaultDepreciationMethod?: AssetCategory['defaultDepreciationMethod'];
+  defaultDepreciationMethod?: 'straight_line' | 'declining_balance' | 'units_of_activity' | 'sum_of_years_digits';
   defaultUsefulLifeMonths?: number;
   defaultSalvageValuePercent?: string;
   isDepreciable?: boolean;
@@ -66,7 +38,23 @@ export interface UpdateAssetCategoryRequest {
   isActive?: boolean;
 }
 
-export type AssetCategoryResponse = AssetCategory;
+export interface AssetCategoryResponse {
+  id: string;
+  createdAt: Date;
+  updatedAt: Date;
+  tenantId: string;
+  deletedAt: Date | null;
+  name: string;
+  code: string;
+  description: string | null;
+  defaultDepreciationMethod: 'straight_line' | 'declining_balance' | 'units_of_activity' | 'sum_of_years_digits';
+  defaultUsefulLifeMonths: number;
+  defaultSalvageValuePercent: string;
+  isDepreciable: boolean;
+  glAccountId: string | null;
+  isActive: boolean;
+}
+
 export type ListAssetCategoriesResponse = PaginatedResponse<AssetCategoryResponse>;
 
 // ─── Fixed Asset Types ────────────────────────────────────────────────────────
@@ -80,7 +68,7 @@ export interface CreateFixedAssetRequest {
   acquisitionCost: string;
   salvageValue?: string;
   usefulLifeMonths?: number;
-  depreciationMethod?: FixedAsset['depreciationMethod'];
+  depreciationMethod?: 'straight_line' | 'declining_balance' | 'units_of_activity' | 'sum_of_years_digits';
   glAccountId?: string;
   isDepreciable?: boolean;
 }
@@ -93,7 +81,31 @@ export interface UpdateFixedAssetRequest {
   isDepreciable?: boolean;
 }
 
-export type FixedAssetResponse = FixedAsset;
+export interface FixedAssetResponse {
+  id: string;
+  createdAt: Date;
+  updatedAt: Date;
+  tenantId: string;
+  deletedAt: Date | null;
+  createdBy: string;
+  name: string;
+  assetNumber: string;
+  description: string | null;
+  categoryId: string;
+  acquisitionDate: string;
+  acquisitionCost: string;
+  salvageValue: string;
+  usefulLifeMonths: number;
+  depreciationMethod: 'straight_line' | 'declining_balance' | 'units_of_activity' | 'sum_of_years_digits';
+  status: 'active' | 'fully_depreciated' | 'disposed' | 'under_construction';
+  accumulatedDepreciation: string;
+  netBookValue: string;
+  glAccountId: string | null;
+  isDepreciable: boolean;
+  disposalDate: string | null;
+  disposalProceeds: string | null;
+}
+
 export type ListFixedAssetsResponse = PaginatedResponse<FixedAssetResponse>;
 
 // ─── Depreciation Schedule Types ──────────────────────────────────────────────
@@ -104,10 +116,23 @@ export interface CreateDepreciationScheduleRequest {
   endDate: string;
   totalDepreciableCost: string;
   monthlyAmount: string;
-  method: DepreciationSchedule['method'];
+  method: 'straight_line' | 'declining_balance' | 'units_of_activity' | 'sum_of_years_digits';
 }
 
-export type DepreciationScheduleResponse = DepreciationSchedule;
+export interface DepreciationScheduleResponse {
+  id: string;
+  createdAt: Date;
+  updatedAt: Date;
+  tenantId: string;
+  assetId: string;
+  startDate: string;
+  endDate: string;
+  totalDepreciableCost: string;
+  monthlyAmount: string;
+  method: 'straight_line' | 'declining_balance' | 'units_of_activity' | 'sum_of_years_digits';
+  status: string;
+}
+
 export type ListDepreciationSchedulesResponse = PaginatedResponse<DepreciationScheduleResponse>;
 
 // ─── Depreciation Entry Types ─────────────────────────────────────────────────
@@ -124,17 +149,33 @@ export interface PostDepreciationEntryRequest {
   journalEntryId: string;
 }
 
-export type DepreciationEntryResponse = DepreciationEntry;
+export interface DepreciationEntryResponse {
+  id: string;
+  createdAt: Date;
+  updatedAt: Date;
+  tenantId: string;
+  createdBy: string;
+  assetId: string;
+  scheduleId: string | null;
+  periodStartDate: string;
+  periodEndDate: string;
+  depreciationAmount: string;
+  accumulatedDepreciation: string;
+  netBookValue: string;
+  journalEntryId: string | null;
+  status: 'draft' | 'posted' | 'voided';
+}
+
 export type ListDepreciationEntriesResponse = PaginatedResponse<DepreciationEntryResponse>;
 
 // ─── Asset Adjustment Types ───────────────────────────────────────────────────
 
 export interface CreateAssetAdjustmentRequest {
   assetId: string;
-  adjustmentType: AssetAdjustment['adjustmentType'];
+  adjustmentType: 'revaluation' | 'impairment' | 'restoration' | 'transfer' | 'reclassification';
   adjustmentDate: string;
   adjustmentAmount: string;
-  direction: AssetAdjustment['direction'];
+  direction: 'increase' | 'decrease';
   description: string;
   revisedUsefulLifeMonths?: number;
   revisedSalvageValue?: string;
@@ -144,7 +185,24 @@ export interface PostAssetAdjustmentRequest {
   journalEntryId: string;
 }
 
-export type AssetAdjustmentResponse = AssetAdjustment;
+export interface AssetAdjustmentResponse {
+  id: string;
+  createdAt: Date;
+  updatedAt: Date;
+  tenantId: string;
+  createdBy: string;
+  assetId: string;
+  adjustmentType: 'revaluation' | 'impairment' | 'restoration' | 'transfer' | 'reclassification';
+  adjustmentDate: string;
+  adjustmentAmount: string;
+  direction: 'increase' | 'decrease';
+  journalEntryId: string | null;
+  description: string;
+  revisedUsefulLifeMonths: number | null;
+  revisedSalvageValue: string | null;
+  status: 'draft' | 'posted' | 'voided';
+}
+
 export type ListAssetAdjustmentsResponse = PaginatedResponse<AssetAdjustmentResponse>;
 
 // ─── Disposal Types ───────────────────────────────────────────────────────────

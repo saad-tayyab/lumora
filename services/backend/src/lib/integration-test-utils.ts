@@ -4,17 +4,16 @@ import {
   journalEntries,
   journalEntryLines,
   fiscalYears,
-  customers,
-  vendors,
-  bankAccounts,
-  items,
-  itemCategories,
-  employees,
-  fixedAssets,
-  taxCodes,
-  budgetHeaders,
-  auditLogEntries,
-} from '@lumora/database/schema';
+} from '@lumora/database/schema/financial';
+import { customers } from '@lumora/database/schema/ar';
+import { vendors } from '@lumora/database/schema/ap';
+import { bankAccounts } from '@lumora/database/schema/cash';
+import { items, itemCategories } from '@lumora/database/schema/inv';
+import { employees } from '@lumora/database/schema/hr';
+import { fixedAssets } from '@lumora/database/schema/asset';
+import { taxCodes } from '@lumora/database/schema/tax';
+import { budgetHeaders } from '@lumora/database/schema/budget';
+import { auditLogEntries } from '@lumora/database/schema/audit';
 import { eq, like } from 'drizzle-orm';
 
 export const TEST_TENANT_ID = '11111111-1111-4111-8111-111111111111';

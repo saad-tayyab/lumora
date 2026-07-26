@@ -1,35 +1,3 @@
-import type {
-  Item,
-  ItemCategory,
-  NewItem,
-  NewItemCategory,
-  NewStockLevel,
-  NewStockMovement,
-  NewUnitOfMeasure,
-  NewWarehouse,
-  StockLevel,
-  StockMovement,
-  UnitOfMeasure,
-  Warehouse,
-} from '@lumora/database/schema/inv';
-
-// ─── Re-export Domain Types ───────────────────────────────────────────────────
-
-export type {
-  Item,
-  ItemCategory,
-  NewItem,
-  NewItemCategory,
-  NewStockLevel,
-  NewStockMovement,
-  NewUnitOfMeasure,
-  NewWarehouse,
-  StockLevel,
-  StockMovement,
-  UnitOfMeasure,
-  Warehouse,
-};
-
 // ─── Pagination ───────────────────────────────────────────────────────────────
 
 export interface PaginationParams {
@@ -61,7 +29,7 @@ export interface CreateItemRequest {
   reorderOptimalQuantity?: number;
   reorderLeadTimeDays?: number;
   reorderSafetyStock?: number;
-  costMethod?: Item['costMethod'];
+  costMethod?: 'fifo' | 'lifo' | 'weighted_average' | 'specific_identification';
 }
 
 export interface UpdateItemRequest {
@@ -77,10 +45,32 @@ export interface UpdateItemRequest {
   reorderOptimalQuantity?: number;
   reorderLeadTimeDays?: number;
   reorderSafetyStock?: number;
-  costMethod?: Item['costMethod'];
+  costMethod?: 'fifo' | 'lifo' | 'weighted_average' | 'specific_identification';
 }
 
-export type ItemResponse = Item;
+export interface ItemResponse {
+  id: string;
+  createdAt: Date;
+  updatedAt: Date;
+  tenantId: string;
+  deletedAt: Date | null;
+  createdBy: string;
+  sku: string;
+  barcode: string | null;
+  name: string;
+  description: string | null;
+  categoryId: string;
+  unitOfMeasureId: string;
+  isActive: boolean;
+  isSerialized: boolean;
+  isLotTracked: boolean;
+  reorderPoint: number;
+  reorderOptimalQuantity: number;
+  reorderLeadTimeDays: number;
+  reorderSafetyStock: number;
+  costMethod: 'fifo' | 'lifo' | 'weighted_average' | 'specific_identification';
+}
+
 export type ListItemsResponse = PaginatedResponse<ItemResponse>;
 
 // ─── Warehouse Types ──────────────────────────────────────────────────────────
@@ -110,7 +100,24 @@ export interface UpdateWarehouseRequest {
   isDefault?: boolean;
 }
 
-export type WarehouseResponse = Warehouse;
+export interface WarehouseResponse {
+  id: string;
+  createdAt: Date;
+  updatedAt: Date;
+  tenantId: string;
+  deletedAt: Date | null;
+  name: string;
+  code: string;
+  addressLine1: string | null;
+  addressLine2: string | null;
+  city: string | null;
+  state: string | null;
+  postalCode: string | null;
+  country: string | null;
+  isActive: boolean;
+  isDefault: boolean;
+}
+
 export type ListWarehousesResponse = PaginatedResponse<WarehouseResponse>;
 
 // ─── Item Category Types ──────────────────────────────────────────────────────
@@ -130,17 +137,54 @@ export interface UpdateItemCategoryRequest {
   isActive?: boolean;
 }
 
-export type ItemCategoryResponse = ItemCategory;
+export interface ItemCategoryResponse {
+  id: string;
+  createdAt: Date;
+  updatedAt: Date;
+  tenantId: string;
+  deletedAt: Date | null;
+  name: string;
+  code: string;
+  description: string | null;
+  parentId: string | null;
+  isActive: boolean;
+}
+
 export type ListItemCategoriesResponse = PaginatedResponse<ItemCategoryResponse>;
 
 // ─── Unit of Measure Types ────────────────────────────────────────────────────
 
-export type UnitOfMeasureResponse = UnitOfMeasure;
+export interface UnitOfMeasureResponse {
+  id: string;
+  createdAt: Date;
+  updatedAt: Date;
+  code: string;
+  name: string;
+  category: 'count' | 'weight' | 'volume' | 'length' | 'area';
+  decimalPlaces: number;
+  baseUomId: string | null;
+  conversionFactor: string;
+}
+
 export type ListUnitOfMeasuresResponse = PaginatedResponse<UnitOfMeasureResponse>;
 
 // ─── Stock Level Types ────────────────────────────────────────────────────────
 
-export type StockLevelResponse = StockLevel;
+export interface StockLevelResponse {
+  id: string;
+  createdAt: Date;
+  updatedAt: Date;
+  tenantId: string;
+  itemId: string;
+  warehouseId: string;
+  quantityOnHand: number;
+  quantityReserved: number;
+  quantityAvailable: number;
+  quantityOnOrder: number;
+  lastCountedAt: Date | null;
+  lastMovementAt: Date | null;
+}
+
 export type ListStockLevelsResponse = PaginatedResponse<StockLevelResponse>;
 
 export interface GetStockLevelRequest {
@@ -153,7 +197,7 @@ export interface GetStockLevelRequest {
 export interface CreateStockMovementRequest {
   itemId: string;
   warehouseId: string;
-  movementType: StockMovement['movementType'];
+  movementType: 'inbound' | 'outbound' | 'transfer' | 'adjustment';
   quantity: number;
   sourceDocumentType: string;
   sourceDocumentId: string;
@@ -164,5 +208,23 @@ export interface CreateStockMovementRequest {
   movementDate?: string;
 }
 
-export type StockMovementResponse = StockMovement;
+export interface StockMovementResponse {
+  id: string;
+  createdAt: Date;
+  updatedAt: Date;
+  tenantId: string;
+  itemId: string;
+  warehouseId: string;
+  movementType: 'inbound' | 'outbound' | 'transfer' | 'adjustment';
+  quantity: number;
+  sourceDocumentType: string;
+  sourceDocumentId: string;
+  unitCost: string;
+  totalCost: string;
+  referenceWarehouseId: string | null;
+  reason: string | null;
+  movementDate: Date;
+  createdBy: string;
+}
+
 export type ListStockMovementsResponse = PaginatedResponse<StockMovementResponse>;

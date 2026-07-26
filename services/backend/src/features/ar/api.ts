@@ -1,5 +1,5 @@
 import { APIError, api } from 'encore.dev/api';
-import { getAuthData } from '~encore/auth';
+import { getAuthData } from 'encore.dev/internal/codegen/auth';
 import * as service from './service';
 import type {
   ApplyCreditNoteRequest,
@@ -8,14 +8,14 @@ import type {
   CreateInvoiceRequest,
   CreatePaymentApplicationRequest,
   CreatePaymentRequest,
-  CreditNote,
-  Customer,
-  Invoice,
-  InvoiceLineItem,
+  CreditNoteResponse,
+  CustomerResponse,
+  InvoiceLineItemListResponse,
   InvoiceQuery,
+  InvoiceResponse,
   PaginatedResponse,
-  Payment,
-  PaymentApplication,
+  PaymentApplicationResponse,
+  PaymentResponse,
   UpdateCustomerRequest,
   UpdateInvoiceRequest,
   UpdatePaymentRequest,
@@ -48,7 +48,7 @@ export const listCustomers = api(
   }: {
     limit?: number;
     offset?: number;
-  }): Promise<PaginatedResponse<Customer>> => {
+  }): Promise<PaginatedResponse<CustomerResponse>> => {
     const auth = getAuthData();
     if (!auth) throw APIError.unauthenticated('not authenticated');
     return service.listCustomers(auth.tenantId, {
@@ -60,7 +60,7 @@ export const listCustomers = api(
 
 export const getCustomer = api(
   { expose: true, auth: true, method: 'GET', path: '/ar/customers/:id' },
-  async ({ id }: { id: string }): Promise<Customer> => {
+  async ({ id }: { id: string }): Promise<CustomerResponse> => {
     const auth = getAuthData();
     if (!auth) throw APIError.unauthenticated('not authenticated');
     return service.getCustomer(id, auth.tenantId);
@@ -69,7 +69,7 @@ export const getCustomer = api(
 
 export const createCustomer = api(
   { expose: true, auth: true, method: 'POST', path: '/ar/customers', sensitive: true },
-  async (req: CreateCustomerRequest): Promise<Customer> => {
+  async (req: CreateCustomerRequest): Promise<CustomerResponse> => {
     const auth = getAuthData();
     if (!auth) throw APIError.unauthenticated('not authenticated');
     const data = validate(CreateCustomerRequestSchema, req);
@@ -79,7 +79,7 @@ export const createCustomer = api(
 
 export const updateCustomer = api(
   { expose: true, auth: true, method: 'PUT', path: '/ar/customers/:id', sensitive: true },
-  async ({ id, ...req }: { id: string } & UpdateCustomerRequest): Promise<Customer> => {
+  async ({ id, ...req }: { id: string } & UpdateCustomerRequest): Promise<CustomerResponse> => {
     const auth = getAuthData();
     if (!auth) throw APIError.unauthenticated('not authenticated');
     const data = validate(UpdateCustomerRequestSchema, req);
@@ -105,7 +105,7 @@ export const listInvoices = api(
     status,
     limit,
     offset,
-  }: InvoiceQuery): Promise<PaginatedResponse<Invoice>> => {
+  }: InvoiceQuery): Promise<PaginatedResponse<InvoiceResponse>> => {
     const auth = getAuthData();
     if (!auth) throw APIError.unauthenticated('not authenticated');
     return service.listInvoices(auth.tenantId, {
@@ -119,7 +119,7 @@ export const listInvoices = api(
 
 export const getInvoice = api(
   { expose: true, auth: true, method: 'GET', path: '/ar/invoices/:id' },
-  async ({ id }: { id: string }): Promise<Invoice> => {
+  async ({ id }: { id: string }): Promise<InvoiceResponse> => {
     const auth = getAuthData();
     if (!auth) throw APIError.unauthenticated('not authenticated');
     return service.getInvoice(id, auth.tenantId);
@@ -128,16 +128,17 @@ export const getInvoice = api(
 
 export const getInvoiceLineItems = api(
   { expose: true, auth: true, method: 'GET', path: '/ar/invoices/:id/line-items' },
-  async ({ id }: { id: string }): Promise<InvoiceLineItem[]> => {
+  async ({ id }: { id: string }): Promise<InvoiceLineItemListResponse> => {
     const auth = getAuthData();
     if (!auth) throw APIError.unauthenticated('not authenticated');
-    return service.getInvoiceLineItems(id, auth.tenantId);
+    const items = await service.getInvoiceLineItems(id, auth.tenantId);
+    return { items };
   },
 );
 
 export const createInvoice = api(
   { expose: true, auth: true, method: 'POST', path: '/ar/invoices' },
-  async (req: CreateInvoiceRequest): Promise<Invoice> => {
+  async (req: CreateInvoiceRequest): Promise<InvoiceResponse> => {
     const auth = getAuthData();
     if (!auth) throw APIError.unauthenticated('not authenticated');
     const data = validate(CreateInvoiceRequestSchema, req);
@@ -147,7 +148,7 @@ export const createInvoice = api(
 
 export const updateInvoice = api(
   { expose: true, auth: true, method: 'PUT', path: '/ar/invoices/:id' },
-  async ({ id, ...req }: { id: string } & UpdateInvoiceRequest): Promise<Invoice> => {
+  async ({ id, ...req }: { id: string } & UpdateInvoiceRequest): Promise<InvoiceResponse> => {
     const auth = getAuthData();
     if (!auth) throw APIError.unauthenticated('not authenticated');
     const data = validate(UpdateInvoiceRequestSchema, req);
@@ -157,7 +158,7 @@ export const updateInvoice = api(
 
 export const updateInvoiceStatus = api(
   { expose: true, auth: true, method: 'PUT', path: '/ar/invoices/:id/status' },
-  async ({ id, status }: { id: string; status: string }): Promise<Invoice> => {
+  async ({ id, status }: { id: string; status: string }): Promise<InvoiceResponse> => {
     const auth = getAuthData();
     if (!auth) throw APIError.unauthenticated('not authenticated');
     return service.updateInvoiceStatus(id, status, auth.tenantId);
@@ -174,7 +175,7 @@ export const listPayments = api(
   }: {
     limit?: number;
     offset?: number;
-  }): Promise<PaginatedResponse<Payment>> => {
+  }): Promise<PaginatedResponse<PaymentResponse>> => {
     const auth = getAuthData();
     if (!auth) throw APIError.unauthenticated('not authenticated');
     return service.listPayments(auth.tenantId, {
@@ -186,7 +187,7 @@ export const listPayments = api(
 
 export const getPayment = api(
   { expose: true, auth: true, method: 'GET', path: '/ar/payments/:id' },
-  async ({ id }: { id: string }): Promise<Payment> => {
+  async ({ id }: { id: string }): Promise<PaymentResponse> => {
     const auth = getAuthData();
     if (!auth) throw APIError.unauthenticated('not authenticated');
     return service.getPayment(id, auth.tenantId);
@@ -195,7 +196,7 @@ export const getPayment = api(
 
 export const createPayment = api(
   { expose: true, auth: true, method: 'POST', path: '/ar/payments', sensitive: true },
-  async (req: CreatePaymentRequest): Promise<Payment> => {
+  async (req: CreatePaymentRequest): Promise<PaymentResponse> => {
     const auth = getAuthData();
     if (!auth) throw APIError.unauthenticated('not authenticated');
     const data = validate(CreatePaymentRequestSchema, req);
@@ -205,7 +206,7 @@ export const createPayment = api(
 
 export const updatePayment = api(
   { expose: true, auth: true, method: 'PUT', path: '/ar/payments/:id' },
-  async ({ id, ...req }: { id: string } & UpdatePaymentRequest): Promise<Payment> => {
+  async ({ id, ...req }: { id: string } & UpdatePaymentRequest): Promise<PaymentResponse> => {
     const auth = getAuthData();
     if (!auth) throw APIError.unauthenticated('not authenticated');
     const data = validate(UpdatePaymentRequestSchema, req);
@@ -217,7 +218,7 @@ export const updatePayment = api(
 
 export const createPaymentApplication = api(
   { expose: true, auth: true, method: 'POST', path: '/ar/payment-applications' },
-  async (req: CreatePaymentApplicationRequest): Promise<PaymentApplication> => {
+  async (req: CreatePaymentApplicationRequest): Promise<PaymentApplicationResponse> => {
     const auth = getAuthData();
     if (!auth) throw APIError.unauthenticated('not authenticated');
     const data = validate(CreatePaymentApplicationRequestSchema, req);
@@ -248,7 +249,7 @@ export const listCreditNotes = api(
     status?: string;
     limit?: number;
     offset?: number;
-  }): Promise<PaginatedResponse<CreditNote>> => {
+  }): Promise<PaginatedResponse<CreditNoteResponse>> => {
     const auth = getAuthData();
     if (!auth) throw APIError.unauthenticated('not authenticated');
     return service.listCreditNotes(auth.tenantId, {
@@ -262,7 +263,7 @@ export const listCreditNotes = api(
 
 export const getCreditNote = api(
   { expose: true, auth: true, method: 'GET', path: '/ar/credit-notes/:id' },
-  async ({ id }: { id: string }): Promise<CreditNote> => {
+  async ({ id }: { id: string }): Promise<CreditNoteResponse> => {
     const auth = getAuthData();
     if (!auth) throw APIError.unauthenticated('not authenticated');
     return service.getCreditNote(id, auth.tenantId);
@@ -271,7 +272,7 @@ export const getCreditNote = api(
 
 export const createCreditNote = api(
   { expose: true, auth: true, method: 'POST', path: '/ar/credit-notes' },
-  async (req: CreateCreditNoteRequest): Promise<CreditNote> => {
+  async (req: CreateCreditNoteRequest): Promise<CreditNoteResponse> => {
     const auth = getAuthData();
     if (!auth) throw APIError.unauthenticated('not authenticated');
     const data = validate(CreateCreditNoteRequestSchema, req);
@@ -281,7 +282,7 @@ export const createCreditNote = api(
 
 export const updateCreditNoteStatus = api(
   { expose: true, auth: true, method: 'PUT', path: '/ar/credit-notes/:id/status' },
-  async ({ id, status }: { id: string; status: string }): Promise<CreditNote> => {
+  async ({ id, status }: { id: string; status: string }): Promise<CreditNoteResponse> => {
     const auth = getAuthData();
     if (!auth) throw APIError.unauthenticated('not authenticated');
     return service.updateCreditNoteStatus(id, status, auth.tenantId);

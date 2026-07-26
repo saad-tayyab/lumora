@@ -1,16 +1,10 @@
-import type {
-  CreditNote,
-  Customer,
-  Invoice,
-  InvoiceLineItem,
-  Payment,
-  PaymentApplication,
-} from '@lumora/database/schema';
 import { z } from 'zod';
 
-// ─── Re-export DB Types ───────────────────────────────────────────────────────
+// ─── List Wrapper (Encore array return workaround) ────────────────────────────
 
-export type { CreditNote, Customer, Invoice, InvoiceLineItem, Payment, PaymentApplication };
+export interface InvoiceLineItemListResponse {
+  items: InvoiceLineItemResponse[];
+}
 
 // ─── Pagination ───────────────────────────────────────────────────────────────
 
@@ -42,7 +36,20 @@ export const CreateCustomerRequestSchema = z.object({
   creditLimit: z.string().optional(),
   isActive: z.boolean().default(true),
 });
-export type CreateCustomerRequest = z.infer<typeof CreateCustomerRequestSchema>;
+export interface CreateCustomerRequest {
+  name: string;
+  email?: string;
+  phone?: string;
+  addressLine1?: string;
+  addressLine2?: string;
+  city?: string;
+  state?: string;
+  postalCode?: string;
+  country?: string;
+  paymentTerms?: string;
+  creditLimit?: string;
+  isActive?: boolean;
+}
 
 export const UpdateCustomerRequestSchema = z.object({
   name: z.string().min(1).max(200).optional(),
@@ -58,7 +65,40 @@ export const UpdateCustomerRequestSchema = z.object({
   creditLimit: z.string().optional(),
   isActive: z.boolean().optional(),
 });
-export type UpdateCustomerRequest = z.infer<typeof UpdateCustomerRequestSchema>;
+export interface UpdateCustomerRequest {
+  name?: string;
+  email?: string;
+  phone?: string;
+  addressLine1?: string;
+  addressLine2?: string;
+  city?: string;
+  state?: string;
+  postalCode?: string;
+  country?: string;
+  paymentTerms?: string;
+  creditLimit?: string;
+  isActive?: boolean;
+}
+
+export interface CustomerResponse {
+  id: string;
+  createdAt: Date;
+  updatedAt: Date;
+  tenantId: string;
+  deletedAt: Date | null;
+  name: string;
+  email: string | null;
+  phone: string | null;
+  addressLine1: string | null;
+  addressLine2: string | null;
+  city: string | null;
+  state: string | null;
+  postalCode: string | null;
+  country: string | null;
+  paymentTerms: string;
+  creditLimit: string | null;
+  isActive: boolean;
+}
 
 // ─── Invoice Line Item Types ──────────────────────────────────────────────────
 
@@ -70,7 +110,14 @@ export const CreateInvoiceLineItemRequestSchema = z.object({
   taxAmount: z.string().optional(),
   sortOrder: z.number().int().default(0),
 });
-export type CreateInvoiceLineItemRequest = z.infer<typeof CreateInvoiceLineItemRequestSchema>;
+export interface CreateInvoiceLineItemRequest {
+  description: string;
+  quantity: string;
+  unitPrice: string;
+  taxRate?: string;
+  taxAmount?: string;
+  sortOrder?: number;
+}
 
 export const UpdateInvoiceLineItemRequestSchema = z.object({
   description: z.string().min(1).max(500).optional(),
@@ -80,7 +127,29 @@ export const UpdateInvoiceLineItemRequestSchema = z.object({
   taxAmount: z.string().optional(),
   sortOrder: z.number().int().optional(),
 });
-export type UpdateInvoiceLineItemRequest = z.infer<typeof UpdateInvoiceLineItemRequestSchema>;
+export interface UpdateInvoiceLineItemRequest {
+  description?: string;
+  quantity?: string;
+  unitPrice?: string;
+  taxRate?: string;
+  taxAmount?: string;
+  sortOrder?: number;
+}
+
+export interface InvoiceLineItemResponse {
+  id: string;
+  createdAt: Date;
+  updatedAt: Date;
+  tenantId: string;
+  invoiceId: string;
+  description: string;
+  quantity: string;
+  unitPrice: string;
+  amount: string;
+  taxRate: string | null;
+  taxAmount: string | null;
+  sortOrder: number;
+}
 
 // ─── Invoice Types ────────────────────────────────────────────────────────────
 
@@ -93,7 +162,15 @@ export const CreateInvoiceRequestSchema = z.object({
   notes: z.string().optional(),
   lineItems: z.array(CreateInvoiceLineItemRequestSchema).min(1, 'At least one line item required'),
 });
-export type CreateInvoiceRequest = z.infer<typeof CreateInvoiceRequestSchema>;
+export interface CreateInvoiceRequest {
+  customerId: string;
+  invoiceNumber: string;
+  issueDate: string;
+  dueDate: string;
+  currency?: string;
+  notes?: string;
+  lineItems: CreateInvoiceLineItemRequest[];
+}
 
 export const UpdateInvoiceRequestSchema = z.object({
   customerId: z.string().uuid().optional(),
@@ -109,7 +186,14 @@ export const UpdateInvoiceRequestSchema = z.object({
   notes: z.string().optional(),
   lineItems: z.array(CreateInvoiceLineItemRequestSchema).optional(),
 });
-export type UpdateInvoiceRequest = z.infer<typeof UpdateInvoiceRequestSchema>;
+export interface UpdateInvoiceRequest {
+  customerId?: string;
+  issueDate?: string;
+  dueDate?: string;
+  currency?: string;
+  notes?: string;
+  lineItems?: CreateInvoiceLineItemRequest[];
+}
 
 export const InvoiceQuerySchema = z.object({
   customerId: z.string().uuid().optional(),
@@ -117,7 +201,32 @@ export const InvoiceQuerySchema = z.object({
   limit: z.coerce.number().int().positive().max(100).default(50),
   offset: z.coerce.number().int().min(0).default(0),
 });
-export type InvoiceQuery = z.infer<typeof InvoiceQuerySchema>;
+export interface InvoiceQuery {
+  customerId?: string;
+  status?: 'draft' | 'sent' | 'paid' | 'overdue' | 'voided';
+  limit?: number;
+  offset?: number;
+}
+
+export interface InvoiceResponse {
+  id: string;
+  createdAt: Date;
+  updatedAt: Date;
+  tenantId: string;
+  deletedAt: Date | null;
+  customerId: string;
+  invoiceNumber: string;
+  status: 'draft' | 'sent' | 'paid' | 'overdue' | 'voided';
+  issueDate: string;
+  dueDate: string;
+  subtotal: string;
+  taxAmount: string;
+  totalAmount: string;
+  amountPaid: string;
+  balanceDue: string;
+  currency: string;
+  notes: string | null;
+}
 
 // ─── Payment Types ────────────────────────────────────────────────────────────
 
@@ -132,7 +241,17 @@ export const CreatePaymentRequestSchema = z.object({
   currency: z.string().length(3).default('USD'),
   notes: z.string().optional(),
 });
-export type CreatePaymentRequest = z.infer<typeof CreatePaymentRequestSchema>;
+export interface CreatePaymentRequest {
+  customerId: string;
+  paymentNumber: string;
+  paymentDate: string;
+  amount: string;
+  paymentMethod: 'cash' | 'check' | 'bank_transfer' | 'credit_card' | 'online';
+  referenceNumber?: string;
+  bankAccountId?: string;
+  currency?: string;
+  notes?: string;
+}
 
 export const UpdatePaymentRequestSchema = z.object({
   paymentDate: z
@@ -145,7 +264,31 @@ export const UpdatePaymentRequestSchema = z.object({
   bankAccountId: z.string().uuid().optional(),
   notes: z.string().optional(),
 });
-export type UpdatePaymentRequest = z.infer<typeof UpdatePaymentRequestSchema>;
+export interface UpdatePaymentRequest {
+  paymentDate?: string;
+  amount?: string;
+  paymentMethod?: 'cash' | 'check' | 'bank_transfer' | 'credit_card' | 'online';
+  referenceNumber?: string;
+  bankAccountId?: string;
+  notes?: string;
+}
+
+export interface PaymentResponse {
+  id: string;
+  createdAt: Date;
+  updatedAt: Date;
+  tenantId: string;
+  deletedAt: Date | null;
+  customerId: string;
+  paymentNumber: string;
+  paymentDate: string;
+  amount: string;
+  paymentMethod: 'cash' | 'check' | 'bank_transfer' | 'credit_card' | 'online';
+  referenceNumber: string | null;
+  bankAccountId: string | null;
+  currency: string;
+  notes: string | null;
+}
 
 // ─── Payment Application Types ────────────────────────────────────────────────
 
@@ -155,7 +298,23 @@ export const CreatePaymentApplicationRequestSchema = z.object({
   amountApplied: z.string().min(0),
   appliedDate: z.string().regex(/^\d{4}-\d{2}-\d{2}$/, 'Date must be YYYY-MM-DD'),
 });
-export type CreatePaymentApplicationRequest = z.infer<typeof CreatePaymentApplicationRequestSchema>;
+export interface CreatePaymentApplicationRequest {
+  paymentId: string;
+  invoiceId: string;
+  amountApplied: string;
+  appliedDate: string;
+}
+
+export interface PaymentApplicationResponse {
+  id: string;
+  createdAt: Date;
+  updatedAt: Date;
+  tenantId: string;
+  paymentId: string;
+  invoiceId: string;
+  amountApplied: string;
+  appliedDate: string;
+}
 
 // ─── Credit Note Types ────────────────────────────────────────────────────────
 
@@ -168,7 +327,15 @@ export const CreateCreditNoteRequestSchema = z.object({
   currency: z.string().length(3).default('USD'),
   notes: z.string().optional(),
 });
-export type CreateCreditNoteRequest = z.infer<typeof CreateCreditNoteRequestSchema>;
+export interface CreateCreditNoteRequest {
+  customerId: string;
+  creditNoteNumber: string;
+  issueDate: string;
+  reason: string;
+  amount: string;
+  currency?: string;
+  notes?: string;
+}
 
 export const UpdateCreditNoteRequestSchema = z.object({
   issueDate: z
@@ -179,11 +346,38 @@ export const UpdateCreditNoteRequestSchema = z.object({
   amount: z.string().min(0).optional(),
   notes: z.string().optional(),
 });
-export type UpdateCreditNoteRequest = z.infer<typeof UpdateCreditNoteRequestSchema>;
+export interface UpdateCreditNoteRequest {
+  issueDate?: string;
+  reason?: string;
+  amount?: string;
+  notes?: string;
+}
 
 export const ApplyCreditNoteRequestSchema = z.object({
   invoiceId: z.string().uuid(),
   amountApplied: z.string().min(0),
   appliedDate: z.string().regex(/^\d{4}-\d{2}-\d{2}$/, 'Date must be YYYY-MM-DD'),
 });
-export type ApplyCreditNoteRequest = z.infer<typeof ApplyCreditNoteRequestSchema>;
+export interface ApplyCreditNoteRequest {
+  invoiceId: string;
+  amountApplied: string;
+  appliedDate: string;
+}
+
+export interface CreditNoteResponse {
+  id: string;
+  createdAt: Date;
+  updatedAt: Date;
+  tenantId: string;
+  deletedAt: Date | null;
+  customerId: string;
+  creditNoteNumber: string;
+  status: 'draft' | 'issued' | 'applied' | 'voided';
+  issueDate: string;
+  reason: string;
+  amount: string;
+  amountApplied: string;
+  balance: string;
+  currency: string;
+  notes: string | null;
+}

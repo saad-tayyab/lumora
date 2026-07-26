@@ -1,5 +1,5 @@
 import { APIError, api } from 'encore.dev/api';
-import { getAuthData } from '~encore/auth';
+import { getAuthData } from 'encore.dev/internal/codegen/auth';
 import { ValidationError } from '../../lib/errors';
 import * as service from './service';
 import type {
@@ -9,16 +9,20 @@ import type {
   ListResponse,
 } from './types';
 import {
+  CreateAccountRequest,
   CreateAccountSchema,
+  CreateFiscalYearRequest,
   CreateFiscalYearSchema,
+  CreateJournalEntryRequest,
   CreateJournalEntrySchema,
   PaginationParamsSchema,
+  UpdateAccountRequest,
   UpdateAccountSchema,
+  UpdateFiscalYearRequest,
   UpdateFiscalYearSchema,
+  UpdateJournalEntryRequest,
   UpdateJournalEntrySchema,
 } from './types';
-
-// ─── Helpers ────────────────────────────────────────────────────────────────
 
 function validate<T>(schema: { parse: (data: unknown) => T }, data: unknown): T {
   try {
@@ -31,11 +35,9 @@ function validate<T>(schema: { parse: (data: unknown) => T }, data: unknown): T 
   }
 }
 
-// ─── Account Endpoints ──────────────────────────────────────────────────────
-
 export const createAccount = api(
   { expose: true, auth: true, method: 'POST', path: '/accounts' },
-  async (req: unknown): Promise<AccountResponse> => {
+  async (req: CreateAccountRequest): Promise<AccountResponse> => {
     const auth = getAuthData();
     if (!auth) throw APIError.unauthenticated('not authenticated');
     const data = validate(CreateAccountSchema, req);
@@ -68,7 +70,8 @@ export const listAccounts = api(
 
 export const updateAccount = api(
   { expose: true, auth: true, method: 'PUT', path: '/accounts/:id' },
-  async ({ id, ...body }: { id: string } & Record<string, unknown>): Promise<AccountResponse> => {
+  async (req: { id: string } & UpdateAccountRequest): Promise<AccountResponse> => {
+    const { id, ...body } = req;
     const auth = getAuthData();
     if (!auth) throw APIError.unauthenticated('not authenticated');
     const data = validate(UpdateAccountSchema, body);
@@ -85,11 +88,9 @@ export const deleteAccount = api(
   },
 );
 
-// ─── Journal Entry Endpoints ────────────────────────────────────────────────
-
 export const createJournalEntry = api(
   { expose: true, auth: true, method: 'POST', path: '/journal-entries' },
-  async (req: unknown): Promise<JournalEntryResponse> => {
+  async (req: CreateJournalEntryRequest): Promise<JournalEntryResponse> => {
     const auth = getAuthData();
     if (!auth) throw APIError.unauthenticated('not authenticated');
     const data = validate(CreateJournalEntrySchema, req);
@@ -125,10 +126,8 @@ export const listJournalEntries = api(
 
 export const updateJournalEntry = api(
   { expose: true, auth: true, method: 'PUT', path: '/journal-entries/:id' },
-  async ({
-    id,
-    ...body
-  }: { id: string } & Record<string, unknown>): Promise<JournalEntryResponse> => {
+  async (req: { id: string } & UpdateJournalEntryRequest): Promise<JournalEntryResponse> => {
+    const { id, ...body } = req;
     const auth = getAuthData();
     if (!auth) throw APIError.unauthenticated('not authenticated');
     const data = validate(UpdateJournalEntrySchema, body);
@@ -154,11 +153,9 @@ export const voidJournalEntry = api(
   },
 );
 
-// ─── Fiscal Year Endpoints ──────────────────────────────────────────────────
-
 export const createFiscalYear = api(
   { expose: true, auth: true, method: 'POST', path: '/fiscal-years' },
-  async (req: unknown): Promise<FiscalYearResponse> => {
+  async (req: CreateFiscalYearRequest): Promise<FiscalYearResponse> => {
     const auth = getAuthData();
     if (!auth) throw APIError.unauthenticated('not authenticated');
     const data = validate(CreateFiscalYearSchema, req);
@@ -187,10 +184,8 @@ export const listFiscalYears = api(
 
 export const updateFiscalYear = api(
   { expose: true, auth: true, method: 'PUT', path: '/fiscal-years/:id' },
-  async ({
-    id,
-    ...body
-  }: { id: string } & Record<string, unknown>): Promise<FiscalYearResponse> => {
+  async (req: { id: string } & UpdateFiscalYearRequest): Promise<FiscalYearResponse> => {
+    const { id, ...body } = req;
     const auth = getAuthData();
     if (!auth) throw APIError.unauthenticated('not authenticated');
     const data = validate(UpdateFiscalYearSchema, body);

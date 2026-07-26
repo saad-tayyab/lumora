@@ -35,14 +35,14 @@ import type {
   CreateInvoiceRequest,
   CreatePaymentApplicationRequest,
   CreatePaymentRequest,
-  CreditNote,
-  Customer,
-  Invoice,
-  InvoiceLineItem,
+  CreditNoteResponse,
+  CustomerResponse,
+  InvoiceLineItemResponse,
   InvoiceQuery,
+  InvoiceResponse,
   PaginationParams,
-  Payment,
-  PaymentApplication,
+  PaymentApplicationResponse,
+  PaymentResponse,
   UpdateCustomerRequest,
   UpdateInvoiceRequest,
   UpdatePaymentRequest,
@@ -87,14 +87,14 @@ const CREDIT_NOTE_STATUS_TRANSITIONS: Record<string, string[]> = {
 export async function listCustomers(
   tenantId: string,
   pagination: PaginationParams,
-): Promise<PaginatedResult<Customer>> {
+): Promise<PaginatedResult<CustomerResponse>> {
   return customersRepository.findMany(tenantId, {
     limit: pagination.limit,
     offset: pagination.offset,
   });
 }
 
-export async function getCustomer(id: string, tenantId: string): Promise<Customer> {
+export async function getCustomer(id: string, tenantId: string): Promise<CustomerResponse> {
   const customer = await customersRepository.findById(id, tenantId);
   if (!customer) {
     throw new CustomerNotFoundError(id);
@@ -105,7 +105,7 @@ export async function getCustomer(id: string, tenantId: string): Promise<Custome
 export async function createCustomer(
   data: CreateCustomerRequest,
   tenantId: string,
-): Promise<Customer> {
+): Promise<CustomerResponse> {
   if (data.email) {
     const existing = await customersRepository.findByEmail(data.email, tenantId);
     if (existing) {
@@ -138,7 +138,7 @@ export async function updateCustomer(
   id: string,
   data: UpdateCustomerRequest,
   tenantId: string,
-): Promise<Customer> {
+): Promise<CustomerResponse> {
   const existing = await customersRepository.findById(id, tenantId);
   if (!existing) {
     throw new CustomerNotFoundError(id);
@@ -219,7 +219,7 @@ function recalculateInvoiceTotals(lineItems: { amount: string; taxAmount?: strin
 export async function listInvoices(
   tenantId: string,
   query: InvoiceQuery,
-): Promise<PaginatedResult<Invoice>> {
+): Promise<PaginatedResult<InvoiceResponse>> {
   return invoicesRepository.findMany(tenantId, {
     limit: query.limit,
     offset: query.offset,
@@ -228,7 +228,7 @@ export async function listInvoices(
   });
 }
 
-export async function getInvoice(id: string, tenantId: string): Promise<Invoice> {
+export async function getInvoice(id: string, tenantId: string): Promise<InvoiceResponse> {
   const invoice = await invoicesRepository.findById(id, tenantId);
   if (!invoice) {
     throw new InvoiceNotFoundError(id);
@@ -239,7 +239,7 @@ export async function getInvoice(id: string, tenantId: string): Promise<Invoice>
 export async function getInvoiceLineItems(
   invoiceId: string,
   tenantId: string,
-): Promise<InvoiceLineItem[]> {
+): Promise<InvoiceLineItemResponse[]> {
   const invoice = await invoicesRepository.findById(invoiceId, tenantId);
   if (!invoice) {
     throw new InvoiceNotFoundError(invoiceId);
@@ -250,7 +250,7 @@ export async function getInvoiceLineItems(
 export async function createInvoice(
   data: CreateInvoiceRequest,
   tenantId: string,
-): Promise<Invoice> {
+): Promise<InvoiceResponse> {
   // Validate customer exists
   const customer = await customersRepository.findById(data.customerId, tenantId);
   if (!customer) {
@@ -330,7 +330,7 @@ export async function updateInvoice(
   id: string,
   data: UpdateInvoiceRequest,
   tenantId: string,
-): Promise<Invoice> {
+): Promise<InvoiceResponse> {
   const existing = await invoicesRepository.findById(id, tenantId);
   if (!existing) {
     throw new InvoiceNotFoundError(id);
@@ -394,7 +394,7 @@ export async function updateInvoiceStatus(
   id: string,
   status: string,
   tenantId: string,
-): Promise<Invoice> {
+): Promise<InvoiceResponse> {
   const existing = await invoicesRepository.findById(id, tenantId);
   if (!existing) {
     throw new InvoiceNotFoundError(id);
@@ -426,14 +426,14 @@ export async function updateInvoiceStatus(
 export async function listPayments(
   tenantId: string,
   pagination: PaginationParams,
-): Promise<PaginatedResult<Payment>> {
+): Promise<PaginatedResult<PaymentResponse>> {
   return paymentsRepository.findMany(tenantId, {
     limit: pagination.limit,
     offset: pagination.offset,
   });
 }
 
-export async function getPayment(id: string, tenantId: string): Promise<Payment> {
+export async function getPayment(id: string, tenantId: string): Promise<PaymentResponse> {
   const payment = await paymentsRepository.findById(id, tenantId);
   if (!payment) {
     throw new PaymentNotFoundError(id);
@@ -444,7 +444,7 @@ export async function getPayment(id: string, tenantId: string): Promise<Payment>
 export async function createPayment(
   data: CreatePaymentRequest,
   tenantId: string,
-): Promise<Payment> {
+): Promise<PaymentResponse> {
   // Validate customer exists
   const customer = await customersRepository.findById(data.customerId, tenantId);
   if (!customer) {
@@ -482,7 +482,7 @@ export async function updatePayment(
   id: string,
   data: UpdatePaymentRequest,
   tenantId: string,
-): Promise<Payment> {
+): Promise<PaymentResponse> {
   const existing = await paymentsRepository.findById(id, tenantId);
   if (!existing) {
     throw new PaymentNotFoundError(id);
@@ -539,7 +539,7 @@ async function updateInvoicePaidAmount(invoiceId: string, tenantId: string): Pro
 export async function createPaymentApplication(
   data: CreatePaymentApplicationRequest,
   tenantId: string,
-): Promise<PaymentApplication> {
+): Promise<PaymentApplicationResponse> {
   // Validate payment exists
   const payment = await paymentsRepository.findById(data.paymentId, tenantId);
   if (!payment) {
@@ -615,7 +615,7 @@ export async function deletePaymentApplication(id: string, tenantId: string): Pr
 export async function listCreditNotes(
   tenantId: string,
   query: { customerId?: string; status?: string } & PaginationParams,
-): Promise<PaginatedResult<CreditNote>> {
+): Promise<PaginatedResult<CreditNoteResponse>> {
   return creditNotesRepository.findMany(tenantId, {
     limit: query.limit,
     offset: query.offset,
@@ -624,7 +624,7 @@ export async function listCreditNotes(
   });
 }
 
-export async function getCreditNote(id: string, tenantId: string): Promise<CreditNote> {
+export async function getCreditNote(id: string, tenantId: string): Promise<CreditNoteResponse> {
   const creditNote = await creditNotesRepository.findById(id, tenantId);
   if (!creditNote) {
     throw new CreditNoteNotFoundError(id);
@@ -635,7 +635,7 @@ export async function getCreditNote(id: string, tenantId: string): Promise<Credi
 export async function createCreditNote(
   data: CreateCreditNoteRequest,
   tenantId: string,
-): Promise<CreditNote> {
+): Promise<CreditNoteResponse> {
   // Validate customer exists
   const customer = await customersRepository.findById(data.customerId, tenantId);
   if (!customer) {
@@ -674,7 +674,7 @@ export async function updateCreditNoteStatus(
   id: string,
   status: string,
   tenantId: string,
-): Promise<CreditNote> {
+): Promise<CreditNoteResponse> {
   const existing = await creditNotesRepository.findById(id, tenantId);
   if (!existing) {
     throw new CreditNoteNotFoundError(id);

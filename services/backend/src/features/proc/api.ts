@@ -12,12 +12,13 @@
 
 import { APIError, api } from 'encore.dev/api';
 import { z } from 'zod';
-import { getAuthData } from '~encore/auth';
+import { getAuthData } from 'encore.dev/internal/codegen/auth';
 import * as service from './service';
 import type {
   CreatePurchaseOrderRequest,
   CreateReceivingReportRequest,
   CreateVendorCatalogItemRequest,
+  PoLineItemListResponse,
   ListResponse,
   PaginationParams,
   PoLineItemResponse,
@@ -278,25 +279,24 @@ export const closePo = api(
 /** List line items for a purchase order */
 export const listPoLineItems = api(
   { expose: true, auth: true, method: 'GET', path: '/proc/purchase-orders/:poId/line-items' },
-  async ({ poId }: { poId: string }): Promise<PoLineItemResponse[]> => {
+  async ({ poId }: { poId: string }): Promise<PoLineItemListResponse> => {
     const auth = getAuthData();
     if (!auth) throw APIError.unauthenticated('not authenticated');
     // Verify PO exists and tenant matches
     await service.getPurchaseOrder(poId, auth.tenantId);
     const { poLineItemRepo } = await import('./repo');
-    return poLineItemRepo.findByPoId(poId);
+    const items = await poLineItemRepo.findByPoId(poId);
+    return { items };
   },
 );
 
 /** Add a line item to a draft purchase order */
 export const addPoLineItem = api(
   { expose: true, auth: true, method: 'POST', path: '/proc/purchase-orders/:poId/line-items' },
-  async ({
-    poId,
-    ...data
-  }: { poId: string } & CreatePoLineItemRequest): Promise<PoLineItemResponse> => {
+  async (req: { poId: string; itemId: string; lineNumber?: number; description: string; quantity: string; unitOfMeasure: string; unitPrice: string; amount?: string; taxRate?: string; taxAmount?: string; notes?: string }): Promise<PoLineItemResponse> => {
     const auth = getAuthData();
     if (!auth) throw APIError.unauthenticated('not authenticated');
+    const { poId, ...data } = req;
     const input = validate(CreatePoLineItemSchema, data);
     return service.addPoLineItem(poId, input, auth.tenantId);
   },
@@ -310,16 +310,10 @@ export const updatePoLineItem = api(
     method: 'PATCH',
     path: '/proc/purchase-orders/:poId/line-items/:lineItemId',
   },
-  async ({
-    poId,
-    lineItemId,
-    ...data
-  }: {
-    poId: string;
-    lineItemId: string;
-  } & UpdatePoLineItemRequest): Promise<PoLineItemResponse> => {
+  async (req: { poId: string; lineItemId: string; itemId?: string; description?: string; quantity?: string; unitOfMeasure?: string; unitPrice?: string; amount?: string; taxRate?: string; taxAmount?: string; notes?: string }): Promise<PoLineItemResponse> => {
     const auth = getAuthData();
     if (!auth) throw APIError.unauthenticated('not authenticated');
+    const { poId, lineItemId, ...data } = req;
     const input = validate(UpdatePoLineItemSchema, data);
     return service.updatePoLineItem(lineItemId, input, poId, auth.tenantId);
   },
@@ -388,12 +382,10 @@ export const listReceivingReports = api(
 /** Update a draft receiving report */
 export const updateReceivingReport = api(
   { expose: true, auth: true, method: 'PATCH', path: '/proc/receiving-reports/:id' },
-  async ({
-    id,
-    ...data
-  }: { id: string } & UpdateReceivingReportRequest): Promise<ReceivingReportResponse> => {
+  async (req: { id: string; receivedDate?: string; notes?: string }): Promise<ReceivingReportResponse> => {
     const auth = getAuthData();
     if (!auth) throw APIError.unauthenticated('not authenticated');
+    const { id, ...data } = req;
     const input = validate(UpdateReceivingReportSchema, data);
     return service.updateReceivingReport(id, input, auth.tenantId);
   },

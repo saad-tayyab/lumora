@@ -18,7 +18,7 @@
     "clean": "rm -rf dist node_modules"
   },
   "devDependencies": {
-    "typescript": "^7.0.0"
+    "typescript": "^6.0.0"
   },
   "dependencies": {
     "clsx": "^2.1.0",

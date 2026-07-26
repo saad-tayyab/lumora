@@ -1,5 +1,5 @@
 import { APIError, api } from 'encore.dev/api';
-import { getAuthData } from '~encore/auth';
+import { getAuthData } from 'encore.dev/internal/codegen/auth';
 import { ValidationError } from '../../lib/errors';
 import * as service from './service';
 import type {
@@ -10,18 +10,24 @@ import type {
   TaxRateResponse,
 } from './types';
 import {
+  CalculateTaxRequest,
   CalculateTaxSchema,
+  CreateTaxAutoAssignmentRuleRequest,
   CreateTaxAutoAssignmentRuleSchema,
+  CreateTaxCodeRequest,
   CreateTaxCodeSchema,
+  CreateTaxRateRequest,
   CreateTaxRateSchema,
   PaginationParamsSchema,
+  ResolveAutoAssignmentRequest,
   ResolveAutoAssignmentSchema,
+  UpdateTaxAutoAssignmentRuleRequest,
   UpdateTaxAutoAssignmentRuleSchema,
+  UpdateTaxCodeRequest,
   UpdateTaxCodeSchema,
+  UpdateTaxRateRequest,
   UpdateTaxRateSchema,
 } from './types';
-
-// ─── Helpers ────────────────────────────────────────────────────────────────
 
 function validate<T>(schema: { parse: (data: unknown) => T }, data: unknown): T {
   try {
@@ -34,11 +40,9 @@ function validate<T>(schema: { parse: (data: unknown) => T }, data: unknown): T 
   }
 }
 
-// ─── Tax Code Endpoints ─────────────────────────────────────────────────────
-
 export const createTaxCode = api(
   { expose: true, auth: true, method: 'POST', path: '/tax/codes' },
-  async (req: unknown): Promise<TaxCodeResponse> => {
+  async (req: CreateTaxCodeRequest): Promise<TaxCodeResponse> => {
     const auth = getAuthData();
     if (!auth) throw APIError.unauthenticated('not authenticated');
     const data = validate(CreateTaxCodeSchema, req);
@@ -76,7 +80,8 @@ export const listTaxCodes = api(
 
 export const updateTaxCode = api(
   { expose: true, auth: true, method: 'PUT', path: '/tax/codes/:id' },
-  async ({ id, ...body }: { id: string } & Record<string, unknown>): Promise<TaxCodeResponse> => {
+  async (req: { id: string } & UpdateTaxCodeRequest): Promise<TaxCodeResponse> => {
+    const { id, ...body } = req;
     const auth = getAuthData();
     if (!auth) throw APIError.unauthenticated('not authenticated');
     const data = validate(UpdateTaxCodeSchema, body);
@@ -93,11 +98,9 @@ export const deleteTaxCode = api(
   },
 );
 
-// ─── Tax Rate Endpoints ─────────────────────────────────────────────────────
-
 export const createTaxRate = api(
   { expose: true, auth: true, method: 'POST', path: '/tax/rates' },
-  async (req: unknown): Promise<TaxRateResponse> => {
+  async (req: CreateTaxRateRequest): Promise<TaxRateResponse> => {
     const auth = getAuthData();
     if (!auth) throw APIError.unauthenticated('not authenticated');
     const data = validate(CreateTaxRateSchema, req);
@@ -135,7 +138,8 @@ export const listTaxRates = api(
 
 export const updateTaxRate = api(
   { expose: true, auth: true, method: 'PUT', path: '/tax/rates/:id' },
-  async ({ id, ...body }: { id: string } & Record<string, unknown>): Promise<TaxRateResponse> => {
+  async (req: { id: string } & UpdateTaxRateRequest): Promise<TaxRateResponse> => {
+    const { id, ...body } = req;
     const auth = getAuthData();
     if (!auth) throw APIError.unauthenticated('not authenticated');
     const data = validate(UpdateTaxRateSchema, body);
@@ -152,11 +156,9 @@ export const deleteTaxRate = api(
   },
 );
 
-// ─── Tax Auto-Assignment Rule Endpoints ──────────────────────────────────────
-
 export const createAutoAssignmentRule = api(
   { expose: true, auth: true, method: 'POST', path: '/tax/auto-assignment-rules' },
-  async (req: unknown): Promise<TaxAutoAssignmentRuleResponse> => {
+  async (req: CreateTaxAutoAssignmentRuleRequest): Promise<TaxAutoAssignmentRuleResponse> => {
     const auth = getAuthData();
     if (!auth) throw APIError.unauthenticated('not authenticated');
     const data = validate(CreateTaxAutoAssignmentRuleSchema, req);
@@ -192,10 +194,8 @@ export const listAutoAssignmentRules = api(
 
 export const updateAutoAssignmentRule = api(
   { expose: true, auth: true, method: 'PUT', path: '/tax/auto-assignment-rules/:id' },
-  async ({
-    id,
-    ...body
-  }: { id: string } & Record<string, unknown>): Promise<TaxAutoAssignmentRuleResponse> => {
+  async (req: { id: string } & UpdateTaxAutoAssignmentRuleRequest): Promise<TaxAutoAssignmentRuleResponse> => {
+    const { id, ...body } = req;
     const auth = getAuthData();
     if (!auth) throw APIError.unauthenticated('not authenticated');
     const data = validate(UpdateTaxAutoAssignmentRuleSchema, body);
@@ -212,11 +212,9 @@ export const deleteAutoAssignmentRule = api(
   },
 );
 
-// ─── Tax Calculation Endpoints ──────────────────────────────────────────────
-
 export const calculateTax = api(
   { expose: true, auth: true, method: 'POST', path: '/tax/calculate' },
-  async (req: unknown): Promise<TaxCalculationResult> => {
+  async (req: CalculateTaxRequest): Promise<TaxCalculationResult> => {
     const auth = getAuthData();
     if (!auth) throw APIError.unauthenticated('not authenticated');
     const data = validate(CalculateTaxSchema, req);
@@ -231,10 +229,14 @@ export const calculateTax = api(
 
 export const resolveAutoAssignment = api(
   { expose: true, auth: true, method: 'POST', path: '/tax/resolve' },
-  async (req: unknown): Promise<TaxCalculationResult | undefined> => {
+  async (req: ResolveAutoAssignmentRequest): Promise<TaxCalculationResult> => {
     const auth = getAuthData();
     if (!auth) throw APIError.unauthenticated('not authenticated');
     const data = validate(ResolveAutoAssignmentSchema, req);
-    return service.resolveAutoAssignment(data, auth.tenantId);
+    const result = await service.resolveAutoAssignment(data, auth.tenantId);
+    if (!result) {
+      throw APIError.notFound('No matching tax assignment rule found');
+    }
+    return result;
   },
 );

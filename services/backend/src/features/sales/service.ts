@@ -46,14 +46,14 @@ import type {
   CreateDiscountPolicyRequest,
   CreateQuotationRequest,
   CreateSalesOrderRequest,
-  DiscountPolicy,
   DiscountPolicyQuery,
-  Quotation,
-  QuotationLineItem,
+  DiscountPolicyResponse,
+  QuotationLineItemResponse,
   QuotationQuery,
-  SalesOrder,
-  SalesOrderLineItem,
+  QuotationResponse,
+  SalesOrderLineItemResponse,
   SalesOrderQuery,
+  SalesOrderResponse,
   UpdateDiscountPolicyRequest,
   UpdateQuotationRequest,
   UpdateSalesOrderRequest,
@@ -167,7 +167,7 @@ function recalculateOrderTotals(
 export async function listSalesOrders(
   tenantId: string,
   query: SalesOrderQuery,
-): Promise<PaginatedResult<SalesOrder>> {
+): Promise<PaginatedResult<SalesOrderResponse>> {
   return salesOrdersRepository.findMany(tenantId, {
     limit: query.limit,
     offset: query.offset,
@@ -176,7 +176,7 @@ export async function listSalesOrders(
   });
 }
 
-export async function getSalesOrder(id: string, tenantId: string): Promise<SalesOrder> {
+export async function getSalesOrder(id: string, tenantId: string): Promise<SalesOrderResponse> {
   const order = await salesOrdersRepository.findById(id, tenantId);
   if (!order) {
     throw new SalesOrderNotFoundError(id);
@@ -187,7 +187,7 @@ export async function getSalesOrder(id: string, tenantId: string): Promise<Sales
 export async function getSalesOrderLineItems(
   orderId: string,
   tenantId: string,
-): Promise<SalesOrderLineItem[]> {
+): Promise<SalesOrderLineItemResponse[]> {
   const order = await salesOrdersRepository.findById(orderId, tenantId);
   if (!order) {
     throw new SalesOrderNotFoundError(orderId);
@@ -198,7 +198,7 @@ export async function getSalesOrderLineItems(
 export async function createSalesOrder(
   data: CreateSalesOrderRequest,
   tenantId: string,
-): Promise<SalesOrder> {
+): Promise<SalesOrderResponse> {
   // Validate order number uniqueness
   const existingOrder = await salesOrdersRepository.findByOrderNumber(data.orderNumber, tenantId);
   if (existingOrder) {
@@ -270,7 +270,7 @@ export async function updateSalesOrder(
   id: string,
   data: UpdateSalesOrderRequest,
   tenantId: string,
-): Promise<SalesOrder> {
+): Promise<SalesOrderResponse> {
   const existing = await salesOrdersRepository.findById(id, tenantId);
   if (!existing) {
     throw new SalesOrderNotFoundError(id);
@@ -343,7 +343,7 @@ export async function updateSalesOrderStatus(
   id: string,
   status: string,
   tenantId: string,
-): Promise<SalesOrder> {
+): Promise<SalesOrderResponse> {
   const existing = await salesOrdersRepository.findById(id, tenantId);
   if (!existing) {
     throw new SalesOrderNotFoundError(id);
@@ -392,7 +392,7 @@ export async function deleteSalesOrder(id: string, tenantId: string): Promise<vo
 export async function getSalesOrderLineItem(
   id: string,
   tenantId: string,
-): Promise<SalesOrderLineItem> {
+): Promise<SalesOrderLineItemResponse> {
   const item = await salesOrderLineItemsRepository.findById(id, tenantId);
   if (!item) {
     throw new SalesOrderLineItemNotFoundError(id);
@@ -413,7 +413,7 @@ export async function createSalesOrderLineItem(
     taxAmount?: string;
   },
   tenantId: string,
-): Promise<SalesOrderLineItem> {
+): Promise<SalesOrderLineItemResponse> {
   const order = await salesOrdersRepository.findById(orderId, tenantId);
   if (!order) {
     throw new SalesOrderNotFoundError(orderId);
@@ -467,7 +467,7 @@ export async function updateSalesOrderLineItem(
     taxAmount?: string;
   },
   tenantId: string,
-): Promise<SalesOrderLineItem> {
+): Promise<SalesOrderLineItemResponse> {
   const existing = await salesOrderLineItemsRepository.findById(id, tenantId);
   if (!existing) {
     throw new SalesOrderLineItemNotFoundError(id);
@@ -572,7 +572,7 @@ async function recalculateOrderFromDb(orderId: string, tenantId: string): Promis
 export async function listQuotations(
   tenantId: string,
   query: QuotationQuery,
-): Promise<PaginatedResult<Quotation>> {
+): Promise<PaginatedResult<QuotationResponse>> {
   return quotationsRepository.findMany(tenantId, {
     limit: query.limit,
     offset: query.offset,
@@ -581,7 +581,7 @@ export async function listQuotations(
   });
 }
 
-export async function getQuotation(id: string, tenantId: string): Promise<Quotation> {
+export async function getQuotation(id: string, tenantId: string): Promise<QuotationResponse> {
   const quotation = await quotationsRepository.findById(id, tenantId);
   if (!quotation) {
     throw new QuotationNotFoundError(id);
@@ -592,7 +592,7 @@ export async function getQuotation(id: string, tenantId: string): Promise<Quotat
 export async function getQuotationLineItems(
   quotationId: string,
   tenantId: string,
-): Promise<QuotationLineItem[]> {
+): Promise<QuotationLineItemResponse[]> {
   const quotation = await quotationsRepository.findById(quotationId, tenantId);
   if (!quotation) {
     throw new QuotationNotFoundError(quotationId);
@@ -603,7 +603,7 @@ export async function getQuotationLineItems(
 export async function createQuotation(
   data: CreateQuotationRequest,
   tenantId: string,
-): Promise<Quotation> {
+): Promise<QuotationResponse> {
   // Validate quotation number uniqueness
   const existingQuotation = await quotationsRepository.findByQuotationNumber(
     data.quotationNumber,
@@ -679,7 +679,7 @@ export async function updateQuotation(
   id: string,
   data: UpdateQuotationRequest,
   tenantId: string,
-): Promise<Quotation> {
+): Promise<QuotationResponse> {
   const existing = await quotationsRepository.findById(id, tenantId);
   if (!existing) {
     throw new QuotationNotFoundError(id);
@@ -752,7 +752,7 @@ export async function updateQuotationStatus(
   id: string,
   status: string,
   tenantId: string,
-): Promise<Quotation> {
+): Promise<QuotationResponse> {
   const existing = await quotationsRepository.findById(id, tenantId);
   if (!existing) {
     throw new QuotationNotFoundError(id);
@@ -787,11 +787,11 @@ export async function updateQuotationStatus(
  * BR-007: Expire quotations that have passed their expiry date.
  * Should be called periodically (e.g., via a scheduled job).
  */
-export async function expireQuotations(tenantId: string): Promise<Quotation[]> {
+export async function expireQuotations(tenantId: string): Promise<QuotationResponse[]> {
   const today = new Date().toISOString().split('T')[0];
   const expired = await quotationsRepository.findExpired(today, tenantId);
 
-  const updated: Quotation[] = [];
+  const updated: QuotationResponse[] = [];
   for (const quotation of expired) {
     const results = await quotationsRepository.update(quotation.id, tenantId, {
       status: 'expired',
@@ -826,7 +826,7 @@ export async function deleteQuotation(id: string, tenantId: string): Promise<voi
 export async function getQuotationLineItem(
   id: string,
   tenantId: string,
-): Promise<QuotationLineItem> {
+): Promise<QuotationLineItemResponse> {
   const item = await quotationLineItemsRepository.findById(id, tenantId);
   if (!item) {
     throw new QuotationLineItemNotFoundError(id);
@@ -847,7 +847,7 @@ export async function createQuotationLineItem(
     taxAmount?: string;
   },
   tenantId: string,
-): Promise<QuotationLineItem> {
+): Promise<QuotationLineItemResponse> {
   const quotation = await quotationsRepository.findById(quotationId, tenantId);
   if (!quotation) {
     throw new QuotationNotFoundError(quotationId);
@@ -901,7 +901,7 @@ export async function updateQuotationLineItem(
     taxAmount?: string;
   },
   tenantId: string,
-): Promise<QuotationLineItem> {
+): Promise<QuotationLineItemResponse> {
   const existing = await quotationLineItemsRepository.findById(id, tenantId);
   if (!existing) {
     throw new QuotationLineItemNotFoundError(id);
@@ -1004,7 +1004,7 @@ async function recalculateQuotationFromDb(quotationId: string, tenantId: string)
 export async function listDiscountPolicies(
   tenantId: string,
   query: DiscountPolicyQuery,
-): Promise<PaginatedResult<DiscountPolicy>> {
+): Promise<PaginatedResult<DiscountPolicyResponse>> {
   return discountPoliciesRepository.findMany(tenantId, {
     limit: query.limit,
     offset: query.offset,
@@ -1013,7 +1013,7 @@ export async function listDiscountPolicies(
   });
 }
 
-export async function getDiscountPolicy(id: string, tenantId: string): Promise<DiscountPolicy> {
+export async function getDiscountPolicy(id: string, tenantId: string): Promise<DiscountPolicyResponse> {
   const policy = await discountPoliciesRepository.findById(id, tenantId);
   if (!policy) {
     throw new DiscountPolicyNotFoundError(id);
@@ -1024,7 +1024,7 @@ export async function getDiscountPolicy(id: string, tenantId: string): Promise<D
 export async function createDiscountPolicy(
   data: CreateDiscountPolicyRequest,
   tenantId: string,
-): Promise<DiscountPolicy> {
+): Promise<DiscountPolicyResponse> {
   // Validate name uniqueness within tenant (findMany and check locally)
   const existing = await discountPoliciesRepository.findMany(tenantId, {});
   const duplicateName = existing.data.find((p) => p.name.toLowerCase() === data.name.toLowerCase());
@@ -1058,7 +1058,7 @@ export async function updateDiscountPolicy(
   id: string,
   data: UpdateDiscountPolicyRequest,
   tenantId: string,
-): Promise<DiscountPolicy> {
+): Promise<DiscountPolicyResponse> {
   const existing = await discountPoliciesRepository.findById(id, tenantId);
   if (!existing) {
     throw new DiscountPolicyNotFoundError(id);
@@ -1117,6 +1117,6 @@ export async function getActiveDiscountPolicies(
   currentDate: string,
   tenantId: string,
   customerId?: string,
-): Promise<DiscountPolicy[]> {
+): Promise<DiscountPolicyResponse[]> {
   return discountPoliciesRepository.findActive(currentDate, tenantId, customerId);
 }

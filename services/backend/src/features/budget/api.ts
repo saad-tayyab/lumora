@@ -1,5 +1,5 @@
 import { APIError, api } from 'encore.dev/api';
-import { getAuthData } from '~encore/auth';
+import { getAuthData } from 'encore.dev/internal/codegen/auth';
 import { ValidationError } from '../../lib/errors';
 import * as service from './service';
 import type {
@@ -7,20 +7,24 @@ import type {
   BudgetHeaderResponse,
   BudgetHeaderWithLines,
   BudgetLineResponse,
-  BudgetVarianceResponse,
+  BudgetVarianceListResponse,
   ListResponse,
 } from './types';
 import {
+  CreateBudgetConsumptionRequest,
   CreateBudgetConsumptionSchema,
+  CreateBudgetHeaderRequest,
   CreateBudgetHeaderSchema,
+  CreateBudgetLineRequest,
   CreateBudgetLineSchema,
   PaginationParamsSchema,
+  ReversalBudgetConsumptionRequest,
   ReversalBudgetConsumptionSchema,
+  UpdateBudgetHeaderRequest,
   UpdateBudgetHeaderSchema,
+  UpdateBudgetLineRequest,
   UpdateBudgetLineSchema,
 } from './types';
-
-// ─── Helpers ────────────────────────────────────────────────────────────
 
 function validate<T>(schema: { parse: (data: unknown) => T }, data: unknown): T {
   try {
@@ -33,11 +37,9 @@ function validate<T>(schema: { parse: (data: unknown) => T }, data: unknown): T 
   }
 }
 
-// ─── Budget Header Endpoints ────────────────────────────────────────────
-
 export const createBudgetHeader = api(
   { expose: true, auth: true, method: 'POST', path: '/budgets' },
-  async (req: unknown): Promise<BudgetHeaderResponse> => {
+  async (req: CreateBudgetHeaderRequest): Promise<BudgetHeaderResponse> => {
     const auth = getAuthData();
     if (!auth) throw APIError.unauthenticated('not authenticated');
     const data = validate(CreateBudgetHeaderSchema, req);
@@ -75,10 +77,8 @@ export const listBudgetHeaders = api(
 
 export const updateBudgetHeader = api(
   { expose: true, auth: true, method: 'PUT', path: '/budgets/:id' },
-  async ({
-    id,
-    ...body
-  }: { id: string } & Record<string, unknown>): Promise<BudgetHeaderResponse> => {
+  async (req: { id: string } & UpdateBudgetHeaderRequest): Promise<BudgetHeaderResponse> => {
+    const { id, ...body } = req;
     const auth = getAuthData();
     if (!auth) throw APIError.unauthenticated('not authenticated');
     const data = validate(UpdateBudgetHeaderSchema, body);
@@ -95,14 +95,10 @@ export const deleteBudgetHeader = api(
   },
 );
 
-// ─── Budget Line Endpoints ──────────────────────────────────────────────
-
 export const createBudgetLine = api(
   { expose: true, auth: true, method: 'POST', path: '/budgets/:headerId/lines' },
-  async ({
-    headerId,
-    ...body
-  }: { headerId: string } & Record<string, unknown>): Promise<BudgetLineResponse> => {
+  async (req: { headerId: string } & CreateBudgetLineRequest): Promise<BudgetLineResponse> => {
+    const { headerId, ...body } = req;
     const auth = getAuthData();
     if (!auth) throw APIError.unauthenticated('not authenticated');
     const data = validate(CreateBudgetLineSchema, body);
@@ -112,14 +108,8 @@ export const createBudgetLine = api(
 
 export const updateBudgetLine = api(
   { expose: true, auth: true, method: 'PUT', path: '/budgets/:headerId/lines/:lineId' },
-  async ({
-    headerId,
-    lineId,
-    ...body
-  }: { headerId: string; lineId: string } & Record<
-    string,
-    unknown
-  >): Promise<BudgetLineResponse> => {
+  async (req: { headerId: string; lineId: string } & UpdateBudgetLineRequest): Promise<BudgetLineResponse> => {
+    const { headerId, lineId, ...body } = req;
     const auth = getAuthData();
     if (!auth) throw APIError.unauthenticated('not authenticated');
     const data = validate(UpdateBudgetLineSchema, body);
@@ -136,11 +126,9 @@ export const deleteBudgetLine = api(
   },
 );
 
-// ─── Budget Consumption Endpoints ───────────────────────────────────────
-
 export const createBudgetConsumption = api(
   { expose: true, auth: true, method: 'POST', path: '/budget-consumptions' },
-  async (req: unknown): Promise<BudgetConsumptionResponse> => {
+  async (req: CreateBudgetConsumptionRequest): Promise<BudgetConsumptionResponse> => {
     const auth = getAuthData();
     if (!auth) throw APIError.unauthenticated('not authenticated');
     const data = validate(CreateBudgetConsumptionSchema, req);
@@ -176,7 +164,7 @@ export const listBudgetConsumptions = api(
 
 export const reverseConsumptionsForJournalEntry = api(
   { expose: true, auth: true, method: 'POST', path: '/budget-consumptions/reverse' },
-  async (req: unknown): Promise<void> => {
+  async (req: ReversalBudgetConsumptionRequest): Promise<void> => {
     const auth = getAuthData();
     if (!auth) throw APIError.unauthenticated('not authenticated');
     const data = validate(ReversalBudgetConsumptionSchema, req);
@@ -184,13 +172,12 @@ export const reverseConsumptionsForJournalEntry = api(
   },
 );
 
-// ─── Budget Variance Endpoint ───────────────────────────────────────────
-
 export const getBudgetVariance = api(
   { expose: true, auth: true, method: 'GET', path: '/budgets/:headerId/variance' },
-  async ({ headerId }: { headerId: string }): Promise<BudgetVarianceResponse[]> => {
+  async ({ headerId }: { headerId: string }): Promise<BudgetVarianceListResponse> => {
     const auth = getAuthData();
     if (!auth) throw APIError.unauthenticated('not authenticated');
-    return service.getBudgetVariance(headerId, auth.tenantId);
+    const items = await service.getBudgetVariance(headerId, auth.tenantId);
+    return { items };
   },
 );

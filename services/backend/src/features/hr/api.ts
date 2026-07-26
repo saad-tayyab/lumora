@@ -1,6 +1,6 @@
 import { APIError, api } from 'encore.dev/api';
 import { z } from 'zod';
-import { getAuthData } from '~encore/auth';
+import { getAuthData } from 'encore.dev/internal/codegen/auth';
 import { ValidationError } from '../../lib/errors';
 import * as service from './service';
 import type {
@@ -469,9 +469,10 @@ export const createLeaveType = api(
 
 export const updateLeaveType = api(
   { expose: true, auth: true, method: 'PATCH', path: '/hr/leave-types/:id' },
-  async ({ id, ...body }: { id: string } & UpdateLeaveTypeRequest): Promise<LeaveTypeResponse> => {
+  async (req: { id: string; name?: string; description?: string; daysPerYear?: number; isPaid?: boolean; carryForward?: boolean; isActive?: boolean }): Promise<LeaveTypeResponse> => {
     const auth = getAuthData();
     if (!auth) throw APIError.unauthenticated('not authenticated');
+    const { id, ...body } = req;
     const input = validate(updateLeaveTypeSchema, body);
     return service.updateLeaveType(id, input);
   },

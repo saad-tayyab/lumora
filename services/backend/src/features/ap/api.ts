@@ -12,9 +12,10 @@
 
 import { APIError, api } from 'encore.dev/api';
 import { z } from 'zod';
-import { getAuthData } from '~encore/auth';
+import { getAuthData } from 'encore.dev/internal/codegen/auth';
 import * as service from './service';
 import type {
+  BillLineItemListResponse,
   BillLineItemResponse,
   BillResponse,
   CreateBillLineItemRequest,
@@ -327,13 +328,14 @@ export const voidBill = api(
 /** List line items for a bill */
 export const listBillLineItems = api(
   { expose: true, auth: true, method: 'GET', path: '/ap/bills/:billId/line-items' },
-  async ({ billId }: { billId: string }): Promise<BillLineItemResponse[]> => {
+  async ({ billId }: { billId: string }): Promise<BillLineItemListResponse> => {
     const auth = getAuthData();
     if (!auth) throw APIError.unauthenticated('not authenticated');
     // Verify bill exists and tenant matches
     await service.getBill(billId, auth.tenantId);
     const { billLineItemRepo } = await import('./repo');
-    return billLineItemRepo.findByBillId(billId);
+    const items = await billLineItemRepo.findByBillId(billId);
+    return { items };
   },
 );
 

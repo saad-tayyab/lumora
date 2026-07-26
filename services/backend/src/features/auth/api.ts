@@ -1,5 +1,5 @@
 import { APIError, api } from 'encore.dev/api';
-import { getAuthData } from '~encore/auth';
+import { getAuthData } from 'encore.dev/internal/codegen/auth';
 import { ValidationError } from '../../lib/errors';
 import * as service from './service';
 import type {
@@ -9,20 +9,26 @@ import type {
   RoleResponse,
   SessionResponse,
   UserResponse,
+  UserRoleListResponse,
   UserRoleResponse,
 } from './types';
 import {
+  AssignUserRoleRequest,
   AssignUserRoleSchema,
+  CreatePermissionRequest,
   CreatePermissionSchema,
+  CreateRoleRequest,
   CreateRoleSchema,
+  CreateUserRequest,
   CreateUserSchema,
   PaginationParamsSchema,
+  UpdatePermissionRequest,
   UpdatePermissionSchema,
+  UpdateRoleRequest,
   UpdateRoleSchema,
+  UpdateUserRequest,
   UpdateUserSchema,
 } from './types';
-
-// ─── Helpers ────────────────────────────────────────────────────────────────
 
 function validate<T>(schema: { parse: (data: unknown) => T }, data: unknown): T {
   try {
@@ -35,11 +41,9 @@ function validate<T>(schema: { parse: (data: unknown) => T }, data: unknown): T 
   }
 }
 
-// ─── User Endpoints ─────────────────────────────────────────────────────────
-
 export const createUser = api(
   { expose: true, auth: true, method: 'POST', path: '/users', sensitive: true },
-  async (req: unknown): Promise<UserResponse> => {
+  async (req: CreateUserRequest): Promise<UserResponse> => {
     const auth = getAuthData();
     if (!auth) throw APIError.unauthenticated('not authenticated');
     const data = validate(CreateUserSchema, req);
@@ -72,7 +76,8 @@ export const listUsers = api(
 
 export const updateUser = api(
   { expose: true, auth: true, method: 'PUT', path: '/users/:id', sensitive: true },
-  async ({ id, ...body }: { id: string } & Record<string, unknown>): Promise<UserResponse> => {
+  async (req: { id: string } & UpdateUserRequest): Promise<UserResponse> => {
+    const { id, ...body } = req;
     const auth = getAuthData();
     if (!auth) throw APIError.unauthenticated('not authenticated');
     const data = validate(UpdateUserSchema, body);
@@ -89,11 +94,9 @@ export const deleteUser = api(
   },
 );
 
-// ─── Role Endpoints ─────────────────────────────────────────────────────────
-
 export const createRole = api(
   { expose: true, auth: true, method: 'POST', path: '/roles' },
-  async (req: unknown): Promise<RoleResponse> => {
+  async (req: CreateRoleRequest): Promise<RoleResponse> => {
     const auth = getAuthData();
     if (!auth) throw APIError.unauthenticated('not authenticated');
     const data = validate(CreateRoleSchema, req);
@@ -122,7 +125,8 @@ export const listRoles = api(
 
 export const updateRole = api(
   { expose: true, auth: true, method: 'PUT', path: '/roles/:id' },
-  async ({ id, ...body }: { id: string } & Record<string, unknown>): Promise<RoleResponse> => {
+  async (req: { id: string } & UpdateRoleRequest): Promise<RoleResponse> => {
+    const { id, ...body } = req;
     const auth = getAuthData();
     if (!auth) throw APIError.unauthenticated('not authenticated');
     const data = validate(UpdateRoleSchema, body);
@@ -139,11 +143,9 @@ export const deleteRole = api(
   },
 );
 
-// ─── User Role Endpoints ────────────────────────────────────────────────────
-
 export const assignRole = api(
   { expose: true, auth: true, method: 'POST', path: '/user-roles' },
-  async (req: unknown): Promise<UserRoleResponse> => {
+  async (req: AssignUserRoleRequest): Promise<UserRoleResponse> => {
     const auth = getAuthData();
     if (!auth) throw APIError.unauthenticated('not authenticated');
     const data = validate(AssignUserRoleSchema, req);
@@ -153,7 +155,7 @@ export const assignRole = api(
 
 export const revokeRole = api(
   { expose: true, auth: true, method: 'DELETE', path: '/user-roles' },
-  async (req: unknown): Promise<void> => {
+  async (req: AssignUserRoleRequest): Promise<void> => {
     const auth = getAuthData();
     if (!auth) throw APIError.unauthenticated('not authenticated');
     const data = validate(AssignUserRoleSchema, req);
@@ -163,18 +165,17 @@ export const revokeRole = api(
 
 export const listUserRoles = api(
   { expose: true, auth: true, method: 'GET', path: '/users/:userId/roles' },
-  async ({ userId }: { userId: string }): Promise<UserRoleResponse[]> => {
+  async ({ userId }: { userId: string }): Promise<UserRoleListResponse> => {
     const auth = getAuthData();
     if (!auth) throw APIError.unauthenticated('not authenticated');
-    return service.listUserRoles(userId, auth.tenantId);
+    const items = await service.listUserRoles(userId, auth.tenantId);
+    return { items };
   },
 );
 
-// ─── Permission Endpoints ───────────────────────────────────────────────────
-
 export const createPermission = api(
   { expose: true, auth: true, method: 'POST', path: '/permissions' },
-  async (req: unknown): Promise<PermissionResponse> => {
+  async (req: CreatePermissionRequest): Promise<PermissionResponse> => {
     const auth = getAuthData();
     if (!auth) throw APIError.unauthenticated('not authenticated');
     const data = validate(CreatePermissionSchema, req);
@@ -207,13 +208,10 @@ export const listPermissions = api(
 
 export const updatePermission = api(
   { expose: true, auth: true, method: 'PUT', path: '/permissions/:id' },
-  async ({
-    id,
-    ...body
-  }: { id: string } & Record<string, unknown>): Promise<PermissionResponse> => {
+  async (req: { id: string } & UpdatePermissionRequest): Promise<PermissionResponse> => {
+    const { id, ...body } = req;
     const auth = getAuthData();
     if (!auth) throw APIError.unauthenticated('not authenticated');
-    // Permissions are immutable per INV-AUTH-002 — updates are delete + recreate
     const existing = await service.getPermission(id, auth.tenantId);
     const data = validate(UpdatePermissionSchema, body);
     await service.deletePermission(id, auth.tenantId, auth.userId);
@@ -237,8 +235,6 @@ export const deletePermission = api(
     return service.deletePermission(id, auth.tenantId, auth.userId);
   },
 );
-
-// ─── Session Endpoints ──────────────────────────────────────────────────────
 
 export const listSessions = api(
   { expose: true, auth: true, method: 'GET', path: '/sessions' },
@@ -267,8 +263,6 @@ export const invalidateAllUserSessions = api(
     return service.invalidateAllUserSessions(userId, auth.tenantId, auth.userId);
   },
 );
-
-// ─── Audit Log Endpoints ────────────────────────────────────────────────────
 
 export const listAuditLogs = api(
   { expose: true, auth: true, method: 'GET', path: '/audit-logs' },

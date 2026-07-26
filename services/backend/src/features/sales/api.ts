@@ -11,21 +11,23 @@
  */
 
 import { APIError, api } from 'encore.dev/api';
-import { getAuthData } from '~encore/auth';
+import { getAuthData } from 'encore.dev/internal/codegen/auth';
 import * as service from './service';
 import type {
   CreateDiscountPolicyRequest,
   CreateQuotationRequest,
   CreateSalesOrderRequest,
-  DiscountPolicy,
   DiscountPolicyQuery,
+  DiscountPolicyResponse,
   PaginatedResponse,
-  Quotation,
-  QuotationLineItem,
+  QuotationLineItemListResponse,
+  QuotationLineItemResponse,
   QuotationQuery,
-  SalesOrder,
-  SalesOrderLineItem,
+  QuotationResponse,
+  SalesOrderLineItemListResponse,
+  SalesOrderLineItemResponse,
   SalesOrderQuery,
+  SalesOrderResponse,
   UpdateDiscountPolicyRequest,
   UpdateQuotationRequest,
   UpdateSalesOrderRequest,
@@ -56,7 +58,7 @@ export const listSalesOrders = api(
     status,
     limit,
     offset,
-  }: SalesOrderQuery): Promise<PaginatedResponse<SalesOrder>> => {
+  }: SalesOrderQuery): Promise<PaginatedResponse<SalesOrderResponse>> => {
     const auth = getAuthData();
     if (!auth) throw APIError.unauthenticated('not authenticated');
     return service.listSalesOrders(auth.tenantId, {
@@ -70,7 +72,7 @@ export const listSalesOrders = api(
 
 export const getSalesOrder = api(
   { expose: true, auth: true, method: 'GET', path: '/sales/orders/:id' },
-  async ({ id }: { id: string }): Promise<SalesOrder> => {
+  async ({ id }: { id: string }): Promise<SalesOrderResponse> => {
     const auth = getAuthData();
     if (!auth) throw APIError.unauthenticated('not authenticated');
     return service.getSalesOrder(id, auth.tenantId);
@@ -79,16 +81,17 @@ export const getSalesOrder = api(
 
 export const getSalesOrderLineItems = api(
   { expose: true, auth: true, method: 'GET', path: '/sales/orders/:id/line-items' },
-  async ({ id }: { id: string }): Promise<SalesOrderLineItem[]> => {
+  async ({ id }: { id: string }): Promise<SalesOrderLineItemListResponse> => {
     const auth = getAuthData();
     if (!auth) throw APIError.unauthenticated('not authenticated');
-    return service.getSalesOrderLineItems(id, auth.tenantId);
+    const items = await service.getSalesOrderLineItems(id, auth.tenantId);
+    return { items };
   },
 );
 
 export const createSalesOrder = api(
   { expose: true, auth: true, method: 'POST', path: '/sales/orders' },
-  async (req: CreateSalesOrderRequest): Promise<SalesOrder> => {
+  async (req: CreateSalesOrderRequest): Promise<SalesOrderResponse> => {
     const auth = getAuthData();
     if (!auth) throw APIError.unauthenticated('not authenticated');
     const data = validate(CreateSalesOrderRequestSchema, req);
@@ -103,7 +106,7 @@ export const updateSalesOrder = api(
     ...req
   }: {
     id: string;
-  } & UpdateSalesOrderRequest): Promise<SalesOrder> => {
+  } & UpdateSalesOrderRequest): Promise<SalesOrderResponse> => {
     const auth = getAuthData();
     if (!auth) throw APIError.unauthenticated('not authenticated');
     const data = validate(UpdateSalesOrderRequestSchema, req);
@@ -113,7 +116,7 @@ export const updateSalesOrder = api(
 
 export const updateSalesOrderStatus = api(
   { expose: true, auth: true, method: 'PUT', path: '/sales/orders/:id/status' },
-  async ({ id, status }: { id: string; status: string }): Promise<SalesOrder> => {
+  async ({ id, status }: { id: string; status: string }): Promise<SalesOrderResponse> => {
     const auth = getAuthData();
     if (!auth) throw APIError.unauthenticated('not authenticated');
     return service.updateSalesOrderStatus(id, status, auth.tenantId);
@@ -151,7 +154,7 @@ export const createSalesOrderLineItem = api(
     discountAmount?: string;
     taxRate?: string;
     taxAmount?: string;
-  }): Promise<SalesOrderLineItem> => {
+  }): Promise<SalesOrderLineItemResponse> => {
     const auth = getAuthData();
     if (!auth) throw APIError.unauthenticated('not authenticated');
     return service.createSalesOrderLineItem(orderId, req, auth.tenantId);
@@ -178,7 +181,7 @@ export const updateSalesOrderLineItem = api(
     discountAmount?: string;
     taxRate?: string;
     taxAmount?: string;
-  }): Promise<SalesOrderLineItem> => {
+  }): Promise<SalesOrderLineItemResponse> => {
     const auth = getAuthData();
     if (!auth) throw APIError.unauthenticated('not authenticated');
     return service.updateSalesOrderLineItem(id, req, auth.tenantId);
@@ -210,7 +213,7 @@ export const listQuotations = api(
     status,
     limit,
     offset,
-  }: QuotationQuery): Promise<PaginatedResponse<Quotation>> => {
+  }: QuotationQuery): Promise<PaginatedResponse<QuotationResponse>> => {
     const auth = getAuthData();
     if (!auth) throw APIError.unauthenticated('not authenticated');
     return service.listQuotations(auth.tenantId, {
@@ -224,7 +227,7 @@ export const listQuotations = api(
 
 export const getQuotation = api(
   { expose: true, auth: true, method: 'GET', path: '/sales/quotations/:id' },
-  async ({ id }: { id: string }): Promise<Quotation> => {
+  async ({ id }: { id: string }): Promise<QuotationResponse> => {
     const auth = getAuthData();
     if (!auth) throw APIError.unauthenticated('not authenticated');
     return service.getQuotation(id, auth.tenantId);
@@ -233,16 +236,17 @@ export const getQuotation = api(
 
 export const getQuotationLineItems = api(
   { expose: true, auth: true, method: 'GET', path: '/sales/quotations/:id/line-items' },
-  async ({ id }: { id: string }): Promise<QuotationLineItem[]> => {
+  async ({ id }: { id: string }): Promise<QuotationLineItemListResponse> => {
     const auth = getAuthData();
     if (!auth) throw APIError.unauthenticated('not authenticated');
-    return service.getQuotationLineItems(id, auth.tenantId);
+    const items = await service.getQuotationLineItems(id, auth.tenantId);
+    return { items };
   },
 );
 
 export const createQuotation = api(
   { expose: true, auth: true, method: 'POST', path: '/sales/quotations' },
-  async (req: CreateQuotationRequest): Promise<Quotation> => {
+  async (req: CreateQuotationRequest): Promise<QuotationResponse> => {
     const auth = getAuthData();
     if (!auth) throw APIError.unauthenticated('not authenticated');
     const data = validate(CreateQuotationRequestSchema, req);
@@ -257,7 +261,7 @@ export const updateQuotation = api(
     ...req
   }: {
     id: string;
-  } & UpdateQuotationRequest): Promise<Quotation> => {
+  } & UpdateQuotationRequest): Promise<QuotationResponse> => {
     const auth = getAuthData();
     if (!auth) throw APIError.unauthenticated('not authenticated');
     const data = validate(UpdateQuotationRequestSchema, req);
@@ -267,7 +271,7 @@ export const updateQuotation = api(
 
 export const updateQuotationStatus = api(
   { expose: true, auth: true, method: 'PUT', path: '/sales/quotations/:id/status' },
-  async ({ id, status }: { id: string; status: string }): Promise<Quotation> => {
+  async ({ id, status }: { id: string; status: string }): Promise<QuotationResponse> => {
     const auth = getAuthData();
     if (!auth) throw APIError.unauthenticated('not authenticated');
     return service.updateQuotationStatus(id, status, auth.tenantId);
@@ -305,7 +309,7 @@ export const createQuotationLineItem = api(
     discountAmount?: string;
     taxRate?: string;
     taxAmount?: string;
-  }): Promise<QuotationLineItem> => {
+  }): Promise<QuotationLineItemResponse> => {
     const auth = getAuthData();
     if (!auth) throw APIError.unauthenticated('not authenticated');
     return service.createQuotationLineItem(quotationId, req, auth.tenantId);
@@ -332,7 +336,7 @@ export const updateQuotationLineItem = api(
     discountAmount?: string;
     taxRate?: string;
     taxAmount?: string;
-  }): Promise<QuotationLineItem> => {
+  }): Promise<QuotationLineItemResponse> => {
     const auth = getAuthData();
     if (!auth) throw APIError.unauthenticated('not authenticated');
     return service.updateQuotationLineItem(id, req, auth.tenantId);
@@ -364,7 +368,7 @@ export const listDiscountPolicies = api(
     type,
     limit,
     offset,
-  }: DiscountPolicyQuery): Promise<PaginatedResponse<DiscountPolicy>> => {
+  }: DiscountPolicyQuery): Promise<PaginatedResponse<DiscountPolicyResponse>> => {
     const auth = getAuthData();
     if (!auth) throw APIError.unauthenticated('not authenticated');
     return service.listDiscountPolicies(auth.tenantId, {
@@ -378,7 +382,7 @@ export const listDiscountPolicies = api(
 
 export const getDiscountPolicy = api(
   { expose: true, auth: true, method: 'GET', path: '/sales/discount-policies/:id' },
-  async ({ id }: { id: string }): Promise<DiscountPolicy> => {
+  async ({ id }: { id: string }): Promise<DiscountPolicyResponse> => {
     const auth = getAuthData();
     if (!auth) throw APIError.unauthenticated('not authenticated');
     return service.getDiscountPolicy(id, auth.tenantId);
@@ -387,7 +391,7 @@ export const getDiscountPolicy = api(
 
 export const createDiscountPolicy = api(
   { expose: true, auth: true, method: 'POST', path: '/sales/discount-policies' },
-  async (req: CreateDiscountPolicyRequest): Promise<DiscountPolicy> => {
+  async (req: CreateDiscountPolicyRequest): Promise<DiscountPolicyResponse> => {
     const auth = getAuthData();
     if (!auth) throw APIError.unauthenticated('not authenticated');
     const data = validate(CreateDiscountPolicyRequestSchema, req);
@@ -402,7 +406,7 @@ export const updateDiscountPolicy = api(
     ...req
   }: {
     id: string;
-  } & UpdateDiscountPolicyRequest): Promise<DiscountPolicy> => {
+  } & UpdateDiscountPolicyRequest): Promise<DiscountPolicyResponse> => {
     const auth = getAuthData();
     if (!auth) throw APIError.unauthenticated('not authenticated');
     const data = validate(UpdateDiscountPolicyRequestSchema, req);

@@ -1,4 +1,3 @@
-import type { Account, FiscalYear, JournalEntry, JournalEntryLine } from '@lumora/database/schema';
 import { z } from 'zod';
 
 // ─── Common Schemas ─────────────────────────────────────────────────────────
@@ -14,7 +13,10 @@ export const PaginationParamsSchema = z.object({
   limit: z.coerce.number().int().positive().max(100).default(20),
 });
 
-export type PaginationParams = z.infer<typeof PaginationParamsSchema>;
+export interface PaginationParams {
+  page?: number;
+  limit?: number;
+}
 
 export interface ListResponse<T> {
   data: T[];
@@ -33,7 +35,13 @@ export const CreateAccountSchema = z.object({
   isActive: z.boolean().default(true),
 });
 
-export type CreateAccountRequest = z.infer<typeof CreateAccountSchema>;
+export interface CreateAccountRequest {
+  code: string;
+  name: string;
+  type: 'asset' | 'liability' | 'equity' | 'revenue' | 'expense';
+  parentId?: string;
+  isActive?: boolean;
+}
 
 export const UpdateAccountSchema = z.object({
   name: z.string().min(1).max(100).optional(),
@@ -42,9 +50,26 @@ export const UpdateAccountSchema = z.object({
   isActive: z.boolean().optional(),
 });
 
-export type UpdateAccountRequest = z.infer<typeof UpdateAccountSchema>;
+export interface UpdateAccountRequest {
+  name?: string;
+  type?: 'asset' | 'liability' | 'equity' | 'revenue' | 'expense';
+  parentId?: string | null;
+  isActive?: boolean;
+}
 
-export type AccountResponse = Account;
+export interface AccountResponse {
+  id: string;
+  createdAt: Date;
+  updatedAt: Date;
+  tenantId: string;
+  deletedAt: Date | null;
+  code: string;
+  name: string;
+  type: 'asset' | 'liability' | 'equity' | 'revenue' | 'expense';
+  parentId: string | null;
+  balance: string;
+  isActive: boolean;
+}
 
 // ─── Journal Entry Types ────────────────────────────────────────────────────
 
@@ -66,7 +91,12 @@ export const JournalEntryLineInputSchema = z
     },
   );
 
-export type JournalEntryLineInput = z.infer<typeof JournalEntryLineInputSchema>;
+export interface JournalEntryLineInput {
+  accountId: string;
+  debit?: string;
+  credit?: string;
+  description?: string;
+}
 
 export const CreateJournalEntrySchema = z
   .object({
@@ -87,7 +117,12 @@ export const CreateJournalEntrySchema = z
     },
   );
 
-export type CreateJournalEntryRequest = z.infer<typeof CreateJournalEntrySchema>;
+export interface CreateJournalEntryRequest {
+  date: string;
+  description: string;
+  referenceNumber?: string;
+  lines: JournalEntryLineInput[];
+}
 
 export const UpdateJournalEntrySchema = z
   .object({
@@ -112,10 +147,38 @@ export const UpdateJournalEntrySchema = z
     },
   );
 
-export type UpdateJournalEntryRequest = z.infer<typeof UpdateJournalEntrySchema>;
+export interface UpdateJournalEntryRequest {
+  date?: string;
+  description?: string;
+  referenceNumber?: string | null;
+  lines?: JournalEntryLineInput[];
+}
 
-export interface JournalEntryResponse extends JournalEntry {
-  lines: JournalEntryLine[];
+export interface JournalEntryResponse {
+  id: string;
+  createdAt: Date;
+  updatedAt: Date;
+  tenantId: string;
+  deletedAt: Date | null;
+  date: string;
+  description: string;
+  referenceNumber: string | null;
+  status: 'draft' | 'posted' | 'voided';
+  createdBy: string;
+  lines: JournalEntryLineResponse[];
+}
+
+export interface JournalEntryLineResponse {
+  id: string;
+  createdAt: Date;
+  updatedAt: Date;
+  tenantId: string;
+  deletedAt: Date | null;
+  journalEntryId: string;
+  accountId: string;
+  debit: string;
+  credit: string;
+  description: string | null;
 }
 
 // ─── Fiscal Year Types ─────────────────────────────────────────────────────
@@ -130,13 +193,30 @@ export const CreateFiscalYearSchema = z
     message: 'End date must be after start date',
   });
 
-export type CreateFiscalYearRequest = z.infer<typeof CreateFiscalYearSchema>;
+export interface CreateFiscalYearRequest {
+  name: string;
+  startDate: string;
+  endDate: string;
+}
 
 export const UpdateFiscalYearSchema = z.object({
   name: z.string().min(1).max(100).optional(),
   status: z.enum(['open', 'closed']).optional(),
 });
 
-export type UpdateFiscalYearRequest = z.infer<typeof UpdateFiscalYearSchema>;
+export interface UpdateFiscalYearRequest {
+  name?: string;
+  status?: 'open' | 'closed';
+}
 
-export type FiscalYearResponse = FiscalYear;
+export interface FiscalYearResponse {
+  id: string;
+  createdAt: Date;
+  updatedAt: Date;
+  tenantId: string;
+  deletedAt: Date | null;
+  name: string;
+  startDate: Date;
+  endDate: Date;
+  status: string;
+}

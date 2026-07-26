@@ -1,4 +1,3 @@
-import type { AuditLog, Permission, Role, Session, User, UserRole } from '@lumora/database/schema';
 import { z } from 'zod';
 
 // ─── Common Schemas ─────────────────────────────────────────────────────────
@@ -10,7 +9,10 @@ export const PaginationParamsSchema = z.object({
   limit: z.coerce.number().int().positive().max(100).default(20),
 });
 
-export type PaginationParams = z.infer<typeof PaginationParamsSchema>;
+export interface PaginationParams {
+  page?: number;
+  limit?: number;
+}
 
 export interface ListResponse<T> {
   data: T[];
@@ -28,7 +30,12 @@ export const CreateUserSchema = z.object({
   status: z.enum(['active', 'suspended']).default('active'),
 });
 
-export type CreateUserRequest = z.infer<typeof CreateUserSchema>;
+export interface CreateUserRequest {
+  email: string;
+  name: string;
+  username: string;
+  status?: 'active' | 'suspended';
+}
 
 export const UpdateUserSchema = z.object({
   name: z.string().min(1).max(100).optional(),
@@ -37,9 +44,26 @@ export const UpdateUserSchema = z.object({
   status: z.enum(['active', 'suspended']).optional(),
 });
 
-export type UpdateUserRequest = z.infer<typeof UpdateUserSchema>;
+export interface UpdateUserRequest {
+  name?: string;
+  email?: string;
+  username?: string;
+  status?: 'active' | 'suspended';
+}
 
-export type UserResponse = User;
+export interface UserResponse {
+  id: string;
+  createdAt: Date;
+  updatedAt: Date;
+  tenantId: string;
+  deletedAt: Date | null;
+  email: string;
+  name: string;
+  username: string;
+  status: string;
+  emailVerified: boolean;
+  mfaEnabled: boolean;
+}
 
 // ─── Role Types ─────────────────────────────────────────────────────────────
 
@@ -49,16 +73,32 @@ export const CreateRoleSchema = z.object({
   isSystem: z.boolean().default(false),
 });
 
-export type CreateRoleRequest = z.infer<typeof CreateRoleSchema>;
+export interface CreateRoleRequest {
+  name: string;
+  description?: string;
+  isSystem?: boolean;
+}
 
 export const UpdateRoleSchema = z.object({
   name: z.string().min(1).max(50).optional(),
   description: z.string().max(255).nullable().optional(),
 });
 
-export type UpdateRoleRequest = z.infer<typeof UpdateRoleSchema>;
+export interface UpdateRoleRequest {
+  name?: string;
+  description?: string | null;
+}
 
-export type RoleResponse = Role;
+export interface RoleResponse {
+  id: string;
+  createdAt: Date;
+  updatedAt: Date;
+  tenantId: string;
+  deletedAt: Date | null;
+  name: string;
+  description: string | null;
+  isSystem: boolean;
+}
 
 // ─── User Role Types ────────────────────────────────────────────────────────
 
@@ -67,9 +107,25 @@ export const AssignUserRoleSchema = z.object({
   roleId: UuidSchema,
 });
 
-export type AssignUserRoleRequest = z.infer<typeof AssignUserRoleSchema>;
+export interface AssignUserRoleRequest {
+  userId: string;
+  roleId: string;
+}
 
-export type UserRoleResponse = UserRole;
+export interface UserRoleResponse {
+  id: string;
+  createdAt: Date;
+  updatedAt: Date;
+  tenantId: string;
+  userId: string;
+  roleId: string;
+}
+
+// ─── List Wrapper (Encore array return workaround) ───────────────────────────
+
+export interface UserRoleListResponse {
+  items: UserRoleResponse[];
+}
 
 // ─── Permission Types ───────────────────────────────────────────────────────
 
@@ -79,21 +135,60 @@ export const CreatePermissionSchema = z.object({
   action: z.string().min(1, 'Action is required').max(100),
 });
 
-export type CreatePermissionRequest = z.infer<typeof CreatePermissionSchema>;
+export interface CreatePermissionRequest {
+  roleId: string;
+  resource: string;
+  action: string;
+}
 
 export const UpdatePermissionSchema = z.object({
   resource: z.string().min(1).max(100).optional(),
   action: z.string().min(1).max(100).optional(),
 });
 
-export type UpdatePermissionRequest = z.infer<typeof UpdatePermissionSchema>;
+export interface UpdatePermissionRequest {
+  resource?: string;
+  action?: string;
+}
 
-export type PermissionResponse = Permission;
+export interface PermissionResponse {
+  id: string;
+  createdAt: Date;
+  updatedAt: Date;
+  tenantId: string;
+  roleId: string;
+  resource: string;
+  action: string;
+}
 
 // ─── Session Types ──────────────────────────────────────────────────────────
 
-export type SessionResponse = Session;
+export interface SessionResponse {
+  id: string;
+  createdAt: Date;
+  updatedAt: Date;
+  tenantId: string;
+  deletedAt: Date | null;
+  userId: string;
+  token: string;
+  ipAddress: string | null;
+  userAgent: string | null;
+  expiresAt: Date;
+}
 
 // ─── Audit Log Types ────────────────────────────────────────────────────────
 
-export type AuditLogResponse = AuditLog;
+export interface AuditLogResponse {
+  id: string;
+  createdAt: Date;
+  userId: string | null;
+  tenantId: string;
+  action: string;
+  resource: string;
+  resourceId: string | null;
+  oldValues: Record<string, unknown> | null;
+  newValues: Record<string, unknown> | null;
+  ipAddress: string | null;
+  userAgent: string | null;
+  metadata: Record<string, unknown> | null;
+}

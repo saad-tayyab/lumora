@@ -1,4 +1,3 @@
-import type { TaxAutoAssignmentRule, TaxCode, TaxRate } from '@lumora/database/schema';
 import { z } from 'zod';
 
 // ─── Common Schemas ─────────────────────────────────────────────────────────
@@ -18,7 +17,10 @@ export const PaginationParamsSchema = z.object({
   limit: z.coerce.number().int().positive().max(100).default(20),
 });
 
-export type PaginationParams = z.infer<typeof PaginationParamsSchema>;
+export interface PaginationParams {
+  page?: number;
+  limit?: number;
+}
 
 export interface ListResponse<T> {
   data: T[];
@@ -40,7 +42,16 @@ export const CreateTaxCodeSchema = z.object({
   description: z.string().optional(),
 });
 
-export type CreateTaxCodeRequest = z.infer<typeof CreateTaxCodeSchema>;
+export interface CreateTaxCodeRequest {
+  code: string;
+  name: string;
+  type: 'sales_tax' | 'vat' | 'gst' | 'excise' | 'withholding';
+  glAccountId: string;
+  isClaimable?: boolean;
+  postingRule?: 'output_liability' | 'input_asset' | 'expense';
+  isActive?: boolean;
+  description?: string;
+}
 
 export const UpdateTaxCodeSchema = z.object({
   name: z.string().min(1).max(100).optional(),
@@ -52,9 +63,31 @@ export const UpdateTaxCodeSchema = z.object({
   description: z.string().nullable().optional(),
 });
 
-export type UpdateTaxCodeRequest = z.infer<typeof UpdateTaxCodeSchema>;
+export interface UpdateTaxCodeRequest {
+  name?: string;
+  type?: 'sales_tax' | 'vat' | 'gst' | 'excise' | 'withholding';
+  glAccountId?: string;
+  isClaimable?: boolean;
+  postingRule?: 'output_liability' | 'input_asset' | 'expense';
+  isActive?: boolean;
+  description?: string | null;
+}
 
-export type TaxCodeResponse = TaxCode;
+export interface TaxCodeResponse {
+  id: string;
+  createdAt: Date;
+  updatedAt: Date;
+  tenantId: string;
+  deletedAt: Date | null;
+  code: string;
+  name: string;
+  type: 'sales_tax' | 'vat' | 'gst' | 'excise' | 'withholding';
+  glAccountId: string;
+  isClaimable: boolean;
+  postingRule: 'output_liability' | 'input_asset' | 'expense';
+  isActive: boolean;
+  description: string | null;
+}
 
 // ─── Tax Rate Types ─────────────────────────────────────────────────────────
 
@@ -80,7 +113,14 @@ export const CreateTaxRateSchema = z
     },
   );
 
-export type CreateTaxRateRequest = z.infer<typeof CreateTaxRateSchema>;
+export interface CreateTaxRateRequest {
+  taxCodeId: string;
+  rate: string;
+  effectiveDate: string;
+  expiryDate?: string | null;
+  description?: string;
+  isActive?: boolean;
+}
 
 export const UpdateTaxRateSchema = z
   .object({
@@ -103,9 +143,26 @@ export const UpdateTaxRateSchema = z
     },
   );
 
-export type UpdateTaxRateRequest = z.infer<typeof UpdateTaxRateSchema>;
+export interface UpdateTaxRateRequest {
+  rate?: string;
+  effectiveDate?: string;
+  expiryDate?: string | null;
+  description?: string | null;
+  isActive?: boolean;
+}
 
-export type TaxRateResponse = TaxRate;
+export interface TaxRateResponse {
+  id: string;
+  createdAt: Date;
+  updatedAt: Date;
+  tenantId: string;
+  taxCodeId: string;
+  rate: string;
+  effectiveDate: string;
+  expiryDate: string | null;
+  description: string | null;
+  isActive: boolean;
+}
 
 // ─── Tax Auto-Assignment Rule Types ─────────────────────────────────────────
 
@@ -122,7 +179,18 @@ export const CreateTaxAutoAssignmentRuleSchema = z.object({
   isActive: z.boolean().default(true),
 });
 
-export type CreateTaxAutoAssignmentRuleRequest = z.infer<typeof CreateTaxAutoAssignmentRuleSchema>;
+export interface CreateTaxAutoAssignmentRuleRequest {
+  name: string;
+  description?: string;
+  priority?: number;
+  taxCodeId: string;
+  entityType: string;
+  entityCategoryId?: string | null;
+  customerGroupId?: string | null;
+  itemCategoryId?: string | null;
+  regionCode?: string | null;
+  isActive?: boolean;
+}
 
 export const UpdateTaxAutoAssignmentRuleSchema = z.object({
   name: z.string().min(1).max(100).optional(),
@@ -137,9 +205,36 @@ export const UpdateTaxAutoAssignmentRuleSchema = z.object({
   isActive: z.boolean().optional(),
 });
 
-export type UpdateTaxAutoAssignmentRuleRequest = z.infer<typeof UpdateTaxAutoAssignmentRuleSchema>;
+export interface UpdateTaxAutoAssignmentRuleRequest {
+  name?: string;
+  description?: string | null;
+  priority?: number;
+  taxCodeId?: string;
+  entityType?: string;
+  entityCategoryId?: string | null;
+  customerGroupId?: string | null;
+  itemCategoryId?: string | null;
+  regionCode?: string | null;
+  isActive?: boolean;
+}
 
-export type TaxAutoAssignmentRuleResponse = TaxAutoAssignmentRule;
+export interface TaxAutoAssignmentRuleResponse {
+  id: string;
+  createdAt: Date;
+  updatedAt: Date;
+  tenantId: string;
+  deletedAt: Date | null;
+  name: string;
+  description: string | null;
+  priority: number;
+  taxCodeId: string;
+  entityType: string;
+  entityCategoryId: string | null;
+  customerGroupId: string | null;
+  itemCategoryId: string | null;
+  regionCode: string | null;
+  isActive: boolean;
+}
 
 // ─── Tax Calculation Types ──────────────────────────────────────────────────
 
@@ -149,7 +244,11 @@ export const CalculateTaxSchema = z.object({
   transactionDate: DateSchema,
 });
 
-export type CalculateTaxRequest = z.infer<typeof CalculateTaxSchema>;
+export interface CalculateTaxRequest {
+  taxCodeId: string;
+  taxableAmount: string;
+  transactionDate: string;
+}
 
 export interface TaxCalculationResult {
   taxCodeId: string;
@@ -172,4 +271,11 @@ export const ResolveAutoAssignmentSchema = z.object({
   transactionDate: DateSchema,
 });
 
-export type ResolveAutoAssignmentRequest = z.infer<typeof ResolveAutoAssignmentSchema>;
+export interface ResolveAutoAssignmentRequest {
+  entityType: string;
+  entityCategoryId?: string;
+  customerGroupId?: string;
+  itemCategoryId?: string;
+  regionCode?: string;
+  transactionDate: string;
+}

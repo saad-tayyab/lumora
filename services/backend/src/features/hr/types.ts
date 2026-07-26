@@ -1,47 +1,3 @@
-import type {
-  AttendanceRecord,
-  Department,
-  Designation,
-  Employee,
-  LeaveRequest,
-  LeaveType,
-  NewAttendanceRecord,
-  NewDepartment,
-  NewDesignation,
-  NewEmployee,
-  NewLeaveRequest,
-  NewLeaveType,
-  NewPayrollRecord,
-  NewPayslip,
-  NewSalary,
-  PayrollRecord,
-  Payslip,
-  Salary,
-} from '@lumora/database/schema/hr';
-
-// ─── Re-export Domain Types ───────────────────────────────────────────────────
-
-export type {
-  AttendanceRecord,
-  Department,
-  Designation,
-  Employee,
-  LeaveRequest,
-  LeaveType,
-  NewAttendanceRecord,
-  NewDepartment,
-  NewDesignation,
-  NewEmployee,
-  NewLeaveRequest,
-  NewLeaveType,
-  NewPayrollRecord,
-  NewPayslip,
-  NewSalary,
-  PayrollRecord,
-  Payslip,
-  Salary,
-};
-
 // ─── Pagination ───────────────────────────────────────────────────────────────
 
 export interface PaginationParams {
@@ -65,7 +21,7 @@ export interface CreateDepartmentRequest {
   description?: string;
   headId?: string;
   parentId?: string;
-  status?: Department['status'];
+  status?: 'active' | 'inactive';
 }
 
 export interface UpdateDepartmentRequest {
@@ -73,10 +29,23 @@ export interface UpdateDepartmentRequest {
   description?: string;
   headId?: string | null;
   parentId?: string | null;
-  status?: Department['status'];
+  status?: 'active' | 'inactive';
 }
 
-export type DepartmentResponse = Department;
+export interface DepartmentResponse {
+  id: string;
+  createdAt: Date;
+  updatedAt: Date;
+  tenantId: string;
+  deletedAt: Date | null;
+  name: string;
+  code: string;
+  description: string | null;
+  headId: string | null;
+  parentId: string | null;
+  status: 'active' | 'inactive';
+}
+
 export type ListDepartmentsResponse = PaginatedResponse<DepartmentResponse>;
 
 // ─── Designation Types ────────────────────────────────────────────────────────
@@ -100,7 +69,21 @@ export interface UpdateDesignationRequest {
   isActive?: boolean;
 }
 
-export type DesignationResponse = Designation;
+export interface DesignationResponse {
+  id: string;
+  createdAt: Date;
+  updatedAt: Date;
+  tenantId: string;
+  deletedAt: Date | null;
+  name: string;
+  code: string;
+  description: string | null;
+  level: number;
+  salaryBandMin: string | null;
+  salaryBandMax: string | null;
+  isActive: boolean;
+}
+
 export type ListDesignationsResponse = PaginatedResponse<DesignationResponse>;
 
 // ─── Employee Types ───────────────────────────────────────────────────────────
@@ -114,8 +97,8 @@ export interface CreateEmployeeRequest {
   departmentId: string;
   designationId: string;
   managerId?: string;
-  employmentType: Employee['employmentType'];
-  status?: Employee['status'];
+  employmentType: 'full_time' | 'part_time' | 'contract' | 'intern';
+  status?: 'active' | 'on_leave' | 'terminated';
   userId?: string;
 }
 
@@ -127,12 +110,30 @@ export interface UpdateEmployeeRequest {
   departmentId?: string;
   designationId?: string;
   managerId?: string | null;
-  employmentType?: Employee['employmentType'];
-  status?: Employee['status'];
+  employmentType?: 'full_time' | 'part_time' | 'contract' | 'intern';
+  status?: 'active' | 'on_leave' | 'terminated';
   userId?: string | null;
 }
 
-export type EmployeeResponse = Employee;
+export interface EmployeeResponse {
+  id: string;
+  createdAt: Date;
+  updatedAt: Date;
+  tenantId: string;
+  deletedAt: Date | null;
+  userId: string | null;
+  firstName: string;
+  lastName: string;
+  email: string;
+  phone: string | null;
+  hireDate: string;
+  departmentId: string;
+  designationId: string;
+  managerId: string | null;
+  employmentType: 'full_time' | 'part_time' | 'contract' | 'intern';
+  status: 'active' | 'on_leave' | 'terminated';
+}
+
 export type ListEmployeesResponse = PaginatedResponse<EmployeeResponse>;
 
 // ─── Attendance Types ─────────────────────────────────────────────────────────
@@ -142,7 +143,7 @@ export interface CreateAttendanceRequest {
   date: string;
   clockIn?: string;
   clockOut?: string;
-  status: AttendanceRecord['status'];
+  status: 'present' | 'absent' | 'half_day' | 'work_from_home';
   hoursWorked?: string;
   overtimeHours?: string;
   notes?: string;
@@ -151,13 +152,27 @@ export interface CreateAttendanceRequest {
 export interface UpdateAttendanceRequest {
   clockIn?: string;
   clockOut?: string;
-  status?: AttendanceRecord['status'];
+  status?: 'present' | 'absent' | 'half_day' | 'work_from_home';
   hoursWorked?: string;
   overtimeHours?: string;
   notes?: string;
 }
 
-export type AttendanceResponse = AttendanceRecord;
+export interface AttendanceResponse {
+  id: string;
+  tenantId: string;
+  employeeId: string;
+  date: string;
+  clockIn: Date | null;
+  clockOut: Date | null;
+  status: 'present' | 'absent' | 'half_day' | 'work_from_home';
+  hoursWorked: string | null;
+  overtimeHours: string | null;
+  notes: string | null;
+  createdAt: Date;
+  updatedAt: Date;
+}
+
 export type ListAttendanceResponse = PaginatedResponse<AttendanceResponse>;
 
 // ─── Leave Type Types ─────────────────────────────────────────────────────────
@@ -180,7 +195,20 @@ export interface UpdateLeaveTypeRequest {
   isActive?: boolean;
 }
 
-export type LeaveTypeResponse = LeaveType;
+export interface LeaveTypeResponse {
+  id: string;
+  createdAt: Date;
+  updatedAt: Date;
+  tenantId: string;
+  deletedAt: Date | null;
+  name: string;
+  code: string;
+  daysPerYear: number;
+  isPaid: boolean;
+  carryForward: boolean;
+  isActive: boolean;
+}
+
 export type ListLeaveTypesResponse = PaginatedResponse<LeaveTypeResponse>;
 
 // ─── Leave Request Types ──────────────────────────────────────────────────────
@@ -199,7 +227,24 @@ export interface ApproveRejectLeaveRequest {
   rejectionReason?: string;
 }
 
-export type LeaveRequestResponse = LeaveRequest;
+export interface LeaveRequestResponse {
+  id: string;
+  createdAt: Date;
+  updatedAt: Date;
+  tenantId: string;
+  deletedAt: Date | null;
+  employeeId: string;
+  leaveTypeId: string;
+  startDate: string;
+  endDate: string;
+  totalDays: number;
+  reason: string | null;
+  status: 'pending' | 'approved' | 'rejected' | 'cancelled';
+  rejectionReason: string | null;
+  approvedBy: string | null;
+  approvedAt: Date | null;
+}
+
 export type ListLeaveRequestsResponse = PaginatedResponse<LeaveRequestResponse>;
 
 // ─── Salary Types ─────────────────────────────────────────────────────────────
@@ -208,7 +253,7 @@ export interface CreateSalaryRequest {
   employeeId: string;
   basicSalary: string;
   currency?: string;
-  payFrequency?: Salary['payFrequency'];
+  payFrequency?: 'monthly' | 'bi_weekly' | 'weekly';
   effectiveDate: string;
   isActive?: boolean;
 }
@@ -216,12 +261,25 @@ export interface CreateSalaryRequest {
 export interface UpdateSalaryRequest {
   basicSalary?: string;
   currency?: string;
-  payFrequency?: Salary['payFrequency'];
+  payFrequency?: 'monthly' | 'bi_weekly' | 'weekly';
   effectiveDate?: string;
   isActive?: boolean;
 }
 
-export type SalaryResponse = Salary;
+export interface SalaryResponse {
+  id: string;
+  createdAt: Date;
+  updatedAt: Date;
+  tenantId: string;
+  deletedAt: Date | null;
+  employeeId: string;
+  basicSalary: string;
+  currency: string;
+  payFrequency: 'monthly' | 'bi_weekly' | 'weekly';
+  effectiveDate: string;
+  isActive: boolean;
+}
+
 export type ListSalariesResponse = PaginatedResponse<SalaryResponse>;
 
 // ─── Payroll Types ────────────────────────────────────────────────────────────
@@ -239,13 +297,43 @@ export interface UpdatePayrollRequest {
   basicSalary?: string;
   allowances?: string;
   deductions?: string;
-  status?: PayrollRecord['status'];
+  status?: 'draft' | 'processed' | 'paid';
 }
 
-export type PayrollResponse = PayrollRecord;
+export interface PayrollResponse {
+  id: string;
+  createdAt: Date;
+  updatedAt: Date;
+  tenantId: string;
+  deletedAt: Date | null;
+  employeeId: string;
+  payPeriodStart: string;
+  payPeriodEnd: string;
+  basicSalary: string;
+  allowances: string;
+  deductions: string;
+  netPay: string;
+  status: 'draft' | 'processed' | 'paid';
+  processedAt: Date | null;
+  paidAt: Date | null;
+}
+
 export type ListPayrollResponse = PaginatedResponse<PayrollResponse>;
 
 // ─── Payslip Types ────────────────────────────────────────────────────────────
 
-export type PayslipResponse = Payslip;
+export interface PayslipResponse {
+  id: string;
+  createdAt: Date;
+  updatedAt: Date;
+  tenantId: string;
+  employeeId: string;
+  payrollId: string | null;
+  period: string;
+  grossPay: string;
+  deductions: string;
+  netPay: string;
+  generatedAt: Date;
+}
+
 export type ListPayslipsResponse = PaginatedResponse<PayslipResponse>;

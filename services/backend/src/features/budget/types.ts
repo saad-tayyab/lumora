@@ -1,4 +1,3 @@
-import type { BudgetConsumption, BudgetHeader, BudgetLine } from '@lumora/database/schema';
 import { z } from 'zod';
 
 // ─── Common Schemas ─────────────────────────────────────────────────────
@@ -14,7 +13,10 @@ export const PaginationParamsSchema = z.object({
   limit: z.coerce.number().int().positive().max(100).default(20),
 });
 
-export type PaginationParams = z.infer<typeof PaginationParamsSchema>;
+export interface PaginationParams {
+  page?: number;
+  limit?: number;
+}
 
 export interface ListResponse<T> {
   data: T[];
@@ -37,7 +39,13 @@ export const CreateBudgetHeaderSchema = z
     message: 'Period end date must be after period start date',
   });
 
-export type CreateBudgetHeaderRequest = z.infer<typeof CreateBudgetHeaderSchema>;
+export interface CreateBudgetHeaderRequest {
+  name: string;
+  description?: string;
+  periodStart: string;
+  periodEnd: string;
+  totalAmount?: string;
+}
 
 export const UpdateBudgetHeaderSchema = z.object({
   name: z.string().min(1).max(100).optional(),
@@ -46,9 +54,27 @@ export const UpdateBudgetHeaderSchema = z.object({
   isActive: z.boolean().optional(),
 });
 
-export type UpdateBudgetHeaderRequest = z.infer<typeof UpdateBudgetHeaderSchema>;
+export interface UpdateBudgetHeaderRequest {
+  name?: string;
+  description?: string;
+  status?: 'draft' | 'active' | 'closed';
+  isActive?: boolean;
+}
 
-export type BudgetHeaderResponse = BudgetHeader;
+export interface BudgetHeaderResponse {
+  id: string;
+  createdAt: Date;
+  updatedAt: Date;
+  tenantId: string;
+  deletedAt: Date | null;
+  name: string;
+  description: string | null;
+  periodStart: string;
+  periodEnd: string;
+  totalAmount: string;
+  status: string;
+  isActive: boolean;
+}
 
 // ─── Budget Line Types ──────────────────────────────────────────────────
 
@@ -58,7 +84,11 @@ export const CreateBudgetLineSchema = z.object({
   budgetAmount: DecimalStringSchema.default('0'),
 });
 
-export type CreateBudgetLineRequest = z.infer<typeof CreateBudgetLineSchema>;
+export interface CreateBudgetLineRequest {
+  glAccountId: string;
+  description?: string;
+  budgetAmount?: string;
+}
 
 export const UpdateBudgetLineSchema = z.object({
   description: z.string().max(200).optional(),
@@ -66,9 +96,25 @@ export const UpdateBudgetLineSchema = z.object({
   isActive: z.boolean().optional(),
 });
 
-export type UpdateBudgetLineRequest = z.infer<typeof UpdateBudgetLineSchema>;
+export interface UpdateBudgetLineRequest {
+  description?: string;
+  budgetAmount?: string;
+  isActive?: boolean;
+}
 
-export type BudgetLineResponse = BudgetLine;
+export interface BudgetLineResponse {
+  id: string;
+  createdAt: Date;
+  updatedAt: Date;
+  tenantId: string;
+  budgetHeaderId: string;
+  glAccountId: string;
+  description: string | null;
+  budgetAmount: string;
+  consumedAmount: string;
+  varianceAmount: string;
+  isActive: boolean;
+}
 
 // ─── Budget Consumption Types ───────────────────────────────────────────
 
@@ -84,15 +130,39 @@ export const CreateBudgetConsumptionSchema = z
     message: 'Consumption amount must be non-negative',
   });
 
-export type CreateBudgetConsumptionRequest = z.infer<typeof CreateBudgetConsumptionSchema>;
+export interface CreateBudgetConsumptionRequest {
+  budgetLineId: string;
+  journalEntryId?: string;
+  amount: string;
+  description?: string;
+  consumptionDate: string;
+}
 
 export const ReversalBudgetConsumptionSchema = z.object({
   journalEntryId: UuidSchema,
 });
 
-export type ReversalBudgetConsumptionRequest = z.infer<typeof ReversalBudgetConsumptionSchema>;
+export interface ReversalBudgetConsumptionRequest {
+  journalEntryId: string;
+}
 
-export type BudgetConsumptionResponse = BudgetConsumption;
+export interface BudgetConsumptionResponse {
+  id: string;
+  createdAt: Date;
+  updatedAt: Date;
+  tenantId: string;
+  budgetLineId: string;
+  journalEntryId: string | null;
+  amount: string;
+  description: string | null;
+  consumptionDate: string;
+}
+
+// ─── List Wrapper (Encore array return workaround) ───────────────────────
+
+export interface BudgetVarianceListResponse {
+  items: BudgetVarianceResponse[];
+}
 
 // ─── Budget Variance Types ──────────────────────────────────────────────
 

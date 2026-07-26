@@ -8,40 +8,6 @@
  * @see packages/database/src/schema/cash/schema.ts — Source schema
  */
 
-import type {
-  BankAccount,
-  BankConnection,
-  BankStatement,
-  BankTransfer,
-  Currency,
-  NewBankAccount,
-  NewBankConnection,
-  NewBankStatement,
-  NewBankTransfer,
-  NewCurrency,
-  NewReconciliationEntry,
-  ReconciliationEntry,
-} from '@lumora/database/schema';
-
-// =============================================================================
-// Re-export Schema Types
-// =============================================================================
-
-export type {
-  BankAccount,
-  BankConnection,
-  BankStatement,
-  BankTransfer,
-  Currency,
-  NewBankAccount,
-  NewBankConnection,
-  NewBankStatement,
-  NewBankTransfer,
-  NewCurrency,
-  NewReconciliationEntry,
-  ReconciliationEntry,
-};
-
 // =============================================================================
 // Bank Account — API Types
 // =============================================================================
@@ -69,7 +35,24 @@ export interface UpdateBankAccountRequest {
   isDefault?: boolean;
 }
 
-export type BankAccountResponse = BankAccount;
+export interface BankAccountResponse {
+  id: string;
+  createdAt: Date;
+  updatedAt: Date;
+  tenantId: string;
+  deletedAt: Date | null;
+  bankName: string;
+  accountName: string;
+  accountNumber: string;
+  routingNumber: string | null;
+  accountType: 'checking' | 'savings' | 'money_market' | 'credit_line';
+  currencyCode: string;
+  currentBalance: string;
+  availableBalance: string;
+  status: 'active' | 'inactive' | 'frozen' | 'closed';
+  isDefault: boolean;
+  lastSyncedAt: Date | null;
+}
 
 // =============================================================================
 // Bank Transfer — API Types
@@ -91,7 +74,25 @@ export interface UpdateBankTransferRequest {
   scheduledDate?: string;
 }
 
-export type BankTransferResponse = BankTransfer;
+export interface BankTransferResponse {
+  id: string;
+  createdAt: Date;
+  updatedAt: Date;
+  tenantId: string;
+  deletedAt: Date | null;
+  sourceAccountId: string;
+  destinationAccountId: string;
+  amount: string;
+  currencyCode: string;
+  transferType: 'internal' | 'external' | 'wire' | 'ach' | 'check';
+  status: 'pending' | 'processing' | 'completed' | 'failed' | 'cancelled';
+  referenceNumber: string | null;
+  description: string | null;
+  scheduledDate: string | null;
+  completedAt: Date | null;
+  failureReason: string | null;
+  createdBy: string;
+}
 
 // =============================================================================
 // Bank Statement — API Types
@@ -121,7 +122,25 @@ export interface UpdateBankStatementRequest {
   reconciledCount?: number;
 }
 
-export type BankStatementResponse = BankStatement;
+export interface BankStatementResponse {
+  id: string;
+  createdAt: Date;
+  updatedAt: Date;
+  tenantId: string;
+  bankAccountId: string;
+  statementDate: string;
+  periodStart: string;
+  periodEnd: string;
+  openingBalance: string;
+  closingBalance: string;
+  importSource: 'api' | 'csv' | 'ofx' | 'manual';
+  importStatus: 'pending' | 'processing' | 'completed' | 'failed';
+  fileReference: string | null;
+  transactionCount: number;
+  reconciledCount: number;
+  importedBy: string;
+  importedAt: Date;
+}
 
 // =============================================================================
 // Reconciliation Entry — API Types
@@ -152,7 +171,26 @@ export interface MatchReconciliationEntryRequest {
   matchConfidence?: string;
 }
 
-export interface ReconciliationEntryResponse extends ReconciliationEntry {}
+export interface ReconciliationEntryResponse {
+  id: string;
+  createdAt: Date;
+  updatedAt: Date;
+  tenantId: string;
+  statementId: string;
+  bankAccountId: string;
+  transactionDate: string;
+  description: string;
+  amount: string;
+  balanceAfter: string | null;
+  transactionType: 'credit' | 'debit' | 'transfer' | 'fee' | 'interest';
+  referenceNumber: string | null;
+  reconciliationStatus: 'unmatched' | 'auto_matched' | 'manually_matched' | 'excluded' | 'disputed';
+  matchedEntityId: string | null;
+  matchedEntityType: string | null;
+  matchConfidence: string | null;
+  reconciledBy: string | null;
+  reconciledAt: Date | null;
+}
 
 // =============================================================================
 // Currency — API Types
@@ -173,7 +211,16 @@ export interface UpdateCurrencyRequest {
   isActive?: boolean;
 }
 
-export type CurrencyResponse = Currency;
+export interface CurrencyResponse {
+  id: string;
+  createdAt: Date;
+  updatedAt: Date;
+  code: string;
+  name: string;
+  symbol: string;
+  decimalPlaces: number;
+  isActive: boolean;
+}
 
 // =============================================================================
 // Bank Connection — API Types
@@ -195,7 +242,24 @@ export interface UpdateBankConnectionRequest {
   lastSyncError?: string;
 }
 
-export type BankConnectionResponse = BankConnection;
+export interface BankConnectionResponse {
+  id: string;
+  createdAt: Date;
+  updatedAt: Date;
+  tenantId: string;
+  deletedAt: Date | null;
+  bankAccountId: string;
+  connectionType: 'plaid' | 'yodlee' | 'ofx' | 'manual';
+  institutionName: string;
+  institutionId: string | null;
+  accessToken: string;
+  refreshToken: string | null;
+  status: 'active' | 'expired' | 'error' | 'disabled';
+  lastSyncAt: Date | null;
+  lastSyncError: string | null;
+  syncFrequency: 'realtime' | 'hourly' | 'daily' | 'manual';
+  createdBy: string;
+}
 
 // =============================================================================
 // Transfer Actions

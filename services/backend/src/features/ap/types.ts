@@ -8,36 +8,6 @@
  * @see packages/database/src/schema/ap/schema.ts — Source schema
  */
 
-import type {
-  Bill,
-  BillLineItem,
-  NewBill,
-  NewBillLineItem,
-  NewPaymentSchedule,
-  NewVendor,
-  NewVendorPayment,
-  PaymentSchedule,
-  Vendor,
-  VendorPayment,
-} from '@lumora/database/schema';
-
-// =============================================================================
-// Re-export Schema Types
-// =============================================================================
-
-export type {
-  Bill,
-  BillLineItem,
-  NewBill,
-  NewBillLineItem,
-  NewPaymentSchedule,
-  NewVendor,
-  NewVendorPayment,
-  PaymentSchedule,
-  Vendor,
-  VendorPayment,
-};
-
 // =============================================================================
 // Vendor — API Types
 // =============================================================================
@@ -76,7 +46,28 @@ export interface UpdateVendorRequest {
   isActive?: boolean;
 }
 
-export type VendorResponse = Vendor;
+export interface VendorResponse {
+  id: string;
+  createdAt: Date;
+  updatedAt: Date;
+  tenantId: string;
+  deletedAt: Date | null;
+  createdBy: string;
+  name: string;
+  code: string;
+  taxId: string | null;
+  email: string | null;
+  phone: string | null;
+  addressLine1: string | null;
+  addressLine2: string | null;
+  city: string | null;
+  state: string | null;
+  postalCode: string | null;
+  country: string | null;
+  paymentTerms: string | null;
+  currency: string;
+  isActive: boolean;
+}
 
 // =============================================================================
 // Bill — API Types
@@ -109,7 +100,24 @@ export interface UpdateBillRequest {
   notes?: string;
 }
 
-export interface BillResponse extends Bill {
+export interface BillResponse {
+  id: string;
+  createdAt: Date;
+  updatedAt: Date;
+  tenantId: string;
+  deletedAt: Date | null;
+  createdBy: string;
+  vendorId: string;
+  billNumber: string;
+  billDate: string;
+  dueDate: string;
+  purchaseOrderId: string | null;
+  subtotal: string;
+  taxAmount: string;
+  totalAmount: string;
+  currency: string;
+  status: 'draft' | 'pending_approval' | 'approved' | 'partially_paid' | 'paid' | 'voided';
+  notes: string | null;
   lineItems?: BillLineItemResponse[];
   payments?: VendorPaymentResponse[];
   totalPaid?: string;
@@ -148,7 +156,20 @@ export interface UpdateBillLineItemRequest {
   sortOrder?: number;
 }
 
-export type BillLineItemResponse = BillLineItem;
+export interface BillLineItemResponse {
+  id: string;
+  createdAt: Date;
+  updatedAt: Date;
+  tenantId: string;
+  billId: string;
+  description: string;
+  quantity: string;
+  unitPrice: string;
+  amount: string;
+  taxRate: string | null;
+  taxAmount: string | null;
+  sortOrder: number;
+}
 
 // =============================================================================
 // Vendor Payment — API Types
@@ -178,7 +199,22 @@ export interface UpdateVendorPaymentRequest {
   notes?: string;
 }
 
-export type VendorPaymentResponse = VendorPayment;
+export interface VendorPaymentResponse {
+  id: string;
+  createdAt: Date;
+  updatedAt: Date;
+  tenantId: string;
+  deletedAt: Date | null;
+  vendorId: string;
+  billId: string | null;
+  amount: string;
+  paymentDate: Date;
+  paymentMethod: string;
+  referenceNumber: string | null;
+  bankAccountId: string | null;
+  currency: string;
+  notes: string | null;
+}
 
 // =============================================================================
 // Payment Schedule — API Types
@@ -197,7 +233,24 @@ export interface UpdatePaymentScheduleRequest {
   status?: string;
 }
 
-export type PaymentScheduleResponse = PaymentSchedule;
+export interface PaymentScheduleResponse {
+  id: string;
+  createdAt: Date;
+  updatedAt: Date;
+  tenantId: string;
+  billId: string;
+  dueDate: Date;
+  amount: string;
+  status: string;
+}
+
+// =============================================================================
+// List Wrapper (Encore array return workaround)
+// =============================================================================
+
+export interface BillLineItemListResponse {
+  items: BillLineItemResponse[];
+}
 
 // =============================================================================
 // List / Pagination

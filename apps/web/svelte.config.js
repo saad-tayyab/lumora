@@ -23,10 +23,10 @@ const config = {
       '@lumora/shared/*': path.resolve(monorepoRoot, 'packages/shared/src/*'),
       '@lumora/validation': path.resolve(monorepoRoot, 'packages/validation/src'),
       '@lumora/validation/*': path.resolve(monorepoRoot, 'packages/validation/src/*'),
-      '@lumora/database': path.resolve(monorepoRoot, 'packages/database/src'),
-      '@lumora/database/*': path.resolve(monorepoRoot, 'packages/database/src/*'),
       '@lumora/config': path.resolve(monorepoRoot, 'packages/config/src'),
       '@lumora/config/*': path.resolve(monorepoRoot, 'packages/config/src/*'),
+      '@lumora/database': path.resolve(monorepoRoot, 'packages/database/src'),
+      '@lumora/database/*': path.resolve(monorepoRoot, 'packages/database/src/*'),
     }
   }
 };
