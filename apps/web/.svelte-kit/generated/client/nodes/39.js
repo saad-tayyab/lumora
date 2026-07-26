@@ -1,1 +1,0 @@
-export { default as component } from "../../../../src/routes/(app)/assets/fixed-assets/new/+page.svelte";

@@ -1,1 +1,0 @@
-export { default as component } from "../../../../src/routes/(app)/financial/fiscal-years/new/+page.svelte";

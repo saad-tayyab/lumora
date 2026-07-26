@@ -1,1 +1,0 @@
-export { default as component } from "../../../../src/routes/(app)/hr/leave/+page.svelte";
