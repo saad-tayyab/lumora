@@ -129,9 +129,7 @@ describe('Vendor Lifecycle (service layer)', () => {
     expect(vendor.tenantId).toBe(TEST_TENANT_ID);
     expect(vendor.isActive).toBe(true);
 
-    const dbRow = await testDb.query.vendors.findFirst({
-      where: eq(vendors.id, vendor.id),
-    });
+    const [dbRow] = await testDb.select().from(vendors).where(eq(vendors.id, vendor.id));
     expect(dbRow).toBeDefined();
     expect(dbRow!.name).toBe(vendorData.name);
     expect(dbRow!.code).toBe(vendorData.code);
@@ -161,9 +159,7 @@ describe('Vendor Lifecycle (service layer)', () => {
     expect(updated.name).toBe('Updated Name');
     expect(updated.email).toBe('updated@test.com');
 
-    const dbRow = await testDb.query.vendors.findFirst({
-      where: eq(vendors.id, created.id),
-    });
+    const [dbRow] = await testDb.select().from(vendors).where(eq(vendors.id, created.id));
     expect(dbRow!.name).toBe('Updated Name');
     expect(dbRow!.email).toBe('updated@test.com');
   });
@@ -219,9 +215,7 @@ describe('Bill Lifecycle (service layer)', () => {
     expect(bill.status).toBe('draft');
     expect(bill.totalAmount).toBe('1100.0000');
 
-    const dbRow = await testDb.query.bills.findFirst({
-      where: eq(bills.id, bill.id),
-    });
+    const [dbRow] = await testDb.select().from(bills).where(eq(bills.id, bill.id));
     expect(dbRow).toBeDefined();
     expect(dbRow!.vendorId).toBe(vendor.id);
   });
@@ -306,15 +300,11 @@ describe('Bill with Line Items (service layer)', () => {
     expect(bill.taxAmount).toBe('50.0000');
     expect(bill.totalAmount).toBe('550.0000');
 
-    const dbLineItems = await testDb.query.billLineItems.findMany({
-      where: eq(billLineItems.billId, bill.id),
-    });
+    const dbLineItems = await testDb.select().from(billLineItems).where(eq(billLineItems.billId, bill.id));
     expect(dbLineItems).toHaveLength(2);
     expect(dbLineItems.map((i) => i.description).sort()).toEqual(['Widget A', 'Widget B']);
 
-    const dbBill = await testDb.query.bills.findFirst({
-      where: eq(bills.id, bill.id),
-    });
+    const [dbBill] = await testDb.select().from(bills).where(eq(bills.id, bill.id));
     expect(dbBill!.subtotal).toBe('500.0000');
     expect(dbBill!.totalAmount).toBe('550.0000');
   });
@@ -348,9 +338,7 @@ describe('Bill with Line Items (service layer)', () => {
     expect(newLineItem.description).toBe('Added Item');
     expect(newLineItem.billId).toBe(bill.id);
 
-    const dbLineItems = await testDb.query.billLineItems.findMany({
-      where: eq(billLineItems.billId, bill.id),
-    });
+    const dbLineItems = await testDb.select().from(billLineItems).where(eq(billLineItems.billId, bill.id));
     expect(dbLineItems).toHaveLength(2);
 
     const refreshedBill = await service.getBill(bill.id, TEST_TENANT_ID);
@@ -402,9 +390,7 @@ describe('Bill Status Transitions (service layer)', () => {
     const approved = await service.approveBill(bill.id, TEST_TENANT_ID);
     expect(approved.status).toBe('approved');
 
-    const dbBill = await testDb.query.bills.findFirst({
-      where: eq(bills.id, bill.id),
-    });
+    const [dbBill] = await testDb.select().from(bills).where(eq(bills.id, bill.id));
     expect(dbBill!.status).toBe('approved');
   });
 
@@ -450,9 +436,7 @@ describe('Bill Status Transitions (service layer)', () => {
     const voided = await service.voidBill(bill.id, TEST_TENANT_ID);
     expect(voided.status).toBe('voided');
 
-    const dbBill = await testDb.query.bills.findFirst({
-      where: eq(bills.id, bill.id),
-    });
+    const [dbBill] = await testDb.select().from(bills).where(eq(bills.id, bill.id));
     expect(dbBill!.status).toBe('voided');
   });
 });
@@ -509,9 +493,7 @@ describe('Payment Flow (service layer)', () => {
     expect(payment.amount).toBe('400.0000');
     expect(payment.billId).toBe(bill.id);
 
-    const dbBill = await testDb.query.bills.findFirst({
-      where: eq(bills.id, bill.id),
-    });
+    const [dbBill] = await testDb.select().from(bills).where(eq(bills.id, bill.id));
     expect(dbBill!.status).toBe('partially_paid');
 
     const refreshed = await service.getBill(bill.id, TEST_TENANT_ID);
@@ -553,9 +535,7 @@ describe('Payment Flow (service layer)', () => {
       TEST_USER_ID,
     );
 
-    const dbBill = await testDb.query.bills.findFirst({
-      where: eq(bills.id, bill.id),
-    });
+    const [dbBill] = await testDb.select().from(bills).where(eq(bills.id, bill.id));
     expect(dbBill!.status).toBe('paid');
   });
 });

@@ -8,6 +8,7 @@ import {
   stockLevels,
   stockMovements,
 } from '@lumora/database/schema/inv';
+import { poLineItems } from '@lumora/database/schema';
 import { eq } from 'drizzle-orm';
 
 vi.mock('encore.dev/api', () => ({
@@ -40,17 +41,18 @@ import * as service from './service';
 // ─── Helpers ──────────────────────────────────────────────────────────────────
 
 async function cleanupInvTestData(): Promise<void> {
-  await testDb.delete(stockMovements).where(eq(stockMovements.tenantId, TEST_TENANT_ID));
-  await testDb.delete(stockLevels).where(eq(stockLevels.tenantId, TEST_TENANT_ID));
-  await testDb.delete(items).where(eq(items.tenantId, TEST_TENANT_ID));
-  await testDb.delete(warehouses).where(eq(warehouses.tenantId, TEST_TENANT_ID));
-  await testDb.delete(itemCategories).where(eq(itemCategories.tenantId, TEST_TENANT_ID));
-  await testDb.delete(unitOfMeasures);
+  try { await testDb.delete(stockMovements).where(eq(stockMovements.tenantId, TEST_TENANT_ID)); } catch {}
+  try { await testDb.delete(stockLevels).where(eq(stockLevels.tenantId, TEST_TENANT_ID)); } catch {}
+  try { await testDb.delete(poLineItems).where(eq(poLineItems.tenantId, TEST_TENANT_ID)); } catch {}
+  try { await testDb.delete(items).where(eq(items.tenantId, TEST_TENANT_ID)); } catch {}
+  try { await testDb.delete(warehouses).where(eq(warehouses.tenantId, TEST_TENANT_ID)); } catch {}
+  try { await testDb.delete(itemCategories).where(eq(itemCategories.tenantId, TEST_TENANT_ID)); } catch {}
+  try { await testDb.delete(unitOfMeasures); } catch {}
 }
 
 function makeUomInput(overrides: Record<string, unknown> = {}) {
   return {
-    code: `UOM-${Date.now()}-${Math.random().toString(36).slice(2, 6)}`,
+    code: `UOM${Math.random().toString(36).slice(2, 6)}`.slice(0, 20),
     name: 'Pieces',
     category: 'count' as const,
     decimalPlaces: 0,
@@ -61,8 +63,8 @@ function makeUomInput(overrides: Record<string, unknown> = {}) {
 
 function makeCategoryInput(overrides: Record<string, unknown> = {}) {
   return {
-    name: `Category-${Date.now()}-${Math.random().toString(36).slice(2, 6)}`,
-    code: `CAT-${Date.now()}-${Math.random().toString(36).slice(2, 6)}`,
+    name: `Category-${Math.random().toString(36).slice(2, 6)}`,
+    code: `CAT${Math.random().toString(36).slice(2, 6)}`.slice(0, 20),
     description: 'Test category',
     isActive: true,
     ...overrides,
@@ -94,8 +96,8 @@ function makeItemInput(
 
 function makeWarehouseInput(overrides: Record<string, unknown> = {}) {
   return {
-    name: `Warehouse-${Date.now()}-${Math.random().toString(36).slice(2, 6)}`,
-    code: `WH-${Date.now()}-${Math.random().toString(36).slice(2, 6)}`,
+    name: `WH-${Math.random().toString(36).slice(2, 6)}`,
+    code: `WH${Math.random().toString(36).slice(2, 6)}`.slice(0, 20),
     isActive: true,
     isDefault: false,
     ...overrides,
@@ -124,9 +126,7 @@ describe('Item lifecycle (service layer)', () => {
     expect(category.tenantId).toBe(TEST_TENANT_ID);
     expect(category.isActive).toBe(true);
 
-    const dbRow = await testDb.query.itemCategories.findFirst({
-      where: eq(itemCategories.id, category.id),
-    });
+    const [dbRow] = await testDb.select().from(itemCategories).where(eq(itemCategories.id, category.id));
     expect(dbRow).toBeDefined();
     expect(dbRow!.code).toBe(category.code);
   });
@@ -144,7 +144,7 @@ describe('Item lifecycle (service layer)', () => {
     expect(item.unitOfMeasureId).toBe(uomId);
     expect(item.tenantId).toBe(TEST_TENANT_ID);
 
-    const dbRow = await testDb.query.items.findFirst({ where: eq(items.id, item.id) });
+    const [dbRow] = await testDb.select().from(items).where(eq(items.id, item.id));
     expect(dbRow).toBeDefined();
     expect(dbRow!.sku).toBe(item.sku);
   });
@@ -176,7 +176,7 @@ describe('Item lifecycle (service layer)', () => {
     expect(updated.name).toBe('After Update');
     expect(updated.reorderPoint).toBe(25);
 
-    const dbRow = await testDb.query.items.findFirst({ where: eq(items.id, created.id) });
+    const [dbRow] = await testDb.select().from(items).where(eq(items.id, created.id));
     expect(dbRow!.name).toBe('After Update');
     expect(dbRow!.reorderPoint).toBe(25);
   });
@@ -222,7 +222,7 @@ describe('Item lifecycle (service layer)', () => {
 
     await service.deleteItem(created.id);
 
-    const dbRow = await testDb.query.items.findFirst({ where: eq(items.id, created.id) });
+    const [dbRow] = await testDb.select().from(items).where(eq(items.id, created.id));
     expect(dbRow).toBeDefined();
     expect(dbRow!.deletedAt).not.toBeNull();
   });
@@ -268,9 +268,7 @@ describe('Stock movement (service layer)', () => {
     const level = await service.getStockLevel(item.id, warehouse.id);
     expect(level.quantityOnHand).toBe(50);
 
-    const dbLevel = await testDb.query.stockLevels.findFirst({
-      where: eq(stockLevels.id, level.id),
-    });
+    const [dbLevel] = await testDb.select().from(stockLevels).where(eq(stockLevels.id, level.id));
     expect(dbLevel).toBeDefined();
     expect(dbLevel!.quantityOnHand).toBe(50);
   });
@@ -372,9 +370,7 @@ describe('Warehouse lifecycle (service layer)', () => {
     expect(warehouse.tenantId).toBe(TEST_TENANT_ID);
     expect(warehouse.isActive).toBe(true);
 
-    const dbRow = await testDb.query.warehouses.findFirst({
-      where: eq(warehouses.id, warehouse.id),
-    });
+    const [dbRow] = await testDb.select().from(warehouses).where(eq(warehouses.id, warehouse.id));
     expect(dbRow).toBeDefined();
     expect(dbRow!.code).toBe(warehouse.code);
   });
@@ -398,9 +394,7 @@ describe('Warehouse lifecycle (service layer)', () => {
     expect(updated.name).toBe('Updated Warehouse');
     expect(updated.city).toBe('Springfield');
 
-    const dbRow = await testDb.query.warehouses.findFirst({
-      where: eq(warehouses.id, created.id),
-    });
+    const [dbRow] = await testDb.select().from(warehouses).where(eq(warehouses.id, created.id));
     expect(dbRow!.name).toBe('Updated Warehouse');
     expect(dbRow!.city).toBe('Springfield');
   });
@@ -417,7 +411,7 @@ describe('Warehouse lifecycle (service layer)', () => {
   });
 
   it('should reject duplicate warehouse code within tenant', async () => {
-    const code = `WH-DUP-${Date.now()}`;
+    const code = `WH-DUP-${Date.now().toString(36).slice(-4)}`.slice(0, 20);
     await service.createWarehouse(TEST_TENANT_ID, makeWarehouseInput({ code }));
 
     await expect(
@@ -430,9 +424,7 @@ describe('Warehouse lifecycle (service layer)', () => {
 
     await service.deleteWarehouse(created.id);
 
-    const dbRow = await testDb.query.warehouses.findFirst({
-      where: eq(warehouses.id, created.id),
-    });
+    const [dbRow] = await testDb.select().from(warehouses).where(eq(warehouses.id, created.id));
     expect(dbRow).toBeDefined();
     expect(dbRow!.deletedAt).not.toBeNull();
   });

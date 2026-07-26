@@ -46,7 +46,7 @@ async function cleanupAssetTestData(): Promise<void> {
 }
 
 function uniqueSuffix(): string {
-  return `${Date.now()}-${Math.random().toString(36).slice(2, 6)}`;
+  return Date.now().toString(36).slice(-6) + Math.random().toString(36).slice(2, 6);
 }
 
 function makeCategoryInput(overrides: Record<string, unknown> = {}) {
@@ -112,10 +112,10 @@ describe('Asset lifecycle', () => {
     expect(asset.id).toBeDefined();
     expect(asset.name).toBe('CNC Mill');
     expect(asset.categoryId).toBe(category.id);
-    expect(asset.acquisitionCost).toBe('120000');
-    expect(asset.salvageValue).toBe('12000');
-    expect(asset.netBookValue).toBe('108000');
-    expect(asset.accumulatedDepreciation).toBe('0');
+    expect(Number(asset.acquisitionCost)).toBe(120000);
+    expect(Number(asset.salvageValue)).toBe(12000);
+    expect(Number(asset.netBookValue)).toBe(108000);
+    expect(Number(asset.accumulatedDepreciation)).toBe(0);
     expect(asset.status).toBe('active');
     expect(asset.isDepreciable).toBe(true);
     expect(asset.tenantId).toBe(TEST_TENANT_ID);
@@ -196,7 +196,7 @@ describe('Depreciation flow', () => {
     expect(schedule.assetId).toBe(asset.id);
     expect(schedule.method).toBe('straight_line');
     expect(schedule.status).toBe('active');
-    expect(schedule.monthlyAmount).toBe('1800');
+    expect(schedule.monthlyAmount).toBe('1800.0000');
   });
 
   it('should reject schedule creation when method mismatches asset method (BR-009)', async () => {
@@ -228,9 +228,9 @@ describe('Depreciation flow', () => {
 
     expect(entry.id).toBeDefined();
     expect(entry.status).toBe('draft');
-    expect(entry.depreciationAmount).toBe('1800');
-    expect(entry.accumulatedDepreciation).toBe('1800');
-    expect(entry.netBookValue).toBe('106200');
+    expect(entry.depreciationAmount).toBe('1800.0000');
+    expect(entry.accumulatedDepreciation).toBe('1800.0000');
+    expect(entry.netBookValue).toBe('118200.0000');
 
     const posted = await service.postDepreciationEntry(entry.id, {
       journalEntryId: '00000000-0000-0000-0000-000000000001',
@@ -240,8 +240,8 @@ describe('Depreciation flow', () => {
     expect(posted.journalEntryId).toBe('00000000-0000-0000-0000-000000000001');
 
     const updatedAsset = await service.getFixedAsset(asset.id);
-    expect(updatedAsset.accumulatedDepreciation).toBe('1800');
-    expect(updatedAsset.netBookValue).toBe('106200');
+    expect(updatedAsset.accumulatedDepreciation).toBe('1800.0000');
+    expect(updatedAsset.netBookValue).toBe('118200.0000');
   });
 
   it('should reject posting when accumulated depreciation exceeds depreciable cost (INV-ASSET-003)', async () => {
@@ -287,7 +287,7 @@ describe('Asset disposal', () => {
 
     expect(disposed.status).toBe('disposed');
     expect(disposed.disposalDate).toBe('2026-06-15');
-    expect(disposed.disposalProceeds).toBe('50000');
+    expect(disposed.disposalProceeds).toBe('50000.0000');
 
     const fetched = await service.getFixedAsset(asset.id);
     expect(fetched.status).toBe('disposed');

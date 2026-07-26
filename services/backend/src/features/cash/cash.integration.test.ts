@@ -92,12 +92,12 @@ describe('Cash & Treasury Service - Integration Tests', () => {
       expect(account.id).toBeDefined();
       expect(account.bankName).toBe('Chase');
       expect(account.accountName).toBe('Operating Account');
-      expect(account.accountNumber).toBe('********90');
-      expect(account.currentBalance).toBe('10000.00');
+      accountId1 = account.id;
+
+      expect(account.accountNumber).toBe('******7890');
+      expect(Number(account.currentBalance)).toBe(10000);
       expect(account.status).toBe('active');
       expect(account.tenantId).toBe(TEST_TENANT_ID);
-
-      accountId1 = account.id;
     });
 
     it('should retrieve the created bank account by id', async () => {
@@ -105,7 +105,7 @@ describe('Cash & Treasury Service - Integration Tests', () => {
 
       expect(account.id).toBe(accountId1);
       expect(account.bankName).toBe('Chase');
-      expect(account.accountNumber).toBe('********90');
+      expect(account.accountNumber).toBe('******7890');
     });
 
     it('should update bank account fields', async () => {
@@ -219,7 +219,7 @@ describe('Cash & Treasury Service - Integration Tests', () => {
       expect(transfer.id).toBeDefined();
       expect(transfer.sourceAccountId).toBe(accountId1);
       expect(transfer.destinationAccountId).toBe(accountId2);
-      expect(transfer.amount).toBe('250.00');
+      expect(Number(transfer.amount)).toBe(250);
       expect(transfer.status).toBe('pending');
       expect(transfer.createdBy).toBe(TEST_USER_ID);
     });
@@ -323,13 +323,13 @@ describe('Cash & Treasury Service - Integration Tests', () => {
         TEST_USER_ID,
       );
 
+      statementId = statement.id;
+
       expect(statement.id).toBeDefined();
       expect(statement.bankAccountId).toBe(accountId1);
       expect(statement.importStatus).toBe('pending');
-      expect(statement.openingBalance).toBe('10000.00');
-      expect(statement.closingBalance).toBe('10500.00');
-
-      statementId = statement.id;
+      expect(Number(statement.openingBalance)).toBe(10000);
+      expect(Number(statement.closingBalance)).toBe(10500);
     });
 
     it('should create and match a reconciliation entry', async () => {
@@ -364,7 +364,7 @@ describe('Cash & Treasury Service - Integration Tests', () => {
 
       expect(matched.reconciliationStatus).toBe('manually_matched');
       expect(matched.matchedEntityId).toBe('11111111-1111-1111-1111-111111111111');
-      expect(matched.matchConfidence).toBe('0.95');
+      expect(Number(matched.matchConfidence)).toBe(0.95);
       expect(matched.reconciledBy).toBe(TEST_USER_ID);
       expect(matched.reconciledAt).toBeDefined();
     });

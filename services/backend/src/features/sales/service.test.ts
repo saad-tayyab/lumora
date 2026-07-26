@@ -44,6 +44,11 @@ const mockTx = {
     set: vi.fn().mockReturnValue({ where: vi.fn().mockResolvedValue(undefined) }),
   }),
   delete: vi.fn().mockReturnValue({ where: vi.fn().mockResolvedValue(undefined) }),
+  select: vi.fn().mockReturnValue({
+    from: vi.fn().mockReturnValue({
+      where: vi.fn().mockResolvedValue([]),
+    }),
+  }),
   query: {
     salesOrderLineItems: {
       findMany: vi.fn().mockResolvedValue([]),
@@ -434,17 +439,17 @@ describe('Sales Service', () => {
         //   lineNet = 1000 - 100 = 900.0000
         //   taxAmount = 900 * 0.05 = 45.0000
         //   total = 900 + 45 = 945.0000
-        // Order level (recalculateOrderTotals sums line item totals):
-        //   subtotal = 945.0000 (sum of line item totals)
+        // Order level (recalculateOrderTotals reconstructs pre-discount subtotals):
+        //   subtotal = 1000.0000 (reconstructed from line total - tax + discount)
         //   discountAmount = 100.0000
         //   taxAmount = 45.0000
-        //   total = (945 - 100) + 45 = 890.0000
+        //   total = (1000 - 100) + 45 = 945.0000
         expect(mockSalesOrdersRepo.create).toHaveBeenCalledWith(
           expect.objectContaining({
-            subtotal: '945.0000',
+            subtotal: '1000.0000',
             discountAmount: '100.0000',
             taxAmount: '45.0000',
-            total: '890.0000',
+            total: '945.0000',
           }),
           TEST_TENANT_ID,
         );
@@ -1249,13 +1254,13 @@ describe('Sales Service', () => {
         //   subtotal = 945.0000 (sum of line item totals)
         //   discountAmount = 100.0000
         //   taxAmount = 45.0000
-        //   total = (945 - 100) + 45 = 890.0000
+        //   total = (1000 - 100) + 45 = 945.0000
         expect(mockQuotationsRepo.create).toHaveBeenCalledWith(
           expect.objectContaining({
-            subtotal: '945.0000',
+            subtotal: '1000.0000',
             discountAmount: '100.0000',
             taxAmount: '45.0000',
-            total: '890.0000',
+            total: '945.0000',
           }),
           TEST_TENANT_ID,
         );

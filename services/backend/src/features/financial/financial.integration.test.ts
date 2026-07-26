@@ -86,7 +86,7 @@ describe('Financial Service - Integration Tests', () => {
       expect(account.code).toBe('CA-1000');
       expect(account.name).toBe('Cash Account');
       expect(account.type).toBe('asset');
-      expect(account.balance).toBe('0');
+      expect(account.balance).toBe('0.0000');
       expect(account.tenantId).toBe(TEST_TENANT_ID);
 
       const row = await testDb
@@ -281,7 +281,7 @@ describe('Financial Service - Integration Tests', () => {
         TEST_TENANT_ID,
       );
       const fetched = await service.getAccount(acct.id, TEST_TENANT_ID);
-      expect(fetched.balance).toBe('0');
+      expect(fetched.balance).toBe('0.0000');
     });
   });
 

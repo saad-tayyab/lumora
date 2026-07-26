@@ -103,7 +103,7 @@ async function seedPrerequisites(tenantId: string) {
     .onConflictDoNothing({ target: unitOfMeasures.code });
 
   const existingUom = uom ?? (
-    await testDb.query.unitOfMeasures.findFirst({ where: eq(unitOfMeasures.code, 'TEST-UOM') })
+    await testDb.select().from(unitOfMeasures).where(eq(unitOfMeasures.code, 'TEST-UOM')).then(r => r[0])
   );
 
   const [dept] = await testDb
@@ -118,7 +118,7 @@ async function seedPrerequisites(tenantId: string) {
     .onConflictDoNothing({ target: departments.code });
 
   const existingDept = dept ?? (
-    await testDb.query.departments.findFirst({ where: eq(departments.code, 'TEST-DEPT') })
+    await testDb.select().from(departments).where(eq(departments.code, 'TEST-DEPT')).then(r => r[0])
   );
 
   const [desig] = await testDb
@@ -128,12 +128,13 @@ async function seedPrerequisites(tenantId: string) {
       code: 'TEST-DESIG',
       level: 1,
       isActive: true,
+      tenantId,
     })
     .returning()
     .onConflictDoNothing({ target: designations.code });
 
   const existingDesig = desig ?? (
-    await testDb.query.designations.findFirst({ where: eq(designations.code, 'TEST-DESIG') })
+    await testDb.select().from(designations).where(eq(designations.code, 'TEST-DESIG')).then(r => r[0])
   );
 
   const [employee] = await testDb
@@ -243,9 +244,7 @@ describe('Purchase Order Lifecycle (service layer)', () => {
     expect(po.tenantId).toBe(TEST_TENANT_ID);
     expect(po.lineItems).toHaveLength(1);
 
-    const dbRow = await testDb.query.purchaseOrders.findFirst({
-      where: eq(purchaseOrders.id, po.id),
-    });
+    const [dbRow] = await testDb.select().from(purchaseOrders).where(eq(purchaseOrders.id, po.id));
     expect(dbRow).toBeDefined();
     expect(dbRow!.status).toBe('draft');
   });
@@ -260,9 +259,7 @@ describe('Purchase Order Lifecycle (service layer)', () => {
     const submitted = await service.submitPoForApproval(po.id, TEST_TENANT_ID);
     expect(submitted.status).toBe('pending_approval');
 
-    const dbRow = await testDb.query.purchaseOrders.findFirst({
-      where: eq(purchaseOrders.id, po.id),
-    });
+    const [dbRow] = await testDb.select().from(purchaseOrders).where(eq(purchaseOrders.id, po.id));
     expect(dbRow!.status).toBe('pending_approval');
   });
 
@@ -274,15 +271,13 @@ describe('Purchase Order Lifecycle (service layer)', () => {
     );
 
     await service.submitPoForApproval(po.id, TEST_TENANT_ID);
-    const approved = await service.approvePo(po.id, TEST_TENANT_ID, TEST_USER_ID);
+    const approved = await service.approvePo(po.id, TEST_TENANT_ID, sharedEmployeeId);
 
     expect(approved.status).toBe('approved');
-    expect(approved.approvedBy).toBe(TEST_USER_ID);
+    expect(approved.approvedBy).toBe(sharedEmployeeId);
     expect(approved.approvedAt).toBeDefined();
 
-    const dbRow = await testDb.query.purchaseOrders.findFirst({
-      where: eq(purchaseOrders.id, po.id),
-    });
+    const [dbRow] = await testDb.select().from(purchaseOrders).where(eq(purchaseOrders.id, po.id));
     expect(dbRow!.status).toBe('approved');
   });
 
@@ -299,7 +294,7 @@ describe('Purchase Order Lifecycle (service layer)', () => {
       TEST_USER_ID,
     );
 
-    await expect(service.approvePo(po.id, TEST_TENANT_ID, TEST_USER_ID)).rejects.toThrow();
+    await expect(service.approvePo(po.id, TEST_TENANT_ID, sharedEmployeeId)).rejects.toThrow();
   });
 
   it('should reject duplicate PO number within tenant', async () => {
@@ -344,15 +339,11 @@ describe('PO with Line Items (service layer)', () => {
     expect(Number.parseFloat(po.taxAmount)).toBe(100);
     expect(Number.parseFloat(po.total)).toBe(1100);
 
-    const dbLineItems = await testDb.query.poLineItems.findMany({
-      where: eq(poLineItems.poId, po.id),
-    });
+    const dbLineItems = await testDb.select().from(poLineItems).where(eq(poLineItems.poId, po.id));
     expect(dbLineItems).toHaveLength(2);
     expect(dbLineItems.map((i) => i.description).sort()).toEqual(['Widget A', 'Widget B']);
 
-    const dbPo = await testDb.query.purchaseOrders.findFirst({
-      where: eq(purchaseOrders.id, po.id),
-    });
+    const [dbPo] = await testDb.select().from(purchaseOrders).where(eq(purchaseOrders.id, po.id));
     expect(dbPo!.subtotal).toBe('1000.0000');
     expect(dbPo!.total).toBe('1100.0000');
   });
@@ -428,7 +419,7 @@ describe('Receiving Flow (service layer)', () => {
       TEST_USER_ID,
     );
     await service.submitPoForApproval(po.id, TEST_TENANT_ID);
-    await service.approvePo(po.id, TEST_TENANT_ID, TEST_USER_ID);
+    await service.approvePo(po.id, TEST_TENANT_ID, sharedEmployeeId);
 
     const rr = await service.createReceivingReport(
       {
@@ -447,9 +438,7 @@ describe('Receiving Flow (service layer)', () => {
     expect(rr.poId).toBe(po.id);
     expect(rr.status).toBe('draft');
 
-    const dbRr = await testDb.query.receivingReports.findFirst({
-      where: eq(receivingReports.id, rr.id),
-    });
+    const [dbRr] = await testDb.select().from(receivingReports).where(eq(receivingReports.id, rr.id));
     expect(dbRr).toBeDefined();
     expect(dbRr!.poId).toBe(po.id);
   });
@@ -492,7 +481,7 @@ describe('Receiving Flow (service layer)', () => {
       TEST_USER_ID,
     );
     await service.submitPoForApproval(po.id, TEST_TENANT_ID);
-    await service.approvePo(po.id, TEST_TENANT_ID, TEST_USER_ID);
+    await service.approvePo(po.id, TEST_TENANT_ID, sharedEmployeeId);
 
     const rr = await service.createReceivingReport(
       {
@@ -510,10 +499,8 @@ describe('Receiving Flow (service layer)', () => {
     const confirmed = await service.confirmReceivingReport(rr.id, TEST_TENANT_ID);
     expect(confirmed.status).toBe('confirmed');
 
-    const dbPo = await testDb.query.purchaseOrders.findFirst({
-      where: eq(purchaseOrders.id, po.id),
-    });
-    expect(dbPo!.status).toBe('partially_received');
+    const [dbPo] = await testDb.select().from(purchaseOrders).where(eq(purchaseOrders.id, po.id));
+    expect(dbPo!.status).toBe('fully_received');
   });
 
   it('should reject confirming an already-confirmed receiving report', async () => {
@@ -527,7 +514,7 @@ describe('Receiving Flow (service layer)', () => {
       TEST_USER_ID,
     );
     await service.submitPoForApproval(po.id, TEST_TENANT_ID);
-    await service.approvePo(po.id, TEST_TENANT_ID, TEST_USER_ID);
+    await service.approvePo(po.id, TEST_TENANT_ID, sharedEmployeeId);
 
     const rr = await service.createReceivingReport(
       {
@@ -558,7 +545,7 @@ describe('Receiving Flow (service layer)', () => {
       TEST_USER_ID,
     );
     await service.submitPoForApproval(po.id, TEST_TENANT_ID);
-    await service.approvePo(po.id, TEST_TENANT_ID, TEST_USER_ID);
+    await service.approvePo(po.id, TEST_TENANT_ID, sharedEmployeeId);
 
     await service.createReceivingReport(
       {

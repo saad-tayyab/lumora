@@ -730,10 +730,23 @@ export async function applyCreditNote(
     );
   }
 
-  // Create payment application as a credit application
+  // Create a payment record for the credit application
+  const [creditPayment] = await paymentsRepository.create(
+    {
+      customerId: creditNote.customerId,
+      paymentNumber: `CN-APP-${Date.now()}-${Math.random().toString(36).slice(2, 6)}`,
+      paymentDate: data.appliedDate,
+      amount: data.amountApplied,
+      paymentMethod: 'cash',
+      currency: creditNote.currency,
+    },
+    tenantId,
+  );
+
+  // Create payment application
   await paymentApplicationsRepository.create(
     {
-      paymentId: creditNoteId, // Reference credit note via payment ID field
+      paymentId: creditPayment.id,
       invoiceId: data.invoiceId,
       amountApplied: data.amountApplied,
       appliedDate: data.appliedDate,

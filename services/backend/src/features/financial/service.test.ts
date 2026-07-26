@@ -57,6 +57,11 @@ const { mockTx } = vi.hoisted(() => ({
       set: vi.fn().mockReturnValue({ where: vi.fn().mockResolvedValue(undefined) }),
     }),
     delete: vi.fn().mockReturnValue({ where: vi.fn().mockResolvedValue(undefined) }),
+    select: vi.fn().mockReturnValue({
+      from: vi.fn().mockReturnValue({
+        where: vi.fn().mockResolvedValue([]),
+      }),
+    }),
     query: {
       journalEntryLines: {
         findMany: vi.fn().mockResolvedValue([]),

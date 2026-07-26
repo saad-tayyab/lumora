@@ -151,9 +151,11 @@ function recalculateOrderTotals(
   let taxAmount = '0';
 
   for (const item of lineItems) {
-    subtotal = decimalAdd(subtotal, item.total);
-    discountAmount = decimalAdd(discountAmount, item.discountAmount);
-    taxAmount = decimalAdd(taxAmount, item.taxAmount);
+    const lineSubtotal =
+      Number(item.total) - Number(item.taxAmount ?? '0') + Number(item.discountAmount ?? '0');
+    subtotal = decimalAdd(subtotal, String(lineSubtotal));
+    discountAmount = decimalAdd(discountAmount, item.discountAmount ?? '0');
+    taxAmount = decimalAdd(taxAmount, item.taxAmount ?? '0');
   }
 
   const total = decimalAdd(decimalSubtract(subtotal, discountAmount), taxAmount);

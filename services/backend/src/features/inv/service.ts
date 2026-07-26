@@ -517,6 +517,7 @@ export async function createStockMovement(
   await repo.stockLevelRepo.upsertByItemAndWarehouse(input.itemId, input.warehouseId, {
     quantityOnHand: resultingQuantity,
     lastMovementAt: new Date(),
+    tenantId,
   });
 
   // For transfers, also update destination warehouse
@@ -530,6 +531,7 @@ export async function createStockMovement(
     await repo.stockLevelRepo.upsertByItemAndWarehouse(input.itemId, input.referenceWarehouseId, {
       quantityOnHand: destQuantity + quantity,
       lastMovementAt: new Date(),
+      tenantId,
     });
   }
 

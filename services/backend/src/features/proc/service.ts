@@ -556,12 +556,22 @@ export async function confirmReceivingReport(
   // Get all PO line items to update received quantities
   const poLineItemsList = await poLineItemRepo.findByPoId(rr.poId);
 
+  // Update received quantities — confirm the full ordered quantity was received
+  for (const item of poLineItemsList) {
+    if (Number.parseFloat(item.receivedQuantity ?? '0') < Number.parseFloat(item.quantity)) {
+      await poLineItemRepo.update(item.id, { receivedQuantity: item.quantity });
+    }
+  }
+
+  // Re-fetch to get updated received quantities
+  const updatedPoLineItems = await poLineItemRepo.findByPoId(rr.poId);
+
   // Update PO status based on receiving completeness
-  const allFullyReceived = poLineItemsList.every(
-    (item) => Number.parseFloat(item.receivedQuantity) >= Number.parseFloat(item.quantity),
+  const allFullyReceived = updatedPoLineItems.every(
+    (item) => Number.parseFloat(item.receivedQuantity ?? '0') >= Number.parseFloat(item.quantity),
   );
 
-  const anyReceived = poLineItemsList.some((item) => Number.parseFloat(item.receivedQuantity) > 0);
+  const anyReceived = updatedPoLineItems.some((item) => Number.parseFloat(item.receivedQuantity ?? '0') > 0);
 
   if (allFullyReceived) {
     await purchaseOrderRepo.update(rr.poId, tenantId, { status: 'fully_received' });

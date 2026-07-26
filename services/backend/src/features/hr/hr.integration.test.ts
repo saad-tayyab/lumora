@@ -39,7 +39,7 @@ const { departments, designations, employees, attendance, leaveTypes, leaveReque
 const OTHER_TENANT_ID = '33333333-3333-4333-8333-333333333333';
 
 function ts(): string {
-  return `${Date.now()}-${Math.random().toString(36).slice(2, 6)}`;
+  return Math.floor(Date.now() / 1000).toString(36) + Math.random().toString(36).slice(2, 5);
 }
 
 async function cleanupHrTestData(): Promise<void> {
@@ -223,8 +223,8 @@ describe('Attendance flow', () => {
     const record = await service.createAttendance(TEST_TENANT_ID, {
       employeeId: emp.id,
       date: '2026-07-20',
-      clockIn: '09:00',
-      clockOut: '17:00',
+      clockIn: '2026-07-20T09:00:00.000Z',
+      clockOut: '2026-07-20T17:00:00.000Z',
       status: 'present',
       hoursWorked: '8',
     });
@@ -233,7 +233,7 @@ describe('Attendance flow', () => {
     expect(record.employeeId).toBe(emp.id);
     expect(record.date).toBe('2026-07-20');
     expect(record.status).toBe('present');
-    expect(record.hoursWorked).toBe('8');
+    expect(Number(record.hoursWorked)).toBe(8);
     expect(record.tenantId).toBe(TEST_TENANT_ID);
   });
 
@@ -526,7 +526,7 @@ describe('Leave flow', () => {
     const emp = await createEmp(TEST_TENANT_ID, dept.id, desig.id, {
       email: `emp-inact-${ts()}@test.com`,
       managerId: manager.id,
-      status: 'inactive',
+      status: 'terminated',
     });
     const leaveType = await createLeaveTypeForTenant(TEST_TENANT_ID);
 

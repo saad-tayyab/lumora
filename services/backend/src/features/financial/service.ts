@@ -331,27 +331,26 @@ export async function postJournalEntry(
   // Update account balances and post entry
   await db.transaction(async (tx) => {
     // Fetch lines for balance updates
-    const lines = await tx.query.journalEntryLines.findMany({
-      where: eq(journalEntryLines.journalEntryId, id),
-    });
+    const lines = await tx
+      .select()
+      .from(journalEntryLines)
+      .where(eq(journalEntryLines.journalEntryId, id));
 
     // Update account balances: balance += (debit - credit)
     for (const line of lines) {
       const netAmount = Number(line.debit) > 0 ? Number(line.debit) : -Number(line.credit);
 
       if (netAmount !== 0) {
+        const [currentAcct] = await tx
+          .select()
+          .from(accounts)
+          .where(eq(accounts.id, line.accountId));
+        const currentBalance = Number(currentAcct?.balance ?? '0');
+
         await tx
           .update(accounts)
           .set({
-            balance: String(
-              Number(
-                (
-                  await tx.query.accounts.findFirst({
-                    where: eq(accounts.id, line.accountId),
-                  })
-                )?.balance ?? '0',
-              ) + netAmount,
-            ),
+            balance: String(currentBalance + netAmount),
             updatedAt: new Date(),
           })
           .where(eq(accounts.id, line.accountId));
@@ -391,27 +390,26 @@ export async function voidJournalEntry(
   // Reverse account balances and void entry
   await db.transaction(async (tx) => {
     // Fetch lines for balance reversal
-    const lines = await tx.query.journalEntryLines.findMany({
-      where: eq(journalEntryLines.journalEntryId, id),
-    });
+    const lines = await tx
+      .select()
+      .from(journalEntryLines)
+      .where(eq(journalEntryLines.journalEntryId, id));
 
     // Reverse account balances: balance -= (debit - credit)
     for (const line of lines) {
       const netAmount = Number(line.debit) > 0 ? Number(line.debit) : -Number(line.credit);
 
       if (netAmount !== 0) {
+        const [currentAcct] = await tx
+          .select()
+          .from(accounts)
+          .where(eq(accounts.id, line.accountId));
+        const currentBalance = Number(currentAcct?.balance ?? '0');
+
         await tx
           .update(accounts)
           .set({
-            balance: String(
-              Number(
-                (
-                  await tx.query.accounts.findFirst({
-                    where: eq(accounts.id, line.accountId),
-                  })
-                )?.balance ?? '0',
-              ) - netAmount,
-            ),
+            balance: String(currentBalance - netAmount),
             updatedAt: new Date(),
           })
           .where(eq(accounts.id, line.accountId));

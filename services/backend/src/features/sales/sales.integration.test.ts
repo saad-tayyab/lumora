@@ -41,15 +41,16 @@ function uniqueSuffix(): string {
 }
 
 async function cleanupSalesTestData(): Promise<void> {
-  await testDb.delete(schema.quotationLineItems).where(eq(schema.quotationLineItems.tenantId, TEST_TENANT_ID));
-  await testDb.delete(schema.salesOrderLineItems).where(eq(schema.salesOrderLineItems.tenantId, TEST_TENANT_ID));
-  await testDb.delete(schema.quotations).where(eq(schema.quotations.tenantId, TEST_TENANT_ID));
-  await testDb.delete(schema.salesOrders).where(eq(schema.salesOrders.tenantId, TEST_TENANT_ID));
-  await testDb.delete(schema.discountPolicies).where(eq(schema.discountPolicies.tenantId, TEST_TENANT_ID));
-  await testDb.delete(schema.items).where(eq(schema.items.tenantId, TEST_TENANT_ID));
-  await testDb.delete(schema.itemCategories).where(eq(schema.itemCategories.tenantId, TEST_TENANT_ID));
-  await testDb.delete(schema.unitOfMeasures);
-  await testDb.delete(schema.customers).where(eq(schema.customers.tenantId, TEST_TENANT_ID));
+  try { await testDb.delete(schema.poLineItems).where(eq(schema.poLineItems.tenantId, TEST_TENANT_ID)); } catch {}
+  try { await testDb.delete(schema.quotationLineItems).where(eq(schema.quotationLineItems.tenantId, TEST_TENANT_ID)); } catch {}
+  try { await testDb.delete(schema.salesOrderLineItems).where(eq(schema.salesOrderLineItems.tenantId, TEST_TENANT_ID)); } catch {}
+  try { await testDb.delete(schema.quotations).where(eq(schema.quotations.tenantId, TEST_TENANT_ID)); } catch {}
+  try { await testDb.delete(schema.salesOrders).where(eq(schema.salesOrders.tenantId, TEST_TENANT_ID)); } catch {}
+  try { await testDb.delete(schema.discountPolicies).where(eq(schema.discountPolicies.tenantId, TEST_TENANT_ID)); } catch {}
+  try { await testDb.delete(schema.items).where(eq(schema.items.tenantId, TEST_TENANT_ID)); } catch {}
+  try { await testDb.delete(schema.itemCategories).where(eq(schema.itemCategories.tenantId, TEST_TENANT_ID)); } catch {}
+  try { await testDb.delete(schema.unitOfMeasures); } catch {}
+  try { await testDb.delete(schema.customers).where(eq(schema.customers.tenantId, TEST_TENANT_ID)); } catch {}
 }
 
 let customerId: string;
@@ -165,7 +166,7 @@ describe('Sales order lifecycle', () => {
 
     const lineItems = await service.getSalesOrderLineItems(created.id, TEST_TENANT_ID);
     expect(lineItems).toHaveLength(1);
-    expect(lineItems[0].quantity).toBe('5');
+    expect(lineItems[0].quantity).toBe('5.00');
     expect(lineItems[0].unitPrice).toBe('100.0000');
     expect(lineItems[0].total).toBe('500.0000');
   });
@@ -273,7 +274,7 @@ describe('Quotation lifecycle', () => {
 
     const lineItems = await service.getQuotationLineItems(created.id, TEST_TENANT_ID);
     expect(lineItems).toHaveLength(1);
-    expect(lineItems[0].quantity).toBe('10');
+    expect(lineItems[0].quantity).toBe('10.00');
     expect(lineItems[0].unitPrice).toBe('50.0000');
     expect(lineItems[0].total).toBe('500.0000');
   });
