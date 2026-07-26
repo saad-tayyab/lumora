@@ -1,4 +1,4 @@
-const BASE_URL = 'http://localhost:4000';
+export const BACKEND_URL = 'http://localhost:4000';
 
 export class ApiError extends Error {
   code: string;
@@ -17,7 +17,7 @@ async function request<T>(path: string, init?: RequestInit): Promise<T> {
   const headers = new Headers(init?.headers);
   headers.set('Content-Type', 'application/json');
 
-  const res = await fetch(`${BASE_URL}${path}`, {
+  const res = await fetch(`${BACKEND_URL}${path}`, {
     ...init,
     headers,
     credentials: 'include',
@@ -52,19 +52,7 @@ async function request<T>(path: string, init?: RequestInit): Promise<T> {
   return body as T;
 }
 
-export interface PaginatedResponse<T> {
-  data: T[];
-  total: number;
-  limit: number;
-  offset: number;
-}
-
-export interface ListResponse<T> {
-  data: T[];
-  total: number;
-  page: number;
-  limit: number;
-}
+export type { ListResponse, PagePaginatedResponse, PaginatedResponse } from '@lumora/shared';
 
 export const api = {
   get: <T>(path: string) => request<T>(path),

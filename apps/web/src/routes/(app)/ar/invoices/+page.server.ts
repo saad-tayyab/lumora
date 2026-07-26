@@ -1,6 +1,6 @@
 import type { PageServerLoad } from './$types';
+import { BACKEND_URL } from '$lib/api';
 
-const BASE_URL = 'http://localhost:4000';
 
 export const load: PageServerLoad = async ({ url }) => {
   const limit = Number(url.searchParams.get('limit')) || 20;
@@ -13,7 +13,7 @@ export const load: PageServerLoad = async ({ url }) => {
     if (status) params.set('status', status);
     if (customerId) params.set('customerId', customerId);
 
-    const res = await fetch(`${BASE_URL}/ar/invoices?${params}`, { credentials: 'include' });
+    const res = await fetch(`${BACKEND_URL}/ar/invoices?${params}`, { credentials: 'include' });
     if (!res.ok) throw new Error('Failed to fetch invoices');
     const data = await res.json();
     return { invoices: data.data, total: data.total, limit, offset };

@@ -1,5 +1,4 @@
 <script lang="ts">
-import { onMount } from 'svelte';
 import { listPayments } from '$lib/api/ar';
 import type { Payment } from '$lib/types';
 import { formatCurrency, formatDate } from '$lib/utils/format';
@@ -24,8 +23,6 @@ async function load() {
     loading = false;
   }
 }
-
-onMount(load);
 
 const totalPages = $derived(Math.ceil(total / limit));
 </script>

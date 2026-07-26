@@ -1,5 +1,4 @@
 <script lang="ts">
-import { onMount } from 'svelte';
 import { toast } from 'svelte-sonner';
 import { deleteCustomer, listCustomers } from '$lib/api/ar';
 import type { Customer } from '$lib/types';
@@ -36,8 +35,6 @@ async function handleDelete(id: string, name: string) {
     toast.error(e instanceof Error ? e.message : 'Failed to delete customer');
   }
 }
-
-onMount(load);
 
 const totalPages = $derived(Math.ceil(total / limit));
 </script>

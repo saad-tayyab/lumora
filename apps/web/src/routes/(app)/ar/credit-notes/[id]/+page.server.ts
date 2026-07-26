@@ -1,11 +1,11 @@
 import { error } from '@sveltejs/kit';
 import type { PageServerLoad } from './$types';
+import { BACKEND_URL } from '$lib/api';
 
-const BASE_URL = 'http://localhost:4000';
 
 export const load: PageServerLoad = async ({ params }) => {
   try {
-    const cnRes = await fetch(`${BASE_URL}/ar/credit-notes/${params.id}`, {
+    const cnRes = await fetch(`${BACKEND_URL}/ar/credit-notes/${params.id}`, {
       credentials: 'include',
     });
     if (cnRes.status === 404)
@@ -13,7 +13,7 @@ export const load: PageServerLoad = async ({ params }) => {
     if (!cnRes.ok) throw new Error('Failed to fetch credit note');
     const creditNote = await cnRes.json();
 
-    const custRes = await fetch(`${BASE_URL}/ar/customers/${creditNote.customerId}`, {
+    const custRes = await fetch(`${BACKEND_URL}/ar/customers/${creditNote.customerId}`, {
       credentials: 'include',
     });
     const customer = custRes.ok ? await custRes.json() : null;

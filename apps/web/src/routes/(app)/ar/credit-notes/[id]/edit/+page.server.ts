@@ -1,14 +1,13 @@
 import { fail, redirect } from '@sveltejs/kit';
-import { api } from '$lib/api';
+import { api, BACKEND_URL } from '$lib/api';
 import type { Actions, PageServerLoad } from './$types';
 
-const BASE_URL = 'http://localhost:4000';
 
 export const load: PageServerLoad = async ({ params }) => {
   try {
     const [cnRes, custRes] = await Promise.all([
-      fetch(`${BASE_URL}/ar/credit-notes/${params.id}`, { credentials: 'include' }),
-      fetch(`${BASE_URL}/ar/customers?limit=100`, { credentials: 'include' }),
+      fetch(`${BACKEND_URL}/ar/credit-notes/${params.id}`, { credentials: 'include' }),
+      fetch(`${BACKEND_URL}/ar/customers?limit=100`, { credentials: 'include' }),
     ]);
     if (cnRes.status === 404) throw new Error('NOT_FOUND');
     if (!cnRes.ok) throw new Error('Failed to fetch credit note');
@@ -51,7 +50,7 @@ export const actions: Actions = {
       };
       if (notes) body.notes = notes.trim();
 
-      const res = await fetch(`${BASE_URL}/ar/credit-notes/${params.id}`, {
+      const res = await fetch(`${BACKEND_URL}/ar/credit-notes/${params.id}`, {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(body),

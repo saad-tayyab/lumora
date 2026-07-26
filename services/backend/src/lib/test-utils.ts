@@ -19,7 +19,7 @@ export function createMockSession(overrides: Partial<AuthData> = {}): AuthData {
 
 // ─── Encore Auth Mock ──────────────────────────────────────────────────────
 // Usage in tests:
-//   import * as auth from '~encore/auth';
+//   import * as auth from 'encore.dev/internal/codegen/auth';
 //   vi.spyOn(auth, 'getAuthData').mockReturnValue({ userID: '...', tenantId: '...', userId: '...' });
 
 // ─── Mock Database ─────────────────────────────────────────────────────────

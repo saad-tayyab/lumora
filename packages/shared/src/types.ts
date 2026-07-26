@@ -21,7 +21,21 @@ export interface ApiResponse<T> {
 export interface PaginatedResponse<T> {
   data: T[];
   total: number;
+  limit: number;
+  offset: number;
+}
+
+export interface PagePaginatedResponse<T> {
+  data: T[];
+  total: number;
   page: number;
   limit: number;
   totalPages: number;
+}
+
+export interface ListResponse<T> {
+  data: T[];
+  total: number;
+  page: number;
+  limit: number;
 }

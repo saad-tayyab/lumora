@@ -1,7 +1,6 @@
 import { fail, redirect } from '@sveltejs/kit';
+import { BACKEND_URL } from '$lib/api';
 import type { Actions } from './$types';
-
-const backendUrl = 'http://localhost:4000';
 
 export const actions: Actions = {
   default: async ({ request, cookies }) => {
@@ -14,7 +13,7 @@ export const actions: Actions = {
     }
 
     try {
-      const res = await fetch(`${backendUrl}/api/auth/sign-in/email`, {
+      const res = await fetch(`${BACKEND_URL}/api/auth/sign-in/email`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ email, password }),

@@ -2,10 +2,18 @@ import { getSession } from '@lumora/auth/middleware';
 import { createAuth } from '@lumora/auth/server';
 import { APIError, type Header } from 'encore.dev/api';
 import { authHandler } from 'encore.dev/auth';
-import { db, authSchema } from './database';
+import { authSchema, db } from './database';
 
-const betterAuthInstance = createAuth(db, authSchema);
-export { betterAuthInstance as betterAuth };
+let _betterAuth: ReturnType<typeof createAuth> | null = null;
+
+function getBetterAuth() {
+  if (!_betterAuth) {
+    _betterAuth = createAuth(db, authSchema);
+  }
+  return _betterAuth;
+}
+
+export { getBetterAuth as betterAuth };
 
 interface AuthParams {
   authorization: Header<'Authorization'>;
@@ -23,7 +31,7 @@ export const auth = authHandler<AuthParams, AuthData>(async (params) => {
   if (params.authorization) headers.set('Authorization', params.authorization);
   if (params.cookie) headers.set('Cookie', params.cookie);
 
-  const session = await getSession(betterAuthInstance, headers);
+  const session = await getSession(getBetterAuth(), headers);
 
   if (!session) {
     throw APIError.unauthenticated('Valid session required');
@@ -31,7 +39,7 @@ export const auth = authHandler<AuthParams, AuthData>(async (params) => {
 
   return {
     userID: session.userId,
-    tenantId: session.tenantId,
+    tenantId: session.tenantId || 'default',
     userId: session.userId,
   };
 });

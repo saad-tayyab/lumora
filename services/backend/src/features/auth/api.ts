@@ -1,5 +1,5 @@
 import { APIError, api } from 'encore.dev/api';
-import { betterAuth } from '../../auth';
+import { betterAuth as getBetterAuth } from '../../auth';
 import { getAuthData } from 'encore.dev/internal/codegen/auth';
 import { ValidationError } from '../../lib/errors';
 import * as service from './service';
@@ -37,7 +37,7 @@ export const signInEmail = api(
   { expose: true, auth: false, method: 'POST', path: '/api/auth/sign-in/email' },
   async (req: { email: string; password: string }): Promise<{ user: any; sessionToken: string | null }> => {
     try {
-      const response = await betterAuth.api.signInEmail({
+      const response = await getBetterAuth().api.signInEmail({
         body: { email: req.email, password: req.password },
         asResponse: true,
       });
@@ -66,7 +66,7 @@ export const signUpEmail = api(
     name: string;
   }): Promise<{ user: any; session: any }> => {
     try {
-      const result = await betterAuth.api.signUpEmail({
+      const result = await getBetterAuth().api.signUpEmail({
         body: { email: req.email, password: req.password, name: req.name },
       });
       return result as any;
@@ -92,9 +92,21 @@ export const getSession = api(
 );
 
 export const signOut = api(
-  { expose: true, auth: false, method: 'POST', path: '/api/auth/sign-out' },
+  { expose: true, auth: true, method: 'POST', path: '/api/auth/sign-out' },
   async (): Promise<{ success: boolean }> => {
-    return { success: true };
+    try {
+      const headers = new Headers();
+      const authData = getAuthData();
+      if (authData) {
+        // Forward cookies to BetterAuth for session invalidation
+        const cookie = (authData as any).cookie || '';
+        if (cookie) headers.set('Cookie', cookie);
+      }
+      await getBetterAuth().api.signOut({ headers });
+      return { success: true };
+    } catch {
+      return { success: true };
+    }
   },
 );
 

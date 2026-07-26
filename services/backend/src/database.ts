@@ -8,5 +8,5 @@ const DB = new SQLDatabase('lumora', {
   },
 });
 
-export const db = drizzle(DB.connectionString, { schema: authSchema });
+export const db = drizzle(DB.connectionString);
 export { authSchema };

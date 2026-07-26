@@ -1,5 +1,6 @@
 <script lang="ts">
 import type { Snippet } from 'svelte';
+import { enhance } from '$app/forms';
 import { page } from '$app/stores';
 import { theme } from '$lib/stores/theme';
 import type { LayoutData } from './$types';
@@ -92,6 +93,16 @@ function isActive(href: string): boolean {
         >
           ⚙️
         </a>
+
+        <form method="POST" action="/logout" use:enhance>
+          <button
+            type="submit"
+            class="rounded-md p-2 text-muted-foreground hover:bg-accent hover:text-accent-foreground"
+            aria-label="Sign out"
+          >
+            🚪
+          </button>
+        </form>
       </div>
     </header>
 

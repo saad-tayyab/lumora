@@ -78,7 +78,11 @@ describe('hooks.server handle', () => {
 
     expect(mockFetch).toHaveBeenCalledWith(
       'http://localhost:4000/api/auth/session',
-      expect.objectContaining({ headers: expect.any(Headers) }),
+      expect.objectContaining({
+        headers: expect.objectContaining({
+          Authorization: 'Bearer session',
+        }),
+      }),
     );
   });
 
@@ -93,7 +97,16 @@ describe('hooks.server handle', () => {
 
     await handle({ event, resolve });
 
-    expect(event.locals.user).toEqual(mockUser);
+    expect(event.locals.user).toEqual({
+      id: 'u1',
+      email: 'test@test.com',
+      name: 'Test',
+      username: 'test',
+      status: 'active',
+      emailVerified: false,
+      mfaEnabled: false,
+      tenantId: 't1',
+    });
     expect(event.locals.userId).toBe('u1');
     expect(event.locals.tenantId).toBe('t1');
   });

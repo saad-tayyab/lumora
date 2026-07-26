@@ -21,10 +21,6 @@
     "./middleware": {
       "types": "./src/middleware.ts",
       "default": "./src/middleware.ts"
-    },
-    "./rbac": {
-      "types": "./src/rbac.ts",
-      "default": "./src/rbac.ts"
     }
   },
   "files": ["dist", "src"],

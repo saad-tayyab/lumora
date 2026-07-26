@@ -26,11 +26,11 @@ describe('authClient', () => {
     delete process.env.BETTER_AUTH_URL;
   });
 
-  it('should default to localhost:3000 when env not set', async () => {
+  it('should default to localhost:4000 when env not set', async () => {
     delete process.env.BETTER_AUTH_URL;
     const { authClient } = await import('./client');
     expect(mockCreateAuthClient).toHaveBeenCalledWith(
-      expect.objectContaining({ baseURL: 'http://localhost:3000' }),
+      expect.objectContaining({ baseURL: 'http://localhost:4000' }),
     );
   });
 

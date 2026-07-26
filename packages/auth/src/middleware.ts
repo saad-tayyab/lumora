@@ -11,7 +11,7 @@ export async function getSession(auth: Auth, headers: Headers) {
 
   return {
     userId: session.user.id,
-    tenantId: String((session.user as Record<string, unknown>).tenantId || ''),
+    tenantId: String((session.user as Record<string, unknown>).tenantId || 'default'),
     user: session.user,
   };
 }

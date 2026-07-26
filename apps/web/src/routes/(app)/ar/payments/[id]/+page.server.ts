@@ -1,17 +1,17 @@
 import { error } from '@sveltejs/kit';
 import type { PageServerLoad } from './$types';
+import { BACKEND_URL } from '$lib/api';
 
-const BASE_URL = 'http://localhost:4000';
 
 export const load: PageServerLoad = async ({ params }) => {
   try {
-    const payRes = await fetch(`${BASE_URL}/ar/payments/${params.id}`, { credentials: 'include' });
+    const payRes = await fetch(`${BACKEND_URL}/ar/payments/${params.id}`, { credentials: 'include' });
     if (payRes.status === 404)
       throw error(404, { code: 'NOT_FOUND', message: 'Payment not found' });
     if (!payRes.ok) throw new Error('Failed to fetch payment');
     const payment = await payRes.json();
 
-    const custRes = await fetch(`${BASE_URL}/ar/customers/${payment.customerId}`, {
+    const custRes = await fetch(`${BACKEND_URL}/ar/customers/${payment.customerId}`, {
       credentials: 'include',
     });
     const customer = custRes.ok ? await custRes.json() : null;

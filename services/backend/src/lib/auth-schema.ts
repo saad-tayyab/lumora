@@ -6,6 +6,10 @@ export const user = pgTable('user', {
   email: varchar('email', { length: 255 }).notNull().unique(),
   emailVerified: boolean('emailVerified').notNull().default(false),
   image: text('image'),
+  tenantId: varchar('tenantId', { length: 255 }).notNull().default('default'),
+  username: varchar('username', { length: 50 }).default(''),
+  status: varchar('status', { length: 20 }).notNull().default('active'),
+  mfaEnabled: boolean('mfaEnabled').notNull().default(false),
   createdAt: timestamp('createdAt').notNull().defaultNow(),
   updatedAt: timestamp('updatedAt').notNull().defaultNow(),
 });
@@ -16,7 +20,9 @@ export const session = pgTable('session', {
   token: varchar('token', { length: 255 }).notNull().unique(),
   ipAddress: varchar('ipAddress', { length: 45 }),
   userAgent: varchar('userAgent', { length: 500 }),
-  userId: text('userId').notNull().references(() => user.id, { onDelete: 'cascade' }),
+  userId: text('userId')
+    .notNull()
+    .references(() => user.id, { onDelete: 'cascade' }),
   createdAt: timestamp('createdAt').notNull().defaultNow(),
   updatedAt: timestamp('updatedAt').notNull().defaultNow(),
 });
@@ -25,7 +31,9 @@ export const account = pgTable('account', {
   id: text('id').primaryKey(),
   accountId: text('accountId').notNull(),
   providerId: text('providerId').notNull(),
-  userId: text('userId').notNull().references(() => user.id, { onDelete: 'cascade' }),
+  userId: text('userId')
+    .notNull()
+    .references(() => user.id, { onDelete: 'cascade' }),
   accessToken: text('accessToken'),
   refreshToken: text('refreshToken'),
   idToken: text('idToken'),

@@ -1,5 +1,4 @@
 <script lang="ts">
-import { onMount } from 'svelte';
 import { listCreditNotes } from '$lib/api/ar';
 import type { CreditNote } from '$lib/types';
 import { formatCurrency, formatDate } from '$lib/utils/format';
@@ -30,8 +29,6 @@ async function load() {
     loading = false;
   }
 }
-
-onMount(load);
 
 $effect(() => {
   void statusFilter;
