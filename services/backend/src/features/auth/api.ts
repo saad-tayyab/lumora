@@ -82,10 +82,33 @@ export const getSession = api(
     const authData = getAuthData();
     if (!authData) throw APIError.unauthenticated('not authenticated');
 
+    const userId = (authData as any).userID || (authData as any).userId || '';
+    const tenantId = (authData as any).tenantId || '';
+
+    // Fetch full user from database
+    const { db, authSchema } = await import('../../database');
+    const { eq } = await import('drizzle-orm');
+    const rows = await db
+      .select()
+      .from(authSchema.user)
+      .where(eq(authSchema.user.id, userId))
+      .limit(1);
+
+    if (rows.length === 0) {
+      throw APIError.unauthenticated('User not found');
+    }
+
+    const user = rows[0];
     return {
       user: {
-        id: (authData as any).userID || (authData as any).userId || '',
-        tenantId: (authData as any).tenantId || '',
+        id: user.id,
+        email: user.email,
+        name: user.name,
+        username: user.username || '',
+        status: user.status || 'active',
+        emailVerified: user.emailVerified || false,
+        mfaEnabled: user.mfaEnabled || false,
+        tenantId: user.tenantId || tenantId,
       },
     };
   },

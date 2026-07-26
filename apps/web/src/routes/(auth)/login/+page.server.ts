@@ -12,6 +12,8 @@ export const actions: Actions = {
       return fail(400, { error: 'Email and password are required' });
     }
 
+    let sessionToken: string | null = null;
+
     try {
       const res = await fetch(`${BACKEND_URL}/api/auth/sign-in/email`, {
         method: 'POST',
@@ -25,19 +27,21 @@ export const actions: Actions = {
         return fail(400, { error: data.message || 'Invalid credentials' });
       }
 
-      if (data.sessionToken) {
-        cookies.set('better-auth.session_token', data.sessionToken, {
-          path: '/',
-          httpOnly: true,
-          secure: false,
-          sameSite: 'lax',
-          maxAge: 60 * 60 * 24 * 7,
-        });
-      }
-
-      return redirect(303, '/dashboard');
+      sessionToken = data.sessionToken ? decodeURIComponent(data.sessionToken) : null;
     } catch {
       return fail(500, { error: 'Failed to connect to server' });
     }
+
+    if (sessionToken) {
+      cookies.set('better-auth.session_token', sessionToken, {
+        path: '/',
+        httpOnly: true,
+        secure: false,
+        sameSite: 'lax',
+        maxAge: 60 * 60 * 24 * 7,
+      });
+    }
+
+    throw redirect(303, '/dashboard');
   },
 };
