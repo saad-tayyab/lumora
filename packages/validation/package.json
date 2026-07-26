@@ -14,12 +14,15 @@
   "files": ["dist"],
   "scripts": {
     "build": "tsc",
-    "typecheck": "tsc --noEmit"
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run"
   },
   "dependencies": {
     "zod": "^4.4.3"
   },
   "devDependencies": {
-    "typescript": "^6.0.0"
+    "@vitest/coverage-v8": "^4.1.10",
+    "typescript": "^6.0.0",
+    "vitest": "^4.1.10"
   }
 }
