@@ -49,6 +49,11 @@ bun.lockb
 *.sqlite
 .neon
 
+# Database TypeScript build artifacts (output goes to dist/, not src/)
+packages/database/src/**/*.js
+packages/database/src/**/*.d.ts
+packages/database/src/**/*.d.ts.map
+
 # Secrets - NEVER commit
 *.pem
 *.key
