@@ -1,9 +1,15 @@
 import { betterAuth } from 'better-auth';
 import { drizzleAdapter } from 'better-auth/adapters/drizzle';
 import { organization } from 'better-auth/plugins';
+import { v7 as uuidv7 } from 'uuid';
 
 export function createAuth(db: any, schema?: Record<string, any>) {
   return betterAuth({
+    advanced: {
+      database: {
+        generateId: () => uuidv7(),
+      },
+    },
     database: drizzleAdapter(db, {
       provider: 'pg',
       ...(schema ? { schema } : {}),

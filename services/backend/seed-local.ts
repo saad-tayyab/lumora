@@ -66,7 +66,7 @@ async function seed() {
   await db.insert(account).values({
     id: DEV_ACCOUNT,
     accountId: 'dev@lumora.app',
-    providerId: 'email',
+    providerId: 'credential',
     userId: DEV,
     password: DEV_PASSWORD_HASH,
   }).onConflictDoNothing();
