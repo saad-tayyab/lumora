@@ -31,7 +31,6 @@
     "vitest": "^4.1.10"
   },
   "dependencies": {
-    "@lumora/auth": "workspace:*",
     "@lumora/shared": "workspace:*",
     "@lumora/validation": "workspace:*",
     "bits-ui": "^2.18.1",

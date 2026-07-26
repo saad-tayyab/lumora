@@ -1,10 +1,5 @@
 import { describe, it, expect, vi, beforeEach } from 'vitest';
 import { handle } from './hooks.server';
-import { getSession } from '@lumora/auth/middleware';
-
-vi.mock('@lumora/auth/middleware', () => ({
-  getSession: vi.fn(),
-}));
 
 const mockRedirect = vi.hoisted(() =>
   vi.fn((_status: number, location: string) => {
@@ -22,6 +17,9 @@ vi.mock('@sveltejs/kit', async (importOriginal) => {
     redirect: mockRedirect,
   };
 });
+
+const mockFetch = vi.fn();
+vi.stubGlobal('fetch', mockFetch);
 
 function createEvent(pathname: string, headers: Record<string, string> = {}) {
   const request = new Request('http://localhost' + pathname, { headers });
@@ -47,7 +45,7 @@ describe('hooks.server handle', () => {
 
     const response = await handle({ event, resolve });
 
-    expect(getSession).not.toHaveBeenCalled();
+    expect(mockFetch).not.toHaveBeenCalled();
     expect(response).toBeInstanceOf(Response);
   });
 
@@ -57,7 +55,7 @@ describe('hooks.server handle', () => {
 
     const response = await handle({ event, resolve });
 
-    expect(getSession).not.toHaveBeenCalled();
+    expect(mockFetch).not.toHaveBeenCalled();
     expect(response).toBeInstanceOf(Response);
   });
 
@@ -67,43 +65,44 @@ describe('hooks.server handle', () => {
 
     const response = await handle({ event, resolve });
 
-    expect(getSession).not.toHaveBeenCalled();
+    expect(mockFetch).not.toHaveBeenCalled();
     expect(response).toBeInstanceOf(Response);
   });
 
   it('redirects unauthenticated users to /login', async () => {
-    vi.mocked(getSession).mockResolvedValue(null as any);
+    mockFetch.mockResolvedValue({ ok: false });
     const event = createEvent('/dashboard');
     const resolve = createResolve();
 
     await expect(handle({ event, resolve })).rejects.toThrow('Redirect to /login');
 
-    expect(getSession).toHaveBeenCalledWith(event.request.headers);
+    expect(mockFetch).toHaveBeenCalledWith(
+      'http://localhost:4000/api/auth/session',
+      expect.objectContaining({ headers: expect.any(Headers) }),
+    );
   });
 
   it('sets locals.user, locals.userId, and locals.tenantId from session', async () => {
-    const mockSession = {
-      user: { id: 'u1', email: 'test@test.com', name: 'Test', username: 'test' },
-      userId: 'u1',
-      tenantId: 't1',
-    };
-    vi.mocked(getSession).mockResolvedValue(mockSession as any);
+    const mockUser = { id: 'u1', email: 'test@test.com', name: 'Test', username: 'test', tenantId: 't1' };
+    mockFetch.mockResolvedValue({
+      ok: true,
+      json: () => Promise.resolve({ user: mockUser }),
+    });
     const event = createEvent('/dashboard');
     const resolve = createResolve();
 
     await handle({ event, resolve });
 
-    expect(event.locals.user).toEqual(mockSession.user);
+    expect(event.locals.user).toEqual(mockUser);
     expect(event.locals.userId).toBe('u1');
     expect(event.locals.tenantId).toBe('t1');
   });
 
   it('resolves the event after successful session check', async () => {
-    vi.mocked(getSession).mockResolvedValue({
-      user: { id: 'u1' },
-      userId: 'u1',
-      tenantId: 't1',
-    } as any);
+    mockFetch.mockResolvedValue({
+      ok: true,
+      json: () => Promise.resolve({ user: { id: 'u1', tenantId: 't1' } }),
+    });
     const event = createEvent('/invoices');
     const resolve = createResolve();
 
@@ -113,19 +112,19 @@ describe('hooks.server handle', () => {
     expect(response).toBeInstanceOf(Response);
   });
 
-  it('redirects to /login when getSession throws a non-redirect error', async () => {
-    vi.mocked(getSession).mockRejectedValue(new Error('network failure'));
+  it('redirects to /login when fetch throws a non-redirect error', async () => {
+    mockFetch.mockRejectedValue(new Error('network failure'));
     const event = createEvent('/reports');
     const resolve = createResolve();
 
     await expect(handle({ event, resolve })).rejects.toThrow('Redirect to /login');
   });
 
-  it('re-throws redirect errors from getSession without overriding', async () => {
+  it('re-throws redirect errors from fetch without overriding', async () => {
     const redirectError = new Error('Redirect to /expired');
     (redirectError as any).status = 302;
     (redirectError as any).location = '/expired';
-    vi.mocked(getSession).mockRejectedValue(redirectError);
+    mockFetch.mockRejectedValue(redirectError);
     const event = createEvent('/settings');
     const resolve = createResolve();
 

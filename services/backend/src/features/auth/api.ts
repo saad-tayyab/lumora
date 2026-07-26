@@ -30,6 +30,16 @@ import {
   UpdateUserSchema,
 } from './types';
 
+export const getSession = api(
+  { expose: true, auth: true, method: 'GET', path: '/api/auth/session' },
+  async (): Promise<{ user: UserResponse }> => {
+    const auth = getAuthData();
+    if (!auth) throw APIError.unauthenticated('not authenticated');
+    const user = await service.getUser(auth.userId, auth.tenantId);
+    return { user };
+  },
+);
+
 function validate<T>(schema: { parse: (data: unknown) => T }, data: unknown): T {
   try {
     return schema.parse(data);

@@ -17,16 +17,12 @@ const config = {
       '$utils': 'src/lib/utils',
       '$types': 'src/lib/types',
       '$stores': 'src/lib/stores',
-      '@lumora/auth': path.resolve(monorepoRoot, 'packages/auth/src'),
-      '@lumora/auth/*': path.resolve(monorepoRoot, 'packages/auth/src/*'),
       '@lumora/shared': path.resolve(monorepoRoot, 'packages/shared/src'),
       '@lumora/shared/*': path.resolve(monorepoRoot, 'packages/shared/src/*'),
       '@lumora/validation': path.resolve(monorepoRoot, 'packages/validation/src'),
       '@lumora/validation/*': path.resolve(monorepoRoot, 'packages/validation/src/*'),
       '@lumora/config': path.resolve(monorepoRoot, 'packages/config/src'),
       '@lumora/config/*': path.resolve(monorepoRoot, 'packages/config/src/*'),
-      '@lumora/database': path.resolve(monorepoRoot, 'packages/database/src'),
-      '@lumora/database/*': path.resolve(monorepoRoot, 'packages/database/src/*'),
     }
   }
 };

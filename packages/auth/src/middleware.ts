@@ -1,6 +1,6 @@
-import { auth } from './server';
+import type { Auth } from './server';
 
-export async function getSession(headers: Headers) {
+export async function getSession(auth: Auth, headers: Headers) {
   const session = await auth.api.getSession({
     headers,
   });
