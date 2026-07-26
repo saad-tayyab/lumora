@@ -12,6 +12,7 @@
     "lint": "biome check src/",
     "test": "vitest run",
     "test:unit": "vitest run",
+    "test:e2e": "playwright test",
     "clean": "rm -rf .svelte-kit node_modules"
   },
   "devDependencies": {

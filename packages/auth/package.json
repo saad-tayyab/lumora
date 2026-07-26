@@ -3,34 +3,35 @@
   "version": "0.0.1",
   "private": true,
   "type": "module",
-  "main": "./dist/index.js",
-  "types": "./dist/index.d.ts",
+  "main": "./src/index.ts",
+  "types": "./src/index.ts",
   "exports": {
     ".": {
-      "types": "./dist/index.d.ts",
-      "default": "./dist/index.js"
+      "types": "./src/index.ts",
+      "default": "./src/index.ts"
     },
     "./server": {
-      "types": "./dist/server.d.ts",
-      "default": "./dist/server.js"
+      "types": "./src/server.ts",
+      "default": "./src/server.ts"
     },
     "./client": {
-      "types": "./dist/client.d.ts",
-      "default": "./dist/client.js"
+      "types": "./src/client.ts",
+      "default": "./src/client.ts"
     },
     "./middleware": {
-      "types": "./dist/middleware.d.ts",
-      "default": "./dist/middleware.js"
+      "types": "./src/middleware.ts",
+      "default": "./src/middleware.ts"
     },
     "./rbac": {
-      "types": "./dist/rbac.d.ts",
-      "default": "./dist/rbac.js"
+      "types": "./src/rbac.ts",
+      "default": "./src/rbac.ts"
     }
   },
-  "files": ["dist"],
+  "files": ["dist", "src"],
   "scripts": {
     "build": "tsc",
     "typecheck": "tsc --noEmit",
+    "lint": "biome check src/",
     "test": "vitest run"
   },
   "dependencies": {
