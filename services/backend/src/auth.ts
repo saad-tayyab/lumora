@@ -16,8 +16,8 @@ function getBetterAuth() {
 export { getBetterAuth as betterAuth };
 
 interface AuthParams {
-  authorization: Header<'Authorization'>;
-  cookie: Header<'Cookie'>;
+  authorization?: Header<'Authorization'>;
+  cookie?: Header<'Cookie'>;
 }
 
 export interface AuthData {
