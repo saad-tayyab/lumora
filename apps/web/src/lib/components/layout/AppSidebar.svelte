@@ -38,7 +38,7 @@
 			</a>
 		</div>
 
-		<ScrollArea class="flex-1 py-2">
+		<ScrollArea class="flex-1 min-h-0 py-2">
 			<nav class="space-y-1 px-2">
 				<a
 					href={dashboardItem.href}
@@ -143,7 +143,7 @@
 
 <!-- Desktop Sidebar -->
 <aside
-	class="hidden lg:fixed lg:inset-y-0 lg:left-0 lg:z-50 lg:flex lg:w-64 lg:flex-col lg:border-r lg:bg-card"
+	class="hidden lg:fixed lg:inset-y-0 lg:left-0 lg:z-50 lg:flex lg:w-64 lg:flex-col lg:border-r lg:bg-card lg:overflow-hidden"
 >
 	{@render sidebarContent()}
 </aside>
