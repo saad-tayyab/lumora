@@ -3,6 +3,8 @@ import { toast } from 'svelte-sonner';
 import { type Quotation, salesApi } from '$lib/api/sales';
 import { formatCurrency, formatDate } from '$lib/utils/format';
 import type { PageData } from './$types';
+import { Button } from '$lib/components/ui/button';
+import * as Card from '$lib/components/ui/card';
 
 let { data }: { data: PageData } = $props();
 let quotations = $state<Quotation[]>(data.quotations);
@@ -63,9 +65,9 @@ $effect(() => {
       <h1 class="text-3xl font-bold text-foreground">Quotations</h1>
       <p class="text-muted-foreground">Manage customer quotations</p>
     </div>
-    <a href="/sales/quotations/new" class="inline-flex items-center gap-2 rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground hover:bg-primary/90">
+    <Button href="/sales/quotations/new">
       New Quotation
-    </a>
+    </Button>
   </div>
 
   <div class="flex items-center gap-4">
@@ -81,7 +83,7 @@ $effect(() => {
     <span class="text-sm text-muted-foreground">{total} total</span>
   </div>
 
-  <div class="rounded-lg border bg-card shadow-sm">
+  <Card.Root class="shadow-sm"><Card.Content class="p-0">
     {#if loading}
       <div class="flex justify-center py-12">
         <div class="h-8 w-8 animate-spin rounded-full border-2 border-primary border-t-transparent"></div>
@@ -132,5 +134,5 @@ $effect(() => {
         </table>
       </div>
     {/if}
-  </div>
+  </Card.Content></Card.Root>
 </div>

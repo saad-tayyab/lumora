@@ -2,6 +2,7 @@
 import { listCreditNotes } from '$lib/api/ar';
 import type { CreditNote } from '$lib/types';
 import { formatCurrency, formatDate } from '$lib/utils/format';
+import { Button } from '$lib/components/ui/button';
 
 let creditNotes = $state<CreditNote[]>([]);
 let loading = $state(true);
@@ -52,12 +53,7 @@ const statusStyles: Record<string, string> = {
 			<h1 class="text-3xl font-bold text-foreground">Credit Notes</h1>
 			<p class="text-muted-foreground">Manage customer credit notes</p>
 		</div>
-		<a
-			href="/ar/credit-notes/new"
-			class="rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground hover:bg-primary/90"
-		>
-			Create Credit Note
-		</a>
+		<Button href="/ar/credit-notes/new">Create Credit Note</Button>
 	</div>
 
 	<div class="flex items-center gap-4">
@@ -139,23 +135,15 @@ const statusStyles: Record<string, string> = {
 					Showing {page * limit + 1}-{Math.min((page + 1) * limit, total)} of {total}
 				</p>
 				<div class="flex items-center gap-2">
-					<button
-						onclick={() => (page = Math.max(0, page - 1))}
-						disabled={page === 0}
-						class="rounded-md border px-3 py-1 text-sm hover:bg-accent disabled:opacity-50"
-					>
-						Previous
-					</button>
+				<Button variant="outline" size="sm" onclick={() => (page = Math.max(0, page - 1))} disabled={page === 0}>
+					Previous
+				</Button>
 					<span class="text-sm text-muted-foreground">
 						Page {page + 1} of {totalPages}
 					</span>
-					<button
-						onclick={() => (page = Math.min(totalPages - 1, page + 1))}
-						disabled={page >= totalPages - 1}
-						class="rounded-md border px-3 py-1 text-sm hover:bg-accent disabled:opacity-50"
-					>
-						Next
-					</button>
+				<Button variant="outline" size="sm" onclick={() => (page = Math.min(totalPages - 1, page + 1))} disabled={page >= totalPages - 1}>
+					Next
+				</Button>
 				</div>
 			</div>
 		{/if}

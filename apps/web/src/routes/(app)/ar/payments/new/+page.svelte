@@ -2,9 +2,11 @@
 import { superForm } from 'sveltekit-superforms';
 import { toast } from 'svelte-sonner';
 import { Input } from '$lib/components/ui/input';
+import DatePicker from '$lib/components/ui/date-picker.svelte';
 import { Label } from '$lib/components/ui/label';
 import { Button } from '$lib/components/ui/button';
 import { Textarea } from '$lib/components/ui/textarea';
+import { Card, CardContent } from '$lib/components/ui/card';
 
 let { data } = $props();
 const { form, enhance, submitting } = superForm(data.form);
@@ -17,7 +19,8 @@ let customers = $derived(data.customers);
 		<p class="text-muted-foreground">Record a customer payment</p>
 	</div>
 
-	<div class="rounded-lg border bg-card p-6 shadow-sm">
+	<Card>
+		<CardContent>
 		<form method="POST" use:enhance class="space-y-6">
 			<div class="grid gap-4 md:grid-cols-2">
 				<div class="space-y-2">
@@ -39,7 +42,7 @@ let customers = $derived(data.customers);
 				</div>
 				<div class="space-y-2">
 					<Label for="paymentDate">Payment Date *</Label>
-					<Input id="paymentDate" type="date" bind:value={$form.paymentDate} />
+					<DatePicker bind:value={$form.paymentDate} />
 				</div>
 				<div class="space-y-2">
 					<Label for="amount">Amount *</Label>
@@ -97,5 +100,6 @@ let customers = $derived(data.customers);
 				<Button variant="outline" href="/ar/payments">Cancel</Button>
 			</div>
 		</form>
-	</div>
+		</CardContent>
+	</Card>
 </div>

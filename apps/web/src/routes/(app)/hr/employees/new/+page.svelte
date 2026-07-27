@@ -4,6 +4,9 @@ import { Button } from '$lib/components/ui/button';
 import { Label } from '$lib/components/ui/label';
 import { toast } from 'svelte-sonner';
 import { goto } from '$app/navigation';
+import * as Card from '$lib/components/ui/card';
+import { Input } from '$lib/components/ui/input';
+import DatePicker from '$lib/components/ui/date-picker.svelte';
 
 let { data } = $props();
 const { form, errors, enhance, submitting, message } = superForm(data.form);
@@ -25,7 +28,7 @@ $effect(() => {
 	</div>
 
 	<form method="POST" use:enhance class="space-y-6">
-		<div class="rounded-lg border bg-card p-6 shadow-sm">
+		<Card.Root class="shadow-sm"><Card.Content>
 			<h2 class="mb-4 text-lg font-semibold text-card-foreground">Personal Information</h2>
 			<div class="grid gap-4 md:grid-cols-2">
 				<div class="space-y-1.5">
@@ -48,9 +51,9 @@ $effect(() => {
 					<input id="phone" type="tel" value={$form.phone ?? ''} oninput={(e) => $form.phone = e.currentTarget.value} class={inputClass} />
 				</div>
 			</div>
-		</div>
+		</Card.Content></Card.Root>
 
-		<div class="rounded-lg border bg-card p-6 shadow-sm">
+		<Card.Root class="shadow-sm"><Card.Content>
 			<h2 class="mb-4 text-lg font-semibold text-card-foreground">Employment Details</h2>
 			<div class="grid gap-4 md:grid-cols-2">
 				<div class="space-y-1.5">
@@ -82,14 +85,14 @@ $effect(() => {
 				</div>
 				<div class="space-y-1.5">
 					<Label for="dateOfJoining">Joining Date *</Label>
-					<input id="dateOfJoining" type="date" value={$form.dateOfJoining} oninput={(e) => $form.dateOfJoining = e.currentTarget.value} class={inputClass} />
+					<DatePicker bind:value={$form.dateOfJoining} />
 					{#if $errors.dateOfJoining}<p class="text-sm text-destructive">{$errors.dateOfJoining}</p>{/if}
 				</div>
 			</div>
-		</div>
+		</Card.Content></Card.Root>
 
 		<div class="flex items-center justify-end gap-3">
-			<a href="/hr/employees" class="inline-flex items-center rounded-md border px-4 py-2 text-sm font-medium hover:bg-accent">Cancel</a>
+			<Button variant="outline" href="/hr/employees">Cancel</Button>
 			<Button type="submit" disabled={$submitting}>
 				{#if $submitting}<div class="mr-2 h-4 w-4 animate-spin rounded-full border-2 border-primary-foreground border-t-transparent"></div>{/if}
 				Add Employee

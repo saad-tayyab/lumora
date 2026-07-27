@@ -3,6 +3,7 @@ import { toast } from 'svelte-sonner';
 import { invalidateAll } from '$app/navigation';
 import { formatDateTime } from '$lib/utils/format';
 import type { PageData } from './$types';
+import * as Card from '$lib/components/ui/card';
 
 let { data }: { data: PageData } = $props();
 let revoking = $state<string | null>(null);
@@ -29,7 +30,7 @@ async function handleRevoke(id: string) {
     <p class="text-muted-foreground">{data.total} sessions</p>
   </div>
 
-  <div class="rounded-lg border bg-card shadow-sm">
+  <Card.Root class="shadow-sm"><Card.Content class="p-0">
     <div class="overflow-x-auto">
       <table class="w-full text-sm">
         <thead>
@@ -60,5 +61,5 @@ async function handleRevoke(id: string) {
         </tbody>
       </table>
     </div>
-  </div>
+  </Card.Content></Card.Root>
 </div>

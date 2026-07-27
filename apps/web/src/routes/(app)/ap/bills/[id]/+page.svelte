@@ -3,6 +3,8 @@ import { toast } from 'svelte-sonner';
 import { enhance } from '$app/forms';
 import { goto } from '$app/navigation';
 import { formatCurrency, formatDate } from '$lib/utils/format';
+import { Button } from '$lib/components/ui/button';
+import { Card, CardContent } from '$lib/components/ui/card';
 import type { PageData } from './$types';
 
 let { data }: { data: PageData } = $props();
@@ -49,9 +51,9 @@ const billStatusColor: Record<string, string> = {
             }
           };
         }}>
-          <button type="submit" disabled={actionLoading === 'submit'} class="inline-flex items-center rounded-md border border-yellow-500 px-4 py-2 text-sm font-medium text-yellow-700 hover:bg-yellow-50 disabled:opacity-50">
+          <Button type="submit" disabled={actionLoading === 'submit'} variant="outline">
             Submit for Approval
-          </button>
+          </Button>
         </form>
       {/if}
       {#if data.bill.status === 'pending_approval'}
@@ -67,9 +69,9 @@ const billStatusColor: Record<string, string> = {
             }
           };
         }}>
-          <button type="submit" disabled={actionLoading === 'approve'} class="inline-flex items-center rounded-md border border-blue-500 px-4 py-2 text-sm font-medium text-blue-700 hover:bg-blue-50 disabled:opacity-50">
+          <Button type="submit" disabled={actionLoading === 'approve'}>
             Approve
-          </button>
+          </Button>
         </form>
       {/if}
       {#if !['paid', 'voided'].includes(data.bill.status)}
@@ -85,95 +87,103 @@ const billStatusColor: Record<string, string> = {
             }
           };
         }}>
-          <button type="submit" disabled={actionLoading === 'void'} class="inline-flex items-center rounded-md border border-destructive px-4 py-2 text-sm font-medium text-destructive hover:bg-destructive/10 disabled:opacity-50">
+          <Button type="submit" disabled={actionLoading === 'void'} variant="destructive">
             Void
-          </button>
+          </Button>
         </form>
       {/if}
       {#if data.bill.status === 'draft'}
-        <a href="/ap/bills/{data.bill.id}/edit" class="inline-flex items-center rounded-md border px-4 py-2 text-sm font-medium hover:bg-accent">
+        <Button variant="outline" href="/ap/bills/{data.bill.id}/edit">
           Edit
-        </a>
-        <button onclick={() => (showDeleteConfirm = true)} class="inline-flex items-center rounded-md border border-destructive px-4 py-2 text-sm font-medium text-destructive hover:bg-destructive/10">
+        </Button>
+        <Button variant="destructive" onclick={() => (showDeleteConfirm = true)}>
           Delete
-        </button>
+        </Button>
       {/if}
     </div>
   </div>
 
   <div class="grid gap-6 lg:grid-cols-2">
-    <div class="rounded-lg border bg-card p-6 shadow-sm">
-      <h2 class="mb-4 text-lg font-semibold text-card-foreground">Bill Details</h2>
-      <dl class="space-y-3">
-        <div class="flex justify-between">
-          <dt class="text-sm text-muted-foreground">Vendor</dt>
-          <dd class="text-sm font-medium">{data.bill.vendorName || '-'}</dd>
-        </div>
-        <div class="flex justify-between">
-          <dt class="text-sm text-muted-foreground">Issue Date</dt>
-          <dd class="text-sm font-medium">{formatDate(data.bill.issueDate)}</dd>
-        </div>
-        <div class="flex justify-between">
-          <dt class="text-sm text-muted-foreground">Due Date</dt>
-          <dd class="text-sm font-medium">{formatDate(data.bill.dueDate)}</dd>
-        </div>
-      </dl>
-    </div>
+    <Card>
+      <CardContent>
+        <h2 class="mb-4 text-lg font-semibold text-card-foreground">Bill Details</h2>
+        <dl class="space-y-3">
+          <div class="flex justify-between">
+            <dt class="text-sm text-muted-foreground">Vendor</dt>
+            <dd class="text-sm font-medium">{data.bill.vendorName || '-'}</dd>
+          </div>
+          <div class="flex justify-between">
+            <dt class="text-sm text-muted-foreground">Issue Date</dt>
+            <dd class="text-sm font-medium">{formatDate(data.bill.issueDate)}</dd>
+          </div>
+          <div class="flex justify-between">
+            <dt class="text-sm text-muted-foreground">Due Date</dt>
+            <dd class="text-sm font-medium">{formatDate(data.bill.dueDate)}</dd>
+          </div>
+        </dl>
+      </CardContent>
+    </Card>
 
-    <div class="rounded-lg border bg-card p-6 shadow-sm">
-      <h2 class="mb-4 text-lg font-semibold text-card-foreground">Amounts</h2>
-      <dl class="space-y-3">
-        <div class="flex justify-between">
-          <dt class="text-sm text-muted-foreground">Subtotal</dt>
-          <dd class="text-sm font-medium">{formatCurrency(data.bill.subtotal)}</dd>
-        </div>
-        <div class="flex justify-between">
-          <dt class="text-sm text-muted-foreground">Tax</dt>
-          <dd class="text-sm font-medium">{formatCurrency(data.bill.taxAmount)}</dd>
-        </div>
-        <div class="flex justify-between border-t pt-3">
-          <dt class="text-sm font-medium text-card-foreground">Total</dt>
-          <dd class="text-lg font-bold">{formatCurrency(data.bill.total)}</dd>
-        </div>
-        <div class="flex justify-between">
-          <dt class="text-sm text-muted-foreground">Amount Paid</dt>
-          <dd class="text-sm font-medium text-green-600">{formatCurrency(data.bill.amountPaid)}</dd>
-        </div>
-      </dl>
-    </div>
+    <Card>
+      <CardContent>
+        <h2 class="mb-4 text-lg font-semibold text-card-foreground">Amounts</h2>
+        <dl class="space-y-3">
+          <div class="flex justify-between">
+            <dt class="text-sm text-muted-foreground">Subtotal</dt>
+            <dd class="text-sm font-medium">{formatCurrency(data.bill.subtotal)}</dd>
+          </div>
+          <div class="flex justify-between">
+            <dt class="text-sm text-muted-foreground">Tax</dt>
+            <dd class="text-sm font-medium">{formatCurrency(data.bill.taxAmount)}</dd>
+          </div>
+          <div class="flex justify-between border-t pt-3">
+            <dt class="text-sm font-medium text-card-foreground">Total</dt>
+            <dd class="text-lg font-bold">{formatCurrency(data.bill.total)}</dd>
+          </div>
+          <div class="flex justify-between">
+            <dt class="text-sm text-muted-foreground">Amount Paid</dt>
+            <dd class="text-sm font-medium text-green-600">{formatCurrency(data.bill.amountPaid)}</dd>
+          </div>
+        </dl>
+      </CardContent>
+    </Card>
   </div>
 
   {#if data.bill.lineItems && data.bill.lineItems.length > 0}
-    <div class="rounded-lg border bg-card p-6 shadow-sm">
-      <h2 class="mb-4 text-lg font-semibold text-card-foreground">Line Items</h2>
-      <div class="overflow-x-auto">
-        <table class="w-full text-sm">
-          <thead>
-            <tr class="border-t bg-muted/50">
-              <th class="px-4 py-2 text-left font-medium text-muted-foreground">Description</th>
-              <th class="px-4 py-2 text-right font-medium text-muted-foreground">Qty</th>
-              <th class="px-4 py-2 text-right font-medium text-muted-foreground">Unit Price</th>
-              <th class="px-4 py-2 text-right font-medium text-muted-foreground">Amount</th>
-            </tr>
-          </thead>
-          <tbody>
-            {#each data.bill.lineItems as item}
-              <tr class="border-t">
-                <td class="px-4 py-2">{item.description}</td>
-                <td class="px-4 py-2 text-right">{item.quantity}</td>
-                <td class="px-4 py-2 text-right">{formatCurrency(item.unitPrice)}</td>
-                <td class="px-4 py-2 text-right font-medium">{formatCurrency(item.amount)}</td>
+    <Card>
+      <CardContent>
+        <h2 class="mb-4 text-lg font-semibold text-card-foreground">Line Items</h2>
+        <div class="overflow-x-auto">
+          <table class="w-full text-sm">
+            <thead>
+              <tr class="border-t bg-muted/50">
+                <th class="px-4 py-2 text-left font-medium text-muted-foreground">Description</th>
+                <th class="px-4 py-2 text-right font-medium text-muted-foreground">Qty</th>
+                <th class="px-4 py-2 text-right font-medium text-muted-foreground">Unit Price</th>
+                <th class="px-4 py-2 text-right font-medium text-muted-foreground">Amount</th>
               </tr>
-            {/each}
-          </tbody>
-        </table>
-      </div>
-    </div>
+            </thead>
+            <tbody>
+              {#each data.bill.lineItems as item}
+                <tr class="border-t">
+                  <td class="px-4 py-2">{item.description}</td>
+                  <td class="px-4 py-2 text-right">{item.quantity}</td>
+                  <td class="px-4 py-2 text-right">{formatCurrency(item.unitPrice)}</td>
+                  <td class="px-4 py-2 text-right font-medium">{formatCurrency(item.amount)}</td>
+                </tr>
+              {/each}
+            </tbody>
+          </table>
+        </div>
+      </CardContent>
+    </Card>
   {:else}
-    <div class="rounded-lg border bg-card p-6 shadow-sm">
-      <h2 class="mb-4 text-lg font-semibold text-card-foreground">Line Items</h2>
-      <p class="py-4 text-center text-sm text-muted-foreground">No line items added to this bill yet.</p>
-    </div>
+    <Card>
+      <CardContent>
+        <h2 class="mb-4 text-lg font-semibold text-card-foreground">Line Items</h2>
+        <p class="py-4 text-center text-sm text-muted-foreground">No line items added to this bill yet.</p>
+      </CardContent>
+    </Card>
   {/if}
 </div>
 
@@ -185,9 +195,9 @@ const billStatusColor: Record<string, string> = {
         Are you sure you want to delete bill "{data.bill.billNumber}"? This action cannot be undone.
       </p>
       <div class="mt-4 flex justify-end gap-3">
-        <button onclick={() => (showDeleteConfirm = false)} class="inline-flex items-center rounded-md border px-4 py-2 text-sm font-medium hover:bg-accent">
+        <Button variant="outline" onclick={() => (showDeleteConfirm = false)}>
           Cancel
-        </button>
+        </Button>
         <form method="POST" action="?/delete" use:enhance={() => {
           deleting = true;
           return async ({ result }) => {
@@ -201,9 +211,9 @@ const billStatusColor: Record<string, string> = {
             showDeleteConfirm = false;
           };
         }}>
-          <button type="submit" disabled={deleting} class="inline-flex items-center rounded-md bg-destructive px-4 py-2 text-sm font-medium text-destructive-foreground hover:bg-destructive/90 disabled:opacity-50">
+          <Button type="submit" disabled={deleting} variant="destructive">
             {deleting ? 'Deleting...' : 'Delete'}
-          </button>
+          </Button>
         </form>
       </div>
     </div>

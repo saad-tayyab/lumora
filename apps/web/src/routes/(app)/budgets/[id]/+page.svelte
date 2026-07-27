@@ -1,6 +1,8 @@
 <script lang="ts">
 import { formatCurrency, formatDate } from '$lib/utils/format';
 import type { PageData } from './$types';
+import { Button } from '$lib/components/ui/button';
+import * as Card from '$lib/components/ui/card';
 
 let { data }: { data: PageData } = $props();
 
@@ -32,12 +34,12 @@ function statusColor(status: string): string {
         <p class="text-muted-foreground">{formatDate(budget.periodStart)} - {formatDate(budget.periodEnd)}</p>
       </div>
       <div class="flex gap-2">
-        <a href="/budgets/{budget.id}/edit" class="rounded-md border px-4 py-2 text-sm font-medium text-foreground hover:bg-accent">Edit</a>
-        <a href="/budgets" class="rounded-md border px-4 py-2 text-sm font-medium text-foreground hover:bg-accent">Back to List</a>
+        <Button variant="outline" href="/budgets/{budget.id}/edit">Edit</Button>
+        <Button variant="outline" href="/budgets">Back to List</Button>
       </div>
     </div>
 
-    <div class="rounded-lg border bg-card p-6 shadow-sm">
+    <Card.Root class="shadow-sm"><Card.Content>
       <h2 class="text-lg font-semibold text-card-foreground">Budget Lines</h2>
       {#if budget.lines.length > 0}
         <div class="mt-4 overflow-x-auto">
@@ -71,10 +73,10 @@ function statusColor(status: string): string {
       {:else}
         <p class="mt-4 text-sm text-muted-foreground">No budget lines yet</p>
       {/if}
-    </div>
+    </Card.Content></Card.Root>
 
     {#if data.variance.length > 0}
-      <div class="rounded-lg border bg-card p-6 shadow-sm">
+      <Card.Root class="shadow-sm"><Card.Content>
         <h2 class="text-lg font-semibold text-card-foreground">Variance Analysis</h2>
         <div class="mt-4 overflow-x-auto">
           <table class="w-full text-sm">
@@ -102,7 +104,7 @@ function statusColor(status: string): string {
             </tbody>
           </table>
         </div>
-      </div>
+      </Card.Content></Card.Root>
     {/if}
   </div>
 {:else}

@@ -2,6 +2,9 @@
 import { toast } from 'svelte-sonner';
 import { type Department, hrApi } from '$lib/api/hr';
 import type { PageData } from './$types';
+import { Button } from '$lib/components/ui/button';
+import * as Card from '$lib/components/ui/card';
+import { Input } from '$lib/components/ui/input';
 
 let { data }: { data: PageData } = $props();
 let departments = $state<Department[]>(data.departments);
@@ -49,16 +52,16 @@ async function deleteDept(id: string) {
   <form onsubmit={handleCreate} class="rounded-lg border bg-card p-6 shadow-sm">
     <h2 class="mb-4 text-lg font-semibold text-card-foreground">Add Department</h2>
     <div class="grid gap-4 md:grid-cols-3">
-      <div><label for="name" class="mb-1 block text-sm font-medium">Name *</label><input id="name" type="text" bind:value={name} class="w-full rounded-md border bg-background px-3 py-2 text-sm" required /></div>
-      <div><label for="code" class="mb-1 block text-sm font-medium">Code *</label><input id="code" type="text" bind:value={code} class="w-full rounded-md border bg-background px-3 py-2 text-sm" required /></div>
-      <div><label for="desc" class="mb-1 block text-sm font-medium">Description</label><input id="desc" type="text" bind:value={description} class="w-full rounded-md border bg-background px-3 py-2 text-sm" /></div>
+      <div><label for="name" class="mb-1 block text-sm font-medium">Name *</label><Input id="name" type="text" bind:value={name} required /></div>
+      <div><label for="code" class="mb-1 block text-sm font-medium">Code *</label><Input id="code" type="text" bind:value={code} required /></div>
+      <div><label for="desc" class="mb-1 block text-sm font-medium">Description</label><Input id="desc" type="text" bind:value={description} /></div>
     </div>
     <button type="submit" disabled={submitting} class="mt-4 inline-flex items-center rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground hover:bg-primary/90 disabled:opacity-50">
       {#if submitting}<div class="mr-2 h-4 w-4 animate-spin rounded-full border-2 border-primary-foreground border-t-transparent"></div>{/if}Add
     </button>
   </form>
 
-  <div class="rounded-lg border bg-card shadow-sm">
+  <Card.Root class="shadow-sm"><Card.Content class="p-0">
     {#if departments.length === 0}<div class="py-12 text-center text-muted-foreground">No departments</div>
     {:else}
       <div class="overflow-x-auto">
@@ -68,5 +71,5 @@ async function deleteDept(id: string) {
         </table>
       </div>
     {/if}
-  </div>
+  </Card.Content></Card.Root>
 </div>

@@ -2,9 +2,11 @@
 import { superForm } from 'sveltekit-superforms';
 import { toast } from 'svelte-sonner';
 import { Input } from '$lib/components/ui/input';
+import DatePicker from '$lib/components/ui/date-picker.svelte';
 import { Label } from '$lib/components/ui/label';
 import { Button } from '$lib/components/ui/button';
 import { Textarea } from '$lib/components/ui/textarea';
+import { Card, CardContent } from '$lib/components/ui/card';
 import { formatCurrency } from '$lib/utils/format';
 
 let { data } = $props();
@@ -41,7 +43,8 @@ function removeLineItem(index: number) {
 		<p class="text-muted-foreground">Create a new customer invoice</p>
 	</div>
 
-	<div class="rounded-lg border bg-card p-6 shadow-sm">
+	<Card>
+		<CardContent>
 		<form method="POST" use:enhance class="space-y-6">
 			<div class="grid gap-4 md:grid-cols-3">
 				<div class="space-y-2">
@@ -75,11 +78,11 @@ function removeLineItem(index: number) {
 				</div>
 				<div class="space-y-2">
 					<Label for="issueDate">Issue Date *</Label>
-					<Input id="issueDate" type="date" bind:value={$form.issueDate} />
+					<DatePicker bind:value={$form.issueDate} />
 				</div>
 				<div class="space-y-2">
 					<Label for="dueDate">Due Date *</Label>
-					<Input id="dueDate" type="date" bind:value={$form.dueDate} />
+					<DatePicker bind:value={$form.dueDate} />
 				</div>
 			</div>
 
@@ -180,5 +183,6 @@ function removeLineItem(index: number) {
 				<Button variant="outline" href="/ar/invoices">Cancel</Button>
 			</div>
 		</form>
-	</div>
+		</CardContent>
+	</Card>
 </div>

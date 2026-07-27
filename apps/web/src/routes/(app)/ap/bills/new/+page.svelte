@@ -2,9 +2,11 @@
 import { superForm } from 'sveltekit-superforms';
 import { toast } from 'svelte-sonner';
 import { Input } from '$lib/components/ui/input';
+import DatePicker from '$lib/components/ui/date-picker.svelte';
 import { Label } from '$lib/components/ui/label';
 import { Button } from '$lib/components/ui/button';
 import { Textarea } from '$lib/components/ui/textarea';
+import { Card, CardContent } from '$lib/components/ui/card';
 
 let { data } = $props();
 const { form, enhance, submitting } = superForm(data.form);
@@ -47,7 +49,9 @@ function removeLineItem(index: number) {
 		<h1 class="mt-2 text-3xl font-bold text-foreground">Record Bill</h1>
 	</div>
 
-	<form method="POST" use:enhance class="space-y-6 rounded-lg border bg-card p-6 shadow-sm">
+	<Card>
+		<CardContent>
+		<form method="POST" use:enhance class="space-y-6">
 		<div class="grid gap-4 md:grid-cols-2">
 			<div class="space-y-2">
 				<Label for="vendorId">Vendor *</Label>
@@ -68,11 +72,11 @@ function removeLineItem(index: number) {
 			</div>
 			<div class="space-y-2">
 				<Label for="issueDate">Issue Date *</Label>
-				<Input id="issueDate" type="date" bind:value={$form.issueDate} />
+				<DatePicker bind:value={$form.issueDate} />
 			</div>
 			<div class="space-y-2">
 				<Label for="dueDate">Due Date *</Label>
-				<Input id="dueDate" type="date" bind:value={$form.dueDate} />
+				<DatePicker bind:value={$form.dueDate} />
 			</div>
 		</div>
 
@@ -168,4 +172,6 @@ function removeLineItem(index: number) {
 			</Button>
 		</div>
 	</form>
+		</CardContent>
+	</Card>
 </div>

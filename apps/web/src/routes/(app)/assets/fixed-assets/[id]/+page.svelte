@@ -4,6 +4,8 @@ import { goto, invalidateAll } from '$app/navigation';
 import { formatCurrency, formatDate } from '$lib/utils/format';
 import DisposeAssetDialog from '$lib/components/asset/DisposeAssetDialog.svelte';
 import type { PageData } from './$types';
+import { Button } from '$lib/components/ui/button';
+import * as Card from '$lib/components/ui/card';
 
 let { data }: { data: PageData } = $props();
 let disposeOpen = $state(false);
@@ -82,7 +84,7 @@ async function handleDispose(detail: { disposalDate: string; disposalProceeds: s
     </div>
 
     <div class="grid gap-6 md:grid-cols-2">
-      <div class="rounded-lg border bg-card p-6 shadow-sm space-y-4">
+      <Card.Root class="shadow-sm"><Card.Content>
         <h2 class="text-lg font-semibold text-card-foreground">Asset Details</h2>
         <dl class="space-y-2 text-sm">
           <div class="flex justify-between">
@@ -114,9 +116,9 @@ async function handleDispose(detail: { disposalDate: string; disposalProceeds: s
             <dd class="font-medium">{asset.isDepreciable ? 'Yes' : 'No'}</dd>
           </div>
         </dl>
-      </div>
+      </Card.Content></Card.Root>
 
-      <div class="rounded-lg border bg-card p-6 shadow-sm space-y-4">
+      <Card.Root class="shadow-sm"><Card.Content>
         <h2 class="text-lg font-semibold text-card-foreground">Depreciation</h2>
         <dl class="space-y-2 text-sm">
           <div class="flex justify-between">
@@ -128,11 +130,11 @@ async function handleDispose(detail: { disposalDate: string; disposalProceeds: s
             <dd class="text-lg font-bold">{formatCurrency(asset.netBookValue)}</dd>
           </div>
         </dl>
-      </div>
+      </Card.Content></Card.Root>
     </div>
 
     {#if asset.status === 'active'}
-      <div class="rounded-lg border bg-card p-6 shadow-sm space-y-4">
+      <Card.Root class="shadow-sm"><Card.Content>
         <h2 class="text-lg font-semibold text-card-foreground">Dispose Asset</h2>
         <p class="text-sm text-muted-foreground">
           Permanently dispose this asset. This action will update the depreciation schedule and record any gain or loss.
@@ -144,7 +146,7 @@ async function handleDispose(detail: { disposalDate: string; disposalProceeds: s
         >
           Dispose Asset
         </button>
-      </div>
+      </Card.Content></Card.Root>
     {/if}
   </div>
 

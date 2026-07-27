@@ -4,6 +4,8 @@ import { goto } from '$app/navigation';
 import { type PurchaseOrder, procApi } from '$lib/api/proc';
 import { formatCurrency, formatDate } from '$lib/utils/format';
 import type { PageData } from './$types';
+import { Button } from '$lib/components/ui/button';
+import * as Card from '$lib/components/ui/card';
 
 let { data }: { data: PageData } = $props();
 let purchaseOrders = $state<PurchaseOrder[]>(data.purchaseOrders);
@@ -93,7 +95,7 @@ $effect(() => {
     <span class="text-sm text-muted-foreground">{total} total</span>
   </div>
 
-  <div class="rounded-lg border bg-card shadow-sm">
+  <Card.Root class="shadow-sm"><Card.Content class="p-0">
     {#if loading}
       <div class="flex justify-center py-12">
         <div class="h-8 w-8 animate-spin rounded-full border-2 border-primary border-t-transparent"></div>
@@ -158,5 +160,5 @@ $effect(() => {
         </table>
       </div>
     {/if}
-  </div>
+  </Card.Content></Card.Root>
 </div>

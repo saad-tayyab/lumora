@@ -1,6 +1,5 @@
 import { describe, expect, it } from 'vitest';
 import {
-  classNames,
   formatCurrency,
   formatDate,
   formatDateTime,
@@ -121,19 +120,5 @@ describe('formatPercent', () => {
 
   it('formats 100%', () => {
     expect(formatPercent(1)).toBe('100.0%');
-  });
-});
-
-describe('classNames', () => {
-  it('joins class names', () => {
-    expect(classNames('a', 'b', 'c')).toBe('a b c');
-  });
-
-  it('filters out falsy values', () => {
-    expect(classNames('a', false, null, undefined, 'b')).toBe('a b');
-  });
-
-  it('returns empty string for no truthy values', () => {
-    expect(classNames(false, null, undefined)).toBe('');
   });
 });

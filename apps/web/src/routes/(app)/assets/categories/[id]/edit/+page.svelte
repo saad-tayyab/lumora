@@ -2,6 +2,8 @@
 import { toast } from 'svelte-sonner';
 import { goto } from '$app/navigation';
 import type { PageData } from './$types';
+import { Button } from '$lib/components/ui/button';
+import { Input } from '$lib/components/ui/input';
 
 let { data }: { data: PageData } = $props();
 let submitting = $state(false);
@@ -48,7 +50,7 @@ async function handleSubmit(e: Event) {
       <p class="text-muted-foreground">{data.category.code} — {data.category.name}</p>
     </div>
 
-    <form onsubmit={handleSubmit} class="rounded-lg border bg-card p-6 shadow-sm space-y-4">
+    <form onsubmit={handleSubmit} class="space-y-4">
       <div class="grid gap-4 md:grid-cols-2">
         <div class="space-y-1.5">
           <label for="name" class="text-sm font-medium text-foreground">Name *</label>
@@ -121,10 +123,7 @@ async function handleSubmit(e: Event) {
 
       <div class="space-y-1.5">
         <label for="glAccountId" class="text-sm font-medium text-foreground">GL Account ID</label>
-        <input
-          id="glAccountId"
-          bind:value={glAccountId}
-          class="w-full rounded-md border bg-background px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-ring"
+        <Input id="glAccountId" bind:value={glAccountId}
         />
       </div>
 

@@ -1,6 +1,7 @@
 <script lang="ts">
 import { formatCurrency, formatDate } from '$lib/utils/format';
 import type { PageData } from './$types';
+import * as Card from '$lib/components/ui/card';
 
 let { data }: { data: PageData } = $props();
 
@@ -21,7 +22,7 @@ function methodLabel(method: string): string {
     <p class="text-muted-foreground">{data.total} schedules</p>
   </div>
 
-  <div class="rounded-lg border bg-card shadow-sm">
+  <Card.Root class="shadow-sm"><Card.Content class="p-0">
     <div class="overflow-x-auto">
       <table class="w-full text-sm">
         <thead>
@@ -58,5 +59,5 @@ function methodLabel(method: string): string {
         </tbody>
       </table>
     </div>
-  </div>
+  </Card.Content></Card.Root>
 </div>

@@ -3,6 +3,8 @@ import { toast } from 'svelte-sonner';
 import { invalidateAll } from '$app/navigation';
 import { formatDate } from '$lib/utils/format';
 import type { PageData } from './$types';
+import { Button } from '$lib/components/ui/button';
+import * as Card from '$lib/components/ui/card';
 
 let { data }: { data: PageData } = $props();
 let deleting = $state<string | null>(null);
@@ -47,7 +49,7 @@ function methodLabel(method: string): string {
     </a>
   </div>
 
-  <div class="rounded-lg border bg-card shadow-sm">
+  <Card.Root class="shadow-sm"><Card.Content class="p-0">
     <div class="overflow-x-auto">
       <table class="w-full text-sm">
         <thead>
@@ -112,5 +114,5 @@ function methodLabel(method: string): string {
         </tbody>
       </table>
     </div>
-  </div>
+  </Card.Content></Card.Root>
 </div>

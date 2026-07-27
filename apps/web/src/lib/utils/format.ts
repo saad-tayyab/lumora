@@ -43,7 +43,3 @@ export function formatPercent(value: string | number, decimals = 1): string {
   if (Number.isNaN(num)) return '0%';
   return `${(num * 100).toFixed(decimals)}%`;
 }
-
-export function classNames(...classes: (string | boolean | undefined | null)[]): string {
-  return classes.filter(Boolean).join(' ');
-}

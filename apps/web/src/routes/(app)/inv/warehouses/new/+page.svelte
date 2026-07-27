@@ -2,6 +2,10 @@
 import { toast } from 'svelte-sonner';
 import { enhance } from '$app/forms';
 import { goto } from '$app/navigation';
+import { Button } from '$lib/components/ui/button';
+import { Input } from '$lib/components/ui/input';
+import { Label } from '$lib/components/ui/label';
+import { Card, CardContent } from '$lib/components/ui/card';
 
 let name = $state('');
 let code = $state('');
@@ -35,42 +39,43 @@ let loading = $state(false);
         }
       };
     }}
-    class="space-y-6 rounded-lg border bg-card p-6 shadow-sm"
   >
-    <div class="grid gap-4 md:grid-cols-2">
-      <div class="space-y-2">
-        <label for="name" class="text-sm font-medium text-card-foreground">Name *</label>
-        <input id="name" name="name" bind:value={name} required class="w-full rounded-md border bg-background px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-ring" />
-      </div>
-      <div class="space-y-2">
-        <label for="code" class="text-sm font-medium text-card-foreground">Code *</label>
-        <input id="code" name="code" bind:value={code} required class="w-full rounded-md border bg-background px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-ring" />
-      </div>
-    </div>
+    <Card>
+      <CardContent class="space-y-6">
+        <div class="grid gap-4 md:grid-cols-2">
+          <div class="space-y-2">
+            <Label for="name">Name *</Label>
+            <Input id="name" name="name" bind:value={name} required />
+          </div>
+          <div class="space-y-2">
+            <Label for="code">Code *</Label>
+            <Input id="code" name="code" bind:value={code} required />
+          </div>
+        </div>
 
-    <div class="space-y-2">
-      <label for="address" class="text-sm font-medium text-card-foreground">Address</label>
-      <input id="address" name="address" bind:value={address} class="w-full rounded-md border bg-background px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-ring" />
-    </div>
+        <div class="space-y-2">
+          <Label for="address">Address</Label>
+          <Input id="address" name="address" bind:value={address} />
+        </div>
 
-    <div class="grid gap-4 md:grid-cols-2">
-      <div class="space-y-2">
-        <label for="city" class="text-sm font-medium text-card-foreground">City</label>
-        <input id="city" name="city" bind:value={city} class="w-full rounded-md border bg-background px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-ring" />
-      </div>
-      <div class="space-y-2">
-        <label for="country" class="text-sm font-medium text-card-foreground">Country</label>
-        <input id="country" name="country" bind:value={country} class="w-full rounded-md border bg-background px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-ring" />
-      </div>
-    </div>
+        <div class="grid gap-4 md:grid-cols-2">
+          <div class="space-y-2">
+            <Label for="city">City</Label>
+            <Input id="city" name="city" bind:value={city} />
+          </div>
+          <div class="space-y-2">
+            <Label for="country">Country</Label>
+            <Input id="country" name="country" bind:value={country} />
+          </div>
+        </div>
 
-    <div class="flex justify-end gap-3">
-      <a href="/inv/warehouses" class="inline-flex items-center rounded-md border px-4 py-2 text-sm font-medium hover:bg-accent">
-        Cancel
-      </a>
-      <button type="submit" disabled={loading} class="inline-flex items-center rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground hover:bg-primary/90 disabled:opacity-50">
-        {loading ? 'Creating...' : 'Create Warehouse'}
-      </button>
-    </div>
+        <div class="flex justify-end gap-3">
+          <Button href="/inv/warehouses" variant="outline">Cancel</Button>
+          <Button type="submit" disabled={loading}>
+            {loading ? 'Creating...' : 'Create Warehouse'}
+          </Button>
+        </div>
+      </CardContent>
+    </Card>
   </form>
 </div>

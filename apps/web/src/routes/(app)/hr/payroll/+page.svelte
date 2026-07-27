@@ -3,6 +3,7 @@ import { toast } from 'svelte-sonner';
 import { hrApi, type Payroll } from '$lib/api/hr';
 import { formatCurrency, formatDate } from '$lib/utils/format';
 import type { PageData } from './$types';
+import * as Card from '$lib/components/ui/card';
 
 let { data }: { data: PageData } = $props();
 let payroll = $state<Payroll[]>(data.payroll);
@@ -54,7 +55,7 @@ async function deletePayroll(id: string) {
     <select bind:value={statusFilter} class="rounded-md border bg-background px-3 py-2 text-sm"><option value="">All Statuses</option><option value="draft">Draft</option><option value="processed">Processed</option><option value="paid">Paid</option><option value="cancelled">Cancelled</option></select>
     <span class="text-sm text-muted-foreground">{total} total</span>
   </div>
-  <div class="rounded-lg border bg-card shadow-sm">
+  <Card.Root class="shadow-sm"><Card.Content class="p-0">
     {#if payroll.length === 0}<div class="py-12 text-center text-muted-foreground">No payroll records</div>
     {:else}
       <div class="overflow-x-auto">
@@ -64,5 +65,5 @@ async function deletePayroll(id: string) {
         </table>
       </div>
     {/if}
-  </div>
+  </Card.Content></Card.Root>
 </div>

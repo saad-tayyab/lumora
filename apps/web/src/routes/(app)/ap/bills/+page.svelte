@@ -1,5 +1,8 @@
 <script lang="ts">
 import { formatCurrency, formatDate } from '$lib/utils/format';
+import { Button } from '$lib/components/ui/button';
+import { Input } from '$lib/components/ui/input';
+import { Card, CardContent } from '$lib/components/ui/card';
 import type { PageData } from './$types';
 
 let { data }: { data: PageData } = $props();
@@ -22,20 +25,18 @@ let statusFilter = $state(data.statusFilter || '');
       <h1 class="text-3xl font-bold text-foreground">Bills</h1>
       <p class="text-muted-foreground">Manage vendor bills</p>
     </div>
-    <a
-      href="/ap/bills/new"
-      class="inline-flex items-center rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground hover:bg-primary/90"
-    >
+    <Button href="/ap/bills/new">
       Record Bill
-    </a>
+    </Button>
   </div>
 
-  <div class="rounded-lg border bg-card shadow-sm">
+  <Card>
+    <CardContent>
     <div class="flex items-center gap-4 border-b p-4">
-      <input
+      <Input
         type="text"
         placeholder="Search bills..."
-        class="w-full max-w-sm rounded-md border bg-background px-3 py-2 text-sm placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring"
+        class="max-w-sm"
       />
       <select
         bind:value={statusFilter}
@@ -105,5 +106,6 @@ let statusFilter = $state(data.statusFilter || '');
         </tbody>
       </table>
     </div>
-  </div>
+    </CardContent>
+  </Card>
 </div>

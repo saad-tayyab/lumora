@@ -3,6 +3,10 @@ import { toast } from 'svelte-sonner';
 import { goto } from '$app/navigation';
 import { type PurchaseOrder, type PurchaseOrderLineItem, procApi } from '$lib/api/proc';
 import type { PageData } from './$types';
+import { Button } from '$lib/components/ui/button';
+import * as Card from '$lib/components/ui/card';
+import { Input } from '$lib/components/ui/input';
+import DatePicker from '$lib/components/ui/date-picker.svelte';
 
 let { data }: { data: PageData } = $props();
 let purchaseOrder = $state<PurchaseOrder | null>(data.purchaseOrder);
@@ -87,7 +91,7 @@ async function handleSubmit(e: Event) {
   </div>
 
   <form onsubmit={handleSubmit} class="space-y-6">
-    <div class="rounded-lg border bg-card p-6 shadow-sm">
+    <Card.Root class="shadow-sm"><Card.Content>
       <h2 class="mb-4 text-lg font-semibold text-card-foreground">Order Details</h2>
       <div class="grid gap-4 md:grid-cols-2">
         <div>
@@ -103,12 +107,7 @@ async function handleSubmit(e: Event) {
         </div>
         <div>
           <label for="expectedDeliveryDate" class="mb-1 block text-sm font-medium text-card-foreground">Expected Delivery Date</label>
-          <input
-            id="expectedDeliveryDate"
-            type="date"
-            bind:value={expectedDeliveryDate}
-            class="w-full rounded-md border bg-background px-3 py-2 text-sm"
-          />
+          <DatePicker bind:value={expectedDeliveryDate} />
         </div>
       </div>
       <div class="mt-4">
@@ -121,67 +120,34 @@ async function handleSubmit(e: Event) {
           placeholder="Optional notes"
         ></textarea>
       </div>
-    </div>
+    </Card.Content></Card.Root>
 
-    <div class="rounded-lg border bg-card p-6 shadow-sm">
+    <Card.Root class="shadow-sm"><Card.Content>
       <div class="mb-4 flex items-center justify-between">
         <h2 class="text-lg font-semibold text-card-foreground">Line Items</h2>
-        <button
-          type="button"
-          onclick={addLineItem}
-          class="inline-flex items-center gap-1 rounded-md border px-3 py-1.5 text-sm font-medium hover:bg-accent"
-        >
+        <Button type="button" variant="outline" onclick={addLineItem}>
           + Add Line
-        </button>
+        </Button>
       </div>
       <div class="space-y-4">
         {#each lineItems as item, index}
           <div class="grid items-end gap-3 rounded-md border p-4 md:grid-cols-4">
             <div>
               <label class="mb-1 block text-xs font-medium text-muted-foreground">Item *</label>
-              <input
-                type="text"
-                value={item.itemId}
-                oninput={(e) => updateLineItem(index, 'itemId', (e.target as HTMLInputElement).value)}
-                class="w-full rounded-md border bg-background px-3 py-2 text-sm"
-                placeholder="Item ID"
-                required
-              />
+              <Input type="text" value={item.itemId} oninput={(e) => updateLineItem(index, 'itemId', (e.target as HTMLInputElement).value)} required />
             </div>
             <div>
               <label class="mb-1 block text-xs font-medium text-muted-foreground">Description</label>
-              <input
-                type="text"
-                value={item.description}
-                oninput={(e) => updateLineItem(index, 'description', (e.target as HTMLInputElement).value)}
-                class="w-full rounded-md border bg-background px-3 py-2 text-sm"
-                placeholder="Description"
-              />
+              <Input type="text" value={item.description} oninput={(e) => updateLineItem(index, 'description', (e.target as HTMLInputElement).value)} />
             </div>
             <div>
               <label class="mb-1 block text-xs font-medium text-muted-foreground">Quantity *</label>
-              <input
-                type="number"
-                value={item.quantity}
-                oninput={(e) => updateLineItem(index, 'quantity', (e.target as HTMLInputElement).value)}
-                class="w-full rounded-md border bg-background px-3 py-2 text-sm"
-                min="0"
-                step="1"
-                required
-              />
+              <Input type="number" value={item.quantity} oninput={(e) => updateLineItem(index, 'quantity', (e.target as HTMLInputElement).value)} min="0" step="1" required />
             </div>
             <div class="flex gap-2">
               <div class="flex-1">
                 <label class="mb-1 block text-xs font-medium text-muted-foreground">Unit Price *</label>
-                <input
-                  type="number"
-                  value={item.unitPrice}
-                  oninput={(e) => updateLineItem(index, 'unitPrice', (e.target as HTMLInputElement).value)}
-                  class="w-full rounded-md border bg-background px-3 py-2 text-sm"
-                  min="0"
-                  step="0.01"
-                  required
-                />
+                <Input type="number" value={item.unitPrice} oninput={(e) => updateLineItem(index, 'unitPrice', (e.target as HTMLInputElement).value)} min="0" step="0.01" required />
               </div>
               {#if lineItems.length > 1}
                 <button
@@ -196,25 +162,14 @@ async function handleSubmit(e: Event) {
           </div>
         {/each}
       </div>
-    </div>
+    </Card.Content></Card.Root>
 
     <div class="flex items-center justify-end gap-3">
-      <a
-        href="/proc/purchase-orders/{purchaseOrder?.id}"
-        class="inline-flex items-center rounded-md border px-4 py-2 text-sm font-medium hover:bg-accent"
-      >
-        Cancel
-      </a>
-      <button
-        type="submit"
-        disabled={submitting}
-        class="inline-flex items-center rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground hover:bg-primary/90 disabled:opacity-50"
-      >
-        {#if submitting}
-          <div class="mr-2 h-4 w-4 animate-spin rounded-full border-2 border-primary-foreground border-t-transparent"></div>
-        {/if}
+      <Button variant="outline" href="/proc/purchase-orders/{purchaseOrder?.id}">Cancel</Button>
+      <Button type="submit" disabled={submitting}>
+        {#if submitting}<div class="mr-2 h-4 w-4 animate-spin rounded-full border-2 border-primary-foreground border-t-transparent"></div>{/if}
         Save Changes
-      </button>
+      </Button>
     </div>
   </form>
 </div>

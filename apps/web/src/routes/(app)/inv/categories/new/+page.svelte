@@ -2,6 +2,9 @@
 import { toast } from 'svelte-sonner';
 import { enhance } from '$app/forms';
 import { goto } from '$app/navigation';
+import { Button } from '$lib/components/ui/button';
+import { Label } from '$lib/components/ui/label';
+import { Card, CardContent } from '$lib/components/ui/card';
 
 let name = $state('');
 let description = $state('');
@@ -32,25 +35,26 @@ let loading = $state(false);
         }
       };
     }}
-    class="space-y-6 rounded-lg border bg-card p-6 shadow-sm"
   >
-    <div class="space-y-2">
-      <label for="name" class="text-sm font-medium text-card-foreground">Name *</label>
-      <input id="name" name="name" bind:value={name} required class="w-full rounded-md border bg-background px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-ring" />
-    </div>
+    <Card>
+      <CardContent class="space-y-6">
+        <div class="space-y-2">
+          <Label for="name">Name *</Label>
+          <input id="name" name="name" bind:value={name} required class="w-full rounded-md border bg-background px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-ring" />
+        </div>
 
-    <div class="space-y-2">
-      <label for="description" class="text-sm font-medium text-card-foreground">Description</label>
-      <textarea id="description" name="description" bind:value={description} rows="3" class="w-full rounded-md border bg-background px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-ring"></textarea>
-    </div>
+        <div class="space-y-2">
+          <Label for="description">Description</Label>
+          <textarea id="description" name="description" bind:value={description} rows="3" class="w-full rounded-md border bg-background px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-ring"></textarea>
+        </div>
 
-    <div class="flex justify-end gap-3">
-      <a href="/inv/categories" class="inline-flex items-center rounded-md border px-4 py-2 text-sm font-medium hover:bg-accent">
-        Cancel
-      </a>
-      <button type="submit" disabled={loading} class="inline-flex items-center rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground hover:bg-primary/90 disabled:opacity-50">
-        {loading ? 'Creating...' : 'Create Category'}
-      </button>
-    </div>
+        <div class="flex justify-end gap-3">
+          <Button href="/inv/categories" variant="outline">Cancel</Button>
+          <Button type="submit" disabled={loading}>
+            {loading ? 'Creating...' : 'Create Category'}
+          </Button>
+        </div>
+      </CardContent>
+    </Card>
   </form>
 </div>

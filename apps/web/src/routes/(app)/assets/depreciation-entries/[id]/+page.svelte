@@ -2,6 +2,8 @@
 import { enhance } from '$app/forms';
 import { formatCurrency, formatDate } from '$lib/utils/format';
 import type { PageData } from './$types';
+import { Button } from '$lib/components/ui/button';
+import * as Card from '$lib/components/ui/card';
 
 let { data }: { data: PageData } = $props();
 let posting = $state(false);
@@ -39,7 +41,7 @@ function statusColor(status: string): string {
     </div>
 
     <div class="grid gap-6 md:grid-cols-2">
-      <div class="rounded-lg border bg-card p-6 shadow-sm space-y-4">
+      <Card.Root class="shadow-sm"><Card.Content>
         <h2 class="text-lg font-semibold text-card-foreground">Entry Details</h2>
         <dl class="space-y-2 text-sm">
           <div class="flex justify-between">
@@ -59,9 +61,9 @@ function statusColor(status: string): string {
             <dd class="font-medium">{formatDate(entry.periodEndDate)}</dd>
           </div>
         </dl>
-      </div>
+      </Card.Content></Card.Root>
 
-      <div class="rounded-lg border bg-card p-6 shadow-sm space-y-4">
+      <Card.Root class="shadow-sm"><Card.Content>
         <h2 class="text-lg font-semibold text-card-foreground">Financials</h2>
         <dl class="space-y-2 text-sm">
           <div class="flex justify-between">
@@ -81,7 +83,7 @@ function statusColor(status: string): string {
             <dd class="font-medium">{entry.journalEntryId || '—'}</dd>
           </div>
         </dl>
-      </div>
+      </Card.Content></Card.Root>
     </div>
 
     {#if entry.status === 'draft'}

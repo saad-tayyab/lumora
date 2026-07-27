@@ -4,6 +4,8 @@ import { goto } from '$app/navigation';
 import { type SalesOrder, type SalesOrderLineItem, salesApi } from '$lib/api/sales';
 import { formatCurrency, formatDate } from '$lib/utils/format';
 import type { PageData } from './$types';
+import { Button } from '$lib/components/ui/button';
+import * as Card from '$lib/components/ui/card';
 
 let { data }: { data: PageData } = $props();
 let order = $state<SalesOrder | null>(data.order);
@@ -107,9 +109,9 @@ async function deleteLineItem(lineItemId: string) {
       </div>
       <div class="flex items-center gap-2">
         {#if statusFlow[order.status]}
-          <button onclick={advanceStatus} disabled={loading} class="inline-flex items-center rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground hover:bg-primary/90 disabled:opacity-50">
+          <Button onclick={advanceStatus} disabled={loading}>
             Move to {formatStatus(statusFlow[order.status])}
-          </button>
+          </Button>
         {/if}
         {#if order.status !== 'cancelled' && order.status !== 'delivered'}
           <button onclick={cancelOrder} disabled={loading} class="inline-flex items-center rounded-md border border-destructive px-4 py-2 text-sm font-medium text-destructive hover:bg-destructive/10 disabled:opacity-50">
@@ -155,7 +157,7 @@ async function deleteLineItem(lineItemId: string) {
         {/if}
       </div>
 
-      <div class="rounded-lg border bg-card p-6 shadow-sm">
+      <Card.Root class="shadow-sm"><Card.Content>
         <h2 class="mb-4 text-lg font-semibold text-card-foreground">Timeline</h2>
         <div class="space-y-3 text-sm">
           <div>
@@ -167,10 +169,10 @@ async function deleteLineItem(lineItemId: string) {
             <div class="text-card-foreground">{formatDate(order.updatedAt)}</div>
           </div>
         </div>
-      </div>
+      </Card.Content></Card.Root>
     </div>
 
-    <div class="rounded-lg border bg-card p-6 shadow-sm">
+    <Card.Root class="shadow-sm"><Card.Content>
       <h2 class="mb-4 text-lg font-semibold text-card-foreground">Line Items</h2>
       {#if lineItems.length === 0}
         <p class="py-4 text-center text-sm text-muted-foreground">No line items</p>
@@ -208,6 +210,6 @@ async function deleteLineItem(lineItemId: string) {
           </table>
         </div>
       {/if}
-    </div>
+    </Card.Content></Card.Root>
   {/if}
 </div>

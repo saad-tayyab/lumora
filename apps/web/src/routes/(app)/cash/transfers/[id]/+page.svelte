@@ -1,5 +1,6 @@
 <script lang="ts">
 import { formatCurrency, formatDate } from '$lib/utils/format';
+import { Card, CardContent } from '$lib/components/ui/card';
 import type { PageData } from './$types';
 
 let { data }: { data: PageData } = $props();
@@ -25,69 +26,73 @@ const statusStyles: Record<string, string> = {
 
 	{#if data.transfer}
 		<div class="grid gap-6 lg:grid-cols-2">
-			<div class="rounded-lg border bg-card p-6 shadow-sm">
-				<h2 class="mb-4 text-lg font-semibold text-card-foreground">Transfer Info</h2>
-				<dl class="space-y-3">
-					<div class="flex justify-between">
-						<dt class="text-sm text-muted-foreground">Status</dt>
-						<dd>
-							<span class="inline-flex items-center rounded-full px-3 py-1 text-sm font-medium {statusStyles[data.transfer.status] || statusStyles.pending}">
-								{data.transfer.status}
-							</span>
-						</dd>
-					</div>
-					<div class="flex justify-between">
-						<dt class="text-sm text-muted-foreground">Amount</dt>
-						<dd class="text-sm font-medium text-card-foreground">
-							{formatCurrency(data.transfer.amount, data.transfer.currency)}
-						</dd>
-					</div>
-					<div class="flex justify-between">
-						<dt class="text-sm text-muted-foreground">Transfer Date</dt>
-						<dd class="text-sm text-card-foreground">{formatDate(data.transfer.transferDate)}</dd>
-					</div>
-					{#if data.transfer.reference}
+			<Card>
+				<CardContent>
+					<h2 class="mb-4 text-lg font-semibold text-card-foreground">Transfer Info</h2>
+					<dl class="space-y-3">
 						<div class="flex justify-between">
-							<dt class="text-sm text-muted-foreground">Reference</dt>
-							<dd class="text-sm text-card-foreground">{data.transfer.reference}</dd>
+							<dt class="text-sm text-muted-foreground">Status</dt>
+							<dd>
+								<span class="inline-flex items-center rounded-full px-3 py-1 text-sm font-medium {statusStyles[data.transfer.status] || statusStyles.pending}">
+									{data.transfer.status}
+								</span>
+							</dd>
 						</div>
-					{/if}
-					{#if data.transfer.completedDate}
 						<div class="flex justify-between">
-							<dt class="text-sm text-muted-foreground">Completed</dt>
-							<dd class="text-sm text-card-foreground">{formatDate(data.transfer.completedDate)}</dd>
+							<dt class="text-sm text-muted-foreground">Amount</dt>
+							<dd class="text-sm font-medium text-card-foreground">
+								{formatCurrency(data.transfer.amount, data.transfer.currency)}
+							</dd>
 						</div>
-					{/if}
-				</dl>
-			</div>
+						<div class="flex justify-between">
+							<dt class="text-sm text-muted-foreground">Transfer Date</dt>
+							<dd class="text-sm text-card-foreground">{formatDate(data.transfer.transferDate)}</dd>
+						</div>
+						{#if data.transfer.reference}
+							<div class="flex justify-between">
+								<dt class="text-sm text-muted-foreground">Reference</dt>
+								<dd class="text-sm text-card-foreground">{data.transfer.reference}</dd>
+							</div>
+						{/if}
+						{#if data.transfer.completedDate}
+							<div class="flex justify-between">
+								<dt class="text-sm text-muted-foreground">Completed</dt>
+								<dd class="text-sm text-card-foreground">{formatDate(data.transfer.completedDate)}</dd>
+							</div>
+						{/if}
+					</dl>
+				</CardContent>
+			</Card>
 
-			<div class="rounded-lg border bg-card p-6 shadow-sm">
-				<h2 class="mb-4 text-lg font-semibold text-card-foreground">Accounts</h2>
-				<dl class="space-y-3">
-					<div class="flex justify-between">
-						<dt class="text-sm text-muted-foreground">From Account</dt>
-						<dd class="text-sm font-medium text-card-foreground">
-							<a href="/cash/bank-accounts/{data.transfer.fromAccountId}" class="text-primary hover:underline">
-								{data.transfer.fromAccountName || data.transfer.fromAccountId.slice(0, 8)}
-							</a>
-						</dd>
-					</div>
-					<div class="flex justify-between">
-						<dt class="text-sm text-muted-foreground">To Account</dt>
-						<dd class="text-sm font-medium text-card-foreground">
-							<a href="/cash/bank-accounts/{data.transfer.toAccountId}" class="text-primary hover:underline">
-								{data.transfer.toAccountName || data.transfer.toAccountId.slice(0, 8)}
-							</a>
-						</dd>
-					</div>
-				</dl>
-				{#if data.transfer.notes}
-					<div class="mt-4 border-t pt-4">
-						<dt class="text-sm font-medium text-muted-foreground">Notes</dt>
-						<dd class="mt-1 text-sm text-card-foreground">{data.transfer.notes}</dd>
-					</div>
-				{/if}
-			</div>
+			<Card>
+				<CardContent>
+					<h2 class="mb-4 text-lg font-semibold text-card-foreground">Accounts</h2>
+					<dl class="space-y-3">
+						<div class="flex justify-between">
+							<dt class="text-sm text-muted-foreground">From Account</dt>
+							<dd class="text-sm font-medium text-card-foreground">
+								<a href="/cash/bank-accounts/{data.transfer.fromAccountId}" class="text-primary hover:underline">
+									{data.transfer.fromAccountName || data.transfer.fromAccountId.slice(0, 8)}
+								</a>
+							</dd>
+						</div>
+						<div class="flex justify-between">
+							<dt class="text-sm text-muted-foreground">To Account</dt>
+							<dd class="text-sm font-medium text-card-foreground">
+								<a href="/cash/bank-accounts/{data.transfer.toAccountId}" class="text-primary hover:underline">
+									{data.transfer.toAccountName || data.transfer.toAccountId.slice(0, 8)}
+								</a>
+							</dd>
+						</div>
+					</dl>
+					{#if data.transfer.notes}
+						<div class="mt-4 border-t pt-4">
+							<dt class="text-sm font-medium text-muted-foreground">Notes</dt>
+							<dd class="mt-1 text-sm text-card-foreground">{data.transfer.notes}</dd>
+						</div>
+					{/if}
+				</CardContent>
+			</Card>
 		</div>
 	{:else}
 		<div class="flex items-center justify-center py-12">

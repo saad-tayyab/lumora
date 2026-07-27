@@ -1,6 +1,8 @@
 <script lang="ts">
 import { formatDateTime } from '$lib/utils/format';
 import type { PageData } from './$types';
+import { Button } from '$lib/components/ui/button';
+import * as Card from '$lib/components/ui/card';
 
 let { data }: { data: PageData } = $props();
 </script>
@@ -14,12 +16,12 @@ let { data }: { data: PageData } = $props();
         <p class="text-muted-foreground">{user.email}</p>
       </div>
       <div class="flex gap-2">
-        <a href="/settings/users/{user.id}/edit" class="rounded-md border px-4 py-2 text-sm font-medium text-foreground hover:bg-accent">Edit</a>
-        <a href="/settings/users" class="rounded-md border px-4 py-2 text-sm font-medium text-foreground hover:bg-accent">Back to List</a>
+        <Button variant="outline" href="/settings/users/{user.id}/edit">Edit</Button>
+        <Button variant="outline" href="/settings/users">Back to List</Button>
       </div>
     </div>
 
-    <div class="rounded-lg border bg-card p-6 shadow-sm">
+    <Card.Root class="shadow-sm"><Card.Content>
       <h2 class="text-lg font-semibold text-card-foreground">User Details</h2>
       <dl class="mt-4 space-y-2 text-sm">
         <div class="flex justify-between">
@@ -43,7 +45,7 @@ let { data }: { data: PageData } = $props();
           <dd>{formatDateTime(user.createdAt)}</dd>
         </div>
       </dl>
-    </div>
+    </Card.Content></Card.Root>
   </div>
 {:else}
   <div class="flex items-center justify-center py-12"><div class="text-muted-foreground">User not found</div></div>

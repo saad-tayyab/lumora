@@ -1,6 +1,10 @@
 <script lang="ts">
 import { formatDateTime } from '$lib/utils/format';
 import type { PageData } from './$types';
+import { Button } from '$lib/components/ui/button';
+import * as Card from '$lib/components/ui/card';
+import { Input } from '$lib/components/ui/input';
+import DatePicker from '$lib/components/ui/date-picker.svelte';
 
 let { data }: { data: PageData } = $props();
 let userId = $state('');
@@ -27,7 +31,7 @@ function actionColor(action: string): string {
     <p class="text-muted-foreground">{data.total} entries</p>
   </div>
 
-  <form class="rounded-lg border bg-card p-4 shadow-sm" method="get">
+  <form method="get">
     <div class="grid gap-4 md:grid-cols-5">
       <div class="space-y-1.5">
         <label for="userId" class="text-sm font-medium text-foreground">User ID</label>
@@ -43,19 +47,21 @@ function actionColor(action: string): string {
       </div>
       <div class="space-y-1.5">
         <label for="startDate" class="text-sm font-medium text-foreground">Start Date</label>
-        <input id="startDate" name="startDate" type="date" bind:value={startDate} class="w-full rounded-md border bg-background px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-ring" />
+        <DatePicker bind:value={startDate} />
+        <input type="hidden" name="startDate" value={startDate} />
       </div>
       <div class="space-y-1.5">
         <label for="endDate" class="text-sm font-medium text-foreground">End Date</label>
-        <input id="endDate" name="endDate" type="date" bind:value={endDate} class="w-full rounded-md border bg-background px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-ring" />
+        <DatePicker bind:value={endDate} />
+        <input type="hidden" name="endDate" value={endDate} />
       </div>
     </div>
     <div class="mt-4 flex justify-end">
-      <button type="submit" class="rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground hover:bg-primary/90">Filter</button>
+      <Button type="submit">Filter</Button>
     </div>
   </form>
 
-  <div class="rounded-lg border bg-card shadow-sm">
+  <Card.Root class="shadow-sm"><Card.Content class="p-0">
     <div class="overflow-x-auto">
       <table class="w-full text-sm">
         <thead>
@@ -88,5 +94,5 @@ function actionColor(action: string): string {
         </tbody>
       </table>
     </div>
-  </div>
+  </Card.Content></Card.Root>
 </div>

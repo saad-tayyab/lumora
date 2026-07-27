@@ -3,6 +3,7 @@ import { toast } from 'svelte-sonner';
 import { type Employee, hrApi } from '$lib/api/hr';
 import { formatDate } from '$lib/utils/format';
 import type { PageData } from './$types';
+import * as Card from '$lib/components/ui/card';
 
 let { data }: { data: PageData } = $props();
 let employee = $state<Employee | null>(data.employee);
@@ -41,7 +42,7 @@ function formatEmploymentType(type: string): string {
     </div>
 
     <div class="grid gap-6 lg:grid-cols-2">
-      <div class="rounded-lg border bg-card p-6 shadow-sm">
+      <Card.Root class="shadow-sm"><Card.Content>
         <h2 class="mb-4 text-lg font-semibold text-card-foreground">Personal Information</h2>
         <div class="space-y-4">
           <div class="grid gap-4 md:grid-cols-2">
@@ -49,9 +50,9 @@ function formatEmploymentType(type: string): string {
             <div><div class="text-sm text-muted-foreground">Phone</div><div class="font-medium text-card-foreground">{employee.phone || '-'}</div></div>
           </div>
         </div>
-      </div>
+      </Card.Content></Card.Root>
 
-      <div class="rounded-lg border bg-card p-6 shadow-sm">
+      <Card.Root class="shadow-sm"><Card.Content>
         <h2 class="mb-4 text-lg font-semibold text-card-foreground">Employment Details</h2>
         <div class="space-y-4">
           <div class="grid gap-4 md:grid-cols-2">
@@ -61,15 +62,15 @@ function formatEmploymentType(type: string): string {
             <div><div class="text-sm text-muted-foreground">Joining Date</div><div class="font-medium text-card-foreground">{formatDate(employee.joiningDate)}</div></div>
           </div>
         </div>
-      </div>
+      </Card.Content></Card.Root>
     </div>
 
-    <div class="rounded-lg border bg-card p-6 shadow-sm">
+    <Card.Root class="shadow-sm"><Card.Content>
       <h2 class="mb-4 text-lg font-semibold text-card-foreground">Timeline</h2>
       <div class="grid gap-4 md:grid-cols-2">
         <div><div class="text-sm text-muted-foreground">Created</div><div class="text-card-foreground">{formatDate(employee.createdAt)}</div></div>
         <div><div class="text-sm text-muted-foreground">Last Updated</div><div class="text-card-foreground">{formatDate(employee.updatedAt)}</div></div>
       </div>
-    </div>
+    </Card.Content></Card.Root>
   {/if}
 </div>

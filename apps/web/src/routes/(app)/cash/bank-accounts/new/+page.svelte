@@ -2,6 +2,10 @@
 import { toast } from 'svelte-sonner';
 import { enhance } from '$app/forms';
 import { goto } from '$app/navigation';
+import { Button } from '$lib/components/ui/button';
+import { Input } from '$lib/components/ui/input';
+import { Label } from '$lib/components/ui/label';
+import { Card, CardContent } from '$lib/components/ui/card';
 
 let name = $state('');
 let accountNumber = $state('');
@@ -36,48 +40,49 @@ let loading = $state(false);
         }
       };
     }}
-    class="space-y-6 rounded-lg border bg-card p-6 shadow-sm"
   >
-    <div class="grid gap-4 md:grid-cols-2">
-      <div class="space-y-2">
-        <label for="name" class="text-sm font-medium text-card-foreground">Account Name *</label>
-        <input id="name" name="name" bind:value={name} required class="w-full rounded-md border bg-background px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-ring" />
-      </div>
-      <div class="space-y-2">
-        <label for="bankName" class="text-sm font-medium text-card-foreground">Bank Name *</label>
-        <input id="bankName" name="bankName" bind:value={bankName} required class="w-full rounded-md border bg-background px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-ring" />
-      </div>
-      <div class="space-y-2">
-        <label for="accountNumber" class="text-sm font-medium text-card-foreground">Account Number *</label>
-        <input id="accountNumber" name="accountNumber" bind:value={accountNumber} required class="w-full rounded-md border bg-background px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-ring" />
-      </div>
-      <div class="space-y-2">
-        <label for="routingNumber" class="text-sm font-medium text-card-foreground">Routing Number</label>
-        <input id="routingNumber" name="routingNumber" bind:value={routingNumber} class="w-full rounded-md border bg-background px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-ring" />
-      </div>
-      <div class="space-y-2">
-        <label for="currency" class="text-sm font-medium text-card-foreground">Currency</label>
-        <select id="currency" name="currency" bind:value={currency} class="w-full rounded-md border bg-background px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-ring">
-          <option value="USD">USD</option>
-          <option value="EUR">EUR</option>
-          <option value="GBP">GBP</option>
-          <option value="PKR">PKR</option>
-        </select>
-      </div>
-    </div>
+    <Card>
+      <CardContent class="space-y-6">
+        <div class="grid gap-4 md:grid-cols-2">
+          <div class="space-y-2">
+            <Label for="name">Account Name *</Label>
+            <Input id="name" name="name" bind:value={name} required />
+          </div>
+          <div class="space-y-2">
+            <Label for="bankName">Bank Name *</Label>
+            <Input id="bankName" name="bankName" bind:value={bankName} required />
+          </div>
+          <div class="space-y-2">
+            <Label for="accountNumber">Account Number *</Label>
+            <Input id="accountNumber" name="accountNumber" bind:value={accountNumber} required />
+          </div>
+          <div class="space-y-2">
+            <Label for="routingNumber">Routing Number</Label>
+            <Input id="routingNumber" name="routingNumber" bind:value={routingNumber} />
+          </div>
+          <div class="space-y-2">
+            <Label for="currency">Currency</Label>
+            <select id="currency" name="currency" bind:value={currency} class="w-full rounded-md border bg-background px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-ring">
+              <option value="USD">USD</option>
+              <option value="EUR">EUR</option>
+              <option value="GBP">GBP</option>
+              <option value="PKR">PKR</option>
+            </select>
+          </div>
+        </div>
 
-    <div class="space-y-2">
-      <label for="notes" class="text-sm font-medium text-card-foreground">Notes</label>
-      <textarea id="notes" name="notes" bind:value={notes} rows="3" class="w-full rounded-md border bg-background px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-ring"></textarea>
-    </div>
+        <div class="space-y-2">
+          <Label for="notes">Notes</Label>
+          <textarea id="notes" name="notes" bind:value={notes} rows="3" class="w-full rounded-md border bg-background px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-ring"></textarea>
+        </div>
 
-    <div class="flex justify-end gap-3">
-      <a href="/cash/bank-accounts" class="inline-flex items-center rounded-md border px-4 py-2 text-sm font-medium hover:bg-accent">
-        Cancel
-      </a>
-      <button type="submit" disabled={loading} class="inline-flex items-center rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground hover:bg-primary/90 disabled:opacity-50">
-        {loading ? 'Creating...' : 'Create Account'}
-      </button>
-    </div>
+        <div class="flex justify-end gap-3">
+          <Button href="/cash/bank-accounts" variant="outline">Cancel</Button>
+          <Button type="submit" disabled={loading}>
+            {loading ? 'Creating...' : 'Create Account'}
+          </Button>
+        </div>
+      </CardContent>
+    </Card>
   </form>
 </div>

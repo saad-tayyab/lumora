@@ -5,6 +5,7 @@ import { Input } from '$lib/components/ui/input';
 import { Label } from '$lib/components/ui/label';
 import { Button } from '$lib/components/ui/button';
 import { Textarea } from '$lib/components/ui/textarea';
+import { Card, CardContent } from '$lib/components/ui/card';
 
 let { data } = $props();
 const { form, enhance, submitting } = superForm(data.form);
@@ -16,7 +17,9 @@ const { form, enhance, submitting } = superForm(data.form);
 		<p class="text-muted-foreground">Create a new vendor record</p>
 	</div>
 
-	<form method="POST" use:enhance class="space-y-6 rounded-lg border bg-card p-6 shadow-sm">
+	<Card>
+		<CardContent>
+		<form method="POST" use:enhance class="space-y-6">
 		<div class="grid gap-4 md:grid-cols-2">
 			<div class="space-y-2">
 				<Label for="name">Name *</Label>
@@ -95,4 +98,6 @@ const { form, enhance, submitting } = superForm(data.form);
 			</Button>
 		</div>
 	</form>
+		</CardContent>
+	</Card>
 </div>

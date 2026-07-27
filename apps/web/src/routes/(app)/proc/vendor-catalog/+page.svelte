@@ -3,6 +3,8 @@ import { toast } from 'svelte-sonner';
 import { procApi, type VendorCatalogItem } from '$lib/api/proc';
 import { formatCurrency } from '$lib/utils/format';
 import type { PageData } from './$types';
+import { Button } from '$lib/components/ui/button';
+import * as Card from '$lib/components/ui/card';
 
 let { data }: { data: PageData } = $props();
 let items = $state<VendorCatalogItem[]>(data.items);
@@ -35,7 +37,7 @@ async function deleteItem(id: string) {
     </a>
   </div>
 
-  <div class="rounded-lg border bg-card shadow-sm">
+  <Card.Root class="shadow-sm"><Card.Content class="p-0">
     {#if items.length === 0}
       <div class="py-12 text-center">
         <p class="text-muted-foreground">No catalog items found</p>
@@ -80,5 +82,5 @@ async function deleteItem(id: string) {
         </table>
       </div>
     {/if}
-  </div>
+  </Card.Content></Card.Root>
 </div>

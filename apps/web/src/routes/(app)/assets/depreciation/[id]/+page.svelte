@@ -1,6 +1,8 @@
 <script lang="ts">
 import { formatCurrency, formatDate } from '$lib/utils/format';
 import type { PageData } from './$types';
+import { Button } from '$lib/components/ui/button';
+import * as Card from '$lib/components/ui/card';
 
 let { data }: { data: PageData } = $props();
 
@@ -32,7 +34,7 @@ function methodLabel(method: string): string {
     </div>
 
     <div class="grid gap-6 md:grid-cols-2">
-      <div class="rounded-lg border bg-card p-6 shadow-sm space-y-4">
+      <Card.Root class="shadow-sm"><Card.Content>
         <h2 class="text-lg font-semibold text-card-foreground">Schedule Details</h2>
         <dl class="space-y-2 text-sm">
           <div class="flex justify-between">
@@ -48,9 +50,9 @@ function methodLabel(method: string): string {
             <dd class="font-medium capitalize">{sched.status}</dd>
           </div>
         </dl>
-      </div>
+      </Card.Content></Card.Root>
 
-      <div class="rounded-lg border bg-card p-6 shadow-sm space-y-4">
+      <Card.Root class="shadow-sm"><Card.Content>
         <h2 class="text-lg font-semibold text-card-foreground">Financials</h2>
         <dl class="space-y-2 text-sm">
           <div class="flex justify-between">
@@ -70,7 +72,7 @@ function methodLabel(method: string): string {
             <dd class="text-lg font-bold">{formatCurrency(sched.monthlyAmount)}</dd>
           </div>
         </dl>
-      </div>
+      </Card.Content></Card.Root>
     </div>
   </div>
 {:else}

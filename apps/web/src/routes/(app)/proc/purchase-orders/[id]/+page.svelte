@@ -4,6 +4,8 @@ import { goto } from '$app/navigation';
 import { type PurchaseOrder, type PurchaseOrderLineItem, procApi } from '$lib/api/proc';
 import { formatCurrency, formatDate } from '$lib/utils/format';
 import type { PageData } from './$types';
+import { Button } from '$lib/components/ui/button';
+import * as Card from '$lib/components/ui/card';
 
 let { data }: { data: PageData } = $props();
 let purchaseOrder = $state<PurchaseOrder | null>(data.purchaseOrder);
@@ -209,7 +211,7 @@ async function deleteLineItem(lineItemId: string) {
         {/if}
       </div>
 
-      <div class="rounded-lg border bg-card p-6 shadow-sm">
+      <Card.Root class="shadow-sm"><Card.Content>
         <h2 class="mb-4 text-lg font-semibold text-card-foreground">Timeline</h2>
         <div class="space-y-3 text-sm">
           <div>
@@ -221,10 +223,10 @@ async function deleteLineItem(lineItemId: string) {
             <div class="text-card-foreground">{formatDate(purchaseOrder.updatedAt)}</div>
           </div>
         </div>
-      </div>
+      </Card.Content></Card.Root>
     </div>
 
-    <div class="rounded-lg border bg-card p-6 shadow-sm">
+    <Card.Root class="shadow-sm"><Card.Content>
       <div class="mb-4 flex items-center justify-between">
         <h2 class="text-lg font-semibold text-card-foreground">Line Items</h2>
         {#if purchaseOrder.status === 'draft'}
@@ -279,6 +281,6 @@ async function deleteLineItem(lineItemId: string) {
           </table>
         </div>
       {/if}
-    </div>
+    </Card.Content></Card.Root>
   {/if}
 </div>

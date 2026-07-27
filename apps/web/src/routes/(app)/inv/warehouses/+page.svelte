@@ -1,5 +1,7 @@
 <script lang="ts">
 import { formatDate } from '$lib/utils/format';
+import { Button } from '$lib/components/ui/button';
+import { Card, CardContent } from '$lib/components/ui/card';
 import type { PageData } from './$types';
 
 let { data }: { data: PageData } = $props();
@@ -11,50 +13,47 @@ let { data }: { data: PageData } = $props();
       <h1 class="text-3xl font-bold text-foreground">Warehouses</h1>
       <p class="text-muted-foreground">Manage warehouse locations</p>
     </div>
-    <a
-      href="/inv/warehouses/new"
-      class="inline-flex items-center rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground hover:bg-primary/90"
-    >
-      Add Warehouse
-    </a>
+    <Button href="/inv/warehouses/new">Add Warehouse</Button>
   </div>
 
-  <div class="rounded-lg border bg-card shadow-sm">
-    <div class="overflow-x-auto">
-      <table class="w-full text-sm">
-        <thead>
-          <tr class="border-t bg-muted/50">
-            <th class="px-4 py-3 text-left font-medium text-muted-foreground">Name</th>
-            <th class="px-4 py-3 text-left font-medium text-muted-foreground">Code</th>
-            <th class="px-4 py-3 text-left font-medium text-muted-foreground">City</th>
-            <th class="px-4 py-3 text-left font-medium text-muted-foreground">Country</th>
-            <th class="px-4 py-3 text-left font-medium text-muted-foreground">Status</th>
-            <th class="px-4 py-3 text-left font-medium text-muted-foreground">Created</th>
-          </tr>
-        </thead>
-        <tbody>
-          {#each data.warehouses as warehouse (warehouse.id)}
-            <tr class="border-t hover:bg-muted/30">
-              <td class="px-4 py-3 font-medium">{warehouse.name}</td>
-              <td class="px-4 py-3 text-muted-foreground">{warehouse.code}</td>
-              <td class="px-4 py-3 text-muted-foreground">{warehouse.city || '-'}</td>
-              <td class="px-4 py-3 text-muted-foreground">{warehouse.country || '-'}</td>
-              <td class="px-4 py-3">
-                <span class="inline-block rounded-full px-2 py-0.5 text-xs font-medium {warehouse.status === 'active' ? 'bg-green-100 text-green-800' : 'bg-gray-100 text-gray-800'}">
-                  {warehouse.status}
-                </span>
-              </td>
-              <td class="px-4 py-3 text-muted-foreground">{formatDate(warehouse.createdAt)}</td>
+  <Card>
+    <CardContent>
+      <div class="overflow-x-auto">
+        <table class="w-full text-sm">
+          <thead>
+            <tr class="border-t bg-muted/50">
+              <th class="px-4 py-3 text-left font-medium text-muted-foreground">Name</th>
+              <th class="px-4 py-3 text-left font-medium text-muted-foreground">Code</th>
+              <th class="px-4 py-3 text-left font-medium text-muted-foreground">City</th>
+              <th class="px-4 py-3 text-left font-medium text-muted-foreground">Country</th>
+              <th class="px-4 py-3 text-left font-medium text-muted-foreground">Status</th>
+              <th class="px-4 py-3 text-left font-medium text-muted-foreground">Created</th>
             </tr>
-          {:else}
-            <tr>
-              <td colspan="6" class="px-4 py-8 text-center text-muted-foreground">
-                No warehouses found.
-              </td>
-            </tr>
-          {/each}
-        </tbody>
-      </table>
-    </div>
-  </div>
+          </thead>
+          <tbody>
+            {#each data.warehouses as warehouse (warehouse.id)}
+              <tr class="border-t hover:bg-muted/30">
+                <td class="px-4 py-3 font-medium">{warehouse.name}</td>
+                <td class="px-4 py-3 text-muted-foreground">{warehouse.code}</td>
+                <td class="px-4 py-3 text-muted-foreground">{warehouse.city || '-'}</td>
+                <td class="px-4 py-3 text-muted-foreground">{warehouse.country || '-'}</td>
+                <td class="px-4 py-3">
+                  <span class="inline-block rounded-full px-2 py-0.5 text-xs font-medium {warehouse.status === 'active' ? 'bg-green-100 text-green-800' : 'bg-gray-100 text-gray-800'}">
+                    {warehouse.status}
+                  </span>
+                </td>
+                <td class="px-4 py-3 text-muted-foreground">{formatDate(warehouse.createdAt)}</td>
+              </tr>
+            {:else}
+              <tr>
+                <td colspan="6" class="px-4 py-8 text-center text-muted-foreground">
+                  No warehouses found.
+                </td>
+              </tr>
+            {/each}
+          </tbody>
+        </table>
+      </div>
+    </CardContent>
+  </Card>
 </div>

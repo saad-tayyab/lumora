@@ -1,6 +1,11 @@
 <script lang="ts">
 import { toast } from 'svelte-sonner';
 import { enhance } from '$app/forms';
+import { Button } from '$lib/components/ui/button';
+import { Input } from '$lib/components/ui/input';
+import DatePicker from '$lib/components/ui/date-picker.svelte';
+import { Label } from '$lib/components/ui/label';
+import { Card, CardContent } from '$lib/components/ui/card';
 import type { ActionData } from './$types';
 
 let { form }: { form: ActionData } = $props();
@@ -35,60 +40,41 @@ $effect(() => {
         submitting = false;
       };
     }}
-    class="space-y-4 rounded-lg border bg-card p-6 shadow-sm"
   >
-    <div class="space-y-2">
-      <label for="name" class="text-sm font-medium text-card-foreground">Year Name *</label>
-      <input
-        id="name"
-        name="name"
-        type="text"
-        required
-        bind:value={name}
-        placeholder="e.g. FY 2026"
-        class="w-full rounded-md border bg-background px-3 py-2 text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring"
-      />
-    </div>
+    <Card>
+      <CardContent class="space-y-4">
+        <div class="space-y-2">
+          <Label for="name">Year Name *</Label>
+          <Input
+            id="name"
+            name="name"
+            type="text"
+            required
+            bind:value={name}
+            placeholder="e.g. FY 2026"
+          />
+        </div>
 
-    <div class="grid gap-4 sm:grid-cols-2">
-      <div class="space-y-2">
-        <label for="startDate" class="text-sm font-medium text-card-foreground">Start Date *</label>
-        <input
-          id="startDate"
-          name="startDate"
-          type="date"
-          required
-          bind:value={startDate}
-          class="w-full rounded-md border bg-background px-3 py-2 text-sm text-foreground focus:outline-none focus:ring-2 focus:ring-ring"
-        />
-      </div>
-      <div class="space-y-2">
-        <label for="endDate" class="text-sm font-medium text-card-foreground">End Date *</label>
-        <input
-          id="endDate"
-          name="endDate"
-          type="date"
-          required
-          bind:value={endDate}
-          class="w-full rounded-md border bg-background px-3 py-2 text-sm text-foreground focus:outline-none focus:ring-2 focus:ring-ring"
-        />
-      </div>
-    </div>
+        <div class="grid gap-4 sm:grid-cols-2">
+          <div class="space-y-2">
+            <Label for="startDate">Start Date *</Label>
+            <DatePicker bind:value={startDate} />
+            <input type="hidden" name="startDate" value={startDate} />
+          </div>
+          <div class="space-y-2">
+            <Label for="endDate">End Date *</Label>
+            <DatePicker bind:value={endDate} />
+            <input type="hidden" name="endDate" value={endDate} />
+          </div>
+        </div>
 
-    <div class="flex justify-end gap-3 pt-2">
-      <a
-        href="/financial/fiscal-years"
-        class="rounded-md border px-4 py-2 text-sm font-medium text-card-foreground hover:bg-accent"
-      >
-        Cancel
-      </a>
-      <button
-        type="submit"
-        disabled={submitting}
-        class="rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground hover:bg-primary/90 disabled:opacity-50"
-      >
-        {submitting ? 'Creating...' : 'Create Fiscal Year'}
-      </button>
-    </div>
+        <div class="flex justify-end gap-3 pt-2">
+          <Button href="/financial/fiscal-years" variant="outline">Cancel</Button>
+          <Button type="submit" disabled={submitting}>
+            {submitting ? 'Creating...' : 'Create Fiscal Year'}
+          </Button>
+        </div>
+      </CardContent>
+    </Card>
   </form>
 </div>

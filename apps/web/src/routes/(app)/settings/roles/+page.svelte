@@ -2,6 +2,8 @@
 import { toast } from 'svelte-sonner';
 import { invalidateAll } from '$app/navigation';
 import type { PageData } from './$types';
+import { Button } from '$lib/components/ui/button';
+import * as Card from '$lib/components/ui/card';
 
 let { data }: { data: PageData } = $props();
 let deleting = $state<string | null>(null);
@@ -28,10 +30,10 @@ async function handleDelete(id: string) {
       <h1 class="text-3xl font-bold text-foreground">Roles</h1>
       <p class="text-muted-foreground">{data.total} roles</p>
     </div>
-    <a href="/settings/roles/new" class="rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground hover:bg-primary/90">New Role</a>
+    <Button href="/settings/roles/new">New Role</Button>
   </div>
 
-  <div class="rounded-lg border bg-card shadow-sm">
+  <Card.Root class="shadow-sm"><Card.Content class="p-0">
     <div class="overflow-x-auto">
       <table class="w-full text-sm">
         <thead>
@@ -60,5 +62,5 @@ async function handleDelete(id: string) {
         </tbody>
       </table>
     </div>
-  </div>
+  </Card.Content></Card.Root>
 </div>

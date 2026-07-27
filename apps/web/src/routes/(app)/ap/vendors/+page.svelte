@@ -1,5 +1,8 @@
 <script lang="ts">
 import { formatCurrency, formatDate } from '$lib/utils/format';
+import { Button } from '$lib/components/ui/button';
+import { Input } from '$lib/components/ui/input';
+import { Card, CardContent } from '$lib/components/ui/card';
 import type { PageData } from './$types';
 
 let { data }: { data: PageData } = $props();
@@ -11,24 +14,21 @@ let { data }: { data: PageData } = $props();
       <h1 class="text-3xl font-bold text-foreground">Vendors</h1>
       <p class="text-muted-foreground">Manage your vendors</p>
     </div>
-    <a
-      href="/ap/vendors/new"
-      class="inline-flex items-center rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground hover:bg-primary/90"
-    >
+    <Button href="/ap/vendors/new">
       Add Vendor
-    </a>
+    </Button>
   </div>
 
-  <div class="rounded-lg border bg-card shadow-sm">
-    <div class="p-4">
-      <div class="relative">
-        <input
-          type="text"
-          placeholder="Search vendors..."
-          class="w-full rounded-md border bg-background px-3 py-2 text-sm placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring"
-        />
+  <Card>
+    <CardContent>
+      <div class="p-4">
+        <div class="relative">
+          <Input
+            type="text"
+            placeholder="Search vendors..."
+          />
+        </div>
       </div>
-    </div>
     <div class="overflow-x-auto">
       <table class="w-full text-sm">
         <thead>
@@ -73,5 +73,6 @@ let { data }: { data: PageData } = $props();
         </tbody>
       </table>
     </div>
-  </div>
+    </CardContent>
+  </Card>
 </div>

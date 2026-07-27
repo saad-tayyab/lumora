@@ -4,6 +4,8 @@ import { Button } from '$lib/components/ui/button';
 import { Label } from '$lib/components/ui/label';
 import { toast } from 'svelte-sonner';
 import { goto } from '$app/navigation';
+import { Input } from '$lib/components/ui/input';
+import DatePicker from '$lib/components/ui/date-picker.svelte';
 
 let { data } = $props();
 const { form, errors, enhance, submitting, message } = superForm(data.form);
@@ -24,7 +26,7 @@ $effect(() => {
 		<p class="text-muted-foreground">Add a versioned tax rate</p>
 	</div>
 
-	<form method="POST" use:enhance class="rounded-lg border bg-card p-6 shadow-sm space-y-4">
+	<form method="POST" use:enhance class="space-y-4">
 		<div class="space-y-1.5">
 			<Label for="taxCodeId">Tax Code *</Label>
 			<select id="taxCodeId" bind:value={$form.taxCodeId} class={inputClass}>
@@ -44,17 +46,17 @@ $effect(() => {
 			</div>
 			<div class="space-y-1.5">
 				<Label for="effectiveDate">Effective Date *</Label>
-				<input id="effectiveDate" type="date" value={$form.effectiveDate} oninput={(e) => $form.effectiveDate = e.currentTarget.value} class={inputClass} />
+				<DatePicker bind:value={$form.effectiveDate} />
 				{#if $errors.effectiveDate}<p class="text-sm text-destructive">{$errors.effectiveDate}</p>{/if}
 			</div>
 			<div class="space-y-1.5">
 				<Label for="expiryDate">Expiry Date</Label>
-				<input id="expiryDate" type="date" value={$form.expiryDate ?? ''} oninput={(e) => $form.expiryDate = e.currentTarget.value} class={inputClass} />
+				<DatePicker bind:value={$form.expiryDate} />
 			</div>
 		</div>
 
 		<div class="flex justify-end gap-3 pt-4">
-			<a href="/tax/rates" class="rounded-md border px-4 py-2 text-sm font-medium text-foreground hover:bg-accent">Cancel</a>
+			<Button variant="outline" href="/tax/rates">Cancel</Button>
 			<Button type="submit" disabled={$submitting}>
 				{#if $submitting}<div class="mr-2 h-4 w-4 animate-spin rounded-full border-2 border-primary-foreground border-t-transparent"></div>{/if}
 				Create Tax Rate

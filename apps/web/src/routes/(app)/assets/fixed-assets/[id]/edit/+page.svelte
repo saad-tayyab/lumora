@@ -2,6 +2,8 @@
 import { toast } from 'svelte-sonner';
 import { goto } from '$app/navigation';
 import type { PageData } from './$types';
+import { Button } from '$lib/components/ui/button';
+import { Input } from '$lib/components/ui/input';
 
 let { data }: { data: PageData } = $props();
 let submitting = $state(false);
@@ -39,7 +41,7 @@ async function handleSubmit(e: Event) {
       <p class="text-muted-foreground">{data.asset.assetNumber}</p>
     </div>
 
-    <form onsubmit={handleSubmit} class="rounded-lg border bg-card p-6 shadow-sm space-y-4">
+    <form onsubmit={handleSubmit} class="space-y-4">
       <div class="space-y-1.5">
         <label for="name" class="text-sm font-medium text-foreground">Name *</label>
         <input

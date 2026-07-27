@@ -3,6 +3,8 @@ import { toast } from 'svelte-sonner';
 import { type DiscountPolicy, salesApi } from '$lib/api/sales';
 import { formatCurrency, formatDate, formatPercent } from '$lib/utils/format';
 import type { PageData } from './$types';
+import { Button } from '$lib/components/ui/button';
+import * as Card from '$lib/components/ui/card';
 
 let { data }: { data: PageData } = $props();
 let policies = $state<DiscountPolicy[]>(data.policies);
@@ -45,12 +47,12 @@ async function deletePolicy(id: string) {
       <h1 class="text-3xl font-bold text-foreground">Discount Policies</h1>
       <p class="text-muted-foreground">Manage discount rules and promotions</p>
     </div>
-    <a href="/sales/discount-policies/new" class="inline-flex items-center gap-2 rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground hover:bg-primary/90">
+    <Button href="/sales/discount-policies/new">
       New Discount Policy
-    </a>
+    </Button>
   </div>
 
-  <div class="rounded-lg border bg-card shadow-sm">
+  <Card.Root class="shadow-sm"><Card.Content class="p-0">
     {#if policies.length === 0}
       <div class="py-12 text-center">
         <p class="text-muted-foreground">No discount policies found</p>
@@ -102,5 +104,5 @@ async function deletePolicy(id: string) {
         </table>
       </div>
     {/if}
-  </div>
+  </Card.Content></Card.Root>
 </div>

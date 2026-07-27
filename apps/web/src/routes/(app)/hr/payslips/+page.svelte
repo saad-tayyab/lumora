@@ -1,6 +1,7 @@
 <script lang="ts">
 import { formatCurrency, formatDate } from '$lib/utils/format';
 import type { PageData } from './$types';
+import * as Card from '$lib/components/ui/card';
 
 let { data }: { data: PageData } = $props();
 let payslips = $state(data.payslips);
@@ -9,7 +10,7 @@ let total = $state(data.total);
 
 <div class="space-y-6">
   <div><h1 class="text-3xl font-bold text-foreground">Payslips</h1><p class="text-muted-foreground">View employee payslips</p></div>
-  <div class="rounded-lg border bg-card shadow-sm">
+  <Card.Root class="shadow-sm"><Card.Content class="p-0">
     {#if payslips.length === 0}<div class="py-12 text-center text-muted-foreground">No payslips</div>
     {:else}
       <div class="overflow-x-auto">
@@ -19,5 +20,5 @@ let total = $state(data.total);
         </table>
       </div>
     {/if}
-  </div>
+  </Card.Content></Card.Root>
 </div>

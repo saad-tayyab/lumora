@@ -1,6 +1,7 @@
 <script lang="ts">
 import { formatCurrency, formatDate } from '$lib/utils/format';
 import type { PageData } from './$types';
+import * as Card from '$lib/components/ui/card';
 
 let { data }: { data: PageData } = $props();
 </script>
@@ -17,7 +18,7 @@ let { data }: { data: PageData } = $props();
 
 	{#if data.consumption}
 		<div class="grid gap-6 lg:grid-cols-2">
-			<div class="rounded-lg border bg-card p-6 shadow-sm">
+			<Card.Root class="shadow-sm"><Card.Content>
 				<h2 class="mb-4 text-lg font-semibold text-card-foreground">Consumption Details</h2>
 				<dl class="space-y-3">
 					<div class="flex justify-between">
@@ -45,9 +46,9 @@ let { data }: { data: PageData } = $props();
 						</div>
 					{/if}
 				</dl>
-			</div>
+			</Card.Content></Card.Root>
 
-			<div class="rounded-lg border bg-card p-6 shadow-sm">
+			<Card.Root class="shadow-sm"><Card.Content>
 				<h2 class="mb-4 text-lg font-semibold text-card-foreground">Linked Journal Entry</h2>
 				{#if data.consumption.journalEntryId}
 					<dl class="space-y-3">
@@ -63,7 +64,7 @@ let { data }: { data: PageData } = $props();
 				{:else}
 					<p class="text-sm text-muted-foreground">No linked journal entry</p>
 				{/if}
-			</div>
+			</Card.Content></Card.Root>
 		</div>
 	{:else}
 		<div class="flex items-center justify-center py-12">

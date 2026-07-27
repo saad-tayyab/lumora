@@ -1,6 +1,10 @@
 <script lang="ts">
 import { toast } from 'svelte-sonner';
 import { enhance } from '$app/forms';
+import { Button } from '$lib/components/ui/button';
+import { Input } from '$lib/components/ui/input';
+import { Label } from '$lib/components/ui/label';
+import { Card, CardContent } from '$lib/components/ui/card';
 import type { ActionData } from './$types';
 
 let { form }: { form: ActionData } = $props();
@@ -32,77 +36,69 @@ $effect(() => {
         submitting = false;
       };
     }}
-    class="space-y-4 rounded-lg border bg-card p-6 shadow-sm"
   >
-    <div class="space-y-2">
-      <label for="code" class="text-sm font-medium text-card-foreground">Account Code *</label>
-      <input
-        id="code"
-        name="code"
-        type="text"
-        required
-        value={form?.code ?? ''}
-        placeholder="e.g. 1000"
-        class="w-full rounded-md border bg-background px-3 py-2 text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring"
-      />
-    </div>
+    <Card>
+      <CardContent class="space-y-4">
+        <div class="space-y-2">
+          <Label for="code">Account Code *</Label>
+          <Input
+            id="code"
+            name="code"
+            type="text"
+            required
+            value={form?.code ?? ''}
+            placeholder="e.g. 1000"
+          />
+        </div>
 
-    <div class="space-y-2">
-      <label for="name" class="text-sm font-medium text-card-foreground">Account Name *</label>
-      <input
-        id="name"
-        name="name"
-        type="text"
-        required
-        value={form?.name ?? ''}
-        placeholder="e.g. Cash"
-        class="w-full rounded-md border bg-background px-3 py-2 text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring"
-      />
-    </div>
+        <div class="space-y-2">
+          <Label for="name">Account Name *</Label>
+          <Input
+            id="name"
+            name="name"
+            type="text"
+            required
+            value={form?.name ?? ''}
+            placeholder="e.g. Cash"
+          />
+        </div>
 
-    <div class="space-y-2">
-      <label for="type" class="text-sm font-medium text-card-foreground">Account Type *</label>
-      <select
-        id="type"
-        name="type"
-        required
-        class="w-full rounded-md border bg-background px-3 py-2 text-sm text-foreground focus:outline-none focus:ring-2 focus:ring-ring"
-      >
-        <option value="">Select type...</option>
-        <option value="asset" selected={form?.type === 'asset'}>Asset</option>
-        <option value="liability" selected={form?.type === 'liability'}>Liability</option>
-        <option value="equity" selected={form?.type === 'equity'}>Equity</option>
-        <option value="revenue" selected={form?.type === 'revenue'}>Revenue</option>
-        <option value="expense" selected={form?.type === 'expense'}>Expense</option>
-      </select>
-    </div>
+        <div class="space-y-2">
+          <Label for="type">Account Type *</Label>
+          <select
+            id="type"
+            name="type"
+            required
+            class="w-full rounded-md border bg-background px-3 py-2 text-sm text-foreground focus:outline-none focus:ring-2 focus:ring-ring"
+          >
+            <option value="">Select type...</option>
+            <option value="asset" selected={form?.type === 'asset'}>Asset</option>
+            <option value="liability" selected={form?.type === 'liability'}>Liability</option>
+            <option value="equity" selected={form?.type === 'equity'}>Equity</option>
+            <option value="revenue" selected={form?.type === 'revenue'}>Revenue</option>
+            <option value="expense" selected={form?.type === 'expense'}>Expense</option>
+          </select>
+        </div>
 
-    <div class="space-y-2">
-      <label for="description" class="text-sm font-medium text-card-foreground">Description</label>
-      <textarea
-        id="description"
-        name="description"
-        rows="3"
-        value={form?.description ?? ''}
-        placeholder="Optional description..."
-        class="w-full rounded-md border bg-background px-3 py-2 text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring"
-      ></textarea>
-    </div>
+        <div class="space-y-2">
+          <Label for="description">Description</Label>
+          <textarea
+            id="description"
+            name="description"
+            rows="3"
+            value={form?.description ?? ''}
+            placeholder="Optional description..."
+            class="w-full rounded-md border bg-background px-3 py-2 text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring"
+          ></textarea>
+        </div>
 
-    <div class="flex justify-end gap-3 pt-2">
-      <a
-        href="/financial/accounts"
-        class="rounded-md border px-4 py-2 text-sm font-medium text-card-foreground hover:bg-accent"
-      >
-        Cancel
-      </a>
-      <button
-        type="submit"
-        disabled={submitting}
-        class="rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground hover:bg-primary/90 disabled:opacity-50"
-      >
-        {submitting ? 'Creating...' : 'Create Account'}
-      </button>
-    </div>
+        <div class="flex justify-end gap-3 pt-2">
+          <Button href="/financial/accounts" variant="outline">Cancel</Button>
+          <Button type="submit" disabled={submitting}>
+            {submitting ? 'Creating...' : 'Create Account'}
+          </Button>
+        </div>
+      </CardContent>
+    </Card>
   </form>
 </div>

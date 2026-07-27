@@ -3,6 +3,7 @@ import { toast } from 'svelte-sonner';
 import { hrApi, type Salary } from '$lib/api/hr';
 import { formatCurrency, formatDate } from '$lib/utils/format';
 import type { PageData } from './$types';
+import * as Card from '$lib/components/ui/card';
 
 let { data }: { data: PageData } = $props();
 let salaries = $state<Salary[]>(data.salaries);
@@ -23,7 +24,7 @@ async function deleteSalary(id: string) {
 
 <div class="space-y-6">
   <div><h1 class="text-3xl font-bold text-foreground">Salaries</h1><p class="text-muted-foreground">Manage employee salary records</p></div>
-  <div class="rounded-lg border bg-card shadow-sm">
+  <Card.Root class="shadow-sm"><Card.Content class="p-0">
     {#if salaries.length === 0}<div class="py-12 text-center text-muted-foreground">No salary records</div>
     {:else}
       <div class="overflow-x-auto">
@@ -33,5 +34,5 @@ async function deleteSalary(id: string) {
         </table>
       </div>
     {/if}
-  </div>
+  </Card.Content></Card.Root>
 </div>

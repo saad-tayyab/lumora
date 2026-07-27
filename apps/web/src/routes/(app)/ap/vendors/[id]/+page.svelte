@@ -3,6 +3,8 @@ import { toast } from 'svelte-sonner';
 import { enhance } from '$app/forms';
 import { goto } from '$app/navigation';
 import { formatDate } from '$lib/utils/format';
+import { Button } from '$lib/components/ui/button';
+import { Card, CardContent } from '$lib/components/ui/card';
 import type { PageData } from './$types';
 
 let { data }: { data: PageData } = $props();
@@ -21,87 +23,85 @@ let deleting = $state(false);
       <h1 class="mt-2 text-3xl font-bold text-foreground">{data.vendor.name}</h1>
     </div>
     <div class="flex gap-2">
-      <a
-        href="/ap/vendors/{data.vendor.id}/edit"
-        class="inline-flex items-center rounded-md border px-4 py-2 text-sm font-medium hover:bg-accent"
-      >
+      <Button variant="outline" href="/ap/vendors/{data.vendor.id}/edit">
         Edit
-      </a>
-      <button
-        onclick={() => (showDeleteConfirm = true)}
-        class="inline-flex items-center rounded-md border border-destructive px-4 py-2 text-sm font-medium text-destructive hover:bg-destructive/10"
-      >
+      </Button>
+      <Button variant="destructive" onclick={() => (showDeleteConfirm = true)}>
         Delete
-      </button>
+      </Button>
     </div>
   </div>
 
   <div class="grid gap-6 lg:grid-cols-2">
-    <div class="rounded-lg border bg-card p-6 shadow-sm">
-      <h2 class="mb-4 text-lg font-semibold text-card-foreground">Contact Information</h2>
-      <dl class="space-y-3">
-        <div class="flex justify-between">
-          <dt class="text-sm text-muted-foreground">Email</dt>
-          <dd class="text-sm font-medium">{data.vendor.email || '-'}</dd>
-        </div>
-        <div class="flex justify-between">
-          <dt class="text-sm text-muted-foreground">Phone</dt>
-          <dd class="text-sm font-medium">{data.vendor.phone || '-'}</dd>
-        </div>
-        <div class="flex justify-between">
-          <dt class="text-sm text-muted-foreground">Address</dt>
-          <dd class="text-sm font-medium text-right">{data.vendor.address || '-'}</dd>
-        </div>
-        <div class="flex justify-between">
-          <dt class="text-sm text-muted-foreground">City</dt>
-          <dd class="text-sm font-medium">{data.vendor.city || '-'}</dd>
-        </div>
-        <div class="flex justify-between">
-          <dt class="text-sm text-muted-foreground">State</dt>
-          <dd class="text-sm font-medium">{data.vendor.state || '-'}</dd>
-        </div>
-        <div class="flex justify-between">
-          <dt class="text-sm text-muted-foreground">Country</dt>
-          <dd class="text-sm font-medium">{data.vendor.country}</dd>
-        </div>
-      </dl>
-    </div>
-
-    <div class="rounded-lg border bg-card p-6 shadow-sm">
-      <h2 class="mb-4 text-lg font-semibold text-card-foreground">Business Details</h2>
-      <dl class="space-y-3">
-        <div class="flex justify-between">
-          <dt class="text-sm text-muted-foreground">Tax ID</dt>
-          <dd class="text-sm font-medium">{data.vendor.taxId || '-'}</dd>
-        </div>
-        <div class="flex justify-between">
-          <dt class="text-sm text-muted-foreground">Currency</dt>
-          <dd class="text-sm font-medium">{data.vendor.currency}</dd>
-        </div>
-        <div class="flex justify-between">
-          <dt class="text-sm text-muted-foreground">Payment Terms</dt>
-          <dd class="text-sm font-medium">{data.vendor.paymentTerms} days</dd>
-        </div>
-        <div class="flex justify-between">
-          <dt class="text-sm text-muted-foreground">Status</dt>
-          <dd>
-            <span class="inline-block rounded-full px-2 py-0.5 text-xs font-medium {data.vendor.status === 'active' ? 'bg-green-100 text-green-800' : 'bg-gray-100 text-gray-800'}">
-              {data.vendor.status}
-            </span>
-          </dd>
-        </div>
-        <div class="flex justify-between">
-          <dt class="text-sm text-muted-foreground">Created</dt>
-          <dd class="text-sm font-medium">{formatDate(data.vendor.createdAt)}</dd>
-        </div>
-        {#if data.vendor.notes}
-          <div class="pt-2">
-            <dt class="text-sm text-muted-foreground">Notes</dt>
-            <dd class="mt-1 text-sm">{data.vendor.notes}</dd>
+    <Card>
+      <CardContent>
+        <h2 class="mb-4 text-lg font-semibold text-card-foreground">Contact Information</h2>
+        <dl class="space-y-3">
+          <div class="flex justify-between">
+            <dt class="text-sm text-muted-foreground">Email</dt>
+            <dd class="text-sm font-medium">{data.vendor.email || '-'}</dd>
           </div>
-        {/if}
-      </dl>
-    </div>
+          <div class="flex justify-between">
+            <dt class="text-sm text-muted-foreground">Phone</dt>
+            <dd class="text-sm font-medium">{data.vendor.phone || '-'}</dd>
+          </div>
+          <div class="flex justify-between">
+            <dt class="text-sm text-muted-foreground">Address</dt>
+            <dd class="text-sm font-medium text-right">{data.vendor.address || '-'}</dd>
+          </div>
+          <div class="flex justify-between">
+            <dt class="text-sm text-muted-foreground">City</dt>
+            <dd class="text-sm font-medium">{data.vendor.city || '-'}</dd>
+          </div>
+          <div class="flex justify-between">
+            <dt class="text-sm text-muted-foreground">State</dt>
+            <dd class="text-sm font-medium">{data.vendor.state || '-'}</dd>
+          </div>
+          <div class="flex justify-between">
+            <dt class="text-sm text-muted-foreground">Country</dt>
+            <dd class="text-sm font-medium">{data.vendor.country}</dd>
+          </div>
+        </dl>
+      </CardContent>
+    </Card>
+
+    <Card>
+      <CardContent>
+        <h2 class="mb-4 text-lg font-semibold text-card-foreground">Business Details</h2>
+        <dl class="space-y-3">
+          <div class="flex justify-between">
+            <dt class="text-sm text-muted-foreground">Tax ID</dt>
+            <dd class="text-sm font-medium">{data.vendor.taxId || '-'}</dd>
+          </div>
+          <div class="flex justify-between">
+            <dt class="text-sm text-muted-foreground">Currency</dt>
+            <dd class="text-sm font-medium">{data.vendor.currency}</dd>
+          </div>
+          <div class="flex justify-between">
+            <dt class="text-sm text-muted-foreground">Payment Terms</dt>
+            <dd class="text-sm font-medium">{data.vendor.paymentTerms} days</dd>
+          </div>
+          <div class="flex justify-between">
+            <dt class="text-sm text-muted-foreground">Status</dt>
+            <dd>
+              <span class="inline-block rounded-full px-2 py-0.5 text-xs font-medium {data.vendor.status === 'active' ? 'bg-green-100 text-green-800' : 'bg-gray-100 text-gray-800'}">
+                {data.vendor.status}
+              </span>
+            </dd>
+          </div>
+          <div class="flex justify-between">
+            <dt class="text-sm text-muted-foreground">Created</dt>
+            <dd class="text-sm font-medium">{formatDate(data.vendor.createdAt)}</dd>
+          </div>
+          {#if data.vendor.notes}
+            <div class="pt-2">
+              <dt class="text-sm text-muted-foreground">Notes</dt>
+              <dd class="mt-1 text-sm">{data.vendor.notes}</dd>
+            </div>
+          {/if}
+        </dl>
+      </CardContent>
+    </Card>
   </div>
 </div>
 
@@ -113,9 +113,9 @@ let deleting = $state(false);
         Are you sure you want to delete "{data.vendor.name}"? This action cannot be undone.
       </p>
       <div class="mt-4 flex justify-end gap-3">
-        <button onclick={() => (showDeleteConfirm = false)} class="inline-flex items-center rounded-md border px-4 py-2 text-sm font-medium hover:bg-accent">
+        <Button variant="outline" onclick={() => (showDeleteConfirm = false)}>
           Cancel
-        </button>
+        </Button>
         <form
           method="POST"
           action="?/delete"
@@ -133,9 +133,9 @@ let deleting = $state(false);
             };
           }}
         >
-          <button type="submit" disabled={deleting} class="inline-flex items-center rounded-md bg-destructive px-4 py-2 text-sm font-medium text-destructive-foreground hover:bg-destructive/90 disabled:opacity-50">
+          <Button type="submit" disabled={deleting} variant="destructive">
             {deleting ? 'Deleting...' : 'Delete'}
-          </button>
+          </Button>
         </form>
       </div>
     </div>

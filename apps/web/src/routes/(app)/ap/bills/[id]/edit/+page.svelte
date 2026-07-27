@@ -3,6 +3,7 @@ import { toast } from 'svelte-sonner';
 import { enhance } from '$app/forms';
 import { goto } from '$app/navigation';
 import type { PageData } from './$types';
+import DatePicker from '$lib/components/ui/date-picker.svelte';
 
 let { data }: { data: PageData } = $props();
 
@@ -61,11 +62,13 @@ let loading = $state(false);
       </div>
       <div class="space-y-2">
         <label for="issueDate" class="text-sm font-medium text-card-foreground">Issue Date *</label>
-        <input id="issueDate" name="issueDate" type="date" bind:value={issueDate} required class="w-full rounded-md border bg-background px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-ring" />
+        <DatePicker bind:value={issueDate} />
+        <input type="hidden" name="issueDate" value={issueDate} />
       </div>
       <div class="space-y-2">
         <label for="dueDate" class="text-sm font-medium text-card-foreground">Due Date *</label>
-        <input id="dueDate" name="dueDate" type="date" bind:value={dueDate} required class="w-full rounded-md border bg-background px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-ring" />
+        <DatePicker bind:value={dueDate} />
+        <input type="hidden" name="dueDate" value={dueDate} />
       </div>
     </div>
 

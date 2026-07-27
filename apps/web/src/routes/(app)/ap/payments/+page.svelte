@@ -1,5 +1,7 @@
 <script lang="ts">
 import { formatCurrency, formatDate } from '$lib/utils/format';
+import { Button } from '$lib/components/ui/button';
+import { Card, CardContent } from '$lib/components/ui/card';
 import type { PageData } from './$types';
 
 let { data }: { data: PageData } = $props();
@@ -11,15 +13,13 @@ let { data }: { data: PageData } = $props();
       <h1 class="text-3xl font-bold text-foreground">Payments</h1>
       <p class="text-muted-foreground">Vendor payment history</p>
     </div>
-    <a
-      href="/ap/payments/new"
-      class="inline-flex items-center rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground hover:bg-primary/90"
-    >
+    <Button href="/ap/payments/new">
       Record Payment
-    </a>
+    </Button>
   </div>
 
-  <div class="rounded-lg border bg-card shadow-sm">
+  <Card>
+    <CardContent>
     <div class="overflow-x-auto">
       <table class="w-full text-sm">
         <thead>
@@ -62,5 +62,6 @@ let { data }: { data: PageData } = $props();
         </tbody>
       </table>
     </div>
-  </div>
+    </CardContent>
+  </Card>
 </div>

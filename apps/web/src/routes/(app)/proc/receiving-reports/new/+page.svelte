@@ -3,6 +3,10 @@ import { toast } from 'svelte-sonner';
 import { goto } from '$app/navigation';
 import { procApi } from '$lib/api/proc';
 import type { PageData } from './$types';
+import { Button } from '$lib/components/ui/button';
+import * as Card from '$lib/components/ui/card';
+import { Input } from '$lib/components/ui/input';
+import DatePicker from '$lib/components/ui/date-picker.svelte';
 
 let { data }: { data: PageData } = $props();
 
@@ -42,7 +46,7 @@ async function handleSubmit(e: Event) {
   </div>
 
   <form onsubmit={handleSubmit} class="space-y-6">
-    <div class="rounded-lg border bg-card p-6 shadow-sm">
+    <Card.Root class="shadow-sm"><Card.Content>
       <h2 class="mb-4 text-lg font-semibold text-card-foreground">Receiving Details</h2>
       <div class="grid gap-4 md:grid-cols-2">
         <div>
@@ -61,13 +65,7 @@ async function handleSubmit(e: Event) {
         </div>
         <div>
           <label for="receivedDate" class="mb-1 block text-sm font-medium text-card-foreground">Received Date *</label>
-          <input
-            id="receivedDate"
-            type="date"
-            bind:value={receivedDate}
-            class="w-full rounded-md border bg-background px-3 py-2 text-sm"
-            required
-          />
+          <DatePicker bind:value={receivedDate} />
         </div>
       </div>
       <div class="mt-4">
@@ -80,25 +78,14 @@ async function handleSubmit(e: Event) {
           placeholder="Optional notes"
         ></textarea>
       </div>
-    </div>
+    </Card.Content></Card.Root>
 
     <div class="flex items-center justify-end gap-3">
-      <a
-        href="/proc/receiving-reports"
-        class="inline-flex items-center rounded-md border px-4 py-2 text-sm font-medium hover:bg-accent"
-      >
-        Cancel
-      </a>
-      <button
-        type="submit"
-        disabled={submitting}
-        class="inline-flex items-center rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground hover:bg-primary/90 disabled:opacity-50"
-      >
-        {#if submitting}
-          <div class="mr-2 h-4 w-4 animate-spin rounded-full border-2 border-primary-foreground border-t-transparent"></div>
-        {/if}
+      <Button variant="outline" href="/proc/receiving-reports">Cancel</Button>
+      <Button type="submit" disabled={submitting}>
+        {#if submitting}<div class="mr-2 h-4 w-4 animate-spin rounded-full border-2 border-primary-foreground border-t-transparent"></div>{/if}
         Create Receiving Report
-      </button>
+      </Button>
     </div>
   </form>
 </div>

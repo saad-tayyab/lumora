@@ -1,6 +1,8 @@
 <script lang="ts">
 import { formatDate } from '$lib/utils/format';
 import type { PageData } from './$types';
+import { Button } from '$lib/components/ui/button';
+import * as Card from '$lib/components/ui/card';
 
 let { data }: { data: PageData } = $props();
 
@@ -44,7 +46,7 @@ function methodLabel(method: string): string {
       </div>
     </div>
 
-    <div class="rounded-lg border bg-card p-6 shadow-sm space-y-4">
+    <Card.Root class="shadow-sm"><Card.Content>
       <h2 class="text-lg font-semibold text-card-foreground">Category Details</h2>
       <dl class="space-y-2 text-sm">
         <div class="flex justify-between">
@@ -68,9 +70,9 @@ function methodLabel(method: string): string {
           <dd class="font-medium">{formatDate(cat.createdAt)}</dd>
         </div>
       </dl>
-    </div>
+    </Card.Content></Card.Root>
 
-    <div class="rounded-lg border bg-card p-6 shadow-sm space-y-4">
+    <Card.Root class="shadow-sm"><Card.Content>
       <h2 class="text-lg font-semibold text-card-foreground">Depreciation Defaults</h2>
       <dl class="space-y-2 text-sm">
         <div class="flex justify-between">
@@ -90,9 +92,9 @@ function methodLabel(method: string): string {
           <dd class="font-medium">{cat.defaultSalvageValuePercent}%</dd>
         </div>
       </dl>
-    </div>
+    </Card.Content></Card.Root>
 
-    <div class="rounded-lg border bg-card p-6 shadow-sm space-y-4">
+    <Card.Root class="shadow-sm"><Card.Content>
       <h2 class="text-lg font-semibold text-card-foreground">General Ledger</h2>
       <dl class="space-y-2 text-sm">
         <div class="flex justify-between">
@@ -100,7 +102,7 @@ function methodLabel(method: string): string {
           <dd class="font-medium">{cat.glAccountId || '—'}</dd>
         </div>
       </dl>
-    </div>
+    </Card.Content></Card.Root>
   </div>
 {:else}
   <div class="flex items-center justify-center py-12">

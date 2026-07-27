@@ -2,6 +2,8 @@
 import { toast } from 'svelte-sonner';
 import { goto } from '$app/navigation';
 import type { PageData } from './$types';
+import { Button } from '$lib/components/ui/button';
+import { Input } from '$lib/components/ui/input';
 
 let { data }: { data: PageData } = $props();
 let submitting = $state(false);
@@ -34,7 +36,7 @@ async function handleSubmit(e: Event) {
       <p class="text-muted-foreground">{data.user.username}</p>
     </div>
 
-    <form onsubmit={handleSubmit} class="rounded-lg border bg-card p-6 shadow-sm space-y-4">
+    <form onsubmit={handleSubmit} class="space-y-4">
       <div class="space-y-1.5">
         <label for="name" class="text-sm font-medium text-foreground">Name</label>
         <input id="name" bind:value={name} required class="w-full rounded-md border bg-background px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-ring" />
@@ -56,10 +58,10 @@ async function handleSubmit(e: Event) {
       </div>
 
       <div class="flex justify-end gap-3 pt-4">
-        <a href="/settings/users/{data.user.id}" class="rounded-md border px-4 py-2 text-sm font-medium text-foreground hover:bg-accent">Cancel</a>
-        <button type="submit" disabled={submitting} class="rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground hover:bg-primary/90 disabled:opacity-50">
+        <Button variant="outline" href="/settings/users/{data.user.id}">Cancel</Button>
+        <Button type="submit" disabled={submitting}>
           {submitting ? 'Saving...' : 'Save Changes'}
-        </button>
+        </Button>
       </div>
     </form>
   </div>

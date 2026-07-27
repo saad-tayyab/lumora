@@ -3,6 +3,7 @@ import { toast } from 'svelte-sonner';
 import { hrApi, type LeaveRequest } from '$lib/api/hr';
 import { formatDate } from '$lib/utils/format';
 import type { PageData } from './$types';
+import * as Card from '$lib/components/ui/card';
 
 let { data }: { data: PageData } = $props();
 let requests = $state<LeaveRequest[]>(data.requests);
@@ -39,7 +40,7 @@ async function approve(id: string) {
     <select bind:value={statusFilter} class="rounded-md border bg-background px-3 py-2 text-sm"><option value="">All</option><option value="pending">Pending</option><option value="approved">Approved</option><option value="rejected">Rejected</option></select>
     <span class="text-sm text-muted-foreground">{total} total</span>
   </div>
-  <div class="rounded-lg border bg-card shadow-sm">
+  <Card.Root class="shadow-sm"><Card.Content class="p-0">
     {#if requests.length === 0}<div class="py-12 text-center text-muted-foreground">No leave requests</div>
     {:else}
       <div class="overflow-x-auto">
@@ -49,5 +50,5 @@ async function approve(id: string) {
         </table>
       </div>
     {/if}
-  </div>
+  </Card.Content></Card.Root>
 </div>

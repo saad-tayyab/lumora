@@ -2,6 +2,10 @@
 import { toast } from 'svelte-sonner';
 import { goto } from '$app/navigation';
 import { salesApi } from '$lib/api/sales';
+import { Button } from '$lib/components/ui/button';
+import * as Card from '$lib/components/ui/card';
+import { Input } from '$lib/components/ui/input';
+import DatePicker from '$lib/components/ui/date-picker.svelte';
 
 let name = $state('');
 let type = $state<string>('percentage');
@@ -51,12 +55,12 @@ async function handleSubmit(e: Event) {
   </div>
 
   <form onsubmit={handleSubmit} class="space-y-6">
-    <div class="rounded-lg border bg-card p-6 shadow-sm">
+    <Card.Root class="shadow-sm"><Card.Content>
       <h2 class="mb-4 text-lg font-semibold text-card-foreground">Policy Details</h2>
       <div class="grid gap-4 md:grid-cols-2">
         <div>
           <label for="name" class="mb-1 block text-sm font-medium text-card-foreground">Name *</label>
-          <input id="name" type="text" bind:value={name} class="w-full rounded-md border bg-background px-3 py-2 text-sm" placeholder="Policy name" required />
+          <Input id="name" type="text" bind:value={name} placeholder="Policy name" required />
         </div>
         <div>
           <label for="type" class="mb-1 block text-sm font-medium text-card-foreground">Type *</label>
@@ -68,44 +72,44 @@ async function handleSubmit(e: Event) {
         </div>
         <div>
           <label for="value" class="mb-1 block text-sm font-medium text-card-foreground">Value *</label>
-          <input id="value" type="number" bind:value={value} class="w-full rounded-md border bg-background px-3 py-2 text-sm" min="0" step="0.01" required />
+          <Input id="value" type="number" bind:value={value} min="0" step="0.01" required />
           <p class="mt-1 text-xs text-muted-foreground">
             {type === 'percentage' ? 'Enter as decimal (e.g., 0.10 for 10%)' : 'Enter amount'}
           </p>
         </div>
         <div>
           <label for="minQuantity" class="mb-1 block text-sm font-medium text-card-foreground">Minimum Quantity</label>
-          <input id="minQuantity" type="number" bind:value={minQuantity} class="w-full rounded-md border bg-background px-3 py-2 text-sm" min="0" />
+          <Input id="minQuantity" type="number" bind:value={minQuantity} min="0" />
         </div>
         <div>
           <label for="minAmount" class="mb-1 block text-sm font-medium text-card-foreground">Minimum Amount</label>
-          <input id="minAmount" type="number" bind:value={minAmount} class="w-full rounded-md border bg-background px-3 py-2 text-sm" min="0" step="0.01" />
+          <Input id="minAmount" type="number" bind:value={minAmount} min="0" step="0.01" />
         </div>
         <div>
           <label for="maxDiscountAmount" class="mb-1 block text-sm font-medium text-card-foreground">Max Discount Amount</label>
-          <input id="maxDiscountAmount" type="number" bind:value={maxDiscountAmount} class="w-full rounded-md border bg-background px-3 py-2 text-sm" min="0" step="0.01" />
+          <Input id="maxDiscountAmount" type="number" bind:value={maxDiscountAmount} min="0" step="0.01" />
         </div>
         <div>
           <label for="startDate" class="mb-1 block text-sm font-medium text-card-foreground">Start Date *</label>
-          <input id="startDate" type="date" bind:value={startDate} class="w-full rounded-md border bg-background px-3 py-2 text-sm" required />
+          <DatePicker bind:value={startDate} />
         </div>
         <div>
           <label for="endDate" class="mb-1 block text-sm font-medium text-card-foreground">End Date</label>
-          <input id="endDate" type="date" bind:value={endDate} class="w-full rounded-md border bg-background px-3 py-2 text-sm" />
+          <DatePicker bind:value={endDate} />
         </div>
         <div class="flex items-center gap-2">
           <input id="isActive" type="checkbox" bind:checked={isActive} class="h-4 w-4 rounded border" />
           <label for="isActive" class="text-sm font-medium text-card-foreground">Active</label>
         </div>
       </div>
-    </div>
+    </Card.Content></Card.Root>
 
     <div class="flex items-center justify-end gap-3">
-      <a href="/sales/discount-policies" class="inline-flex items-center rounded-md border px-4 py-2 text-sm font-medium hover:bg-accent">Cancel</a>
-      <button type="submit" disabled={submitting} class="inline-flex items-center rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground hover:bg-primary/90 disabled:opacity-50">
+      <Button variant="outline" href="/sales/discount-policies">Cancel</Button>
+      <Button type="submit" disabled={submitting}>
         {#if submitting}<div class="mr-2 h-4 w-4 animate-spin rounded-full border-2 border-primary-foreground border-t-transparent"></div>{/if}
         Create Discount Policy
-      </button>
+      </Button>
     </div>
   </form>
 </div>

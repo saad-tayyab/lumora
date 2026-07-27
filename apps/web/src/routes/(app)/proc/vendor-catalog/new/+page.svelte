@@ -2,6 +2,9 @@
 import { toast } from 'svelte-sonner';
 import { goto } from '$app/navigation';
 import { procApi } from '$lib/api/proc';
+import { Button } from '$lib/components/ui/button';
+import * as Card from '$lib/components/ui/card';
+import { Input } from '$lib/components/ui/input';
 
 let vendorId = $state('');
 let itemId = $state('');
@@ -47,48 +50,32 @@ async function handleSubmit(e: Event) {
   </div>
 
   <form onsubmit={handleSubmit} class="space-y-6">
-    <div class="rounded-lg border bg-card p-6 shadow-sm">
+    <Card.Root class="shadow-sm"><Card.Content>
       <h2 class="mb-4 text-lg font-semibold text-card-foreground">Catalog Details</h2>
       <div class="grid gap-4 md:grid-cols-2">
         <div>
           <label for="vendorId" class="mb-1 block text-sm font-medium text-card-foreground">Vendor ID *</label>
-          <input
-            id="vendorId"
-            type="text"
-            bind:value={vendorId}
-            class="w-full rounded-md border bg-background px-3 py-2 text-sm"
+          <Input id="vendorId" type="text" bind:value={vendorId}
             placeholder="Vendor ID"
             required
           />
         </div>
         <div>
           <label for="itemId" class="mb-1 block text-sm font-medium text-card-foreground">Item ID *</label>
-          <input
-            id="itemId"
-            type="text"
-            bind:value={itemId}
-            class="w-full rounded-md border bg-background px-3 py-2 text-sm"
+          <Input id="itemId" type="text" bind:value={itemId}
             placeholder="Item ID"
             required
           />
         </div>
         <div>
           <label for="vendorSku" class="mb-1 block text-sm font-medium text-card-foreground">Vendor SKU</label>
-          <input
-            id="vendorSku"
-            type="text"
-            bind:value={vendorSku}
-            class="w-full rounded-md border bg-background px-3 py-2 text-sm"
+          <Input id="vendorSku" type="text" bind:value={vendorSku}
             placeholder="Vendor's SKU"
           />
         </div>
         <div>
           <label for="unitPrice" class="mb-1 block text-sm font-medium text-card-foreground">Unit Price *</label>
-          <input
-            id="unitPrice"
-            type="number"
-            bind:value={unitPrice}
-            class="w-full rounded-md border bg-background px-3 py-2 text-sm"
+          <Input id="unitPrice" type="number" bind:value={unitPrice}
             min="0"
             step="0.01"
             required
@@ -96,22 +83,14 @@ async function handleSubmit(e: Event) {
         </div>
         <div>
           <label for="leadTimeDays" class="mb-1 block text-sm font-medium text-card-foreground">Lead Time (days)</label>
-          <input
-            id="leadTimeDays"
-            type="number"
-            bind:value={leadTimeDays}
-            class="w-full rounded-md border bg-background px-3 py-2 text-sm"
+          <Input id="leadTimeDays" type="number" bind:value={leadTimeDays}
             min="0"
             placeholder="Delivery lead time"
           />
         </div>
         <div>
           <label for="minimumOrderQuantity" class="mb-1 block text-sm font-medium text-card-foreground">Min Order Quantity</label>
-          <input
-            id="minimumOrderQuantity"
-            type="number"
-            bind:value={minimumOrderQuantity}
-            class="w-full rounded-md border bg-background px-3 py-2 text-sm"
+          <Input id="minimumOrderQuantity" type="number" bind:value={minimumOrderQuantity}
             min="0"
             placeholder="Minimum order quantity"
           />
@@ -127,7 +106,7 @@ async function handleSubmit(e: Event) {
           placeholder="Optional notes"
         ></textarea>
       </div>
-    </div>
+    </Card.Content></Card.Root>
 
     <div class="flex items-center justify-end gap-3">
       <a
