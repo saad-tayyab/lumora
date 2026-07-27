@@ -14,7 +14,7 @@
     class?: string;
   }
 
-  let { value = $bindable(''), label, placeholder = 'Pick a date', disabled = false, class: className }: Props = $props();
+  let { value = $bindable(), label, placeholder = 'Pick a date', disabled = false, class: className }: Props = $props();
   let open = $state(false);
 
   let dateValue = $derived.by(() => {
@@ -35,7 +35,7 @@
     open = false;
   }
 
-  function formatDateDisplay(d: string): string {
+  function formatDateDisplay(d: string | undefined): string {
     if (!d) return placeholder;
     try {
       const date = new Date(d + 'T00:00:00');
