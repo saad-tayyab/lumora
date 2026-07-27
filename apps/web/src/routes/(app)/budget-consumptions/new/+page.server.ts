@@ -4,13 +4,30 @@ import type { Actions, PageServerLoad } from './$types';
 
 export const load: PageServerLoad = async () => {
   try {
-    const result = await budgetApi.listBudgets({ limit: 200 });
-    const budgetLines = result.data.flatMap((b) =>
-      (b as unknown as { lines?: Array<{ id: string; description: string | null; budgetHeaderId: string }> }).lines?.map((line) => ({
-        ...line,
-        budgetName: b.name,
-      })) ?? [],
-    );
+    const result = await budgetApi.listBudgets({ limit: 100 });
+    const budgetLines: Array<{
+      id: string;
+      description: string | null;
+      budgetHeaderId: string;
+      budgetName: string;
+    }> = [];
+
+    for (const header of result.data) {
+      try {
+        const full = await budgetApi.getBudget(header.id);
+        for (const line of full.lines) {
+          budgetLines.push({
+            id: line.id,
+            description: line.description,
+            budgetHeaderId: line.budgetHeaderId,
+            budgetName: header.name,
+          });
+        }
+      } catch {
+        // skip headers where lines can't be fetched
+      }
+    }
+
     return { budgetLines };
   } catch {
     return { budgetLines: [] };
@@ -27,7 +44,7 @@ export const actions: Actions = {
 
     if (!budgetLineId) return fail(400, { error: 'Budget line is required' });
     if (!amount || parseFloat(amount) <= 0) return fail(400, { error: 'Valid amount is required' });
-    if (!consumptionDate) return fail(400, { error: 'Consumption date is required' });
+    if (!consumptionDate) return fail(400, { error: 'Budget consumption date is required' });
 
     try {
       await budgetApi.createBudgetConsumption({

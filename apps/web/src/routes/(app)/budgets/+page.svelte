@@ -5,7 +5,6 @@ import { formatCurrency, formatDate } from '$lib/utils/format';
 import type { PageData } from './$types';
 import { Button } from '$lib/components/ui/button';
 import AppDataTable from '$lib/components/data/AppDataTable.svelte';
-import type { ColumnDef } from '@tanstack/svelte-table';
 
 let { data }: { data: PageData } = $props();
 let deleting = $state<string | null>(null);
@@ -34,7 +33,7 @@ async function handleDelete(id: string) {
   }
 }
 
-const columns: ColumnDef<any>[] = [
+const columns = [
   { accessorKey: 'name', header: 'Name', cell: (row) => `<a href="/budgets/${(row as any).original.id}" class="font-medium hover:underline">${(row as any).original.name}</a>` },
   { accessorKey: 'periodStart', header: 'Period', cell: (row) => `${formatDate((row as any).original.periodStart)} - ${formatDate((row as any).original.periodEnd)}` },
   { accessorKey: 'totalAmount', header: 'Total Amount', cell: (row) => `<span class="text-right">${formatCurrency((row as any).original.totalAmount)}</span>` },

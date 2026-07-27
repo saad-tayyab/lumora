@@ -13,9 +13,24 @@ export class ApiError extends Error {
   }
 }
 
+async function getCookieFromContext(): Promise<string | undefined> {
+  if (typeof window !== 'undefined') return undefined;
+  try {
+    const { cookieStore } = await import('$lib/cookie-context');
+    return cookieStore.getStore();
+  } catch {
+    return undefined;
+  }
+}
+
 async function request<T>(path: string, init?: RequestInit): Promise<T> {
   const headers = new Headers(init?.headers);
   headers.set('Content-Type', 'application/json');
+
+  const cookie = await getCookieFromContext();
+  if (cookie) {
+    headers.set('Cookie', cookie);
+  }
 
   const res = await fetch(`${BACKEND_URL}${path}`, {
     ...init,

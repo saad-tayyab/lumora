@@ -1,22 +1,18 @@
 <script lang="ts" generics="TData">
-	import { get } from 'svelte/store';
-	import {
-		createSvelteTable,
-		getCoreRowModel,
-		getSortedRowModel,
-		getPaginationRowModel,
-		flexRender,
-		type ColumnDef,
-		type SortingState,
-		type PaginationState,
-	} from '@tanstack/svelte-table';
 	import { cn } from '$lib/utils/cn';
 	import { Skeleton } from '$lib/components/ui/skeleton';
 	import { Button } from '$lib/components/ui/button';
 	import { ChevronsUpDown, ChevronDown, ChevronUp } from '@lucide/svelte';
 
 	interface Props {
-		columns: ColumnDef<TData, any>[];
+		columns: {
+			accessorKey?: string;
+			id?: string;
+			header: string | (() => string);
+			cell?: (row: TData) => string;
+			accessorFn?: (row: TData) => unknown;
+			sortable?: boolean;
+		}[];
 		data: TData[];
 		loading?: boolean;
 		emptyMessage?: string;
@@ -37,30 +33,63 @@
 		class: className,
 	}: Props = $props();
 
-	let sorting = $state<SortingState>([]);
-	let pagination = $state<PaginationState>({ pageIndex: 0, pageSize });
+	let sorting = $state<{ key: string; desc: boolean } | null>(null);
+	let pageIndex = $state(0);
 
-	const table = createSvelteTable({
-		get data() {
-			return data;
-		},
-		columns,
-		get state() {
-			return { sorting, pagination };
-		},
-		onSortingChange: (updater) => {
-			sorting = typeof updater === 'function' ? updater(sorting) : updater;
-		},
-		onPaginationChange: (updater) => {
-			pagination = typeof updater === 'function' ? updater(pagination) : updater;
-		},
-		getCoreRowModel: getCoreRowModel(),
-		getSortedRowModel: getSortedRowModel(),
-		getPaginationRowModel: getPaginationRowModel(),
+	const sorted = $derived.by(() => {
+		if (!sorting) return data;
+		const col = columns.find((c) => (c.accessorKey ?? c.id) === sorting.key);
+		if (!col) return data;
+		const sortedData = [...data].sort((a, b) => {
+			const aVal = col.accessorFn ? col.accessorFn(a) : (a as any)[sorting.key];
+			const bVal = col.accessorFn ? col.accessorFn(b) : (b as any)[sorting.key];
+			if (aVal == null && bVal == null) return 0;
+			if (aVal == null) return 1;
+			if (bVal == null) return -1;
+			if (aVal < bVal) return sorting.desc ? 1 : -1;
+			if (aVal > bVal) return sorting.desc ? -1 : 1;
+			return 0;
+		});
+		return sortedData;
 	});
 
-	function t() {
-		return get(table);
+	const paged = $derived(() => {
+		const start = pageIndex * pageSize;
+		return sorted.slice(start, start + pageSize);
+	});
+
+	const pageCount = $derived(Math.ceil(sorted.length / pageSize));
+
+	function toggleSort(key: string) {
+		if (!sorting || sorting.key !== key) {
+			sorting = { key, desc: false };
+		} else if (!sorting.desc) {
+			sorting = { key, desc: true };
+		} else {
+			sorting = null;
+		}
+		pageIndex = 0;
+	}
+
+	function getCellValue(row: TData, col: (typeof columns)[number]): string {
+		if (col.cell) return col.cell({ original: row } as any);
+		const key = col.accessorKey ?? col.id;
+		if (!key) return '';
+		const val = (row as any)[key];
+		return val != null ? String(val) : '';
+	}
+
+	function getHeaderLabel(col: (typeof columns)[number]): string {
+		return typeof col.header === 'function' ? col.header() : col.header;
+	}
+
+	function getColumnId(col: (typeof columns)[number]): string {
+		return col.accessorKey ?? col.id ?? '';
+	}
+
+	function isSorted(key: string): 'asc' | 'desc' | false {
+		if (!sorting || sorting.key !== key) return false;
+		return sorting.desc ? 'desc' : 'asc';
 	}
 </script>
 
@@ -68,34 +97,26 @@
 	<div class="overflow-x-auto">
 		<table class="w-full caption-bottom text-sm">
 			<thead class="border-b bg-muted/50">
-				{#each t().getHeaderGroups() as headerGroup}
-					<tr>
-						{#each headerGroup.headers as header}
-							<th
-								class={cn(
-									'h-10 px-4 text-left align-middle font-medium text-muted-foreground',
-									header.column.getCanSort() && 'cursor-pointer select-none',
-								)}
-								onclick={header.column.getToggleSortingHandler()}
-							>
-								{#if header.isPlaceholder}
-									&nbsp;
+				<tr>
+					{#each columns as col}
+						{@const key = getColumnId(col)}
+						<th
+							class="h-10 px-4 text-left align-middle font-medium text-muted-foreground cursor-pointer select-none"
+							onclick={() => key && toggleSort(key)}
+						>
+							<div class="flex items-center gap-1">
+								{getHeaderLabel(col)}
+								{#if isSorted(key) === 'asc'}
+									<ChevronUp class="h-3 w-3" />
+								{:else if isSorted(key) === 'desc'}
+									<ChevronDown class="h-3 w-3" />
 								{:else}
-									<div class="flex items-center gap-1">
-										{@html flexRender(header.column.columnDef.header, header.getContext())}
-										{#if header.column.getIsSorted() === 'asc'}
-											<ChevronUp class="h-3 w-3" />
-										{:else if header.column.getIsSorted() === 'desc'}
-											<ChevronDown class="h-3 w-3" />
-										{:else}
-											<ChevronsUpDown class="h-3 w-3 opacity-50" />
-										{/if}
-									</div>
+									<ChevronsUpDown class="h-3 w-3 opacity-50" />
 								{/if}
-							</th>
-						{/each}
-					</tr>
-				{/each}
+							</div>
+						</th>
+					{/each}
+				</tr>
 			</thead>
 			<tbody>
 				{#if loading}
@@ -108,24 +129,24 @@
 							{/each}
 						</tr>
 					{/each}
-				{:else if t().getRowModel().rows.length === 0}
+				{:else if sorted.length === 0}
 					<tr>
 						<td colspan={columns.length} class="h-24 text-center text-muted-foreground">
 							{emptyMessage}
 						</td>
 					</tr>
 				{:else}
-					{#each t().getRowModel().rows as row}
+					{#each paged() as row}
 						<tr
 							class={cn(
 								'border-b transition-colors hover:bg-muted/50',
 								onRowClick && 'cursor-pointer',
 							)}
-							onclick={() => onRowClick?.(row.original)}
+							onclick={() => onRowClick?.(row)}
 						>
-							{#each row.getVisibleCells() as cell}
+							{#each columns as col}
 								<td class="p-4 align-middle">
-									{@html flexRender(cell.column.columnDef.cell, cell.getContext())}
+									{@html getCellValue(row, col)}
 								</td>
 							{/each}
 						</tr>
@@ -135,33 +156,31 @@
 		</table>
 	</div>
 
-	{#if t().getPageCount() > 1}
+	{#if pageCount > 1}
 		<div class="flex items-center justify-between border-t px-4 py-3">
 			<p class="text-sm text-muted-foreground">
 				{#if totalItems}
-					Showing {t().getState().pagination.pageIndex * t().getState().pagination.pageSize + 1}
-					to {Math.min(
-						(t().getState().pagination.pageIndex + 1) * t().getState().pagination.pageSize,
-						totalItems,
-					)} of {totalItems}
+					Showing {pageIndex * pageSize + 1}
+					to {Math.min((pageIndex + 1) * pageSize, totalItems)}
+					of {totalItems}
 				{:else}
-					Page {t().getState().pagination.pageIndex + 1} of {t().getPageCount()}
+					Page {pageIndex + 1} of {pageCount}
 				{/if}
 			</p>
 			<div class="flex items-center gap-2">
 				<Button
 					variant="outline"
 					size="sm"
-					onclick={() => t().previousPage()}
-					disabled={!t().getCanPreviousPage()}
+					onclick={() => (pageIndex = Math.max(0, pageIndex - 1))}
+					disabled={pageIndex === 0}
 				>
 					Previous
 				</Button>
 				<Button
 					variant="outline"
 					size="sm"
-					onclick={() => t().nextPage()}
-					disabled={!t().getCanNextPage()}
+					onclick={() => (pageIndex = Math.min(pageCount - 1, pageIndex + 1))}
+					disabled={pageIndex >= pageCount - 1}
 				>
 					Next
 				</Button>

@@ -1,5 +1,6 @@
 import { type Handle, redirect } from '@sveltejs/kit';
 import { BACKEND_URL } from '$lib/api';
+import { cookieStore } from '$lib/cookie-context';
 
 const publicRoutes = ['/login', '/register', '/api/auth'];
 
@@ -33,10 +34,10 @@ export const handle: Handle = async ({ event, resolve }) => {
     };
     event.locals.userId = data.user.id;
     event.locals.tenantId = data.user.tenantId || 'default';
+
+    return cookieStore.run(cookie, () => resolve(event));
   } catch (e) {
     if (e && typeof e === 'object' && 'status' in e) throw e;
     throw redirect(303, '/login');
   }
-
-  return resolve(event);
 };
