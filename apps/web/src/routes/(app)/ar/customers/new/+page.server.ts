@@ -3,7 +3,7 @@ import { superValidate, message } from 'sveltekit-superforms';
 import { zod4 } from 'sveltekit-superforms/adapters';
 import { z } from 'zod';
 import { customerSchema } from '@lumora/validation';
-import { BACKEND_URL } from '$lib/api';
+import { api } from '$lib/api';
 import type { Actions } from './$types';
 
 const formSchema = customerSchema.extend({
@@ -40,19 +40,7 @@ export const actions: Actions = {
 				body.creditLimit = String(form.data.creditLimit);
 			}
 
-			const res = await fetch(`${BACKEND_URL}/ar/customers`, {
-				method: 'POST',
-				headers: { 'Content-Type': 'application/json' },
-				body: JSON.stringify(body),
-				credentials: 'include',
-			});
-
-			if (!res.ok) {
-				const err = await res.json().catch(() => ({ message: 'Failed to create customer' }));
-				return fail(400, { form, error: err.message || 'Failed to create customer' });
-			}
-
-			const customer = await res.json();
+			const customer = await api.post<{ id: string }>('/ar/customers', body);
 			return redirect(303, `/ar/customers/${customer.id}`);
 		} catch {
 			return fail(500, { form, error: 'Failed to connect to server' });

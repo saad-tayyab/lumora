@@ -3,7 +3,7 @@ import { superValidate, message } from 'sveltekit-superforms';
 import { zod4 } from 'sveltekit-superforms/adapters';
 import { z } from 'zod';
 import { paymentSchema } from '@lumora/validation';
-import { BACKEND_URL } from '$lib/api';
+import { api } from '$lib/api';
 import type { Actions, PageServerLoad } from './$types';
 
 const formSchema = paymentSchema.extend({
@@ -17,9 +17,7 @@ export const load: PageServerLoad = async ({ url }) => {
 	const customerId = url.searchParams.get('customerId') || undefined;
 	const [form, customersRes] = await Promise.all([
 		superValidate(zod4(formSchema)),
-		fetch(`${BACKEND_URL}/ar/customers?limit=100`, { credentials: 'include' })
-			.then((r) => (r.ok ? r.json() : { data: [] }))
-			.catch(() => ({ data: [] })),
+		api.get<{ data: unknown[] }>('/ar/customers?limit=100').catch(() => ({ data: [] })),
 	]);
 	return { form, customers: customersRes.data, preselectedCustomerId: customerId };
 };
@@ -41,18 +39,7 @@ export const actions: Actions = {
 			if (form.data.referenceNumber) body.referenceNumber = form.data.referenceNumber.trim();
 			if (form.data.notes) body.notes = form.data.notes.trim();
 
-			const res = await fetch(`${BACKEND_URL}/ar/payments`, {
-				method: 'POST',
-				headers: { 'Content-Type': 'application/json' },
-				body: JSON.stringify(body),
-				credentials: 'include',
-			});
-
-			if (!res.ok) {
-				const err = await res.json().catch(() => ({ message: 'Failed to record payment' }));
-				return fail(400, { form, error: err.message || 'Failed to record payment' });
-			}
-
+			await api.post('/ar/payments', body);
 			return redirect(303, '/ar/payments');
 		} catch {
 			return fail(500, { form, error: 'Failed to connect to server' });

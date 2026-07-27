@@ -1,21 +1,12 @@
 import { fail, redirect } from '@sveltejs/kit';
-import { BACKEND_URL } from '$lib/api';
+import { api } from '$lib/api';
 import type { Actions, PageServerLoad } from './$types';
-
 
 export const load: PageServerLoad = async ({ params }) => {
   try {
-    const res = await fetch(`${BACKEND_URL}/ar/customers/${params.id}`, {
-      credentials: 'include',
-    });
-    if (res.status === 404) throw new Error('NOT_FOUND');
-    if (!res.ok) throw new Error('Failed to fetch customer');
-    const customer = await res.json();
+    const customer = await api.get<Record<string, unknown>>(`/ar/customers/${params.id}`);
     return { customer };
-  } catch (e) {
-    if (e instanceof Error && e.message === 'NOT_FOUND') {
-      throw redirect(303, '/ar/customers');
-    }
+  } catch {
     throw redirect(303, '/ar/customers');
   }
 };
@@ -56,18 +47,7 @@ export const actions: Actions = {
       if (country) body.country = country.trim().toUpperCase();
       if (creditLimit) body.creditLimit = creditLimit;
 
-      const res = await fetch(`${BACKEND_URL}/ar/customers/${params.id}`, {
-        method: 'PUT',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(body),
-        credentials: 'include',
-      });
-
-      if (!res.ok) {
-        const err = await res.json().catch(() => ({ message: 'Failed to update customer' }));
-        return fail(400, { error: err.message || 'Failed to update customer' });
-      }
-
+      await api.put(`/ar/customers/${params.id}`, body);
       return redirect(303, `/ar/customers/${params.id}`);
     } catch {
       return fail(500, { error: 'Failed to connect to server' });

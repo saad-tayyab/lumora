@@ -1,14 +1,5 @@
 import type { PageServerLoad } from './$types';
-import { BACKEND_URL, type PaginatedResponse } from '$lib/api';
-
-async function fetchJson<T>(path: string): Promise<T> {
-  const res = await fetch(`${BACKEND_URL}${path}`, {
-    headers: { 'Content-Type': 'application/json' },
-    credentials: 'include',
-  });
-  if (!res.ok) throw new Error(`${res.status}`);
-  return res.json() as Promise<T>;
-}
+import { api, type PaginatedResponse } from '$lib/api';
 
 interface Invoice {
   id: string;
@@ -43,11 +34,11 @@ export const load: PageServerLoad = async () => {
   try {
     const [invoicesRes, billsRes, employeesRes, recentInvoicesRes, recentPaymentsRes] =
       await Promise.allSettled([
-        fetchJson<PaginatedResponse<Invoice>>('/ar/invoices?limit=200'),
-        fetchJson<PaginatedResponse<Bill>>('/ap/bills?limit=200'),
-        fetchJson<PaginatedResponse<unknown>>('/hr/employees?limit=1'),
-        fetchJson<PaginatedResponse<Invoice>>('/ar/invoices?limit=5&sort=createdAt&order=desc'),
-        fetchJson<PaginatedResponse<Payment>>('/ar/payments?limit=5&sort=createdAt&order=desc'),
+        api.get<PaginatedResponse<Invoice>>('/ar/invoices?limit=200'),
+        api.get<PaginatedResponse<Bill>>('/ap/bills?limit=200'),
+        api.get<PaginatedResponse<unknown>>('/hr/employees?limit=1'),
+        api.get<PaginatedResponse<Invoice>>('/ar/invoices?limit=5&sort=createdAt&order=desc'),
+        api.get<PaginatedResponse<Payment>>('/ar/payments?limit=5&sort=createdAt&order=desc'),
       ]);
 
     const invoices =

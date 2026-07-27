@@ -3,7 +3,7 @@ import { superValidate, message } from 'sveltekit-superforms';
 import { zod4 } from 'sveltekit-superforms/adapters';
 import { z } from 'zod';
 import { invoiceSchema } from '@lumora/validation';
-import { BACKEND_URL } from '$lib/api';
+import { api } from '$lib/api';
 import type { Actions, PageServerLoad } from './$types';
 
 const formSchema = invoiceSchema.extend({
@@ -14,9 +14,7 @@ const formSchema = invoiceSchema.extend({
 export const load: PageServerLoad = async () => {
 	const [form, customersRes] = await Promise.all([
 		superValidate(zod4(formSchema)),
-		fetch(`${BACKEND_URL}/ar/customers?limit=100`, { credentials: 'include' })
-			.then((r) => (r.ok ? r.json() : { data: [] }))
-			.catch(() => ({ data: [] })),
+		api.get<{ data: unknown[] }>('/ar/customers?limit=100').catch(() => ({ data: [] })),
 	]);
 	return { form, customers: customersRes.data };
 };
@@ -67,19 +65,7 @@ export const actions: Actions = {
 				lineItems,
 			};
 
-			const res = await fetch(`${BACKEND_URL}/ar/invoices`, {
-				method: 'POST',
-				headers: { 'Content-Type': 'application/json' },
-				body: JSON.stringify(body),
-				credentials: 'include',
-			});
-
-			if (!res.ok) {
-				const err = await res.json().catch(() => ({ message: 'Failed to create invoice' }));
-				return fail(400, { form, error: err.message || 'Failed to create invoice' });
-			}
-
-			const invoice = await res.json();
+			const invoice = await api.post<{ id: string }>('/ar/invoices', body);
 			return redirect(303, `/ar/invoices/${invoice.id}`);
 		} catch {
 			return fail(500, { form, error: 'Failed to connect to server' });

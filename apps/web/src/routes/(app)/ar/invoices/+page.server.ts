@@ -1,6 +1,5 @@
 import type { PageServerLoad } from './$types';
-import { BACKEND_URL } from '$lib/api';
-
+import { api } from '$lib/api';
 
 export const load: PageServerLoad = async ({ url }) => {
   const limit = Number(url.searchParams.get('limit')) || 20;
@@ -13,9 +12,9 @@ export const load: PageServerLoad = async ({ url }) => {
     if (status) params.set('status', status);
     if (customerId) params.set('customerId', customerId);
 
-    const res = await fetch(`${BACKEND_URL}/ar/invoices?${params}`, { credentials: 'include' });
-    if (!res.ok) throw new Error('Failed to fetch invoices');
-    const data = await res.json();
+    const data = await api.get<{ data: unknown[]; total: number }>(
+      `/ar/invoices?${params}`,
+    );
     return { invoices: data.data, total: data.total, limit, offset };
   } catch {
     return { invoices: [], total: 0, limit, offset };

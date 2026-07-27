@@ -1,24 +1,17 @@
 import { error } from '@sveltejs/kit';
 import type { PageServerLoad } from './$types';
-import { BACKEND_URL } from '$lib/api';
-
+import { api } from '$lib/api';
 
 export const load: PageServerLoad = async ({ params }) => {
   try {
-    const [invRes, itemsRes] = await Promise.all([
-      fetch(`${BACKEND_URL}/ar/invoices/${params.id}`, { credentials: 'include' }),
-      fetch(`${BACKEND_URL}/ar/invoices/${params.id}/line-items`, { credentials: 'include' }),
+    const [invoice, lineItems] = await Promise.all([
+      api.get<Record<string, unknown>>(`/ar/invoices/${params.id}`),
+      api.get<unknown[]>(`/ar/invoices/${params.id}/line-items`).catch(() => []),
     ]);
-    if (invRes.status === 404)
-      throw error(404, { code: 'NOT_FOUND', message: 'Invoice not found' });
-    if (!invRes.ok) throw new Error('Failed to fetch invoice');
-    const invoice = await invRes.json();
-    const lineItems = itemsRes.ok ? await itemsRes.json() : [];
 
-    const custRes = await fetch(`${BACKEND_URL}/ar/customers/${invoice.customerId}`, {
-      credentials: 'include',
-    });
-    const customer = custRes.ok ? await custRes.json() : null;
+    const customer = await api
+      .get<Record<string, unknown>>(`/ar/customers/${(invoice as { customerId: string }).customerId}`)
+      .catch(() => null);
 
     return { invoice, lineItems, customer };
   } catch (e) {

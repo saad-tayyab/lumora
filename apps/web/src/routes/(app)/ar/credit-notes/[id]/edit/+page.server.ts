@@ -1,23 +1,15 @@
 import { fail, redirect } from '@sveltejs/kit';
-import { api, BACKEND_URL } from '$lib/api';
+import { api } from '$lib/api';
 import type { Actions, PageServerLoad } from './$types';
-
 
 export const load: PageServerLoad = async ({ params }) => {
   try {
-    const [cnRes, custRes] = await Promise.all([
-      fetch(`${BACKEND_URL}/ar/credit-notes/${params.id}`, { credentials: 'include' }),
-      fetch(`${BACKEND_URL}/ar/customers?limit=100`, { credentials: 'include' }),
+    const [creditNote, custData] = await Promise.all([
+      api.get<Record<string, unknown>>(`/ar/credit-notes/${params.id}`),
+      api.get<{ data: unknown[] }>('/ar/customers?limit=100').catch(() => ({ data: [] })),
     ]);
-    if (cnRes.status === 404) throw new Error('NOT_FOUND');
-    if (!cnRes.ok) throw new Error('Failed to fetch credit note');
-    const creditNote = await cnRes.json();
-    const custData = custRes.ok ? await custRes.json() : { data: [] };
     return { creditNote, customers: custData.data };
-  } catch (e) {
-    if (e instanceof Error && e.message === 'NOT_FOUND') {
-      throw redirect(303, '/ar/credit-notes');
-    }
+  } catch {
     throw redirect(303, '/ar/credit-notes');
   }
 };
@@ -50,18 +42,7 @@ export const actions: Actions = {
       };
       if (notes) body.notes = notes.trim();
 
-      const res = await fetch(`${BACKEND_URL}/ar/credit-notes/${params.id}`, {
-        method: 'PUT',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(body),
-        credentials: 'include',
-      });
-
-      if (!res.ok) {
-        const err = await res.json().catch(() => ({ message: 'Failed to update credit note' }));
-        return fail(400, { error: err.message || 'Failed to update credit note' });
-      }
-
+      await api.put(`/ar/credit-notes/${params.id}`, body);
       return redirect(303, `/ar/credit-notes/${params.id}`);
     } catch {
       return fail(500, { error: 'Failed to connect to server' });

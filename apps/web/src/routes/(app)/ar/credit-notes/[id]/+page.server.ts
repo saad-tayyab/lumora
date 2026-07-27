@@ -1,22 +1,16 @@
 import { error } from '@sveltejs/kit';
 import type { PageServerLoad } from './$types';
-import { BACKEND_URL } from '$lib/api';
-
+import { api } from '$lib/api';
 
 export const load: PageServerLoad = async ({ params }) => {
   try {
-    const cnRes = await fetch(`${BACKEND_URL}/ar/credit-notes/${params.id}`, {
-      credentials: 'include',
-    });
-    if (cnRes.status === 404)
-      throw error(404, { code: 'NOT_FOUND', message: 'Credit note not found' });
-    if (!cnRes.ok) throw new Error('Failed to fetch credit note');
-    const creditNote = await cnRes.json();
+    const creditNote = await api.get<Record<string, unknown>>(
+      `/ar/credit-notes/${params.id}`,
+    );
 
-    const custRes = await fetch(`${BACKEND_URL}/ar/customers/${creditNote.customerId}`, {
-      credentials: 'include',
-    });
-    const customer = custRes.ok ? await custRes.json() : null;
+    const customer = await api
+      .get<Record<string, unknown>>(`/ar/customers/${(creditNote as { customerId: string }).customerId}`)
+      .catch(() => null);
 
     return { creditNote, customer };
   } catch (e) {
