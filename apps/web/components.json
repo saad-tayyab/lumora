@@ -4,7 +4,7 @@
   "tailwind": {
     "config": "",
     "css": "src/app.css",
-    "baseColor": "slate",
+    "baseColor": "custom",
     "cssVariables": true,
     "prefix": ""
   },

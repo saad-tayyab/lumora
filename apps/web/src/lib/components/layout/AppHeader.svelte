@@ -1,26 +1,15 @@
 <script lang="ts">
-	import { page } from '$app/stores';
-	import { enhance } from '$app/forms';
-	import { theme } from '$lib/stores/theme';
-	import * as DropdownMenu from '$lib/components/ui/dropdown-menu';
-	import * as Tooltip from '$lib/components/ui/tooltip';
-	import { Button } from '$lib/components/ui/button';
-	import { Separator } from '$lib/components/ui/separator';
-	import { Avatar, AvatarFallback } from '$lib/components/ui/avatar';
-	import {
-		Menu,
-		Sun,
-		Moon,
-		LogOut,
-		Settings,
-		User,
-		Command,
-	} from '@lucide/svelte';
+import { Command, LogOut, Menu, Moon, Settings, Sun, User } from '@lucide/svelte';
+import { mode, toggleMode } from 'mode-watcher';
+import { enhance } from '$app/forms';
+import { page } from '$app/stores';
+import { Avatar, AvatarFallback } from '$lib/components/ui/avatar';
+import { Button } from '$lib/components/ui/button';
+import * as DropdownMenu from '$lib/components/ui/dropdown-menu';
+import { Separator } from '$lib/components/ui/separator';
+import * as Tooltip from '$lib/components/ui/tooltip';
 
-	let {
-		onMenuClick,
-		onSearchOpen,
-	}: { onMenuClick: () => void; onSearchOpen: () => void } = $props();
+let { onMenuClick, onSearchOpen }: { onMenuClick: () => void; onSearchOpen: () => void } = $props();
 </script>
 
 <header
@@ -56,10 +45,10 @@
 						<Button
 							variant="ghost"
 							size="icon"
-							onclick={() => theme.toggle()}
 							{...props}
+							onclick={toggleMode}
 						>
-							{#if $theme === 'dark'}
+							{#if mode.current === 'dark'}
 								<Sun class="h-4 w-4" />
 							{:else}
 								<Moon class="h-4 w-4" />
