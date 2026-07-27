@@ -130,6 +130,10 @@
     </Card.Header>
     <Card.Content>
       <div class="grid gap-3 md:grid-cols-2 lg:grid-cols-4">
+        <Button variant="outline" class="justify-start gap-2" href="/ap/vendors">
+          <Building2 class="h-4 w-4" />
+          View Vendors
+        </Button>
         <Button variant="outline" class="justify-start gap-2" href="/ap/vendors/new">
           <Plus class="h-4 w-4" />
           Add Vendor

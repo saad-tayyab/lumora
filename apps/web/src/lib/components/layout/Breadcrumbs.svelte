@@ -68,20 +68,38 @@
 		roles: 'Roles',
 		sessions: 'Sessions',
 		consumptions: 'Consumptions',
+		variance: 'Variance',
 		new: 'New',
 		edit: 'Edit',
 	};
 
+	function isUUID(segment: string): boolean {
+		return /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(segment)
+			|| /^[0-9a-f]{20,}$/i.test(segment);
+	}
+
 	function getBreadcrumbs() {
 		const path = $page.url.pathname;
 		const segments = path.split('/').filter(Boolean);
-		const crumbs: { label: string; href: string }[] = [];
+		const crumbs: { label: string; href: string; isLast: boolean }[] = [];
 
 		let currentPath = '';
-		for (const segment of segments) {
-			currentPath += `/${segment}`;
-			const label = segmentLabels[segment] || (segment.length > 8 ? `${segment.slice(0, 8)}...` : segment);
-			crumbs.push({ label, href: currentPath });
+		for (let i = 0; i < segments.length; i++) {
+			currentPath += `/${segments[i]}`;
+			const isLast = i === segments.length - 1;
+
+			let label: string;
+			if (segmentLabels[segments[i]]) {
+				label = segmentLabels[segments[i]];
+			} else if (isUUID(segments[i])) {
+				label = 'Detail';
+			} else if (segments[i].length > 20) {
+				label = 'Detail';
+			} else {
+				label = segments[i].charAt(0).toUpperCase() + segments[i].slice(1).replace(/-/g, ' ');
+			}
+
+			crumbs.push({ label, href: currentPath, isLast });
 		}
 
 		return crumbs;
@@ -96,10 +114,10 @@
 			<Item>
 				<Link href="/dashboard">Home</Link>
 			</Item>
-			{#each crumbs.slice(1) as crumb, i}
+			{#each crumbs.slice(1) as crumb}
 				<Separator />
 				<Item>
-					{#if i === crumbs.length - 2}
+					{#if crumb.isLast}
 						<Page>{crumb.label}</Page>
 					{:else}
 						<Link href={crumb.href}>{crumb.label}</Link>

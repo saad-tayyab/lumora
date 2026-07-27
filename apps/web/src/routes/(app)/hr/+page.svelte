@@ -164,17 +164,37 @@
           <Plus class="h-4 w-4" />
           Add Employee
         </Button>
+        <Button variant="outline" class="justify-start gap-2" href="/hr/departments">
+          <Building2 class="h-4 w-4" />
+          Departments
+        </Button>
+        <Button variant="outline" class="justify-start gap-2" href="/hr/designations">
+          <FileText class="h-4 w-4" />
+          Designations
+        </Button>
         <Button variant="outline" class="justify-start gap-2" href="/hr/attendance">
           <Clock class="h-4 w-4" />
           Attendance
         </Button>
+        <Button variant="outline" class="justify-start gap-2" href="/hr/leave">
+          <CalendarOff class="h-4 w-4" />
+          Leave
+        </Button>
+        <Button variant="outline" class="justify-start gap-2" href="/hr/leave-types">
+          <FileText class="h-4 w-4" />
+          Leave Types
+        </Button>
         <Button variant="outline" class="justify-start gap-2" href="/hr/payroll">
           <DollarSign class="h-4 w-4" />
-          Run Payroll
+          Payroll
         </Button>
         <Button variant="outline" class="justify-start gap-2" href="/hr/payslips">
           <FileText class="h-4 w-4" />
           Payslips
+        </Button>
+        <Button variant="outline" class="justify-start gap-2" href="/hr/salaries">
+          <DollarSign class="h-4 w-4" />
+          Salaries
         </Button>
       </div>
     </Card.Content>

@@ -128,12 +128,41 @@
     </Card.Root>
   </div>
 
+  <div class="rounded-lg border bg-card p-6 shadow-sm">
+    <div class="mb-4 flex items-center justify-between">
+      <h2 class="text-lg font-semibold text-card-foreground">Credit Notes</h2>
+      <a href="/ar/credit-notes" class="text-sm text-primary hover:underline">View all</a>
+    </div>
+    {#if data.creditNotes?.length === 0}
+      <p class="text-sm text-muted-foreground">No credit notes yet.</p>
+    {:else}
+      <div class="space-y-3">
+        {#each (data.creditNotes || []).slice(0, 5) as cn}
+          <a
+            href="/ar/credit-notes/{cn.id}"
+            class="flex items-center justify-between rounded-md border p-3 hover:bg-accent transition-colors"
+          >
+            <div>
+              <p class="text-sm font-medium text-card-foreground">{cn.creditNoteNumber}</p>
+              <p class="text-xs text-muted-foreground">{cn.issueDate}</p>
+            </div>
+            <p class="text-sm font-medium text-card-foreground">{formatCurrency(cn.totalAmount)}</p>
+          </a>
+        {/each}
+      </div>
+    {/if}
+  </div>
+
   <Card.Root>
     <Card.Header>
       <Card.Title>Quick Actions</Card.Title>
     </Card.Header>
     <Card.Content>
       <div class="grid gap-3 md:grid-cols-2 lg:grid-cols-4">
+        <Button variant="outline" class="justify-start gap-2" href="/ar/customers">
+          <Users class="h-4 w-4" />
+          View Customers
+        </Button>
         <Button variant="outline" class="justify-start gap-2" href="/ar/customers/new">
           <UserPlus class="h-4 w-4" />
           New Customer

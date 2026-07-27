@@ -63,7 +63,10 @@ $effect(() => {
       <h1 class="text-3xl font-bold text-foreground">Budgets</h1>
       <p class="text-muted-foreground">{data.total} budgets</p>
     </div>
-    <Button href="/budgets/new">New Budget</Button>
+    <div class="flex items-center gap-2">
+      <Button variant="outline" href="/budgets/consumptions">Consumptions</Button>
+      <Button href="/budgets/new">New Budget</Button>
+    </div>
   </div>
 
   <AppDataTable
