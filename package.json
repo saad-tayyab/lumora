@@ -20,6 +20,8 @@
     "db:generate": "turbo run db:generate --filter=@lumora/database",
     "db:migrate": "turbo run db:migrate --filter=@lumora/database",
     "db:seed": "turbo run db:seed --filter=@lumora/database",
+    "db:migrate:local": "cd packages/database && DATABASE_URL=$(cd ../services/backend && encore db conn-uri lumora) bun ./node_modules/.bin/drizzle-kit migrate",
+    "db:seed:local": "cd packages/database && DATABASE_URL=$(cd ../services/backend && encore db conn-uri lumora) bun src/seed.ts",
     "clean": "turbo run clean",
     "format": "biome format --write .",
     "format:check": "biome check --formatter-enabled=true --linter-enabled=false .",
