@@ -13,24 +13,24 @@
     "test:coverage": "vitest run --coverage",
     "test:integration": "vitest run --config vitest.integration.config.ts",
     "test:integration:watch": "vitest --config vitest.integration.config.ts",
-    "db:generate": "drizzle-kit generate --config=../../packages/database/drizzle.config.ts",
-    "db:push": "drizzle-kit push --config=../../packages/database/drizzle.config.ts",
     "db:seed:local": "DATABASE_URL=$(encore db conn-uri lumora) bun seed-local.ts"
   },
   "dependencies": {
-    "encore.dev": "^1.57.13",
-    "@lumora/database": "workspace:*",
     "@lumora/auth": "workspace:*",
-    "better-auth": "^1.6.25",
-    "@lumora/shared": "workspace:*",
     "@lumora/config": "workspace:*",
+    "@lumora/database": "workspace:*",
+    "@lumora/shared": "workspace:*",
     "@lumora/validation": "workspace:*",
+    "better-auth": "^1.6.25",
     "drizzle-orm": "1.0.0-rc.4",
-    "zod": "^4.4.3",
-    "uuid": "^14.0.0"
+    "encore.dev": "^1.57.13",
+    "pg": "^8.22.0",
+    "uuid": "^14.0.0",
+    "zod": "^4.4.3"
   },
   "devDependencies": {
     "@biomejs/biome": "^2.5.5",
+    "@types/pg": "^8.20.0",
     "@vitest/coverage-v8": "^4.1.10",
     "typescript": "^6.0.0",
     "vitest": "^4.1.10"
