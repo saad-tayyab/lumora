@@ -1,6 +1,6 @@
 {
   "$schema": "https://next.shadcn.com/schema/components.json",
-  "style": "default",
+  "style": "nova",
   "tailwind": {
     "config": "",
     "css": "src/app.css",

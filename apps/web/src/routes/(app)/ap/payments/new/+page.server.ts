@@ -1,50 +1,53 @@
-import { fail } from '@sveltejs/kit';
+import { fail, redirect } from '@sveltejs/kit';
+import { superValidate, message } from 'sveltekit-superforms';
+import { zod4 } from 'sveltekit-superforms/adapters';
+import { z } from 'zod';
+import { vendorPaymentSchema } from '@lumora/validation';
 import { apApi } from '$lib/api/ap';
 import { cashApi } from '$lib/api/cash';
 import type { Actions, PageServerLoad } from './$types';
 
+const formSchema = vendorPaymentSchema.extend({
+	billId: z.string().optional(),
+});
+
 export const load: PageServerLoad = async () => {
-  try {
-    const [vendors, billsResult, bankAccountsResult] = await Promise.all([
-      apApi.vendors.list({ limit: 100 }),
-      apApi.bills.list({ limit: 100 }),
-      cashApi.bankAccounts.list({ limit: 100 }),
-    ]);
-    return {
-      vendors: vendors.data,
-      bills: billsResult.data,
-      bankAccounts: bankAccountsResult.data,
-    };
-  } catch {
-    return { vendors: [], bills: [], bankAccounts: [] };
-  }
+	const [form, vendorsResult, billsResult, bankAccountsResult] = await Promise.all([
+		superValidate(zod4(formSchema)),
+		apApi.vendors.list({ limit: 100 }).catch(() => ({ data: [] })),
+		apApi.bills.list({ limit: 100 }).catch(() => ({ data: [] })),
+		cashApi.bankAccounts.list({ limit: 100 }).catch(() => ({ data: [] })),
+	]);
+	return {
+		form,
+		vendors: vendorsResult.data,
+		bills: billsResult.data,
+		bankAccounts: bankAccountsResult.data,
+	};
 };
 
 export const actions: Actions = {
-  default: async ({ request }) => {
-    const formData = await request.formData();
+	default: async ({ request }) => {
+		const form = await superValidate(request, zod4(formSchema));
+		if (!form.valid) return fail(400, { form });
 
-    const data = {
-      vendorId: formData.get('vendorId') as string,
-      billId: (formData.get('billId') as string) || undefined,
-      amount: formData.get('amount') as string,
-      paymentDate: formData.get('paymentDate') as string,
-      paymentMethod: formData.get('paymentMethod') as string,
-      reference: (formData.get('reference') as string) || undefined,
-      bankAccountId: (formData.get('bankAccountId') as string) || undefined,
-      notes: (formData.get('notes') as string) || undefined,
-    };
+		try {
+			const data = {
+				vendorId: form.data.vendorId,
+				billId: form.data.billId || undefined,
+				amount: String(form.data.amount),
+				paymentDate: form.data.paymentDate,
+				paymentMethod: form.data.paymentMethod,
+				reference: form.data.reference || undefined,
+				bankAccountId: form.data.bankAccountId || undefined,
+				notes: form.data.notes || undefined,
+			};
 
-    if (!data.vendorId || !data.amount || !data.paymentDate || !data.paymentMethod) {
-      return fail(400, { error: 'Vendor, amount, date, and payment method are required' });
-    }
-
-    try {
-      await apApi.payments.create(data);
-      return { success: true };
-    } catch (e) {
-      const message = e instanceof Error ? e.message : 'Failed to record payment';
-      return fail(400, { error: message });
-    }
-  },
+			await apApi.payments.create(data);
+			return redirect(303, '/ap/payments');
+		} catch (e) {
+			const errorMsg = e instanceof Error ? e.message : 'Failed to record payment';
+			return fail(400, { form, error: errorMsg });
+		}
+	},
 };

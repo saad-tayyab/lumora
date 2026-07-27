@@ -1,122 +1,99 @@
 <script lang="ts">
+import { superForm } from 'sveltekit-superforms';
+import { Button } from '$lib/components/ui/button';
+import { Label } from '$lib/components/ui/label';
 import { toast } from 'svelte-sonner';
 import { goto } from '$app/navigation';
-import { hrApi } from '$lib/api/hr';
-import type { PageData } from './$types';
 
-let { data }: { data: PageData } = $props();
+let { data } = $props();
+const { form, errors, enhance, submitting, message } = superForm(data.form);
 
-let firstName = $state('');
-let lastName = $state('');
-let email = $state('');
-let phone = $state('');
-let departmentId = $state('');
-let designationId = $state('');
-let employmentType = $state<string>('full_time');
-let joiningDate = $state(new Date().toISOString().split('T')[0]);
-let submitting = $state(false);
+const inputClass = "w-full rounded-lg border border-input bg-transparent px-2.5 py-1 text-base md:text-sm placeholder:text-muted-foreground focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:outline-none focus-visible:ring-3 disabled:cursor-not-allowed disabled:opacity-50";
 
-async function handleSubmit(e: Event) {
-  e.preventDefault();
-  if (!firstName || !lastName || !email || !departmentId || !designationId) {
-    toast.error('Please fill in all required fields');
-    return;
-  }
-
-  submitting = true;
-  try {
-    const emp = await hrApi.employees.create({
-      firstName,
-      lastName,
-      email,
-      phone: phone || null,
-      departmentId,
-      designationId,
-      employmentType,
-      joiningDate,
-    });
-    toast.success('Employee created');
-    goto(`/hr/employees/${emp.id}`);
-  } catch {
-    toast.error('Failed to create employee');
-  } finally {
-    submitting = false;
-  }
-}
+$effect(() => {
+	if ($message) {
+		toast.success($message);
+		goto('/hr/employees');
+	}
+});
 </script>
 
-<div class="space-y-6">
-  <div>
-    <h1 class="text-3xl font-bold text-foreground">Add Employee</h1>
-    <p class="text-muted-foreground">Create a new employee record</p>
-  </div>
+<div class="mx-auto max-w-2xl space-y-6">
+	<div>
+		<h1 class="text-3xl font-bold text-foreground">Add Employee</h1>
+		<p class="text-muted-foreground">Create a new employee record</p>
+	</div>
 
-  <form onsubmit={handleSubmit} class="space-y-6">
-    <div class="rounded-lg border bg-card p-6 shadow-sm">
-      <h2 class="mb-4 text-lg font-semibold text-card-foreground">Personal Information</h2>
-      <div class="grid gap-4 md:grid-cols-2">
-        <div>
-          <label for="firstName" class="mb-1 block text-sm font-medium text-card-foreground">First Name *</label>
-          <input id="firstName" type="text" bind:value={firstName} class="w-full rounded-md border bg-background px-3 py-2 text-sm" required />
-        </div>
-        <div>
-          <label for="lastName" class="mb-1 block text-sm font-medium text-card-foreground">Last Name *</label>
-          <input id="lastName" type="text" bind:value={lastName} class="w-full rounded-md border bg-background px-3 py-2 text-sm" required />
-        </div>
-        <div>
-          <label for="email" class="mb-1 block text-sm font-medium text-card-foreground">Email *</label>
-          <input id="email" type="email" bind:value={email} class="w-full rounded-md border bg-background px-3 py-2 text-sm" required />
-        </div>
-        <div>
-          <label for="phone" class="mb-1 block text-sm font-medium text-card-foreground">Phone</label>
-          <input id="phone" type="tel" bind:value={phone} class="w-full rounded-md border bg-background px-3 py-2 text-sm" />
-        </div>
-      </div>
-    </div>
+	<form method="POST" use:enhance class="space-y-6">
+		<div class="rounded-lg border bg-card p-6 shadow-sm">
+			<h2 class="mb-4 text-lg font-semibold text-card-foreground">Personal Information</h2>
+			<div class="grid gap-4 md:grid-cols-2">
+				<div class="space-y-1.5">
+					<Label for="firstName">First Name *</Label>
+					<input id="firstName" type="text" value={$form.firstName} oninput={(e) => $form.firstName = e.currentTarget.value} class={inputClass} />
+					{#if $errors.firstName}<p class="text-sm text-destructive">{$errors.firstName}</p>{/if}
+				</div>
+				<div class="space-y-1.5">
+					<Label for="lastName">Last Name *</Label>
+					<input id="lastName" type="text" value={$form.lastName} oninput={(e) => $form.lastName = e.currentTarget.value} class={inputClass} />
+					{#if $errors.lastName}<p class="text-sm text-destructive">{$errors.lastName}</p>{/if}
+				</div>
+				<div class="space-y-1.5">
+					<Label for="email">Email *</Label>
+					<input id="email" type="email" value={$form.email} oninput={(e) => $form.email = e.currentTarget.value} class={inputClass} />
+					{#if $errors.email}<p class="text-sm text-destructive">{$errors.email}</p>{/if}
+				</div>
+				<div class="space-y-1.5">
+					<Label for="phone">Phone</Label>
+					<input id="phone" type="tel" value={$form.phone ?? ''} oninput={(e) => $form.phone = e.currentTarget.value} class={inputClass} />
+				</div>
+			</div>
+		</div>
 
-    <div class="rounded-lg border bg-card p-6 shadow-sm">
-      <h2 class="mb-4 text-lg font-semibold text-card-foreground">Employment Details</h2>
-      <div class="grid gap-4 md:grid-cols-2">
-        <div>
-          <label for="departmentId" class="mb-1 block text-sm font-medium text-card-foreground">Department *</label>
-          <select id="departmentId" bind:value={departmentId} class="w-full rounded-md border bg-background px-3 py-2 text-sm" required>
-            <option value="">Select department</option>
-            {#each data.departments as dept}
-              <option value={dept.id}>{dept.name}</option>
-            {/each}
-          </select>
-        </div>
-        <div>
-          <label for="designationId" class="mb-1 block text-sm font-medium text-card-foreground">Designation *</label>
-          <select id="designationId" bind:value={designationId} class="w-full rounded-md border bg-background px-3 py-2 text-sm" required>
-            <option value="">Select designation</option>
-            {#each data.designations as desig}
-              <option value={desig.id}>{desig.title}</option>
-            {/each}
-          </select>
-        </div>
-        <div>
-          <label for="employmentType" class="mb-1 block text-sm font-medium text-card-foreground">Employment Type</label>
-          <select id="employmentType" bind:value={employmentType} class="w-full rounded-md border bg-background px-3 py-2 text-sm">
-            <option value="full_time">Full Time</option>
-            <option value="part_time">Part Time</option>
-            <option value="contract">Contract</option>
-            <option value="intern">Intern</option>
-          </select>
-        </div>
-        <div>
-          <label for="joiningDate" class="mb-1 block text-sm font-medium text-card-foreground">Joining Date *</label>
-          <input id="joiningDate" type="date" bind:value={joiningDate} class="w-full rounded-md border bg-background px-3 py-2 text-sm" required />
-        </div>
-      </div>
-    </div>
+		<div class="rounded-lg border bg-card p-6 shadow-sm">
+			<h2 class="mb-4 text-lg font-semibold text-card-foreground">Employment Details</h2>
+			<div class="grid gap-4 md:grid-cols-2">
+				<div class="space-y-1.5">
+					<Label for="departmentId">Department</Label>
+					<select id="departmentId" bind:value={$form.departmentId} class={inputClass}>
+						<option value="">Select department</option>
+						{#each data.departments as dept}
+							<option value={dept.id}>{dept.name}</option>
+						{/each}
+					</select>
+				</div>
+				<div class="space-y-1.5">
+					<Label for="designationId">Designation</Label>
+					<select id="designationId" bind:value={$form.designationId} class={inputClass}>
+						<option value="">Select designation</option>
+						{#each data.designations as desig}
+							<option value={desig.id}>{desig.title}</option>
+						{/each}
+					</select>
+				</div>
+				<div class="space-y-1.5">
+					<Label for="employmentType">Employment Type</Label>
+					<select id="employmentType" bind:value={$form.employmentType} class={inputClass}>
+						<option value="full_time">Full Time</option>
+						<option value="part_time">Part Time</option>
+						<option value="contract">Contract</option>
+						<option value="intern">Intern</option>
+					</select>
+				</div>
+				<div class="space-y-1.5">
+					<Label for="dateOfJoining">Joining Date *</Label>
+					<input id="dateOfJoining" type="date" value={$form.dateOfJoining} oninput={(e) => $form.dateOfJoining = e.currentTarget.value} class={inputClass} />
+					{#if $errors.dateOfJoining}<p class="text-sm text-destructive">{$errors.dateOfJoining}</p>{/if}
+				</div>
+			</div>
+		</div>
 
-    <div class="flex items-center justify-end gap-3">
-      <a href="/hr/employees" class="inline-flex items-center rounded-md border px-4 py-2 text-sm font-medium hover:bg-accent">Cancel</a>
-      <button type="submit" disabled={submitting} class="inline-flex items-center rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground hover:bg-primary/90 disabled:opacity-50">
-        {#if submitting}<div class="mr-2 h-4 w-4 animate-spin rounded-full border-2 border-primary-foreground border-t-transparent"></div>{/if}
-        Add Employee
-      </button>
-    </div>
-  </form>
+		<div class="flex items-center justify-end gap-3">
+			<a href="/hr/employees" class="inline-flex items-center rounded-md border px-4 py-2 text-sm font-medium hover:bg-accent">Cancel</a>
+			<Button type="submit" disabled={$submitting}>
+				{#if $submitting}<div class="mr-2 h-4 w-4 animate-spin rounded-full border-2 border-primary-foreground border-t-transparent"></div>{/if}
+				Add Employee
+			</Button>
+		</div>
+	</form>
 </div>

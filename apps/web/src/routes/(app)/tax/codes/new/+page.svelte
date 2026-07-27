@@ -1,99 +1,95 @@
 <script lang="ts">
+import { superForm } from 'sveltekit-superforms';
+import { Button } from '$lib/components/ui/button';
+import { Label } from '$lib/components/ui/label';
 import { toast } from 'svelte-sonner';
 import { goto } from '$app/navigation';
 
-let submitting = $state(false);
-let code = $state('');
-let name = $state('');
-let type = $state('sales_tax');
-let glAccountId = $state('');
-let postingRule = $state('output_liability');
-let isClaimable = $state(false);
-let description = $state('');
+let { data } = $props();
+const { form, errors, enhance, submitting, message } = superForm(data.form);
 
-async function handleSubmit(e: Event) {
-  e.preventDefault();
-  submitting = true;
-  try {
-    const { createTaxCode } = await import('$lib/api/tax');
-    await createTaxCode({
-      code,
-      name,
-      type,
-      glAccountId,
-      postingRule,
-      isClaimable,
-      description: description || undefined,
-    });
-    toast.success('Tax code created');
-    await goto('/tax/codes');
-  } catch (err: any) {
-    toast.error(err.message || 'Failed to create');
-  } finally {
-    submitting = false;
-  }
-}
+const inputClass = "w-full rounded-lg border border-input bg-transparent px-2.5 py-1 text-base md:text-sm placeholder:text-muted-foreground focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:outline-none focus-visible:ring-3 disabled:cursor-not-allowed disabled:opacity-50";
+
+$effect(() => {
+	if ($message) {
+		toast.success($message);
+		goto('/tax/codes');
+	}
+});
 </script>
 
 <div class="mx-auto max-w-2xl space-y-6">
-  <div>
-    <h1 class="text-3xl font-bold text-foreground">New Tax Code</h1>
-    <p class="text-muted-foreground">Define a new tax code</p>
-  </div>
+	<div>
+		<h1 class="text-3xl font-bold text-foreground">New Tax Code</h1>
+		<p class="text-muted-foreground">Define a new tax code</p>
+	</div>
 
-  <form onsubmit={handleSubmit} class="rounded-lg border bg-card p-6 shadow-sm space-y-4">
-    <div class="grid gap-4 md:grid-cols-2">
-      <div class="space-y-1.5">
-        <label for="code" class="text-sm font-medium text-foreground">Code *</label>
-        <input id="code" bind:value={code} required maxlength="20" class="w-full rounded-md border bg-background px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-ring" />
-      </div>
-      <div class="space-y-1.5">
-        <label for="name" class="text-sm font-medium text-foreground">Name *</label>
-        <input id="name" bind:value={name} required maxlength="100" class="w-full rounded-md border bg-background px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-ring" />
-      </div>
-    </div>
+	<form method="POST" use:enhance class="rounded-lg border bg-card p-6 shadow-sm space-y-4">
+		<div class="grid gap-4 md:grid-cols-2">
+			<div class="space-y-1.5">
+				<Label for="code">Code *</Label>
+				<input id="code" type="text" value={$form.code} oninput={(e) => $form.code = e.currentTarget.value} class={inputClass} maxlength="20" />
+				{#if $errors.code}<p class="text-sm text-destructive">{$errors.code}</p>{/if}
+			</div>
+			<div class="space-y-1.5">
+				<Label for="name">Name *</Label>
+				<input id="name" type="text" value={$form.name} oninput={(e) => $form.name = e.currentTarget.value} class={inputClass} maxlength="100" />
+				{#if $errors.name}<p class="text-sm text-destructive">{$errors.name}</p>{/if}
+			</div>
+		</div>
 
-    <div class="grid gap-4 md:grid-cols-2">
-      <div class="space-y-1.5">
-        <label for="type" class="text-sm font-medium text-foreground">Type *</label>
-        <select id="type" bind:value={type} class="w-full rounded-md border bg-background px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-ring">
-          <option value="sales_tax">Sales Tax</option>
-          <option value="vat">VAT</option>
-          <option value="gst">GST</option>
-          <option value="excise">Excise</option>
-          <option value="withholding">Withholding</option>
-        </select>
-      </div>
-      <div class="space-y-1.5">
-        <label for="postingRule" class="text-sm font-medium text-foreground">Posting Rule</label>
-        <select id="postingRule" bind:value={postingRule} class="w-full rounded-md border bg-background px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-ring">
-          <option value="output_liability">Output Liability</option>
-          <option value="input_asset">Input Asset</option>
-          <option value="expense">Expense</option>
-        </select>
-      </div>
-    </div>
+		<div class="grid gap-4 md:grid-cols-2">
+			<div class="space-y-1.5">
+				<Label for="type">Type *</Label>
+				<select id="type" bind:value={$form.type} class={inputClass}>
+					<option value="output_tax">Output Tax</option>
+					<option value="input_tax">Input Tax</option>
+					<option value="exempt">Exempt</option>
+					<option value="zero_rated">Zero Rated</option>
+				</select>
+				{#if $errors.type}<p class="text-sm text-destructive">{$errors.type}</p>{/if}
+			</div>
+			<div class="space-y-1.5">
+				<Label for="postingRule">Posting Rule</Label>
+				<select id="postingRule" bind:value={$form.postingRule} class={inputClass}>
+					<option value="output_liability">Output Liability</option>
+					<option value="input_asset">Input Asset</option>
+				</select>
+			</div>
+		</div>
 
-    <div class="space-y-1.5">
-      <label for="glAccount" class="text-sm font-medium text-foreground">GL Account ID *</label>
-      <input id="glAccount" bind:value={glAccountId} required class="w-full rounded-md border bg-background px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-ring" />
-    </div>
+		<div class="space-y-1.5">
+			<Label for="rate">Rate *</Label>
+			<input id="rate" type="number" value={$form.rate} oninput={(e) => $form.rate = Number(e.currentTarget.value)} class={inputClass} placeholder="e.g. 15" />
+			{#if $errors.rate}<p class="text-sm text-destructive">{$errors.rate}</p>{/if}
+		</div>
 
-    <div class="space-y-1.5">
-      <label for="description" class="text-sm font-medium text-foreground">Description</label>
-      <textarea id="description" bind:value={description} rows="2" class="w-full rounded-md border bg-background px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-ring"></textarea>
-    </div>
+		<div class="space-y-1.5">
+			<Label for="glAccountId">GL Account ID</Label>
+			<input id="glAccountId" type="text" value={$form.glAccountId ?? ''} oninput={(e) => $form.glAccountId = e.currentTarget.value} class={inputClass} />
+		</div>
 
-    <div class="flex items-center gap-2">
-      <input id="claimable" type="checkbox" bind:checked={isClaimable} class="h-4 w-4 rounded border-input" />
-      <label for="claimable" class="text-sm font-medium text-foreground">Is Claimable</label>
-    </div>
+		<div class="space-y-1.5">
+			<Label for="description">Description</Label>
+			<input id="description" type="text" value={$form.description ?? ''} oninput={(e) => $form.description = e.currentTarget.value} class={inputClass} />
+		</div>
 
-    <div class="flex justify-end gap-3 pt-4">
-      <a href="/tax/codes" class="rounded-md border px-4 py-2 text-sm font-medium text-foreground hover:bg-accent">Cancel</a>
-      <button type="submit" disabled={submitting} class="rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground hover:bg-primary/90 disabled:opacity-50">
-        {submitting ? 'Creating...' : 'Create Tax Code'}
-      </button>
-    </div>
-  </form>
+		<div class="flex items-center gap-2">
+			<input id="isClaimable" type="checkbox" bind:checked={$form.isClaimable} class="h-4 w-4 rounded border-input" />
+			<Label for="isClaimable">Is Claimable</Label>
+		</div>
+
+		<div class="flex items-center gap-2">
+			<input id="isActive" type="checkbox" bind:checked={$form.isActive} class="h-4 w-4 rounded border-input" />
+			<Label for="isActive">Is Active</Label>
+		</div>
+
+		<div class="flex justify-end gap-3 pt-4">
+			<a href="/tax/codes" class="rounded-md border px-4 py-2 text-sm font-medium text-foreground hover:bg-accent">Cancel</a>
+			<Button type="submit" disabled={$submitting}>
+				{#if $submitting}<div class="mr-2 h-4 w-4 animate-spin rounded-full border-2 border-primary-foreground border-t-transparent"></div>{/if}
+				Create Tax Code
+			</Button>
+		</div>
+	</form>
 </div>

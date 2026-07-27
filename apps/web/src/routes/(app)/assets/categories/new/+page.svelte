@@ -1,139 +1,79 @@
 <script lang="ts">
+import { superForm } from 'sveltekit-superforms';
+import { Button } from '$lib/components/ui/button';
+import { Label } from '$lib/components/ui/label';
 import { toast } from 'svelte-sonner';
 import { goto } from '$app/navigation';
 
-let submitting = $state(false);
-let name = $state('');
-let code = $state('');
-let description = $state('');
-let defaultDepreciationMethod = $state('straight_line');
-let defaultUsefulLifeMonths = $state(60);
-let defaultSalvageValuePercent = $state('0');
-let isDepreciable = $state(true);
+let { data } = $props();
+const { form, errors, enhance, submitting, message } = superForm(data.form);
 
-async function handleSubmit(e: Event) {
-  e.preventDefault();
-  submitting = true;
-  try {
-    const { createAssetCategory } = await import('$lib/api/asset');
-    await createAssetCategory({
-      name,
-      code,
-      description: description || undefined,
-      defaultDepreciationMethod,
-      defaultUsefulLifeMonths,
-      defaultSalvageValuePercent,
-      isDepreciable,
-    });
-    toast.success('Category created');
-    await goto('/assets/categories');
-  } catch (err: any) {
-    toast.error(err.message || 'Failed to create category');
-  } finally {
-    submitting = false;
-  }
-}
+const inputClass = "w-full rounded-lg border border-input bg-transparent px-2.5 py-1 text-base md:text-sm placeholder:text-muted-foreground focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:outline-none focus-visible:ring-3 disabled:cursor-not-allowed disabled:opacity-50";
+
+$effect(() => {
+	if ($message) {
+		toast.success($message);
+		goto('/assets/categories');
+	}
+});
 </script>
 
 <div class="mx-auto max-w-2xl space-y-6">
-  <div>
-    <h1 class="text-3xl font-bold text-foreground">New Asset Category</h1>
-    <p class="text-muted-foreground">Create a new fixed asset category</p>
-  </div>
+	<div>
+		<h1 class="text-3xl font-bold text-foreground">New Asset Category</h1>
+		<p class="text-muted-foreground">Create a new fixed asset category</p>
+	</div>
 
-  <form onsubmit={handleSubmit} class="rounded-lg border bg-card p-6 shadow-sm space-y-4">
-    <div class="grid gap-4 md:grid-cols-2">
-      <div class="space-y-1.5">
-        <label for="name" class="text-sm font-medium text-foreground">Name *</label>
-        <input
-          id="name"
-          bind:value={name}
-          required
-          class="w-full rounded-md border bg-background px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-ring"
-          placeholder="e.g. Office Equipment"
-        />
-      </div>
-      <div class="space-y-1.5">
-        <label for="code" class="text-sm font-medium text-foreground">Code *</label>
-        <input
-          id="code"
-          bind:value={code}
-          required
-          maxlength="20"
-          class="w-full rounded-md border bg-background px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-ring"
-          placeholder="e.g. OE"
-        />
-      </div>
-    </div>
+	<form method="POST" use:enhance class="rounded-lg border bg-card p-6 shadow-sm space-y-4">
+		<div class="grid gap-4 md:grid-cols-2">
+			<div class="space-y-1.5">
+				<Label for="name">Name *</Label>
+				<input id="name" type="text" value={$form.name} oninput={(e) => $form.name = e.currentTarget.value} class={inputClass} placeholder="e.g. Office Equipment" />
+				{#if $errors.name}<p class="text-sm text-destructive">{$errors.name}</p>{/if}
+			</div>
+			<div class="space-y-1.5">
+				<Label for="code">Code *</Label>
+				<input id="code" type="text" value={$form.code} oninput={(e) => $form.code = e.currentTarget.value} class={inputClass} maxlength="20" placeholder="e.g. OE" />
+				{#if $errors.code}<p class="text-sm text-destructive">{$errors.code}</p>{/if}
+			</div>
+		</div>
 
-    <div class="space-y-1.5">
-      <label for="description" class="text-sm font-medium text-foreground">Description</label>
-      <textarea
-        id="description"
-        bind:value={description}
-        rows="2"
-        class="w-full rounded-md border bg-background px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-ring"
-      ></textarea>
-    </div>
+		<div class="space-y-1.5">
+			<Label for="description">Description</Label>
+			<input id="description" type="text" value={$form.description ?? ''} oninput={(e) => $form.description = e.currentTarget.value} class={inputClass} />
+		</div>
 
-    <div class="grid gap-4 md:grid-cols-3">
-      <div class="space-y-1.5">
-        <label for="method" class="text-sm font-medium text-foreground">Depreciation Method</label>
-        <select
-          id="method"
-          bind:value={defaultDepreciationMethod}
-          class="w-full rounded-md border bg-background px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-ring"
-        >
-          <option value="straight_line">Straight Line</option>
-          <option value="declining_balance">Declining Balance</option>
-          <option value="sum_of_years_digits">Sum of Years Digits</option>
-          <option value="units_of_activity">Units of Activity</option>
-        </select>
-      </div>
-      <div class="space-y-1.5">
-        <label for="usefulLife" class="text-sm font-medium text-foreground">Useful Life (months)</label>
-        <input
-          id="usefulLife"
-          type="number"
-          bind:value={defaultUsefulLifeMonths}
-          min="1"
-          class="w-full rounded-md border bg-background px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-ring"
-        />
-      </div>
-      <div class="space-y-1.5">
-        <label for="salvage" class="text-sm font-medium text-foreground">Salvage Value %</label>
-        <input
-          id="salvage"
-          bind:value={defaultSalvageValuePercent}
-          class="w-full rounded-md border bg-background px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-ring"
-        />
-      </div>
-    </div>
+		<div class="grid gap-4 md:grid-cols-3">
+			<div class="space-y-1.5">
+				<Label for="defaultDepreciationMethod">Depreciation Method</Label>
+				<select id="defaultDepreciationMethod" bind:value={$form.defaultDepreciationMethod} class={inputClass}>
+					<option value="straight_line">Straight Line</option>
+					<option value="declining_balance">Declining Balance</option>
+					<option value="sum_of_years_digits">Sum of Years Digits</option>
+					<option value="units_of_activity">Units of Activity</option>
+				</select>
+			</div>
+			<div class="space-y-1.5">
+				<Label for="defaultUsefulLifeMonths">Useful Life (months)</Label>
+				<input id="defaultUsefulLifeMonths" type="number" value={$form.defaultUsefulLifeMonths} oninput={(e) => $form.defaultUsefulLifeMonths = Number(e.currentTarget.value)} class={inputClass} />
+			</div>
+			<div class="space-y-1.5">
+				<Label for="defaultSalvageValuePercent">Salvage Value %</Label>
+				<input id="defaultSalvageValuePercent" type="number" value={$form.defaultSalvageValuePercent} oninput={(e) => $form.defaultSalvageValuePercent = Number(e.currentTarget.value)} class={inputClass} />
+			</div>
+		</div>
 
-    <div class="flex items-center gap-2">
-      <input
-        id="depreciable"
-        type="checkbox"
-        bind:checked={isDepreciable}
-        class="h-4 w-4 rounded border-input"
-      />
-      <label for="depreciable" class="text-sm font-medium text-foreground">Is Depreciable</label>
-    </div>
+		<div class="flex items-center gap-2">
+			<input id="isDepreciable" type="checkbox" bind:checked={$form.isDepreciable} class="h-4 w-4 rounded border-input" />
+			<Label for="isDepreciable">Is Depreciable</Label>
+		</div>
 
-    <div class="flex justify-end gap-3 pt-4">
-      <a
-        href="/assets/categories"
-        class="rounded-md border px-4 py-2 text-sm font-medium text-foreground hover:bg-accent"
-      >
-        Cancel
-      </a>
-      <button
-        type="submit"
-        disabled={submitting}
-        class="rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground hover:bg-primary/90 disabled:opacity-50"
-      >
-        {submitting ? 'Creating...' : 'Create Category'}
-      </button>
-    </div>
-  </form>
+		<div class="flex justify-end gap-3 pt-4">
+			<a href="/assets/categories" class="rounded-md border px-4 py-2 text-sm font-medium text-foreground hover:bg-accent">Cancel</a>
+			<Button type="submit" disabled={$submitting}>
+				{#if $submitting}<div class="mr-2 h-4 w-4 animate-spin rounded-full border-2 border-primary-foreground border-t-transparent"></div>{/if}
+				Create Category
+			</Button>
+		</div>
+	</form>
 </div>

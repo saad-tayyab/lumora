@@ -1,184 +1,98 @@
 <script lang="ts">
+import { superForm } from 'sveltekit-superforms';
+import { Button } from '$lib/components/ui/button';
+import { Label } from '$lib/components/ui/label';
 import { toast } from 'svelte-sonner';
 import { goto } from '$app/navigation';
-import type { PageData } from './$types';
 
-let { data }: { data: PageData } = $props();
-let submitting = $state(false);
-let name = $state('');
-let assetNumber = $state('');
-let description = $state('');
-let categoryId = $state('');
-let acquisitionDate = $state('');
-let acquisitionCost = $state('');
-let salvageValue = $state('0');
-let usefulLifeMonths = $state(60);
-let depreciationMethod = $state('straight_line');
-let isDepreciable = $state(true);
+let { data } = $props();
+const { form, errors, enhance, submitting, message } = superForm(data.form);
 
-async function handleSubmit(e: Event) {
-  e.preventDefault();
-  submitting = true;
-  try {
-    const { createFixedAsset } = await import('$lib/api/asset');
-    await createFixedAsset({
-      name,
-      assetNumber,
-      description: description || undefined,
-      categoryId,
-      acquisitionDate,
-      acquisitionCost,
-      salvageValue,
-      usefulLifeMonths,
-      depreciationMethod,
-      isDepreciable,
-    });
-    toast.success('Asset created');
-    await goto('/assets/fixed-assets');
-  } catch (err: any) {
-    toast.error(err.message || 'Failed to create asset');
-  } finally {
-    submitting = false;
-  }
-}
+const inputClass = "w-full rounded-lg border border-input bg-transparent px-2.5 py-1 text-base md:text-sm placeholder:text-muted-foreground focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:outline-none focus-visible:ring-3 disabled:cursor-not-allowed disabled:opacity-50";
+
+$effect(() => {
+	if ($message) {
+		toast.success($message);
+		goto('/assets/fixed-assets');
+	}
+});
 </script>
 
 <div class="mx-auto max-w-2xl space-y-6">
-  <div>
-    <h1 class="text-3xl font-bold text-foreground">New Fixed Asset</h1>
-    <p class="text-muted-foreground">Register a new fixed asset</p>
-  </div>
+	<div>
+		<h1 class="text-3xl font-bold text-foreground">New Fixed Asset</h1>
+		<p class="text-muted-foreground">Register a new fixed asset</p>
+	</div>
 
-  <form onsubmit={handleSubmit} class="rounded-lg border bg-card p-6 shadow-sm space-y-4">
-    <div class="grid gap-4 md:grid-cols-2">
-      <div class="space-y-1.5">
-        <label for="name" class="text-sm font-medium text-foreground">Name *</label>
-        <input
-          id="name"
-          bind:value={name}
-          required
-          class="w-full rounded-md border bg-background px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-ring"
-        />
-      </div>
-      <div class="space-y-1.5">
-        <label for="assetNumber" class="text-sm font-medium text-foreground">Asset Number *</label>
-        <input
-          id="assetNumber"
-          bind:value={assetNumber}
-          required
-          class="w-full rounded-md border bg-background px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-ring"
-        />
-      </div>
-    </div>
+	<form method="POST" use:enhance class="rounded-lg border bg-card p-6 shadow-sm space-y-4">
+		<div class="grid gap-4 md:grid-cols-2">
+			<div class="space-y-1.5">
+				<Label for="name">Name *</Label>
+				<input id="name" type="text" value={$form.name} oninput={(e) => $form.name = e.currentTarget.value} class={inputClass} />
+				{#if $errors.name}<p class="text-sm text-destructive">{$errors.name}</p>{/if}
+			</div>
+			<div class="space-y-1.5">
+				<Label for="code">Code *</Label>
+				<input id="code" type="text" value={$form.code} oninput={(e) => $form.code = e.currentTarget.value} class={inputClass} />
+				{#if $errors.code}<p class="text-sm text-destructive">{$errors.code}</p>{/if}
+			</div>
+		</div>
 
-    <div class="space-y-1.5">
-      <label for="description" class="text-sm font-medium text-foreground">Description</label>
-      <textarea
-        id="description"
-        bind:value={description}
-        rows="2"
-        class="w-full rounded-md border bg-background px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-ring"
-      ></textarea>
-    </div>
+		<div class="grid gap-4 md:grid-cols-2">
+			<div class="space-y-1.5">
+				<Label for="categoryId">Category *</Label>
+				<select id="categoryId" bind:value={$form.categoryId} class={inputClass}>
+					<option value="">Select category</option>
+					{#each data.categories as cat}
+						<option value={cat.id}>{cat.name} ({cat.code})</option>
+					{/each}
+				</select>
+				{#if $errors.categoryId}<p class="text-sm text-destructive">{$errors.categoryId}</p>{/if}
+			</div>
+			<div class="space-y-1.5">
+				<Label for="purchaseDate">Purchase Date *</Label>
+				<input id="purchaseDate" type="date" value={$form.purchaseDate} oninput={(e) => $form.purchaseDate = e.currentTarget.value} class={inputClass} />
+				{#if $errors.purchaseDate}<p class="text-sm text-destructive">{$errors.purchaseDate}</p>{/if}
+			</div>
+		</div>
 
-    <div class="grid gap-4 md:grid-cols-2">
-      <div class="space-y-1.5">
-        <label for="category" class="text-sm font-medium text-foreground">Category *</label>
-        <select
-          id="category"
-          bind:value={categoryId}
-          required
-          class="w-full rounded-md border bg-background px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-ring"
-        >
-          <option value="">Select category</option>
-          {#each data.categories as cat}
-            <option value={cat.id}>{cat.name} ({cat.code})</option>
-          {/each}
-        </select>
-      </div>
-      <div class="space-y-1.5">
-        <label for="acquisitionDate" class="text-sm font-medium text-foreground">Acquisition Date *</label>
-        <input
-          id="acquisitionDate"
-          type="date"
-          bind:value={acquisitionDate}
-          required
-          class="w-full rounded-md border bg-background px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-ring"
-        />
-      </div>
-    </div>
+		<div class="grid gap-4 md:grid-cols-3">
+			<div class="space-y-1.5">
+				<Label for="purchasePrice">Purchase Price *</Label>
+				<input id="purchasePrice" type="number" value={$form.purchasePrice} oninput={(e) => $form.purchasePrice = Number(e.currentTarget.value)} class={inputClass} />
+				{#if $errors.purchasePrice}<p class="text-sm text-destructive">{$errors.purchasePrice}</p>{/if}
+			</div>
+			<div class="space-y-1.5">
+				<Label for="salvageValue">Salvage Value</Label>
+				<input id="salvageValue" type="number" value={$form.salvageValue} oninput={(e) => $form.salvageValue = Number(e.currentTarget.value)} class={inputClass} />
+			</div>
+			<div class="space-y-1.5">
+				<Label for="usefulLife">Useful Life (months) *</Label>
+				<input id="usefulLife" type="number" value={$form.usefulLife} oninput={(e) => $form.usefulLife = Number(e.currentTarget.value)} class={inputClass} />
+				{#if $errors.usefulLife}<p class="text-sm text-destructive">{$errors.usefulLife}</p>{/if}
+			</div>
+		</div>
 
-    <div class="grid gap-4 md:grid-cols-3">
-      <div class="space-y-1.5">
-        <label for="cost" class="text-sm font-medium text-foreground">Acquisition Cost *</label>
-        <input
-          id="cost"
-          bind:value={acquisitionCost}
-          required
-          class="w-full rounded-md border bg-background px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-ring"
-        />
-      </div>
-      <div class="space-y-1.5">
-        <label for="salvage" class="text-sm font-medium text-foreground">Salvage Value</label>
-        <input
-          id="salvage"
-          bind:value={salvageValue}
-          class="w-full rounded-md border bg-background px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-ring"
-        />
-      </div>
-      <div class="space-y-1.5">
-        <label for="usefulLife" class="text-sm font-medium text-foreground">Useful Life (months)</label>
-        <input
-          id="usefulLife"
-          type="number"
-          bind:value={usefulLifeMonths}
-          min="1"
-          class="w-full rounded-md border bg-background px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-ring"
-        />
-      </div>
-    </div>
+		<div class="space-y-1.5">
+			<Label for="depreciationMethod">Depreciation Method</Label>
+			<select id="depreciationMethod" bind:value={$form.depreciationMethod} class={inputClass}>
+				<option value="straight_line">Straight Line</option>
+				<option value="declining_balance">Declining Balance</option>
+				<option value="units_of_production">Units of Production</option>
+			</select>
+		</div>
 
-    <div class="grid gap-4 md:grid-cols-2">
-      <div class="space-y-1.5">
-        <label for="method" class="text-sm font-medium text-foreground">Depreciation Method</label>
-        <select
-          id="method"
-          bind:value={depreciationMethod}
-          class="w-full rounded-md border bg-background px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-ring"
-        >
-          <option value="straight_line">Straight Line</option>
-          <option value="declining_balance">Declining Balance</option>
-          <option value="sum_of_years_digits">Sum of Years Digits</option>
-          <option value="units_of_activity">Units of Activity</option>
-        </select>
-      </div>
-      <div class="flex items-end">
-        <div class="flex items-center gap-2 pb-0.5">
-          <input
-            id="depreciable"
-            type="checkbox"
-            bind:checked={isDepreciable}
-            class="h-4 w-4 rounded border-input"
-          />
-          <label for="depreciable" class="text-sm font-medium text-foreground">Is Depreciable</label>
-        </div>
-      </div>
-    </div>
+		<div class="space-y-1.5">
+			<Label for="notes">Notes</Label>
+			<input id="notes" type="text" value={$form.notes ?? ''} oninput={(e) => $form.notes = e.currentTarget.value} class={inputClass} />
+		</div>
 
-    <div class="flex justify-end gap-3 pt-4">
-      <a
-        href="/assets/fixed-assets"
-        class="rounded-md border px-4 py-2 text-sm font-medium text-foreground hover:bg-accent"
-      >
-        Cancel
-      </a>
-      <button
-        type="submit"
-        disabled={submitting}
-        class="rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground hover:bg-primary/90 disabled:opacity-50"
-      >
-        {submitting ? 'Creating...' : 'Create Asset'}
-      </button>
-    </div>
-  </form>
+		<div class="flex justify-end gap-3 pt-4">
+			<a href="/assets/fixed-assets" class="rounded-md border px-4 py-2 text-sm font-medium text-foreground hover:bg-accent">Cancel</a>
+			<Button type="submit" disabled={$submitting}>
+				{#if $submitting}<div class="mr-2 h-4 w-4 animate-spin rounded-full border-2 border-primary-foreground border-t-transparent"></div>{/if}
+				Create Asset
+			</Button>
+		</div>
+	</form>
 </div>

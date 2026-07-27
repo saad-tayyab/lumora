@@ -1,16 +1,13 @@
 <script lang="ts">
+import { superForm } from 'sveltekit-superforms';
 import { toast } from 'svelte-sonner';
-import { enhance } from '$app/forms';
-import type { ActionData } from './$types';
+import { Input } from '$lib/components/ui/input';
+import { Label } from '$lib/components/ui/label';
+import { Button } from '$lib/components/ui/button';
+import { Textarea } from '$lib/components/ui/textarea';
 
-let { form }: { form: ActionData } = $props();
-let isLoading = $state(false);
-
-$effect(() => {
-  if (form?.error) {
-    toast.error(form.error);
-  }
-});
+let { data } = $props();
+const { form, enhance, submitting } = superForm(data.form);
 </script>
 
 <div class="space-y-6">
@@ -20,76 +17,43 @@ $effect(() => {
 	</div>
 
 	<div class="rounded-lg border bg-card p-6 shadow-sm">
-		<form
-			method="POST"
-			use:enhance={() => {
-				isLoading = true;
-				return async ({ update }) => {
-					isLoading = false;
-					await update();
-				};
-			}}
-			class="space-y-6"
-		>
+		<form method="POST" use:enhance class="space-y-6">
 			<div class="grid gap-4 md:grid-cols-2">
-				<div>
-					<label for="name" class="block text-sm font-medium text-card-foreground">Name *</label>
-					<input
-						id="name"
-						name="name"
-						type="text"
-						required
-						class="mt-1 block w-full rounded-md border border-input bg-background px-3 py-2 text-sm text-foreground placeholder:text-muted-foreground focus:border-ring focus:outline-none focus:ring-1 focus:ring-ring"
-						placeholder="Customer name"
-					/>
+				<div class="space-y-2">
+					<Label for="name">Name *</Label>
+					<Input id="name" bind:value={$form.name} placeholder="Customer name" />
 				</div>
-				<div>
-					<label for="email" class="block text-sm font-medium text-card-foreground">Email</label>
-					<input
-						id="email"
-						name="email"
-						type="email"
-						class="mt-1 block w-full rounded-md border border-input bg-background px-3 py-2 text-sm text-foreground placeholder:text-muted-foreground focus:border-ring focus:outline-none focus:ring-1 focus:ring-ring"
-						placeholder="customer@example.com"
-					/>
+				<div class="space-y-2">
+					<Label for="email">Email</Label>
+					<Input id="email" type="email" bind:value={$form.email} placeholder="customer@example.com" />
 				</div>
-				<div>
-					<label for="phone" class="block text-sm font-medium text-card-foreground">Phone</label>
-					<input
-						id="phone"
-						name="phone"
-						type="text"
-						class="mt-1 block w-full rounded-md border border-input bg-background px-3 py-2 text-sm text-foreground placeholder:text-muted-foreground focus:border-ring focus:outline-none focus:ring-1 focus:ring-ring"
-						placeholder="+1 (555) 000-0000"
-					/>
+				<div class="space-y-2">
+					<Label for="phone">Phone</Label>
+					<Input id="phone" bind:value={$form.phone} placeholder="+1 (555) 000-0000" />
 				</div>
-				<div>
-					<label for="paymentTerms" class="block text-sm font-medium text-card-foreground">
-						Payment Terms
-					</label>
+				<div class="space-y-2">
+					<Label for="paymentTerms">Payment Terms</Label>
 					<select
 						id="paymentTerms"
-						name="paymentTerms"
-						class="mt-1 block w-full rounded-md border border-input bg-background px-3 py-2 text-sm text-foreground focus:border-ring focus:outline-none focus:ring-1 focus:ring-ring"
+						bind:value={$form.paymentTerms}
+						class="h-8 w-full rounded-lg border border-input bg-transparent px-2.5 py-1 text-base transition-colors focus-visible:border-ring focus-visible:ring-3 focus-visible:ring-ring/50 md:text-sm"
 					>
 						<option value="Net 15">Net 15</option>
-						<option value="Net 30" selected>Net 30</option>
+						<option value="Net 30">Net 30</option>
 						<option value="Net 45">Net 45</option>
 						<option value="Net 60">Net 60</option>
 						<option value="Due on Receipt">Due on Receipt</option>
 					</select>
 				</div>
-				<div>
-					<label for="creditLimit" class="block text-sm font-medium text-card-foreground">
-						Credit Limit
-					</label>
-					<input
+				<div class="space-y-2">
+					<Label for="creditLimit">Credit Limit</Label>
+					<Input
 						id="creditLimit"
-						name="creditLimit"
 						type="number"
 						step="0.01"
 						min="0"
-						class="mt-1 block w-full rounded-md border border-input bg-background px-3 py-2 text-sm text-foreground placeholder:text-muted-foreground focus:border-ring focus:outline-none focus:ring-1 focus:ring-ring"
+						value={$form.creditLimit ?? ''}
+						oninput={(e) => ($form.creditLimit = Number(e.currentTarget.value) || undefined)}
 						placeholder="0.00"
 					/>
 				</div>
@@ -98,93 +62,38 @@ $effect(() => {
 			<div class="space-y-4">
 				<h3 class="text-sm font-medium text-card-foreground">Address</h3>
 				<div class="grid gap-4 md:grid-cols-2">
-					<div class="md:col-span-2">
-						<label for="addressLine1" class="block text-sm font-medium text-card-foreground">
-							Address Line 1
-						</label>
-						<input
-							id="addressLine1"
-							name="addressLine1"
-							type="text"
-							class="mt-1 block w-full rounded-md border border-input bg-background px-3 py-2 text-sm text-foreground placeholder:text-muted-foreground focus:border-ring focus:outline-none focus:ring-1 focus:ring-ring"
-							placeholder="Street address"
-						/>
+					<div class="space-y-2 md:col-span-2">
+						<Label for="addressLine1">Address Line 1</Label>
+						<Input id="addressLine1" bind:value={$form.addressLine1} placeholder="Street address" />
 					</div>
-					<div class="md:col-span-2">
-						<label for="addressLine2" class="block text-sm font-medium text-card-foreground">
-							Address Line 2
-						</label>
-						<input
-							id="addressLine2"
-							name="addressLine2"
-							type="text"
-							class="mt-1 block w-full rounded-md border border-input bg-background px-3 py-2 text-sm text-foreground placeholder:text-muted-foreground focus:border-ring focus:outline-none focus:ring-1 focus:ring-ring"
-							placeholder="Suite, unit, etc."
-						/>
+					<div class="space-y-2 md:col-span-2">
+						<Label for="addressLine2">Address Line 2</Label>
+						<Input id="addressLine2" bind:value={$form.addressLine2} placeholder="Suite, unit, etc." />
 					</div>
-					<div>
-						<label for="city" class="block text-sm font-medium text-card-foreground">City</label>
-						<input
-							id="city"
-							name="city"
-							type="text"
-							class="mt-1 block w-full rounded-md border border-input bg-background px-3 py-2 text-sm text-foreground placeholder:text-muted-foreground focus:border-ring focus:outline-none focus:ring-1 focus:ring-ring"
-						/>
+					<div class="space-y-2">
+						<Label for="city">City</Label>
+						<Input id="city" bind:value={$form.city} />
 					</div>
-					<div>
-						<label for="state" class="block text-sm font-medium text-card-foreground">State</label>
-						<input
-							id="state"
-							name="state"
-							type="text"
-							class="mt-1 block w-full rounded-md border border-input bg-background px-3 py-2 text-sm text-foreground placeholder:text-muted-foreground focus:border-ring focus:outline-none focus:ring-1 focus:ring-ring"
-						/>
+					<div class="space-y-2">
+						<Label for="state">State</Label>
+						<Input id="state" bind:value={$form.state} />
 					</div>
-					<div>
-						<label for="postalCode" class="block text-sm font-medium text-card-foreground">
-							Postal Code
-						</label>
-						<input
-							id="postalCode"
-							name="postalCode"
-							type="text"
-							class="mt-1 block w-full rounded-md border border-input bg-background px-3 py-2 text-sm text-foreground placeholder:text-muted-foreground focus:border-ring focus:outline-none focus:ring-1 focus:ring-ring"
-						/>
+					<div class="space-y-2">
+						<Label for="postalCode">Postal Code</Label>
+						<Input id="postalCode" bind:value={$form.postalCode} />
 					</div>
-					<div>
-						<label for="country" class="block text-sm font-medium text-card-foreground">
-							Country (3-letter code)
-						</label>
-						<input
-							id="country"
-							name="country"
-							type="text"
-							maxlength="3"
-							class="mt-1 block w-full rounded-md border border-input bg-background px-3 py-2 text-sm text-foreground placeholder:text-muted-foreground focus:border-ring focus:outline-none focus:ring-1 focus:ring-ring"
-							placeholder="USA"
-						/>
+					<div class="space-y-2">
+						<Label for="country">Country (3-letter code)</Label>
+						<Input id="country" bind:value={$form.country} maxlength={3} placeholder="USA" />
 					</div>
 				</div>
 			</div>
 
 			<div class="flex items-center gap-3">
-				<button
-					type="submit"
-					disabled={isLoading}
-					class="rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground hover:bg-primary/90 disabled:cursor-not-allowed disabled:opacity-50"
-				>
-					{#if isLoading}
-						Creating...
-					{:else}
-						Create Customer
-					{/if}
-				</button>
-				<a
-					href="/ar/customers"
-					class="rounded-md border px-4 py-2 text-sm font-medium text-card-foreground hover:bg-accent"
-				>
-					Cancel
-				</a>
+				<Button type="submit" disabled={$submitting}>
+					{$submitting ? 'Creating...' : 'Create Customer'}
+				</Button>
+				<Button variant="outline" href="/ar/customers">Cancel</Button>
 			</div>
 		</form>
 	</div>

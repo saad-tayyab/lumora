@@ -1,58 +1,61 @@
 import { fail, redirect } from '@sveltejs/kit';
+import { superValidate, message } from 'sveltekit-superforms';
+import { zod4 } from 'sveltekit-superforms/adapters';
+import { z } from 'zod';
+import { customerSchema } from '@lumora/validation';
 import { BACKEND_URL } from '$lib/api';
 import type { Actions } from './$types';
 
+const formSchema = customerSchema.extend({
+	addressLine1: z.string().optional(),
+	addressLine2: z.string().optional(),
+	state: z.string().optional(),
+	postalCode: z.string().optional(),
+}).omit({ address: true, taxId: true, notes: true });
+
+export const load = async () => {
+	const form = await superValidate(zod4(formSchema));
+	return { form };
+};
 
 export const actions: Actions = {
-  default: async ({ request }) => {
-    const formData = await request.formData();
-    const name = formData.get('name') as string;
-    const email = formData.get('email') as string;
-    const phone = formData.get('phone') as string;
-    const addressLine1 = formData.get('addressLine1') as string;
-    const addressLine2 = formData.get('addressLine2') as string;
-    const city = formData.get('city') as string;
-    const state = formData.get('state') as string;
-    const postalCode = formData.get('postalCode') as string;
-    const country = formData.get('country') as string;
-    const paymentTerms = formData.get('paymentTerms') as string;
-    const creditLimit = formData.get('creditLimit') as string;
+	default: async ({ request }) => {
+		const form = await superValidate(request, zod4(formSchema));
+		if (!form.valid) return fail(400, { form });
 
-    if (!name || name.trim().length === 0) {
-      return fail(400, { error: 'Name is required' });
-    }
+		try {
+			const body: Record<string, unknown> = {
+				name: form.data.name.trim(),
+				paymentTerms: form.data.paymentTerms || 'Net 30',
+			};
+			if (form.data.email) body.email = form.data.email.trim();
+			if (form.data.phone) body.phone = form.data.phone.trim();
+			if (form.data.addressLine1) body.addressLine1 = form.data.addressLine1.trim();
+			if (form.data.addressLine2) body.addressLine2 = form.data.addressLine2.trim();
+			if (form.data.city) body.city = form.data.city.trim();
+			if (form.data.state) body.state = form.data.state.trim();
+			if (form.data.postalCode) body.postalCode = form.data.postalCode.trim();
+			if (form.data.country) body.country = form.data.country.trim().toUpperCase();
+			if (form.data.creditLimit !== undefined && form.data.creditLimit !== null) {
+				body.creditLimit = String(form.data.creditLimit);
+			}
 
-    try {
-      const body: Record<string, unknown> = {
-        name: name.trim(),
-        paymentTerms: paymentTerms || 'Net 30',
-      };
-      if (email) body.email = email.trim();
-      if (phone) body.phone = phone.trim();
-      if (addressLine1) body.addressLine1 = addressLine1.trim();
-      if (addressLine2) body.addressLine2 = addressLine2.trim();
-      if (city) body.city = city.trim();
-      if (state) body.state = state.trim();
-      if (postalCode) body.postalCode = postalCode.trim();
-      if (country) body.country = country.trim().toUpperCase();
-      if (creditLimit) body.creditLimit = creditLimit;
+			const res = await fetch(`${BACKEND_URL}/ar/customers`, {
+				method: 'POST',
+				headers: { 'Content-Type': 'application/json' },
+				body: JSON.stringify(body),
+				credentials: 'include',
+			});
 
-      const res = await fetch(`${BACKEND_URL}/ar/customers`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(body),
-        credentials: 'include',
-      });
+			if (!res.ok) {
+				const err = await res.json().catch(() => ({ message: 'Failed to create customer' }));
+				return fail(400, { form, error: err.message || 'Failed to create customer' });
+			}
 
-      if (!res.ok) {
-        const err = await res.json().catch(() => ({ message: 'Failed to create customer' }));
-        return fail(400, { error: err.message || 'Failed to create customer' });
-      }
-
-      const customer = await res.json();
-      return redirect(303, `/ar/customers/${customer.id}`);
-    } catch {
-      return fail(500, { error: 'Failed to connect to server' });
-    }
-  },
+			const customer = await res.json();
+			return redirect(303, `/ar/customers/${customer.id}`);
+		} catch {
+			return fail(500, { form, error: 'Failed to connect to server' });
+		}
+	},
 };

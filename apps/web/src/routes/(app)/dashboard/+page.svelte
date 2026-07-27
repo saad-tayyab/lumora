@@ -1,82 +1,138 @@
 <script lang="ts">
-import { formatCurrency } from '$lib/utils/format';
-import type { PageData } from './$types';
+  import { formatCurrency, formatDate } from '$lib/utils/format';
+  import { KpiCard } from '$lib/components/dashboard';
+  import * as Card from '$lib/components/ui/card';
+  import { Button } from '$lib/components/ui/button';
+  import { FileText, Receipt, CreditCard, Users, Plus, BookOpen } from '@lucide/svelte';
+  import type { PageData } from './$types';
 
-let { data }: { data: PageData } = $props();
-let loading = $state(false);
+  let { data }: { data: PageData } = $props();
 </script>
 
 <div class="space-y-6">
-  {#if loading}
-    <div class="flex items-center justify-center py-12">
-      <div class="h-8 w-8 animate-spin rounded-full border-4 border-primary border-t-transparent"></div>
-    </div>
-  {:else}
-    <div>
-      <h1 class="text-3xl font-bold text-foreground">Dashboard</h1>
-      <p class="text-muted-foreground">Welcome to Lumora ERP</p>
-    </div>
+  <div>
+    <h1 class="text-3xl font-bold text-foreground">Dashboard</h1>
+    <p class="text-muted-foreground">Welcome to Lumora ERP</p>
+  </div>
 
-    <div class="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
-      <div class="rounded-lg border bg-card p-6 shadow-sm">
-        <div class="text-sm font-medium text-muted-foreground">Outstanding Invoices</div>
-        <div class="mt-2 text-3xl font-bold text-card-foreground">
-          {formatCurrency(data.outstandingInvoicesTotal)}
-        </div>
-        <p class="mt-1 text-xs text-muted-foreground">{data.outstandingInvoicesCount} invoices pending</p>
-      </div>
+  <div class="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
+    <KpiCard
+      title="Outstanding Invoices"
+      value={formatCurrency(data.outstandingInvoicesTotal)}
+      subtitle="{data.outstandingInvoicesCount} invoices pending"
+      icon={FileText}
+    />
+    <KpiCard
+      title="Pending Bills"
+      value={formatCurrency(data.pendingBillsTotal)}
+      subtitle="{data.pendingBillsCount} bills pending"
+      icon={Receipt}
+    />
+    <KpiCard
+      title="Total Employees"
+      value={data.employeeCount}
+      subtitle="Active workforce"
+      icon={Users}
+    />
+    <KpiCard
+      title="Open Items"
+      value={data.outstandingInvoicesCount + data.pendingBillsCount}
+      subtitle="Items requiring attention"
+      icon={CreditCard}
+    />
+  </div>
 
-      <div class="rounded-lg border bg-card p-6 shadow-sm">
-        <div class="text-sm font-medium text-muted-foreground">Pending Bills</div>
-        <div class="mt-2 text-3xl font-bold text-card-foreground">
-          {formatCurrency(data.pendingBillsTotal)}
-        </div>
-        <p class="mt-1 text-xs text-muted-foreground">{data.pendingBillsCount} bills pending</p>
-      </div>
+  <div class="grid gap-6 lg:grid-cols-2">
+    <Card.Root>
+      <Card.Header>
+        <Card.Title class="flex items-center justify-between">
+          <span>Recent Invoices</span>
+          <a href="/ar/invoices" class="text-sm text-primary hover:underline">View all</a>
+        </Card.Title>
+      </Card.Header>
+      <Card.Content>
+        {#if data.recentInvoices.length === 0}
+          <p class="py-4 text-center text-sm text-muted-foreground">No invoices yet.</p>
+        {:else}
+          <div class="space-y-3">
+            {#each data.recentInvoices as invoice}
+              <a
+                href="/ar/invoices/{invoice.id}"
+                class="flex items-center justify-between rounded-md border p-3 hover:bg-accent transition-colors"
+              >
+                <div>
+                  <p class="text-sm font-medium text-card-foreground">{invoice.invoiceNumber}</p>
+                  <p class="text-xs text-muted-foreground">{invoice.customerName} &middot; {formatDate(invoice.issueDate)}</p>
+                </div>
+                <div class="text-right">
+                  <p class="text-sm font-medium text-card-foreground">{formatCurrency(invoice.totalAmount)}</p>
+                  <span
+                    class="inline-flex items-center rounded-full px-2 py-0.5 text-xs font-medium
+                      {invoice.status === 'paid' ? 'bg-green-100 text-green-800' :
+                       invoice.status === 'overdue' ? 'bg-red-100 text-red-800' :
+                       invoice.status === 'sent' ? 'bg-blue-100 text-blue-800' :
+                       'bg-gray-100 text-gray-800'}"
+                  >
+                    {invoice.status}
+                  </span>
+                </div>
+              </a>
+            {/each}
+          </div>
+        {/if}
+      </Card.Content>
+    </Card.Root>
 
-      <div class="rounded-lg border bg-card p-6 shadow-sm">
-        <div class="text-sm font-medium text-muted-foreground">Total Employees</div>
-        <div class="mt-2 text-3xl font-bold text-card-foreground">{data.employeeCount}</div>
-        <p class="mt-1 text-xs text-muted-foreground">Active workforce</p>
-      </div>
+    <Card.Root>
+      <Card.Header>
+        <Card.Title class="flex items-center justify-between">
+          <span>Recent Payments</span>
+          <a href="/ar/payments" class="text-sm text-primary hover:underline">View all</a>
+        </Card.Title>
+      </Card.Header>
+      <Card.Content>
+        {#if data.recentPayments.length === 0}
+          <p class="py-4 text-center text-sm text-muted-foreground">No payments yet.</p>
+        {:else}
+          <div class="space-y-3">
+            {#each data.recentPayments as payment}
+              <div class="flex items-center justify-between rounded-md border p-3">
+                <div>
+                  <p class="text-sm font-medium text-card-foreground">{payment.paymentNumber}</p>
+                  <p class="text-xs text-muted-foreground">{formatDate(payment.paymentDate)}</p>
+                </div>
+                <p class="text-sm font-medium text-card-foreground">{formatCurrency(payment.amount)}</p>
+              </div>
+            {/each}
+          </div>
+        {/if}
+      </Card.Content>
+    </Card.Root>
+  </div>
 
-      <div class="rounded-lg border bg-card p-6 shadow-sm">
-        <div class="text-sm font-medium text-muted-foreground">Quick Stats</div>
-        <div class="mt-2 text-3xl font-bold text-card-foreground">
-          {data.outstandingInvoicesCount + data.pendingBillsCount}
-        </div>
-        <p class="mt-1 text-xs text-muted-foreground">Open items requiring attention</p>
-      </div>
-    </div>
-
-    <div class="rounded-lg border bg-card p-6 shadow-sm">
-      <h2 class="mb-4 text-lg font-semibold text-card-foreground">Quick Actions</h2>
+  <Card.Root>
+    <Card.Header>
+      <Card.Title>Quick Actions</Card.Title>
+    </Card.Header>
+    <Card.Content>
       <div class="grid gap-3 md:grid-cols-2 lg:grid-cols-4">
-        <a
-          href="/ar/invoices/new"
-          class="flex items-center gap-2 rounded-md border p-3 text-sm font-medium text-card-foreground hover:bg-accent"
-        >
-          📄 Create Invoice
-        </a>
-        <a
-          href="/ap/bills/new"
-          class="flex items-center gap-2 rounded-md border p-3 text-sm font-medium text-card-foreground hover:bg-accent"
-        >
-          📄 Record Bill
-        </a>
-        <a
-          href="/ar/payments/new"
-          class="flex items-center gap-2 rounded-md border p-3 text-sm font-medium text-card-foreground hover:bg-accent"
-        >
-          💵 Record Payment
-        </a>
-        <a
-          href="/financial/journal-entries/new"
-          class="flex items-center gap-2 rounded-md border p-3 text-sm font-medium text-card-foreground hover:bg-accent"
-        >
-          📝 Journal Entry
-        </a>
+        <Button variant="outline" class="justify-start gap-2" href="/ar/invoices/new">
+          <Plus class="h-4 w-4" />
+          Create Invoice
+        </Button>
+        <Button variant="outline" class="justify-start gap-2" href="/ap/bills/new">
+          <Plus class="h-4 w-4" />
+          Record Bill
+        </Button>
+        <Button variant="outline" class="justify-start gap-2" href="/ar/payments/new">
+          <CreditCard class="h-4 w-4" />
+          Record Payment
+        </Button>
+        <Button variant="outline" class="justify-start gap-2" href="/financial/journal-entries/new">
+          <BookOpen class="h-4 w-4" />
+          Journal Entry
+        </Button>
       </div>
-    </div>
-  {/if}
+    </Card.Content>
+  </Card.Root>
 </div>

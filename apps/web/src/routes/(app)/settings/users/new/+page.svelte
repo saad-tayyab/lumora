@@ -1,61 +1,52 @@
 <script lang="ts">
+import { superForm } from 'sveltekit-superforms';
+import { Button } from '$lib/components/ui/button';
+import { Label } from '$lib/components/ui/label';
 import { toast } from 'svelte-sonner';
 import { goto } from '$app/navigation';
 
-let submitting = $state(false);
-let name = $state('');
-let email = $state('');
-let username = $state('');
-let status = $state('active');
+let { data } = $props();
+const { form, errors, enhance, submitting, message } = superForm(data.form);
 
-async function handleSubmit(e: Event) {
-  e.preventDefault();
-  submitting = true;
-  try {
-    const { createUser } = await import('$lib/api/auth');
-    await createUser({ name, email, username, status });
-    toast.success('User created');
-    await goto('/settings/users');
-  } catch (err: any) {
-    toast.error(err.message || 'Failed to create');
-  } finally {
-    submitting = false;
-  }
-}
+const inputClass = "w-full rounded-lg border border-input bg-transparent px-2.5 py-1 text-base md:text-sm placeholder:text-muted-foreground focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:outline-none focus-visible:ring-3 disabled:cursor-not-allowed disabled:opacity-50";
+
+$effect(() => {
+	if ($message) {
+		toast.success($message);
+		goto('/settings/users');
+	}
+});
 </script>
 
 <div class="mx-auto max-w-2xl space-y-6">
-  <div>
-    <h1 class="text-3xl font-bold text-foreground">New User</h1>
-    <p class="text-muted-foreground">Create a new user account</p>
-  </div>
+	<div>
+		<h1 class="text-3xl font-bold text-foreground">New User</h1>
+		<p class="text-muted-foreground">Create a new user account</p>
+	</div>
 
-  <form onsubmit={handleSubmit} class="rounded-lg border bg-card p-6 shadow-sm space-y-4">
-    <div class="space-y-1.5">
-      <label for="name" class="text-sm font-medium text-foreground">Name *</label>
-      <input id="name" bind:value={name} required maxlength="100" class="w-full rounded-md border bg-background px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-ring" />
-    </div>
-    <div class="space-y-1.5">
-      <label for="email" class="text-sm font-medium text-foreground">Email *</label>
-      <input id="email" type="email" bind:value={email} required class="w-full rounded-md border bg-background px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-ring" />
-    </div>
-    <div class="space-y-1.5">
-      <label for="username" class="text-sm font-medium text-foreground">Username *</label>
-      <input id="username" bind:value={username} required maxlength="50" class="w-full rounded-md border bg-background px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-ring" />
-    </div>
-    <div class="space-y-1.5">
-      <label for="status" class="text-sm font-medium text-foreground">Status</label>
-      <select id="status" bind:value={status} class="w-full rounded-md border bg-background px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-ring">
-        <option value="active">Active</option>
-        <option value="suspended">Suspended</option>
-      </select>
-    </div>
+	<form method="POST" use:enhance class="rounded-lg border bg-card p-6 shadow-sm space-y-4">
+		<div class="space-y-1.5">
+			<Label for="name">Name *</Label>
+			<input id="name" type="text" value={$form.name} oninput={(e) => $form.name = e.currentTarget.value} class={inputClass} maxlength="100" />
+			{#if $errors.name}<p class="text-sm text-destructive">{$errors.name}</p>{/if}
+		</div>
+		<div class="space-y-1.5">
+			<Label for="email">Email *</Label>
+			<input id="email" type="email" value={$form.email} oninput={(e) => $form.email = e.currentTarget.value} class={inputClass} />
+			{#if $errors.email}<p class="text-sm text-destructive">{$errors.email}</p>{/if}
+		</div>
+		<div class="space-y-1.5">
+			<Label for="username">Username</Label>
+			<input id="username" type="text" value={$form.username ?? ''} oninput={(e) => $form.username = e.currentTarget.value} class={inputClass} maxlength="50" />
+			{#if $errors.username}<p class="text-sm text-destructive">{$errors.username}</p>{/if}
+		</div>
 
-    <div class="flex justify-end gap-3 pt-4">
-      <a href="/settings/users" class="rounded-md border px-4 py-2 text-sm font-medium text-foreground hover:bg-accent">Cancel</a>
-      <button type="submit" disabled={submitting} class="rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground hover:bg-primary/90 disabled:opacity-50">
-        {submitting ? 'Creating...' : 'Create User'}
-      </button>
-    </div>
-  </form>
+		<div class="flex justify-end gap-3 pt-4">
+			<a href="/settings/users" class="rounded-md border px-4 py-2 text-sm font-medium text-foreground hover:bg-accent">Cancel</a>
+			<Button type="submit" disabled={$submitting}>
+				{#if $submitting}<div class="mr-2 h-4 w-4 animate-spin rounded-full border-2 border-primary-foreground border-t-transparent"></div>{/if}
+				Create User
+			</Button>
+		</div>
+	</form>
 </div>

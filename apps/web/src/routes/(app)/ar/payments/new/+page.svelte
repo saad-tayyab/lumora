@@ -1,17 +1,14 @@
 <script lang="ts">
+import { superForm } from 'sveltekit-superforms';
 import { toast } from 'svelte-sonner';
-import { enhance } from '$app/forms';
-import type { ActionData, PageData } from './$types';
+import { Input } from '$lib/components/ui/input';
+import { Label } from '$lib/components/ui/label';
+import { Button } from '$lib/components/ui/button';
+import { Textarea } from '$lib/components/ui/textarea';
 
-let { form, data }: { form: ActionData; data: PageData } = $props();
+let { data } = $props();
+const { form, enhance, submitting } = superForm(data.form);
 let customers = $derived(data.customers);
-let isLoading = $state(false);
-
-$effect(() => {
-  if (form?.error) {
-    toast.error(form.error);
-  }
-});
 </script>
 
 <div class="space-y-6">
@@ -21,27 +18,14 @@ $effect(() => {
 	</div>
 
 	<div class="rounded-lg border bg-card p-6 shadow-sm">
-		<form
-			method="POST"
-			use:enhance={() => {
-				isLoading = true;
-				return async ({ update }) => {
-					isLoading = false;
-					await update();
-				};
-			}}
-			class="space-y-6"
-		>
+		<form method="POST" use:enhance class="space-y-6">
 			<div class="grid gap-4 md:grid-cols-2">
-				<div>
-					<label for="customerId" class="block text-sm font-medium text-card-foreground">
-						Customer *
-					</label>
+				<div class="space-y-2">
+					<Label for="customerId">Customer *</Label>
 					<select
 						id="customerId"
-						name="customerId"
-						required
-						class="mt-1 block w-full rounded-md border border-input bg-background px-3 py-2 text-sm text-foreground focus:border-ring focus:outline-none focus:ring-1 focus:ring-ring"
+						bind:value={$form.customerId}
+						class="h-8 w-full rounded-lg border border-input bg-transparent px-2.5 py-1 text-base transition-colors focus-visible:border-ring focus-visible:ring-3 focus-visible:ring-ring/50 md:text-sm"
 					>
 						<option value="">Select a customer</option>
 						{#each customers as customer}
@@ -49,55 +33,32 @@ $effect(() => {
 						{/each}
 					</select>
 				</div>
-				<div>
-					<label for="paymentNumber" class="block text-sm font-medium text-card-foreground">
-						Payment Number *
-					</label>
-					<input
-						id="paymentNumber"
-						name="paymentNumber"
-						type="text"
-						required
-						class="mt-1 block w-full rounded-md border border-input bg-background px-3 py-2 text-sm text-foreground placeholder:text-muted-foreground focus:border-ring focus:outline-none focus:ring-1 focus:ring-ring"
-						placeholder="PAY-001"
-					/>
+				<div class="space-y-2">
+					<Label for="paymentNumber">Payment Number *</Label>
+					<Input id="paymentNumber" bind:value={$form.paymentNumber} placeholder="PAY-001" />
 				</div>
-				<div>
-					<label for="paymentDate" class="block text-sm font-medium text-card-foreground">
-						Payment Date *
-					</label>
-					<input
-						id="paymentDate"
-						name="paymentDate"
-						type="date"
-						required
-						class="mt-1 block w-full rounded-md border border-input bg-background px-3 py-2 text-sm text-foreground focus:border-ring focus:outline-none focus:ring-1 focus:ring-ring"
-					/>
+				<div class="space-y-2">
+					<Label for="paymentDate">Payment Date *</Label>
+					<Input id="paymentDate" type="date" bind:value={$form.paymentDate} />
 				</div>
-				<div>
-					<label for="amount" class="block text-sm font-medium text-card-foreground">
-						Amount *
-					</label>
-					<input
+				<div class="space-y-2">
+					<Label for="amount">Amount *</Label>
+					<Input
 						id="amount"
-						name="amount"
 						type="number"
 						step="0.01"
 						min="0"
-						required
-						class="mt-1 block w-full rounded-md border border-input bg-background px-3 py-2 text-sm text-foreground placeholder:text-muted-foreground focus:border-ring focus:outline-none focus:ring-1 focus:ring-ring"
+						value={$form.amount}
+						oninput={(e) => ($form.amount = Number(e.currentTarget.value))}
 						placeholder="0.00"
 					/>
 				</div>
-				<div>
-					<label for="paymentMethod" class="block text-sm font-medium text-card-foreground">
-						Payment Method *
-					</label>
+				<div class="space-y-2">
+					<Label for="paymentMethod">Payment Method *</Label>
 					<select
 						id="paymentMethod"
-						name="paymentMethod"
-						required
-						class="mt-1 block w-full rounded-md border border-input bg-background px-3 py-2 text-sm text-foreground focus:border-ring focus:outline-none focus:ring-1 focus:ring-ring"
+						bind:value={$form.paymentMethod}
+						class="h-8 w-full rounded-lg border border-input bg-transparent px-2.5 py-1 text-base transition-colors focus-visible:border-ring focus-visible:ring-3 focus-visible:ring-ring/50 md:text-sm"
 					>
 						<option value="cash">Cash</option>
 						<option value="check">Check</option>
@@ -106,63 +67,34 @@ $effect(() => {
 						<option value="online">Online</option>
 					</select>
 				</div>
-				<div>
-					<label for="referenceNumber" class="block text-sm font-medium text-card-foreground">
-						Reference Number
-					</label>
-					<input
-						id="referenceNumber"
-						name="referenceNumber"
-						type="text"
-						class="mt-1 block w-full rounded-md border border-input bg-background px-3 py-2 text-sm text-foreground placeholder:text-muted-foreground focus:border-ring focus:outline-none focus:ring-1 focus:ring-ring"
-						placeholder="Check #, transaction ID, etc."
-					/>
+				<div class="space-y-2">
+					<Label for="referenceNumber">Reference Number</Label>
+					<Input id="referenceNumber" bind:value={$form.referenceNumber} placeholder="Check #, transaction ID, etc." />
 				</div>
-				<div>
-					<label for="currency" class="block text-sm font-medium text-card-foreground">
-						Currency
-					</label>
+				<div class="space-y-2">
+					<Label for="currency">Currency</Label>
 					<select
 						id="currency"
-						name="currency"
-						class="mt-1 block w-full rounded-md border border-input bg-background px-3 py-2 text-sm text-foreground focus:border-ring focus:outline-none focus:ring-1 focus:ring-ring"
+						bind:value={$form.currency}
+						class="h-8 w-full rounded-lg border border-input bg-transparent px-2.5 py-1 text-base transition-colors focus-visible:border-ring focus-visible:ring-3 focus-visible:ring-ring/50 md:text-sm"
 					>
-						<option value="USD" selected>USD</option>
+						<option value="USD">USD</option>
 						<option value="EUR">EUR</option>
 						<option value="GBP">GBP</option>
 					</select>
 				</div>
 			</div>
 
-			<div>
-				<label for="notes" class="block text-sm font-medium text-card-foreground">Notes</label>
-				<textarea
-					id="notes"
-					name="notes"
-					rows="3"
-					class="mt-1 block w-full rounded-md border border-input bg-background px-3 py-2 text-sm text-foreground placeholder:text-muted-foreground focus:border-ring focus:outline-none focus:ring-1 focus:ring-ring"
-					placeholder="Payment notes..."
-				></textarea>
+			<div class="space-y-2">
+				<Label for="notes">Notes</Label>
+				<Textarea id="notes" bind:value={$form.notes} rows={3} placeholder="Payment notes..." />
 			</div>
 
 			<div class="flex items-center gap-3">
-				<button
-					type="submit"
-					disabled={isLoading}
-					class="rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground hover:bg-primary/90 disabled:cursor-not-allowed disabled:opacity-50"
-				>
-					{#if isLoading}
-						Recording...
-					{:else}
-						Record Payment
-					{/if}
-				</button>
-				<a
-					href="/ar/payments"
-					class="rounded-md border px-4 py-2 text-sm font-medium text-card-foreground hover:bg-accent"
-				>
-					Cancel
-				</a>
+				<Button type="submit" disabled={$submitting}>
+					{$submitting ? 'Recording...' : 'Record Payment'}
+				</Button>
+				<Button variant="outline" href="/ar/payments">Cancel</Button>
 			</div>
 		</form>
 	</div>

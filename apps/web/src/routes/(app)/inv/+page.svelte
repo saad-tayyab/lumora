@@ -1,8 +1,19 @@
 <script lang="ts">
-import { formatCurrency, formatNumber } from '$lib/utils/format';
-import type { PageData } from './$types';
+  import { KpiCard } from '$lib/components/dashboard';
+  import * as Card from '$lib/components/ui/card';
+  import { Button } from '$lib/components/ui/button';
+  import { formatCurrency, formatNumber } from '$lib/utils/format';
+  import {
+    Package,
+    Warehouse,
+    FolderOpen,
+    ArrowRightLeft,
+    Plus,
+    AlertTriangle,
+  } from '@lucide/svelte';
+  import type { PageData } from './$types';
 
-let { data }: { data: PageData } = $props();
+  let { data }: { data: PageData } = $props();
 </script>
 
 <div class="space-y-6">
@@ -12,89 +23,115 @@ let { data }: { data: PageData } = $props();
   </div>
 
   <div class="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
-    <a href="/inv/items" class="rounded-lg border bg-card p-6 shadow-sm hover:bg-accent transition-colors">
-      <div class="text-sm font-medium text-muted-foreground">Items</div>
-      <div class="mt-2 text-3xl font-bold text-card-foreground">{data.itemCount}</div>
-    </a>
-    <a href="/inv/warehouses" class="rounded-lg border bg-card p-6 shadow-sm hover:bg-accent transition-colors">
-      <div class="text-sm font-medium text-muted-foreground">Warehouses</div>
-      <div class="mt-2 text-3xl font-bold text-card-foreground">{data.warehouseCount}</div>
-    </a>
-    <a href="/inv/categories" class="rounded-lg border bg-card p-6 shadow-sm hover:bg-accent transition-colors">
-      <div class="text-sm font-medium text-muted-foreground">Categories</div>
-      <div class="mt-2 text-3xl font-bold text-card-foreground">{data.categoryCount}</div>
-    </a>
-    <a href="/inv/stock-movements" class="rounded-lg border bg-card p-6 shadow-sm hover:bg-accent transition-colors">
-      <div class="text-sm font-medium text-muted-foreground">Stock Movements</div>
-      <div class="mt-2 text-3xl font-bold text-card-foreground">{data.movementCount}</div>
-    </a>
+    <KpiCard
+      title="Items"
+      value={data.itemCount}
+      subtitle="Products tracked"
+      icon={Package}
+    />
+    <KpiCard
+      title="Warehouses"
+      value={data.warehouseCount}
+      subtitle="Storage locations"
+      icon={Warehouse}
+    />
+    <KpiCard
+      title="Categories"
+      value={data.categoryCount}
+      subtitle="Item groupings"
+      icon={FolderOpen}
+    />
+    <KpiCard
+      title="Stock Movements"
+      value={data.movementCount}
+      subtitle="Recent transactions"
+      icon={ArrowRightLeft}
+    />
   </div>
 
   <div class="grid gap-6 lg:grid-cols-2">
-    <div class="rounded-lg border bg-card p-6 shadow-sm">
-      <div class="mb-4 flex items-center justify-between">
-        <h2 class="text-lg font-semibold text-card-foreground">Recent Items</h2>
-        <a href="/inv/items" class="text-sm text-primary hover:underline">View all</a>
-      </div>
-      {#if data.recentItems.length === 0}
-        <p class="text-sm text-muted-foreground">No items yet.</p>
-      {:else}
-        <div class="space-y-3">
-          {#each data.recentItems as item}
-            <a href="/inv/items/{item.id}" class="flex items-center justify-between rounded-md border p-3 hover:bg-accent transition-colors">
-              <div>
-                <div class="text-sm font-medium">{item.name}</div>
-                <div class="text-xs text-muted-foreground">{item.sku}</div>
-              </div>
-              <div class="text-right">
-                <div class="text-sm font-medium">{formatCurrency(item.costPrice)}</div>
-                <div class="text-xs text-muted-foreground">UoM: {item.unitOfMeasure}</div>
-              </div>
-            </a>
-          {/each}
-        </div>
-      {/if}
-    </div>
+    <Card.Root>
+      <Card.Header>
+        <Card.Title class="flex items-center justify-between">
+          <span>Recent Items</span>
+          <a href="/inv/items" class="text-sm text-primary hover:underline">View all</a>
+        </Card.Title>
+      </Card.Header>
+      <Card.Content>
+        {#if data.recentItems.length === 0}
+          <p class="py-4 text-center text-sm text-muted-foreground">No items yet.</p>
+        {:else}
+          <div class="space-y-3">
+            {#each data.recentItems as item}
+              <a
+                href="/inv/items/{item.id}"
+                class="flex items-center justify-between rounded-md border p-3 hover:bg-accent transition-colors"
+              >
+                <div>
+                  <p class="text-sm font-medium text-card-foreground">{item.name}</p>
+                  <p class="text-xs text-muted-foreground">{item.sku}</p>
+                </div>
+                <div class="text-right">
+                  <p class="text-sm font-medium text-card-foreground">{formatCurrency(item.costPrice)}</p>
+                  <p class="text-xs text-muted-foreground">UoM: {item.unitOfMeasure}</p>
+                </div>
+              </a>
+            {/each}
+          </div>
+        {/if}
+      </Card.Content>
+    </Card.Root>
 
-    <div class="rounded-lg border bg-card p-6 shadow-sm">
-      <div class="mb-4 flex items-center justify-between">
-        <h2 class="text-lg font-semibold text-card-foreground">Low Stock Alerts</h2>
-      </div>
-      {#if data.lowStockItems.length === 0}
-        <p class="text-sm text-muted-foreground">All items are well stocked.</p>
-      {:else}
-        <div class="space-y-3">
-          {#each data.lowStockItems as level}
-            <div class="flex items-center justify-between rounded-md border border-yellow-200 bg-yellow-50 p-3">
-              <div>
-                <div class="text-sm font-medium">{level.itemName}</div>
-                <div class="text-xs text-muted-foreground">{level.warehouseName} | SKU: {level.itemSku}</div>
+    <Card.Root>
+      <Card.Header>
+        <Card.Title class="flex items-center gap-2">
+          <AlertTriangle class="h-5 w-5 text-yellow-500" />
+          Low Stock Alerts
+        </Card.Title>
+      </Card.Header>
+      <Card.Content>
+        {#if data.lowStockItems.length === 0}
+          <p class="py-4 text-center text-sm text-muted-foreground">All items are well stocked.</p>
+        {:else}
+          <div class="space-y-3">
+            {#each data.lowStockItems as level}
+              <div class="flex items-center justify-between rounded-md border border-yellow-200 bg-yellow-50 p-3">
+                <div>
+                  <p class="text-sm font-medium">{level.itemName}</p>
+                  <p class="text-xs text-muted-foreground">{level.warehouseName} &middot; SKU: {level.itemSku}</p>
+                </div>
+                <p class="text-sm font-medium text-yellow-700">{formatNumber(level.availableQuantity)} available</p>
               </div>
-              <div class="text-right">
-                <div class="text-sm font-medium text-yellow-700">{formatNumber(level.availableQuantity)} available</div>
-              </div>
-            </div>
-          {/each}
-        </div>
-      {/if}
-    </div>
+            {/each}
+          </div>
+        {/if}
+      </Card.Content>
+    </Card.Root>
   </div>
 
-  <div class="rounded-lg border bg-card p-6 shadow-sm">
-    <h2 class="mb-4 text-lg font-semibold text-card-foreground">Quick Actions</h2>
-    <div class="grid gap-3 md:grid-cols-2 lg:grid-cols-4">
-      <a href="/inv/items/new" class="flex items-center gap-2 rounded-md border p-3 text-sm font-medium text-card-foreground hover:bg-accent">
-        Add Item
-      </a>
-      <a href="/inv/warehouses/new" class="flex items-center gap-2 rounded-md border p-3 text-sm font-medium text-card-foreground hover:bg-accent">
-        Add Warehouse
-      </a>
-      <a href="/inv/categories/new" class="flex items-center gap-2 rounded-md border p-3 text-sm font-medium text-card-foreground hover:bg-accent">
-        Add Category
-      </a>
-      <a href="/inv/stock-movements/new" class="flex items-center gap-2 rounded-md border p-3 text-sm font-medium text-card-foreground hover:bg-accent">
-        Record Stock Movement
-      </a>
-    </div>
-  </div>
+  <Card.Root>
+    <Card.Header>
+      <Card.Title>Quick Actions</Card.Title>
+    </Card.Header>
+    <Card.Content>
+      <div class="grid gap-3 md:grid-cols-2 lg:grid-cols-4">
+        <Button variant="outline" class="justify-start gap-2" href="/inv/items/new">
+          <Plus class="h-4 w-4" />
+          Add Item
+        </Button>
+        <Button variant="outline" class="justify-start gap-2" href="/inv/warehouses/new">
+          <Warehouse class="h-4 w-4" />
+          Add Warehouse
+        </Button>
+        <Button variant="outline" class="justify-start gap-2" href="/inv/categories/new">
+          <FolderOpen class="h-4 w-4" />
+          Add Category
+        </Button>
+        <Button variant="outline" class="justify-start gap-2" href="/inv/stock-movements/new">
+          <ArrowRightLeft class="h-4 w-4" />
+          Record Movement
+        </Button>
+      </div>
+    </Card.Content>
+  </Card.Root>
 </div>

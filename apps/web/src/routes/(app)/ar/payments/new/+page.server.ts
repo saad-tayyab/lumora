@@ -1,66 +1,61 @@
 import { fail, redirect } from '@sveltejs/kit';
+import { superValidate, message } from 'sveltekit-superforms';
+import { zod4 } from 'sveltekit-superforms/adapters';
+import { z } from 'zod';
+import { paymentSchema } from '@lumora/validation';
 import { BACKEND_URL } from '$lib/api';
 import type { Actions, PageServerLoad } from './$types';
 
+const formSchema = paymentSchema.extend({
+	paymentNumber: z.string().min(1, 'Payment number is required'),
+	currency: z.string().default('USD'),
+}).omit({ reference: true }).extend({
+	referenceNumber: z.string().optional(),
+});
 
 export const load: PageServerLoad = async ({ url }) => {
-  const customerId = url.searchParams.get('customerId') || undefined;
-
-  try {
-    const res = await fetch(`${BACKEND_URL}/ar/customers?limit=100`, { credentials: 'include' });
-    if (!res.ok) throw new Error('Failed to fetch customers');
-    const data = await res.json();
-    return { customers: data.data, preselectedCustomerId: customerId };
-  } catch {
-    return { customers: [], preselectedCustomerId: customerId };
-  }
+	const customerId = url.searchParams.get('customerId') || undefined;
+	const [form, customersRes] = await Promise.all([
+		superValidate(zod4(formSchema)),
+		fetch(`${BACKEND_URL}/ar/customers?limit=100`, { credentials: 'include' })
+			.then((r) => (r.ok ? r.json() : { data: [] }))
+			.catch(() => ({ data: [] })),
+	]);
+	return { form, customers: customersRes.data, preselectedCustomerId: customerId };
 };
 
 export const actions: Actions = {
-  default: async ({ request }) => {
-    const formData = await request.formData();
-    const customerId = formData.get('customerId') as string;
-    const paymentNumber = formData.get('paymentNumber') as string;
-    const paymentDate = formData.get('paymentDate') as string;
-    const amount = formData.get('amount') as string;
-    const paymentMethod = formData.get('paymentMethod') as string;
-    const referenceNumber = formData.get('referenceNumber') as string;
-    const currency = formData.get('currency') as string;
-    const notes = formData.get('notes') as string;
+	default: async ({ request }) => {
+		const form = await superValidate(request, zod4(formSchema));
+		if (!form.valid) return fail(400, { form });
 
-    if (!customerId) return fail(400, { error: 'Customer is required' });
-    if (!paymentNumber) return fail(400, { error: 'Payment number is required' });
-    if (!paymentDate) return fail(400, { error: 'Payment date is required' });
-    if (!amount || parseFloat(amount) <= 0) return fail(400, { error: 'Valid amount is required' });
-    if (!paymentMethod) return fail(400, { error: 'Payment method is required' });
+		try {
+			const body: Record<string, unknown> = {
+				customerId: form.data.customerId,
+				paymentNumber: form.data.paymentNumber.trim(),
+				paymentDate: form.data.paymentDate,
+				amount: String(form.data.amount),
+				paymentMethod: form.data.paymentMethod,
+				currency: form.data.currency || 'USD',
+			};
+			if (form.data.referenceNumber) body.referenceNumber = form.data.referenceNumber.trim();
+			if (form.data.notes) body.notes = form.data.notes.trim();
 
-    try {
-      const body: Record<string, unknown> = {
-        customerId,
-        paymentNumber: paymentNumber.trim(),
-        paymentDate,
-        amount,
-        paymentMethod,
-        currency: currency || 'USD',
-      };
-      if (referenceNumber) body.referenceNumber = referenceNumber.trim();
-      if (notes) body.notes = notes.trim();
+			const res = await fetch(`${BACKEND_URL}/ar/payments`, {
+				method: 'POST',
+				headers: { 'Content-Type': 'application/json' },
+				body: JSON.stringify(body),
+				credentials: 'include',
+			});
 
-      const res = await fetch(`${BACKEND_URL}/ar/payments`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(body),
-        credentials: 'include',
-      });
+			if (!res.ok) {
+				const err = await res.json().catch(() => ({ message: 'Failed to record payment' }));
+				return fail(400, { form, error: err.message || 'Failed to record payment' });
+			}
 
-      if (!res.ok) {
-        const err = await res.json().catch(() => ({ message: 'Failed to record payment' }));
-        return fail(400, { error: err.message || 'Failed to record payment' });
-      }
-
-      return redirect(303, '/ar/payments');
-    } catch {
-      return fail(500, { error: 'Failed to connect to server' });
-    }
-  },
+			return redirect(303, '/ar/payments');
+		} catch {
+			return fail(500, { form, error: 'Failed to connect to server' });
+		}
+	},
 };
