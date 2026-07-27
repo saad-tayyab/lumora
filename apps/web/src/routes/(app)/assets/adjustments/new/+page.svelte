@@ -11,8 +11,13 @@ const { form, errors, enhance, submitting, message } = superForm(data.form);
 
 $effect(() => {
 	if ($message) {
-		toast.success($message);
-		goto('/assets/adjustments');
+		const text = typeof $message === 'string' ? $message : $message.text;
+		if (typeof $message === 'object' && $message.type === 'error') {
+			toast.error(text);
+		} else {
+			toast.success(text);
+			goto('/assets/adjustments');
+		}
 	}
 });
 </script>

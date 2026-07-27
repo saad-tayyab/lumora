@@ -22,8 +22,13 @@ function removeLineItem(index: number) {
 
 $effect(() => {
 	if ($message) {
-		toast.success($message);
-		goto('/proc/purchase-orders');
+		const text = typeof $message === 'string' ? $message : $message.text;
+		if (typeof $message === 'object' && $message.type === 'error') {
+			toast.error(text);
+		} else {
+			toast.success(text);
+			goto('/proc/purchase-orders');
+		}
 	}
 });
 </script>

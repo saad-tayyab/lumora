@@ -14,8 +14,13 @@ const inputClass = "w-full rounded-lg border border-input bg-transparent px-2.5 
 
 $effect(() => {
 	if ($message) {
-		toast.success($message);
-		goto('/assets/fixed-assets');
+		const text = typeof $message === 'string' ? $message : $message.text;
+		if (typeof $message === 'object' && $message.type === 'error') {
+			toast.error(text);
+		} else {
+			toast.success(text);
+			goto('/assets/fixed-assets');
+		}
 	}
 });
 </script>
