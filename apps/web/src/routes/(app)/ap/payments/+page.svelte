@@ -1,10 +1,52 @@
 <script lang="ts">
+import { goto } from '$app/navigation';
 import { formatCurrency, formatDate } from '$lib/utils/format';
 import { Button } from '$lib/components/ui/button';
-import { Card, CardContent } from '$lib/components/ui/card';
+import AppDataTable from '$lib/components/data/AppDataTable.svelte';
+import type { ColumnDef } from '@tanstack/svelte-table';
 import type { PageData } from './$types';
 
 let { data }: { data: PageData } = $props();
+
+const columns: ColumnDef<any, any>[] = [
+  {
+    accessorKey: 'vendorName',
+    header: 'Vendor',
+    cell: ({ row }) => `<span class="font-medium">${(row as any).original.vendorName || '—'}</span>`,
+  },
+  {
+    accessorKey: 'billNumber',
+    header: 'Bill',
+    cell: ({ row }) => (row as any).original.billNumber
+      ? `<a href="/ap/bills/${(row as any).original.billId}" class="text-primary hover:underline">${(row as any).original.billNumber}</a>`
+      : `<span>—</span>`,
+  },
+  {
+    accessorKey: 'paymentDate',
+    header: 'Date',
+    cell: ({ row }) => `<span class="text-muted-foreground">${formatDate((row as any).original.paymentDate)}</span>`,
+  },
+  {
+    accessorKey: 'paymentMethod',
+    header: 'Method',
+    cell: ({ row }) => `<span class="text-muted-foreground capitalize">${(row as any).original.paymentMethod.replace('_', ' ')}</span>`,
+  },
+  {
+    accessorKey: 'amount',
+    header: 'Amount',
+    cell: ({ row }) => `<span class="text-right font-medium">${formatCurrency((row as any).original.amount)}</span>`,
+  },
+  {
+    accessorKey: 'reference',
+    header: 'Reference',
+    cell: ({ row }) => `<span class="text-muted-foreground">${(row as any).original.reference || '—'}</span>`,
+  },
+  {
+    accessorKey: 'createdAt',
+    header: 'Created',
+    cell: ({ row }) => `<span class="text-sm text-muted-foreground">${formatDate((row as any).original.createdAt)}</span>`,
+  },
+];
 </script>
 
 <div class="space-y-6">
@@ -18,50 +60,10 @@ let { data }: { data: PageData } = $props();
     </Button>
   </div>
 
-  <Card>
-    <CardContent>
-    <div class="overflow-x-auto">
-      <table class="w-full text-sm">
-        <thead>
-          <tr class="border-t bg-muted/50">
-            <th class="px-4 py-3 text-left font-medium text-muted-foreground">Vendor</th>
-            <th class="px-4 py-3 text-left font-medium text-muted-foreground">Bill</th>
-            <th class="px-4 py-3 text-left font-medium text-muted-foreground">Date</th>
-            <th class="px-4 py-3 text-left font-medium text-muted-foreground">Method</th>
-            <th class="px-4 py-3 text-right font-medium text-muted-foreground">Amount</th>
-            <th class="px-4 py-3 text-left font-medium text-muted-foreground">Reference</th>
-            <th class="px-4 py-3 text-right font-medium text-muted-foreground">Actions</th>
-          </tr>
-        </thead>
-        <tbody>
-          {#each data.payments as payment (payment.id)}
-            <tr class="border-t hover:bg-muted/30">
-              <td class="px-4 py-3 font-medium">{payment.vendorName || '-'}</td>
-              <td class="px-4 py-3 text-muted-foreground">
-                {#if payment.billNumber}
-                  <a href="/ap/bills/{payment.billId}" class="text-primary hover:underline">{payment.billNumber}</a>
-                {:else}
-                  -
-                {/if}
-              </td>
-              <td class="px-4 py-3 text-muted-foreground">{formatDate(payment.paymentDate)}</td>
-              <td class="px-4 py-3 text-muted-foreground capitalize">{payment.paymentMethod.replace('_', ' ')}</td>
-              <td class="px-4 py-3 text-right font-medium">{formatCurrency(payment.amount)}</td>
-              <td class="px-4 py-3 text-muted-foreground">{payment.reference || '-'}</td>
-              <td class="px-4 py-3 text-right">
-                <span class="text-sm text-muted-foreground">{formatDate(payment.createdAt)}</span>
-              </td>
-            </tr>
-          {:else}
-            <tr>
-              <td colspan="7" class="px-4 py-8 text-center text-muted-foreground">
-                No payments found.
-              </td>
-            </tr>
-          {/each}
-        </tbody>
-      </table>
-    </div>
-    </CardContent>
-  </Card>
+  <AppDataTable
+    {columns}
+    data={data.payments}
+    emptyMessage="No payments found."
+    onRowClick={(row) => goto(`/ap/payments/${row.id}`)}
+  />
 </div>

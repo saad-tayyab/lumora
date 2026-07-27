@@ -1,11 +1,52 @@
 <script lang="ts">
+import { goto } from '$app/navigation';
 import { formatCurrency, formatDate } from '$lib/utils/format';
 import { Button } from '$lib/components/ui/button';
-import { Input } from '$lib/components/ui/input';
-import { Card, CardContent } from '$lib/components/ui/card';
+import AppDataTable from '$lib/components/data/AppDataTable.svelte';
+import type { ColumnDef } from '@tanstack/svelte-table';
 import type { PageData } from './$types';
 
 let { data }: { data: PageData } = $props();
+
+function getStatusColor(status: string): string {
+  switch (status) {
+    case 'active': return 'bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-300';
+    default: return 'bg-gray-100 text-gray-800 dark:bg-gray-800 dark:text-gray-300';
+  }
+}
+
+const columns: ColumnDef<any, any>[] = [
+  {
+    accessorKey: 'name',
+    header: 'Name',
+    cell: ({ row }) => `<a href="/ap/vendors/${(row as any).original.id}" class="font-medium text-primary hover:underline">${(row as any).original.name}</a>`,
+  },
+  {
+    accessorKey: 'email',
+    header: 'Email',
+    cell: ({ row }) => `<span class="text-muted-foreground">${(row as any).original.email || '—'}</span>`,
+  },
+  {
+    accessorKey: 'phone',
+    header: 'Phone',
+    cell: ({ row }) => `<span class="text-muted-foreground">${(row as any).original.phone || '—'}</span>`,
+  },
+  {
+    accessorKey: 'currency',
+    header: 'Currency',
+    cell: ({ row }) => `<span class="text-muted-foreground">${(row as any).original.currency}</span>`,
+  },
+  {
+    accessorKey: 'status',
+    header: 'Status',
+    cell: ({ row }) => `<span class="inline-flex items-center rounded-full px-2 py-0.5 text-xs font-medium ${getStatusColor((row as any).original.status)}">${(row as any).original.status}</span>`,
+  },
+  {
+    accessorKey: 'createdAt',
+    header: 'Created',
+    cell: ({ row }) => `<span class="text-muted-foreground">${formatDate((row as any).original.createdAt)}</span>`,
+  },
+];
 </script>
 
 <div class="space-y-6">
@@ -19,60 +60,10 @@ let { data }: { data: PageData } = $props();
     </Button>
   </div>
 
-  <Card>
-    <CardContent>
-      <div class="p-4">
-        <div class="relative">
-          <Input
-            type="text"
-            placeholder="Search vendors..."
-          />
-        </div>
-      </div>
-    <div class="overflow-x-auto">
-      <table class="w-full text-sm">
-        <thead>
-          <tr class="border-t bg-muted/50">
-            <th class="px-4 py-3 text-left font-medium text-muted-foreground">Name</th>
-            <th class="px-4 py-3 text-left font-medium text-muted-foreground">Email</th>
-            <th class="px-4 py-3 text-left font-medium text-muted-foreground">Phone</th>
-            <th class="px-4 py-3 text-left font-medium text-muted-foreground">Currency</th>
-            <th class="px-4 py-3 text-left font-medium text-muted-foreground">Status</th>
-            <th class="px-4 py-3 text-left font-medium text-muted-foreground">Created</th>
-            <th class="px-4 py-3 text-right font-medium text-muted-foreground">Actions</th>
-          </tr>
-        </thead>
-        <tbody>
-          {#each data.vendors as vendor (vendor.id)}
-            <tr class="border-t hover:bg-muted/30">
-              <td class="px-4 py-3">
-                <a href="/ap/vendors/{vendor.id}" class="font-medium text-primary hover:underline">
-                  {vendor.name}
-                </a>
-              </td>
-              <td class="px-4 py-3 text-muted-foreground">{vendor.email || '-'}</td>
-              <td class="px-4 py-3 text-muted-foreground">{vendor.phone || '-'}</td>
-              <td class="px-4 py-3 text-muted-foreground">{vendor.currency}</td>
-              <td class="px-4 py-3">
-                <span class="inline-block rounded-full px-2 py-0.5 text-xs font-medium {vendor.status === 'active' ? 'bg-green-100 text-green-800' : 'bg-gray-100 text-gray-800'}">
-                  {vendor.status}
-                </span>
-              </td>
-              <td class="px-4 py-3 text-muted-foreground">{formatDate(vendor.createdAt)}</td>
-              <td class="px-4 py-3 text-right">
-                <a href="/ap/vendors/{vendor.id}/edit" class="text-primary hover:underline">Edit</a>
-              </td>
-            </tr>
-          {:else}
-            <tr>
-              <td colspan="7" class="px-4 py-8 text-center text-muted-foreground">
-                No vendors found.
-              </td>
-            </tr>
-          {/each}
-        </tbody>
-      </table>
-    </div>
-    </CardContent>
-  </Card>
+  <AppDataTable
+    {columns}
+    data={data.vendors}
+    emptyMessage="No vendors found."
+    onRowClick={(row) => goto(`/ap/vendors/${row.id}`)}
+  />
 </div>

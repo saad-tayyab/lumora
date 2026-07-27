@@ -1,10 +1,53 @@
 <script lang="ts">
+import { goto } from '$app/navigation';
 import { formatCurrency } from '$lib/utils/format';
 import { Button } from '$lib/components/ui/button';
-import { Card, CardContent } from '$lib/components/ui/card';
+import AppDataTable from '$lib/components/data/AppDataTable.svelte';
+import type { ColumnDef } from '@tanstack/svelte-table';
 import type { PageData } from './$types';
 
 let { data }: { data: PageData } = $props();
+
+function getStatusColor(status: string): string {
+  switch (status) {
+    case 'active': return 'bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-300';
+    case 'frozen': return 'bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-300';
+    default: return 'bg-gray-100 text-gray-800 dark:bg-gray-800 dark:text-gray-300';
+  }
+}
+
+const columns: ColumnDef<any, any>[] = [
+  {
+    accessorKey: 'name',
+    header: 'Name',
+    cell: ({ row }) => `<a href="/cash/bank-accounts/${(row as any).original.id}" class="font-medium text-primary hover:underline">${(row as any).original.name}</a>`,
+  },
+  {
+    accessorKey: 'bankName',
+    header: 'Bank',
+    cell: ({ row }) => `<span class="text-muted-foreground">${(row as any).original.bankName}</span>`,
+  },
+  {
+    accessorKey: 'accountNumber',
+    header: 'Account #',
+    cell: ({ row }) => `<span class="text-muted-foreground">${(row as any).original.accountNumber}</span>`,
+  },
+  {
+    accessorKey: 'currency',
+    header: 'Currency',
+    cell: ({ row }) => `<span class="text-muted-foreground">${(row as any).original.currency}</span>`,
+  },
+  {
+    accessorKey: 'balance',
+    header: 'Balance',
+    cell: ({ row }) => `<span class="text-right font-medium">${formatCurrency((row as any).original.balance, (row as any).original.currency)}</span>`,
+  },
+  {
+    accessorKey: 'status',
+    header: 'Status',
+    cell: ({ row }) => `<span class="inline-flex items-center rounded-full px-2 py-0.5 text-xs font-medium ${getStatusColor((row as any).original.status)}">${(row as any).original.status}</span>`,
+  },
+];
 </script>
 
 <div class="space-y-6">
@@ -16,52 +59,10 @@ let { data }: { data: PageData } = $props();
     <Button href="/cash/bank-accounts/new">Add Bank Account</Button>
   </div>
 
-  <Card>
-    <CardContent>
-      <div class="overflow-x-auto">
-        <table class="w-full text-sm">
-          <thead>
-            <tr class="border-t bg-muted/50">
-              <th class="px-4 py-3 text-left font-medium text-muted-foreground">Name</th>
-              <th class="px-4 py-3 text-left font-medium text-muted-foreground">Bank</th>
-              <th class="px-4 py-3 text-left font-medium text-muted-foreground">Account #</th>
-              <th class="px-4 py-3 text-left font-medium text-muted-foreground">Currency</th>
-              <th class="px-4 py-3 text-right font-medium text-muted-foreground">Balance</th>
-              <th class="px-4 py-3 text-left font-medium text-muted-foreground">Status</th>
-              <th class="px-4 py-3 text-right font-medium text-muted-foreground">Actions</th>
-            </tr>
-          </thead>
-          <tbody>
-            {#each data.accounts as account (account.id)}
-              <tr class="border-t hover:bg-muted/30">
-                <td class="px-4 py-3">
-                  <a href="/cash/bank-accounts/{account.id}" class="font-medium text-primary hover:underline">
-                    {account.name}
-                  </a>
-                </td>
-                <td class="px-4 py-3 text-muted-foreground">{account.bankName}</td>
-                <td class="px-4 py-3 text-muted-foreground">{account.accountNumber}</td>
-                <td class="px-4 py-3 text-muted-foreground">{account.currency}</td>
-                <td class="px-4 py-3 text-right font-medium">{formatCurrency(account.balance, account.currency)}</td>
-                <td class="px-4 py-3">
-                  <span class="inline-block rounded-full px-2 py-0.5 text-xs font-medium {account.status === 'active' ? 'bg-green-100 text-green-800' : account.status === 'frozen' ? 'bg-blue-100 text-blue-800' : 'bg-gray-100 text-gray-800'}">
-                    {account.status}
-                  </span>
-                </td>
-                <td class="px-4 py-3 text-right">
-                  <a href="/cash/bank-accounts/{account.id}" class="text-primary hover:underline">View</a>
-                </td>
-              </tr>
-            {:else}
-              <tr>
-                <td colspan="7" class="px-4 py-8 text-center text-muted-foreground">
-                  No bank accounts found.
-                </td>
-              </tr>
-            {/each}
-          </tbody>
-        </table>
-      </div>
-    </CardContent>
-  </Card>
+  <AppDataTable
+    {columns}
+    data={data.accounts}
+    emptyMessage="No bank accounts found."
+    onRowClick={(row) => goto(`/cash/bank-accounts/${row.id}`)}
+  />
 </div>

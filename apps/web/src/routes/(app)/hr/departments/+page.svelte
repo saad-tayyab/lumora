@@ -3,8 +3,9 @@ import { toast } from 'svelte-sonner';
 import { type Department, hrApi } from '$lib/api/hr';
 import type { PageData } from './$types';
 import { Button } from '$lib/components/ui/button';
-import * as Card from '$lib/components/ui/card';
 import { Input } from '$lib/components/ui/input';
+import AppDataTable from '$lib/components/data/AppDataTable.svelte';
+import type { ColumnDef } from '@tanstack/svelte-table';
 
 let { data }: { data: PageData } = $props();
 let departments = $state<Department[]>(data.departments);
@@ -44,6 +45,23 @@ async function deleteDept(id: string) {
     toast.error('Failed to delete');
   }
 }
+
+const columns: ColumnDef<Department>[] = [
+  { accessorKey: 'name', header: 'Name', cell: (row) => `<span class="font-medium">${(row as any).original.name}</span>` },
+  { accessorKey: 'code', header: 'Code', cell: (row) => `<span class="text-sm">${(row as any).original.code}</span>` },
+  { accessorKey: 'description', header: 'Description', cell: (row) => `<span class="text-sm text-muted-foreground">${(row as any).original.description || '-'}</span>` },
+  {
+    id: 'actions',
+    header: 'Actions',
+    cell: (row) => `<button onclick="window.dispatchEvent(new CustomEvent('delete-dept', {detail:'${(row as any).original.id}'}))" class="text-sm text-destructive hover:underline">Delete</button>`,
+  },
+];
+
+$effect(() => {
+  const handler = (e: Event) => deleteDept((e as CustomEvent).detail);
+  window.addEventListener('delete-dept', handler);
+  return () => window.removeEventListener('delete-dept', handler);
+});
 </script>
 
 <div class="space-y-6">
@@ -61,15 +79,10 @@ async function deleteDept(id: string) {
     </button>
   </form>
 
-  <Card.Root class="shadow-sm"><Card.Content class="p-0">
-    {#if departments.length === 0}<div class="py-12 text-center text-muted-foreground">No departments</div>
-    {:else}
-      <div class="overflow-x-auto">
-        <table class="w-full">
-          <thead><tr class="border-b bg-muted/50"><th class="px-4 py-3 text-left text-sm font-medium text-muted-foreground">Name</th><th class="px-4 py-3 text-left text-sm font-medium text-muted-foreground">Code</th><th class="px-4 py-3 text-left text-sm font-medium text-muted-foreground">Description</th><th class="px-4 py-3 text-right text-sm font-medium text-muted-foreground">Actions</th></tr></thead>
-          <tbody>{#each departments as dept}<tr class="border-b hover:bg-muted/30"><td class="px-4 py-3 font-medium">{dept.name}</td><td class="px-4 py-3 text-sm">{dept.code}</td><td class="px-4 py-3 text-sm text-muted-foreground">{dept.description || '-'}</td><td class="px-4 py-3 text-right"><button onclick={() => deleteDept(dept.id)} class="text-sm text-destructive hover:underline">Delete</button></td></tr>{/each}</tbody>
-        </table>
-      </div>
-    {/if}
-  </Card.Content></Card.Root>
+  <AppDataTable
+    {columns}
+    data={departments}
+    emptyMessage="No departments"
+    pageSize={20}
+  />
 </div>

@@ -1,38 +1,38 @@
-import { fail, redirect } from '@sveltejs/kit';
-import { ApiError } from '$lib/api';
+import { fail } from '@sveltejs/kit';
+import { superValidate, message } from 'sveltekit-superforms';
+import { zod4 } from 'sveltekit-superforms/adapters';
+import { z } from 'zod';
 import { financialApi } from '$lib/api/financial';
-import type { Actions } from './$types';
+import type { Actions, PageServerLoad } from './$types';
+
+const accountSchema = z.object({
+	code: z.string().min(1, 'Code is required'),
+	name: z.string().min(1, 'Name is required'),
+	type: z.enum(['asset', 'liability', 'equity', 'revenue', 'expense']),
+	description: z.string().optional(),
+});
+
+export const load: PageServerLoad = async () => {
+	const form = await superValidate(zod4(accountSchema));
+	return { form };
+};
 
 export const actions: Actions = {
-  default: async ({ request }) => {
-    const formData = await request.formData();
-    const code = formData.get('code') as string;
-    const name = formData.get('name') as string;
-    const type = formData.get('type') as string;
-    const description = formData.get('description') as string;
+	default: async ({ request }) => {
+		const form = await superValidate(request, zod4(accountSchema));
+		if (!form.valid) return fail(400, { form });
 
-    if (!code || !name || !type) {
-      return fail(400, {
-        code,
-        name,
-        type,
-        description,
-        error: 'Code, name, and type are required',
-      });
-    }
-
-    try {
-      await financialApi.accounts.create({
-        code,
-        name,
-        type: type as any,
-        description: description || undefined,
-      });
-    } catch (e: any) {
-      const message = e instanceof ApiError ? e.message : 'Failed to create account';
-      return fail(e.status || 500, { code, name, type, description, error: message });
-    }
-
-    redirect(303, '/financial/accounts');
-  },
+		try {
+			await financialApi.accounts.create({
+				code: form.data.code,
+				name: form.data.name,
+				type: form.data.type,
+				description: form.data.description || undefined,
+			});
+			return message(form, 'Account created successfully');
+		} catch (e) {
+			const msg = e instanceof Error ? e.message : 'Failed to create account';
+			return fail(400, { form, error: msg });
+		}
+	},
 };

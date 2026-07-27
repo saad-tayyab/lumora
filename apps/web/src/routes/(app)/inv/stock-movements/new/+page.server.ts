@@ -1,46 +1,48 @@
 import { fail } from '@sveltejs/kit';
+import { superValidate, message } from 'sveltekit-superforms';
+import { zod4 } from 'sveltekit-superforms/adapters';
+import { z } from 'zod';
 import { invApi } from '$lib/api/inv';
 import type { Actions, PageServerLoad } from './$types';
 
+const stockMovementSchema = z.object({
+	itemId: z.string().min(1, 'Item is required'),
+	warehouseId: z.string().min(1, 'Warehouse is required'),
+	type: z.enum(['in', 'out', 'transfer', 'adjustment']),
+	quantity: z.number().positive('Quantity must be positive'),
+	referenceType: z.string().optional(),
+	referenceId: z.string().optional(),
+	notes: z.string().optional(),
+});
+
 export const load: PageServerLoad = async () => {
-  try {
-    const [itemsResult, warehousesResult] = await Promise.all([
-      invApi.items.list({ limit: 100 }),
-      invApi.warehouses.list({ limit: 100 }),
-    ]);
-    return {
-      items: itemsResult.data,
-      warehouses: warehousesResult.data,
-    };
-  } catch {
-    return { items: [], warehouses: [] };
-  }
+	const [form, itemsResult, warehousesResult] = await Promise.all([
+		superValidate(zod4(stockMovementSchema)),
+		invApi.items.list({ limit: 100 }).catch(() => ({ data: [] })),
+		invApi.warehouses.list({ limit: 100 }).catch(() => ({ data: [] })),
+	]);
+	return { form, items: itemsResult.data, warehouses: warehousesResult.data };
 };
 
 export const actions: Actions = {
-  default: async ({ request }) => {
-    const formData = await request.formData();
+	default: async ({ request }) => {
+		const form = await superValidate(request, zod4(stockMovementSchema));
+		if (!form.valid) return fail(400, { form });
 
-    const data = {
-      itemId: formData.get('itemId') as string,
-      warehouseId: formData.get('warehouseId') as string,
-      type: formData.get('type') as 'in' | 'out' | 'transfer' | 'adjustment',
-      quantity: formData.get('quantity') as string,
-      referenceType: (formData.get('referenceType') as string) || undefined,
-      referenceId: (formData.get('referenceId') as string) || undefined,
-      notes: (formData.get('notes') as string) || undefined,
-    };
-
-    if (!data.itemId || !data.warehouseId || !data.type || !data.quantity) {
-      return fail(400, { error: 'Item, warehouse, type, and quantity are required' });
-    }
-
-    try {
-      await invApi.stockMovements.create(data);
-      return { success: true };
-    } catch (e) {
-      const message = e instanceof Error ? e.message : 'Failed to record stock movement';
-      return fail(400, { error: message });
-    }
-  },
+		try {
+			await invApi.stockMovements.create({
+				itemId: form.data.itemId,
+				warehouseId: form.data.warehouseId,
+				type: form.data.type,
+				quantity: String(form.data.quantity),
+				referenceType: form.data.referenceType || undefined,
+				referenceId: form.data.referenceId || undefined,
+				notes: form.data.notes || undefined,
+			});
+			return message(form, 'Stock movement recorded successfully');
+		} catch (e) {
+			const msg = e instanceof Error ? e.message : 'Failed to record stock movement';
+			return fail(400, { form, error: msg });
+		}
+	},
 };

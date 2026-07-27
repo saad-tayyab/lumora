@@ -3,7 +3,8 @@ import { toast } from 'svelte-sonner';
 import { hrApi, type LeaveRequest } from '$lib/api/hr';
 import { formatDate } from '$lib/utils/format';
 import type { PageData } from './$types';
-import * as Card from '$lib/components/ui/card';
+import AppDataTable from '$lib/components/data/AppDataTable.svelte';
+import type { ColumnDef } from '@tanstack/svelte-table';
 
 let { data }: { data: PageData } = $props();
 let requests = $state<LeaveRequest[]>(data.requests);
@@ -32,6 +33,32 @@ async function approve(id: string) {
     toast.error('Failed to approve');
   }
 }
+
+const columns: ColumnDef<LeaveRequest>[] = [
+  { accessorKey: 'employeeName', header: 'Employee', cell: (row) => `<span class="text-sm font-medium">${(row as any).original.employeeName}</span>` },
+  { accessorKey: 'leaveTypeName', header: 'Type', cell: (row) => `<span class="text-sm">${(row as any).original.leaveTypeName}</span>` },
+  { accessorKey: 'startDate', header: 'Start', cell: (row) => `<span class="text-sm">${formatDate((row as any).original.startDate)}</span>` },
+  { accessorKey: 'endDate', header: 'End', cell: (row) => `<span class="text-sm">${formatDate((row as any).original.endDate)}</span>` },
+  { accessorKey: 'totalDays', header: 'Days', cell: (row) => `<span class="text-sm text-right">${(row as any).original.totalDays}</span>` },
+  {
+    accessorKey: 'status',
+    header: 'Status',
+    cell: (row) => `<span class="inline-block rounded-full px-2 py-0.5 text-xs font-medium ${lrStatusColor((row as any).original.status)}">${formatStatus((row as any).original.status)}</span>`,
+  },
+  {
+    id: 'actions',
+    header: 'Actions',
+    cell: (row) => (row as any).original.status === 'pending'
+      ? `<button onclick="window.dispatchEvent(new CustomEvent('approve-leave', {detail:'${(row as any).original.id}'}))" class="text-sm text-green-600 hover:underline">Approve</button>`
+      : '',
+  },
+];
+
+$effect(() => {
+  const handler = (e: Event) => approve((e as CustomEvent).detail);
+  window.addEventListener('approve-leave', handler);
+  return () => window.removeEventListener('approve-leave', handler);
+});
 </script>
 
 <div class="space-y-6">
@@ -40,15 +67,11 @@ async function approve(id: string) {
     <select bind:value={statusFilter} class="rounded-md border bg-background px-3 py-2 text-sm"><option value="">All</option><option value="pending">Pending</option><option value="approved">Approved</option><option value="rejected">Rejected</option></select>
     <span class="text-sm text-muted-foreground">{total} total</span>
   </div>
-  <Card.Root class="shadow-sm"><Card.Content class="p-0">
-    {#if requests.length === 0}<div class="py-12 text-center text-muted-foreground">No leave requests</div>
-    {:else}
-      <div class="overflow-x-auto">
-        <table class="w-full">
-          <thead><tr class="border-b bg-muted/50"><th class="px-4 py-3 text-left text-sm font-medium text-muted-foreground">Employee</th><th class="px-4 py-3 text-left text-sm font-medium text-muted-foreground">Type</th><th class="px-4 py-3 text-left text-sm font-medium text-muted-foreground">Start</th><th class="px-4 py-3 text-left text-sm font-medium text-muted-foreground">End</th><th class="px-4 py-3 text-right text-sm font-medium text-muted-foreground">Days</th><th class="px-4 py-3 text-left text-sm font-medium text-muted-foreground">Status</th><th class="px-4 py-3 text-right text-sm font-medium text-muted-foreground">Actions</th></tr></thead>
-          <tbody>{#each requests as lr}<tr class="border-b hover:bg-muted/30"><td class="px-4 py-3 text-sm font-medium">{lr.employeeName}</td><td class="px-4 py-3 text-sm">{lr.leaveTypeName}</td><td class="px-4 py-3 text-sm">{formatDate(lr.startDate)}</td><td class="px-4 py-3 text-sm">{formatDate(lr.endDate)}</td><td class="px-4 py-3 text-right text-sm">{lr.totalDays}</td><td class="px-4 py-3"><span class="inline-block rounded-full px-2 py-0.5 text-xs font-medium {lrStatusColor(lr.status)}">{formatStatus(lr.status)}</span></td><td class="px-4 py-3 text-right">{#if lr.status === 'pending'}<button onclick={() => approve(lr.id)} class="text-sm text-green-600 hover:underline">Approve</button>{/if}</td></tr>{/each}</tbody>
-        </table>
-      </div>
-    {/if}
-  </Card.Content></Card.Root>
+  <AppDataTable
+    {columns}
+    data={requests}
+    emptyMessage="No leave requests"
+    pageSize={20}
+    totalItems={total}
+  />
 </div>

@@ -1,7 +1,8 @@
 <script lang="ts">
 import { formatCurrency, formatDate } from '$lib/utils/format';
 import type { PageData } from './$types';
-import * as Card from '$lib/components/ui/card';
+import AppDataTable from '$lib/components/data/AppDataTable.svelte';
+import type { ColumnDef } from '@tanstack/svelte-table';
 
 let { data }: { data: PageData } = $props();
 
@@ -14,6 +15,20 @@ function methodLabel(method: string): string {
   };
   return labels[method] || method;
 }
+
+const columns: ColumnDef<any>[] = [
+  { accessorKey: 'assetId', header: 'Asset ID', cell: (row) => `<span class="font-mono text-xs">${(row as any).original.assetId.slice(0, 8)}...</span>` },
+  { accessorKey: 'startDate', header: 'Start Date', cell: (row) => formatDate((row as any).original.startDate) },
+  { accessorKey: 'endDate', header: 'End Date', cell: (row) => formatDate((row as any).original.endDate) },
+  { accessorKey: 'totalDepreciableCost', header: 'Total Depreciable', cell: (row) => `<span class="text-right">${formatCurrency((row as any).original.totalDepreciableCost)}</span>` },
+  { accessorKey: 'monthlyAmount', header: 'Monthly Amount', cell: (row) => `<span class="text-right font-medium">${formatCurrency((row as any).original.monthlyAmount)}</span>` },
+  { accessorKey: 'method', header: 'Method', cell: (row) => methodLabel((row as any).original.method) },
+  {
+    accessorKey: 'status',
+    header: 'Status',
+    cell: (row) => `<span class="inline-flex items-center rounded-full px-2 py-0.5 text-xs font-medium bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-300">${(row as any).original.status}</span>`,
+  },
+];
 </script>
 
 <div class="space-y-6">
@@ -22,42 +37,11 @@ function methodLabel(method: string): string {
     <p class="text-muted-foreground">{data.total} schedules</p>
   </div>
 
-  <Card.Root class="shadow-sm"><Card.Content class="p-0">
-    <div class="overflow-x-auto">
-      <table class="w-full text-sm">
-        <thead>
-          <tr class="border-b bg-muted/50">
-            <th class="px-4 py-3 text-left font-medium text-muted-foreground">Asset ID</th>
-            <th class="px-4 py-3 text-left font-medium text-muted-foreground">Start Date</th>
-            <th class="px-4 py-3 text-left font-medium text-muted-foreground">End Date</th>
-            <th class="px-4 py-3 text-right font-medium text-muted-foreground">Total Depreciable</th>
-            <th class="px-4 py-3 text-right font-medium text-muted-foreground">Monthly Amount</th>
-            <th class="px-4 py-3 text-left font-medium text-muted-foreground">Method</th>
-            <th class="px-4 py-3 text-left font-medium text-muted-foreground">Status</th>
-          </tr>
-        </thead>
-        <tbody>
-          {#each data.schedules as schedule}
-            <tr class="border-b hover:bg-muted/30">
-              <td class="px-4 py-3 font-mono text-xs">{schedule.assetId.slice(0, 8)}...</td>
-              <td class="px-4 py-3">{formatDate(schedule.startDate)}</td>
-              <td class="px-4 py-3">{formatDate(schedule.endDate)}</td>
-              <td class="px-4 py-3 text-right">{formatCurrency(schedule.totalDepreciableCost)}</td>
-              <td class="px-4 py-3 text-right font-medium">{formatCurrency(schedule.monthlyAmount)}</td>
-              <td class="px-4 py-3">{methodLabel(schedule.method)}</td>
-              <td class="px-4 py-3">
-                <span class="inline-flex items-center rounded-full px-2 py-0.5 text-xs font-medium bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-300">
-                  {schedule.status}
-                </span>
-              </td>
-            </tr>
-          {:else}
-            <tr>
-              <td colspan="7" class="px-4 py-12 text-center text-muted-foreground">No schedules found</td>
-            </tr>
-          {/each}
-        </tbody>
-      </table>
-    </div>
-  </Card.Content></Card.Root>
+  <AppDataTable
+    {columns}
+    data={data.schedules}
+    emptyMessage="No schedules found"
+    pageSize={20}
+    totalItems={data.total}
+  />
 </div>

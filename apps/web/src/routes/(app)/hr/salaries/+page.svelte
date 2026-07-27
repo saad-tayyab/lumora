@@ -3,7 +3,8 @@ import { toast } from 'svelte-sonner';
 import { hrApi, type Salary } from '$lib/api/hr';
 import { formatCurrency, formatDate } from '$lib/utils/format';
 import type { PageData } from './$types';
-import * as Card from '$lib/components/ui/card';
+import AppDataTable from '$lib/components/data/AppDataTable.svelte';
+import type { ColumnDef } from '@tanstack/svelte-table';
 
 let { data }: { data: PageData } = $props();
 let salaries = $state<Salary[]>(data.salaries);
@@ -20,19 +21,41 @@ async function deleteSalary(id: string) {
     toast.error('Failed to delete');
   }
 }
+
+const columns: ColumnDef<Salary>[] = [
+  { accessorKey: 'employeeName', header: 'Employee', cell: (row) => `<span class="text-sm font-medium">${(row as any).original.employeeName}</span>` },
+  { accessorKey: 'basicSalary', header: 'Basic Salary', cell: (row) => `<span class="text-sm text-right">${formatCurrency((row as any).original.basicSalary)}</span>` },
+  { accessorKey: 'allowances', header: 'Allowances', cell: (row) => `<span class="text-sm text-right">${formatCurrency((row as any).original.allowances)}</span>` },
+  { accessorKey: 'deductions', header: 'Deductions', cell: (row) => `<span class="text-sm text-right">${formatCurrency((row as any).original.deductions)}</span>` },
+  { accessorKey: 'effectiveFrom', header: 'Effective From', cell: (row) => `<span class="text-sm">${formatDate((row as any).original.effectiveFrom)}</span>` },
+  {
+    accessorKey: 'isActive',
+    header: 'Active',
+    cell: (row) => (row as any).original.isActive
+      ? '<span class="inline-block rounded-full bg-green-100 px-2 py-0.5 text-xs font-medium text-green-800">Active</span>'
+      : '<span class="inline-block rounded-full bg-gray-100 px-2 py-0.5 text-xs font-medium text-gray-800">Inactive</span>',
+  },
+  {
+    id: 'actions',
+    header: 'Actions',
+    cell: (row) => `<button onclick="window.dispatchEvent(new CustomEvent('delete-salary', {detail:'${(row as any).original.id}'}))" class="text-sm text-destructive hover:underline">Delete</button>`,
+  },
+];
+
+$effect(() => {
+  const handler = (e: Event) => deleteSalary((e as CustomEvent).detail);
+  window.addEventListener('delete-salary', handler);
+  return () => window.removeEventListener('delete-salary', handler);
+});
 </script>
 
 <div class="space-y-6">
   <div><h1 class="text-3xl font-bold text-foreground">Salaries</h1><p class="text-muted-foreground">Manage employee salary records</p></div>
-  <Card.Root class="shadow-sm"><Card.Content class="p-0">
-    {#if salaries.length === 0}<div class="py-12 text-center text-muted-foreground">No salary records</div>
-    {:else}
-      <div class="overflow-x-auto">
-        <table class="w-full">
-          <thead><tr class="border-b bg-muted/50"><th class="px-4 py-3 text-left text-sm font-medium text-muted-foreground">Employee</th><th class="px-4 py-3 text-right text-sm font-medium text-muted-foreground">Basic Salary</th><th class="px-4 py-3 text-right text-sm font-medium text-muted-foreground">Allowances</th><th class="px-4 py-3 text-right text-sm font-medium text-muted-foreground">Deductions</th><th class="px-4 py-3 text-left text-sm font-medium text-muted-foreground">Effective From</th><th class="px-4 py-3 text-left text-sm font-medium text-muted-foreground">Active</th><th class="px-4 py-3 text-right text-sm font-medium text-muted-foreground">Actions</th></tr></thead>
-          <tbody>{#each salaries as sal}<tr class="border-b hover:bg-muted/30"><td class="px-4 py-3 text-sm font-medium">{sal.employeeName}</td><td class="px-4 py-3 text-right text-sm">{formatCurrency(sal.basicSalary)}</td><td class="px-4 py-3 text-right text-sm">{formatCurrency(sal.allowances)}</td><td class="px-4 py-3 text-right text-sm">{formatCurrency(sal.deductions)}</td><td class="px-4 py-3 text-sm">{formatDate(sal.effectiveFrom)}</td><td class="px-4 py-3">{#if sal.isActive}<span class="inline-block rounded-full bg-green-100 px-2 py-0.5 text-xs font-medium text-green-800">Active</span>{:else}<span class="inline-block rounded-full bg-gray-100 px-2 py-0.5 text-xs font-medium text-gray-800">Inactive</span>{/if}</td><td class="px-4 py-3 text-right"><button onclick={() => deleteSalary(sal.id)} class="text-sm text-destructive hover:underline">Delete</button></td></tr>{/each}</tbody>
-        </table>
-      </div>
-    {/if}
-  </Card.Content></Card.Root>
+  <AppDataTable
+    {columns}
+    data={salaries}
+    emptyMessage="No salary records"
+    pageSize={20}
+    totalItems={total}
+  />
 </div>

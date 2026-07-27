@@ -1,9 +1,12 @@
 <script lang="ts">
+import { goto } from '$app/navigation';
 import { toast } from 'svelte-sonner';
 import { deleteCustomer, listCustomers } from '$lib/api/ar';
 import type { Customer } from '$lib/types';
 import { formatCurrency } from '$lib/utils/format';
 import { Button } from '$lib/components/ui/button';
+import AppDataTable from '$lib/components/data/AppDataTable.svelte';
+import type { ColumnDef } from '@tanstack/svelte-table';
 
 let customers = $state<Customer[]>([]);
 let loading = $state(true);
@@ -37,7 +40,49 @@ async function handleDelete(id: string, name: string) {
   }
 }
 
-const totalPages = $derived(Math.ceil(total / limit));
+$effect(() => {
+  load();
+});
+
+function getStatusColor(isActive: boolean): string {
+  return isActive ? 'bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-300' : 'bg-gray-100 text-gray-800 dark:bg-gray-800 dark:text-gray-300';
+}
+
+const columns: ColumnDef<Customer, any>[] = [
+  {
+    accessorKey: 'name',
+    header: 'Name',
+    cell: ({ row }) => `<a href="/ar/customers/${(row as any).original.id}" class="font-medium text-primary hover:underline">${(row as any).original.name}</a>`,
+  },
+  {
+    accessorKey: 'email',
+    header: 'Email',
+    cell: ({ row }) => `<span class="text-muted-foreground">${(row as any).original.email || '—'}</span>`,
+  },
+  {
+    accessorKey: 'phone',
+    header: 'Phone',
+    cell: ({ row }) => `<span class="text-muted-foreground">${(row as any).original.phone || '—'}</span>`,
+  },
+  {
+    accessorKey: 'paymentTerms',
+    header: 'Payment Terms',
+    cell: ({ row }) => `<span class="text-muted-foreground">${(row as any).original.paymentTerms}</span>`,
+  },
+  {
+    accessorKey: 'creditLimit',
+    header: 'Credit Limit',
+    cell: ({ row }) => `<span class="text-muted-foreground">${(row as any).original.creditLimit ? formatCurrency((row as any).original.creditLimit) : '—'}</span>`,
+  },
+  {
+    accessorKey: 'isActive',
+    header: 'Status',
+    cell: ({ row }) => {
+      const label = (row as any).original.isActive ? 'Active' : 'Inactive';
+      return `<span class="inline-flex items-center rounded-full px-2 py-0.5 text-xs font-medium ${getStatusColor((row as any).original.isActive)}">${label}</span>`;
+    },
+  },
+];
 </script>
 
 <div class="space-y-6">
@@ -49,95 +94,19 @@ const totalPages = $derived(Math.ceil(total / limit));
 		<Button href="/ar/customers/new">New Customer</Button>
 	</div>
 
-	{#if loading}
-		<div class="flex items-center justify-center py-12">
-			<div class="text-sm text-muted-foreground">Loading customers...</div>
-		</div>
-	{:else if error}
+	{#if error}
 		<div class="rounded-lg border border-destructive/50 bg-destructive/10 p-4 text-sm text-destructive">
 			{error}
 		</div>
-	{:else if customers.length === 0}
-		<div class="rounded-lg border bg-card p-12 text-center shadow-sm">
-			<p class="text-muted-foreground">No customers found.</p>
-			<a href="/ar/customers/new" class="mt-4 inline-block text-sm text-primary hover:underline">
-				Create your first customer
-			</a>
-		</div>
-	{:else}
-		<div class="rounded-lg border bg-card shadow-sm">
-			<table class="w-full text-sm">
-				<thead>
-					<tr class="border-b bg-muted/50 text-left">
-						<th class="px-4 py-3 font-medium text-muted-foreground">Name</th>
-						<th class="px-4 py-3 font-medium text-muted-foreground">Email</th>
-						<th class="px-4 py-3 font-medium text-muted-foreground">Phone</th>
-						<th class="px-4 py-3 font-medium text-muted-foreground">Payment Terms</th>
-						<th class="px-4 py-3 font-medium text-muted-foreground">Credit Limit</th>
-						<th class="px-4 py-3 font-medium text-muted-foreground">Status</th>
-						<th class="px-4 py-3 font-medium text-muted-foreground">Actions</th>
-					</tr>
-				</thead>
-				<tbody>
-					{#each customers as customer}
-						<tr class="border-b last:border-b-0 hover:bg-muted/30">
-							<td class="px-4 py-3">
-								<a href="/ar/customers/{customer.id}" class="font-medium text-primary hover:underline">
-									{customer.name}
-								</a>
-							</td>
-							<td class="px-4 py-3 text-muted-foreground">{customer.email || '—'}</td>
-							<td class="px-4 py-3 text-muted-foreground">{customer.phone || '—'}</td>
-							<td class="px-4 py-3 text-muted-foreground">{customer.paymentTerms}</td>
-							<td class="px-4 py-3 text-muted-foreground">
-								{customer.creditLimit ? formatCurrency(customer.creditLimit) : '—'}
-							</td>
-							<td class="px-4 py-3">
-								<span
-									class="inline-flex items-center rounded-full px-2 py-0.5 text-xs font-medium {customer.isActive
-										? 'bg-green-100 text-green-800'
-										: 'bg-gray-100 text-gray-800'}"
-								>
-									{customer.isActive ? 'Active' : 'Inactive'}
-								</span>
-							</td>
-							<td class="px-4 py-3">
-								<div class="flex items-center gap-2">
-									<a href="/ar/customers/{customer.id}" class="text-primary hover:underline">View</a>
-									<a href="/ar/customers/{customer.id}/edit" class="text-primary hover:underline">
-										Edit
-									</a>
-									<button
-										onclick={() => handleDelete(customer.id, customer.name)}
-										class="text-destructive hover:underline"
-									>
-										Delete
-									</button>
-								</div>
-							</td>
-						</tr>
-					{/each}
-				</tbody>
-			</table>
-		</div>
-
-		{#if totalPages > 1}
-			<div class="flex items-center justify-between">
-				<p class="text-sm text-muted-foreground">
-					Showing {page * limit + 1}-{Math.min((page + 1) * limit, total)} of {total}
-				</p>
-				<div class="flex items-center gap-2">
-				<Button variant="outline" size="sm" onclick={() => (page = Math.max(0, page - 1))} disabled={page === 0}>
-					Previous
-				</Button>
-					<span class="text-sm text-muted-foreground">
-						Page {page + 1} of {totalPages}
-					</span>
-				<Button variant="outline" size="sm" onclick={() => (page = Math.min(totalPages - 1, page + 1))} disabled={page >= totalPages - 1}>
-					Next
-				</Button>
-				</div>
-			</div>
-		{/if}
 	{/if}
+
+	<AppDataTable
+		{columns}
+		data={customers}
+		{loading}
+		emptyMessage="No customers found."
+		pageSize={limit}
+		totalItems={total}
+		onRowClick={(row) => goto(`/ar/customers/${row.id}`)}
+	/>
 </div>

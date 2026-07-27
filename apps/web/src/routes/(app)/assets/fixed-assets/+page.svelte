@@ -1,10 +1,11 @@
 <script lang="ts">
 import { toast } from 'svelte-sonner';
-import { invalidateAll } from '$app/navigation';
+import { invalidateAll, goto } from '$app/navigation';
 import { formatCurrency, formatDate } from '$lib/utils/format';
 import type { PageData } from './$types';
 import { Button } from '$lib/components/ui/button';
-import * as Card from '$lib/components/ui/card';
+import AppDataTable from '$lib/components/data/AppDataTable.svelte';
+import type { ColumnDef } from '@tanstack/svelte-table';
 
 let { data }: { data: PageData } = $props();
 let deleting = $state<string | null>(null);
@@ -43,6 +44,32 @@ function methodLabel(method: string): string {
   };
   return labels[method] || method;
 }
+
+const columns: ColumnDef<any>[] = [
+  { accessorKey: 'assetNumber', header: 'Asset #', cell: (row) => `<span class="font-mono text-xs">${(row as any).original.assetNumber}</span>` },
+  { accessorKey: 'name', header: 'Name', cell: (row) => `<a href="/assets/fixed-assets/${(row as any).original.id}" class="font-medium hover:underline">${(row as any).original.name}</a>` },
+  { accessorKey: 'acquisitionDate', header: 'Acquired', cell: (row) => formatDate((row as any).original.acquisitionDate) },
+  { accessorKey: 'acquisitionCost', header: 'Cost', cell: (row) => `<span class="text-right">${formatCurrency((row as any).original.acquisitionCost)}</span>` },
+  { accessorKey: 'accumulatedDepreciation', header: 'Acc. Depreciation', cell: (row) => `<span class="text-right">${formatCurrency((row as any).original.accumulatedDepreciation)}</span>` },
+  { accessorKey: 'netBookValue', header: 'NBV', cell: (row) => `<span class="text-right font-medium">${formatCurrency((row as any).original.netBookValue)}</span>` },
+  { accessorKey: 'depreciationMethod', header: 'Method', cell: (row) => methodLabel((row as any).original.depreciationMethod) },
+  {
+    accessorKey: 'status',
+    header: 'Status',
+    cell: (row) => `<span class="inline-flex items-center rounded-full px-2 py-0.5 text-xs font-medium ${statusColor((row as any).original.status)}">${(row as any).original.status.replace('_', ' ')}</span>`,
+  },
+  {
+    id: 'actions',
+    header: 'Actions',
+    cell: (row) => `<div class="flex items-center justify-end gap-2"><a href="/assets/fixed-assets/${(row as any).original.id}/edit" class="rounded p-1 text-muted-foreground hover:bg-accent hover:text-accent-foreground">Edit</a><button onclick="window.dispatchEvent(new CustomEvent('delete-asset', {detail:'${(row as any).original.id}'}))" class="rounded p-1 text-destructive hover:bg-destructive/10 disabled:opacity-50">Delete</button></div>`,
+  },
+];
+
+$effect(() => {
+  const handler = (e: Event) => handleDelete((e as CustomEvent).detail);
+  window.addEventListener('delete-asset', handler);
+  return () => window.removeEventListener('delete-asset', handler);
+});
 </script>
 
 <div class="space-y-6">
@@ -59,64 +86,12 @@ function methodLabel(method: string): string {
     </a>
   </div>
 
-  <Card.Root class="shadow-sm"><Card.Content class="p-0">
-    <div class="overflow-x-auto">
-      <table class="w-full text-sm">
-        <thead>
-          <tr class="border-b bg-muted/50">
-            <th class="px-4 py-3 text-left font-medium text-muted-foreground">Asset #</th>
-            <th class="px-4 py-3 text-left font-medium text-muted-foreground">Name</th>
-            <th class="px-4 py-3 text-left font-medium text-muted-foreground">Acquired</th>
-            <th class="px-4 py-3 text-right font-medium text-muted-foreground">Cost</th>
-            <th class="px-4 py-3 text-right font-medium text-muted-foreground">Acc. Depreciation</th>
-            <th class="px-4 py-3 text-right font-medium text-muted-foreground">NBV</th>
-            <th class="px-4 py-3 text-left font-medium text-muted-foreground">Method</th>
-            <th class="px-4 py-3 text-left font-medium text-muted-foreground">Status</th>
-            <th class="px-4 py-3 text-right font-medium text-muted-foreground">Actions</th>
-          </tr>
-        </thead>
-        <tbody>
-          {#each data.assets as asset}
-            <tr class="border-b hover:bg-muted/30">
-              <td class="px-4 py-3 font-mono text-xs">{asset.assetNumber}</td>
-              <td class="px-4 py-3">
-                <a href="/assets/fixed-assets/{asset.id}" class="font-medium hover:underline">{asset.name}</a>
-              </td>
-              <td class="px-4 py-3">{formatDate(asset.acquisitionDate)}</td>
-              <td class="px-4 py-3 text-right">{formatCurrency(asset.acquisitionCost)}</td>
-              <td class="px-4 py-3 text-right">{formatCurrency(asset.accumulatedDepreciation)}</td>
-              <td class="px-4 py-3 text-right font-medium">{formatCurrency(asset.netBookValue)}</td>
-              <td class="px-4 py-3">{methodLabel(asset.depreciationMethod)}</td>
-              <td class="px-4 py-3">
-                <span class="inline-flex items-center rounded-full px-2 py-0.5 text-xs font-medium {statusColor(asset.status)}">
-                  {asset.status.replace('_', ' ')}
-                </span>
-              </td>
-              <td class="px-4 py-3 text-right">
-                <div class="flex items-center justify-end gap-2">
-                  <a
-                    href="/assets/fixed-assets/{asset.id}/edit"
-                    class="rounded p-1 text-muted-foreground hover:bg-accent hover:text-accent-foreground"
-                  >
-                    Edit
-                  </a>
-                  <button
-                    onclick={() => handleDelete(asset.id)}
-                    disabled={deleting === asset.id}
-                    class="rounded p-1 text-destructive hover:bg-destructive/10 disabled:opacity-50"
-                  >
-                    Delete
-                  </button>
-                </div>
-              </td>
-            </tr>
-          {:else}
-            <tr>
-              <td colspan="9" class="px-4 py-12 text-center text-muted-foreground">No assets found</td>
-            </tr>
-          {/each}
-        </tbody>
-      </table>
-    </div>
-  </Card.Content></Card.Root>
+  <AppDataTable
+    {columns}
+    data={data.assets}
+    emptyMessage="No assets found"
+    pageSize={20}
+    totalItems={data.total}
+    onRowClick={(row) => goto(`/assets/fixed-assets/${row.id}`)}
+  />
 </div>

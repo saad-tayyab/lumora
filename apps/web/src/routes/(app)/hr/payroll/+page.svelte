@@ -1,15 +1,16 @@
 <script lang="ts">
 import { toast } from 'svelte-sonner';
 import { hrApi, type Payroll } from '$lib/api/hr';
-import { formatCurrency, formatDate } from '$lib/utils/format';
+import { formatCurrency } from '$lib/utils/format';
 import type { PageData } from './$types';
-import * as Card from '$lib/components/ui/card';
+import AppDataTable from '$lib/components/data/AppDataTable.svelte';
+import type { ColumnDef } from '@tanstack/svelte-table';
 
 let { data }: { data: PageData } = $props();
 let payroll = $state<Payroll[]>(data.payroll);
 let total = $state(data.total);
 let statusFilter = $state('');
-let loading = $state(false);
+let isLoading = $state(false);
 
 function prStatusColor(status: string): string {
   const colors: Record<string, string> = {
@@ -47,6 +48,38 @@ async function deletePayroll(id: string) {
     toast.error('Failed to delete');
   }
 }
+
+const columns: ColumnDef<Payroll>[] = [
+  { accessorKey: 'payrollNumber', header: 'Payroll #', cell: (row) => `<span class="font-medium text-primary">${(row as any).original.payrollNumber}</span>` },
+  { accessorKey: 'period', header: 'Period', cell: (row) => `<span class="text-sm">${(row as any).original.period}</span>` },
+  { accessorKey: 'totalGross', header: 'Gross', cell: (row) => `<span class="text-sm text-right">${formatCurrency((row as any).original.totalGross)}</span>` },
+  { accessorKey: 'totalDeductions', header: 'Deductions', cell: (row) => `<span class="text-sm text-right">${formatCurrency((row as any).original.totalDeductions)}</span>` },
+  { accessorKey: 'totalNet', header: 'Net', cell: (row) => `<span class="text-sm text-right font-medium">${formatCurrency((row as any).original.totalNet)}</span>` },
+  {
+    accessorKey: 'status',
+    header: 'Status',
+    cell: (row) => `<span class="inline-block rounded-full px-2 py-0.5 text-xs font-medium ${prStatusColor((row as any).original.status)}">${formatStatus((row as any).original.status)}</span>`,
+  },
+  {
+    id: 'actions',
+    header: 'Actions',
+    cell: (row) => {
+      if ((row as any).original.status !== 'draft') return '';
+      return `<div class="flex items-center justify-end gap-2"><button onclick="window.dispatchEvent(new CustomEvent('process-payroll', {detail:'${(row as any).original.id}'}))" class="text-sm text-green-600 hover:underline">Process</button><button onclick="window.dispatchEvent(new CustomEvent('delete-payroll', {detail:'${(row as any).original.id}'}))" class="text-sm text-destructive hover:underline">Delete</button></div>`;
+    },
+  },
+];
+
+$effect(() => {
+  const handler = (e: Event) => processPayroll((e as CustomEvent).detail);
+  window.addEventListener('process-payroll', handler);
+  return () => window.removeEventListener('process-payroll', handler);
+});
+$effect(() => {
+  const handler = (e: Event) => deletePayroll((e as CustomEvent).detail);
+  window.addEventListener('delete-payroll', handler);
+  return () => window.removeEventListener('delete-payroll', handler);
+});
 </script>
 
 <div class="space-y-6">
@@ -55,15 +88,12 @@ async function deletePayroll(id: string) {
     <select bind:value={statusFilter} class="rounded-md border bg-background px-3 py-2 text-sm"><option value="">All Statuses</option><option value="draft">Draft</option><option value="processed">Processed</option><option value="paid">Paid</option><option value="cancelled">Cancelled</option></select>
     <span class="text-sm text-muted-foreground">{total} total</span>
   </div>
-  <Card.Root class="shadow-sm"><Card.Content class="p-0">
-    {#if payroll.length === 0}<div class="py-12 text-center text-muted-foreground">No payroll records</div>
-    {:else}
-      <div class="overflow-x-auto">
-        <table class="w-full">
-          <thead><tr class="border-b bg-muted/50"><th class="px-4 py-3 text-left text-sm font-medium text-muted-foreground">Payroll #</th><th class="px-4 py-3 text-left text-sm font-medium text-muted-foreground">Period</th><th class="px-4 py-3 text-right text-sm font-medium text-muted-foreground">Gross</th><th class="px-4 py-3 text-right text-sm font-medium text-muted-foreground">Deductions</th><th class="px-4 py-3 text-right text-sm font-medium text-muted-foreground">Net</th><th class="px-4 py-3 text-left text-sm font-medium text-muted-foreground">Status</th><th class="px-4 py-3 text-right text-sm font-medium text-muted-foreground">Actions</th></tr></thead>
-          <tbody>{#each payroll as pr}<tr class="border-b hover:bg-muted/30"><td class="px-4 py-3 font-medium text-primary">{pr.payrollNumber}</td><td class="px-4 py-3 text-sm">{pr.period}</td><td class="px-4 py-3 text-right text-sm">{formatCurrency(pr.totalGross)}</td><td class="px-4 py-3 text-right text-sm">{formatCurrency(pr.totalDeductions)}</td><td class="px-4 py-3 text-right text-sm font-medium">{formatCurrency(pr.totalNet)}</td><td class="px-4 py-3"><span class="inline-block rounded-full px-2 py-0.5 text-xs font-medium {prStatusColor(pr.status)}">{formatStatus(pr.status)}</span></td><td class="px-4 py-3 text-right"><div class="flex items-center justify-end gap-2">{#if pr.status === 'draft'}<button onclick={() => processPayroll(pr.id)} class="text-sm text-green-600 hover:underline">Process</button><button onclick={() => deletePayroll(pr.id)} class="text-sm text-destructive hover:underline">Delete</button>{/if}</div></td></tr>{/each}</tbody>
-        </table>
-      </div>
-    {/if}
-  </Card.Content></Card.Root>
+  <AppDataTable
+    {columns}
+    data={payroll}
+    loading={isLoading}
+    emptyMessage="No payroll records"
+    pageSize={20}
+    totalItems={total}
+  />
 </div>

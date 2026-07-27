@@ -1,35 +1,40 @@
-import { fail, redirect } from '@sveltejs/kit';
-import { ApiError } from '$lib/api';
+import { fail } from '@sveltejs/kit';
+import { superValidate, message } from 'sveltekit-superforms';
+import { zod4 } from 'sveltekit-superforms/adapters';
+import { z } from 'zod';
 import { financialApi } from '$lib/api/financial';
-import type { Actions } from './$types';
+import type { Actions, PageServerLoad } from './$types';
+
+const fiscalYearSchema = z.object({
+	name: z.string().min(1, 'Name is required'),
+	startDate: z.string().min(1, 'Start date is required'),
+	endDate: z.string().min(1, 'End date is required'),
+});
+
+export const load: PageServerLoad = async () => {
+	const form = await superValidate(zod4(fiscalYearSchema));
+	return { form };
+};
 
 export const actions: Actions = {
-  default: async ({ request }) => {
-    const formData = await request.formData();
-    const name = formData.get('name') as string;
-    const startDate = formData.get('startDate') as string;
-    const endDate = formData.get('endDate') as string;
+	default: async ({ request }) => {
+		const form = await superValidate(request, zod4(fiscalYearSchema));
+		if (!form.valid) return fail(400, { form });
 
-    if (!name || !startDate || !endDate) {
-      return fail(400, {
-        name,
-        startDate,
-        endDate,
-        error: 'Name, start date, and end date are required',
-      });
-    }
+		if (new Date(form.data.startDate) >= new Date(form.data.endDate)) {
+			return fail(400, { form, error: 'End date must be after start date' });
+		}
 
-    if (new Date(startDate) >= new Date(endDate)) {
-      return fail(400, { name, startDate, endDate, error: 'End date must be after start date' });
-    }
-
-    try {
-      await financialApi.fiscalYears.create({ name, startDate, endDate });
-    } catch (e: any) {
-      const message = e instanceof ApiError ? e.message : 'Failed to create fiscal year';
-      return fail(e.status || 500, { name, startDate, endDate, error: message });
-    }
-
-    redirect(303, '/financial/fiscal-years');
-  },
+		try {
+			await financialApi.fiscalYears.create({
+				name: form.data.name,
+				startDate: form.data.startDate,
+				endDate: form.data.endDate,
+			});
+			return message(form, 'Fiscal year created successfully');
+		} catch (e) {
+			const msg = e instanceof Error ? e.message : 'Failed to create fiscal year';
+			return fail(400, { form, error: msg });
+		}
+	},
 };

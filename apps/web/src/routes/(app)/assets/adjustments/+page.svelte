@@ -4,7 +4,8 @@ import { invalidateAll } from '$app/navigation';
 import { formatCurrency, formatDate } from '$lib/utils/format';
 import type { PageData } from './$types';
 import { Button } from '$lib/components/ui/button';
-import * as Card from '$lib/components/ui/card';
+import AppDataTable from '$lib/components/data/AppDataTable.svelte';
+import type { ColumnDef } from '@tanstack/svelte-table';
 
 let { data }: { data: PageData } = $props();
 let posting = $state<string | null>(null);
@@ -31,6 +32,38 @@ async function handlePost(id: string) {
     posting = null;
   }
 }
+
+const columns: ColumnDef<any>[] = [
+  { accessorKey: 'assetId', header: 'Asset ID', cell: (row) => `<span class="font-mono text-xs">${(row as any).original.assetId.slice(0, 8)}...</span>` },
+  { accessorKey: 'adjustmentType', header: 'Type', cell: (row) => `<span class="capitalize">${(row as any).original.adjustmentType}</span>` },
+  {
+    accessorKey: 'direction',
+    header: 'Direction',
+    cell: (row) => `<span class="${(row as any).original.direction === 'increase' ? 'text-green-600 dark:text-green-400' : 'text-red-600 dark:text-red-400'}">${(row as any).original.direction}</span>`,
+  },
+  { accessorKey: 'adjustmentAmount', header: 'Amount', cell: (row) => `<span class="text-right">${formatCurrency((row as any).original.adjustmentAmount)}</span>` },
+  { accessorKey: 'adjustmentDate', header: 'Date', cell: (row) => formatDate((row as any).original.adjustmentDate) },
+  { accessorKey: 'description', header: 'Description', cell: (row) => `<span class="max-w-[200px] truncate">${(row as any).original.description}</span>` },
+  {
+    accessorKey: 'status',
+    header: 'Status',
+    cell: (row) => `<span class="inline-flex items-center rounded-full px-2 py-0.5 text-xs font-medium ${statusColor((row as any).original.status)}">${(row as any).original.status}</span>`,
+  },
+  {
+    id: 'actions',
+    header: 'Actions',
+    cell: (row) => {
+      if ((row as any).original.status !== 'draft') return '';
+      return `<button onclick="window.dispatchEvent(new CustomEvent('post-adj', {detail:'${(row as any).original.id}'}))" class="rounded p-1 text-green-600 hover:bg-green-50 disabled:opacity-50 dark:text-green-400">Post</button>`;
+    },
+  },
+];
+
+$effect(() => {
+  const handler = (e: Event) => handlePost((e as CustomEvent).detail);
+  window.addEventListener('post-adj', handler);
+  return () => window.removeEventListener('post-adj', handler);
+});
 </script>
 
 <div class="space-y-6">
@@ -47,58 +80,11 @@ async function handlePost(id: string) {
     </a>
   </div>
 
-  <Card.Root class="shadow-sm"><Card.Content class="p-0">
-    <div class="overflow-x-auto">
-      <table class="w-full text-sm">
-        <thead>
-          <tr class="border-b bg-muted/50">
-            <th class="px-4 py-3 text-left font-medium text-muted-foreground">Asset ID</th>
-            <th class="px-4 py-3 text-left font-medium text-muted-foreground">Type</th>
-            <th class="px-4 py-3 text-left font-medium text-muted-foreground">Direction</th>
-            <th class="px-4 py-3 text-right font-medium text-muted-foreground">Amount</th>
-            <th class="px-4 py-3 text-left font-medium text-muted-foreground">Date</th>
-            <th class="px-4 py-3 text-left font-medium text-muted-foreground">Description</th>
-            <th class="px-4 py-3 text-left font-medium text-muted-foreground">Status</th>
-            <th class="px-4 py-3 text-right font-medium text-muted-foreground">Actions</th>
-          </tr>
-        </thead>
-        <tbody>
-          {#each data.adjustments as adj}
-            <tr class="border-b hover:bg-muted/30">
-              <td class="px-4 py-3 font-mono text-xs">{adj.assetId.slice(0, 8)}...</td>
-              <td class="px-4 py-3 capitalize">{adj.adjustmentType}</td>
-              <td class="px-4 py-3">
-                <span class={adj.direction === 'increase' ? 'text-green-600 dark:text-green-400' : 'text-red-600 dark:text-red-400'}>
-                  {adj.direction}
-                </span>
-              </td>
-              <td class="px-4 py-3 text-right">{formatCurrency(adj.adjustmentAmount)}</td>
-              <td class="px-4 py-3">{formatDate(adj.adjustmentDate)}</td>
-              <td class="px-4 py-3 max-w-[200px] truncate">{adj.description}</td>
-              <td class="px-4 py-3">
-                <span class="inline-flex items-center rounded-full px-2 py-0.5 text-xs font-medium {statusColor(adj.status)}">
-                  {adj.status}
-                </span>
-              </td>
-              <td class="px-4 py-3 text-right">
-                {#if adj.status === 'draft'}
-                  <button
-                    onclick={() => handlePost(adj.id)}
-                    disabled={posting === adj.id}
-                    class="rounded p-1 text-green-600 hover:bg-green-50 disabled:opacity-50 dark:text-green-400"
-                  >
-                    Post
-                  </button>
-                {/if}
-              </td>
-            </tr>
-          {:else}
-            <tr>
-              <td colspan="8" class="px-4 py-12 text-center text-muted-foreground">No adjustments found</td>
-            </tr>
-          {/each}
-        </tbody>
-      </table>
-    </div>
-  </Card.Content></Card.Root>
+  <AppDataTable
+    {columns}
+    data={data.adjustments}
+    emptyMessage="No adjustments found"
+    pageSize={20}
+    totalItems={data.total}
+  />
 </div>

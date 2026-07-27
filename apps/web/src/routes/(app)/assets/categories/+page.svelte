@@ -1,10 +1,11 @@
 <script lang="ts">
 import { toast } from 'svelte-sonner';
-import { invalidateAll } from '$app/navigation';
+import { invalidateAll, goto } from '$app/navigation';
 import { formatDate } from '$lib/utils/format';
 import type { PageData } from './$types';
 import { Button } from '$lib/components/ui/button';
-import * as Card from '$lib/components/ui/card';
+import AppDataTable from '$lib/components/data/AppDataTable.svelte';
+import type { ColumnDef } from '@tanstack/svelte-table';
 
 let { data }: { data: PageData } = $props();
 let deleting = $state<string | null>(null);
@@ -33,6 +34,39 @@ function methodLabel(method: string): string {
   };
   return labels[method] || method;
 }
+
+const columns: ColumnDef<any>[] = [
+  { accessorKey: 'code', header: 'Code', cell: (row) => `<span class="font-mono text-xs">${(row as any).original.code}</span>` },
+  { accessorKey: 'name', header: 'Name', cell: (row) => `<span class="font-medium">${(row as any).original.name}</span>` },
+  {
+    accessorKey: 'isDepreciable',
+    header: 'Depreciable',
+    cell: (row) => (row as any).original.isDepreciable
+      ? '<span class="inline-flex items-center rounded-full px-2 py-0.5 text-xs font-medium bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-300">Depreciable</span>'
+      : '<span class="inline-flex items-center rounded-full px-2 py-0.5 text-xs font-medium bg-gray-100 text-gray-800 dark:bg-gray-800 dark:text-gray-300">Non-depreciable</span>',
+  },
+  { accessorKey: 'defaultDepreciationMethod', header: 'Method', cell: (row) => methodLabel((row as any).original.defaultDepreciationMethod) },
+  { accessorKey: 'defaultUsefulLifeMonths', header: 'Useful Life', cell: (row) => `${(row as any).original.defaultUsefulLifeMonths} mo` },
+  { accessorKey: 'defaultSalvageValuePercent', header: 'Salvage %', cell: (row) => `${(row as any).original.defaultSalvageValuePercent}%` },
+  {
+    accessorKey: 'isActive',
+    header: 'Status',
+    cell: (row) => (row as any).original.isActive
+      ? '<span class="inline-flex items-center rounded-full px-2 py-0.5 text-xs font-medium bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-300">Active</span>'
+      : '<span class="inline-flex items-center rounded-full px-2 py-0.5 text-xs font-medium bg-gray-100 text-gray-800 dark:bg-gray-800 dark:text-gray-300">Inactive</span>',
+  },
+  {
+    id: 'actions',
+    header: 'Actions',
+    cell: (row) => `<div class="flex items-center justify-end gap-2"><a href="/assets/categories/${(row as any).original.id}" class="rounded p-1 text-muted-foreground hover:bg-accent hover:text-accent-foreground">Edit</a><button onclick="window.dispatchEvent(new CustomEvent('delete-category', {detail:'${(row as any).original.id}'}))" class="rounded p-1 text-destructive hover:bg-destructive/10 disabled:opacity-50">Delete</button></div>`,
+  },
+];
+
+$effect(() => {
+  const handler = (e: Event) => handleDelete((e as CustomEvent).detail);
+  window.addEventListener('delete-category', handler);
+  return () => window.removeEventListener('delete-category', handler);
+});
 </script>
 
 <div class="space-y-6">
@@ -49,70 +83,12 @@ function methodLabel(method: string): string {
     </a>
   </div>
 
-  <Card.Root class="shadow-sm"><Card.Content class="p-0">
-    <div class="overflow-x-auto">
-      <table class="w-full text-sm">
-        <thead>
-          <tr class="border-b bg-muted/50">
-            <th class="px-4 py-3 text-left font-medium text-muted-foreground">Code</th>
-            <th class="px-4 py-3 text-left font-medium text-muted-foreground">Name</th>
-            <th class="px-4 py-3 text-left font-medium text-muted-foreground">Depreciable</th>
-            <th class="px-4 py-3 text-left font-medium text-muted-foreground">Method</th>
-            <th class="px-4 py-3 text-left font-medium text-muted-foreground">Useful Life</th>
-            <th class="px-4 py-3 text-left font-medium text-muted-foreground">Salvage %</th>
-            <th class="px-4 py-3 text-left font-medium text-muted-foreground">Status</th>
-            <th class="px-4 py-3 text-right font-medium text-muted-foreground">Actions</th>
-          </tr>
-        </thead>
-        <tbody>
-          {#each data.categories as category}
-            <tr class="border-b hover:bg-muted/30">
-              <td class="px-4 py-3 font-mono text-xs">{category.code}</td>
-              <td class="px-4 py-3 font-medium">{category.name}</td>
-              <td class="px-4 py-3">
-                <span
-                  class="inline-flex items-center rounded-full px-2 py-0.5 text-xs font-medium
-                    {category.isDepreciable ? 'bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-300' : 'bg-gray-100 text-gray-800 dark:bg-gray-800 dark:text-gray-300'}"
-                >
-                  {category.isDepreciable ? 'Depreciable' : 'Non-depreciable'}
-                </span>
-              </td>
-              <td class="px-4 py-3">{methodLabel(category.defaultDepreciationMethod)}</td>
-              <td class="px-4 py-3">{category.defaultUsefulLifeMonths} mo</td>
-              <td class="px-4 py-3">{category.defaultSalvageValuePercent}%</td>
-              <td class="px-4 py-3">
-                <span
-                  class="inline-flex items-center rounded-full px-2 py-0.5 text-xs font-medium
-                    {category.isActive ? 'bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-300' : 'bg-gray-100 text-gray-800 dark:bg-gray-800 dark:text-gray-300'}"
-                >
-                  {category.isActive ? 'Active' : 'Inactive'}
-                </span>
-              </td>
-              <td class="px-4 py-3 text-right">
-                <div class="flex items-center justify-end gap-2">
-                  <a
-                    href="/assets/categories/{category.id}"
-                    class="rounded p-1 text-muted-foreground hover:bg-accent hover:text-accent-foreground"
-                  >
-                    Edit
-                  </a>
-                  <button
-                    onclick={() => handleDelete(category.id)}
-                    disabled={deleting === category.id}
-                    class="rounded p-1 text-destructive hover:bg-destructive/10 disabled:opacity-50"
-                  >
-                    Delete
-                  </button>
-                </div>
-              </td>
-            </tr>
-          {:else}
-            <tr>
-              <td colspan="8" class="px-4 py-12 text-center text-muted-foreground">No categories found</td>
-            </tr>
-          {/each}
-        </tbody>
-      </table>
-    </div>
-  </Card.Content></Card.Root>
+  <AppDataTable
+    {columns}
+    data={data.categories}
+    emptyMessage="No categories found"
+    pageSize={20}
+    totalItems={data.total}
+    onRowClick={(row) => goto(`/assets/categories/${row.id}`)}
+  />
 </div>

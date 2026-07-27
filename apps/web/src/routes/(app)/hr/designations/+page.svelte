@@ -3,8 +3,9 @@ import { toast } from 'svelte-sonner';
 import { type Designation, hrApi } from '$lib/api/hr';
 import type { PageData } from './$types';
 import { Button } from '$lib/components/ui/button';
-import * as Card from '$lib/components/ui/card';
 import { Input } from '$lib/components/ui/input';
+import AppDataTable from '$lib/components/data/AppDataTable.svelte';
+import type { ColumnDef } from '@tanstack/svelte-table';
 
 let { data }: { data: PageData } = $props();
 let designations = $state<Designation[]>(data.designations);
@@ -46,6 +47,24 @@ async function deleteDesig(id: string) {
     toast.error('Failed to delete');
   }
 }
+
+const columns: ColumnDef<Designation>[] = [
+  { accessorKey: 'title', header: 'Title', cell: (row) => `<span class="font-medium">${(row as any).original.title}</span>` },
+  { accessorKey: 'code', header: 'Code', cell: (row) => `<span class="text-sm">${(row as any).original.code}</span>` },
+  { accessorKey: 'departmentName', header: 'Department', cell: (row) => `<span class="text-sm">${(row as any).original.departmentName}</span>` },
+  { accessorKey: 'level', header: 'Level', cell: (row) => `<span class="text-sm text-right">${(row as any).original.level}</span>` },
+  {
+    id: 'actions',
+    header: 'Actions',
+    cell: (row) => `<button onclick="window.dispatchEvent(new CustomEvent('delete-desig', {detail:'${(row as any).original.id}'}))" class="text-sm text-destructive hover:underline">Delete</button>`,
+  },
+];
+
+$effect(() => {
+  const handler = (e: Event) => deleteDesig((e as CustomEvent).detail);
+  window.addEventListener('delete-desig', handler);
+  return () => window.removeEventListener('delete-desig', handler);
+});
 </script>
 
 <div class="space-y-6">
@@ -64,15 +83,10 @@ async function deleteDesig(id: string) {
     </button>
   </form>
 
-  <Card.Root class="shadow-sm"><Card.Content class="p-0">
-    {#if designations.length === 0}<div class="py-12 text-center text-muted-foreground">No designations</div>
-    {:else}
-      <div class="overflow-x-auto">
-        <table class="w-full">
-          <thead><tr class="border-b bg-muted/50"><th class="px-4 py-3 text-left text-sm font-medium text-muted-foreground">Title</th><th class="px-4 py-3 text-left text-sm font-medium text-muted-foreground">Code</th><th class="px-4 py-3 text-left text-sm font-medium text-muted-foreground">Department</th><th class="px-4 py-3 text-right text-sm font-medium text-muted-foreground">Level</th><th class="px-4 py-3 text-right text-sm font-medium text-muted-foreground">Actions</th></tr></thead>
-          <tbody>{#each designations as des}<tr class="border-b hover:bg-muted/30"><td class="px-4 py-3 font-medium">{des.title}</td><td class="px-4 py-3 text-sm">{des.code}</td><td class="px-4 py-3 text-sm">{des.departmentName}</td><td class="px-4 py-3 text-right text-sm">{des.level}</td><td class="px-4 py-3 text-right"><button onclick={() => deleteDesig(des.id)} class="text-sm text-destructive hover:underline">Delete</button></td></tr>{/each}</tbody>
-        </table>
-      </div>
-    {/if}
-  </Card.Content></Card.Root>
+  <AppDataTable
+    {columns}
+    data={designations}
+    emptyMessage="No designations"
+    pageSize={20}
+  />
 </div>

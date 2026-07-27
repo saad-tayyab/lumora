@@ -5,13 +5,14 @@ import { procApi, type ReceivingReport } from '$lib/api/proc';
 import { formatDate } from '$lib/utils/format';
 import type { PageData } from './$types';
 import { Button } from '$lib/components/ui/button';
-import * as Card from '$lib/components/ui/card';
+import AppDataTable from '$lib/components/data/AppDataTable.svelte';
+import type { ColumnDef } from '@tanstack/svelte-table';
 
 let { data }: { data: PageData } = $props();
 let reports = $state<ReceivingReport[]>(data.reports);
 let total = $state(data.total);
 let statusFilter = $state('');
-let loading = $state(false);
+let isLoading = $state(false);
 
 function rrStatusColor(status: string): string {
   const colors: Record<string, string> = {
@@ -27,7 +28,7 @@ function formatStatus(status: string): string {
 }
 
 async function filterByStatus() {
-  loading = true;
+  isLoading = true;
   try {
     const result = await procApi.receivingReports.list({
       status: statusFilter || undefined,
@@ -38,7 +39,7 @@ async function filterByStatus() {
   } catch {
     toast.error('Failed to filter receiving reports');
   } finally {
-    loading = false;
+    isLoading = false;
   }
 }
 
@@ -57,6 +58,36 @@ async function deleteReport(id: string) {
 $effect(() => {
   statusFilter;
   filterByStatus();
+});
+
+const columns: ColumnDef<ReceivingReport>[] = [
+  { accessorKey: 'reportNumber', header: 'Report #', cell: (row) => `<a href="/proc/receiving-reports/${(row as any).original.id}" class="font-medium text-primary hover:underline">${(row as any).original.reportNumber}</a>` },
+  { accessorKey: 'purchaseOrderNumber', header: 'PO Number', cell: (row) => `<span class="text-sm">${(row as any).original.purchaseOrderNumber}</span>` },
+  { accessorKey: 'vendorName', header: 'Vendor', cell: (row) => `<span class="text-sm">${(row as any).original.vendorName}</span>` },
+  { accessorKey: 'receivedDate', header: 'Received Date', cell: (row) => `<span class="text-sm">${formatDate((row as any).original.receivedDate)}</span>` },
+  {
+    accessorKey: 'status',
+    header: 'Status',
+    cell: (row) => `<span class="inline-block rounded-full px-2 py-0.5 text-xs font-medium ${rrStatusColor((row as any).original.status)}">${formatStatus((row as any).original.status)}</span>`,
+  },
+  {
+    id: 'actions',
+    header: 'Actions',
+    cell: (row) => {
+      let html = `<div class="flex items-center justify-end gap-2"><a href="/proc/receiving-reports/${(row as any).original.id}" class="text-sm text-primary hover:underline">View</a>`;
+      if ((row as any).original.status === 'draft') {
+        html += `<button onclick="window.dispatchEvent(new CustomEvent('delete-rr', {detail:'${(row as any).original.id}'}))" class="text-sm text-destructive hover:underline">Delete</button>`;
+      }
+      html += '</div>';
+      return html;
+    },
+  },
+];
+
+$effect(() => {
+  const handler = (e: Event) => deleteReport((e as CustomEvent).detail);
+  window.addEventListener('delete-rr', handler);
+  return () => window.removeEventListener('delete-rr', handler);
 });
 </script>
 
@@ -87,60 +118,13 @@ $effect(() => {
     <span class="text-sm text-muted-foreground">{total} total</span>
   </div>
 
-  <Card.Root class="shadow-sm"><Card.Content class="p-0">
-    {#if loading}
-      <div class="flex justify-center py-12">
-        <div class="h-8 w-8 animate-spin rounded-full border-2 border-primary border-t-transparent"></div>
-      </div>
-    {:else if reports.length === 0}
-      <div class="py-12 text-center">
-        <p class="text-muted-foreground">No receiving reports found</p>
-        <a href="/proc/receiving-reports/new" class="mt-4 inline-block text-sm text-primary hover:underline">
-          Create your first receiving report
-        </a>
-      </div>
-    {:else}
-      <div class="overflow-x-auto">
-        <table class="w-full">
-          <thead>
-            <tr class="border-b bg-muted/50">
-              <th class="px-4 py-3 text-left text-sm font-medium text-muted-foreground">Report #</th>
-              <th class="px-4 py-3 text-left text-sm font-medium text-muted-foreground">PO Number</th>
-              <th class="px-4 py-3 text-left text-sm font-medium text-muted-foreground">Vendor</th>
-              <th class="px-4 py-3 text-left text-sm font-medium text-muted-foreground">Received Date</th>
-              <th class="px-4 py-3 text-left text-sm font-medium text-muted-foreground">Status</th>
-              <th class="px-4 py-3 text-right text-sm font-medium text-muted-foreground">Actions</th>
-            </tr>
-          </thead>
-          <tbody>
-            {#each reports as rr}
-              <tr class="border-b hover:bg-muted/30">
-                <td class="px-4 py-3">
-                  <a href="/proc/receiving-reports/{rr.id}" class="font-medium text-primary hover:underline">
-                    {rr.reportNumber}
-                  </a>
-                </td>
-                <td class="px-4 py-3 text-sm">{rr.purchaseOrderNumber}</td>
-                <td class="px-4 py-3 text-sm">{rr.vendorName}</td>
-                <td class="px-4 py-3 text-sm">{formatDate(rr.receivedDate)}</td>
-                <td class="px-4 py-3">
-                  <span class="inline-block rounded-full px-2 py-0.5 text-xs font-medium {rrStatusColor(rr.status)}">
-                    {formatStatus(rr.status)}
-                  </span>
-                </td>
-                <td class="px-4 py-3 text-right">
-                  <div class="flex items-center justify-end gap-2">
-                    <a href="/proc/receiving-reports/{rr.id}" class="text-sm text-primary hover:underline">View</a>
-                    {#if rr.status === 'draft'}
-                      <button onclick={() => deleteReport(rr.id)} class="text-sm text-destructive hover:underline">Delete</button>
-                    {/if}
-                  </div>
-                </td>
-              </tr>
-            {/each}
-          </tbody>
-        </table>
-      </div>
-    {/if}
-  </Card.Content></Card.Root>
+  <AppDataTable
+    {columns}
+    data={reports}
+    loading={isLoading}
+    emptyMessage="No receiving reports found"
+    pageSize={20}
+    totalItems={total}
+    onRowClick={(row) => goto(`/proc/receiving-reports/${row.id}`)}
+  />
 </div>

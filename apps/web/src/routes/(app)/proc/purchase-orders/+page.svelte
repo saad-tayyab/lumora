@@ -5,13 +5,14 @@ import { type PurchaseOrder, procApi } from '$lib/api/proc';
 import { formatCurrency, formatDate } from '$lib/utils/format';
 import type { PageData } from './$types';
 import { Button } from '$lib/components/ui/button';
-import * as Card from '$lib/components/ui/card';
+import AppDataTable from '$lib/components/data/AppDataTable.svelte';
+import type { ColumnDef } from '@tanstack/svelte-table';
 
 let { data }: { data: PageData } = $props();
 let purchaseOrders = $state<PurchaseOrder[]>(data.purchaseOrders);
 let total = $state(data.total);
 let statusFilter = $state('');
-let loading = $state(false);
+let isLoading = $state(false);
 
 function poStatusColor(status: string): string {
   const colors: Record<string, string> = {
@@ -31,7 +32,7 @@ function formatStatus(status: string): string {
 }
 
 async function filterByStatus() {
-  loading = true;
+  isLoading = true;
   try {
     const result = await procApi.purchaseOrders.list({
       status: statusFilter || undefined,
@@ -42,7 +43,7 @@ async function filterByStatus() {
   } catch {
     toast.error('Failed to filter purchase orders');
   } finally {
-    loading = false;
+    isLoading = false;
   }
 }
 
@@ -61,6 +62,38 @@ async function deletePO(id: string) {
 $effect(() => {
   statusFilter;
   filterByStatus();
+});
+
+const columns: ColumnDef<PurchaseOrder>[] = [
+  { accessorKey: 'poNumber', header: 'PO Number', cell: (row) => `<a href="/proc/purchase-orders/${(row as any).original.id}" class="font-medium text-primary hover:underline">${(row as any).original.poNumber}</a>` },
+  { accessorKey: 'vendorName', header: 'Vendor', cell: (row) => `<span class="text-sm">${(row as any).original.vendorName}</span>` },
+  { accessorKey: 'orderDate', header: 'Date', cell: (row) => `<span class="text-sm">${formatDate((row as any).original.orderDate)}</span>` },
+  { accessorKey: 'expectedDeliveryDate', header: 'Expected Delivery', cell: (row) => `<span class="text-sm">${(row as any).original.expectedDeliveryDate ? formatDate((row as any).original.expectedDeliveryDate) : '-'}</span>` },
+  { accessorKey: 'totalAmount', header: 'Amount', cell: (row) => `<span class="text-sm text-right font-medium">${formatCurrency((row as any).original.totalAmount)}</span>` },
+  {
+    accessorKey: 'status',
+    header: 'Status',
+    cell: (row) => `<span class="inline-block rounded-full px-2 py-0.5 text-xs font-medium ${poStatusColor((row as any).original.status)}">${formatStatus((row as any).original.status)}</span>`,
+  },
+  {
+    id: 'actions',
+    header: 'Actions',
+    cell: (row) => {
+      let html = `<div class="flex items-center justify-end gap-2"><a href="/proc/purchase-orders/${(row as any).original.id}" class="text-sm text-primary hover:underline">View</a>`;
+      if ((row as any).original.status === 'draft') {
+        html += `<a href="/proc/purchase-orders/${(row as any).original.id}/edit" class="text-sm text-primary hover:underline">Edit</a>`;
+        html += `<button onclick="window.dispatchEvent(new CustomEvent('delete-po', {detail:'${(row as any).original.id}'}))" class="text-sm text-destructive hover:underline">Delete</button>`;
+      }
+      html += '</div>';
+      return html;
+    },
+  },
+];
+
+$effect(() => {
+  const handler = (e: Event) => deletePO((e as CustomEvent).detail);
+  window.addEventListener('delete-po', handler);
+  return () => window.removeEventListener('delete-po', handler);
 });
 </script>
 
@@ -95,70 +128,13 @@ $effect(() => {
     <span class="text-sm text-muted-foreground">{total} total</span>
   </div>
 
-  <Card.Root class="shadow-sm"><Card.Content class="p-0">
-    {#if loading}
-      <div class="flex justify-center py-12">
-        <div class="h-8 w-8 animate-spin rounded-full border-2 border-primary border-t-transparent"></div>
-      </div>
-    {:else if purchaseOrders.length === 0}
-      <div class="py-12 text-center">
-        <p class="text-muted-foreground">No purchase orders found</p>
-        <a href="/proc/purchase-orders/new" class="mt-4 inline-block text-sm text-primary hover:underline">
-          Create your first purchase order
-        </a>
-      </div>
-    {:else}
-      <div class="overflow-x-auto">
-        <table class="w-full">
-          <thead>
-            <tr class="border-b bg-muted/50">
-              <th class="px-4 py-3 text-left text-sm font-medium text-muted-foreground">PO Number</th>
-              <th class="px-4 py-3 text-left text-sm font-medium text-muted-foreground">Vendor</th>
-              <th class="px-4 py-3 text-left text-sm font-medium text-muted-foreground">Date</th>
-              <th class="px-4 py-3 text-left text-sm font-medium text-muted-foreground">Expected Delivery</th>
-              <th class="px-4 py-3 text-right text-sm font-medium text-muted-foreground">Amount</th>
-              <th class="px-4 py-3 text-left text-sm font-medium text-muted-foreground">Status</th>
-              <th class="px-4 py-3 text-right text-sm font-medium text-muted-foreground">Actions</th>
-            </tr>
-          </thead>
-          <tbody>
-            {#each purchaseOrders as po}
-              <tr class="border-b hover:bg-muted/30">
-                <td class="px-4 py-3">
-                  <a href="/proc/purchase-orders/{po.id}" class="font-medium text-primary hover:underline">
-                    {po.poNumber}
-                  </a>
-                </td>
-                <td class="px-4 py-3 text-sm">{po.vendorName}</td>
-                <td class="px-4 py-3 text-sm">{formatDate(po.orderDate)}</td>
-                <td class="px-4 py-3 text-sm">
-                  {po.expectedDeliveryDate ? formatDate(po.expectedDeliveryDate) : '-'}
-                </td>
-                <td class="px-4 py-3 text-right text-sm font-medium">{formatCurrency(po.totalAmount)}</td>
-                <td class="px-4 py-3">
-                  <span class="inline-block rounded-full px-2 py-0.5 text-xs font-medium {poStatusColor(po.status)}">
-                    {formatStatus(po.status)}
-                  </span>
-                </td>
-                <td class="px-4 py-3 text-right">
-                  <div class="flex items-center justify-end gap-2">
-                    <a href="/proc/purchase-orders/{po.id}" class="text-sm text-primary hover:underline">View</a>
-                    {#if po.status === 'draft'}
-                      <a href="/proc/purchase-orders/{po.id}/edit" class="text-sm text-primary hover:underline">Edit</a>
-                      <button
-                        onclick={() => deletePO(po.id)}
-                        class="text-sm text-destructive hover:underline"
-                      >
-                        Delete
-                      </button>
-                    {/if}
-                  </div>
-                </td>
-              </tr>
-            {/each}
-          </tbody>
-        </table>
-      </div>
-    {/if}
-  </Card.Content></Card.Root>
+  <AppDataTable
+    {columns}
+    data={purchaseOrders}
+    loading={isLoading}
+    emptyMessage="No purchase orders found"
+    pageSize={20}
+    totalItems={total}
+    onRowClick={(row) => goto(`/proc/purchase-orders/${row.id}`)}
+  />
 </div>

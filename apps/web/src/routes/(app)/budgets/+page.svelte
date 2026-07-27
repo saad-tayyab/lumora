@@ -1,10 +1,11 @@
 <script lang="ts">
 import { toast } from 'svelte-sonner';
-import { invalidateAll } from '$app/navigation';
+import { invalidateAll, goto } from '$app/navigation';
 import { formatCurrency, formatDate } from '$lib/utils/format';
 import type { PageData } from './$types';
 import { Button } from '$lib/components/ui/button';
-import * as Card from '$lib/components/ui/card';
+import AppDataTable from '$lib/components/data/AppDataTable.svelte';
+import type { ColumnDef } from '@tanstack/svelte-table';
 
 let { data }: { data: PageData } = $props();
 let deleting = $state<string | null>(null);
@@ -32,6 +33,28 @@ async function handleDelete(id: string) {
     deleting = null;
   }
 }
+
+const columns: ColumnDef<any>[] = [
+  { accessorKey: 'name', header: 'Name', cell: (row) => `<a href="/budgets/${(row as any).original.id}" class="font-medium hover:underline">${(row as any).original.name}</a>` },
+  { accessorKey: 'periodStart', header: 'Period', cell: (row) => `${formatDate((row as any).original.periodStart)} - ${formatDate((row as any).original.periodEnd)}` },
+  { accessorKey: 'totalAmount', header: 'Total Amount', cell: (row) => `<span class="text-right">${formatCurrency((row as any).original.totalAmount)}</span>` },
+  {
+    accessorKey: 'status',
+    header: 'Status',
+    cell: (row) => `<span class="inline-flex items-center rounded-full px-2 py-0.5 text-xs font-medium ${statusColor((row as any).original.status)}">${(row as any).original.status}</span>`,
+  },
+  {
+    id: 'actions',
+    header: 'Actions',
+    cell: (row) => `<div class="flex items-center justify-end gap-2"><a href="/budgets/${(row as any).original.id}/edit" class="rounded p-1 text-muted-foreground hover:bg-accent hover:text-accent-foreground">Edit</a><button onclick="window.dispatchEvent(new CustomEvent('delete-budget', {detail:'${(row as any).original.id}'}))" class="rounded p-1 text-destructive hover:bg-destructive/10 disabled:opacity-50">Delete</button></div>`,
+  },
+];
+
+$effect(() => {
+  const handler = (e: Event) => handleDelete((e as CustomEvent).detail);
+  window.addEventListener('delete-budget', handler);
+  return () => window.removeEventListener('delete-budget', handler);
+});
 </script>
 
 <div class="space-y-6">
@@ -43,43 +66,12 @@ async function handleDelete(id: string) {
     <Button href="/budgets/new">New Budget</Button>
   </div>
 
-  <Card.Root class="shadow-sm"><Card.Content class="p-0">
-    <div class="overflow-x-auto">
-      <table class="w-full text-sm">
-        <thead>
-          <tr class="border-b bg-muted/50">
-            <th class="px-4 py-3 text-left font-medium text-muted-foreground">Name</th>
-            <th class="px-4 py-3 text-left font-medium text-muted-foreground">Period</th>
-            <th class="px-4 py-3 text-right font-medium text-muted-foreground">Total Amount</th>
-            <th class="px-4 py-3 text-left font-medium text-muted-foreground">Status</th>
-            <th class="px-4 py-3 text-right font-medium text-muted-foreground">Actions</th>
-          </tr>
-        </thead>
-        <tbody>
-          {#each data.budgets as budget}
-            <tr class="border-b hover:bg-muted/30">
-              <td class="px-4 py-3">
-                <a href="/budgets/{budget.id}" class="font-medium hover:underline">{budget.name}</a>
-              </td>
-              <td class="px-4 py-3">{formatDate(budget.periodStart)} - {formatDate(budget.periodEnd)}</td>
-              <td class="px-4 py-3 text-right">{formatCurrency(budget.totalAmount)}</td>
-              <td class="px-4 py-3">
-                <span class="inline-flex items-center rounded-full px-2 py-0.5 text-xs font-medium {statusColor(budget.status)}">
-                  {budget.status}
-                </span>
-              </td>
-              <td class="px-4 py-3 text-right">
-                <div class="flex items-center justify-end gap-2">
-                  <a href="/budgets/{budget.id}/edit" class="rounded p-1 text-muted-foreground hover:bg-accent hover:text-accent-foreground">Edit</a>
-                  <button onclick={() => handleDelete(budget.id)} disabled={deleting === budget.id} class="rounded p-1 text-destructive hover:bg-destructive/10 disabled:opacity-50">Delete</button>
-                </div>
-              </td>
-            </tr>
-          {:else}
-            <tr><td colspan="5" class="px-4 py-12 text-center text-muted-foreground">No budgets found</td></tr>
-          {/each}
-        </tbody>
-      </table>
-    </div>
-  </Card.Content></Card.Root>
+  <AppDataTable
+    {columns}
+    data={data.budgets}
+    emptyMessage="No budgets found"
+    pageSize={20}
+    totalItems={data.total}
+    onRowClick={(row) => goto(`/budgets/${row.id}`)}
+  />
 </div>

@@ -4,7 +4,8 @@ import { procApi, type VendorCatalogItem } from '$lib/api/proc';
 import { formatCurrency } from '$lib/utils/format';
 import type { PageData } from './$types';
 import { Button } from '$lib/components/ui/button';
-import * as Card from '$lib/components/ui/card';
+import AppDataTable from '$lib/components/data/AppDataTable.svelte';
+import type { ColumnDef } from '@tanstack/svelte-table';
 
 let { data }: { data: PageData } = $props();
 let items = $state<VendorCatalogItem[]>(data.items);
@@ -21,6 +22,26 @@ async function deleteItem(id: string) {
     toast.error('Failed to delete catalog item');
   }
 }
+
+const columns: ColumnDef<VendorCatalogItem>[] = [
+  { accessorKey: 'vendorName', header: 'Vendor', cell: (row) => `<span class="text-sm font-medium">${(row as any).original.vendorName}</span>` },
+  { accessorKey: 'itemName', header: 'Item', cell: (row) => `<span class="text-sm">${(row as any).original.itemName}</span>` },
+  { accessorKey: 'vendorSku', header: 'Vendor SKU', cell: (row) => `<span class="text-sm text-muted-foreground">${(row as any).original.vendorSku || '-'}</span>` },
+  { accessorKey: 'unitPrice', header: 'Unit Price', cell: (row) => `<span class="text-sm text-right">${formatCurrency((row as any).original.unitPrice)}</span>` },
+  { accessorKey: 'leadTimeDays', header: 'Lead Time (days)', cell: (row) => `<span class="text-sm text-right">${(row as any).original.leadTimeDays ?? '-'}</span>` },
+  { accessorKey: 'minimumOrderQuantity', header: 'Min Order Qty', cell: (row) => `<span class="text-sm text-right">${(row as any).original.minimumOrderQuantity || '-'}</span>` },
+  {
+    id: 'actions',
+    header: 'Actions',
+    cell: (row) => `<button onclick="window.dispatchEvent(new CustomEvent('delete-catalog', {detail:'${(row as any).original.id}'}))" class="text-sm text-destructive hover:underline">Delete</button>`,
+  },
+];
+
+$effect(() => {
+  const handler = (e: Event) => deleteItem((e as CustomEvent).detail);
+  window.addEventListener('delete-catalog', handler);
+  return () => window.removeEventListener('delete-catalog', handler);
+});
 </script>
 
 <div class="space-y-6">
@@ -37,50 +58,11 @@ async function deleteItem(id: string) {
     </a>
   </div>
 
-  <Card.Root class="shadow-sm"><Card.Content class="p-0">
-    {#if items.length === 0}
-      <div class="py-12 text-center">
-        <p class="text-muted-foreground">No catalog items found</p>
-        <a href="/proc/vendor-catalog/new" class="mt-4 inline-block text-sm text-primary hover:underline">
-          Add your first catalog item
-        </a>
-      </div>
-    {:else}
-      <div class="overflow-x-auto">
-        <table class="w-full">
-          <thead>
-            <tr class="border-b bg-muted/50">
-              <th class="px-4 py-3 text-left text-sm font-medium text-muted-foreground">Vendor</th>
-              <th class="px-4 py-3 text-left text-sm font-medium text-muted-foreground">Item</th>
-              <th class="px-4 py-3 text-left text-sm font-medium text-muted-foreground">Vendor SKU</th>
-              <th class="px-4 py-3 text-right text-sm font-medium text-muted-foreground">Unit Price</th>
-              <th class="px-4 py-3 text-right text-sm font-medium text-muted-foreground">Lead Time (days)</th>
-              <th class="px-4 py-3 text-right text-sm font-medium text-muted-foreground">Min Order Qty</th>
-              <th class="px-4 py-3 text-right text-sm font-medium text-muted-foreground">Actions</th>
-            </tr>
-          </thead>
-          <tbody>
-            {#each items as item}
-              <tr class="border-b hover:bg-muted/30">
-                <td class="px-4 py-3 text-sm font-medium">{item.vendorName}</td>
-                <td class="px-4 py-3 text-sm">{item.itemName}</td>
-                <td class="px-4 py-3 text-sm text-muted-foreground">{item.vendorSku || '-'}</td>
-                <td class="px-4 py-3 text-right text-sm">{formatCurrency(item.unitPrice)}</td>
-                <td class="px-4 py-3 text-right text-sm">{item.leadTimeDays ?? '-'}</td>
-                <td class="px-4 py-3 text-right text-sm">{item.minimumOrderQuantity || '-'}</td>
-                <td class="px-4 py-3 text-right">
-                  <button
-                    onclick={() => deleteItem(item.id)}
-                    class="text-sm text-destructive hover:underline"
-                  >
-                    Delete
-                  </button>
-                </td>
-              </tr>
-            {/each}
-          </tbody>
-        </table>
-      </div>
-    {/if}
-  </Card.Content></Card.Root>
+  <AppDataTable
+    {columns}
+    data={items}
+    emptyMessage="No catalog items found"
+    pageSize={20}
+    totalItems={total}
+  />
 </div>

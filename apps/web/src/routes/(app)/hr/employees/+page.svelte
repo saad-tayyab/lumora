@@ -1,16 +1,18 @@
 <script lang="ts">
 import { toast } from 'svelte-sonner';
+import { goto } from '$app/navigation';
 import { type Employee, hrApi } from '$lib/api/hr';
 import { formatDate } from '$lib/utils/format';
 import type { PageData } from './$types';
 import { Button } from '$lib/components/ui/button';
-import * as Card from '$lib/components/ui/card';
+import AppDataTable from '$lib/components/data/AppDataTable.svelte';
+import type { ColumnDef } from '@tanstack/svelte-table';
 
 let { data }: { data: PageData } = $props();
 let employees = $state<Employee[]>(data.employees);
 let total = $state(data.total);
 let statusFilter = $state('');
-let loading = $state(false);
+let isLoading = $state(false);
 
 function empStatusColor(status: string): string {
   const colors: Record<string, string> = {
@@ -26,7 +28,7 @@ function formatStatus(status: string): string {
 }
 
 async function filterByStatus() {
-  loading = true;
+  isLoading = true;
   try {
     const result = await hrApi.employees.list({ status: statusFilter || undefined, limit: 20 });
     employees = result.data;
@@ -34,7 +36,7 @@ async function filterByStatus() {
   } catch {
     toast.error('Failed to filter employees');
   } finally {
-    loading = false;
+    isLoading = false;
   }
 }
 
@@ -50,9 +52,45 @@ async function deleteEmployee(id: string) {
   }
 }
 
+const columns: ColumnDef<Employee>[] = [
+  {
+    accessorKey: 'employeeNumber',
+    header: 'Employee #',
+    cell: (row) => `<a href="/hr/employees/${(row as any).original.id}" class="font-medium text-primary hover:underline">${(row as any).original.employeeNumber}</a>`,
+  },
+  {
+    accessorKey: 'firstName',
+    header: 'Name',
+    cell: (row) => `<span class="text-sm">${(row as any).original.firstName} ${(row as any).original.lastName}</span>`,
+  },
+  { accessorKey: 'departmentName', header: 'Department', cell: (row) => `<span class="text-sm">${(row as any).original.departmentName}</span>` },
+  { accessorKey: 'designationTitle', header: 'Designation', cell: (row) => `<span class="text-sm">${(row as any).original.designationTitle}</span>` },
+  {
+    accessorKey: 'joiningDate',
+    header: 'Joining Date',
+    cell: (row) => `<span class="text-sm">${formatDate((row as any).original.joiningDate)}</span>`,
+  },
+  {
+    accessorKey: 'status',
+    header: 'Status',
+    cell: (row) => `<span class="inline-block rounded-full px-2 py-0.5 text-xs font-medium ${empStatusColor((row as any).original.status)}">${formatStatus((row as any).original.status)}</span>`,
+  },
+  {
+    id: 'actions',
+    header: 'Actions',
+    cell: (row) => `<div class="flex items-center justify-end gap-2"><a href="/hr/employees/${(row as any).original.id}" class="text-sm text-primary hover:underline">View</a><button onclick="window.dispatchEvent(new CustomEvent('delete-employee', {detail:'${(row as any).original.id}'}))" class="text-sm text-destructive hover:underline">Delete</button></div>`,
+  },
+];
+
 $effect(() => {
   statusFilter;
   filterByStatus();
+});
+
+$effect(() => {
+  const handler = (e: Event) => deleteEmployee((e as CustomEvent).detail);
+  window.addEventListener('delete-employee', handler);
+  return () => window.removeEventListener('delete-employee', handler);
 });
 </script>
 
@@ -75,48 +113,13 @@ $effect(() => {
     <span class="text-sm text-muted-foreground">{total} total</span>
   </div>
 
-  <Card.Root class="shadow-sm"><Card.Content class="p-0">
-    {#if loading}
-      <div class="flex justify-center py-12"><div class="h-8 w-8 animate-spin rounded-full border-2 border-primary border-t-transparent"></div></div>
-    {:else if employees.length === 0}
-      <div class="py-12 text-center">
-        <p class="text-muted-foreground">No employees found</p>
-        <a href="/hr/employees/new" class="mt-4 inline-block text-sm text-primary hover:underline">Add your first employee</a>
-      </div>
-    {:else}
-      <div class="overflow-x-auto">
-        <table class="w-full">
-          <thead>
-            <tr class="border-b bg-muted/50">
-              <th class="px-4 py-3 text-left text-sm font-medium text-muted-foreground">Employee #</th>
-              <th class="px-4 py-3 text-left text-sm font-medium text-muted-foreground">Name</th>
-              <th class="px-4 py-3 text-left text-sm font-medium text-muted-foreground">Department</th>
-              <th class="px-4 py-3 text-left text-sm font-medium text-muted-foreground">Designation</th>
-              <th class="px-4 py-3 text-left text-sm font-medium text-muted-foreground">Joining Date</th>
-              <th class="px-4 py-3 text-left text-sm font-medium text-muted-foreground">Status</th>
-              <th class="px-4 py-3 text-right text-sm font-medium text-muted-foreground">Actions</th>
-            </tr>
-          </thead>
-          <tbody>
-            {#each employees as emp}
-              <tr class="border-b hover:bg-muted/30">
-                <td class="px-4 py-3"><a href="/hr/employees/{emp.id}" class="font-medium text-primary hover:underline">{emp.employeeNumber}</a></td>
-                <td class="px-4 py-3 text-sm">{emp.firstName} {emp.lastName}</td>
-                <td class="px-4 py-3 text-sm">{emp.departmentName}</td>
-                <td class="px-4 py-3 text-sm">{emp.designationTitle}</td>
-                <td class="px-4 py-3 text-sm">{formatDate(emp.joiningDate)}</td>
-                <td class="px-4 py-3"><span class="inline-block rounded-full px-2 py-0.5 text-xs font-medium {empStatusColor(emp.status)}">{formatStatus(emp.status)}</span></td>
-                <td class="px-4 py-3 text-right">
-                  <div class="flex items-center justify-end gap-2">
-                    <a href="/hr/employees/{emp.id}" class="text-sm text-primary hover:underline">View</a>
-                    <button onclick={() => deleteEmployee(emp.id)} class="text-sm text-destructive hover:underline">Delete</button>
-                  </div>
-                </td>
-              </tr>
-            {/each}
-          </tbody>
-        </table>
-      </div>
-    {/if}
-  </Card.Content></Card.Root>
+  <AppDataTable
+    {columns}
+    data={employees}
+    loading={isLoading}
+    emptyMessage="No employees found"
+    pageSize={20}
+    totalItems={total}
+    onRowClick={(row) => goto(`/hr/employees/${row.id}`)}
+  />
 </div>

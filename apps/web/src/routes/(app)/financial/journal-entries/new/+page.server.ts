@@ -1,68 +1,58 @@
-import { fail, redirect } from '@sveltejs/kit';
-import { ApiError } from '$lib/api';
+import { fail } from '@sveltejs/kit';
+import { superValidate, message } from 'sveltekit-superforms';
+import { zod4 } from 'sveltekit-superforms/adapters';
+import { z } from 'zod';
 import { financialApi } from '$lib/api/financial';
 import type { Actions, PageServerLoad } from './$types';
 
+const journalEntryLineSchema = z.object({
+	accountId: z.string().min(1, 'Account is required'),
+	description: z.string().optional(),
+	debit: z.number().min(0).optional(),
+	credit: z.number().min(0).optional(),
+});
+
+const journalEntrySchema = z.object({
+	date: z.string().min(1, 'Date is required'),
+	description: z.string().min(1, 'Description is required'),
+	lines: z.array(journalEntryLineSchema).min(2, 'At least 2 lines required'),
+});
+
 export const load: PageServerLoad = async () => {
-  try {
-    const response = await financialApi.accounts.list();
-    return { accounts: response.data };
-  } catch (_e: any) {
-    return { accounts: [] };
-  }
+	const [form, accountsResult] = await Promise.all([
+		superValidate(zod4(journalEntrySchema)),
+		financialApi.accounts.list().catch(() => ({ data: [] })),
+	]);
+	return { form, accounts: accountsResult.data };
 };
 
 export const actions: Actions = {
-  default: async ({ request }) => {
-    const formData = await request.formData();
-    const date = formData.get('date') as string;
-    const description = formData.get('description') as string;
+	default: async ({ request }) => {
+		const form = await superValidate(request, zod4(journalEntrySchema));
+		if (!form.valid) return fail(400, { form });
 
-    const lineCount = Number(formData.get('lineCount') || 0);
-    const lines: { accountId: string; description: string; debit: string; credit: string }[] = [];
+		const totalDebit = form.data.lines.reduce((s, l) => s + (l.debit || 0), 0);
+		const totalCredit = form.data.lines.reduce((s, l) => s + (l.credit || 0), 0);
 
-    for (let i = 0; i < lineCount; i++) {
-      const accountId = formData.get(`line_${i}_accountId`) as string;
-      const lineDescription = formData.get(`line_${i}_description`) as string;
-      const debit = (formData.get(`line_${i}_debit`) as string) || '0';
-      const credit = (formData.get(`line_${i}_credit`) as string) || '0';
+		if (Math.abs(totalDebit - totalCredit) > 0.001) {
+			return fail(400, { form, error: `Debits (${totalDebit.toFixed(2)}) must equal credits (${totalCredit.toFixed(2)})` });
+		}
 
-      if (accountId) {
-        lines.push({
-          accountId,
-          description: lineDescription || '',
-          debit,
-          credit,
-        });
-      }
-    }
-
-    if (!date || !description || lines.length < 2) {
-      return fail(400, {
-        date,
-        description,
-        error: 'Date, description, and at least 2 lines are required',
-      });
-    }
-
-    const totalDebit = lines.reduce((sum, l) => sum + Number(l.debit || 0), 0);
-    const totalCredit = lines.reduce((sum, l) => sum + Number(l.credit || 0), 0);
-
-    if (Math.abs(totalDebit - totalCredit) > 0.001) {
-      return fail(400, {
-        date,
-        description,
-        error: `Debits (${totalDebit.toFixed(2)}) must equal credits (${totalCredit.toFixed(2)})`,
-      });
-    }
-
-    try {
-      await financialApi.journalEntries.create({ date, description, lines });
-    } catch (e: any) {
-      const message = e instanceof ApiError ? e.message : 'Failed to create journal entry';
-      return fail(e.status || 500, { date, description, error: message });
-    }
-
-    redirect(303, '/financial/journal-entries');
-  },
+		try {
+			await financialApi.journalEntries.create({
+				date: form.data.date,
+				description: form.data.description,
+				lines: form.data.lines.map((l) => ({
+					accountId: l.accountId,
+					description: l.description || '',
+					debit: String(l.debit || 0),
+					credit: String(l.credit || 0),
+				})),
+			});
+			return message(form, 'Journal entry created successfully');
+		} catch (e) {
+			const msg = e instanceof Error ? e.message : 'Failed to create journal entry';
+			return fail(400, { form, error: msg });
+		}
+	},
 };

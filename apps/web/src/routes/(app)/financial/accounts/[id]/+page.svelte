@@ -47,7 +47,7 @@ const typeBadgeColors: Record<AccountType, string> = {
         <div>
           <dt class="text-sm text-muted-foreground">Type</dt>
           <dd class="mt-1">
-            <span class="inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-medium {typeBadgeColors[account.type]}">
+            <span class="inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-medium {typeBadgeColors[account.type as AccountType]}">
               {account.type}
             </span>
           </dd>

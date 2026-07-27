@@ -1,8 +1,11 @@
 <script lang="ts">
+import { goto } from '$app/navigation';
 import { listCreditNotes } from '$lib/api/ar';
 import type { CreditNote } from '$lib/types';
 import { formatCurrency, formatDate } from '$lib/utils/format';
 import { Button } from '$lib/components/ui/button';
+import AppDataTable from '$lib/components/data/AppDataTable.svelte';
+import type { ColumnDef } from '@tanstack/svelte-table';
 
 let creditNotes = $state<CreditNote[]>([]);
 let loading = $state(true);
@@ -37,14 +40,48 @@ $effect(() => {
   load();
 });
 
-const totalPages = $derived(Math.ceil(total / limit));
+function getStatusColor(status: string): string {
+  switch (status) {
+    case 'issued': return 'bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-300';
+    case 'applied': return 'bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-300';
+    case 'draft': return 'bg-gray-100 text-gray-800 dark:bg-gray-800 dark:text-gray-300';
+    case 'voided': return 'bg-gray-100 text-gray-800 dark:bg-gray-800 dark:text-gray-300';
+    default: return 'bg-gray-100 text-gray-800';
+  }
+}
 
-const statusStyles: Record<string, string> = {
-  draft: 'bg-gray-100 text-gray-800',
-  issued: 'bg-blue-100 text-blue-800',
-  applied: 'bg-green-100 text-green-800',
-  voided: 'bg-gray-100 text-gray-800',
-};
+const columns: ColumnDef<CreditNote, any>[] = [
+  {
+    accessorKey: 'creditNoteNumber',
+    header: 'Credit Note #',
+    cell: ({ row }) => `<a href="/ar/credit-notes/${(row as any).original.id}" class="font-medium text-primary hover:underline">${(row as any).original.creditNoteNumber}</a>`,
+  },
+  {
+    accessorKey: 'issueDate',
+    header: 'Issue Date',
+    cell: ({ row }) => `<span class="text-muted-foreground">${formatDate((row as any).original.issueDate)}</span>`,
+  },
+  {
+    accessorKey: 'reason',
+    header: 'Reason',
+    cell: ({ row }) => `<span class="text-muted-foreground">${(row as any).original.reason}</span>`,
+  },
+  {
+    accessorKey: 'amount',
+    header: 'Amount',
+    cell: ({ row }) => `<span class="text-right">${formatCurrency((row as any).original.amount)}</span>`,
+  },
+  {
+    accessorKey: 'balance',
+    header: 'Balance',
+    cell: ({ row }) => `<span class="text-right">${formatCurrency((row as any).original.balance)}</span>`,
+  },
+  {
+    accessorKey: 'status',
+    header: 'Status',
+    cell: ({ row }) => `<span class="inline-flex items-center rounded-full px-2 py-0.5 text-xs font-medium ${getStatusColor((row as any).original.status)}">${(row as any).original.status}</span>`,
+  },
+];
 </script>
 
 <div class="space-y-6">
@@ -71,81 +108,19 @@ const statusStyles: Record<string, string> = {
 		</select>
 	</div>
 
-	{#if loading}
-		<div class="flex items-center justify-center py-12">
-			<div class="text-sm text-muted-foreground">Loading credit notes...</div>
-		</div>
-	{:else if error}
+	{#if error}
 		<div class="rounded-lg border border-destructive/50 bg-destructive/10 p-4 text-sm text-destructive">
 			{error}
 		</div>
-	{:else if creditNotes.length === 0}
-		<div class="rounded-lg border bg-card p-12 text-center shadow-sm">
-			<p class="text-muted-foreground">No credit notes found.</p>
-			<a href="/ar/credit-notes/new" class="mt-4 inline-block text-sm text-primary hover:underline">
-				Create your first credit note
-			</a>
-		</div>
-	{:else}
-		<div class="rounded-lg border bg-card shadow-sm">
-			<table class="w-full text-sm">
-				<thead>
-					<tr class="border-b bg-muted/50 text-left">
-						<th class="px-4 py-3 font-medium text-muted-foreground">Credit Note #</th>
-						<th class="px-4 py-3 font-medium text-muted-foreground">Issue Date</th>
-						<th class="px-4 py-3 font-medium text-muted-foreground">Reason</th>
-						<th class="px-4 py-3 font-medium text-muted-foreground text-right">Amount</th>
-						<th class="px-4 py-3 font-medium text-muted-foreground text-right">Balance</th>
-						<th class="px-4 py-3 font-medium text-muted-foreground">Status</th>
-						<th class="px-4 py-3 font-medium text-muted-foreground">Actions</th>
-					</tr>
-				</thead>
-				<tbody>
-					{#each creditNotes as cn}
-						<tr class="border-b last:border-b-0 hover:bg-muted/30">
-							<td class="px-4 py-3">
-								<a href="/ar/credit-notes/{cn.id}" class="font-medium text-primary hover:underline">
-									{cn.creditNoteNumber}
-								</a>
-							</td>
-							<td class="px-4 py-3 text-muted-foreground">{formatDate(cn.issueDate)}</td>
-							<td class="px-4 py-3 text-muted-foreground">{cn.reason}</td>
-							<td class="px-4 py-3 text-right">{formatCurrency(cn.amount)}</td>
-							<td class="px-4 py-3 text-right">{formatCurrency(cn.balance)}</td>
-							<td class="px-4 py-3">
-								<span
-									class="inline-flex items-center rounded-full px-2 py-0.5 text-xs font-medium {statusStyles[cn.status] ||
-										statusStyles.draft}"
-								>
-									{cn.status}
-								</span>
-							</td>
-							<td class="px-4 py-3">
-								<a href="/ar/credit-notes/{cn.id}" class="text-primary hover:underline">View</a>
-							</td>
-						</tr>
-					{/each}
-				</tbody>
-			</table>
-		</div>
-
-		{#if totalPages > 1}
-			<div class="flex items-center justify-between">
-				<p class="text-sm text-muted-foreground">
-					Showing {page * limit + 1}-{Math.min((page + 1) * limit, total)} of {total}
-				</p>
-				<div class="flex items-center gap-2">
-				<Button variant="outline" size="sm" onclick={() => (page = Math.max(0, page - 1))} disabled={page === 0}>
-					Previous
-				</Button>
-					<span class="text-sm text-muted-foreground">
-						Page {page + 1} of {totalPages}
-					</span>
-				<Button variant="outline" size="sm" onclick={() => (page = Math.min(totalPages - 1, page + 1))} disabled={page >= totalPages - 1}>
-					Next
-				</Button>
-				</div>
-			</div>
-		{/if}
 	{/if}
+
+	<AppDataTable
+		{columns}
+		data={creditNotes}
+		{loading}
+		emptyMessage="No credit notes found."
+		pageSize={limit}
+		totalItems={total}
+		onRowClick={(row) => goto(`/ar/credit-notes/${row.id}`)}
+	/>
 </div>

@@ -4,7 +4,8 @@ import { invalidateAll } from '$app/navigation';
 import { formatDate } from '$lib/utils/format';
 import type { PageData } from './$types';
 import { Button } from '$lib/components/ui/button';
-import * as Card from '$lib/components/ui/card';
+import AppDataTable from '$lib/components/data/AppDataTable.svelte';
+import type { ColumnDef } from '@tanstack/svelte-table';
 
 let { data }: { data: PageData } = $props();
 let deleting = $state<string | null>(null);
@@ -28,6 +29,31 @@ async function handleDelete(id: string) {
     deleting = null;
   }
 }
+
+const columns: ColumnDef<any>[] = [
+  { accessorKey: 'taxCodeId', header: 'Tax Code', cell: (row) => codeName((row as any).original.taxCodeId) },
+  { accessorKey: 'rate', header: 'Rate', cell: (row) => `<span class="text-right font-mono">${(parseFloat((row as any).original.rate) * 100).toFixed(2)}%</span>` },
+  { accessorKey: 'effectiveDate', header: 'Effective Date', cell: (row) => formatDate((row as any).original.effectiveDate) },
+  { accessorKey: 'expiryDate', header: 'Expiry Date', cell: (row) => (row as any).original.expiryDate ? formatDate((row as any).original.expiryDate) : '—' },
+  {
+    accessorKey: 'isActive',
+    header: 'Active',
+    cell: (row) => (row as any).original.isActive
+      ? '<span class="inline-flex items-center rounded-full px-2 py-0.5 text-xs font-medium bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-300">Active</span>'
+      : '<span class="inline-flex items-center rounded-full px-2 py-0.5 text-xs font-medium bg-gray-100 text-gray-800 dark:bg-gray-800 dark:text-gray-300">Inactive</span>',
+  },
+  {
+    id: 'actions',
+    header: 'Actions',
+    cell: (row) => `<button onclick="window.dispatchEvent(new CustomEvent('delete-taxrate', {detail:'${(row as any).original.id}'}))" class="rounded p-1 text-destructive hover:bg-destructive/10 disabled:opacity-50">Delete</button>`,
+  },
+];
+
+$effect(() => {
+  const handler = (e: Event) => handleDelete((e as CustomEvent).detail);
+  window.addEventListener('delete-taxrate', handler);
+  return () => window.removeEventListener('delete-taxrate', handler);
+});
 </script>
 
 <div class="space-y-6">
@@ -39,40 +65,11 @@ async function handleDelete(id: string) {
     <Button href="/tax/rates/new">New Tax Rate</Button>
   </div>
 
-  <Card.Root class="shadow-sm"><Card.Content class="p-0">
-    <div class="overflow-x-auto">
-      <table class="w-full text-sm">
-        <thead>
-          <tr class="border-b bg-muted/50">
-            <th class="px-4 py-3 text-left font-medium text-muted-foreground">Tax Code</th>
-            <th class="px-4 py-3 text-right font-medium text-muted-foreground">Rate</th>
-            <th class="px-4 py-3 text-left font-medium text-muted-foreground">Effective Date</th>
-            <th class="px-4 py-3 text-left font-medium text-muted-foreground">Expiry Date</th>
-            <th class="px-4 py-3 text-left font-medium text-muted-foreground">Active</th>
-            <th class="px-4 py-3 text-right font-medium text-muted-foreground">Actions</th>
-          </tr>
-        </thead>
-        <tbody>
-          {#each data.rates as rate}
-            <tr class="border-b hover:bg-muted/30">
-              <td class="px-4 py-3">{codeName(rate.taxCodeId)}</td>
-              <td class="px-4 py-3 text-right font-mono">{(parseFloat(rate.rate) * 100).toFixed(2)}%</td>
-              <td class="px-4 py-3">{formatDate(rate.effectiveDate)}</td>
-              <td class="px-4 py-3">{rate.expiryDate ? formatDate(rate.expiryDate) : '—'}</td>
-              <td class="px-4 py-3">
-                <span class="inline-flex items-center rounded-full px-2 py-0.5 text-xs font-medium {rate.isActive ? 'bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-300' : 'bg-gray-100 text-gray-800 dark:bg-gray-800 dark:text-gray-300'}">
-                  {rate.isActive ? 'Active' : 'Inactive'}
-                </span>
-              </td>
-              <td class="px-4 py-3 text-right">
-                <button onclick={() => handleDelete(rate.id)} disabled={deleting === rate.id} class="rounded p-1 text-destructive hover:bg-destructive/10 disabled:opacity-50">Delete</button>
-              </td>
-            </tr>
-          {:else}
-            <tr><td colspan="6" class="px-4 py-12 text-center text-muted-foreground">No tax rates found</td></tr>
-          {/each}
-        </tbody>
-      </table>
-    </div>
-  </Card.Content></Card.Root>
+  <AppDataTable
+    {columns}
+    data={data.rates}
+    emptyMessage="No tax rates found"
+    pageSize={20}
+    totalItems={data.total}
+  />
 </div>

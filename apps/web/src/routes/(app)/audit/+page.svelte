@@ -2,8 +2,8 @@
 import { formatDateTime } from '$lib/utils/format';
 import type { PageData } from './$types';
 import { Button } from '$lib/components/ui/button';
-import * as Card from '$lib/components/ui/card';
-import { Input } from '$lib/components/ui/input';
+import AppDataTable from '$lib/components/data/AppDataTable.svelte';
+import type { ColumnDef } from '@tanstack/svelte-table';
 import DatePicker from '$lib/components/ui/date-picker.svelte';
 
 let { data }: { data: PageData } = $props();
@@ -23,6 +23,23 @@ function actionColor(action: string): string {
     return 'bg-red-100 text-red-800 dark:bg-red-900 dark:text-red-300';
   return 'bg-gray-100 text-gray-800 dark:bg-gray-800 dark:text-gray-300';
 }
+
+const columns: ColumnDef<any>[] = [
+  { accessorKey: 'createdAt', header: 'Timestamp', cell: (row) => `<span class="text-xs">${formatDateTime((row as any).original.createdAt)}</span>` },
+  {
+    accessorKey: 'action',
+    header: 'Action',
+    cell: (row) => `<span class="inline-flex items-center rounded-full px-2 py-0.5 text-xs font-medium ${actionColor((row as any).original.action)}">${(row as any).original.action}</span>`,
+  },
+  { accessorKey: 'resource', header: 'Resource', cell: (row) => (row as any).original.resource },
+  { accessorKey: 'resourceId', header: 'Resource ID', cell: (row) => `<span class="font-mono text-xs">${(row as any).original.resourceId ? (row as any).original.resourceId.slice(0, 8) + '...' : '—'}</span>` },
+  { accessorKey: 'userId', header: 'User', cell: (row) => `<span class="font-mono text-xs">${(row as any).original.userId ? (row as any).original.userId.slice(0, 8) + '...' : 'System'}</span>` },
+  {
+    id: 'actions',
+    header: 'Actions',
+    cell: (row) => `<a href="/audit/${(row as any).original.id}" class="rounded p-1 text-muted-foreground hover:bg-accent hover:text-accent-foreground">View</a>`,
+  },
+];
 </script>
 
 <div class="space-y-6">
@@ -61,38 +78,11 @@ function actionColor(action: string): string {
     </div>
   </form>
 
-  <Card.Root class="shadow-sm"><Card.Content class="p-0">
-    <div class="overflow-x-auto">
-      <table class="w-full text-sm">
-        <thead>
-          <tr class="border-b bg-muted/50">
-            <th class="px-4 py-3 text-left font-medium text-muted-foreground">Timestamp</th>
-            <th class="px-4 py-3 text-left font-medium text-muted-foreground">Action</th>
-            <th class="px-4 py-3 text-left font-medium text-muted-foreground">Resource</th>
-            <th class="px-4 py-3 text-left font-medium text-muted-foreground">Resource ID</th>
-            <th class="px-4 py-3 text-left font-medium text-muted-foreground">User</th>
-            <th class="px-4 py-3 text-right font-medium text-muted-foreground">Actions</th>
-          </tr>
-        </thead>
-        <tbody>
-          {#each data.entries as entry}
-            <tr class="border-b hover:bg-muted/30">
-              <td class="px-4 py-3 text-xs">{formatDateTime(entry.createdAt)}</td>
-              <td class="px-4 py-3">
-                <span class="inline-flex items-center rounded-full px-2 py-0.5 text-xs font-medium {actionColor(entry.action)}">{entry.action}</span>
-              </td>
-              <td class="px-4 py-3">{entry.resource}</td>
-              <td class="px-4 py-3 font-mono text-xs">{entry.resourceId ? entry.resourceId.slice(0, 8) + '...' : '—'}</td>
-              <td class="px-4 py-3 font-mono text-xs">{entry.userId ? entry.userId.slice(0, 8) + '...' : 'System'}</td>
-              <td class="px-4 py-3 text-right">
-                <a href="/audit/{entry.id}" class="rounded p-1 text-muted-foreground hover:bg-accent hover:text-accent-foreground">View</a>
-              </td>
-            </tr>
-          {:else}
-            <tr><td colspan="6" class="px-4 py-12 text-center text-muted-foreground">No audit entries found</td></tr>
-          {/each}
-        </tbody>
-      </table>
-    </div>
-  </Card.Content></Card.Root>
+  <AppDataTable
+    {columns}
+    data={data.entries}
+    emptyMessage="No audit entries found"
+    pageSize={20}
+    totalItems={data.total}
+  />
 </div>

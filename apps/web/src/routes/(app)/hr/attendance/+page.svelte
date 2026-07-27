@@ -3,7 +3,8 @@ import { toast } from 'svelte-sonner';
 import { type Attendance, hrApi } from '$lib/api/hr';
 import { formatDate } from '$lib/utils/format';
 import type { PageData } from './$types';
-import * as Card from '$lib/components/ui/card';
+import AppDataTable from '$lib/components/data/AppDataTable.svelte';
+import type { ColumnDef } from '@tanstack/svelte-table';
 
 let { data }: { data: PageData } = $props();
 let records = $state<Attendance[]>(data.records);
@@ -35,19 +36,38 @@ async function deleteRecord(id: string) {
     toast.error('Failed to delete');
   }
 }
+
+const columns: ColumnDef<Attendance>[] = [
+  { accessorKey: 'employeeName', header: 'Employee', cell: (row) => `<span class="text-sm font-medium">${(row as any).original.employeeName}</span>` },
+  { accessorKey: 'date', header: 'Date', cell: (row) => `<span class="text-sm">${formatDate((row as any).original.date)}</span>` },
+  { accessorKey: 'clockIn', header: 'Clock In', cell: (row) => `<span class="text-sm">${(row as any).original.clockIn || '-'}</span>` },
+  { accessorKey: 'clockOut', header: 'Clock Out', cell: (row) => `<span class="text-sm">${(row as any).original.clockOut || '-'}</span>` },
+  {
+    accessorKey: 'status',
+    header: 'Status',
+    cell: (row) => `<span class="inline-block rounded-full px-2 py-0.5 text-xs font-medium ${attStatusColor((row as any).original.status)}">${formatStatus((row as any).original.status)}</span>`,
+  },
+  {
+    id: 'actions',
+    header: 'Actions',
+    cell: (row) => `<button onclick="window.dispatchEvent(new CustomEvent('delete-att', {detail:'${(row as any).original.id}'}))" class="text-sm text-destructive hover:underline">Delete</button>`,
+  },
+];
+
+$effect(() => {
+  const handler = (e: Event) => deleteRecord((e as CustomEvent).detail);
+  window.addEventListener('delete-att', handler);
+  return () => window.removeEventListener('delete-att', handler);
+});
 </script>
 
 <div class="space-y-6">
   <div><h1 class="text-3xl font-bold text-foreground">Attendance</h1><p class="text-muted-foreground">Track employee attendance</p></div>
-  <Card.Root class="shadow-sm"><Card.Content class="p-0">
-    {#if records.length === 0}<div class="py-12 text-center text-muted-foreground">No attendance records</div>
-    {:else}
-      <div class="overflow-x-auto">
-        <table class="w-full">
-          <thead><tr class="border-b bg-muted/50"><th class="px-4 py-3 text-left text-sm font-medium text-muted-foreground">Employee</th><th class="px-4 py-3 text-left text-sm font-medium text-muted-foreground">Date</th><th class="px-4 py-3 text-left text-sm font-medium text-muted-foreground">Clock In</th><th class="px-4 py-3 text-left text-sm font-medium text-muted-foreground">Clock Out</th><th class="px-4 py-3 text-left text-sm font-medium text-muted-foreground">Status</th><th class="px-4 py-3 text-right text-sm font-medium text-muted-foreground">Actions</th></tr></thead>
-          <tbody>{#each records as rec}<tr class="border-b hover:bg-muted/30"><td class="px-4 py-3 text-sm font-medium">{rec.employeeName}</td><td class="px-4 py-3 text-sm">{formatDate(rec.date)}</td><td class="px-4 py-3 text-sm">{rec.clockIn || '-'}</td><td class="px-4 py-3 text-sm">{rec.clockOut || '-'}</td><td class="px-4 py-3"><span class="inline-block rounded-full px-2 py-0.5 text-xs font-medium {attStatusColor(rec.status)}">{formatStatus(rec.status)}</span></td><td class="px-4 py-3 text-right"><button onclick={() => deleteRecord(rec.id)} class="text-sm text-destructive hover:underline">Delete</button></td></tr>{/each}</tbody>
-        </table>
-      </div>
-    {/if}
-  </Card.Content></Card.Root>
+  <AppDataTable
+    {columns}
+    data={records}
+    emptyMessage="No attendance records"
+    pageSize={20}
+    totalItems={total}
+  />
 </div>

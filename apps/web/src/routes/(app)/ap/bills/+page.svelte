@@ -1,22 +1,65 @@
 <script lang="ts">
+import { goto } from '$app/navigation';
 import { formatCurrency, formatDate } from '$lib/utils/format';
 import { Button } from '$lib/components/ui/button';
 import { Input } from '$lib/components/ui/input';
-import { Card, CardContent } from '$lib/components/ui/card';
+import AppDataTable from '$lib/components/data/AppDataTable.svelte';
+import type { ColumnDef } from '@tanstack/svelte-table';
 import type { PageData } from './$types';
 
 let { data }: { data: PageData } = $props();
 
-const billStatusColor: Record<string, string> = {
-  draft: 'bg-gray-100 text-gray-800',
-  pending_approval: 'bg-yellow-100 text-yellow-800',
-  approved: 'bg-blue-100 text-blue-800',
-  partially_paid: 'bg-orange-100 text-orange-800',
-  paid: 'bg-green-100 text-green-800',
-  voided: 'bg-red-100 text-red-800',
-};
-
 let statusFilter = $state(data.statusFilter || '');
+
+function getStatusColor(status: string): string {
+  switch (status) {
+    case 'draft': return 'bg-gray-100 text-gray-800 dark:bg-gray-800 dark:text-gray-300';
+    case 'pending_approval': return 'bg-yellow-100 text-yellow-800 dark:bg-yellow-900 dark:text-yellow-300';
+    case 'approved': return 'bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-300';
+    case 'partially_paid': return 'bg-orange-100 text-orange-800 dark:bg-orange-900 dark:text-orange-300';
+    case 'paid': return 'bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-300';
+    case 'voided': return 'bg-red-100 text-red-800 dark:bg-red-900 dark:text-red-300';
+    default: return 'bg-gray-100 text-gray-800';
+  }
+}
+
+const columns: ColumnDef<any, any>[] = [
+  {
+    accessorKey: 'billNumber',
+    header: 'Bill #',
+    cell: ({ row }) => `<a href="/ap/bills/${(row as any).original.id}" class="font-medium text-primary hover:underline">${(row as any).original.billNumber}</a>`,
+  },
+  {
+    accessorKey: 'vendorName',
+    header: 'Vendor',
+    cell: ({ row }) => `<span class="text-muted-foreground">${(row as any).original.vendorName || '—'}</span>`,
+  },
+  {
+    accessorKey: 'issueDate',
+    header: 'Issue Date',
+    cell: ({ row }) => `<span class="text-muted-foreground">${formatDate((row as any).original.issueDate)}</span>`,
+  },
+  {
+    accessorKey: 'dueDate',
+    header: 'Due Date',
+    cell: ({ row }) => `<span class="text-muted-foreground">${formatDate((row as any).original.dueDate)}</span>`,
+  },
+  {
+    accessorKey: 'total',
+    header: 'Total',
+    cell: ({ row }) => `<span class="text-right font-medium">${formatCurrency((row as any).original.total)}</span>`,
+  },
+  {
+    accessorKey: 'amountPaid',
+    header: 'Amount Paid',
+    cell: ({ row }) => `<span class="text-right text-muted-foreground">${formatCurrency((row as any).original.amountPaid)}</span>`,
+  },
+  {
+    accessorKey: 'status',
+    header: 'Status',
+    cell: ({ row }) => `<span class="inline-flex items-center rounded-full px-2 py-0.5 text-xs font-medium ${getStatusColor((row as any).original.status)}">${(row as any).original.status.replace('_', ' ')}</span>`,
+  },
+];
 </script>
 
 <div class="space-y-6">
@@ -30,82 +73,39 @@ let statusFilter = $state(data.statusFilter || '');
     </Button>
   </div>
 
-  <Card>
-    <CardContent>
-    <div class="flex items-center gap-4 border-b p-4">
-      <Input
-        type="text"
-        placeholder="Search bills..."
-        class="max-w-sm"
-      />
-      <select
-        bind:value={statusFilter}
-        class="rounded-md border bg-background px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-ring"
-        onchange={() => {
-          const url = new URL(window.location.href);
-          if (statusFilter) {
-            url.searchParams.set('status', statusFilter);
-          } else {
-            url.searchParams.delete('status');
-          }
-          window.location.href = url.toString();
-        }}
-      >
-        <option value="">All Statuses</option>
-        <option value="draft">Draft</option>
-        <option value="pending_approval">Pending Approval</option>
-        <option value="approved">Approved</option>
-        <option value="partially_paid">Partially Paid</option>
-        <option value="paid">Paid</option>
-        <option value="voided">Voided</option>
-      </select>
-    </div>
-    <div class="overflow-x-auto">
-      <table class="w-full text-sm">
-        <thead>
-          <tr class="border-t bg-muted/50">
-            <th class="px-4 py-3 text-left font-medium text-muted-foreground">Bill #</th>
-            <th class="px-4 py-3 text-left font-medium text-muted-foreground">Vendor</th>
-            <th class="px-4 py-3 text-left font-medium text-muted-foreground">Issue Date</th>
-            <th class="px-4 py-3 text-left font-medium text-muted-foreground">Due Date</th>
-            <th class="px-4 py-3 text-right font-medium text-muted-foreground">Total</th>
-            <th class="px-4 py-3 text-right font-medium text-muted-foreground">Amount Paid</th>
-            <th class="px-4 py-3 text-left font-medium text-muted-foreground">Status</th>
-            <th class="px-4 py-3 text-right font-medium text-muted-foreground">Actions</th>
-          </tr>
-        </thead>
-        <tbody>
-          {#each data.bills as bill (bill.id)}
-            <tr class="border-t hover:bg-muted/30">
-              <td class="px-4 py-3">
-                <a href="/ap/bills/{bill.id}" class="font-medium text-primary hover:underline">
-                  {bill.billNumber}
-                </a>
-              </td>
-              <td class="px-4 py-3 text-muted-foreground">{bill.vendorName || '-'}</td>
-              <td class="px-4 py-3 text-muted-foreground">{formatDate(bill.issueDate)}</td>
-              <td class="px-4 py-3 text-muted-foreground">{formatDate(bill.dueDate)}</td>
-              <td class="px-4 py-3 text-right font-medium">{formatCurrency(bill.total)}</td>
-              <td class="px-4 py-3 text-right text-muted-foreground">{formatCurrency(bill.amountPaid)}</td>
-              <td class="px-4 py-3">
-                <span class="inline-block rounded-full px-2 py-0.5 text-xs font-medium {billStatusColor[bill.status] || 'bg-gray-100 text-gray-800'}">
-                  {bill.status.replace('_', ' ')}
-                </span>
-              </td>
-              <td class="px-4 py-3 text-right">
-                <a href="/ap/bills/{bill.id}" class="text-primary hover:underline">View</a>
-              </td>
-            </tr>
-          {:else}
-            <tr>
-              <td colspan="8" class="px-4 py-8 text-center text-muted-foreground">
-                No bills found.
-              </td>
-            </tr>
-          {/each}
-        </tbody>
-      </table>
-    </div>
-    </CardContent>
-  </Card>
+  <div class="flex items-center gap-4">
+    <Input
+      type="text"
+      placeholder="Search bills..."
+      class="max-w-sm"
+    />
+    <select
+      bind:value={statusFilter}
+      class="rounded-md border bg-background px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-ring"
+      onchange={() => {
+        const url = new URL(window.location.href);
+        if (statusFilter) {
+          url.searchParams.set('status', statusFilter);
+        } else {
+          url.searchParams.delete('status');
+        }
+        window.location.href = url.toString();
+      }}
+    >
+      <option value="">All Statuses</option>
+      <option value="draft">Draft</option>
+      <option value="pending_approval">Pending Approval</option>
+      <option value="approved">Approved</option>
+      <option value="partially_paid">Partially Paid</option>
+      <option value="paid">Paid</option>
+      <option value="voided">Voided</option>
+    </select>
+  </div>
+
+  <AppDataTable
+    {columns}
+    data={data.bills}
+    emptyMessage="No bills found."
+    onRowClick={(row) => goto(`/ap/bills/${row.id}`)}
+  />
 </div>

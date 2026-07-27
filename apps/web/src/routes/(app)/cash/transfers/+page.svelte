@@ -1,18 +1,56 @@
 <script lang="ts">
+import { goto } from '$app/navigation';
 import { formatCurrency, formatDate } from '$lib/utils/format';
 import { Button } from '$lib/components/ui/button';
-import { Card, CardContent } from '$lib/components/ui/card';
+import AppDataTable from '$lib/components/data/AppDataTable.svelte';
+import type { ColumnDef } from '@tanstack/svelte-table';
 import type { PageData } from './$types';
 
 let { data }: { data: PageData } = $props();
 
-const transferStatusColor: Record<string, string> = {
-  pending: 'bg-gray-100 text-gray-800',
-  processing: 'bg-yellow-100 text-yellow-800',
-  completed: 'bg-green-100 text-green-800',
-  failed: 'bg-red-100 text-red-800',
-  cancelled: 'bg-gray-100 text-gray-800',
-};
+function getStatusColor(status: string): string {
+  switch (status) {
+    case 'pending': return 'bg-gray-100 text-gray-800 dark:bg-gray-800 dark:text-gray-300';
+    case 'processing': return 'bg-yellow-100 text-yellow-800 dark:bg-yellow-900 dark:text-yellow-300';
+    case 'completed': return 'bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-300';
+    case 'failed': return 'bg-red-100 text-red-800 dark:bg-red-900 dark:text-red-300';
+    case 'cancelled': return 'bg-gray-100 text-gray-800 dark:bg-gray-800 dark:text-gray-300';
+    default: return 'bg-gray-100 text-gray-800';
+  }
+}
+
+const columns: ColumnDef<any, any>[] = [
+  {
+    accessorKey: 'fromAccountName',
+    header: 'From',
+    cell: ({ row }) => `<span class="font-medium">${(row as any).original.fromAccountName || '—'}</span>`,
+  },
+  {
+    accessorKey: 'toAccountName',
+    header: 'To',
+    cell: ({ row }) => `<span class="font-medium">${(row as any).original.toAccountName || '—'}</span>`,
+  },
+  {
+    accessorKey: 'transferDate',
+    header: 'Date',
+    cell: ({ row }) => `<span class="text-muted-foreground">${formatDate((row as any).original.transferDate)}</span>`,
+  },
+  {
+    accessorKey: 'amount',
+    header: 'Amount',
+    cell: ({ row }) => `<span class="text-right font-medium">${formatCurrency((row as any).original.amount)}</span>`,
+  },
+  {
+    accessorKey: 'status',
+    header: 'Status',
+    cell: ({ row }) => `<span class="inline-flex items-center rounded-full px-2 py-0.5 text-xs font-medium ${getStatusColor((row as any).original.status)}">${(row as any).original.status}</span>`,
+  },
+  {
+    accessorKey: 'reference',
+    header: 'Reference',
+    cell: ({ row }) => `<span class="text-muted-foreground">${(row as any).original.reference || '—'}</span>`,
+  },
+];
 </script>
 
 <div class="space-y-6">
@@ -24,44 +62,10 @@ const transferStatusColor: Record<string, string> = {
     <Button href="/cash/transfers/new">New Transfer</Button>
   </div>
 
-  <Card>
-    <CardContent>
-      <div class="overflow-x-auto">
-        <table class="w-full text-sm">
-          <thead>
-            <tr class="border-t bg-muted/50">
-              <th class="px-4 py-3 text-left font-medium text-muted-foreground">From</th>
-              <th class="px-4 py-3 text-left font-medium text-muted-foreground">To</th>
-              <th class="px-4 py-3 text-left font-medium text-muted-foreground">Date</th>
-              <th class="px-4 py-3 text-right font-medium text-muted-foreground">Amount</th>
-              <th class="px-4 py-3 text-left font-medium text-muted-foreground">Status</th>
-              <th class="px-4 py-3 text-left font-medium text-muted-foreground">Reference</th>
-            </tr>
-          </thead>
-          <tbody>
-            {#each data.transfers as transfer (transfer.id)}
-              <tr class="border-t hover:bg-muted/30">
-                <td class="px-4 py-3 font-medium">{transfer.fromAccountName || '-'}</td>
-                <td class="px-4 py-3 font-medium">{transfer.toAccountName || '-'}</td>
-                <td class="px-4 py-3 text-muted-foreground">{formatDate(transfer.transferDate)}</td>
-                <td class="px-4 py-3 text-right font-medium">{formatCurrency(transfer.amount)}</td>
-                <td class="px-4 py-3">
-                  <span class="inline-block rounded-full px-2 py-0.5 text-xs font-medium {transferStatusColor[transfer.status] || 'bg-gray-100 text-gray-800'}">
-                    {transfer.status}
-                  </span>
-                </td>
-                <td class="px-4 py-3 text-muted-foreground">{transfer.reference || '-'}</td>
-              </tr>
-            {:else}
-              <tr>
-                <td colspan="6" class="px-4 py-8 text-center text-muted-foreground">
-                  No transfers found.
-                </td>
-              </tr>
-            {/each}
-          </tbody>
-        </table>
-      </div>
-    </CardContent>
-  </Card>
+  <AppDataTable
+    {columns}
+    data={data.transfers}
+    emptyMessage="No transfers found."
+    onRowClick={(row) => goto(`/cash/transfers/${row.id}`)}
+  />
 </div>
