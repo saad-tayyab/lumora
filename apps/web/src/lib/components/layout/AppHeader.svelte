@@ -49,9 +49,9 @@ let { onMenuClick, onSearchOpen }: { onMenuClick: () => void; onSearchOpen: () =
 							onclick={toggleMode}
 						>
 							{#if mode.current === 'dark'}
-								<Sun class="h-4 w-4" />
+								<Sun data-icon="inline-start" />
 							{:else}
-								<Moon class="h-4 w-4" />
+								<Moon data-icon="inline-start" />
 							{/if}
 						</Button>
 					{/snippet}
@@ -76,7 +76,7 @@ let { onMenuClick, onSearchOpen }: { onMenuClick: () => void; onSearchOpen: () =
 			</DropdownMenu.Trigger>
 			<DropdownMenu.Content align="end" class="w-56">
 				<DropdownMenu.Label>
-					<div class="flex flex-col space-y-1">
+					<div class="flex flex-col gap-1">
 						<p class="text-sm font-medium">{$page.data.user?.name || 'User'}</p>
 						<p class="text-xs text-muted-foreground">{$page.data.user?.email || ''}</p>
 					</div>

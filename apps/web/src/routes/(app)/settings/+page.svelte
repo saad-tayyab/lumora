@@ -3,7 +3,7 @@
   import { Users, Shield, Monitor, Building2 } from '@lucide/svelte';
 </script>
 
-<div class="space-y-6">
+<div class="flex flex-col gap-6">
   <div>
     <h1 class="text-3xl font-bold">Settings</h1>
     <p class="text-muted-foreground">Manage your organization and system settings</p>

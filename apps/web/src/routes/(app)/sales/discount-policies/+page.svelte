@@ -4,8 +4,9 @@
 	import { type DiscountPolicy, salesApi } from '$lib/api/sales';
 	import { formatCurrency, formatDate, formatPercent } from '$lib/utils/format';
 	import type { PageData } from './$types';
-	import { Button } from '$lib/components/ui/button';
-	import AppDataTable from '$lib/components/data/AppDataTable.svelte';
+import { Button } from '$lib/components/ui/button';
+import { badgeVariants } from '$lib/components/ui/badge';
+import AppDataTable from '$lib/components/data/AppDataTable.svelte';
 	import type { ColumnDef } from '@tanstack/svelte-table';
 
 	let { data }: { data: PageData } = $props();
@@ -21,13 +22,13 @@
 		return labels[type] || type;
 	}
 
-	function typeColor(type: string): string {
-		const colors: Record<string, string> = {
-			percentage: 'bg-blue-100 text-blue-800',
-			fixed_amount: 'bg-green-100 text-green-800',
-			tiered: 'bg-purple-100 text-purple-800',
-		};
-		return colors[type] || 'bg-gray-100 text-gray-800';
+	function typeVariant(type: string): 'secondary' | 'destructive' | 'default' | 'outline' {
+		switch (type) {
+			case 'percentage': return 'default';
+			case 'fixed_amount': return 'secondary';
+			case 'tiered': return 'secondary';
+			default: return 'outline';
+		}
 	}
 
 	const columns: ColumnDef<DiscountPolicy, any>[] = [
@@ -40,7 +41,7 @@
 			accessorKey: 'type',
 			header: 'Type',
 			cell: ({ row }) => {
-				const cls = typeColor((row as any).original.type);
+				const cls = typeVariant((row as any).original.type);
 				return `<span class="inline-block rounded-full px-2 py-0.5 text-xs font-medium ${cls}">${typeLabel((row as any).original.type)}</span>`;
 			},
 		},
@@ -68,9 +69,9 @@
 			header: 'Active',
 			cell: ({ row }) => {
 				if ((row as any).original.isActive) {
-					return '<span class="inline-block rounded-full bg-green-100 px-2 py-0.5 text-xs font-medium text-green-800">Active</span>';
+					return `<span class="${badgeVariants({ variant: 'secondary' })}">Active</span>`;
 				}
-				return '<span class="inline-block rounded-full bg-gray-100 px-2 py-0.5 text-xs font-medium text-gray-800">Inactive</span>';
+				return `<span class="${badgeVariants({ variant: 'outline' })}">Inactive</span>`;
 			},
 		},
 	];
@@ -88,7 +89,7 @@
 	}
 </script>
 
-<div class="space-y-6">
+<div class="flex flex-col gap-6">
 	<div class="flex items-center justify-between">
 		<div>
 			<h1 class="text-3xl font-bold text-foreground">Discount Policies</h1>

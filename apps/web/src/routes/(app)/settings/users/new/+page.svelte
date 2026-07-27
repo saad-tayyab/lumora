@@ -1,56 +1,57 @@
 <script lang="ts">
-import { superForm } from 'sveltekit-superforms';
-import { Button } from '$lib/components/ui/button';
-import { Label } from '$lib/components/ui/label';
 import { toast } from 'svelte-sonner';
+import { superForm } from 'sveltekit-superforms';
 import { goto } from '$app/navigation';
+import { Button } from '$lib/components/ui/button';
+import { Spinner } from '$lib/components/ui/spinner';
+import * as Field from '$lib/components/ui/field';
 import { Input } from '$lib/components/ui/input';
 
 let { data } = $props();
 const { form, errors, enhance, submitting, message } = superForm(data.form);
 
-const inputClass = "w-full rounded-lg border border-input bg-transparent px-2.5 py-1 text-base md:text-sm placeholder:text-muted-foreground focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:outline-none focus-visible:ring-3 disabled:cursor-not-allowed disabled:opacity-50";
-
 $effect(() => {
-	if ($message) {
-		const text = typeof $message === 'string' ? $message : $message.text;
-		if (typeof $message === 'object' && $message.type === 'error') {
-			toast.error(text);
-		} else {
-			toast.success(text);
-			goto('/settings/users');
-		}
-	}
+  if ($message) {
+    const text = typeof $message === 'string' ? $message : $message.text;
+    if (typeof $message === 'object' && $message.type === 'error') {
+      toast.error(text);
+    } else {
+      toast.success(text);
+      goto('/settings/users');
+    }
+  }
 });
 </script>
 
-<div class="mx-auto max-w-2xl space-y-6">
+<div class="flex flex-col mx-auto max-w-2xl gap-6">
 	<div>
 		<h1 class="text-3xl font-bold text-foreground">New User</h1>
 		<p class="text-muted-foreground">Create a new user account</p>
 	</div>
 
-	<form method="POST" use:enhance class="space-y-4">
-		<div class="space-y-1.5">
-			<Label for="name">Name *</Label>
-			<input id="name" type="text" value={$form.name} oninput={(e) => $form.name = e.currentTarget.value} class={inputClass} maxlength="100" />
-			{#if $errors.name}<p class="text-sm text-destructive">{$errors.name}</p>{/if}
-		</div>
-		<div class="space-y-1.5">
-			<Label for="email">Email *</Label>
-			<input id="email" type="email" value={$form.email} oninput={(e) => $form.email = e.currentTarget.value} class={inputClass} />
-			{#if $errors.email}<p class="text-sm text-destructive">{$errors.email}</p>{/if}
-		</div>
-		<div class="space-y-1.5">
-			<Label for="username">Username</Label>
-			<input id="username" type="text" value={$form.username ?? ''} oninput={(e) => $form.username = e.currentTarget.value} class={inputClass} maxlength="50" />
-			{#if $errors.username}<p class="text-sm text-destructive">{$errors.username}</p>{/if}
-		</div>
+	<form method="POST" use:enhance>
+		<Field.FieldGroup>
+			<Field.Field>
+				<Field.FieldLabel for="name">Name *</Field.FieldLabel>
+				<Input id="name" value={$form.name} oninput={(e) => $form.name = e.currentTarget.value} maxlength="100" />
+				{#if $errors.name}<Field.FieldError>{$errors.name}</Field.FieldError>{/if}
+			</Field.Field>
+			<Field.Field>
+				<Field.FieldLabel for="email">Email *</Field.FieldLabel>
+				<Input id="email" type="email" value={$form.email} oninput={(e) => $form.email = e.currentTarget.value} />
+				{#if $errors.email}<Field.FieldError>{$errors.email}</Field.FieldError>{/if}
+			</Field.Field>
+			<Field.Field>
+				<Field.FieldLabel for="username">Username</Field.FieldLabel>
+				<Input id="username" value={$form.username ?? ''} oninput={(e) => $form.username = e.currentTarget.value} maxlength="50" />
+				{#if $errors.username}<Field.FieldError>{$errors.username}</Field.FieldError>{/if}
+			</Field.Field>
+		</Field.FieldGroup>
 
 		<div class="flex justify-end gap-3 pt-4">
 			<Button variant="outline" href="/settings/users">Cancel</Button>
 			<Button type="submit" disabled={$submitting}>
-				{#if $submitting}<div class="mr-2 h-4 w-4 animate-spin rounded-full border-2 border-primary-foreground border-t-transparent"></div>{/if}
+				{#if $submitting}<Spinner data-icon="inline-start" class="text-primary-foreground" />{/if}
 				Create User
 			</Button>
 		</div>

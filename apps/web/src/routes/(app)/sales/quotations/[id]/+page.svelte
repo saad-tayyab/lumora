@@ -12,16 +12,16 @@ let quotation = $state<Quotation | null>(data.quotation);
 let lineItems = $state<QuotationLineItem[]>(data.lineItems);
 let loading = $state(false);
 
-function qtStatusColor(status: string): string {
-  const colors: Record<string, string> = {
-    draft: 'bg-gray-100 text-gray-800',
-    sent: 'bg-blue-100 text-blue-800',
-    accepted: 'bg-green-100 text-green-800',
-    rejected: 'bg-red-100 text-red-800',
-    expired: 'bg-orange-100 text-orange-800',
-    cancelled: 'bg-gray-100 text-gray-800',
-  };
-  return colors[status] || 'bg-gray-100 text-gray-800';
+function qtStatusVariant(status: string): 'secondary' | 'destructive' | 'default' | 'outline' {
+  switch (status) {
+    case 'accepted': return 'secondary';
+    case 'cancelled': return 'destructive';
+    case 'draft': return 'outline';
+    case 'expired': return 'outline';
+    case 'rejected': return 'destructive';
+    case 'sent': return 'default';
+    default: return 'outline';
+  }
 }
 
 function formatStatus(status: string): string {
@@ -64,7 +64,7 @@ async function deleteLineItem(lineItemId: string) {
 }
 </script>
 
-<div class="space-y-6">
+<div class="flex flex-col gap-6">
   {#if !quotation}
     <div class="py-12 text-center text-muted-foreground">Quotation not found</div>
   {:else}
@@ -72,7 +72,7 @@ async function deleteLineItem(lineItemId: string) {
       <div>
         <div class="flex items-center gap-3">
           <h1 class="text-3xl font-bold text-foreground">{quotation.quotationNumber}</h1>
-          <span class="inline-block rounded-full px-2 py-0.5 text-xs font-medium {qtStatusColor(quotation.status)}">{formatStatus(quotation.status)}</span>
+          <span class="inline-block rounded-full px-2 py-0.5 text-xs font-medium {qtStatusVariant(quotation.status)}">{formatStatus(quotation.status)}</span>
         </div>
         <p class="text-muted-foreground">Quotation details</p>
       </div>
@@ -91,7 +91,9 @@ async function deleteLineItem(lineItemId: string) {
 
     <div class="grid gap-6 lg:grid-cols-3">
       <div class="rounded-lg border bg-card p-6 shadow-sm lg:col-span-2">
-        <h2 class="mb-4 text-lg font-semibold text-card-foreground">Quotation Details</h2>
+        <Card.Header>
+				<Card.Title>Quotation Details</Card.Title>
+			</Card.Header>
         <div class="grid gap-4 md:grid-cols-2">
           <div>
             <div class="text-sm text-muted-foreground">Customer</div>
@@ -119,8 +121,10 @@ async function deleteLineItem(lineItemId: string) {
       </div>
 
       <Card.Root class="shadow-sm"><Card.Content>
-        <h2 class="mb-4 text-lg font-semibold text-card-foreground">Timeline</h2>
-        <div class="space-y-3 text-sm">
+        <Card.Header>
+				<Card.Title>Timeline</Card.Title>
+			</Card.Header>
+        <div class="flex flex-col gap-3 text-sm">
           <div>
             <div class="text-muted-foreground">Created</div>
             <div class="text-card-foreground">{formatDate(quotation.createdAt)}</div>
@@ -134,7 +138,9 @@ async function deleteLineItem(lineItemId: string) {
     </div>
 
     <Card.Root class="shadow-sm"><Card.Content>
-      <h2 class="mb-4 text-lg font-semibold text-card-foreground">Line Items</h2>
+      <Card.Header>
+				<Card.Title>Line Items</Card.Title>
+			</Card.Header>
       {#if lineItems.length === 0}
         <p class="py-4 text-center text-sm text-muted-foreground">No line items</p>
       {:else}

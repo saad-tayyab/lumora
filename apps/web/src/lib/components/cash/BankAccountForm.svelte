@@ -1,5 +1,10 @@
 <script lang="ts">
 import { formatCurrency } from '$lib/utils/format';
+import * as Field from '$lib/components/ui/field';
+import * as Select from '$lib/components/ui/select';
+import { Checkbox } from '$lib/components/ui/checkbox';
+import { Input } from '$lib/components/ui/input';
+import { Button } from '$lib/components/ui/button';
 
 let {
   bankAccount,
@@ -31,147 +36,135 @@ let isSubmitting = $state(false);
 </script>
 
 <div class="rounded-lg border bg-card p-6 shadow-sm">
-  <form method="POST" class="space-y-6">
-    <div class="grid gap-4 md:grid-cols-2">
-      <div class="space-y-2">
-        <label for="bankName" class="text-sm font-medium text-card-foreground">Bank Name *</label>
-        <input
-          id="bankName"
-          name="bankName"
-          type="text"
-          required
-          bind:value={bankName}
-          class="w-full rounded-md border border-input bg-background px-3 py-2 text-sm text-foreground placeholder:text-muted-foreground focus:border-ring focus:outline-none focus:ring-1 focus:ring-ring"
-          placeholder="e.g. Chase Bank"
-        />
-        {#if errors.bankName}<p class="text-xs text-destructive">{errors.bankName[0]}</p>{/if}
+  <form method="POST">
+    <Field.FieldGroup>
+      <div class="grid gap-4 md:grid-cols-2">
+        <Field.Field>
+          <Field.FieldLabel for="bankName">Bank Name *</Field.FieldLabel>
+          <Input
+            id="bankName"
+            name="bankName"
+            type="text"
+            required
+            bind:value={bankName}
+            placeholder="e.g. Chase Bank"
+          />
+          {#if errors.bankName}<p class="text-xs text-destructive">{errors.bankName[0]}</p>{/if}
+        </Field.Field>
+
+        <Field.Field>
+          <Field.FieldLabel for="accountName">Account Name *</Field.FieldLabel>
+          <Input
+            id="accountName"
+            name="accountName"
+            type="text"
+            required
+            bind:value={accountName}
+            placeholder="e.g. Operating Account"
+          />
+          {#if errors.accountName}<p class="text-xs text-destructive">{errors.accountName[0]}</p>{/if}
+        </Field.Field>
+
+        <Field.Field>
+          <Field.FieldLabel for="accountNumber">Account Number *</Field.FieldLabel>
+          <Input
+            id="accountNumber"
+            name="accountNumber"
+            type="text"
+            required
+            bind:value={accountNumber}
+            placeholder="000123456789"
+          />
+          {#if errors.accountNumber}<p class="text-xs text-destructive">{errors.accountNumber[0]}</p>{/if}
+        </Field.Field>
+
+        <Field.Field>
+          <Field.FieldLabel for="routingNumber">Routing Number</Field.FieldLabel>
+          <Input
+            id="routingNumber"
+            name="routingNumber"
+            type="text"
+            bind:value={routingNumber}
+            placeholder="021000021"
+          />
+          {#if errors.routingNumber}<p class="text-xs text-destructive">{errors.routingNumber[0]}</p>{/if}
+        </Field.Field>
+
+        <Field.Field>
+          <Field.FieldLabel for="accountType">Account Type *</Field.FieldLabel>
+          <Select.Root bind:value={accountType}>
+            <Select.Trigger class="w-full">
+              <Select.Value placeholder="Select type" />
+            </Select.Trigger>
+            <Select.Content>
+              <Select.Item value="checking">Checking</Select.Item>
+              <Select.Item value="savings">Savings</Select.Item>
+              <Select.Item value="money_market">Money Market</Select.Item>
+              <Select.Item value="credit_line">Credit Line</Select.Item>
+            </Select.Content>
+          </Select.Root>
+          {#if errors.accountType}<p class="text-xs text-destructive">{errors.accountType[0]}</p>{/if}
+        </Field.Field>
+
+        <Field.Field>
+          <Field.FieldLabel for="currencyCode">Currency</Field.FieldLabel>
+          <Select.Root bind:value={currencyCode}>
+            <Select.Trigger class="w-full">
+              <Select.Value placeholder="Select currency" />
+            </Select.Trigger>
+            <Select.Content>
+              <Select.Item value="USD">USD</Select.Item>
+              <Select.Item value="EUR">EUR</Select.Item>
+              <Select.Item value="GBP">GBP</Select.Item>
+              <Select.Item value="PKR">PKR</Select.Item>
+            </Select.Content>
+          </Select.Root>
+        </Field.Field>
+
+        <Field.Field>
+          <Field.FieldLabel for="currentBalance">Current Balance</Field.FieldLabel>
+          <Input
+            id="currentBalance"
+            name="currentBalance"
+            type="number"
+            step="0.01"
+            bind:value={currentBalance}
+          />
+          {#if errors.currentBalance}<p class="text-xs text-destructive">{errors.currentBalance[0]}</p>{/if}
+        </Field.Field>
+
+        <Field.Field>
+          <Field.FieldLabel for="availableBalance">Available Balance</Field.FieldLabel>
+          <Input
+            id="availableBalance"
+            name="availableBalance"
+            type="number"
+            step="0.01"
+            bind:value={availableBalance}
+          />
+          {#if errors.availableBalance}<p class="text-xs text-destructive">{errors.availableBalance[0]}</p>{/if}
+        </Field.Field>
       </div>
 
-      <div class="space-y-2">
-        <label for="accountName" class="text-sm font-medium text-card-foreground">Account Name *</label>
-        <input
-          id="accountName"
-          name="accountName"
-          type="text"
-          required
-          bind:value={accountName}
-          class="w-full rounded-md border border-input bg-background px-3 py-2 text-sm text-foreground placeholder:text-muted-foreground focus:border-ring focus:outline-none focus:ring-1 focus:ring-ring"
-          placeholder="e.g. Operating Account"
-        />
-        {#if errors.accountName}<p class="text-xs text-destructive">{errors.accountName[0]}</p>{/if}
-      </div>
+      <Field.Field class="flex flex-row items-center gap-2">
+        <Checkbox id="isDefault" bind:checked={isDefault} />
+        <Field.FieldLabel for="isDefault">Set as default account</Field.FieldLabel>
+      </Field.Field>
 
-      <div class="space-y-2">
-        <label for="accountNumber" class="text-sm font-medium text-card-foreground">Account Number *</label>
-        <input
-          id="accountNumber"
-          name="accountNumber"
-          type="text"
-          required
-          bind:value={accountNumber}
-          class="w-full rounded-md border border-input bg-background px-3 py-2 text-sm text-foreground placeholder:text-muted-foreground focus:border-ring focus:outline-none focus:ring-1 focus:ring-ring"
-          placeholder="000123456789"
-        />
-        {#if errors.accountNumber}<p class="text-xs text-destructive">{errors.accountNumber[0]}</p>{/if}
-      </div>
-
-      <div class="space-y-2">
-        <label for="routingNumber" class="text-sm font-medium text-card-foreground">Routing Number</label>
-        <input
-          id="routingNumber"
-          name="routingNumber"
-          type="text"
-          bind:value={routingNumber}
-          class="w-full rounded-md border border-input bg-background px-3 py-2 text-sm text-foreground placeholder:text-muted-foreground focus:border-ring focus:outline-none focus:ring-1 focus:ring-ring"
-          placeholder="021000021"
-        />
-        {#if errors.routingNumber}<p class="text-xs text-destructive">{errors.routingNumber[0]}</p>{/if}
-      </div>
-
-      <div class="space-y-2">
-        <label for="accountType" class="text-sm font-medium text-card-foreground">Account Type *</label>
-        <select
-          id="accountType"
-          name="accountType"
-          required
-          bind:value={accountType}
-          class="w-full rounded-md border border-input bg-background px-3 py-2 text-sm text-foreground focus:border-ring focus:outline-none focus:ring-1 focus:ring-ring"
+      <div class="flex items-center gap-3">
+        <Button
+          type="submit"
+          disabled={isSubmitting}
         >
-          <option value="checking">Checking</option>
-          <option value="savings">Savings</option>
-          <option value="money_market">Money Market</option>
-          <option value="credit_line">Credit Line</option>
-        </select>
-        {#if errors.accountType}<p class="text-xs text-destructive">{errors.accountType[0]}</p>{/if}
-      </div>
-
-      <div class="space-y-2">
-        <label for="currencyCode" class="text-sm font-medium text-card-foreground">Currency</label>
-        <select
-          id="currencyCode"
-          name="currencyCode"
-          bind:value={currencyCode}
-          class="w-full rounded-md border border-input bg-background px-3 py-2 text-sm text-foreground focus:border-ring focus:outline-none focus:ring-1 focus:ring-ring"
+          {#if isSubmitting}Saving...{:else}{bankAccount?.id ? 'Update Account' : 'Create Account'}{/if}
+        </Button>
+        <Button
+          variant="outline"
+          href="/cash/bank-accounts"
         >
-          <option value="USD">USD</option>
-          <option value="EUR">EUR</option>
-          <option value="GBP">GBP</option>
-          <option value="PKR">PKR</option>
-        </select>
+          Cancel
+        </Button>
       </div>
-
-      <div class="space-y-2">
-        <label for="currentBalance" class="text-sm font-medium text-card-foreground">Current Balance</label>
-        <input
-          id="currentBalance"
-          name="currentBalance"
-          type="number"
-          step="0.01"
-          bind:value={currentBalance}
-          class="w-full rounded-md border border-input bg-background px-3 py-2 text-sm text-foreground focus:border-ring focus:outline-none focus:ring-1 focus:ring-ring"
-        />
-        {#if errors.currentBalance}<p class="text-xs text-destructive">{errors.currentBalance[0]}</p>{/if}
-      </div>
-
-      <div class="space-y-2">
-        <label for="availableBalance" class="text-sm font-medium text-card-foreground">Available Balance</label>
-        <input
-          id="availableBalance"
-          name="availableBalance"
-          type="number"
-          step="0.01"
-          bind:value={availableBalance}
-          class="w-full rounded-md border border-input bg-background px-3 py-2 text-sm text-foreground focus:border-ring focus:outline-none focus:ring-1 focus:ring-ring"
-        />
-        {#if errors.availableBalance}<p class="text-xs text-destructive">{errors.availableBalance[0]}</p>{/if}
-      </div>
-    </div>
-
-    <div class="flex items-center gap-2">
-      <input
-        id="isDefault"
-        name="isDefault"
-        type="checkbox"
-        bind:checked={isDefault}
-        class="h-4 w-4 rounded border-input"
-      />
-      <label for="isDefault" class="text-sm font-medium text-card-foreground">Set as default account</label>
-    </div>
-
-    <div class="flex items-center gap-3">
-      <button
-        type="submit"
-        disabled={isSubmitting}
-        class="rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground hover:bg-primary/90 disabled:cursor-not-allowed disabled:opacity-50"
-      >
-        {#if isSubmitting}Saving...{:else}{bankAccount?.id ? 'Update Account' : 'Create Account'}{/if}
-      </button>
-      <a
-        href="/cash/bank-accounts"
-        class="rounded-md border px-4 py-2 text-sm font-medium text-card-foreground hover:bg-accent"
-      >
-        Cancel
-      </a>
-    </div>
+    </Field.FieldGroup>
   </form>
 </div>

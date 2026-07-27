@@ -2,6 +2,8 @@
 import { goto } from '$app/navigation';
 import { formatCurrency, formatDate } from '$lib/utils/format';
 import { Button } from '$lib/components/ui/button';
+import { badgeVariants } from '$lib/components/ui/badge';
+import * as Select from '$lib/components/ui/select';
 import { Input } from '$lib/components/ui/input';
 import AppDataTable from '$lib/components/data/AppDataTable.svelte';
 import type { ColumnDef } from '@tanstack/svelte-table';
@@ -11,15 +13,15 @@ let { data }: { data: PageData } = $props();
 
 let statusFilter = $state(data.statusFilter || '');
 
-function getStatusColor(status: string): string {
+function getStatusVariant(status: string): 'secondary' | 'destructive' | 'default' | 'outline' {
   switch (status) {
-    case 'draft': return 'bg-gray-100 text-gray-800 dark:bg-gray-800 dark:text-gray-300';
-    case 'pending_approval': return 'bg-yellow-100 text-yellow-800 dark:bg-yellow-900 dark:text-yellow-300';
-    case 'approved': return 'bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-300';
-    case 'partially_paid': return 'bg-orange-100 text-orange-800 dark:bg-orange-900 dark:text-orange-300';
-    case 'paid': return 'bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-300';
-    case 'voided': return 'bg-red-100 text-red-800 dark:bg-red-900 dark:text-red-300';
-    default: return 'bg-gray-100 text-gray-800';
+    case 'draft': return 'outline';
+    case 'pending_approval': return 'outline';
+    case 'approved': return 'default';
+    case 'partially_paid': return 'outline';
+    case 'paid': return 'secondary';
+    case 'voided': return 'destructive';
+    default: return 'outline';
   }
 }
 
@@ -57,12 +59,12 @@ const columns: ColumnDef<any, any>[] = [
   {
     accessorKey: 'status',
     header: 'Status',
-    cell: ({ row }) => `<span class="inline-flex items-center rounded-full px-2 py-0.5 text-xs font-medium ${getStatusColor((row as any).original.status)}">${(row as any).original.status.replace('_', ' ')}</span>`,
+    cell: ({ row }) => `<span class="${badgeVariants({ variant: getStatusVariant((row as any).original.status) })}">${(row as any).original.status.replace('_', ' ')}</span>`,
   },
 ];
 </script>
 
-<div class="space-y-6">
+<div class="flex flex-col gap-6">
   <div class="flex items-center justify-between">
     <div>
       <h1 class="text-3xl font-bold text-foreground">Bills</h1>
@@ -79,27 +81,20 @@ const columns: ColumnDef<any, any>[] = [
       placeholder="Search bills..."
       class="max-w-sm"
     />
-    <select
-      bind:value={statusFilter}
-      class="rounded-md border bg-background px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-ring"
-      onchange={() => {
-        const url = new URL(window.location.href);
-        if (statusFilter) {
-          url.searchParams.set('status', statusFilter);
-        } else {
-          url.searchParams.delete('status');
-        }
-        window.location.href = url.toString();
-      }}
-    >
-      <option value="">All Statuses</option>
-      <option value="draft">Draft</option>
-      <option value="pending_approval">Pending Approval</option>
-      <option value="approved">Approved</option>
-      <option value="partially_paid">Partially Paid</option>
-      <option value="paid">Paid</option>
-      <option value="voided">Voided</option>
-    </select>
+    <Select.Root bind:value={statusFilter}>
+      <Select.Trigger class="w-full">
+        <Select.Value placeholder="All Statuses" />
+      </Select.Trigger>
+      <Select.Content>
+        <Select.Item value="">All Statuses</Select.Item>
+        <Select.Item value="draft">Draft</Select.Item>
+        <Select.Item value="pending_approval">Pending Approval</Select.Item>
+        <Select.Item value="approved">Approved</Select.Item>
+        <Select.Item value="partially_paid">Partially Paid</Select.Item>
+        <Select.Item value="paid">Paid</Select.Item>
+        <Select.Item value="voided">Voided</Select.Item>
+      </Select.Content>
+    </Select.Root>
   </div>
 
   <AppDataTable

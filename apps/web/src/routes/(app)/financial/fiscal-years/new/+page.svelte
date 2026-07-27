@@ -4,9 +4,9 @@ import { toast } from 'svelte-sonner';
 import { goto } from '$app/navigation';
 import { Button } from '$lib/components/ui/button';
 import { Input } from '$lib/components/ui/input';
+import * as Field from '$lib/components/ui/field';
 import DatePicker from '$lib/components/ui/date-picker.svelte';
-import { Label } from '$lib/components/ui/label';
-import { Card, CardContent } from '$lib/components/ui/card';
+import * as Card from '$lib/components/ui/card';
 
 let { data } = $props();
 const { form, errors, enhance, submitting, message } = superForm(data.form);
@@ -24,7 +24,7 @@ $effect(() => {
 });
 </script>
 
-<div class="mx-auto max-w-2xl space-y-6">
+<div class="flex flex-col mx-auto max-w-2xl gap-6">
 	<div>
 		<a href="/financial/fiscal-years" class="text-sm text-muted-foreground hover:text-foreground">
 			← Back to Fiscal Years
@@ -33,27 +33,29 @@ $effect(() => {
 		<p class="mt-1 text-muted-foreground">Create a new fiscal year period</p>
 	</div>
 
-	<Card>
-		<CardContent>
-			<form method="POST" use:enhance class="space-y-4">
-				<div class="space-y-2">
-					<Label for="name">Year Name *</Label>
-					<Input id="name" bind:value={$form.name} placeholder="e.g. FY 2026" />
-					{#if $errors.name}<p class="text-xs text-destructive">{$errors.name}</p>{/if}
-				</div>
+	<Card.Root>
+		<Card.Content>
+			<form method="POST" use:enhance>
+				<Field.FieldGroup>
+					<Field.Field>
+						<Field.FieldLabel for="name">Year Name *</Field.FieldLabel>
+						<Input id="name" bind:value={$form.name} placeholder="e.g. FY 2026" />
+						{#if $errors.name}<Field.FieldError>{$errors.name}</Field.FieldError>{/if}
+					</Field.Field>
 
-				<div class="grid gap-4 sm:grid-cols-2">
-					<div class="space-y-2">
-						<Label for="startDate">Start Date *</Label>
-						<DatePicker bind:value={$form.startDate} />
-						{#if $errors.startDate}<p class="text-xs text-destructive">{$errors.startDate}</p>{/if}
+					<div class="grid gap-4 sm:grid-cols-2">
+						<Field.Field>
+							<Field.FieldLabel for="startDate">Start Date *</Field.FieldLabel>
+							<DatePicker bind:value={$form.startDate} />
+							{#if $errors.startDate}<Field.FieldError>{$errors.startDate}</Field.FieldError>{/if}
+						</Field.Field>
+						<Field.Field>
+							<Field.FieldLabel for="endDate">End Date *</Field.FieldLabel>
+							<DatePicker bind:value={$form.endDate} />
+							{#if $errors.endDate}<Field.FieldError>{$errors.endDate}</Field.FieldError>{/if}
+						</Field.Field>
 					</div>
-					<div class="space-y-2">
-						<Label for="endDate">End Date *</Label>
-						<DatePicker bind:value={$form.endDate} />
-						{#if $errors.endDate}<p class="text-xs text-destructive">{$errors.endDate}</p>{/if}
-					</div>
-				</div>
+				</Field.FieldGroup>
 
 				<div class="flex justify-end gap-3 pt-2">
 					<Button href="/financial/fiscal-years" variant="outline">Cancel</Button>
@@ -62,6 +64,6 @@ $effect(() => {
 					</Button>
 				</div>
 			</form>
-		</CardContent>
-	</Card>
+		</Card.Content>
+	</Card.Root>
 </div>

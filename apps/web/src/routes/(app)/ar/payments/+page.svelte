@@ -4,6 +4,7 @@ import { listPayments } from '$lib/api/ar';
 import type { Payment } from '$lib/types';
 import { formatCurrency, formatDate } from '$lib/utils/format';
 import { Button } from '$lib/components/ui/button';
+import { badgeVariants } from '$lib/components/ui/badge';
 import AppDataTable from '$lib/components/data/AppDataTable.svelte';
 import type { ColumnDef } from '@tanstack/svelte-table';
 
@@ -51,7 +52,7 @@ const columns: ColumnDef<Payment, any>[] = [
   {
     accessorKey: 'paymentMethod',
     header: 'Method',
-    cell: ({ row }) => `<span class="inline-flex items-center rounded-full px-2 py-0.5 text-xs font-medium bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-300">${(row as any).original.paymentMethod.replace('_', ' ')}</span>`,
+    cell: ({ row }) => `<span class="${badgeVariants({ variant: 'default' })}">${(row as any).original.paymentMethod.replace('_', ' ')}</span>`,
   },
   {
     accessorKey: 'referenceNumber',
@@ -61,7 +62,7 @@ const columns: ColumnDef<Payment, any>[] = [
 ];
 </script>
 
-<div class="space-y-6">
+<div class="flex flex-col gap-6">
 	<div class="flex items-center justify-between">
 		<div>
 			<h1 class="text-3xl font-bold text-foreground">Payments</h1>

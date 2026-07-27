@@ -4,8 +4,10 @@ import { toast } from 'svelte-sonner';
 import { goto } from '$app/navigation';
 import { Button } from '$lib/components/ui/button';
 import { Input } from '$lib/components/ui/input';
-import { Label } from '$lib/components/ui/label';
-import { Card, CardContent } from '$lib/components/ui/card';
+import { Textarea } from '$lib/components/ui/textarea';
+import * as Field from '$lib/components/ui/field';
+import * as Select from '$lib/components/ui/select';
+import * as Card from '$lib/components/ui/card';
 
 let { data } = $props();
 const { form, errors, enhance, submitting, message } = superForm(data.form);
@@ -23,7 +25,7 @@ $effect(() => {
 });
 </script>
 
-<div class="mx-auto max-w-2xl space-y-6">
+<div class="flex flex-col mx-auto max-w-2xl gap-6">
 	<div>
 		<a href="/financial/accounts" class="text-sm text-muted-foreground hover:text-foreground">
 			← Back to Accounts
@@ -32,38 +34,44 @@ $effect(() => {
 		<p class="mt-1 text-muted-foreground">Create a new financial account</p>
 	</div>
 
-	<Card>
-		<CardContent>
-			<form method="POST" use:enhance class="space-y-4">
-				<div class="space-y-2">
-					<Label for="code">Account Code *</Label>
-					<Input id="code" bind:value={$form.code} placeholder="e.g. 1000" />
-					{#if $errors.code}<p class="text-xs text-destructive">{$errors.code}</p>{/if}
-				</div>
+	<Card.Root>
+		<Card.Content>
+			<form method="POST" use:enhance>
+				<Field.FieldGroup>
+					<Field.Field>
+						<Field.FieldLabel for="code">Account Code *</Field.FieldLabel>
+						<Input id="code" bind:value={$form.code} placeholder="e.g. 1000" />
+						{#if $errors.code}<Field.FieldError>{$errors.code}</Field.FieldError>{/if}
+					</Field.Field>
 
-				<div class="space-y-2">
-					<Label for="name">Account Name *</Label>
-					<Input id="name" bind:value={$form.name} placeholder="e.g. Cash" />
-					{#if $errors.name}<p class="text-xs text-destructive">{$errors.name}</p>{/if}
-				</div>
+					<Field.Field>
+						<Field.FieldLabel for="name">Account Name *</Field.FieldLabel>
+						<Input id="name" bind:value={$form.name} placeholder="e.g. Cash" />
+						{#if $errors.name}<Field.FieldError>{$errors.name}</Field.FieldError>{/if}
+					</Field.Field>
 
-				<div class="space-y-2">
-					<Label for="type">Account Type *</Label>
-					<select id="type" bind:value={$form.type} class="w-full rounded-md border bg-background px-3 py-2 text-sm text-foreground focus:outline-none focus:ring-2 focus:ring-ring">
-						<option value="">Select type...</option>
-						<option value="asset">Asset</option>
-						<option value="liability">Liability</option>
-						<option value="equity">Equity</option>
-						<option value="revenue">Revenue</option>
-						<option value="expense">Expense</option>
-					</select>
-					{#if $errors.type}<p class="text-xs text-destructive">{$errors.type}</p>{/if}
-				</div>
+					<Field.Field>
+						<Field.FieldLabel for="type">Account Type *</Field.FieldLabel>
+						<Select.Root bind:value={$form.type}>
+							<Select.Trigger class="w-full">
+								<Select.Value placeholder="Select type..." />
+							</Select.Trigger>
+							<Select.Content>
+								<Select.Item value="asset">Asset</Select.Item>
+								<Select.Item value="liability">Liability</Select.Item>
+								<Select.Item value="equity">Equity</Select.Item>
+								<Select.Item value="revenue">Revenue</Select.Item>
+								<Select.Item value="expense">Expense</Select.Item>
+							</Select.Content>
+						</Select.Root>
+						{#if $errors.type}<Field.FieldError>{$errors.type}</Field.FieldError>{/if}
+					</Field.Field>
 
-				<div class="space-y-2">
-					<Label for="description">Description</Label>
-					<textarea id="description" bind:value={$form.description} rows="3" placeholder="Optional description..." class="w-full rounded-md border bg-background px-3 py-2 text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring"></textarea>
-				</div>
+					<Field.Field>
+						<Field.FieldLabel for="description">Description</Field.FieldLabel>
+						<Textarea id="description" bind:value={$form.description} rows="3" placeholder="Optional description..."></Textarea>
+					</Field.Field>
+				</Field.FieldGroup>
 
 				<div class="flex justify-end gap-3 pt-2">
 					<Button href="/financial/accounts" variant="outline">Cancel</Button>
@@ -72,6 +80,6 @@ $effect(() => {
 					</Button>
 				</div>
 			</form>
-		</CardContent>
-	</Card>
+		</Card.Content>
+	</Card.Root>
 </div>

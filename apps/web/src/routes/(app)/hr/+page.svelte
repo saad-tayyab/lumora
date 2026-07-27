@@ -2,6 +2,8 @@
   import { KpiCard } from '$lib/components/dashboard';
   import * as Card from '$lib/components/ui/card';
   import { Button } from '$lib/components/ui/button';
+  import { Badge } from '$lib/components/ui/badge';
+import { Spinner } from '$lib/components/ui/spinner';
   import {
     Users,
     Building2,
@@ -40,13 +42,13 @@
     }
   });
 
-  function empStatusColor(status: string): string {
-    const colors: Record<string, string> = {
-      active: 'bg-green-100 text-green-800',
-      inactive: 'bg-gray-100 text-gray-800',
-      terminated: 'bg-red-100 text-red-800',
-    };
-    return colors[status] || 'bg-gray-100 text-gray-800';
+  function empStatusVariant(status: string): 'secondary' | 'destructive' | 'outline' {
+    switch (status) {
+      case 'active': return 'secondary';
+      case 'inactive': return 'outline';
+      case 'terminated': return 'destructive';
+      default: return 'outline';
+    }
   }
 
   function formatStatus(status: string): string {
@@ -54,7 +56,7 @@
   }
 </script>
 
-<div class="space-y-6">
+<div class="flex flex-col gap-6">
   <div>
     <h1 class="text-3xl font-bold text-foreground">Human Resources</h1>
     <p class="text-muted-foreground">Manage employees, attendance, leave, and payroll</p>
@@ -98,12 +100,12 @@
       <Card.Content>
         {#if loading}
           <div class="flex justify-center py-8">
-            <div class="h-6 w-6 animate-spin rounded-full border-2 border-primary border-t-transparent"></div>
+            <Spinner class="size-6 text-primary" />
           </div>
         {:else if employees.length === 0}
           <p class="py-4 text-center text-sm text-muted-foreground">No employees yet.</p>
         {:else}
-          <div class="space-y-3">
+          <div class="flex flex-col gap-3">
             {#each employees as emp}
               <a
                 href="/hr/employees/{emp.id}"
@@ -113,9 +115,9 @@
                   <p class="font-medium text-card-foreground">{emp.firstName} {emp.lastName}</p>
                   <p class="text-sm text-muted-foreground">{emp.departmentName} - {emp.designationTitle}</p>
                 </div>
-                <span class="inline-block rounded-full px-2 py-0.5 text-xs font-medium {empStatusColor(emp.status)}">
+                <Badge variant={empStatusVariant(emp.status)}>
                   {formatStatus(emp.status)}
-                </span>
+                </Badge>
               </a>
             {/each}
           </div>
@@ -133,19 +135,19 @@
       <Card.Content>
         {#if loading}
           <div class="flex justify-center py-8">
-            <div class="h-6 w-6 animate-spin rounded-full border-2 border-primary border-t-transparent"></div>
+            <Spinner class="size-6 text-primary" />
           </div>
         {:else if leaveRequests.length === 0}
           <p class="py-4 text-center text-sm text-muted-foreground">No pending requests.</p>
         {:else}
-          <div class="space-y-3">
+          <div class="flex flex-col gap-3">
             {#each leaveRequests as lr}
               <div class="flex items-center justify-between rounded-md border p-3">
                 <div>
                   <p class="font-medium text-card-foreground">{lr.employeeName}</p>
                   <p class="text-sm text-muted-foreground">{lr.leaveTypeName} - {lr.totalDays} days</p>
                 </div>
-                <span class="inline-block rounded-full bg-yellow-100 px-2 py-0.5 text-xs font-medium text-yellow-800">Pending</span>
+                <Badge variant="outline">Pending</Badge>
               </div>
             {/each}
           </div>
@@ -161,39 +163,39 @@
     <Card.Content>
       <div class="grid gap-3 md:grid-cols-2 lg:grid-cols-4">
         <Button variant="outline" class="justify-start gap-2" href="/hr/employees/new">
-          <Plus class="h-4 w-4" />
+          <Plus data-icon="inline-start" />
           Add Employee
         </Button>
         <Button variant="outline" class="justify-start gap-2" href="/hr/departments">
-          <Building2 class="h-4 w-4" />
+          <Building2 data-icon="inline-start" />
           Departments
         </Button>
         <Button variant="outline" class="justify-start gap-2" href="/hr/designations">
-          <FileText class="h-4 w-4" />
+          <FileText data-icon="inline-start" />
           Designations
         </Button>
         <Button variant="outline" class="justify-start gap-2" href="/hr/attendance">
-          <Clock class="h-4 w-4" />
+          <Clock data-icon="inline-start" />
           Attendance
         </Button>
         <Button variant="outline" class="justify-start gap-2" href="/hr/leave">
-          <CalendarOff class="h-4 w-4" />
+          <CalendarOff data-icon="inline-start" />
           Leave
         </Button>
         <Button variant="outline" class="justify-start gap-2" href="/hr/leave-types">
-          <FileText class="h-4 w-4" />
+          <FileText data-icon="inline-start" />
           Leave Types
         </Button>
         <Button variant="outline" class="justify-start gap-2" href="/hr/payroll">
-          <DollarSign class="h-4 w-4" />
+          <DollarSign data-icon="inline-start" />
           Payroll
         </Button>
         <Button variant="outline" class="justify-start gap-2" href="/hr/payslips">
-          <FileText class="h-4 w-4" />
+          <FileText data-icon="inline-start" />
           Payslips
         </Button>
         <Button variant="outline" class="justify-start gap-2" href="/hr/salaries">
-          <DollarSign class="h-4 w-4" />
+          <DollarSign data-icon="inline-start" />
           Salaries
         </Button>
       </div>

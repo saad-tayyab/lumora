@@ -3,7 +3,8 @@ import { toast } from 'svelte-sonner';
 import { updateCreditNoteStatus } from '$lib/api/ar';
 import { formatCurrency, formatDate } from '$lib/utils/format';
 import { Button } from '$lib/components/ui/button';
-import { Card, CardContent } from '$lib/components/ui/card';
+import { Badge } from '$lib/components/ui/badge';
+import * as Card from '$lib/components/ui/card';
 import type { PageData } from './$types';
 
 let { data }: { data: PageData } = $props();
@@ -11,12 +12,15 @@ let cn = $derived(data.creditNote);
 let customer = $derived(data.customer);
 let updating = $state(false);
 
-const statusStyles: Record<string, string> = {
-  draft: 'bg-gray-100 text-gray-800',
-  issued: 'bg-blue-100 text-blue-800',
-  applied: 'bg-green-100 text-green-800',
-  voided: 'bg-gray-100 text-gray-800',
-};
+function cnStatusVariant(status: string): 'secondary' | 'destructive' | 'default' | 'outline' {
+  switch (status) {
+    case 'draft': return 'outline';
+    case 'issued': return 'default';
+    case 'applied': return 'secondary';
+    case 'voided': return 'outline';
+    default: return 'outline';
+  }
+}
 
 async function handleStatusChange(newStatus: string) {
   if (!confirm(`Change credit note status to "${newStatus}"?`)) return;
@@ -32,7 +36,7 @@ async function handleStatusChange(newStatus: string) {
 }
 </script>
 
-<div class="space-y-6">
+<div class="flex flex-col gap-6">
 	<div class="flex items-center justify-between">
 		<div>
 			<div class="flex items-center gap-2 text-sm text-muted-foreground">
@@ -59,12 +63,14 @@ async function handleStatusChange(newStatus: string) {
 	</div>
 
 	<div class="grid gap-6 lg:grid-cols-3">
-		<div class="lg:col-span-2 space-y-6">
-			<Card>
-				<CardContent>
+		<div class="lg:col-span-2 flex flex-col gap-6">
+			<Card.Root>
+				<Card.Header>
+					<Card.Title>Credit Note Details</Card.Title>
+				</Card.Header>
+				<Card.Content>
 					<div class="flex items-start justify-between">
 						<div>
-							<h2 class="text-lg font-semibold text-card-foreground">Credit Note Details</h2>
 							{#if customer}
 								<p class="mt-1 text-sm text-muted-foreground">
 									<a href="/ar/customers/{customer.id}" class="text-primary hover:underline">
@@ -73,12 +79,9 @@ async function handleStatusChange(newStatus: string) {
 								</p>
 							{/if}
 						</div>
-						<span
-							class="inline-flex items-center rounded-full px-3 py-1 text-sm font-medium {statusStyles[cn.status] ||
-								statusStyles.draft}"
-						>
-							{cn.status}
-						</span>
+					<Badge variant={cnStatusVariant(cn.status)}>
+						{cn.status}
+					</Badge>
 					</div>
 
 					<dl class="mt-4 grid gap-4 md:grid-cols-2">
@@ -102,15 +105,17 @@ async function handleStatusChange(newStatus: string) {
 							<dd class="mt-1 text-sm text-card-foreground">{cn.notes}</dd>
 						</div>
 					{/if}
-				</CardContent>
-			</Card>
+				</Card.Content>
+			</Card.Root>
 		</div>
 
-		<div class="space-y-6">
-			<Card>
-				<CardContent>
-					<h2 class="mb-4 text-lg font-semibold text-card-foreground">Summary</h2>
-					<dl class="space-y-3">
+		<div class="flex flex-col gap-6">
+			<Card.Root>
+				<Card.Header>
+					<Card.Title>Summary</Card.Title>
+				</Card.Header>
+				<Card.Content>
+					<dl class="flex flex-col gap-3">
 						<div class="flex items-center justify-between">
 							<dt class="text-sm text-muted-foreground">Amount</dt>
 							<dd class="text-sm font-medium text-card-foreground">{formatCurrency(cn.amount)}</dd>
@@ -126,8 +131,8 @@ async function handleStatusChange(newStatus: string) {
 							</dd>
 						</div>
 					</dl>
-				</CardContent>
-			</Card>
+				</Card.Content>
+			</Card.Root>
 		</div>
 	</div>
 </div>

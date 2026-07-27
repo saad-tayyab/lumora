@@ -3,16 +3,19 @@ import { toast } from 'svelte-sonner';
 import { financialApi } from '$lib/api/financial';
 import { formatDate } from '$lib/utils/format';
 import { Button } from '$lib/components/ui/button';
-import { Card, CardContent } from '$lib/components/ui/card';
+import * as Card from '$lib/components/ui/card';
 import type { PageData } from './$types';
 
 let { data }: { data: PageData } = $props();
 let closing = $state(false);
 
-const statusColors: Record<string, string> = {
-	open: 'bg-green-100 text-green-800',
-	closed: 'bg-gray-100 text-gray-800',
-};
+function statusVariants(status: string): 'secondary' | 'destructive' | 'default' | 'outline' {
+  switch (status) {
+    case 'closed': return 'outline';
+    case 'open': return 'secondary';
+    default: return 'outline';
+  }
+}
 
 async function handleClose() {
 	if (!data.fiscalYear || !confirm('Are you sure you want to close this fiscal year?')) return;
@@ -29,7 +32,7 @@ async function handleClose() {
 }
 </script>
 
-<div class="mx-auto max-w-4xl space-y-6">
+<div class="flex flex-col mx-auto max-w-4xl gap-6">
 	<nav class="mb-4 text-sm text-muted-foreground">
 		<a href="/financial/fiscal-years" class="hover:underline">Fiscal Years</a>
 		<span class="mx-2">/</span>
@@ -41,7 +44,7 @@ async function handleClose() {
 			<div>
 				<div class="flex items-center gap-3">
 					<h1 class="text-3xl font-bold text-foreground">{data.fiscalYear.name}</h1>
-					<span class="inline-block rounded-full px-2 py-0.5 text-xs font-medium {statusColors[data.fiscalYear.status] || 'bg-gray-100 text-gray-800'}">
+					<span class="inline-block rounded-full px-2 py-0.5 text-xs font-medium {statusVariant(data.fiscalYear.status) === "secondary" ? "secondary" : "outline"}">
 						{data.fiscalYear.status}
 					</span>
 				</div>
@@ -57,9 +60,11 @@ async function handleClose() {
 			</div>
 		</div>
 
-		<Card>
-			<CardContent>
-				<h2 class="mb-4 text-lg font-semibold text-card-foreground">Fiscal Year Details</h2>
+		<Card.Root>
+			<Card.Content>
+				<Card.Header>
+				<Card.Title>Fiscal Year Details</Card.Title>
+			</Card.Header>
 				<dl class="grid grid-cols-2 gap-4">
 					<div>
 						<dt class="text-sm text-muted-foreground">Name</dt>
@@ -68,7 +73,7 @@ async function handleClose() {
 					<div>
 						<dt class="text-sm text-muted-foreground">Status</dt>
 						<dd class="mt-1">
-							<span class="inline-block rounded-full px-2 py-0.5 text-xs font-medium {statusColors[data.fiscalYear.status] || 'bg-gray-100 text-gray-800'}">
+							<span class="inline-block rounded-full px-2 py-0.5 text-xs font-medium {statusVariant(data.fiscalYear.status) === "secondary" ? "secondary" : "outline"}">
 								{data.fiscalYear.status}
 							</span>
 						</dd>
@@ -86,8 +91,8 @@ async function handleClose() {
 						<dd class="mt-1 text-foreground">{formatDate(data.fiscalYear.createdAt)}</dd>
 					</div>
 				</dl>
-			</CardContent>
-		</Card>
+			</Card.Content>
+		</Card.Root>
 	{:else}
 		<div class="py-12 text-center text-muted-foreground">Fiscal year not found</div>
 	{/if}

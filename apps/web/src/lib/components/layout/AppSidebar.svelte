@@ -1,33 +1,35 @@
 <script lang="ts">
-	import { page } from '$app/stores';
-	import * as Sheet from '$lib/components/ui/sheet';
-	import { Root as ScrollArea } from '$lib/components/ui/scroll-area';
-	import { Separator } from '$lib/components/ui/separator';
-	import { navGroups, dashboardItem, type NavItem } from '$lib/config/navigation';
-	import { cn } from '$lib/utils/cn';
-	import { ChevronRight } from '@lucide/svelte';
+import { ChevronRight } from '@lucide/svelte';
+import { prefersReducedMotion } from 'svelte/motion';
+import { slide } from 'svelte/transition';
+import { page } from '$app/stores';
+import { Root as ScrollArea } from '$lib/components/ui/scroll-area';
+import { Separator } from '$lib/components/ui/separator';
+import * as Sheet from '$lib/components/ui/sheet';
+import { dashboardItem, type NavItem, navGroups } from '$lib/config/navigation';
+import { cn } from '$lib/utils/cn';
 
-	let { open = $bindable(false) }: { open: boolean } = $props();
+let { open = $bindable(false) }: { open: boolean } = $props();
 
-	let expandedSections = $state<Set<string>>(new Set());
+let expandedSections = $state<Set<string>>(new Set());
 
-	function toggleSection(label: string) {
-		if (expandedSections.has(label)) {
-			expandedSections.delete(label);
-		} else {
-			expandedSections.add(label);
-		}
-		expandedSections = new Set(expandedSections);
-	}
+function toggleSection(label: string) {
+  if (expandedSections.has(label)) {
+    expandedSections.delete(label);
+  } else {
+    expandedSections.add(label);
+  }
+  expandedSections = new Set(expandedSections);
+}
 
-	function isActive(href: string): boolean {
-		const path = $page.url.pathname;
-		return path === href || path.startsWith(href + '/');
-	}
+function isActive(href: string): boolean {
+  const path = $page.url.pathname;
+  return path === href || path.startsWith(href + '/');
+}
 
-	function closeMobile() {
-		open = false;
-	}
+function closeMobile() {
+  open = false;
+}
 </script>
 
 {#snippet sidebarContent()}
@@ -39,7 +41,7 @@
 		</div>
 
 		<ScrollArea class="flex-1 min-h-0 py-2">
-			<nav class="space-y-1 px-2">
+			<nav class="flex flex-col gap-1 px-2">
 				<a
 					href={dashboardItem.href}
 					class={cn(
@@ -61,7 +63,7 @@
 						<div class="px-3 py-1 text-xs font-semibold uppercase tracking-wider text-muted-foreground">
 							{group.label}
 						</div>
-						<div class="mt-1 space-y-0.5">
+						<div class="mt-1 flex flex-col gap-0.5">
 							{#each group.items as item}
 								{#if item.children && item.children.length > 0}
 									<button
@@ -83,8 +85,11 @@
 											)}
 										/>
 									</button>
-									{#if expandedSections.has(item.label)}
-										<div class="ml-6 space-y-0.5 border-l pl-3">
+								{#if expandedSections.has(item.label)}
+									<div
+										class="ml-6 flex flex-col gap-0.5 border-l pl-3"
+										transition:slide={{ duration: prefersReducedMotion.current ? 0 : 150 }}
+									>
 											{#each item.children as child}
 												<a
 													href={child.href}

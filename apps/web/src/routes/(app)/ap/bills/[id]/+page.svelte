@@ -2,9 +2,11 @@
 import { toast } from 'svelte-sonner';
 import { enhance } from '$app/forms';
 import { goto } from '$app/navigation';
-import { formatCurrency, formatDate } from '$lib/utils/format';
+import { Badge } from '$lib/components/ui/badge';
 import { Button } from '$lib/components/ui/button';
-import { Card, CardContent } from '$lib/components/ui/card';
+import * as Card from '$lib/components/ui/card';
+import * as Dialog from '$lib/components/ui/dialog';
+import { formatCurrency, formatDate } from '$lib/utils/format';
 import type { PageData } from './$types';
 
 let { data }: { data: PageData } = $props();
@@ -12,17 +14,27 @@ let showDeleteConfirm = $state(false);
 let deleting = $state(false);
 let actionLoading = $state('');
 
-const billStatusColor: Record<string, string> = {
-  draft: 'bg-gray-100 text-gray-800 dark:bg-gray-800 dark:text-gray-300',
-  pending_approval: 'bg-yellow-100 text-yellow-800 dark:bg-yellow-900 dark:text-yellow-300',
-  approved: 'bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-300',
-  partially_paid: 'bg-orange-100 text-orange-800 dark:bg-orange-900 dark:text-orange-300',
-  paid: 'bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-300',
-  voided: 'bg-red-100 text-red-800 dark:bg-red-900 dark:text-red-300',
-};
+function billStatusVariant(status: string): 'secondary' | 'destructive' | 'default' | 'outline' {
+  switch (status) {
+    case 'approved':
+      return 'default';
+    case 'draft':
+      return 'outline';
+    case 'paid':
+      return 'secondary';
+    case 'partially_paid':
+      return 'outline';
+    case 'pending_approval':
+      return 'outline';
+    case 'voided':
+      return 'destructive';
+    default:
+      return 'outline';
+  }
+}
 </script>
 
-<div class="mx-auto max-w-4xl space-y-6">
+<div class="flex flex-col mx-auto max-w-4xl gap-6">
   <div class="flex items-center justify-between">
     <div>
       <div class="flex items-center gap-2 text-sm text-muted-foreground">
@@ -32,9 +44,9 @@ const billStatusColor: Record<string, string> = {
       </div>
       <h1 class="mt-2 text-3xl font-bold text-foreground">
         Bill {data.bill.billNumber}
-        <span class="ml-3 inline-block rounded-full px-3 py-1 text-sm font-medium {billStatusColor[data.bill.status] || 'bg-gray-100 text-gray-800'}">
+        <Badge variant={billStatusVariant(data.bill.status)}>
           {data.bill.status.replace('_', ' ')}
-        </span>
+        </Badge>
       </h1>
     </div>
     <div class="flex gap-2">
@@ -104,10 +116,12 @@ const billStatusColor: Record<string, string> = {
   </div>
 
   <div class="grid gap-6 lg:grid-cols-2">
-    <Card>
-      <CardContent>
-        <h2 class="mb-4 text-lg font-semibold text-card-foreground">Bill Details</h2>
-        <dl class="space-y-3">
+    <Card.Root>
+      <Card.Header>
+        <Card.Title>Bill Details</Card.Title>
+      </Card.Header>
+      <Card.Content>
+        <dl class="flex flex-col gap-3">
           <div class="flex justify-between">
             <dt class="text-sm text-muted-foreground">Vendor</dt>
             <dd class="text-sm font-medium">{data.bill.vendorName || '-'}</dd>
@@ -121,13 +135,15 @@ const billStatusColor: Record<string, string> = {
             <dd class="text-sm font-medium">{formatDate(data.bill.dueDate)}</dd>
           </div>
         </dl>
-      </CardContent>
-    </Card>
+      </Card.Content>
+    </Card.Root>
 
-    <Card>
-      <CardContent>
-        <h2 class="mb-4 text-lg font-semibold text-card-foreground">Amounts</h2>
-        <dl class="space-y-3">
+    <Card.Root>
+      <Card.Header>
+        <Card.Title>Amounts</Card.Title>
+      </Card.Header>
+      <Card.Content>
+        <dl class="flex flex-col gap-3">
           <div class="flex justify-between">
             <dt class="text-sm text-muted-foreground">Subtotal</dt>
             <dd class="text-sm font-medium">{formatCurrency(data.bill.subtotal)}</dd>
@@ -145,14 +161,16 @@ const billStatusColor: Record<string, string> = {
             <dd class="text-sm font-medium text-green-600">{formatCurrency(data.bill.amountPaid)}</dd>
           </div>
         </dl>
-      </CardContent>
-    </Card>
+      </Card.Content>
+    </Card.Root>
   </div>
 
   {#if data.bill.lineItems && data.bill.lineItems.length > 0}
-    <Card>
-      <CardContent>
-        <h2 class="mb-4 text-lg font-semibold text-card-foreground">Line Items</h2>
+    <Card.Root>
+      <Card.Header>
+        <Card.Title>Line Items</Card.Title>
+      </Card.Header>
+      <Card.Content>
         <div class="overflow-x-auto">
           <table class="w-full text-sm">
             <thead>
@@ -175,47 +193,51 @@ const billStatusColor: Record<string, string> = {
             </tbody>
           </table>
         </div>
-      </CardContent>
-    </Card>
+      </Card.Content>
+    </Card.Root>
   {:else}
-    <Card>
-      <CardContent>
-        <h2 class="mb-4 text-lg font-semibold text-card-foreground">Line Items</h2>
+    <Card.Root>
+      <Card.Header>
+        <Card.Title>Line Items</Card.Title>
+      </Card.Header>
+      <Card.Content>
         <p class="py-4 text-center text-sm text-muted-foreground">No line items added to this bill yet.</p>
-      </CardContent>
-    </Card>
+      </Card.Content>
+    </Card.Root>
   {/if}
 </div>
 
-{#if showDeleteConfirm}
-  <div class="fixed inset-0 z-50 flex items-center justify-center bg-black/50">
-    <div class="mx-4 w-full max-w-sm rounded-lg bg-card p-6 shadow-lg">
-      <h3 class="text-lg font-semibold text-card-foreground">Delete Bill</h3>
-      <p class="mt-2 text-sm text-muted-foreground">
-        Are you sure you want to delete bill "{data.bill.billNumber}"? This action cannot be undone.
-      </p>
-      <div class="mt-4 flex justify-end gap-3">
-        <Button variant="outline" onclick={() => (showDeleteConfirm = false)}>
-          Cancel
-        </Button>
-        <form method="POST" action="?/delete" use:enhance={() => {
-          deleting = true;
-          return async ({ result }) => {
-            deleting = false;
-            if (result.type === 'success') {
-              toast.success('Bill deleted');
-              goto('/ap/bills');
-            } else {
-              toast.error('Failed to delete bill');
-            }
-            showDeleteConfirm = false;
-          };
-        }}>
-          <Button type="submit" disabled={deleting} variant="destructive">
-            {deleting ? 'Deleting...' : 'Delete'}
-          </Button>
-        </form>
-      </div>
-    </div>
-  </div>
-{/if}
+<Dialog.Root bind:open={showDeleteConfirm}>
+	<Dialog.Content>
+		<Dialog.Header>
+			<Dialog.Title>Delete Bill</Dialog.Title>
+			<Dialog.Description>
+				Are you sure you want to delete bill "{data.bill.billNumber}"? This action cannot be undone.
+			</Dialog.Description>
+		</Dialog.Header>
+		<div class="flex justify-end gap-3">
+			<Button variant="outline" onclick={() => (showDeleteConfirm = false)}>Cancel</Button>
+			<form
+				method="POST"
+				action="?/delete"
+				use:enhance={() => {
+					deleting = true;
+					return async ({ result }) => {
+						deleting = false;
+						if (result.type === 'success') {
+							toast.success('Bill deleted');
+							goto('/ap/bills');
+						} else {
+							toast.error('Failed to delete bill');
+						}
+						showDeleteConfirm = false;
+					};
+				}}
+			>
+				<Button type="submit" disabled={deleting} variant="destructive">
+					{deleting ? 'Deleting...' : 'Delete'}
+				</Button>
+			</form>
+		</div>
+	</Dialog.Content>
+</Dialog.Root>

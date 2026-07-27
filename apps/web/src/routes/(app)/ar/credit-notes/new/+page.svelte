@@ -1,92 +1,96 @@
 <script lang="ts">
 import { superForm } from 'sveltekit-superforms';
 import { toast } from 'svelte-sonner';
+import * as Field from '$lib/components/ui/field';
 import { Input } from '$lib/components/ui/input';
-import DatePicker from '$lib/components/ui/date-picker.svelte';
-import { Label } from '$lib/components/ui/label';
 import { Button } from '$lib/components/ui/button';
 import { Textarea } from '$lib/components/ui/textarea';
-import { Card, CardContent } from '$lib/components/ui/card';
+import * as Card from '$lib/components/ui/card';
+import * as Select from '$lib/components/ui/select';
+import DatePicker from '$lib/components/ui/date-picker.svelte';
 
 let { data } = $props();
 const { form, enhance, submitting } = superForm(data.form);
 let customers = $derived(data.customers);
 </script>
 
-<div class="space-y-6">
+<div class="flex flex-col gap-6">
 	<div>
 		<h1 class="text-3xl font-bold text-foreground">Create Credit Note</h1>
 		<p class="text-muted-foreground">Issue a credit note to a customer</p>
 	</div>
 
-	<Card>
-		<CardContent>
-		<form method="POST" use:enhance class="space-y-6">
-			<div class="grid gap-4 md:grid-cols-2">
-				<div class="space-y-2">
-					<Label for="customerId">Customer *</Label>
-					<select
-						id="customerId"
-						bind:value={$form.customerId}
-						class="h-8 w-full rounded-lg border border-input bg-transparent px-2.5 py-1 text-base transition-colors focus-visible:border-ring focus-visible:ring-3 focus-visible:ring-ring/50 md:text-sm"
-					>
-						<option value="">Select a customer</option>
-						{#each customers as customer}
-							<option value={customer.id}>{customer.name}</option>
-						{/each}
-					</select>
+	<Card.Root>
+		<Card.Content>
+		<form method="POST" use:enhance>
+			<Field.FieldGroup>
+				<div class="grid gap-4 md:grid-cols-2">
+					<Field.Field>
+						<Field.FieldLabel for="customerId">Customer *</Field.FieldLabel>
+						<Select.Root bind:value={$form.customerId}>
+							<Select.Trigger class="w-full">
+								<Select.Value placeholder="Select a customer" />
+							</Select.Trigger>
+							<Select.Content>
+								{#each customers as customer}
+									<Select.Item value={customer.id}>{customer.name}</Select.Item>
+								{/each}
+							</Select.Content>
+						</Select.Root>
+					</Field.Field>
+					<Field.Field>
+						<Field.FieldLabel for="creditNoteNumber">Credit Note Number *</Field.FieldLabel>
+						<Input id="creditNoteNumber" bind:value={$form.creditNoteNumber} placeholder="CN-001" />
+					</Field.Field>
+					<Field.Field>
+						<Field.FieldLabel for="issueDate">Issue Date *</Field.FieldLabel>
+						<DatePicker bind:value={$form.issueDate} />
+					</Field.Field>
+					<Field.Field>
+						<Field.FieldLabel for="amount">Amount *</Field.FieldLabel>
+						<Input
+							id="amount"
+							type="number"
+							step="0.01"
+							min="0"
+							value={$form.amount}
+							oninput={(e) => ($form.amount = Number(e.currentTarget.value))}
+							placeholder="0.00"
+						/>
+					</Field.Field>
+					<Field.Field>
+						<Field.FieldLabel for="currency">Currency</Field.FieldLabel>
+						<Select.Root bind:value={$form.currency}>
+							<Select.Trigger class="w-full">
+								<Select.Value placeholder="Select currency" />
+							</Select.Trigger>
+							<Select.Content>
+								<Select.Item value="USD">USD</Select.Item>
+								<Select.Item value="EUR">EUR</Select.Item>
+								<Select.Item value="GBP">GBP</Select.Item>
+							</Select.Content>
+						</Select.Root>
+					</Field.Field>
 				</div>
-				<div class="space-y-2">
-					<Label for="creditNoteNumber">Credit Note Number *</Label>
-					<Input id="creditNoteNumber" bind:value={$form.creditNoteNumber} placeholder="CN-001" />
-				</div>
-				<div class="space-y-2">
-					<Label for="issueDate">Issue Date *</Label>
-					<DatePicker bind:value={$form.issueDate} />
-				</div>
-				<div class="space-y-2">
-					<Label for="amount">Amount *</Label>
-					<Input
-						id="amount"
-						type="number"
-						step="0.01"
-						min="0"
-						value={$form.amount}
-						oninput={(e) => ($form.amount = Number(e.currentTarget.value))}
-						placeholder="0.00"
-					/>
-				</div>
-				<div class="space-y-2">
-					<Label for="currency">Currency</Label>
-					<select
-						id="currency"
-						bind:value={$form.currency}
-						class="h-8 w-full rounded-lg border border-input bg-transparent px-2.5 py-1 text-base transition-colors focus-visible:border-ring focus-visible:ring-3 focus-visible:ring-ring/50 md:text-sm"
-					>
-						<option value="USD">USD</option>
-						<option value="EUR">EUR</option>
-						<option value="GBP">GBP</option>
-					</select>
-				</div>
-			</div>
 
-			<div class="space-y-2">
-				<Label for="reason">Reason *</Label>
-				<Input id="reason" bind:value={$form.reason} maxlength={500} placeholder="Reason for credit note" />
-			</div>
+				<Field.Field>
+					<Field.FieldLabel for="reason">Reason *</Field.FieldLabel>
+					<Input id="reason" bind:value={$form.reason} maxlength={500} placeholder="Reason for credit note" />
+				</Field.Field>
 
-			<div class="space-y-2">
-				<Label for="notes">Notes</Label>
-				<Textarea id="notes" bind:value={$form.notes} rows={3} placeholder="Additional notes..." />
-			</div>
+				<Field.Field>
+					<Field.FieldLabel for="notes">Notes</Field.FieldLabel>
+					<Textarea id="notes" bind:value={$form.notes} rows={3} placeholder="Additional notes..." />
+				</Field.Field>
 
-			<div class="flex items-center gap-3">
-				<Button type="submit" disabled={$submitting}>
-					{$submitting ? 'Creating...' : 'Create Credit Note'}
-				</Button>
-				<Button variant="outline" href="/ar/credit-notes">Cancel</Button>
-			</div>
+				<div class="flex items-center gap-3">
+					<Button type="submit" disabled={$submitting}>
+						{$submitting ? 'Creating...' : 'Create Credit Note'}
+					</Button>
+					<Button variant="outline" href="/ar/credit-notes">Cancel</Button>
+				</div>
+			</Field.FieldGroup>
 		</form>
-		</CardContent>
-	</Card>
+		</Card.Content>
+	</Card.Root>
 </div>

@@ -1,16 +1,16 @@
 <script lang="ts">
 import { superForm } from 'sveltekit-superforms';
 import { Button } from '$lib/components/ui/button';
-import { Label } from '$lib/components/ui/label';
+import { Spinner } from '$lib/components/ui/spinner';
+import { Input } from '$lib/components/ui/input';
+import * as Field from '$lib/components/ui/field';
+import * as Select from '$lib/components/ui/select';
 import { toast } from 'svelte-sonner';
 import { goto } from '$app/navigation';
-import { Input } from '$lib/components/ui/input';
 import DatePicker from '$lib/components/ui/date-picker.svelte';
 
 let { data } = $props();
 const { form, errors, enhance, submitting, message } = superForm(data.form);
-
-const inputClass = "w-full rounded-lg border border-input bg-transparent px-2.5 py-1 text-base md:text-sm placeholder:text-muted-foreground focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:outline-none focus-visible:ring-3 disabled:cursor-not-allowed disabled:opacity-50";
 
 $effect(() => {
 	if ($message) {
@@ -25,79 +25,90 @@ $effect(() => {
 });
 </script>
 
-<div class="mx-auto max-w-2xl space-y-6">
+<div class="flex flex-col mx-auto max-w-2xl gap-6">
 	<div>
 		<h1 class="text-3xl font-bold text-foreground">New Fixed Asset</h1>
 		<p class="text-muted-foreground">Register a new fixed asset</p>
 	</div>
 
-	<form method="POST" use:enhance class="space-y-4">
-		<div class="grid gap-4 md:grid-cols-2">
-			<div class="space-y-1.5">
-				<Label for="name">Name *</Label>
-				<input id="name" type="text" value={$form.name} oninput={(e) => $form.name = e.currentTarget.value} class={inputClass} />
-				{#if $errors.name}<p class="text-sm text-destructive">{$errors.name}</p>{/if}
+	<form method="POST" use:enhance>
+		<Field.FieldGroup>
+			<div class="grid gap-4 md:grid-cols-2">
+				<Field.Field>
+					<Field.FieldLabel for="name">Name *</Field.FieldLabel>
+					<Input id="name" type="text" value={$form.name} oninput={(e) => $form.name = e.currentTarget.value} />
+					{#if $errors.name}<Field.FieldError>{$errors.name}</Field.FieldError>{/if}
+				</Field.Field>
+				<Field.Field>
+					<Field.FieldLabel for="code">Code *</Field.FieldLabel>
+					<Input id="code" type="text" value={$form.code} oninput={(e) => $form.code = e.currentTarget.value} />
+					{#if $errors.code}<Field.FieldError>{$errors.code}</Field.FieldError>{/if}
+				</Field.Field>
 			</div>
-			<div class="space-y-1.5">
-				<Label for="code">Code *</Label>
-				<input id="code" type="text" value={$form.code} oninput={(e) => $form.code = e.currentTarget.value} class={inputClass} />
-				{#if $errors.code}<p class="text-sm text-destructive">{$errors.code}</p>{/if}
-			</div>
-		</div>
 
-		<div class="grid gap-4 md:grid-cols-2">
-			<div class="space-y-1.5">
-				<Label for="categoryId">Category *</Label>
-				<select id="categoryId" bind:value={$form.categoryId} class={inputClass}>
-					<option value="">Select category</option>
-					{#each data.categories as cat}
-						<option value={cat.id}>{cat.name} ({cat.code})</option>
-					{/each}
-				</select>
-				{#if $errors.categoryId}<p class="text-sm text-destructive">{$errors.categoryId}</p>{/if}
+			<div class="grid gap-4 md:grid-cols-2">
+				<Field.Field>
+					<Field.FieldLabel for="categoryId">Category *</Field.FieldLabel>
+					<Select.Root bind:value={$form.categoryId}>
+						<Select.Trigger class="w-full">
+							<Select.Value placeholder="Select category" />
+						</Select.Trigger>
+						<Select.Content>
+							{#each data.categories as cat}
+								<Select.Item value={cat.id}>{cat.name} ({cat.code})</Select.Item>
+							{/each}
+						</Select.Content>
+					</Select.Root>
+					{#if $errors.categoryId}<Field.FieldError>{$errors.categoryId}</Field.FieldError>{/if}
+				</Field.Field>
+				<Field.Field>
+					<Field.FieldLabel for="purchaseDate">Purchase Date *</Field.FieldLabel>
+					<DatePicker bind:value={$form.purchaseDate} />
+					{#if $errors.purchaseDate}<Field.FieldError>{$errors.purchaseDate}</Field.FieldError>{/if}
+				</Field.Field>
 			</div>
-			<div class="space-y-1.5">
-				<Label for="purchaseDate">Purchase Date *</Label>
-				<DatePicker bind:value={$form.purchaseDate} />
-				{#if $errors.purchaseDate}<p class="text-sm text-destructive">{$errors.purchaseDate}</p>{/if}
-			</div>
-		</div>
 
-		<div class="grid gap-4 md:grid-cols-3">
-			<div class="space-y-1.5">
-				<Label for="purchasePrice">Purchase Price *</Label>
-				<input id="purchasePrice" type="number" value={$form.purchasePrice} oninput={(e) => $form.purchasePrice = Number(e.currentTarget.value)} class={inputClass} />
-				{#if $errors.purchasePrice}<p class="text-sm text-destructive">{$errors.purchasePrice}</p>{/if}
+			<div class="grid gap-4 md:grid-cols-3">
+				<Field.Field>
+					<Field.FieldLabel for="purchasePrice">Purchase Price *</Field.FieldLabel>
+					<Input id="purchasePrice" type="number" value={$form.purchasePrice} oninput={(e) => $form.purchasePrice = Number(e.currentTarget.value)} />
+					{#if $errors.purchasePrice}<Field.FieldError>{$errors.purchasePrice}</Field.FieldError>{/if}
+				</Field.Field>
+				<Field.Field>
+					<Field.FieldLabel for="salvageValue">Salvage Value</Field.FieldLabel>
+					<Input id="salvageValue" type="number" value={$form.salvageValue} oninput={(e) => $form.salvageValue = Number(e.currentTarget.value)} />
+				</Field.Field>
+				<Field.Field>
+					<Field.FieldLabel for="usefulLife">Useful Life (months) *</Field.FieldLabel>
+					<Input id="usefulLife" type="number" value={$form.usefulLife} oninput={(e) => $form.usefulLife = Number(e.currentTarget.value)} />
+					{#if $errors.usefulLife}<Field.FieldError>{$errors.usefulLife}</Field.FieldError>{/if}
+				</Field.Field>
 			</div>
-			<div class="space-y-1.5">
-				<Label for="salvageValue">Salvage Value</Label>
-				<input id="salvageValue" type="number" value={$form.salvageValue} oninput={(e) => $form.salvageValue = Number(e.currentTarget.value)} class={inputClass} />
-			</div>
-			<div class="space-y-1.5">
-				<Label for="usefulLife">Useful Life (months) *</Label>
-				<input id="usefulLife" type="number" value={$form.usefulLife} oninput={(e) => $form.usefulLife = Number(e.currentTarget.value)} class={inputClass} />
-				{#if $errors.usefulLife}<p class="text-sm text-destructive">{$errors.usefulLife}</p>{/if}
-			</div>
-		</div>
 
-		<div class="space-y-1.5">
-			<Label for="depreciationMethod">Depreciation Method</Label>
-			<select id="depreciationMethod" bind:value={$form.depreciationMethod} class={inputClass}>
-				<option value="straight_line">Straight Line</option>
-				<option value="declining_balance">Declining Balance</option>
-				<option value="units_of_production">Units of Production</option>
-			</select>
-		</div>
+			<Field.Field>
+				<Field.FieldLabel for="depreciationMethod">Depreciation Method</Field.FieldLabel>
+				<Select.Root bind:value={$form.depreciationMethod}>
+					<Select.Trigger class="w-full">
+						<Select.Value placeholder="Select method" />
+					</Select.Trigger>
+					<Select.Content>
+						<Select.Item value="straight_line">Straight Line</Select.Item>
+						<Select.Item value="declining_balance">Declining Balance</Select.Item>
+						<Select.Item value="units_of_production">Units of Production</Select.Item>
+					</Select.Content>
+				</Select.Root>
+			</Field.Field>
 
-		<div class="space-y-1.5">
-			<Label for="notes">Notes</Label>
-			<input id="notes" type="text" value={$form.notes ?? ''} oninput={(e) => $form.notes = e.currentTarget.value} class={inputClass} />
-		</div>
+			<Field.Field>
+				<Field.FieldLabel for="notes">Notes</Field.FieldLabel>
+				<Input id="notes" type="text" value={$form.notes ?? ''} oninput={(e) => $form.notes = e.currentTarget.value} />
+			</Field.Field>
+		</Field.FieldGroup>
 
 		<div class="flex justify-end gap-3 pt-4">
 			<Button variant="outline" href="/assets/fixed-assets">Cancel</Button>
 			<Button type="submit" disabled={$submitting}>
-				{#if $submitting}<div class="mr-2 h-4 w-4 animate-spin rounded-full border-2 border-primary-foreground border-t-transparent"></div>{/if}
+				{#if $submitting}<Spinner data-icon="inline-start" class="text-primary-foreground" />{/if}
 				Create Asset
 			</Button>
 		</div>

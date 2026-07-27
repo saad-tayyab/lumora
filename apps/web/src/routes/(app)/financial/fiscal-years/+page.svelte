@@ -3,17 +3,17 @@
 	import type { FiscalYearStatus } from '$lib/types';
 	import { formatDate } from '$lib/utils/format';
 	import { Button } from '$lib/components/ui/button';
-	import { Card, CardContent } from '$lib/components/ui/card';
+	import { badgeVariants } from '$lib/components/ui/badge';
+	import * as Card from '$lib/components/ui/card';
 	import AppDataTable from '$lib/components/data/AppDataTable.svelte';
 	import type { ColumnDef } from '@tanstack/svelte-table';
 	import type { PageData } from './$types';
 
 	let { data }: { data: PageData } = $props();
 
-	const statusBadgeColors: Record<FiscalYearStatus, string> = {
-		open: 'bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-300',
-		closed: 'bg-gray-100 text-gray-800 dark:bg-gray-800 dark:text-gray-300',
-	};
+	function statusVariant(status: FiscalYearStatus): 'secondary' | 'outline' {
+		return status === 'open' ? 'secondary' : 'outline';
+	}
 
 	const columns: ColumnDef<(typeof data.fiscalYears)[number], any>[] = [
 		{
@@ -35,14 +35,14 @@
 			accessorKey: 'status',
 			header: 'Status',
 			cell: ({ row }) => {
-				const cls = statusBadgeColors[(row as any).original.status as FiscalYearStatus] || '';
-				return `<span class="inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-medium ${cls}">${(row as any).original.status}</span>`;
+				const variant = statusVariant((row as any).original.status as FiscalYearStatus);
+				return `<span class="${badgeVariants({ variant })}">${(row as any).original.status}</span>`;
 			},
 		},
 	];
 </script>
 
-<div class="space-y-6">
+<div class="flex flex-col gap-6">
 	<div class="flex items-center justify-between">
 		<div>
 			<h1 class="text-3xl font-bold text-foreground">Fiscal Years</h1>
@@ -51,8 +51,8 @@
 		<Button href="/financial/fiscal-years/new">New Fiscal Year</Button>
 	</div>
 
-	<Card>
-		<CardContent>
+	<Card.Root>
+		<Card.Content>
 			<AppDataTable
 				{columns}
 				data={data.fiscalYears}
@@ -61,8 +61,8 @@
 				totalItems={data.fiscalYears.length}
 				onRowClick={(row) => goto(`/financial/fiscal-years/${row.id}`)}
 			/>
-		</CardContent>
-	</Card>
+		</Card.Content>
+	</Card.Root>
 
 	<div class="text-sm text-muted-foreground">
 		Showing {data.fiscalYears.length} fiscal year{data.fiscalYears.length !== 1 ? 's' : ''}

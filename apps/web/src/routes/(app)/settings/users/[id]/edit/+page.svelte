@@ -1,9 +1,11 @@
 <script lang="ts">
 import { toast } from 'svelte-sonner';
 import { goto } from '$app/navigation';
-import type { PageData } from './$types';
 import { Button } from '$lib/components/ui/button';
+import * as Field from '$lib/components/ui/field';
+import * as Select from '$lib/components/ui/select';
 import { Input } from '$lib/components/ui/input';
+import type { PageData } from './$types';
 
 let { data }: { data: PageData } = $props();
 let submitting = $state(false);
@@ -30,32 +32,39 @@ async function handleSubmit(e: Event) {
 </script>
 
 {#if data.user}
-  <div class="mx-auto max-w-2xl space-y-6">
+  <div class="mx-auto max-w-2xl flex flex-col gap-6">
     <div>
       <h1 class="text-3xl font-bold text-foreground">Edit User</h1>
       <p class="text-muted-foreground">{data.user.username}</p>
     </div>
 
-    <form onsubmit={handleSubmit} class="space-y-4">
-      <div class="space-y-1.5">
-        <label for="name" class="text-sm font-medium text-foreground">Name</label>
-        <input id="name" bind:value={name} required class="w-full rounded-md border bg-background px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-ring" />
-      </div>
-      <div class="space-y-1.5">
-        <label for="email" class="text-sm font-medium text-foreground">Email</label>
-        <input id="email" type="email" bind:value={email} required class="w-full rounded-md border bg-background px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-ring" />
-      </div>
-      <div class="space-y-1.5">
-        <label for="username" class="text-sm font-medium text-foreground">Username</label>
-        <input id="username" bind:value={username} required class="w-full rounded-md border bg-background px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-ring" />
-      </div>
-      <div class="space-y-1.5">
-        <label for="status" class="text-sm font-medium text-foreground">Status</label>
-        <select id="status" bind:value={status} class="w-full rounded-md border bg-background px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-ring">
-          <option value="active">Active</option>
-          <option value="suspended">Suspended</option>
-        </select>
-      </div>
+    <form onsubmit={handleSubmit}>
+      <Field.FieldGroup>
+        <Field.Field>
+          <Field.FieldLabel for="name">Name</Field.FieldLabel>
+          <Input id="name" bind:value={name} required />
+        </Field.Field>
+        <Field.Field>
+          <Field.FieldLabel for="email">Email</Field.FieldLabel>
+          <Input id="email" type="email" bind:value={email} required />
+        </Field.Field>
+        <Field.Field>
+          <Field.FieldLabel for="username">Username</Field.FieldLabel>
+          <Input id="username" bind:value={username} required />
+        </Field.Field>
+        <Field.Field>
+          <Field.FieldLabel for="status">Status</Field.FieldLabel>
+          <Select.Root bind:value={status}>
+            <Select.Trigger class="w-full">
+              <Select.Value placeholder="Select status" />
+            </Select.Trigger>
+            <Select.Content>
+              <Select.Item value="active">Active</Select.Item>
+              <Select.Item value="suspended">Suspended</Select.Item>
+            </Select.Content>
+          </Select.Root>
+        </Field.Field>
+      </Field.FieldGroup>
 
       <div class="flex justify-end gap-3 pt-4">
         <Button variant="outline" href="/settings/users/{data.user.id}">Cancel</Button>

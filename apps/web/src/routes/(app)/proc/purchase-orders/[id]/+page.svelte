@@ -5,6 +5,8 @@ import { type PurchaseOrder, type PurchaseOrderLineItem, procApi } from '$lib/ap
 import { formatCurrency, formatDate } from '$lib/utils/format';
 import type { PageData } from './$types';
 import { Button } from '$lib/components/ui/button';
+import { Spinner } from '$lib/components/ui/spinner';
+import { Badge } from '$lib/components/ui/badge';
 import * as Card from '$lib/components/ui/card';
 
 let { data }: { data: PageData } = $props();
@@ -12,17 +14,17 @@ let purchaseOrder = $state<PurchaseOrder | null>(data.purchaseOrder);
 let lineItems = $state<PurchaseOrderLineItem[]>(data.lineItems);
 let loading = $state(false);
 
-function poStatusColor(status: string): string {
-  const colors: Record<string, string> = {
-    draft: 'bg-gray-100 text-gray-800 dark:bg-gray-800 dark:text-gray-300',
-    pending_approval: 'bg-yellow-100 text-yellow-800 dark:bg-yellow-900 dark:text-yellow-300',
-    approved: 'bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-300',
-    partially_received: 'bg-orange-100 text-orange-800 dark:bg-orange-900 dark:text-orange-300',
-    fully_received: 'bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-300',
-    closed: 'bg-gray-100 text-gray-800 dark:bg-gray-800 dark:text-gray-300',
-    cancelled: 'bg-red-100 text-red-800 dark:bg-red-900 dark:text-red-300',
-  };
-  return colors[status] || 'bg-gray-100 text-gray-800 dark:bg-gray-800 dark:text-gray-300';
+function poStatusVariant(status: string): 'secondary' | 'destructive' | 'default' | 'outline' {
+  switch (status) {
+    case 'draft': return 'outline';
+    case 'pending_approval': return 'outline';
+    case 'approved': return 'default';
+    case 'partially_received': return 'outline';
+    case 'fully_received': return 'secondary';
+    case 'closed': return 'outline';
+    case 'cancelled': return 'destructive';
+    default: return 'outline';
+  }
 }
 
 function formatStatus(status: string): string {
@@ -102,7 +104,7 @@ async function deleteLineItem(lineItemId: string) {
 }
 </script>
 
-<div class="mx-auto max-w-4xl space-y-6">
+<div class="mx-auto max-w-4xl flex flex-col gap-6">
   <nav class="mb-4 text-sm text-muted-foreground">
     <a href="/proc/purchase-orders" class="hover:underline">Purchase Orders</a>
     <span class="mx-2">/</span>
@@ -111,7 +113,7 @@ async function deleteLineItem(lineItemId: string) {
 
   {#if loading}
     <div class="flex items-center justify-center py-12">
-      <div class="h-8 w-8 animate-spin rounded-full border-4 border-primary border-t-transparent"></div>
+      <Spinner class="size-8 text-primary" />
     </div>
   {:else if !purchaseOrder}
     <div class="py-12 text-center text-muted-foreground">Purchase order not found</div>
@@ -120,9 +122,9 @@ async function deleteLineItem(lineItemId: string) {
       <div>
         <div class="flex items-center gap-3">
           <h1 class="text-3xl font-bold text-foreground">{purchaseOrder.poNumber}</h1>
-          <span class="inline-block rounded-full px-2 py-0.5 text-xs font-medium {poStatusColor(purchaseOrder.status)}">
+          <Badge variant={poStatusVariant(purchaseOrder.status)}>
             {formatStatus(purchaseOrder.status)}
-          </span>
+          </Badge>
         </div>
         <p class="text-muted-foreground">Purchase order details</p>
       </div>
@@ -182,7 +184,9 @@ async function deleteLineItem(lineItemId: string) {
 
     <div class="grid gap-6 lg:grid-cols-3">
       <div class="rounded-lg border bg-card p-6 shadow-sm lg:col-span-2">
-        <h2 class="mb-4 text-lg font-semibold text-card-foreground">Order Details</h2>
+        <Card.Header>
+				<Card.Title>Order Details</Card.Title>
+			</Card.Header>
         <div class="grid gap-4 md:grid-cols-2">
           <div>
             <div class="text-sm text-muted-foreground">Vendor</div>
@@ -212,8 +216,10 @@ async function deleteLineItem(lineItemId: string) {
       </div>
 
       <Card.Root class="shadow-sm"><Card.Content>
-        <h2 class="mb-4 text-lg font-semibold text-card-foreground">Timeline</h2>
-        <div class="space-y-3 text-sm">
+        <Card.Header>
+				<Card.Title>Timeline</Card.Title>
+			</Card.Header>
+        <div class="flex flex-col gap-3 text-sm">
           <div>
             <div class="text-muted-foreground">Created</div>
             <div class="text-card-foreground">{formatDate(purchaseOrder.createdAt)}</div>

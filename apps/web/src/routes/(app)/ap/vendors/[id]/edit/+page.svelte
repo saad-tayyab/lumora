@@ -2,6 +2,11 @@
 import { toast } from 'svelte-sonner';
 import { enhance } from '$app/forms';
 import { goto } from '$app/navigation';
+import * as Field from '$lib/components/ui/field';
+import * as Select from '$lib/components/ui/select';
+import { Input } from '$lib/components/ui/input';
+import { Textarea } from '$lib/components/ui/textarea';
+import { Button } from '$lib/components/ui/button';
 import type { PageData } from './$types';
 
 let { data }: { data: PageData } = $props();
@@ -21,7 +26,7 @@ let notes = $state(data.vendor.notes || '');
 let loading = $state(false);
 </script>
 
-<div class="mx-auto max-w-2xl space-y-6">
+<div class="flex flex-col mx-auto max-w-2xl gap-6">
   <div>
     <div class="flex items-center gap-2 text-sm text-muted-foreground">
       <a href="/ap/vendors" class="hover:underline">Vendors</a>
@@ -47,77 +52,83 @@ let loading = $state(false);
         }
       };
     }}
-    class="space-y-6 rounded-lg border bg-card p-6 shadow-sm"
   >
-    <div class="grid gap-4 md:grid-cols-2">
-      <div class="space-y-2">
-        <label for="name" class="text-sm font-medium text-card-foreground">Name *</label>
-        <input id="name" name="name" bind:value={name} required class="w-full rounded-md border bg-background px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-ring" />
-      </div>
-      <div class="space-y-2">
-        <label for="email" class="text-sm font-medium text-card-foreground">Email</label>
-        <input id="email" name="email" type="email" bind:value={email} class="w-full rounded-md border bg-background px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-ring" />
-      </div>
-      <div class="space-y-2">
-        <label for="phone" class="text-sm font-medium text-card-foreground">Phone</label>
-        <input id="phone" name="phone" bind:value={phone} class="w-full rounded-md border bg-background px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-ring" />
-      </div>
-      <div class="space-y-2">
-        <label for="taxId" class="text-sm font-medium text-card-foreground">Tax ID</label>
-        <input id="taxId" name="taxId" bind:value={taxId} class="w-full rounded-md border bg-background px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-ring" />
-      </div>
-      <div class="space-y-2">
-        <label for="currency" class="text-sm font-medium text-card-foreground">Currency</label>
-        <select id="currency" name="currency" bind:value={currency} class="w-full rounded-md border bg-background px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-ring">
-          <option value="USD">USD</option>
-          <option value="EUR">EUR</option>
-          <option value="GBP">GBP</option>
-          <option value="PKR">PKR</option>
-        </select>
-      </div>
-      <div class="space-y-2">
-        <label for="paymentTerms" class="text-sm font-medium text-card-foreground">Payment Terms (days)</label>
-        <input id="paymentTerms" name="paymentTerms" type="number" bind:value={paymentTerms} class="w-full rounded-md border bg-background px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-ring" />
-      </div>
-    </div>
+    <div class="rounded-lg border bg-card p-6 shadow-sm">
+      <Field.FieldGroup>
+        <div class="grid gap-4 md:grid-cols-2">
+          <Field.Field>
+            <Field.FieldLabel for="name">Name *</Field.FieldLabel>
+            <Input id="name" name="name" bind:value={name} required />
+          </Field.Field>
+          <Field.Field>
+            <Field.FieldLabel for="email">Email</Field.FieldLabel>
+            <Input id="email" name="email" type="email" bind:value={email} />
+          </Field.Field>
+          <Field.Field>
+            <Field.FieldLabel for="phone">Phone</Field.FieldLabel>
+            <Input id="phone" name="phone" bind:value={phone} />
+          </Field.Field>
+          <Field.Field>
+            <Field.FieldLabel for="taxId">Tax ID</Field.FieldLabel>
+            <Input id="taxId" name="taxId" bind:value={taxId} />
+          </Field.Field>
+          <Field.Field>
+            <Field.FieldLabel for="currency">Currency</Field.FieldLabel>
+            <Select.Root bind:value={currency}>
+              <Select.Trigger class="w-full">
+                <Select.Value placeholder="Select currency" />
+              </Select.Trigger>
+              <Select.Content>
+                <Select.Item value="USD">USD</Select.Item>
+                <Select.Item value="EUR">EUR</Select.Item>
+                <Select.Item value="GBP">GBP</Select.Item>
+                <Select.Item value="PKR">PKR</Select.Item>
+              </Select.Content>
+            </Select.Root>
+          </Field.Field>
+          <Field.Field>
+            <Field.FieldLabel for="paymentTerms">Payment Terms (days)</Field.FieldLabel>
+            <Input id="paymentTerms" name="paymentTerms" type="number" bind:value={paymentTerms} />
+          </Field.Field>
+        </div>
 
-    <div class="space-y-2">
-      <label for="address" class="text-sm font-medium text-card-foreground">Address</label>
-      <input id="address" name="address" bind:value={address} class="w-full rounded-md border bg-background px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-ring" />
-    </div>
+        <Field.Field>
+          <Field.FieldLabel for="address">Address</Field.FieldLabel>
+          <Input id="address" name="address" bind:value={address} />
+        </Field.Field>
 
-    <div class="grid gap-4 md:grid-cols-3">
-      <div class="space-y-2">
-        <label for="city" class="text-sm font-medium text-card-foreground">City</label>
-        <input id="city" name="city" bind:value={city} class="w-full rounded-md border bg-background px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-ring" />
-      </div>
-      <div class="space-y-2">
-        <label for="state" class="text-sm font-medium text-card-foreground">State</label>
-        <input id="state" name="state" bind:value={state_} class="w-full rounded-md border bg-background px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-ring" />
-      </div>
-      <div class="space-y-2">
-        <label for="postalCode" class="text-sm font-medium text-card-foreground">Postal Code</label>
-        <input id="postalCode" name="postalCode" bind:value={postalCode} class="w-full rounded-md border bg-background px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-ring" />
-      </div>
-    </div>
+        <div class="grid gap-4 md:grid-cols-3">
+          <Field.Field>
+            <Field.FieldLabel for="city">City</Field.FieldLabel>
+            <Input id="city" name="city" bind:value={city} />
+          </Field.Field>
+          <Field.Field>
+            <Field.FieldLabel for="state">State</Field.FieldLabel>
+            <Input id="state" name="state" bind:value={state_} />
+          </Field.Field>
+          <Field.Field>
+            <Field.FieldLabel for="postalCode">Postal Code</Field.FieldLabel>
+            <Input id="postalCode" name="postalCode" bind:value={postalCode} />
+          </Field.Field>
+        </div>
 
-    <div class="space-y-2">
-      <label for="country" class="text-sm font-medium text-card-foreground">Country</label>
-      <input id="country" name="country" bind:value={country} class="w-full rounded-md border bg-background px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-ring" />
-    </div>
+        <Field.Field>
+          <Field.FieldLabel for="country">Country</Field.FieldLabel>
+          <Input id="country" name="country" bind:value={country} />
+        </Field.Field>
 
-    <div class="space-y-2">
-      <label for="notes" class="text-sm font-medium text-card-foreground">Notes</label>
-      <textarea id="notes" name="notes" bind:value={notes} rows="3" class="w-full rounded-md border bg-background px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-ring"></textarea>
-    </div>
+        <Field.Field>
+          <Field.FieldLabel for="notes">Notes</Field.FieldLabel>
+          <Textarea id="notes" name="notes" bind:value={notes} rows={3} />
+        </Field.Field>
 
-    <div class="flex justify-end gap-3">
-      <a href="/ap/vendors/{data.vendor.id}" class="inline-flex items-center rounded-md border px-4 py-2 text-sm font-medium hover:bg-accent">
-        Cancel
-      </a>
-      <button type="submit" disabled={loading} class="inline-flex items-center rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground hover:bg-primary/90 disabled:opacity-50">
-        {loading ? 'Saving...' : 'Save Changes'}
-      </button>
+        <div class="flex justify-end gap-3">
+          <Button variant="outline" href="/ap/vendors/{data.vendor.id}">Cancel</Button>
+          <Button type="submit" disabled={loading}>
+            {loading ? 'Saving...' : 'Save Changes'}
+          </Button>
+        </div>
+      </Field.FieldGroup>
     </div>
   </form>
 </div>

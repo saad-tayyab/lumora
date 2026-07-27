@@ -2,19 +2,23 @@
 	import { goto } from '$app/navigation';
 	import { formatDateTime } from '$lib/utils/format';
 	import { Button } from '$lib/components/ui/button';
-	import { Card, CardContent } from '$lib/components/ui/card';
+	import { badgeVariants } from '$lib/components/ui/badge';
+	import * as Card from '$lib/components/ui/card';
 	import AppDataTable from '$lib/components/data/AppDataTable.svelte';
 	import type { ColumnDef } from '@tanstack/svelte-table';
 	import type { PageData } from './$types';
 
 	let { data }: { data: PageData } = $props();
 
-	const movementTypeColor: Record<string, string> = {
-		in: 'bg-green-100 text-green-800',
-		out: 'bg-red-100 text-red-800',
-		transfer: 'bg-blue-100 text-blue-800',
-		adjustment: 'bg-yellow-100 text-yellow-800',
-	};
+	function movementTypeVariant(type: string): 'secondary' | 'destructive' | 'default' | 'outline' {
+		switch (type) {
+			case 'in': return 'secondary';
+			case 'out': return 'destructive';
+			case 'transfer': return 'default';
+			case 'adjustment': return 'outline';
+			default: return 'outline';
+		}
+	}
 
 	const columns: ColumnDef<(typeof data.movements)[number], any>[] = [
 		{
@@ -38,10 +42,7 @@
 		{
 			accessorKey: 'type',
 			header: 'Type',
-			cell: ({ row }) => {
-				const cls = movementTypeColor[(row as any).original.type] || 'bg-gray-100 text-gray-800';
-				return `<span class="inline-block rounded-full px-2 py-0.5 text-xs font-medium ${cls}">${(row as any).original.type}</span>`;
-			},
+		cell: ({ row }) => `<span class="${badgeVariants({ variant: movementTypeVariant((row as any).original.type) })}">${(row as any).original.type}</span>`,
 		},
 		{
 			accessorKey: 'quantity',
@@ -72,7 +73,7 @@
 	];
 </script>
 
-<div class="space-y-6">
+<div class="flex flex-col gap-6">
 	<div class="flex items-center justify-between">
 		<div>
 			<h1 class="text-3xl font-bold text-foreground">Stock Movements</h1>
@@ -81,8 +82,8 @@
 		<Button href="/inv/stock-movements/new">Record Movement</Button>
 	</div>
 
-	<Card>
-		<CardContent>
+	<Card.Root>
+		<Card.Content>
 			<AppDataTable
 				{columns}
 				data={data.movements}
@@ -90,6 +91,6 @@
 				pageSize={20}
 				onRowClick={(row) => goto(`/inv/stock-movements/${row.id}`)}
 			/>
-		</CardContent>
-	</Card>
+		</Card.Content>
+	</Card.Root>
 </div>

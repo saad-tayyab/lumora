@@ -6,7 +6,7 @@ import * as Card from '$lib/components/ui/card';
 let { data }: { data: PageData } = $props();
 </script>
 
-<div class="space-y-6">
+<div class="flex flex-col gap-6">
   <div>
     <h1 class="text-3xl font-bold text-foreground">Budget Consumptions</h1>
     <p class="text-muted-foreground">{data.total} consumptions</p>

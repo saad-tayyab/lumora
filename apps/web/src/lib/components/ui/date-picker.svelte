@@ -59,7 +59,7 @@
           {disabled}
           {...props}
         >
-          <CalendarIcon class="mr-2 h-4 w-4 shrink-0" />
+          <CalendarIcon data-icon="inline-start" class="shrink-0" />
           {formatDateDisplay(value)}
         </Button>
       {/snippet}

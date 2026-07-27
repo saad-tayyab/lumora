@@ -4,7 +4,9 @@ import { goto } from '$app/navigation';
 import { financialApi } from '$lib/api/financial';
 import { formatCurrency, formatDate } from '$lib/utils/format';
 import { Button } from '$lib/components/ui/button';
-import { Card, CardContent } from '$lib/components/ui/card';
+import { Badge } from '$lib/components/ui/badge';
+import { Spinner } from '$lib/components/ui/spinner';
+import * as Card from '$lib/components/ui/card';
 import type { PageData } from './$types';
 
 let { data }: { data: PageData } = $props();
@@ -15,11 +17,14 @@ let loading = $state(false);
 let posting = $state(false);
 let voiding = $state(false);
 
-const statusBadgeColors: Record<string, string> = {
-  draft: 'bg-gray-100 text-gray-800 dark:bg-gray-800 dark:text-gray-300',
-  posted: 'bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-300',
-  voided: 'bg-red-100 text-red-800 dark:bg-red-900 dark:text-red-300',
-};
+function statusBadgeVariants(status: string): 'secondary' | 'destructive' | 'default' | 'outline' {
+  switch (status) {
+    case 'draft': return 'outline';
+    case 'posted': return 'secondary';
+    case 'voided': return 'destructive';
+    default: return 'outline';
+  }
+}
 
 const totalDebit = $derived(entry.lines.reduce((sum, l) => sum + (parseFloat(l.debit) || 0), 0));
 const totalCredit = $derived(entry.lines.reduce((sum, l) => sum + (parseFloat(l.credit) || 0), 0));
@@ -49,7 +54,7 @@ async function handleVoid() {
 }
 </script>
 
-<div class="mx-auto max-w-4xl space-y-6">
+<div class="flex flex-col mx-auto max-w-4xl gap-6">
   <nav class="mb-4 text-sm text-muted-foreground">
     <a href="/financial/journal-entries" class="hover:underline">Journal Entries</a>
     <span class="mx-2">/</span>
@@ -58,7 +63,7 @@ async function handleVoid() {
 
   {#if loading}
     <div class="flex items-center justify-center py-12">
-      <div class="h-8 w-8 animate-spin rounded-full border-4 border-primary border-t-transparent"></div>
+      <Spinner class="size-8 text-primary" />
     </div>
   {:else}
   <div>
@@ -80,9 +85,11 @@ async function handleVoid() {
     </div>
   </div>
 
-  <Card>
-    <CardContent>
-      <h2 class="mb-4 text-lg font-semibold text-card-foreground">Entry Details</h2>
+  <Card.Root>
+    <Card.Content>
+      <Card.Header>
+				<Card.Title>Entry Details</Card.Title>
+			</Card.Header>
       <dl class="grid grid-cols-2 gap-4">
         <div>
           <dt class="text-sm text-muted-foreground">Entry Number</dt>
@@ -95,9 +102,9 @@ async function handleVoid() {
         <div>
           <dt class="text-sm text-muted-foreground">Status</dt>
           <dd class="mt-1">
-            <span class="inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-medium {statusBadgeColors[entry.status]}">
+            <Badge variant={statusBadgeVariants(entry.status)}>
               {entry.status}
-            </span>
+            </Badge>
           </dd>
         </div>
         <div>
@@ -105,12 +112,14 @@ async function handleVoid() {
           <dd class="mt-1 text-foreground">{formatDate(entry.createdAt)}</dd>
         </div>
       </dl>
-    </CardContent>
-  </Card>
+    </Card.Content>
+  </Card.Root>
 
-  <Card>
-    <CardContent>
-      <h2 class="mb-4 text-lg font-semibold text-card-foreground">Lines</h2>
+  <Card.Root>
+    <Card.Content>
+      <Card.Header>
+				<Card.Title>Lines</Card.Title>
+			</Card.Header>
       <div class="overflow-x-auto">
         <table class="w-full text-sm">
           <thead>
@@ -159,7 +168,7 @@ async function handleVoid() {
           </span>
         {/if}
       </div>
-    </CardContent>
-  </Card>
+    </Card.Content>
+  </Card.Root>
   {/if}
 </div>

@@ -21,14 +21,14 @@ function methodLabel(method: string): string {
   return labels[method] || method;
 }
 
-function statusColor(status: string): string {
-  const colors: Record<string, string> = {
-    active: 'bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-300',
-    fully_depreciated: 'bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-300',
-    disposed: 'bg-gray-100 text-gray-800 dark:bg-gray-800 dark:text-gray-300',
-    under_construction: 'bg-yellow-100 text-yellow-800 dark:bg-yellow-900 dark:text-yellow-300',
-  };
-  return colors[status] || 'bg-gray-100 text-gray-800';
+function statusVariant(status: string): 'secondary' | 'destructive' | 'default' | 'outline' {
+  switch (status) {
+    case 'active': return 'secondary';
+    case 'disposed': return 'outline';
+    case 'fully_depreciated': return 'outline';
+    case 'under_construction': return 'outline';
+    default: return 'outline';
+  }
 }
 
 async function handleDispose(detail: { disposalDate: string; disposalProceeds: string }) {
@@ -50,7 +50,7 @@ async function handleDispose(detail: { disposalDate: string; disposalProceeds: s
 
 {#if data.asset}
   {@const asset = data.asset}
-  <div class="mx-auto max-w-4xl space-y-6">
+  <div class="flex flex-col mx-auto max-w-4xl gap-6">
     <nav class="mb-4 text-sm text-muted-foreground">
       <a href="/assets/fixed-assets" class="hover:underline">Fixed Assets</a>
       <span class="mx-2">/</span>
@@ -61,7 +61,7 @@ async function handleDispose(detail: { disposalDate: string; disposalProceeds: s
       <div>
         <div class="flex items-center gap-3">
           <h1 class="text-3xl font-bold text-foreground">{asset.name}</h1>
-          <span class="inline-flex items-center rounded-full px-2 py-0.5 text-xs font-medium {statusColor(asset.status)}">
+          <span class="inline-flex items-center rounded-full px-2 py-0.5 text-xs font-medium {statusVariant(asset.status)}">
             {asset.status.replace('_', ' ')}
           </span>
         </div>
@@ -86,7 +86,7 @@ async function handleDispose(detail: { disposalDate: string; disposalProceeds: s
     <div class="grid gap-6 md:grid-cols-2">
       <Card.Root class="shadow-sm"><Card.Content>
         <h2 class="text-lg font-semibold text-card-foreground">Asset Details</h2>
-        <dl class="space-y-2 text-sm">
+        <dl class="flex flex-col gap-2 text-sm">
           <div class="flex justify-between">
             <dt class="text-muted-foreground">Category</dt>
             <dd class="font-medium">{asset.categoryId}</dd>
@@ -120,7 +120,7 @@ async function handleDispose(detail: { disposalDate: string; disposalProceeds: s
 
       <Card.Root class="shadow-sm"><Card.Content>
         <h2 class="text-lg font-semibold text-card-foreground">Depreciation</h2>
-        <dl class="space-y-2 text-sm">
+        <dl class="flex flex-col gap-2 text-sm">
           <div class="flex justify-between">
             <dt class="text-muted-foreground">Accumulated Depreciation</dt>
             <dd class="font-medium">{formatCurrency(asset.accumulatedDepreciation)}</dd>

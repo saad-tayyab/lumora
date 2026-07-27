@@ -2,6 +2,11 @@
 import { toast } from 'svelte-sonner';
 import { enhance } from '$app/forms';
 import { goto } from '$app/navigation';
+import * as Field from '$lib/components/ui/field';
+import { Input } from '$lib/components/ui/input';
+import { Textarea } from '$lib/components/ui/textarea';
+import { Button } from '$lib/components/ui/button';
+import * as Select from '$lib/components/ui/select';
 import type { PageData } from './$types';
 import DatePicker from '$lib/components/ui/date-picker.svelte';
 
@@ -18,7 +23,7 @@ let notes = $state(data.bill.notes || '');
 let loading = $state(false);
 </script>
 
-<div class="mx-auto max-w-2xl space-y-6">
+<div class="flex flex-col mx-auto max-w-2xl gap-6">
   <div>
     <div class="flex items-center gap-2 text-sm text-muted-foreground">
       <a href="/ap/bills" class="hover:underline">Bills</a>
@@ -44,61 +49,66 @@ let loading = $state(false);
         }
       };
     }}
-    class="space-y-6 rounded-lg border bg-card p-6 shadow-sm"
   >
-    <div class="grid gap-4 md:grid-cols-2">
-      <div class="space-y-2">
-        <label for="vendorId" class="text-sm font-medium text-card-foreground">Vendor *</label>
-        <select id="vendorId" name="vendorId" bind:value={vendorId} required class="w-full rounded-md border bg-background px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-ring">
-          <option value="">Select vendor</option>
-          {#each data.vendors as vendor}
-            <option value={vendor.id}>{vendor.name}</option>
-          {/each}
-        </select>
-      </div>
-      <div class="space-y-2">
-        <label for="billNumber" class="text-sm font-medium text-card-foreground">Bill Number *</label>
-        <input id="billNumber" name="billNumber" bind:value={billNumber} required class="w-full rounded-md border bg-background px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-ring" />
-      </div>
-      <div class="space-y-2">
-        <label for="issueDate" class="text-sm font-medium text-card-foreground">Issue Date *</label>
-        <DatePicker bind:value={issueDate} />
-        <input type="hidden" name="issueDate" value={issueDate} />
-      </div>
-      <div class="space-y-2">
-        <label for="dueDate" class="text-sm font-medium text-card-foreground">Due Date *</label>
-        <DatePicker bind:value={dueDate} />
-        <input type="hidden" name="dueDate" value={dueDate} />
-      </div>
-    </div>
+    <div class="rounded-lg border bg-card p-6 shadow-sm">
+      <Field.FieldGroup>
+        <div class="grid gap-4 md:grid-cols-2">
+          <Field.Field>
+            <Field.FieldLabel for="vendorId">Vendor *</Field.FieldLabel>
+            <Select.Root bind:value={vendorId}>
+              <Select.Trigger class="w-full">
+                <Select.Value placeholder="Select vendor" />
+              </Select.Trigger>
+              <Select.Content>
+                {#each data.vendors as vendor}
+                  <Select.Item value={vendor.id}>{vendor.name}</Select.Item>
+                {/each}
+              </Select.Content>
+            </Select.Root>
+          </Field.Field>
+          <Field.Field>
+            <Field.FieldLabel for="billNumber">Bill Number *</Field.FieldLabel>
+            <Input id="billNumber" name="billNumber" bind:value={billNumber} required />
+          </Field.Field>
+          <Field.Field>
+            <Field.FieldLabel for="issueDate">Issue Date *</Field.FieldLabel>
+            <DatePicker bind:value={issueDate} />
+            <input type="hidden" name="issueDate" value={issueDate} />
+          </Field.Field>
+          <Field.Field>
+            <Field.FieldLabel for="dueDate">Due Date *</Field.FieldLabel>
+            <DatePicker bind:value={dueDate} />
+            <input type="hidden" name="dueDate" value={dueDate} />
+          </Field.Field>
+        </div>
 
-    <div class="grid gap-4 md:grid-cols-3">
-      <div class="space-y-2">
-        <label for="subtotal" class="text-sm font-medium text-card-foreground">Subtotal</label>
-        <input id="subtotal" name="subtotal" bind:value={subtotal} type="number" step="0.01" class="w-full rounded-md border bg-background px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-ring" />
-      </div>
-      <div class="space-y-2">
-        <label for="taxAmount" class="text-sm font-medium text-card-foreground">Tax Amount</label>
-        <input id="taxAmount" name="taxAmount" bind:value={taxAmount} type="number" step="0.01" class="w-full rounded-md border bg-background px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-ring" />
-      </div>
-      <div class="space-y-2">
-        <label for="total" class="text-sm font-medium text-card-foreground">Total</label>
-        <input id="total" name="total" bind:value={total} type="number" step="0.01" class="w-full rounded-md border bg-background px-3 py-2 text-sm font-bold focus:outline-none focus:ring-2 focus:ring-ring" />
-      </div>
-    </div>
+        <div class="grid gap-4 md:grid-cols-3">
+          <Field.Field>
+            <Field.FieldLabel for="subtotal">Subtotal</Field.FieldLabel>
+            <Input id="subtotal" name="subtotal" bind:value={subtotal} type="number" step="0.01" />
+          </Field.Field>
+          <Field.Field>
+            <Field.FieldLabel for="taxAmount">Tax Amount</Field.FieldLabel>
+            <Input id="taxAmount" name="taxAmount" bind:value={taxAmount} type="number" step="0.01" />
+          </Field.Field>
+          <Field.Field>
+            <Field.FieldLabel for="total">Total</Field.FieldLabel>
+            <Input id="total" name="total" bind:value={total} type="number" step="0.01" class="font-bold" />
+          </Field.Field>
+        </div>
 
-    <div class="space-y-2">
-      <label for="notes" class="text-sm font-medium text-card-foreground">Notes</label>
-      <textarea id="notes" name="notes" bind:value={notes} rows="3" class="w-full rounded-md border bg-background px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-ring"></textarea>
-    </div>
+        <Field.Field>
+          <Field.FieldLabel for="notes">Notes</Field.FieldLabel>
+          <Textarea id="notes" name="notes" bind:value={notes} rows={3} />
+        </Field.Field>
 
-    <div class="flex justify-end gap-3">
-      <a href="/ap/bills/{data.bill.id}" class="inline-flex items-center rounded-md border px-4 py-2 text-sm font-medium hover:bg-accent">
-        Cancel
-      </a>
-      <button type="submit" disabled={loading} class="inline-flex items-center rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground hover:bg-primary/90 disabled:opacity-50">
-        {loading ? 'Saving...' : 'Save Changes'}
-      </button>
+        <div class="flex justify-end gap-3">
+          <Button variant="outline" href="/ap/bills/{data.bill.id}">Cancel</Button>
+          <Button type="submit" disabled={loading}>
+            {loading ? 'Saving...' : 'Save Changes'}
+          </Button>
+        </div>
+      </Field.FieldGroup>
     </div>
   </form>
 </div>

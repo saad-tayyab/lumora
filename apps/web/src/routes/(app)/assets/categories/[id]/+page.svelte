@@ -19,7 +19,7 @@ function methodLabel(method: string): string {
 
 {#if data.category}
   {@const cat = data.category}
-  <div class="space-y-6">
+  <div class="flex flex-col gap-6">
     <div class="flex items-center justify-between">
       <div>
         <div class="flex items-center gap-3">
@@ -48,7 +48,7 @@ function methodLabel(method: string): string {
 
     <Card.Root class="shadow-sm"><Card.Content>
       <h2 class="text-lg font-semibold text-card-foreground">Category Details</h2>
-      <dl class="space-y-2 text-sm">
+      <dl class="flex flex-col gap-2 text-sm">
         <div class="flex justify-between">
           <dt class="text-muted-foreground">Name</dt>
           <dd class="font-medium">{cat.name}</dd>
@@ -74,7 +74,7 @@ function methodLabel(method: string): string {
 
     <Card.Root class="shadow-sm"><Card.Content>
       <h2 class="text-lg font-semibold text-card-foreground">Depreciation Defaults</h2>
-      <dl class="space-y-2 text-sm">
+      <dl class="flex flex-col gap-2 text-sm">
         <div class="flex justify-between">
           <dt class="text-muted-foreground">Depreciable</dt>
           <dd class="font-medium">{cat.isDepreciable ? 'Yes' : 'No'}</dd>
@@ -96,7 +96,7 @@ function methodLabel(method: string): string {
 
     <Card.Root class="shadow-sm"><Card.Content>
       <h2 class="text-lg font-semibold text-card-foreground">General Ledger</h2>
-      <dl class="space-y-2 text-sm">
+      <dl class="flex flex-col gap-2 text-sm">
         <div class="flex justify-between">
           <dt class="text-muted-foreground">GL Account ID</dt>
           <dd class="font-medium">{cat.glAccountId || '—'}</dd>

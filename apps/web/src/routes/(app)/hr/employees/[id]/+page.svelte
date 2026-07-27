@@ -3,19 +3,20 @@ import { toast } from 'svelte-sonner';
 import { type Employee, hrApi } from '$lib/api/hr';
 import { formatDate } from '$lib/utils/format';
 import type { PageData } from './$types';
+import { Badge } from '$lib/components/ui/badge';
 import * as Card from '$lib/components/ui/card';
 
 let { data }: { data: PageData } = $props();
 let employee = $state<Employee | null>(data.employee);
 let loading = $state(false);
 
-function empStatusColor(status: string): string {
-  const colors: Record<string, string> = {
-    active: 'bg-green-100 text-green-800',
-    inactive: 'bg-gray-100 text-gray-800',
-    terminated: 'bg-red-100 text-red-800',
-  };
-  return colors[status] || 'bg-gray-100 text-gray-800';
+function empStatusVariant(status: string): 'secondary' | 'destructive' | 'outline' {
+  switch (status) {
+    case 'active': return 'secondary';
+    case 'inactive': return 'outline';
+    case 'terminated': return 'destructive';
+    default: return 'outline';
+  }
 }
 
 function formatStatus(status: string): string {
@@ -27,7 +28,7 @@ function formatEmploymentType(type: string): string {
 }
 </script>
 
-<div class="space-y-6">
+<div class="flex flex-col gap-6">
   {#if !employee}
     <div class="py-12 text-center text-muted-foreground">Employee not found</div>
   {:else}
@@ -35,7 +36,7 @@ function formatEmploymentType(type: string): string {
       <div>
         <div class="flex items-center gap-3">
           <h1 class="text-3xl font-bold text-foreground">{employee.firstName} {employee.lastName}</h1>
-          <span class="inline-block rounded-full px-2 py-0.5 text-xs font-medium {empStatusColor(employee.status)}">{formatStatus(employee.status)}</span>
+          <Badge variant={empStatusVariant(employee.status)}>{formatStatus(employee.status)}</Badge>
         </div>
         <p class="text-muted-foreground">{employee.employeeNumber}</p>
       </div>
@@ -43,8 +44,10 @@ function formatEmploymentType(type: string): string {
 
     <div class="grid gap-6 lg:grid-cols-2">
       <Card.Root class="shadow-sm"><Card.Content>
-        <h2 class="mb-4 text-lg font-semibold text-card-foreground">Personal Information</h2>
-        <div class="space-y-4">
+        <Card.Header>
+				<Card.Title>Personal Information</Card.Title>
+			</Card.Header>
+        <div class="flex flex-col gap-4">
           <div class="grid gap-4 md:grid-cols-2">
             <div><div class="text-sm text-muted-foreground">Email</div><div class="font-medium text-card-foreground">{employee.email}</div></div>
             <div><div class="text-sm text-muted-foreground">Phone</div><div class="font-medium text-card-foreground">{employee.phone || '-'}</div></div>
@@ -53,8 +56,10 @@ function formatEmploymentType(type: string): string {
       </Card.Content></Card.Root>
 
       <Card.Root class="shadow-sm"><Card.Content>
-        <h2 class="mb-4 text-lg font-semibold text-card-foreground">Employment Details</h2>
-        <div class="space-y-4">
+        <Card.Header>
+				<Card.Title>Employment Details</Card.Title>
+			</Card.Header>
+        <div class="flex flex-col gap-4">
           <div class="grid gap-4 md:grid-cols-2">
             <div><div class="text-sm text-muted-foreground">Department</div><div class="font-medium text-card-foreground">{employee.departmentName}</div></div>
             <div><div class="text-sm text-muted-foreground">Designation</div><div class="font-medium text-card-foreground">{employee.designationTitle}</div></div>
@@ -66,7 +71,9 @@ function formatEmploymentType(type: string): string {
     </div>
 
     <Card.Root class="shadow-sm"><Card.Content>
-      <h2 class="mb-4 text-lg font-semibold text-card-foreground">Timeline</h2>
+      <Card.Header>
+				<Card.Title>Timeline</Card.Title>
+			</Card.Header>
       <div class="grid gap-4 md:grid-cols-2">
         <div><div class="text-sm text-muted-foreground">Created</div><div class="text-card-foreground">{formatDate(employee.createdAt)}</div></div>
         <div><div class="text-sm text-muted-foreground">Last Updated</div><div class="text-card-foreground">{formatDate(employee.updatedAt)}</div></div>

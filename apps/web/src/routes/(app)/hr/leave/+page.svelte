@@ -3,21 +3,23 @@ import { toast } from 'svelte-sonner';
 import { hrApi, type LeaveRequest } from '$lib/api/hr';
 import { formatDate } from '$lib/utils/format';
 import type { PageData } from './$types';
+import * as Select from '$lib/components/ui/select';
 import AppDataTable from '$lib/components/data/AppDataTable.svelte';
 import type { ColumnDef } from '@tanstack/svelte-table';
+import { badgeVariants } from '$lib/components/ui/badge';
 
 let { data }: { data: PageData } = $props();
 let requests = $state<LeaveRequest[]>(data.requests);
 let total = $state(data.total);
 let statusFilter = $state('');
 
-function lrStatusColor(status: string): string {
-  const colors: Record<string, string> = {
-    pending: 'bg-yellow-100 text-yellow-800',
-    approved: 'bg-green-100 text-green-800',
-    rejected: 'bg-red-100 text-red-800',
-  };
-  return colors[status] || 'bg-gray-100 text-gray-800';
+function lrStatusVariant(status: string): 'secondary' | 'destructive' | 'default' | 'outline' {
+  switch (status) {
+    case 'approved': return 'default';
+    case 'pending': return 'outline';
+    case 'rejected': return 'destructive';
+    default: return 'outline';
+  }
 }
 
 function formatStatus(status: string): string {
@@ -43,7 +45,7 @@ const columns: ColumnDef<LeaveRequest>[] = [
   {
     accessorKey: 'status',
     header: 'Status',
-    cell: (row) => `<span class="inline-block rounded-full px-2 py-0.5 text-xs font-medium ${lrStatusColor((row as any).original.status)}">${formatStatus((row as any).original.status)}</span>`,
+    cell: (row) => `<span class="${badgeVariants({ variant: lrStatusVariant((row as any).original.status) })}">${formatStatus((row as any).original.status)}</span>`,
   },
   {
     id: 'actions',
@@ -61,10 +63,20 @@ $effect(() => {
 });
 </script>
 
-<div class="space-y-6">
+<div class="flex flex-col gap-6">
   <div><h1 class="text-3xl font-bold text-foreground">Leave Requests</h1><p class="text-muted-foreground">Manage employee leave requests</p></div>
   <div class="flex items-center gap-4">
-    <select bind:value={statusFilter} class="rounded-md border bg-background px-3 py-2 text-sm"><option value="">All</option><option value="pending">Pending</option><option value="approved">Approved</option><option value="rejected">Rejected</option></select>
+    <Select.Root bind:value={statusFilter}>
+      <Select.Trigger class="w-full">
+        <Select.Value placeholder="All" />
+      </Select.Trigger>
+      <Select.Content>
+        <Select.Item value="">All</Select.Item>
+        <Select.Item value="pending">Pending</Select.Item>
+        <Select.Item value="approved">Approved</Select.Item>
+        <Select.Item value="rejected">Rejected</Select.Item>
+      </Select.Content>
+    </Select.Root>
     <span class="text-sm text-muted-foreground">{total} total</span>
   </div>
   <AppDataTable

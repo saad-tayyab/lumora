@@ -4,7 +4,7 @@
   let { data }: { data: PageData } = $props();
 </script>
 
-<div class="space-y-6">
+<div class="flex flex-col gap-6">
   <div>
     <h1 class="text-3xl font-bold text-foreground">Fixed Assets</h1>
     <p class="text-muted-foreground">Manage fixed assets, depreciation, and adjustments</p>

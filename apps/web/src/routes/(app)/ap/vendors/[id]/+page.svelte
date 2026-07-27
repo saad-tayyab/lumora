@@ -2,9 +2,11 @@
 import { toast } from 'svelte-sonner';
 import { enhance } from '$app/forms';
 import { goto } from '$app/navigation';
-import { formatDate } from '$lib/utils/format';
+import { Badge } from '$lib/components/ui/badge';
 import { Button } from '$lib/components/ui/button';
-import { Card, CardContent } from '$lib/components/ui/card';
+import * as Card from '$lib/components/ui/card';
+import * as Dialog from '$lib/components/ui/dialog';
+import { formatDate } from '$lib/utils/format';
 import type { PageData } from './$types';
 
 let { data }: { data: PageData } = $props();
@@ -12,7 +14,7 @@ let showDeleteConfirm = $state(false);
 let deleting = $state(false);
 </script>
 
-<div class="mx-auto max-w-4xl space-y-6">
+<div class="flex flex-col mx-auto max-w-4xl gap-6">
   <div class="flex items-center justify-between">
     <div>
       <div class="flex items-center gap-2 text-sm text-muted-foreground">
@@ -33,10 +35,12 @@ let deleting = $state(false);
   </div>
 
   <div class="grid gap-6 lg:grid-cols-2">
-    <Card>
-      <CardContent>
-        <h2 class="mb-4 text-lg font-semibold text-card-foreground">Contact Information</h2>
-        <dl class="space-y-3">
+    <Card.Root>
+      <Card.Content>
+        <Card.Header>
+				<Card.Title>Contact Information</Card.Title>
+			</Card.Header>
+        <dl class="flex flex-col gap-3">
           <div class="flex justify-between">
             <dt class="text-sm text-muted-foreground">Email</dt>
             <dd class="text-sm font-medium">{data.vendor.email || '-'}</dd>
@@ -62,13 +66,15 @@ let deleting = $state(false);
             <dd class="text-sm font-medium">{data.vendor.country}</dd>
           </div>
         </dl>
-      </CardContent>
-    </Card>
+      </Card.Content>
+    </Card.Root>
 
-    <Card>
-      <CardContent>
-        <h2 class="mb-4 text-lg font-semibold text-card-foreground">Business Details</h2>
-        <dl class="space-y-3">
+    <Card.Root>
+      <Card.Content>
+        <Card.Header>
+				<Card.Title>Business Details</Card.Title>
+			</Card.Header>
+        <dl class="flex flex-col gap-3">
           <div class="flex justify-between">
             <dt class="text-sm text-muted-foreground">Tax ID</dt>
             <dd class="text-sm font-medium">{data.vendor.taxId || '-'}</dd>
@@ -84,9 +90,9 @@ let deleting = $state(false);
           <div class="flex justify-between">
             <dt class="text-sm text-muted-foreground">Status</dt>
             <dd>
-              <span class="inline-block rounded-full px-2 py-0.5 text-xs font-medium {data.vendor.status === 'active' ? 'bg-green-100 text-green-800' : 'bg-gray-100 text-gray-800'}">
+              <Badge variant={data.vendor.status === 'active' ? 'secondary' : 'outline'}>
                 {data.vendor.status}
-              </span>
+              </Badge>
             </dd>
           </div>
           <div class="flex justify-between">
@@ -100,44 +106,42 @@ let deleting = $state(false);
             </div>
           {/if}
         </dl>
-      </CardContent>
-    </Card>
+      </Card.Content>
+    </Card.Root>
   </div>
 </div>
 
-{#if showDeleteConfirm}
-  <div class="fixed inset-0 z-50 flex items-center justify-center bg-black/50">
-    <div class="mx-4 w-full max-w-sm rounded-lg bg-card p-6 shadow-lg">
-      <h3 class="text-lg font-semibold text-card-foreground">Delete Vendor</h3>
-      <p class="mt-2 text-sm text-muted-foreground">
-        Are you sure you want to delete "{data.vendor.name}"? This action cannot be undone.
-      </p>
-      <div class="mt-4 flex justify-end gap-3">
-        <Button variant="outline" onclick={() => (showDeleteConfirm = false)}>
-          Cancel
-        </Button>
-        <form
-          method="POST"
-          action="?/delete"
-          use:enhance={() => {
-            deleting = true;
-            return async ({ result }) => {
-              deleting = false;
-              if (result.type === 'success') {
-                toast.success('Vendor deleted');
-                goto('/ap/vendors');
-              } else if (result.type === 'failure') {
-                toast.error((result.data as Record<string, string>)?.error || 'Failed to delete vendor');
-              }
-              showDeleteConfirm = false;
-            };
-          }}
-        >
-          <Button type="submit" disabled={deleting} variant="destructive">
-            {deleting ? 'Deleting...' : 'Delete'}
-          </Button>
-        </form>
-      </div>
-    </div>
-  </div>
-{/if}
+<Dialog.Root bind:open={showDeleteConfirm}>
+	<Dialog.Content>
+		<Dialog.Header>
+			<Dialog.Title>Delete Vendor</Dialog.Title>
+			<Dialog.Description>
+				Are you sure you want to delete "{data.vendor.name}"? This action cannot be undone.
+			</Dialog.Description>
+		</Dialog.Header>
+		<div class="flex justify-end gap-3">
+			<Button variant="outline" onclick={() => (showDeleteConfirm = false)}>Cancel</Button>
+			<form
+				method="POST"
+				action="?/delete"
+				use:enhance={() => {
+					deleting = true;
+					return async ({ result }) => {
+						deleting = false;
+						if (result.type === 'success') {
+							toast.success('Vendor deleted');
+							goto('/ap/vendors');
+						} else if (result.type === 'failure') {
+							toast.error((result.data as Record<string, string>)?.error || 'Failed to delete vendor');
+						}
+						showDeleteConfirm = false;
+					};
+				}}
+			>
+				<Button type="submit" disabled={deleting} variant="destructive">
+					{deleting ? 'Deleting...' : 'Delete'}
+				</Button>
+			</form>
+		</div>
+	</Dialog.Content>
+</Dialog.Root>

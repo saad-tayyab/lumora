@@ -5,6 +5,7 @@
 	import { formatCurrency, formatDate } from '$lib/utils/format';
 	import type { PageData } from './$types';
 	import { Button } from '$lib/components/ui/button';
+	import * as Select from '$lib/components/ui/select';
 	import AppDataTable from '$lib/components/data/AppDataTable.svelte';
 	import type { ColumnDef } from '@tanstack/svelte-table';
 
@@ -14,18 +15,18 @@
 	let statusFilter = $state('');
 	let loading = $state(false);
 
-	function orderStatusColor(status: string): string {
-		const colors: Record<string, string> = {
-			draft: 'bg-gray-100 text-gray-800',
-			confirmed: 'bg-blue-100 text-blue-800',
-			processing: 'bg-yellow-100 text-yellow-800',
-			shipped: 'bg-purple-100 text-purple-800',
-			delivered: 'bg-green-100 text-green-800',
-			cancelled: 'bg-red-100 text-red-800',
-			closed: 'bg-gray-100 text-gray-800',
-		};
-		return colors[status] || 'bg-gray-100 text-gray-800';
-	}
+	function orderStatusVariant(status: string): 'secondary' | 'destructive' | 'default' | 'outline' {
+  switch (status) {
+    case 'cancelled': return 'destructive';
+    case 'closed': return 'outline';
+    case 'confirmed': return 'secondary';
+    case 'delivered': return 'secondary';
+    case 'draft': return 'outline';
+    case 'processing': return 'outline';
+    case 'shipped': return 'outline';
+    default: return 'outline';
+  }
+}
 
 	function formatStatus(status: string): string {
 		return status.replace(/_/g, ' ').replace(/\b\w/g, (l) => l.toUpperCase());
@@ -81,7 +82,7 @@
 			accessorKey: 'status',
 			header: 'Status',
 			cell: ({ row }) => {
-				const cls = orderStatusColor((row as any).original.status);
+				const cls = orderStatusVariant((row as any).original.status);
 				return `<span class="inline-block rounded-full px-2 py-0.5 text-xs font-medium ${cls}">${formatStatus((row as any).original.status)}</span>`;
 			},
 		},
@@ -93,7 +94,7 @@
 	});
 </script>
 
-<div class="space-y-6">
+<div class="flex flex-col gap-6">
 	<div class="flex items-center justify-between">
 		<div>
 			<h1 class="text-3xl font-bold text-foreground">Sales Orders</h1>
@@ -108,18 +109,20 @@
 	</div>
 
 	<div class="flex items-center gap-4">
-		<select
-			bind:value={statusFilter}
-			class="rounded-md border bg-background px-3 py-2 text-sm"
-		>
-			<option value="">All Statuses</option>
-			<option value="draft">Draft</option>
-			<option value="confirmed">Confirmed</option>
-			<option value="processing">Processing</option>
-			<option value="shipped">Shipped</option>
-			<option value="delivered">Delivered</option>
-			<option value="cancelled">Cancelled</option>
-		</select>
+		<Select.Root bind:value={statusFilter}>
+			<Select.Trigger class="w-full">
+				<Select.Value placeholder="All Statuses" />
+			</Select.Trigger>
+			<Select.Content>
+				<Select.Item value="">All Statuses</Select.Item>
+				<Select.Item value="draft">Draft</Select.Item>
+				<Select.Item value="confirmed">Confirmed</Select.Item>
+				<Select.Item value="processing">Processing</Select.Item>
+				<Select.Item value="shipped">Shipped</Select.Item>
+				<Select.Item value="delivered">Delivered</Select.Item>
+				<Select.Item value="cancelled">Cancelled</Select.Item>
+			</Select.Content>
+		</Select.Root>
 		<span class="text-sm text-muted-foreground">{total} total</span>
 	</div>
 

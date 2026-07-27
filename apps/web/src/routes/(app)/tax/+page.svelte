@@ -4,7 +4,7 @@
   let { data }: { data: PageData } = $props();
 </script>
 
-<div class="space-y-6">
+<div class="flex flex-col gap-6">
   <div>
     <h1 class="text-3xl font-bold text-foreground">Tax Management</h1>
     <p class="text-muted-foreground">Manage tax codes, rates, and auto-assignment rules</p>

@@ -5,19 +5,21 @@ import { procApi, type ReceivingReport } from '$lib/api/proc';
 import { formatDate } from '$lib/utils/format';
 import type { PageData } from './$types';
 import { Button } from '$lib/components/ui/button';
+import { Spinner } from '$lib/components/ui/spinner';
 import * as Card from '$lib/components/ui/card';
+import { Badge } from '$lib/components/ui/badge';
 
 let { data }: { data: PageData } = $props();
 let report = $state<ReceivingReport | null>(data.report);
 let loading = $state(false);
 
-function rrStatusColor(status: string): string {
-  const colors: Record<string, string> = {
-    draft: 'bg-gray-100 text-gray-800 dark:bg-gray-800 dark:text-gray-300',
-    confirmed: 'bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-300',
-    rejected: 'bg-red-100 text-red-800 dark:bg-red-900 dark:text-red-300',
-  };
-  return colors[status] || 'bg-gray-100 text-gray-800 dark:bg-gray-800 dark:text-gray-300';
+function rrStatusVariant(status: string): 'secondary' | 'destructive' | 'default' | 'outline' {
+  switch (status) {
+    case 'confirmed': return 'secondary';
+    case 'draft': return 'outline';
+    case 'rejected': return 'destructive';
+    default: return 'outline';
+  }
 }
 
 function formatStatus(status: string): string {
@@ -61,7 +63,7 @@ async function deleteReport() {
 }
 </script>
 
-<div class="mx-auto max-w-4xl space-y-6">
+<div class="mx-auto max-w-4xl flex flex-col gap-6">
   <nav class="mb-4 text-sm text-muted-foreground">
     <a href="/proc/receiving-reports" class="hover:underline">Receiving Reports</a>
     <span class="mx-2">/</span>
@@ -70,7 +72,7 @@ async function deleteReport() {
 
   {#if loading}
     <div class="flex items-center justify-center py-12">
-      <div class="h-8 w-8 animate-spin rounded-full border-4 border-primary border-t-transparent"></div>
+      <Spinner class="size-8 text-primary" />
     </div>
   {:else if !report}
     <div class="py-12 text-center text-muted-foreground">Receiving report not found</div>
@@ -79,9 +81,9 @@ async function deleteReport() {
       <div>
         <div class="flex items-center gap-3">
           <h1 class="text-3xl font-bold text-foreground">{report.reportNumber}</h1>
-          <span class="inline-block rounded-full px-2 py-0.5 text-xs font-medium {rrStatusColor(report.status)}">
+          <Badge variant={rrStatusVariant(report.status)}>
             {formatStatus(report.status)}
-          </span>
+          </Badge>
         </div>
         <p class="text-muted-foreground">Receiving report details</p>
       </div>
@@ -121,7 +123,9 @@ async function deleteReport() {
 
     <div class="grid gap-6 lg:grid-cols-3">
       <div class="rounded-lg border bg-card p-6 shadow-sm lg:col-span-2">
-        <h2 class="mb-4 text-lg font-semibold text-card-foreground">Report Details</h2>
+        <Card.Header>
+				<Card.Title>Report Details</Card.Title>
+			</Card.Header>
         <div class="grid gap-4 md:grid-cols-2">
           <div>
             <div class="text-sm text-muted-foreground">Report Number</div>
@@ -153,8 +157,10 @@ async function deleteReport() {
       </div>
 
       <Card.Root class="shadow-sm"><Card.Content>
-        <h2 class="mb-4 text-lg font-semibold text-card-foreground">Timeline</h2>
-        <div class="space-y-3 text-sm">
+        <Card.Header>
+				<Card.Title>Timeline</Card.Title>
+			</Card.Header>
+        <div class="flex flex-col gap-3 text-sm">
           <div>
             <div class="text-muted-foreground">Created</div>
             <div class="text-card-foreground">{formatDate(report.createdAt)}</div>

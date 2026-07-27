@@ -1,5 +1,10 @@
 <script lang="ts">
 import type { Customer } from '$lib/types';
+import * as Field from '$lib/components/ui/field';
+import * as Select from '$lib/components/ui/select';
+import { Input } from '$lib/components/ui/input';
+import { Textarea } from '$lib/components/ui/textarea';
+import { Button } from '$lib/components/ui/button';
 
 let { customers, errors = {} }: { customers: Customer[]; errors?: Record<string, string[]> } =
   $props();
@@ -17,64 +22,80 @@ let isSubmitting = $state(false);
 </script>
 
 <div class="rounded-lg border bg-card p-6 shadow-sm">
-	<form method="POST" class="space-y-6">
-		<div class="grid gap-4 md:grid-cols-2">
-			<div>
-				<label for="customerId" class="block text-sm font-medium text-card-foreground">Customer *</label>
-				<select id="customerId" name="customerId" required bind:value={customerId} class="mt-1 block w-full rounded-md border border-input bg-background px-3 py-2 text-sm text-foreground focus:border-ring focus:outline-none focus:ring-1 focus:ring-ring">
-					<option value="">Select a customer</option>
-					{#each customers as customer}
-						<option value={customer.id}>{customer.name}</option>
-					{/each}
-				</select>
-				{#if errors.customerId}<p class="mt-1 text-xs text-destructive">{errors.customerId[0]}</p>{/if}
+	<form method="POST">
+		<Field.FieldGroup>
+			<div class="grid gap-4 md:grid-cols-2">
+				<Field.Field>
+					<Field.FieldLabel for="customerId">Customer *</Field.FieldLabel>
+					<Select.Root bind:value={customerId}>
+						<Select.Trigger class="w-full">
+							<Select.Value placeholder="Select a customer" />
+						</Select.Trigger>
+						<Select.Content>
+							{#each customers as customer}
+								<Select.Item value={customer.id}>{customer.name}</Select.Item>
+							{/each}
+						</Select.Content>
+					</Select.Root>
+					{#if errors.customerId}<p class="text-xs text-destructive">{errors.customerId[0]}</p>{/if}
+				</Field.Field>
+				<Field.Field>
+					<Field.FieldLabel for="paymentNumber">Payment Number *</Field.FieldLabel>
+					<Input id="paymentNumber" name="paymentNumber" type="text" required bind:value={paymentNumber} placeholder="PAY-001" />
+				</Field.Field>
+				<Field.Field>
+					<Field.FieldLabel for="paymentDate">Payment Date *</Field.FieldLabel>
+					<Input id="paymentDate" name="paymentDate" type="date" required bind:value={paymentDate} />
+				</Field.Field>
+				<Field.Field>
+					<Field.FieldLabel for="amount">Amount *</Field.FieldLabel>
+					<Input id="amount" name="amount" type="number" step="0.01" min="0" required bind:value={amount} placeholder="0.00" />
+				</Field.Field>
+				<Field.Field>
+					<Field.FieldLabel for="paymentMethod">Payment Method *</Field.FieldLabel>
+					<Select.Root bind:value={paymentMethod}>
+						<Select.Trigger class="w-full">
+							<Select.Value placeholder="Select method" />
+						</Select.Trigger>
+						<Select.Content>
+							<Select.Item value="cash">Cash</Select.Item>
+							<Select.Item value="check">Check</Select.Item>
+							<Select.Item value="bank_transfer">Bank Transfer</Select.Item>
+							<Select.Item value="credit_card">Credit Card</Select.Item>
+							<Select.Item value="online">Online</Select.Item>
+						</Select.Content>
+					</Select.Root>
+				</Field.Field>
+				<Field.Field>
+					<Field.FieldLabel for="referenceNumber">Reference Number</Field.FieldLabel>
+					<Input id="referenceNumber" name="referenceNumber" type="text" bind:value={referenceNumber} placeholder="Check #, transaction ID" />
+				</Field.Field>
+				<Field.Field>
+					<Field.FieldLabel for="currency">Currency</Field.FieldLabel>
+					<Select.Root bind:value={currency}>
+						<Select.Trigger class="w-full">
+							<Select.Value placeholder="Select currency" />
+						</Select.Trigger>
+						<Select.Content>
+							<Select.Item value="USD">USD</Select.Item>
+							<Select.Item value="EUR">EUR</Select.Item>
+							<Select.Item value="GBP">GBP</Select.Item>
+						</Select.Content>
+					</Select.Root>
+				</Field.Field>
 			</div>
-			<div>
-				<label for="paymentNumber" class="block text-sm font-medium text-card-foreground">Payment Number *</label>
-				<input id="paymentNumber" name="paymentNumber" type="text" required bind:value={paymentNumber} class="mt-1 block w-full rounded-md border border-input bg-background px-3 py-2 text-sm text-foreground placeholder:text-muted-foreground focus:border-ring focus:outline-none focus:ring-1 focus:ring-ring" placeholder="PAY-001" />
-			</div>
-			<div>
-				<label for="paymentDate" class="block text-sm font-medium text-card-foreground">Payment Date *</label>
-				<input id="paymentDate" name="paymentDate" type="date" required bind:value={paymentDate} class="mt-1 block w-full rounded-md border border-input bg-background px-3 py-2 text-sm text-foreground focus:border-ring focus:outline-none focus:ring-1 focus:ring-ring" />
-			</div>
-			<div>
-				<label for="amount" class="block text-sm font-medium text-card-foreground">Amount *</label>
-				<input id="amount" name="amount" type="number" step="0.01" min="0" required bind:value={amount} class="mt-1 block w-full rounded-md border border-input bg-background px-3 py-2 text-sm text-foreground placeholder:text-muted-foreground focus:border-ring focus:outline-none focus:ring-1 focus:ring-ring" placeholder="0.00" />
-			</div>
-			<div>
-				<label for="paymentMethod" class="block text-sm font-medium text-card-foreground">Payment Method *</label>
-				<select id="paymentMethod" name="paymentMethod" required bind:value={paymentMethod} class="mt-1 block w-full rounded-md border border-input bg-background px-3 py-2 text-sm text-foreground focus:border-ring focus:outline-none focus:ring-1 focus:ring-ring">
-					<option value="cash">Cash</option>
-					<option value="check">Check</option>
-					<option value="bank_transfer">Bank Transfer</option>
-					<option value="credit_card">Credit Card</option>
-					<option value="online">Online</option>
-				</select>
-			</div>
-			<div>
-				<label for="referenceNumber" class="block text-sm font-medium text-card-foreground">Reference Number</label>
-				<input id="referenceNumber" name="referenceNumber" type="text" bind:value={referenceNumber} class="mt-1 block w-full rounded-md border border-input bg-background px-3 py-2 text-sm text-foreground placeholder:text-muted-foreground focus:border-ring focus:outline-none focus:ring-1 focus:ring-ring" placeholder="Check #, transaction ID" />
-			</div>
-			<div>
-				<label for="currency" class="block text-sm font-medium text-card-foreground">Currency</label>
-				<select id="currency" name="currency" bind:value={currency} class="mt-1 block w-full rounded-md border border-input bg-background px-3 py-2 text-sm text-foreground focus:border-ring focus:outline-none focus:ring-1 focus:ring-ring">
-					<option value="USD">USD</option>
-					<option value="EUR">EUR</option>
-					<option value="GBP">GBP</option>
-				</select>
-			</div>
-		</div>
 
-		<div>
-			<label for="notes" class="block text-sm font-medium text-card-foreground">Notes</label>
-			<textarea id="notes" name="notes" rows="3" bind:value={notes} class="mt-1 block w-full rounded-md border border-input bg-background px-3 py-2 text-sm text-foreground placeholder:text-muted-foreground focus:border-ring focus:outline-none focus:ring-1 focus:ring-ring" placeholder="Payment notes..."></textarea>
-		</div>
+			<Field.Field>
+				<Field.FieldLabel for="notes">Notes</Field.FieldLabel>
+				<Textarea id="notes" name="notes" rows="3" bind:value={notes} placeholder="Payment notes..." />
+			</Field.Field>
 
-		<div class="flex items-center gap-3">
-			<button type="submit" disabled={isSubmitting} class="rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground hover:bg-primary/90 disabled:cursor-not-allowed disabled:opacity-50">
-				{#if isSubmitting}Recording...{:else}Record Payment{/if}
-			</button>
-			<a href="/ar/payments" class="rounded-md border px-4 py-2 text-sm font-medium text-card-foreground hover:bg-accent">Cancel</a>
-		</div>
+			<div class="flex items-center gap-3">
+				<Button type="submit" disabled={isSubmitting}>
+					{#if isSubmitting}Recording...{:else}Record Payment{/if}
+				</Button>
+				<Button variant="outline" href="/ar/payments">Cancel</Button>
+			</div>
+		</Field.FieldGroup>
 	</form>
 </div>

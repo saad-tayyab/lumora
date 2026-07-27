@@ -4,8 +4,10 @@ import { enhance } from '$app/forms';
 import { goto } from '$app/navigation';
 import { Button } from '$lib/components/ui/button';
 import { Input } from '$lib/components/ui/input';
-import { Label } from '$lib/components/ui/label';
-import { Card, CardContent } from '$lib/components/ui/card';
+import { Textarea } from '$lib/components/ui/textarea';
+import * as Card from '$lib/components/ui/card';
+import * as Field from '$lib/components/ui/field';
+import * as Select from '$lib/components/ui/select';
 import type { PageData } from './$types';
 
 let { data }: { data: PageData } = $props();
@@ -21,7 +23,7 @@ let reorderPoint = $state(data.item.reorderPoint || '');
 let loading = $state(false);
 </script>
 
-<div class="mx-auto max-w-2xl space-y-6">
+<div class="mx-auto max-w-2xl flex flex-col gap-6">
   <div>
     <div class="flex items-center gap-2 text-sm text-muted-foreground">
       <a href="/inv/items" class="hover:underline">Items</a>
@@ -48,65 +50,76 @@ let loading = $state(false);
       };
     }}
   >
-    <Card>
-      <CardContent class="space-y-6">
-        <div class="grid gap-4 md:grid-cols-2">
-          <div class="space-y-2">
-            <Label for="name">Name *</Label>
-            <Input id="name" name="name" bind:value={name} required />
+    <Card.Root>
+      <Card.Content>
+        <Field.FieldGroup>
+          <div class="grid gap-4 md:grid-cols-2">
+            <Field.Field>
+              <Field.FieldLabel for="name">Name *</Field.FieldLabel>
+              <Input id="name" name="name" bind:value={name} required />
+            </Field.Field>
+            <Field.Field>
+              <Field.FieldLabel for="sku">SKU *</Field.FieldLabel>
+              <Input id="sku" name="sku" bind:value={sku} required />
+            </Field.Field>
+            <Field.Field>
+              <Field.FieldLabel for="categoryId">Category</Field.FieldLabel>
+              <Select.Root bind:value={categoryId}>
+                <Select.Trigger class="w-full">
+                  <Select.Value placeholder="Select category" />
+                </Select.Trigger>
+                <Select.Content>
+                  {#each data.categories as category}
+                    <Select.Item value={category.id}>{category.name}</Select.Item>
+                  {/each}
+                </Select.Content>
+              </Select.Root>
+            </Field.Field>
+            <Field.Field>
+              <Field.FieldLabel for="unitOfMeasure">Unit of Measure *</Field.FieldLabel>
+              <Select.Root bind:value={unitOfMeasure}>
+                <Select.Trigger class="w-full">
+                  <Select.Value placeholder="Select unit" />
+                </Select.Trigger>
+                <Select.Content>
+                  <Select.Item value="pcs">Pieces</Select.Item>
+                  <Select.Item value="kg">Kilograms</Select.Item>
+                  <Select.Item value="g">Grams</Select.Item>
+                  <Select.Item value="l">Liters</Select.Item>
+                  <Select.Item value="ml">Milliliters</Select.Item>
+                  <Select.Item value="m">Meters</Select.Item>
+                  <Select.Item value="box">Box</Select.Item>
+                  <Select.Item value="set">Set</Select.Item>
+                </Select.Content>
+              </Select.Root>
+            </Field.Field>
+            <Field.Field>
+              <Field.FieldLabel for="costPrice">Cost Price *</Field.FieldLabel>
+              <Input id="costPrice" name="costPrice" type="number" step="0.01" min="0" bind:value={costPrice} required />
+            </Field.Field>
+            <Field.Field>
+              <Field.FieldLabel for="salePrice">Sale Price *</Field.FieldLabel>
+              <Input id="salePrice" name="salePrice" type="number" step="0.01" min="0" bind:value={salePrice} required />
+            </Field.Field>
+            <Field.Field>
+              <Field.FieldLabel for="reorderPoint">Reorder Point</Field.FieldLabel>
+              <Input id="reorderPoint" name="reorderPoint" type="number" step="0.01" min="0" bind:value={reorderPoint} />
+            </Field.Field>
           </div>
-          <div class="space-y-2">
-            <Label for="sku">SKU *</Label>
-            <Input id="sku" name="sku" bind:value={sku} required />
-          </div>
-          <div class="space-y-2">
-            <Label for="categoryId">Category</Label>
-            <select id="categoryId" name="categoryId" bind:value={categoryId} class="w-full rounded-md border bg-background px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-ring">
-              <option value="">Select category</option>
-              {#each data.categories as category}
-                <option value={category.id}>{category.name}</option>
-              {/each}
-            </select>
-          </div>
-          <div class="space-y-2">
-            <Label for="unitOfMeasure">Unit of Measure *</Label>
-            <select id="unitOfMeasure" name="unitOfMeasure" bind:value={unitOfMeasure} required class="w-full rounded-md border bg-background px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-ring">
-              <option value="pcs">Pieces</option>
-              <option value="kg">Kilograms</option>
-              <option value="g">Grams</option>
-              <option value="l">Liters</option>
-              <option value="ml">Milliliters</option>
-              <option value="m">Meters</option>
-              <option value="box">Box</option>
-              <option value="set">Set</option>
-            </select>
-          </div>
-          <div class="space-y-2">
-            <Label for="costPrice">Cost Price *</Label>
-            <Input id="costPrice" name="costPrice" type="number" step="0.01" min="0" bind:value={costPrice} required />
-          </div>
-          <div class="space-y-2">
-            <Label for="salePrice">Sale Price *</Label>
-            <Input id="salePrice" name="salePrice" type="number" step="0.01" min="0" bind:value={salePrice} required />
-          </div>
-          <div class="space-y-2">
-            <Label for="reorderPoint">Reorder Point</Label>
-            <Input id="reorderPoint" name="reorderPoint" type="number" step="0.01" min="0" bind:value={reorderPoint} />
-          </div>
-        </div>
 
-        <div class="space-y-2">
-          <Label for="description">Description</Label>
-          <textarea id="description" name="description" bind:value={description} rows="3" class="w-full rounded-md border bg-background px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-ring"></textarea>
-        </div>
+          <Field.Field>
+            <Field.FieldLabel for="description">Description</Field.FieldLabel>
+            <Textarea id="description" name="description" bind:value={description} rows="3" />
+          </Field.Field>
 
-        <div class="flex justify-end gap-3">
-          <Button href="/inv/items/{data.item.id}" variant="outline">Cancel</Button>
-          <Button type="submit" disabled={loading}>
-            {loading ? 'Saving...' : 'Save Changes'}
-          </Button>
-        </div>
-      </CardContent>
-    </Card>
+          <div class="flex justify-end gap-3">
+            <Button href="/inv/items/{data.item.id}" variant="outline">Cancel</Button>
+            <Button type="submit" disabled={loading}>
+              {loading ? 'Saving...' : 'Save Changes'}
+            </Button>
+          </div>
+        </Field.FieldGroup>
+      </Card.Content>
+    </Card.Root>
   </form>
 </div>

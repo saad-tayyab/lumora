@@ -4,8 +4,12 @@ import { goto } from '$app/navigation';
 import { type PurchaseOrder, type PurchaseOrderLineItem, procApi } from '$lib/api/proc';
 import type { PageData } from './$types';
 import { Button } from '$lib/components/ui/button';
-import * as Card from '$lib/components/ui/card';
+import { Spinner } from '$lib/components/ui/spinner';
 import { Input } from '$lib/components/ui/input';
+import { Textarea } from '$lib/components/ui/textarea';
+import * as Field from '$lib/components/ui/field';
+import * as Select from '$lib/components/ui/select';
+import * as Card from '$lib/components/ui/card';
 import DatePicker from '$lib/components/ui/date-picker.svelte';
 
 let { data }: { data: PageData } = $props();
@@ -84,42 +88,44 @@ async function handleSubmit(e: Event) {
 }
 </script>
 
-<div class="space-y-6">
+<div class="flex flex-col gap-6">
   <div>
     <h1 class="text-3xl font-bold text-foreground">Edit Purchase Order</h1>
     <p class="text-muted-foreground">Editing {purchaseOrder?.poNumber}</p>
   </div>
 
-  <form onsubmit={handleSubmit} class="space-y-6">
+  <form onsubmit={handleSubmit}>
     <Card.Root class="shadow-sm"><Card.Content>
-      <h2 class="mb-4 text-lg font-semibold text-card-foreground">Order Details</h2>
-      <div class="grid gap-4 md:grid-cols-2">
-        <div>
-          <label for="vendorId" class="mb-1 block text-sm font-medium text-card-foreground">Vendor *</label>
-          <select
-            id="vendorId"
-            bind:value={vendorId}
-            class="w-full rounded-md border bg-background px-3 py-2 text-sm"
-            required
-          >
-            <option value="">Select vendor</option>
-          </select>
+      <Card.Header>
+				<Card.Title>Order Details</Card.Title>
+			</Card.Header>
+      <Field.FieldGroup>
+        <div class="grid gap-4 md:grid-cols-2">
+          <Field.Field>
+            <Field.FieldLabel for="vendorId">Vendor *</Field.FieldLabel>
+            <Select.Root bind:value={vendorId}>
+              <Select.Trigger class="w-full">
+                <Select.Value placeholder="Select vendor" />
+              </Select.Trigger>
+              <Select.Content>
+              </Select.Content>
+            </Select.Root>
+          </Field.Field>
+          <Field.Field>
+            <Field.FieldLabel for="expectedDeliveryDate">Expected Delivery Date</Field.FieldLabel>
+            <DatePicker bind:value={expectedDeliveryDate} />
+          </Field.Field>
         </div>
-        <div>
-          <label for="expectedDeliveryDate" class="mb-1 block text-sm font-medium text-card-foreground">Expected Delivery Date</label>
-          <DatePicker bind:value={expectedDeliveryDate} />
-        </div>
-      </div>
-      <div class="mt-4">
-        <label for="notes" class="mb-1 block text-sm font-medium text-card-foreground">Notes</label>
-        <textarea
-          id="notes"
-          bind:value={notes}
-          rows="3"
-          class="w-full rounded-md border bg-background px-3 py-2 text-sm"
-          placeholder="Optional notes"
-        ></textarea>
-      </div>
+        <Field.Field>
+          <Field.FieldLabel for="notes">Notes</Field.FieldLabel>
+          <Textarea
+            id="notes"
+            bind:value={notes}
+            rows="3"
+            placeholder="Optional notes"
+          ></Textarea>
+        </Field.Field>
+      </Field.FieldGroup>
     </Card.Content></Card.Root>
 
     <Card.Root class="shadow-sm"><Card.Content>
@@ -129,26 +135,26 @@ async function handleSubmit(e: Event) {
           + Add Line
         </Button>
       </div>
-      <div class="space-y-4">
+      <div class="flex flex-col gap-4">
         {#each lineItems as item, index}
           <div class="grid items-end gap-3 rounded-md border p-4 md:grid-cols-4">
-            <div>
-              <label class="mb-1 block text-xs font-medium text-muted-foreground">Item *</label>
+            <Field.Field>
+              <Field.FieldLabel class="text-xs">Item *</Field.FieldLabel>
               <Input type="text" value={item.itemId} oninput={(e) => updateLineItem(index, 'itemId', (e.target as HTMLInputElement).value)} required />
-            </div>
-            <div>
-              <label class="mb-1 block text-xs font-medium text-muted-foreground">Description</label>
+            </Field.Field>
+            <Field.Field>
+              <Field.FieldLabel class="text-xs">Description</Field.FieldLabel>
               <Input type="text" value={item.description} oninput={(e) => updateLineItem(index, 'description', (e.target as HTMLInputElement).value)} />
-            </div>
-            <div>
-              <label class="mb-1 block text-xs font-medium text-muted-foreground">Quantity *</label>
+            </Field.Field>
+            <Field.Field>
+              <Field.FieldLabel class="text-xs">Quantity *</Field.FieldLabel>
               <Input type="number" value={item.quantity} oninput={(e) => updateLineItem(index, 'quantity', (e.target as HTMLInputElement).value)} min="0" step="1" required />
-            </div>
+            </Field.Field>
             <div class="flex gap-2">
-              <div class="flex-1">
-                <label class="mb-1 block text-xs font-medium text-muted-foreground">Unit Price *</label>
+              <Field.Field class="flex-1">
+                <Field.FieldLabel class="text-xs">Unit Price *</Field.FieldLabel>
                 <Input type="number" value={item.unitPrice} oninput={(e) => updateLineItem(index, 'unitPrice', (e.target as HTMLInputElement).value)} min="0" step="0.01" required />
-              </div>
+              </Field.Field>
               {#if lineItems.length > 1}
                 <button
                   type="button"
@@ -167,7 +173,7 @@ async function handleSubmit(e: Event) {
     <div class="flex items-center justify-end gap-3">
       <Button variant="outline" href="/proc/purchase-orders/{purchaseOrder?.id}">Cancel</Button>
       <Button type="submit" disabled={submitting}>
-        {#if submitting}<div class="mr-2 h-4 w-4 animate-spin rounded-full border-2 border-primary-foreground border-t-transparent"></div>{/if}
+        {#if submitting}<Spinner data-icon="inline-start" class="text-primary-foreground" />{/if}
         Save Changes
       </Button>
     </div>

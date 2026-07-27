@@ -11,7 +11,7 @@
   } from '@lucide/svelte';
 </script>
 
-<div class="space-y-6">
+<div class="flex flex-col gap-6">
   <div>
     <h1 class="text-3xl font-bold text-foreground">Reports</h1>
     <p class="text-muted-foreground">Financial and operational reporting</p>
@@ -74,14 +74,14 @@
     <Card.Content>
       <div class="grid gap-3 md:grid-cols-2 lg:grid-cols-4">
         <Button variant="outline" class="justify-start gap-2" href="/reports/financial">
-          <FileText class="h-4 w-4" />
+          <FileText data-icon="inline-start" />
           Financial Reports
-          <ArrowRight class="ml-auto h-4 w-4" />
+          <ArrowRight data-icon="inline-end" />
         </Button>
         <Button variant="outline" class="justify-start gap-2" href="/reports/operational">
-          <BarChart3 class="h-4 w-4" />
+          <BarChart3 data-icon="inline-start" />
           Operational Reports
-          <ArrowRight class="ml-auto h-4 w-4" />
+          <ArrowRight data-icon="inline-end" />
         </Button>
       </div>
     </Card.Content>

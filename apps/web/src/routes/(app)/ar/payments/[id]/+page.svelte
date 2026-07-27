@@ -1,6 +1,6 @@
 <script lang="ts">
 import { formatCurrency, formatDate } from '$lib/utils/format';
-import { Card, CardContent } from '$lib/components/ui/card';
+import * as Card from '$lib/components/ui/card';
 import type { PageData } from './$types';
 
 let { data }: { data: PageData } = $props();
@@ -16,7 +16,7 @@ const methodLabels: Record<string, string> = {
 };
 </script>
 
-<div class="space-y-6">
+<div class="flex flex-col gap-6">
 	<div>
 		<div class="flex items-center gap-2 text-sm text-muted-foreground">
 			<a href="/ar/payments" class="hover:underline">Payments</a>
@@ -29,9 +29,9 @@ const methodLabels: Record<string, string> = {
 	</div>
 
 	<div class="grid gap-6 lg:grid-cols-3">
-		<div class="space-y-6 lg:col-span-2">
-			<Card>
-				<CardContent>
+		<div class="flex flex-col gap-6 lg:col-span-2">
+			<Card.Root>
+				<Card.Content>
 					<div class="flex items-start justify-between">
 						<div>
 							<h2 class="text-lg font-semibold text-card-foreground">Payment Details</h2>
@@ -79,24 +79,26 @@ const methodLabels: Record<string, string> = {
 							</div>
 						{/if}
 					</dl>
-				</CardContent>
-			</Card>
+				</Card.Content>
+			</Card.Root>
 
 			{#if payment.notes}
-				<Card>
-					<CardContent>
+				<Card.Root>
+					<Card.Content>
 						<h2 class="mb-2 text-lg font-semibold text-card-foreground">Notes</h2>
 						<p class="text-sm text-muted-foreground">{payment.notes}</p>
-					</CardContent>
-				</Card>
+					</Card.Content>
+				</Card.Root>
 			{/if}
 		</div>
 
-		<div class="space-y-6">
-			<Card>
-				<CardContent>
-					<h2 class="mb-4 text-lg font-semibold text-card-foreground">Summary</h2>
-					<dl class="space-y-3">
+		<div class="flex flex-col gap-6">
+			<Card.Root>
+				<Card.Content>
+					<Card.Header>
+				<Card.Title>Summary</Card.Title>
+			</Card.Header>
+					<dl class="flex flex-col gap-3">
 						<div class="flex items-center justify-between">
 							<dt class="text-sm text-muted-foreground">Payment Number</dt>
 							<dd class="text-sm text-card-foreground">{payment.paymentNumber}</dd>
@@ -108,8 +110,8 @@ const methodLabels: Record<string, string> = {
 							</dd>
 						</div>
 					</dl>
-				</CardContent>
-			</Card>
+				</Card.Content>
+			</Card.Root>
 		</div>
 	</div>
 </div>

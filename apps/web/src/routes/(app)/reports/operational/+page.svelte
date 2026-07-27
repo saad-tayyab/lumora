@@ -5,7 +5,7 @@ import type { PageData } from './$types';
 let { data }: { data: PageData } = $props();
 </script>
 
-<div class="space-y-6">
+<div class="flex flex-col gap-6">
   <div>
     <h1 class="text-3xl font-bold text-foreground">Operational Reports</h1>
     <p class="text-muted-foreground">Inventory and stock level summaries</p>

@@ -1,4 +1,9 @@
 <script lang="ts">
+import { Button } from '$lib/components/ui/button';
+import { Checkbox } from '$lib/components/ui/checkbox';
+import { Input } from '$lib/components/ui/input';
+import * as Field from '$lib/components/ui/field';
+
 let {
   warehouse,
   errors = {},
@@ -25,46 +30,48 @@ let isSubmitting = $state(false);
 </script>
 
 <div class="rounded-lg border bg-card p-6 shadow-sm">
-	<form method="POST" class="space-y-6">
-		<div class="grid gap-4 md:grid-cols-2">
-			<div>
-				<label for="name" class="block text-sm font-medium text-card-foreground">Name *</label>
-				<input id="name" name="name" type="text" required bind:value={name} class="mt-1 block w-full rounded-md border border-input bg-background px-3 py-2 text-sm text-foreground placeholder:text-muted-foreground focus:border-ring focus:outline-none focus:ring-1 focus:ring-ring" placeholder="Warehouse name" />
-				{#if errors.name}<p class="mt-1 text-xs text-destructive">{errors.name[0]}</p>{/if}
+	<form method="POST">
+		<Field.FieldGroup>
+			<div class="grid gap-4 md:grid-cols-2">
+				<Field.Field>
+					<Field.FieldLabel for="name">Name *</Field.FieldLabel>
+					<Input id="name" name="name" type="text" required bind:value={name} placeholder="Warehouse name" />
+					{#if errors.name}<p class="mt-1 text-xs text-destructive">{errors.name[0]}</p>{/if}
+				</Field.Field>
+				<Field.Field>
+					<Field.FieldLabel for="code">Code *</Field.FieldLabel>
+					<Input id="code" name="code" type="text" required maxlength="20" bind:value={code} placeholder="WH-01" />
+					{#if errors.code}<p class="mt-1 text-xs text-destructive">{errors.code[0]}</p>{/if}
+				</Field.Field>
 			</div>
-			<div>
-				<label for="code" class="block text-sm font-medium text-card-foreground">Code *</label>
-				<input id="code" name="code" type="text" required maxlength="20" bind:value={code} class="mt-1 block w-full rounded-md border border-input bg-background px-3 py-2 text-sm text-foreground placeholder:text-muted-foreground focus:border-ring focus:outline-none focus:ring-1 focus:ring-ring" placeholder="WH-01" />
-				{#if errors.code}<p class="mt-1 text-xs text-destructive">{errors.code[0]}</p>{/if}
+
+			<Field.Field>
+				<Field.FieldLabel for="address">Address</Field.FieldLabel>
+				<Input id="address" name="address" type="text" bind:value={address} />
+			</Field.Field>
+
+			<div class="grid gap-4 md:grid-cols-2">
+				<Field.Field>
+					<Field.FieldLabel for="city">City</Field.FieldLabel>
+					<Input id="city" name="city" type="text" bind:value={city} />
+				</Field.Field>
+				<Field.Field>
+					<Field.FieldLabel for="country">Country</Field.FieldLabel>
+					<Input id="country" name="country" type="text" maxlength="3" bind:value={country} placeholder="USA" />
+				</Field.Field>
 			</div>
-		</div>
 
-		<div>
-			<label for="address" class="block text-sm font-medium text-card-foreground">Address</label>
-			<input id="address" name="address" type="text" bind:value={address} class="mt-1 block w-full rounded-md border border-input bg-background px-3 py-2 text-sm text-foreground placeholder:text-muted-foreground focus:border-ring focus:outline-none focus:ring-1 focus:ring-ring" />
-		</div>
+			<Field.Field class="flex flex-row items-center gap-2">
+				<Checkbox id="isActive" bind:checked={isActive} />
+				<Field.FieldLabel for="isActive">Active</Field.FieldLabel>
+			</Field.Field>
 
-		<div class="grid gap-4 md:grid-cols-2">
-			<div>
-				<label for="city" class="block text-sm font-medium text-card-foreground">City</label>
-				<input id="city" name="city" type="text" bind:value={city} class="mt-1 block w-full rounded-md border border-input bg-background px-3 py-2 text-sm text-foreground placeholder:text-muted-foreground focus:border-ring focus:outline-none focus:ring-1 focus:ring-ring" />
+			<div class="flex items-center gap-3">
+				<Button type="submit" disabled={isSubmitting}>
+					{#if isSubmitting}Saving...{:else}{warehouse ? 'Update Warehouse' : 'Create Warehouse'}{/if}
+				</Button>
+				<Button href="/inv/warehouses" variant="outline">Cancel</Button>
 			</div>
-			<div>
-				<label for="country" class="block text-sm font-medium text-card-foreground">Country</label>
-				<input id="country" name="country" type="text" maxlength="3" bind:value={country} class="mt-1 block w-full rounded-md border border-input bg-background px-3 py-2 text-sm text-foreground placeholder:text-muted-foreground focus:border-ring focus:outline-none focus:ring-1 focus:ring-ring" placeholder="USA" />
-			</div>
-		</div>
-
-		<div class="flex items-center gap-2">
-			<input id="isActive" name="isActive" type="checkbox" bind:checked={isActive} class="h-4 w-4 rounded border-input" />
-			<label for="isActive" class="text-sm font-medium text-card-foreground">Active</label>
-		</div>
-
-		<div class="flex items-center gap-3">
-			<button type="submit" disabled={isSubmitting} class="rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground hover:bg-primary/90 disabled:cursor-not-allowed disabled:opacity-50">
-				{#if isSubmitting}Saving...{:else}{warehouse ? 'Update Warehouse' : 'Create Warehouse'}{/if}
-			</button>
-			<a href="/inv/warehouses" class="rounded-md border px-4 py-2 text-sm font-medium text-card-foreground hover:bg-accent">Cancel</a>
-		</div>
+		</Field.FieldGroup>
 	</form>
 </div>

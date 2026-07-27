@@ -25,14 +25,14 @@ async function handleDelete(id: string) {
   }
 }
 
-function statusColor(status: string): string {
-  const colors: Record<string, string> = {
-    active: 'bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-300',
-    fully_depreciated: 'bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-300',
-    disposed: 'bg-gray-100 text-gray-800 dark:bg-gray-800 dark:text-gray-300',
-    under_construction: 'bg-yellow-100 text-yellow-800 dark:bg-yellow-900 dark:text-yellow-300',
-  };
-  return colors[status] || 'bg-gray-100 text-gray-800';
+function statusVariant(status: string): 'secondary' | 'destructive' | 'default' | 'outline' {
+  switch (status) {
+    case 'active': return 'secondary';
+    case 'disposed': return 'outline';
+    case 'fully_depreciated': return 'outline';
+    case 'under_construction': return 'outline';
+    default: return 'outline';
+  }
 }
 
 function methodLabel(method: string): string {
@@ -56,7 +56,7 @@ const columns: ColumnDef<any>[] = [
   {
     accessorKey: 'status',
     header: 'Status',
-    cell: (row) => `<span class="inline-flex items-center rounded-full px-2 py-0.5 text-xs font-medium ${statusColor((row as any).original.status)}">${(row as any).original.status.replace('_', ' ')}</span>`,
+    cell: (row) => `<span class="inline-flex items-center rounded-full px-2 py-0.5 text-xs font-medium ${statusVariant((row as any).original.status)}">${(row as any).original.status.replace('_', ' ')}</span>`,
   },
   {
     id: 'actions',
@@ -72,7 +72,7 @@ $effect(() => {
 });
 </script>
 
-<div class="space-y-6">
+<div class="flex flex-col gap-6">
   <div class="flex items-center justify-between">
     <div>
       <h1 class="text-3xl font-bold text-foreground">Fixed Assets</h1>

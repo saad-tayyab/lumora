@@ -19,7 +19,7 @@ function methodLabel(method: string): string {
 
 {#if data.schedule}
   {@const sched = data.schedule}
-  <div class="space-y-6">
+  <div class="flex flex-col gap-6">
     <div class="flex items-center justify-between">
       <div>
         <h1 class="text-3xl font-bold text-foreground">Depreciation Schedule</h1>
@@ -36,7 +36,7 @@ function methodLabel(method: string): string {
     <div class="grid gap-6 md:grid-cols-2">
       <Card.Root class="shadow-sm"><Card.Content>
         <h2 class="text-lg font-semibold text-card-foreground">Schedule Details</h2>
-        <dl class="space-y-2 text-sm">
+        <dl class="flex flex-col gap-2 text-sm">
           <div class="flex justify-between">
             <dt class="text-muted-foreground">Asset</dt>
             <dd class="font-medium">{sched.assetId}</dd>
@@ -54,7 +54,7 @@ function methodLabel(method: string): string {
 
       <Card.Root class="shadow-sm"><Card.Content>
         <h2 class="text-lg font-semibold text-card-foreground">Financials</h2>
-        <dl class="space-y-2 text-sm">
+        <dl class="flex flex-col gap-2 text-sm">
           <div class="flex justify-between">
             <dt class="text-muted-foreground">Start Date</dt>
             <dd class="font-medium">{formatDate(sched.startDate)}</dd>

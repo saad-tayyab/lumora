@@ -2,11 +2,13 @@
 import { superForm } from 'sveltekit-superforms';
 import { toast } from 'svelte-sonner';
 import { goto } from '$app/navigation';
+import * as Field from '$lib/components/ui/field';
 import { Button } from '$lib/components/ui/button';
 import { Input } from '$lib/components/ui/input';
-import { Label } from '$lib/components/ui/label';
 import { Textarea } from '$lib/components/ui/textarea';
-import { Card, CardContent } from '$lib/components/ui/card';
+import { Label } from '$lib/components/ui/label';
+import * as Card from '$lib/components/ui/card';
+import * as Select from '$lib/components/ui/select';
 import DatePicker from '$lib/components/ui/date-picker.svelte';
 
 let { data } = $props();
@@ -25,7 +27,7 @@ $effect(() => {
 });
 </script>
 
-<div class="mx-auto max-w-2xl space-y-6">
+<div class="mx-auto max-w-2xl flex flex-col gap-6">
 	<div>
 		<div class="flex items-center gap-2 text-sm text-muted-foreground">
 			<a href="/hr/attendance" class="hover:underline">Attendance</a>
@@ -35,65 +37,68 @@ $effect(() => {
 		<h1 class="mt-2 text-3xl font-bold text-foreground">Record Attendance</h1>
 	</div>
 
-	<Card>
-		<CardContent>
-			<form method="POST" use:enhance class="space-y-6">
-				<div class="grid gap-4 md:grid-cols-2">
-					<div class="space-y-2">
-						<Label for="employeeId">Employee *</Label>
-						<select
-							id="employeeId"
-							bind:value={$form.employeeId}
-							class="h-8 w-full rounded-lg border border-input bg-transparent px-2.5 py-1 text-base transition-colors focus-visible:border-ring focus-visible:ring-3 focus-visible:ring-ring/50 md:text-sm"
-						>
-							<option value="">Select employee</option>
-							{#each data.employees as emp}
-								<option value={emp.id}>{emp.firstName} {emp.lastName}</option>
-							{/each}
-						</select>
-						{#if $errors.employeeId}<p class="text-xs text-destructive">{$errors.employeeId}</p>{/if}
+	<Card.Root>
+		<Card.Content>
+			<form method="POST" use:enhance>
+				<Field.FieldGroup>
+					<div class="grid gap-4 md:grid-cols-2">
+						<div class="flex flex-col gap-2">
+							<Label for="employeeId">Employee *</Label>
+						<Select.Root bind:value={$form.employeeId}>
+							<Select.Trigger class="w-full">
+								<Select.Value placeholder="Select employee" />
+							</Select.Trigger>
+							<Select.Content>
+								{#each data.employees as emp}
+									<Select.Item value={emp.id}>{emp.firstName} {emp.lastName}</Select.Item>
+								{/each}
+							</Select.Content>
+						</Select.Root>
+							{#if $errors.employeeId}<p class="text-xs text-destructive">{$errors.employeeId}</p>{/if}
+						</div>
+						<Field.Field>
+							<Field.FieldLabel for="date">Date *</Field.FieldLabel>
+							<DatePicker bind:value={$form.date} />
+							{#if $errors.date}<Field.FieldError errors={$errors.date.map(m => ({ message: m }))} />{/if}
+						</Field.Field>
+						<Field.Field>
+							<Field.FieldLabel for="checkIn">Check In</Field.FieldLabel>
+							<Input id="checkIn" type="time" bind:value={$form.checkIn} />
+						</Field.Field>
+						<Field.Field>
+							<Field.FieldLabel for="checkOut">Check Out</Field.FieldLabel>
+							<Input id="checkOut" type="time" bind:value={$form.checkOut} />
+						</Field.Field>
+						<div class="flex flex-col gap-2">
+							<Label for="status">Status *</Label>
+						<Select.Root bind:value={$form.status}>
+							<Select.Trigger class="w-full">
+								<Select.Value placeholder="Select status" />
+							</Select.Trigger>
+							<Select.Content>
+								<Select.Item value="present">Present</Select.Item>
+								<Select.Item value="absent">Absent</Select.Item>
+								<Select.Item value="half_day">Half Day</Select.Item>
+								<Select.Item value="late">Late</Select.Item>
+							</Select.Content>
+						</Select.Root>
+							{#if $errors.status}<p class="text-xs text-destructive">{$errors.status}</p>{/if}
+						</div>
 					</div>
-					<div class="space-y-2">
-						<Label for="date">Date *</Label>
-						<DatePicker bind:value={$form.date} />
-						{#if $errors.date}<p class="text-xs text-destructive">{$errors.date}</p>{/if}
-					</div>
-					<div class="space-y-2">
-						<Label for="checkIn">Check In</Label>
-						<Input id="checkIn" type="time" bind:value={$form.checkIn} />
-					</div>
-					<div class="space-y-2">
-						<Label for="checkOut">Check Out</Label>
-						<Input id="checkOut" type="time" bind:value={$form.checkOut} />
-					</div>
-					<div class="space-y-2">
-						<Label for="status">Status *</Label>
-						<select
-							id="status"
-							bind:value={$form.status}
-							class="h-8 w-full rounded-lg border border-input bg-transparent px-2.5 py-1 text-base transition-colors focus-visible:border-ring focus-visible:ring-3 focus-visible:ring-ring/50 md:text-sm"
-						>
-							<option value="present">Present</option>
-							<option value="absent">Absent</option>
-							<option value="half_day">Half Day</option>
-							<option value="late">Late</option>
-						</select>
-						{#if $errors.status}<p class="text-xs text-destructive">{$errors.status}</p>{/if}
-					</div>
-				</div>
 
-				<div class="space-y-2">
-					<Label for="notes">Notes</Label>
-					<Textarea id="notes" bind:value={$form.notes} rows={3} />
-				</div>
+					<Field.Field>
+						<Field.FieldLabel for="notes">Notes</Field.FieldLabel>
+						<Textarea id="notes" bind:value={$form.notes} rows={3} />
+					</Field.Field>
 
-				<div class="flex justify-end gap-3">
-					<Button variant="outline" href="/hr/attendance">Cancel</Button>
-					<Button type="submit" disabled={$submitting}>
-						{$submitting ? 'Saving...' : 'Record Attendance'}
-					</Button>
-				</div>
+					<div class="flex justify-end gap-3">
+						<Button variant="outline" href="/hr/attendance">Cancel</Button>
+						<Button type="submit" disabled={$submitting}>
+							{$submitting ? 'Saving...' : 'Record Attendance'}
+						</Button>
+					</div>
+				</Field.FieldGroup>
 			</form>
-		</CardContent>
-	</Card>
+		</Card.Content>
+	</Card.Root>
 </div>

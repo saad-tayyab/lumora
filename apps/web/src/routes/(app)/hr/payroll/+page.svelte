@@ -3,6 +3,7 @@ import { toast } from 'svelte-sonner';
 import { hrApi, type Payroll } from '$lib/api/hr';
 import { formatCurrency } from '$lib/utils/format';
 import type { PageData } from './$types';
+import { badgeVariants } from '$lib/components/ui/badge';
 import AppDataTable from '$lib/components/data/AppDataTable.svelte';
 import type { ColumnDef } from '@tanstack/svelte-table';
 
@@ -12,14 +13,14 @@ let total = $state(data.total);
 let statusFilter = $state('');
 let isLoading = $state(false);
 
-function prStatusColor(status: string): string {
-  const colors: Record<string, string> = {
-    draft: 'bg-gray-100 text-gray-800',
-    processed: 'bg-blue-100 text-blue-800',
-    paid: 'bg-green-100 text-green-800',
-    cancelled: 'bg-red-100 text-red-800',
-  };
-  return colors[status] || 'bg-gray-100 text-gray-800';
+function prStatusVariant(status: string): 'secondary' | 'destructive' | 'outline' | 'default' {
+  switch (status) {
+    case 'draft': return 'outline';
+    case 'processed': return 'default';
+    case 'paid': return 'secondary';
+    case 'cancelled': return 'destructive';
+    default: return 'outline';
+  }
 }
 
 function formatStatus(status: string): string {
@@ -58,7 +59,7 @@ const columns: ColumnDef<Payroll>[] = [
   {
     accessorKey: 'status',
     header: 'Status',
-    cell: (row) => `<span class="inline-block rounded-full px-2 py-0.5 text-xs font-medium ${prStatusColor((row as any).original.status)}">${formatStatus((row as any).original.status)}</span>`,
+    cell: (row) => `<span class="${badgeVariants({ variant: prStatusVariant((row as any).original.status) })}">${formatStatus((row as any).original.status)}</span>`,
   },
   {
     id: 'actions',
@@ -82,10 +83,21 @@ $effect(() => {
 });
 </script>
 
-<div class="space-y-6">
+<div class="flex flex-col gap-6">
   <div><h1 class="text-3xl font-bold text-foreground">Payroll</h1><p class="text-muted-foreground">Manage payroll runs</p></div>
   <div class="flex items-center gap-4">
-    <select bind:value={statusFilter} class="rounded-md border bg-background px-3 py-2 text-sm"><option value="">All Statuses</option><option value="draft">Draft</option><option value="processed">Processed</option><option value="paid">Paid</option><option value="cancelled">Cancelled</option></select>
+    <Select.Root bind:value={statusFilter}>
+      <Select.Trigger class="w-full">
+        <Select.Value placeholder="All Statuses" />
+      </Select.Trigger>
+      <Select.Content>
+        <Select.Item value="">All Statuses</Select.Item>
+        <Select.Item value="draft">Draft</Select.Item>
+        <Select.Item value="processed">Processed</Select.Item>
+        <Select.Item value="paid">Paid</Select.Item>
+        <Select.Item value="cancelled">Cancelled</Select.Item>
+      </Select.Content>
+    </Select.Root>
     <span class="text-sm text-muted-foreground">{total} total</span>
   </div>
   <AppDataTable

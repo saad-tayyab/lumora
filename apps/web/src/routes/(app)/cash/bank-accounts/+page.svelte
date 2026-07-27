@@ -2,17 +2,18 @@
 import { goto } from '$app/navigation';
 import { formatCurrency } from '$lib/utils/format';
 import { Button } from '$lib/components/ui/button';
+import { badgeVariants } from '$lib/components/ui/badge';
 import AppDataTable from '$lib/components/data/AppDataTable.svelte';
 import type { ColumnDef } from '@tanstack/svelte-table';
 import type { PageData } from './$types';
 
 let { data }: { data: PageData } = $props();
 
-function getStatusColor(status: string): string {
+function getStatusVariant(status: string): 'secondary' | 'default' | 'outline' {
   switch (status) {
-    case 'active': return 'bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-300';
-    case 'frozen': return 'bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-300';
-    default: return 'bg-gray-100 text-gray-800 dark:bg-gray-800 dark:text-gray-300';
+    case 'active': return 'secondary';
+    case 'frozen': return 'default';
+    default: return 'outline';
   }
 }
 
@@ -45,12 +46,12 @@ const columns: ColumnDef<any, any>[] = [
   {
     accessorKey: 'status',
     header: 'Status',
-    cell: ({ row }) => `<span class="inline-flex items-center rounded-full px-2 py-0.5 text-xs font-medium ${getStatusColor((row as any).original.status)}">${(row as any).original.status}</span>`,
+    cell: ({ row }) => `<span class="${badgeVariants({ variant: getStatusVariant((row as any).original.status) })}">${(row as any).original.status}</span>`,
   },
 ];
 </script>
 
-<div class="space-y-6">
+<div class="flex flex-col gap-6">
   <div class="flex items-center justify-between">
     <div>
       <h1 class="text-3xl font-bold text-foreground">Bank Accounts</h1>

@@ -44,7 +44,7 @@ $effect(() => {
 });
 </script>
 
-<div class="space-y-6">
+<div class="flex flex-col gap-6">
   <div>
     <h1 class="text-3xl font-bold text-foreground">Active Sessions</h1>
     <p class="text-muted-foreground">{data.total} sessions</p>

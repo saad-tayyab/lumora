@@ -1,11 +1,12 @@
 <script lang="ts">
 import { formatCurrency, formatDate } from '$lib/utils/format';
+import { Badge } from '$lib/components/ui/badge';
 import type { PageData } from './$types';
 
 let { data }: { data: PageData } = $props();
 </script>
 
-<div class="space-y-6">
+<div class="flex flex-col gap-6">
   <div>
     <h1 class="text-3xl font-bold text-foreground">Financial Reports</h1>
     <p class="text-muted-foreground">Account summaries and journal entry history</p>
@@ -70,16 +71,9 @@ let { data }: { data: PageData } = $props();
               <td class="px-4 py-3 text-right">{formatCurrency(entry.totalDebit)}</td>
               <td class="px-4 py-3 text-right">{formatCurrency(entry.totalCredit)}</td>
               <td class="px-4 py-3">
-                <span
-                  class="inline-block rounded-full px-2 py-0.5 text-xs font-medium
-                    {entry.status === 'posted'
-                      ? 'bg-green-100 text-green-800'
-                      : entry.status === 'draft'
-                        ? 'bg-gray-100 text-gray-800'
-                        : 'bg-yellow-100 text-yellow-800'}"
-                >
+                <Badge variant={entry.status === 'posted' ? 'secondary' : entry.status === 'draft' ? 'outline' : 'outline'}>
                   {entry.status}
-                </span>
+                </Badge>
               </td>
             </tr>
           {:else}

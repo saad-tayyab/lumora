@@ -3,7 +3,9 @@ import { goto } from '$app/navigation';
 import { listCreditNotes } from '$lib/api/ar';
 import type { CreditNote } from '$lib/types';
 import { formatCurrency, formatDate } from '$lib/utils/format';
+import * as Select from '$lib/components/ui/select';
 import { Button } from '$lib/components/ui/button';
+import { badgeVariants } from '$lib/components/ui/badge';
 import AppDataTable from '$lib/components/data/AppDataTable.svelte';
 import type { ColumnDef } from '@tanstack/svelte-table';
 
@@ -40,13 +42,13 @@ $effect(() => {
   load();
 });
 
-function getStatusColor(status: string): string {
+function getStatusVariant(status: string): 'secondary' | 'destructive' | 'default' | 'outline' {
   switch (status) {
-    case 'issued': return 'bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-300';
-    case 'applied': return 'bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-300';
-    case 'draft': return 'bg-gray-100 text-gray-800 dark:bg-gray-800 dark:text-gray-300';
-    case 'voided': return 'bg-gray-100 text-gray-800 dark:bg-gray-800 dark:text-gray-300';
-    default: return 'bg-gray-100 text-gray-800';
+    case 'issued': return 'default';
+    case 'applied': return 'secondary';
+    case 'draft': return 'outline';
+    case 'voided': return 'outline';
+    default: return 'outline';
   }
 }
 
@@ -79,12 +81,12 @@ const columns: ColumnDef<CreditNote, any>[] = [
   {
     accessorKey: 'status',
     header: 'Status',
-    cell: ({ row }) => `<span class="inline-flex items-center rounded-full px-2 py-0.5 text-xs font-medium ${getStatusColor((row as any).original.status)}">${(row as any).original.status}</span>`,
+    cell: ({ row }) => `<span class="${badgeVariants({ variant: getStatusVariant((row as any).original.status) })}">${(row as any).original.status}</span>`,
   },
 ];
 </script>
 
-<div class="space-y-6">
+<div class="flex flex-col gap-6">
 	<div class="flex items-center justify-between">
 		<div>
 			<h1 class="text-3xl font-bold text-foreground">Credit Notes</h1>
@@ -95,17 +97,18 @@ const columns: ColumnDef<CreditNote, any>[] = [
 
 	<div class="flex items-center gap-4">
 		<label for="status" class="text-sm font-medium text-foreground">Status:</label>
-		<select
-			id="status"
-			bind:value={statusFilter}
-			class="rounded-md border border-input bg-background px-3 py-2 text-sm text-foreground focus:border-ring focus:outline-none focus:ring-1 focus:ring-ring"
-		>
-			<option value="">All</option>
-			<option value="draft">Draft</option>
-			<option value="issued">Issued</option>
-			<option value="applied">Applied</option>
-			<option value="voided">Voided</option>
-		</select>
+		<Select.Root bind:value={statusFilter}>
+			<Select.Trigger class="w-full">
+				<Select.Value placeholder="All" />
+			</Select.Trigger>
+			<Select.Content>
+				<Select.Item value="">All</Select.Item>
+				<Select.Item value="draft">Draft</Select.Item>
+				<Select.Item value="issued">Issued</Select.Item>
+				<Select.Item value="applied">Applied</Select.Item>
+				<Select.Item value="voided">Voided</Select.Item>
+			</Select.Content>
+		</Select.Root>
 	</div>
 
 	{#if error}

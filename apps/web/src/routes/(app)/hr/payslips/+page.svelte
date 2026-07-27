@@ -20,7 +20,7 @@ const columns: ColumnDef<any>[] = [
 ];
 </script>
 
-<div class="space-y-6">
+<div class="flex flex-col gap-6">
   <div><h1 class="text-3xl font-bold text-foreground">Payslips</h1><p class="text-muted-foreground">View employee payslips</p></div>
   <AppDataTable
     {columns}

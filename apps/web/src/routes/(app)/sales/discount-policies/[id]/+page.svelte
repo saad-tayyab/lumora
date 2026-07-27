@@ -2,9 +2,11 @@
 import { toast } from 'svelte-sonner';
 import { enhance } from '$app/forms';
 import { goto } from '$app/navigation';
-import { formatCurrency, formatDate, formatPercent } from '$lib/utils/format';
+import { Badge } from '$lib/components/ui/badge';
 import { Button } from '$lib/components/ui/button';
-import { Card, CardContent } from '$lib/components/ui/card';
+import * as Card from '$lib/components/ui/card';
+import * as Dialog from '$lib/components/ui/dialog';
+import { formatCurrency, formatDate, formatPercent } from '$lib/utils/format';
 import type { PageData } from './$types';
 
 let { data }: { data: PageData } = $props();
@@ -12,25 +14,29 @@ let showDeleteConfirm = $state(false);
 let deleting = $state(false);
 
 function typeLabel(type: string): string {
-	const labels: Record<string, string> = {
-		percentage: 'Percentage',
-		fixed_amount: 'Fixed Amount',
-		tiered: 'Tiered',
-	};
-	return labels[type] || type;
+  const labels: Record<string, string> = {
+    percentage: 'Percentage',
+    fixed_amount: 'Fixed Amount',
+    tiered: 'Tiered',
+  };
+  return labels[type] || type;
 }
 
-function typeColor(type: string): string {
-	const colors: Record<string, string> = {
-		percentage: 'bg-blue-100 text-blue-800',
-		fixed_amount: 'bg-green-100 text-green-800',
-		tiered: 'bg-purple-100 text-purple-800',
-	};
-	return colors[type] || 'bg-gray-100 text-gray-800';
+function typeVariant(type: string): 'secondary' | 'destructive' | 'default' | 'outline' {
+  switch (type) {
+    case 'percentage':
+      return 'default';
+    case 'fixed_amount':
+      return 'secondary';
+    case 'tiered':
+      return 'secondary';
+    default:
+      return 'outline';
+  }
 }
 </script>
 
-<div class="mx-auto max-w-4xl space-y-6">
+<div class="flex flex-col mx-auto max-w-4xl gap-6">
 	<nav class="mb-4 text-sm text-muted-foreground">
 		<a href="/sales/discount-policies" class="hover:underline">Discount Policies</a>
 		<span class="mx-2">/</span>
@@ -42,11 +48,11 @@ function typeColor(type: string): string {
 			<div>
 				<div class="flex items-center gap-3">
 					<h1 class="text-3xl font-bold text-foreground">{data.policy.name}</h1>
-					<span class="inline-block rounded-full px-2 py-0.5 text-xs font-medium {typeColor(data.policy.type)}">{typeLabel(data.policy.type)}</span>
+					<span class="inline-block rounded-full px-2 py-0.5 text-xs font-medium {typeVariant(data.policy.type)}">{typeLabel(data.policy.type)}</span>
 					{#if data.policy.isActive}
-						<span class="inline-block rounded-full bg-green-100 px-2 py-0.5 text-xs font-medium text-green-800">Active</span>
+						<Badge variant="secondary">Active</Badge>
 					{:else}
-						<span class="inline-block rounded-full bg-gray-100 px-2 py-0.5 text-xs font-medium text-gray-800">Inactive</span>
+						<Badge variant="outline">Inactive</Badge>
 					{/if}
 				</div>
 				<p class="text-muted-foreground">Discount policy details</p>
@@ -57,10 +63,12 @@ function typeColor(type: string): string {
 		</div>
 
 		<div class="grid gap-6 lg:grid-cols-2">
-			<Card>
-				<CardContent>
-					<h2 class="mb-4 text-lg font-semibold text-card-foreground">Policy Details</h2>
-					<dl class="space-y-3">
+			<Card.Root>
+				<Card.Content>
+					<Card.Header>
+				<Card.Title>Policy Details</Card.Title>
+			</Card.Header>
+					<dl class="flex flex-col gap-3">
 						<div class="flex justify-between">
 							<dt class="text-sm text-muted-foreground">Name</dt>
 							<dd class="text-sm font-medium">{data.policy.name}</dd>
@@ -68,7 +76,7 @@ function typeColor(type: string): string {
 						<div class="flex justify-between">
 							<dt class="text-sm text-muted-foreground">Type</dt>
 							<dd>
-								<span class="inline-block rounded-full px-2 py-0.5 text-xs font-medium {typeColor(data.policy.type)}">{typeLabel(data.policy.type)}</span>
+								<span class="inline-block rounded-full px-2 py-0.5 text-xs font-medium {typeVariant(data.policy.type)}">{typeLabel(data.policy.type)}</span>
 							</dd>
 						</div>
 						<div class="flex justify-between border-t pt-3">
@@ -100,19 +108,19 @@ function typeColor(type: string): string {
 							</div>
 						{/if}
 					</dl>
-				</CardContent>
-			</Card>
+				</Card.Content>
+			</Card.Root>
 
-			<Card>
-				<CardContent>
-					<h2 class="mb-4 text-lg font-semibold text-card-foreground">Status & Info</h2>
-					<dl class="space-y-3">
+			<Card.Root>
+				<Card.Content>
+					<Card.Header>
+				<Card.Title>Status & Info</Card.Title>
+			</Card.Header>
+					<dl class="flex flex-col gap-3">
 						<div class="flex justify-between">
 							<dt class="text-sm text-muted-foreground">Active</dt>
 							<dd>
-								<span class="inline-block rounded-full px-2 py-0.5 text-xs font-medium {data.policy.isActive ? 'bg-green-100 text-green-800' : 'bg-gray-100 text-gray-800'}">
-									{data.policy.isActive ? 'Yes' : 'No'}
-								</span>
+								<Badge variant={data.policy.isActive ? "secondary" : "outline"}>{data.policy.isActive ? 'Yes' : 'No'}</Badge>
 							</dd>
 						</div>
 						<div class="flex justify-between">
@@ -128,45 +136,45 @@ function typeColor(type: string): string {
 							<dd class="text-sm font-medium">{formatDate(data.policy.createdAt)}</dd>
 						</div>
 					</dl>
-				</CardContent>
-			</Card>
+				</Card.Content>
+			</Card.Root>
 		</div>
 	{:else}
 		<div class="py-12 text-center text-muted-foreground">Discount policy not found</div>
 	{/if}
 </div>
 
-{#if showDeleteConfirm}
-	<div class="fixed inset-0 z-50 flex items-center justify-center bg-black/50">
-		<div class="mx-4 w-full max-w-sm rounded-lg bg-card p-6 shadow-lg">
-			<h3 class="text-lg font-semibold text-card-foreground">Delete Discount Policy</h3>
-			<p class="mt-2 text-sm text-muted-foreground">
+<Dialog.Root bind:open={showDeleteConfirm}>
+	<Dialog.Content>
+		<Dialog.Header>
+			<Dialog.Title>Delete Discount Policy</Dialog.Title>
+			<Dialog.Description>
 				Are you sure you want to delete "{data.policy?.name}"? This action cannot be undone.
-			</p>
-			<div class="mt-4 flex justify-end gap-3">
-				<Button variant="outline" onclick={() => (showDeleteConfirm = false)}>Cancel</Button>
-				<form
-					method="POST"
-					action="?/delete"
-					use:enhance={() => {
-						deleting = true;
-						return async ({ result }) => {
-							deleting = false;
-							if (result.type === 'success') {
-								toast.success('Discount policy deleted');
-								goto('/sales/discount-policies');
-							} else {
-								toast.error('Failed to delete discount policy');
-							}
-							showDeleteConfirm = false;
-						};
-					}}
-				>
-					<Button type="submit" variant="destructive" disabled={deleting}>
-						{deleting ? 'Deleting...' : 'Delete'}
-					</Button>
-				</form>
-			</div>
+			</Dialog.Description>
+		</Dialog.Header>
+		<div class="flex justify-end gap-3">
+			<Button variant="outline" onclick={() => (showDeleteConfirm = false)}>Cancel</Button>
+			<form
+				method="POST"
+				action="?/delete"
+				use:enhance={() => {
+					deleting = true;
+					return async ({ result }) => {
+						deleting = false;
+						if (result.type === 'success') {
+							toast.success('Discount policy deleted');
+							goto('/sales/discount-policies');
+						} else {
+							toast.error('Failed to delete discount policy');
+						}
+						showDeleteConfirm = false;
+					};
+				}}
+			>
+				<Button type="submit" variant="destructive" disabled={deleting}>
+					{deleting ? 'Deleting...' : 'Delete'}
+				</Button>
+			</form>
 		</div>
-	</div>
-{/if}
+	</Dialog.Content>
+</Dialog.Root>

@@ -2,23 +2,27 @@
 import type { AccountType } from '$lib/types';
 import { formatDate } from '$lib/utils/format';
 import { Button } from '$lib/components/ui/button';
-import { Card, CardContent } from '$lib/components/ui/card';
+import { Badge } from '$lib/components/ui/badge';
+import * as Card from '$lib/components/ui/card';
 import type { PageData } from './$types';
 
 let { data }: { data: PageData } = $props();
 
 const { account } = data;
 
-const typeBadgeColors: Record<AccountType, string> = {
-  asset: 'bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-300',
-  liability: 'bg-orange-100 text-orange-800 dark:bg-orange-900 dark:text-orange-300',
-  equity: 'bg-purple-100 text-purple-800 dark:bg-purple-900 dark:text-purple-300',
-  revenue: 'bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-300',
-  expense: 'bg-red-100 text-red-800 dark:bg-red-900 dark:text-red-300',
-};
+function typeBadgeVariant(type: AccountType): 'secondary' | 'destructive' | 'default' | 'outline' {
+  switch (type) {
+    case 'asset': return 'default';
+    case 'liability': return 'outline';
+    case 'equity': return 'secondary';
+    case 'revenue': return 'secondary';
+    case 'expense': return 'destructive';
+    default: return 'outline';
+  }
+}
 </script>
 
-<div class="mx-auto max-w-2xl space-y-6">
+<div class="flex flex-col mx-auto max-w-2xl gap-6">
   <div>
     <a href="/financial/accounts" class="text-sm text-muted-foreground hover:text-foreground">
       ← Back to Accounts
@@ -32,9 +36,11 @@ const typeBadgeColors: Record<AccountType, string> = {
     </div>
   </div>
 
-  <Card>
-    <CardContent>
-      <h2 class="mb-4 text-lg font-semibold text-card-foreground">Account Details</h2>
+  <Card.Root>
+    <Card.Content>
+      <Card.Header>
+				<Card.Title>Account Details</Card.Title>
+			</Card.Header>
       <dl class="grid grid-cols-2 gap-4">
         <div>
           <dt class="text-sm text-muted-foreground">Code</dt>
@@ -47,17 +53,17 @@ const typeBadgeColors: Record<AccountType, string> = {
         <div>
           <dt class="text-sm text-muted-foreground">Type</dt>
           <dd class="mt-1">
-            <span class="inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-medium {typeBadgeColors[account.type as AccountType]}">
+            <Badge variant={typeBadgeVariant(account.type as AccountType)}>
               {account.type}
-            </span>
+            </Badge>
           </dd>
         </div>
         <div>
           <dt class="text-sm text-muted-foreground">Status</dt>
           <dd class="mt-1">
-            <span class="inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-medium {account.isActive ? 'bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-300' : 'bg-gray-100 text-gray-800 dark:bg-gray-800 dark:text-gray-300'}">
+            <Badge variant={account.isActive ? 'secondary' : 'outline'}>
               {account.isActive ? 'Active' : 'Inactive'}
-            </span>
+            </Badge>
           </dd>
         </div>
         {#if account.description}
@@ -75,6 +81,6 @@ const typeBadgeColors: Record<AccountType, string> = {
           <dd class="mt-1 text-foreground">{formatDate(account.updatedAt)}</dd>
         </div>
       </dl>
-    </CardContent>
-  </Card>
+    </Card.Content>
+  </Card.Root>
 </div>

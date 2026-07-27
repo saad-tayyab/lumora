@@ -1,4 +1,5 @@
 <script lang="ts">
+import * as Select from '$lib/components/ui/select';
 let {
   employee,
   departments,
@@ -35,7 +36,7 @@ let isSubmitting = $state(false);
 </script>
 
 <div class="rounded-lg border bg-card p-6 shadow-sm">
-	<form method="POST" class="space-y-6">
+	<form method="POST" class="flex flex-col gap-6">
 		<div class="grid gap-4 md:grid-cols-2">
 			<div>
 				<label for="firstName" class="block text-sm font-medium text-card-foreground">First Name *</label>
@@ -55,21 +56,29 @@ let isSubmitting = $state(false);
 			</div>
 			<div>
 				<label for="departmentId" class="block text-sm font-medium text-card-foreground">Department *</label>
-				<select id="departmentId" name="departmentId" required bind:value={departmentId} class="mt-1 block w-full rounded-md border border-input bg-background px-3 py-2 text-sm text-foreground focus:border-ring focus:outline-none focus:ring-1 focus:ring-ring">
-					<option value="">Select department</option>
+			<Select.Root bind:value={departmentId}>
+				<Select.Trigger class="w-full">
+					<Select.Value placeholder="Select department" />
+				</Select.Trigger>
+				<Select.Content>
 					{#each departments as dept}
-						<option value={dept.id}>{dept.name}</option>
+						<Select.Item value={dept.id}>{dept.name}</Select.Item>
 					{/each}
-				</select>
+				</Select.Content>
+			</Select.Root>
 			</div>
 			<div>
 				<label for="designationId" class="block text-sm font-medium text-card-foreground">Designation *</label>
-				<select id="designationId" name="designationId" required bind:value={designationId} class="mt-1 block w-full rounded-md border border-input bg-background px-3 py-2 text-sm text-foreground focus:border-ring focus:outline-none focus:ring-1 focus:ring-ring">
-					<option value="">Select designation</option>
+			<Select.Root bind:value={designationId}>
+				<Select.Trigger class="w-full">
+					<Select.Value placeholder="Select designation" />
+				</Select.Trigger>
+				<Select.Content>
 					{#each designations as des}
-						<option value={des.id}>{des.title}</option>
+						<Select.Item value={des.id}>{des.title}</Select.Item>
 					{/each}
-				</select>
+				</Select.Content>
+			</Select.Root>
 			</div>
 			<div>
 				<label for="joiningDate" class="block text-sm font-medium text-card-foreground">Joining Date *</label>
@@ -77,22 +86,32 @@ let isSubmitting = $state(false);
 			</div>
 			<div>
 				<label for="employmentType" class="block text-sm font-medium text-card-foreground">Employment Type</label>
-				<select id="employmentType" name="employmentType" bind:value={employmentType} class="mt-1 block w-full rounded-md border border-input bg-background px-3 py-2 text-sm text-foreground focus:border-ring focus:outline-none focus:ring-1 focus:ring-ring">
-					<option value="full_time">Full Time</option>
-					<option value="part_time">Part Time</option>
-					<option value="contract">Contract</option>
-					<option value="intern">Intern</option>
-				</select>
+			<Select.Root bind:value={employmentType}>
+				<Select.Trigger class="w-full">
+					<Select.Value placeholder="Select type" />
+				</Select.Trigger>
+				<Select.Content>
+					<Select.Item value="full_time">Full Time</Select.Item>
+					<Select.Item value="part_time">Part Time</Select.Item>
+					<Select.Item value="contract">Contract</Select.Item>
+					<Select.Item value="intern">Intern</Select.Item>
+				</Select.Content>
+			</Select.Root>
 			</div>
 		</div>
 
 		<div>
 			<label for="status" class="block text-sm font-medium text-card-foreground">Status</label>
-			<select id="status" name="status" bind:value={status} class="mt-1 block w-full rounded-md border border-input bg-background px-3 py-2 text-sm text-foreground focus:border-ring focus:outline-none focus:ring-1 focus:ring-ring">
-				<option value="active">Active</option>
-				<option value="inactive">Inactive</option>
-				<option value="terminated">Terminated</option>
-			</select>
+		<Select.Root bind:value={status}>
+			<Select.Trigger class="w-full">
+				<Select.Value placeholder="Select status" />
+			</Select.Trigger>
+			<Select.Content>
+				<Select.Item value="active">Active</Select.Item>
+				<Select.Item value="inactive">Inactive</Select.Item>
+				<Select.Item value="terminated">Terminated</Select.Item>
+			</Select.Content>
+		</Select.Root>
 		</div>
 
 		<div class="flex items-center gap-3">

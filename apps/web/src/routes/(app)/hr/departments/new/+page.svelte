@@ -1,15 +1,14 @@
 <script lang="ts">
 import { superForm } from 'sveltekit-superforms';
+import * as Field from '$lib/components/ui/field';
 import { Button } from '$lib/components/ui/button';
-import { Label } from '$lib/components/ui/label';
+import { Spinner } from '$lib/components/ui/spinner';
+import { Input } from '$lib/components/ui/input';
 import { toast } from 'svelte-sonner';
 import { goto } from '$app/navigation';
-import { Input } from '$lib/components/ui/input';
 
 let { data } = $props();
 const { form, errors, enhance, submitting, message } = superForm(data.form);
-
-const inputClass = "w-full rounded-lg border border-input bg-transparent px-2.5 py-1 text-base md:text-sm placeholder:text-muted-foreground focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:outline-none focus-visible:ring-3 disabled:cursor-not-allowed disabled:opacity-50";
 
 $effect(() => {
 	if ($message) {
@@ -24,33 +23,35 @@ $effect(() => {
 });
 </script>
 
-<div class="mx-auto max-w-2xl space-y-6">
+<div class="flex flex-col mx-auto max-w-2xl gap-6">
 	<div>
 		<h1 class="text-3xl font-bold text-foreground">New Department</h1>
 		<p class="text-muted-foreground">Create a new department</p>
 	</div>
 
-	<form method="POST" use:enhance class="space-y-4">
-		<div class="space-y-1.5">
-			<Label for="name">Name *</Label>
-			<input id="name" type="text" value={$form.name} oninput={(e) => $form.name = e.currentTarget.value} class={inputClass} placeholder="e.g. Engineering" />
-			{#if $errors.name}<p class="text-sm text-destructive">{$errors.name}</p>{/if}
-		</div>
-		<div class="space-y-1.5">
-			<Label for="description">Description</Label>
-			<input id="description" type="text" value={$form.description ?? ''} oninput={(e) => $form.description = e.currentTarget.value} class={inputClass} />
-		</div>
-		<div class="space-y-1.5">
-			<Label for="managerId">Manager ID</Label>
-			<input id="managerId" type="text" value={$form.managerId ?? ''} oninput={(e) => $form.managerId = e.currentTarget.value} class={inputClass} />
-		</div>
+	<form method="POST" use:enhance>
+		<Field.FieldGroup>
+			<Field.Field>
+				<Field.FieldLabel for="name">Name *</Field.FieldLabel>
+				<Input id="name" type="text" value={$form.name} oninput={(e) => $form.name = e.currentTarget.value} placeholder="e.g. Engineering" />
+				{#if $errors.name}<Field.FieldError errors={$errors.name.map(m => ({ message: m }))} />{/if}
+			</Field.Field>
+			<Field.Field>
+				<Field.FieldLabel for="description">Description</Field.FieldLabel>
+				<Input id="description" type="text" value={$form.description ?? ''} oninput={(e) => $form.description = e.currentTarget.value} />
+			</Field.Field>
+			<Field.Field>
+				<Field.FieldLabel for="managerId">Manager ID</Field.FieldLabel>
+				<Input id="managerId" type="text" value={$form.managerId ?? ''} oninput={(e) => $form.managerId = e.currentTarget.value} />
+			</Field.Field>
 
-		<div class="flex justify-end gap-3 pt-4">
-			<Button variant="outline" href="/hr/departments">Cancel</Button>
-			<Button type="submit" disabled={$submitting}>
-				{#if $submitting}<div class="mr-2 h-4 w-4 animate-spin rounded-full border-2 border-primary-foreground border-t-transparent"></div>{/if}
-				Create Department
-			</Button>
-		</div>
+			<div class="flex justify-end gap-3 pt-4">
+				<Button variant="outline" href="/hr/departments">Cancel</Button>
+				<Button type="submit" disabled={$submitting}>
+					{#if $submitting}<Spinner data-icon="inline-start" class="text-primary-foreground" />{/if}
+					Create Department
+				</Button>
+			</div>
+		</Field.FieldGroup>
 	</form>
 </div>

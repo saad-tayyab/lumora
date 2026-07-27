@@ -5,6 +5,8 @@ import { type Employee, hrApi } from '$lib/api/hr';
 import { formatDate } from '$lib/utils/format';
 import type { PageData } from './$types';
 import { Button } from '$lib/components/ui/button';
+import * as Select from '$lib/components/ui/select';
+import { badgeVariants } from '$lib/components/ui/badge';
 import AppDataTable from '$lib/components/data/AppDataTable.svelte';
 import type { ColumnDef } from '@tanstack/svelte-table';
 
@@ -14,13 +16,13 @@ let total = $state(data.total);
 let statusFilter = $state('');
 let isLoading = $state(false);
 
-function empStatusColor(status: string): string {
-  const colors: Record<string, string> = {
-    active: 'bg-green-100 text-green-800',
-    inactive: 'bg-gray-100 text-gray-800',
-    terminated: 'bg-red-100 text-red-800',
-  };
-  return colors[status] || 'bg-gray-100 text-gray-800';
+function empStatusVariant(status: string): 'secondary' | 'destructive' | 'outline' {
+  switch (status) {
+    case 'active': return 'secondary';
+    case 'inactive': return 'outline';
+    case 'terminated': return 'destructive';
+    default: return 'outline';
+  }
 }
 
 function formatStatus(status: string): string {
@@ -73,7 +75,7 @@ const columns: ColumnDef<Employee>[] = [
   {
     accessorKey: 'status',
     header: 'Status',
-    cell: (row) => `<span class="inline-block rounded-full px-2 py-0.5 text-xs font-medium ${empStatusColor((row as any).original.status)}">${formatStatus((row as any).original.status)}</span>`,
+    cell: (row) => `<span class="${badgeVariants({ variant: empStatusVariant((row as any).original.status) })}">${formatStatus((row as any).original.status)}</span>`,
   },
   {
     id: 'actions',
@@ -94,7 +96,7 @@ $effect(() => {
 });
 </script>
 
-<div class="space-y-6">
+<div class="flex flex-col gap-6">
   <div class="flex items-center justify-between">
     <div>
       <h1 class="text-3xl font-bold text-foreground">Employees</h1>
@@ -104,12 +106,17 @@ $effect(() => {
   </div>
 
   <div class="flex items-center gap-4">
-    <select bind:value={statusFilter} class="rounded-md border bg-background px-3 py-2 text-sm">
-      <option value="">All Statuses</option>
-      <option value="active">Active</option>
-      <option value="inactive">Inactive</option>
-      <option value="terminated">Terminated</option>
-    </select>
+    <Select.Root bind:value={statusFilter}>
+      <Select.Trigger class="w-full">
+        <Select.Value placeholder="All Statuses" />
+      </Select.Trigger>
+      <Select.Content>
+        <Select.Item value="">All Statuses</Select.Item>
+        <Select.Item value="active">Active</Select.Item>
+        <Select.Item value="inactive">Inactive</Select.Item>
+        <Select.Item value="terminated">Terminated</Select.Item>
+      </Select.Content>
+    </Select.Root>
     <span class="text-sm text-muted-foreground">{total} total</span>
   </div>
 

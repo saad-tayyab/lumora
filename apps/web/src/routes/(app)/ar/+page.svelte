@@ -2,6 +2,7 @@
   import { KpiCard } from '$lib/components/dashboard';
   import * as Card from '$lib/components/ui/card';
   import { Button } from '$lib/components/ui/button';
+  import { Badge } from '$lib/components/ui/badge';
   import { formatCurrency } from '$lib/utils/format';
   import {
     Users,
@@ -27,7 +28,7 @@
   const overdueCount = $derived(data.invoices.filter((i: any) => i.status === 'overdue').length);
 </script>
 
-<div class="space-y-6">
+<div class="flex flex-col gap-6">
   <div>
     <h1 class="text-3xl font-bold text-foreground">Accounts Receivable</h1>
     <p class="text-muted-foreground">Manage customers, invoices, payments, and credit notes</p>
@@ -72,7 +73,7 @@
         {#if data.invoices.length === 0}
           <p class="py-4 text-center text-sm text-muted-foreground">No invoices yet.</p>
         {:else}
-          <div class="space-y-3">
+          <div class="flex flex-col gap-3">
             {#each data.invoices.slice(0, 5) as invoice}
               <a
                 href="/ar/invoices/{invoice.id}"
@@ -84,15 +85,9 @@
                 </div>
                 <div class="text-right">
                   <p class="text-sm font-medium text-card-foreground">{formatCurrency(invoice.totalAmount)}</p>
-                  <span
-                    class="inline-flex items-center rounded-full px-2 py-0.5 text-xs font-medium
-                      {invoice.status === 'paid' ? 'bg-green-100 text-green-800' :
-                       invoice.status === 'overdue' ? 'bg-red-100 text-red-800' :
-                       invoice.status === 'sent' ? 'bg-blue-100 text-blue-800' :
-                       'bg-gray-100 text-gray-800'}"
-                  >
+                  <Badge variant={invoice.status === 'paid' ? 'secondary' : invoice.status === 'overdue' ? 'destructive' : invoice.status === 'sent' ? 'default' : 'outline'}>
                     {invoice.status}
-                  </span>
+                  </Badge>
                 </div>
               </a>
             {/each}
@@ -112,7 +107,7 @@
         {#if data.payments.length === 0}
           <p class="py-4 text-center text-sm text-muted-foreground">No payments yet.</p>
         {:else}
-          <div class="space-y-3">
+          <div class="flex flex-col gap-3">
             {#each data.payments.slice(0, 5) as payment}
               <div class="flex items-center justify-between rounded-md border p-3">
                 <div>
@@ -136,7 +131,7 @@
     {#if data.creditNotes?.length === 0}
       <p class="text-sm text-muted-foreground">No credit notes yet.</p>
     {:else}
-      <div class="space-y-3">
+      <div class="flex flex-col gap-3">
         {#each (data.creditNotes || []).slice(0, 5) as cn}
           <a
             href="/ar/credit-notes/{cn.id}"
@@ -160,23 +155,23 @@
     <Card.Content>
       <div class="grid gap-3 md:grid-cols-2 lg:grid-cols-4">
         <Button variant="outline" class="justify-start gap-2" href="/ar/customers">
-          <Users class="h-4 w-4" />
+          <Users data-icon="inline-start" />
           View Customers
         </Button>
         <Button variant="outline" class="justify-start gap-2" href="/ar/customers/new">
-          <UserPlus class="h-4 w-4" />
+          <UserPlus data-icon="inline-start" />
           New Customer
         </Button>
         <Button variant="outline" class="justify-start gap-2" href="/ar/invoices/new">
-          <Plus class="h-4 w-4" />
+          <Plus data-icon="inline-start" />
           Create Invoice
         </Button>
         <Button variant="outline" class="justify-start gap-2" href="/ar/payments/new">
-          <CreditCard class="h-4 w-4" />
+          <CreditCard data-icon="inline-start" />
           Record Payment
         </Button>
         <Button variant="outline" class="justify-start gap-2" href="/ar/credit-notes/new">
-          <FileWarning class="h-4 w-4" />
+          <FileWarning data-icon="inline-start" />
           Create Credit Note
         </Button>
       </div>

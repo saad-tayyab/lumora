@@ -21,7 +21,7 @@ const sections: { title: string; description: string; href: string; icon: string
 ];
 </script>
 
-<div class="space-y-6">
+<div class="flex flex-col gap-6">
   <div>
     <h1 class="text-3xl font-bold text-foreground">Financial Management</h1>
     <p class="mt-1 text-muted-foreground">Chart of accounts, journal entries, and fiscal year management</p>

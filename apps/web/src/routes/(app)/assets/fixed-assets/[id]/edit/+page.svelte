@@ -3,7 +3,11 @@ import { toast } from 'svelte-sonner';
 import { goto } from '$app/navigation';
 import type { PageData } from './$types';
 import { Button } from '$lib/components/ui/button';
+import { Checkbox } from '$lib/components/ui/checkbox';
 import { Input } from '$lib/components/ui/input';
+import { Textarea } from '$lib/components/ui/textarea';
+import * as Field from '$lib/components/ui/field';
+import * as Select from '$lib/components/ui/select';
 
 let { data }: { data: PageData } = $props();
 let submitting = $state(false);
@@ -35,56 +39,43 @@ async function handleSubmit(e: Event) {
 </script>
 
 {#if data.asset}
-  <div class="mx-auto max-w-2xl space-y-6">
+  <div class="flex flex-col mx-auto max-w-2xl gap-6">
     <div>
       <h1 class="text-3xl font-bold text-foreground">Edit Fixed Asset</h1>
       <p class="text-muted-foreground">{data.asset.assetNumber}</p>
     </div>
 
-    <form onsubmit={handleSubmit} class="space-y-4">
-      <div class="space-y-1.5">
-        <label for="name" class="text-sm font-medium text-foreground">Name *</label>
-        <input
-          id="name"
-          bind:value={name}
-          required
-          class="w-full rounded-md border bg-background px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-ring"
-        />
-      </div>
+    <form onsubmit={handleSubmit}>
+      <Field.FieldGroup>
+        <Field.Field>
+          <Field.FieldLabel for="name">Name *</Field.FieldLabel>
+          <Input id="name" bind:value={name} required />
+        </Field.Field>
 
-      <div class="space-y-1.5">
-        <label for="description" class="text-sm font-medium text-foreground">Description</label>
-        <textarea
-          id="description"
-          bind:value={description}
-          rows="2"
-          class="w-full rounded-md border bg-background px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-ring"
-        ></textarea>
-      </div>
+        <Field.Field>
+          <Field.FieldLabel for="description">Description</Field.FieldLabel>
+          <Textarea id="description" bind:value={description} rows="2"></Textarea>
+        </Field.Field>
 
-      <div class="space-y-1.5">
-        <label for="category" class="text-sm font-medium text-foreground">Category *</label>
-        <select
-          id="category"
-          bind:value={categoryId}
-          required
-          class="w-full rounded-md border bg-background px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-ring"
-        >
-          {#each data.categories as cat}
-            <option value={cat.id}>{cat.name} ({cat.code})</option>
-          {/each}
-        </select>
-      </div>
+        <Field.Field>
+          <Field.FieldLabel for="category">Category *</Field.FieldLabel>
+          <Select.Root bind:value={categoryId}>
+            <Select.Trigger class="w-full">
+              <Select.Value placeholder="Select category" />
+            </Select.Trigger>
+            <Select.Content>
+              {#each data.categories as cat}
+                <Select.Item value={cat.id}>{cat.name} ({cat.code})</Select.Item>
+              {/each}
+            </Select.Content>
+          </Select.Root>
+        </Field.Field>
 
-      <div class="flex items-center gap-2">
-        <input
-          id="depreciable"
-          type="checkbox"
-          bind:checked={isDepreciable}
-          class="h-4 w-4 rounded border-input"
-        />
-        <label for="depreciable" class="text-sm font-medium text-foreground">Is Depreciable</label>
-      </div>
+        <Field.Field class="flex flex-row items-center gap-2">
+          <Checkbox id="depreciable" bind:checked={isDepreciable} />
+          <Field.FieldLabel for="depreciable">Is Depreciable</Field.FieldLabel>
+        </Field.Field>
+      </Field.FieldGroup>
 
       <div class="flex justify-end gap-3 pt-4">
         <a

@@ -39,7 +39,7 @@ function updateLine(index: number, field: string, value: string) {
 }
 </script>
 
-<div class="space-y-3">
+<div class="flex flex-col gap-3">
 	{#each lineItems as item, index}
 		<div class="grid items-end gap-3 rounded-md border p-3 md:grid-cols-[2fr_1fr_1fr_auto]">
 			<div>

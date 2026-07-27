@@ -1,15 +1,16 @@
 <script lang="ts">
 import { superForm } from 'sveltekit-superforms';
 import { Button } from '$lib/components/ui/button';
-import { Label } from '$lib/components/ui/label';
+import { Checkbox } from '$lib/components/ui/checkbox';
+import { Spinner } from '$lib/components/ui/spinner';
+import { Input } from '$lib/components/ui/input';
+import * as Field from '$lib/components/ui/field';
+import * as Select from '$lib/components/ui/select';
 import { toast } from 'svelte-sonner';
 import { goto } from '$app/navigation';
-import { Input } from '$lib/components/ui/input';
 
 let { data } = $props();
 const { form, errors, enhance, submitting, message } = superForm(data.form);
-
-const inputClass = "w-full rounded-lg border border-input bg-transparent px-2.5 py-1 text-base md:text-sm placeholder:text-muted-foreground focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:outline-none focus-visible:ring-3 disabled:cursor-not-allowed disabled:opacity-50";
 
 $effect(() => {
 	if ($message) {
@@ -24,76 +25,88 @@ $effect(() => {
 });
 </script>
 
-<div class="mx-auto max-w-2xl space-y-6">
+<div class="flex flex-col mx-auto max-w-2xl gap-6">
 	<div>
 		<h1 class="text-3xl font-bold text-foreground">New Tax Code</h1>
 		<p class="text-muted-foreground">Define a new tax code</p>
 	</div>
 
-	<form method="POST" use:enhance class="space-y-4">
-		<div class="grid gap-4 md:grid-cols-2">
-			<div class="space-y-1.5">
-				<Label for="code">Code *</Label>
-				<input id="code" type="text" value={$form.code} oninput={(e) => $form.code = e.currentTarget.value} class={inputClass} maxlength="20" />
-				{#if $errors.code}<p class="text-sm text-destructive">{$errors.code}</p>{/if}
+	<form method="POST" use:enhance>
+		<Field.FieldGroup>
+			<div class="grid gap-4 md:grid-cols-2">
+				<Field.Field>
+					<Field.FieldLabel for="code">Code *</Field.FieldLabel>
+					<Input id="code" type="text" value={$form.code} oninput={(e) => $form.code = e.currentTarget.value} maxlength="20" />
+					{#if $errors.code}<Field.FieldError>{$errors.code}</Field.FieldError>{/if}
+				</Field.Field>
+				<Field.Field>
+					<Field.FieldLabel for="name">Name *</Field.FieldLabel>
+					<Input id="name" type="text" value={$form.name} oninput={(e) => $form.name = e.currentTarget.value} maxlength="100" />
+					{#if $errors.name}<Field.FieldError>{$errors.name}</Field.FieldError>{/if}
+				</Field.Field>
 			</div>
-			<div class="space-y-1.5">
-				<Label for="name">Name *</Label>
-				<input id="name" type="text" value={$form.name} oninput={(e) => $form.name = e.currentTarget.value} class={inputClass} maxlength="100" />
-				{#if $errors.name}<p class="text-sm text-destructive">{$errors.name}</p>{/if}
+
+			<div class="grid gap-4 md:grid-cols-2">
+				<Field.Field>
+					<Field.FieldLabel for="type">Type *</Field.FieldLabel>
+				<Select.Root bind:value={$form.type}>
+					<Select.Trigger class="w-full">
+						<Select.Value placeholder="Select type" />
+					</Select.Trigger>
+					<Select.Content>
+						<Select.Item value="output_tax">Output Tax</Select.Item>
+						<Select.Item value="input_tax">Input Tax</Select.Item>
+						<Select.Item value="exempt">Exempt</Select.Item>
+						<Select.Item value="zero_rated">Zero Rated</Select.Item>
+					</Select.Content>
+				</Select.Root>
+					{#if $errors.type}<Field.FieldError>{$errors.type}</Field.FieldError>{/if}
+				</Field.Field>
+				<Field.Field>
+					<Field.FieldLabel for="postingRule">Posting Rule</Field.FieldLabel>
+					<Select.Root bind:value={$form.postingRule}>
+						<Select.Trigger class="w-full">
+							<Select.Value placeholder="Select rule" />
+						</Select.Trigger>
+						<Select.Content>
+							<Select.Item value="output_liability">Output Liability</Select.Item>
+							<Select.Item value="input_asset">Input Asset</Select.Item>
+						</Select.Content>
+					</Select.Root>
+				</Field.Field>
 			</div>
-		</div>
 
-		<div class="grid gap-4 md:grid-cols-2">
-			<div class="space-y-1.5">
-				<Label for="type">Type *</Label>
-				<select id="type" bind:value={$form.type} class={inputClass}>
-					<option value="output_tax">Output Tax</option>
-					<option value="input_tax">Input Tax</option>
-					<option value="exempt">Exempt</option>
-					<option value="zero_rated">Zero Rated</option>
-				</select>
-				{#if $errors.type}<p class="text-sm text-destructive">{$errors.type}</p>{/if}
-			</div>
-			<div class="space-y-1.5">
-				<Label for="postingRule">Posting Rule</Label>
-				<select id="postingRule" bind:value={$form.postingRule} class={inputClass}>
-					<option value="output_liability">Output Liability</option>
-					<option value="input_asset">Input Asset</option>
-				</select>
-			</div>
-		</div>
+			<Field.Field>
+				<Field.FieldLabel for="rate">Rate *</Field.FieldLabel>
+				<Input id="rate" type="number" value={$form.rate} oninput={(e) => $form.rate = Number(e.currentTarget.value)} placeholder="e.g. 15" />
+				{#if $errors.rate}<Field.FieldError>{$errors.rate}</Field.FieldError>{/if}
+			</Field.Field>
 
-		<div class="space-y-1.5">
-			<Label for="rate">Rate *</Label>
-			<input id="rate" type="number" value={$form.rate} oninput={(e) => $form.rate = Number(e.currentTarget.value)} class={inputClass} placeholder="e.g. 15" />
-			{#if $errors.rate}<p class="text-sm text-destructive">{$errors.rate}</p>{/if}
-		</div>
+			<Field.Field>
+				<Field.FieldLabel for="glAccountId">GL Account ID</Field.FieldLabel>
+				<Input id="glAccountId" type="text" value={$form.glAccountId ?? ''} oninput={(e) => $form.glAccountId = e.currentTarget.value} />
+			</Field.Field>
 
-		<div class="space-y-1.5">
-			<Label for="glAccountId">GL Account ID</Label>
-			<input id="glAccountId" type="text" value={$form.glAccountId ?? ''} oninput={(e) => $form.glAccountId = e.currentTarget.value} class={inputClass} />
-		</div>
+			<Field.Field>
+				<Field.FieldLabel for="description">Description</Field.FieldLabel>
+				<Input id="description" type="text" value={$form.description ?? ''} oninput={(e) => $form.description = e.currentTarget.value} />
+			</Field.Field>
 
-		<div class="space-y-1.5">
-			<Label for="description">Description</Label>
-			<input id="description" type="text" value={$form.description ?? ''} oninput={(e) => $form.description = e.currentTarget.value} class={inputClass} />
-		</div>
+			<Field.Field class="flex flex-row items-center gap-2">
+				<Checkbox id="isClaimable" bind:checked={$form.isClaimable} />
+				<Field.FieldLabel for="isClaimable">Is Claimable</Field.FieldLabel>
+			</Field.Field>
 
-		<div class="flex items-center gap-2">
-			<input id="isClaimable" type="checkbox" bind:checked={$form.isClaimable} class="h-4 w-4 rounded border-input" />
-			<Label for="isClaimable">Is Claimable</Label>
-		</div>
-
-		<div class="flex items-center gap-2">
-			<input id="isActive" type="checkbox" bind:checked={$form.isActive} class="h-4 w-4 rounded border-input" />
-			<Label for="isActive">Is Active</Label>
-		</div>
+			<Field.Field class="flex flex-row items-center gap-2">
+				<Checkbox id="isActive" bind:checked={$form.isActive} />
+				<Field.FieldLabel for="isActive">Is Active</Field.FieldLabel>
+			</Field.Field>
+		</Field.FieldGroup>
 
 		<div class="flex justify-end gap-3 pt-4">
 			<Button variant="outline" href="/tax/codes">Cancel</Button>
 			<Button type="submit" disabled={$submitting}>
-				{#if $submitting}<div class="mr-2 h-4 w-4 animate-spin rounded-full border-2 border-primary-foreground border-t-transparent"></div>{/if}
+				{#if $submitting}<Spinner data-icon="inline-start" class="text-primary-foreground" />{/if}
 				Create Tax Code
 			</Button>
 		</div>

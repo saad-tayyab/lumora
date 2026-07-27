@@ -6,6 +6,7 @@ import type { PageData } from './$types';
 import { Button } from '$lib/components/ui/button';
 import AppDataTable from '$lib/components/data/AppDataTable.svelte';
 import type { ColumnDef } from '@tanstack/svelte-table';
+import { badgeVariants } from '$lib/components/ui/badge';
 
 let { data }: { data: PageData } = $props();
 let deleting = $state<string | null>(null);
@@ -38,9 +39,7 @@ const columns: ColumnDef<any>[] = [
   {
     accessorKey: 'isActive',
     header: 'Active',
-    cell: (row) => (row as any).original.isActive
-      ? '<span class="inline-flex items-center rounded-full px-2 py-0.5 text-xs font-medium bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-300">Active</span>'
-      : '<span class="inline-flex items-center rounded-full px-2 py-0.5 text-xs font-medium bg-gray-100 text-gray-800 dark:bg-gray-800 dark:text-gray-300">Inactive</span>',
+    cell: (row) => `<span class="${badgeVariants({ variant: (row as any).original.isActive ? 'secondary' : 'outline' })}">${(row as any).original.isActive ? 'Active' : 'Inactive'}</span>`,
   },
   {
     id: 'actions',
@@ -56,7 +55,7 @@ $effect(() => {
 });
 </script>
 
-<div class="space-y-6">
+<div class="flex flex-col gap-6">
   <div class="flex items-center justify-between">
     <div>
       <h1 class="text-3xl font-bold text-foreground">Tax Rates</h1>

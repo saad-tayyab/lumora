@@ -1,12 +1,13 @@
 <script lang="ts">
 import { superForm } from 'sveltekit-superforms';
 import { toast } from 'svelte-sonner';
+import * as Field from '$lib/components/ui/field';
 import { Input } from '$lib/components/ui/input';
-import DatePicker from '$lib/components/ui/date-picker.svelte';
-import { Label } from '$lib/components/ui/label';
 import { Button } from '$lib/components/ui/button';
 import { Textarea } from '$lib/components/ui/textarea';
-import { Card, CardContent } from '$lib/components/ui/card';
+import * as Card from '$lib/components/ui/card';
+import * as Select from '$lib/components/ui/select';
+import DatePicker from '$lib/components/ui/date-picker.svelte';
 
 let { data } = $props();
 const { form, enhance, submitting } = superForm(data.form);
@@ -16,7 +17,7 @@ let filteredBills = $derived(
 );
 </script>
 
-<div class="mx-auto max-w-2xl space-y-6">
+<div class="flex flex-col mx-auto max-w-2xl gap-6">
 	<div>
 		<div class="flex items-center gap-2 text-sm text-muted-foreground">
 			<a href="/ap/payments" class="hover:underline">Payments</a>
@@ -26,96 +27,99 @@ let filteredBills = $derived(
 		<h1 class="mt-2 text-3xl font-bold text-foreground">Record Payment</h1>
 	</div>
 
-	<Card>
-		<CardContent>
-		<form method="POST" use:enhance class="space-y-6">
-		<div class="grid gap-4 md:grid-cols-2">
-			<div class="space-y-2">
-				<Label for="vendorId">Vendor *</Label>
-				<select
-					id="vendorId"
-					bind:value={$form.vendorId}
-					class="h-8 w-full rounded-lg border border-input bg-transparent px-2.5 py-1 text-base transition-colors focus-visible:border-ring focus-visible:ring-3 focus-visible:ring-ring/50 md:text-sm"
-				>
-					<option value="">Select vendor</option>
-					{#each data.vendors as vendor}
-						<option value={vendor.id}>{vendor.name}</option>
-					{/each}
-				</select>
-			</div>
-			<div class="space-y-2">
-				<Label for="billId">Bill (optional)</Label>
-				<select
-					id="billId"
-					bind:value={$form.billId}
-					class="h-8 w-full rounded-lg border border-input bg-transparent px-2.5 py-1 text-base transition-colors focus-visible:border-ring focus-visible:ring-3 focus-visible:ring-ring/50 md:text-sm"
-				>
-					<option value="">No bill (credit)</option>
-					{#each filteredBills as bill}
-						<option value={bill.id}>{bill.billNumber} - {bill.total}</option>
-					{/each}
-				</select>
-			</div>
-			<div class="space-y-2">
-				<Label for="amount">Amount *</Label>
-				<Input
-					id="amount"
-					type="number"
-					step="0.01"
-					min="0.01"
-					value={$form.amount}
-					oninput={(e) => ($form.amount = Number(e.currentTarget.value))}
-				/>
-			</div>
-			<div class="space-y-2">
-				<Label for="paymentDate">Payment Date *</Label>
-				<DatePicker bind:value={$form.paymentDate} />
-			</div>
-			<div class="space-y-2">
-				<Label for="paymentMethod">Payment Method *</Label>
-				<select
-					id="paymentMethod"
-					bind:value={$form.paymentMethod}
-					class="h-8 w-full rounded-lg border border-input bg-transparent px-2.5 py-1 text-base transition-colors focus-visible:border-ring focus-visible:ring-3 focus-visible:ring-ring/50 md:text-sm"
-				>
-					<option value="bank_transfer">Bank Transfer</option>
-					<option value="check">Check</option>
-					<option value="cash">Cash</option>
-					<option value="credit_card">Credit Card</option>
-					<option value="online">Online</option>
-				</select>
-			</div>
-			<div class="space-y-2">
-				<Label for="reference">Reference</Label>
-				<Input id="reference" bind:value={$form.reference} />
-			</div>
-			<div class="space-y-2">
-				<Label for="bankAccountId">Bank Account</Label>
-				<select
-					id="bankAccountId"
-					bind:value={$form.bankAccountId}
-					class="h-8 w-full rounded-lg border border-input bg-transparent px-2.5 py-1 text-base transition-colors focus-visible:border-ring focus-visible:ring-3 focus-visible:ring-ring/50 md:text-sm"
-				>
-					<option value="">Select bank account</option>
-					{#each data.bankAccounts as account}
-						<option value={account.id}>{account.name} ({account.currency})</option>
-					{/each}
-				</select>
-			</div>
-		</div>
+	<Card.Root>
+		<Card.Content>
+		<form method="POST" use:enhance>
+			<Field.FieldGroup>
+				<div class="grid gap-4 md:grid-cols-2">
+					<Field.Field>
+						<Field.FieldLabel for="vendorId">Vendor *</Field.FieldLabel>
+						<Select.Root bind:value={$form.vendorId}>
+							<Select.Trigger class="w-full">
+								<Select.Value placeholder="Select vendor" />
+							</Select.Trigger>
+							<Select.Content>
+								{#each data.vendors as vendor}
+									<Select.Item value={vendor.id}>{vendor.name}</Select.Item>
+								{/each}
+							</Select.Content>
+						</Select.Root>
+					</Field.Field>
+					<Field.Field>
+						<Field.FieldLabel for="billId">Bill (optional)</Field.FieldLabel>
+						<Select.Root bind:value={$form.billId}>
+							<Select.Trigger class="w-full">
+								<Select.Value placeholder="No bill (credit)" />
+							</Select.Trigger>
+							<Select.Content>
+								{#each filteredBills as bill}
+									<Select.Item value={bill.id}>{bill.billNumber} - {bill.total}</Select.Item>
+								{/each}
+							</Select.Content>
+						</Select.Root>
+					</Field.Field>
+					<Field.Field>
+						<Field.FieldLabel for="amount">Amount *</Field.FieldLabel>
+						<Input
+							id="amount"
+							type="number"
+							step="0.01"
+							min="0.01"
+							value={$form.amount}
+							oninput={(e) => ($form.amount = Number(e.currentTarget.value))}
+						/>
+					</Field.Field>
+					<Field.Field>
+						<Field.FieldLabel for="paymentDate">Payment Date *</Field.FieldLabel>
+						<DatePicker bind:value={$form.paymentDate} />
+					</Field.Field>
+					<Field.Field>
+						<Field.FieldLabel for="paymentMethod">Payment Method *</Field.FieldLabel>
+						<Select.Root bind:value={$form.paymentMethod}>
+							<Select.Trigger class="w-full">
+								<Select.Value placeholder="Select method" />
+							</Select.Trigger>
+							<Select.Content>
+								<Select.Item value="bank_transfer">Bank Transfer</Select.Item>
+								<Select.Item value="check">Check</Select.Item>
+								<Select.Item value="cash">Cash</Select.Item>
+								<Select.Item value="credit_card">Credit Card</Select.Item>
+								<Select.Item value="online">Online</Select.Item>
+							</Select.Content>
+						</Select.Root>
+					</Field.Field>
+					<Field.Field>
+						<Field.FieldLabel for="reference">Reference</Field.FieldLabel>
+						<Input id="reference" bind:value={$form.reference} />
+					</Field.Field>
+					<Field.Field>
+						<Field.FieldLabel for="bankAccountId">Bank Account</Field.FieldLabel>
+						<Select.Root bind:value={$form.bankAccountId}>
+							<Select.Trigger class="w-full">
+								<Select.Value placeholder="Select bank account" />
+							</Select.Trigger>
+							<Select.Content>
+								{#each data.bankAccounts as account}
+									<Select.Item value={account.id}>{account.name} ({account.currency})</Select.Item>
+								{/each}
+							</Select.Content>
+						</Select.Root>
+					</Field.Field>
+				</div>
 
-		<div class="space-y-2">
-			<Label for="notes">Notes</Label>
-			<Textarea id="notes" bind:value={$form.notes} rows={3} />
-		</div>
+				<Field.Field>
+					<Field.FieldLabel for="notes">Notes</Field.FieldLabel>
+					<Textarea id="notes" bind:value={$form.notes} rows={3} />
+				</Field.Field>
 
-		<div class="flex justify-end gap-3">
-			<Button variant="outline" href="/ap/payments">Cancel</Button>
-			<Button type="submit" disabled={$submitting}>
-				{$submitting ? 'Recording...' : 'Record Payment'}
-			</Button>
-		</div>
-	</form>
-		</CardContent>
-	</Card>
+				<div class="flex justify-end gap-3">
+					<Button variant="outline" href="/ap/payments">Cancel</Button>
+					<Button type="submit" disabled={$submitting}>
+						{$submitting ? 'Recording...' : 'Record Payment'}
+					</Button>
+				</div>
+			</Field.FieldGroup>
+		</form>
+		</Card.Content>
+	</Card.Root>
 </div>

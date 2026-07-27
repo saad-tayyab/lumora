@@ -2,6 +2,7 @@
   import { KpiCard } from '$lib/components/dashboard';
   import * as Card from '$lib/components/ui/card';
   import { Button } from '$lib/components/ui/button';
+  import { Badge } from '$lib/components/ui/badge';
   import { formatCurrency, formatDate } from '$lib/utils/format';
   import {
     Building2,
@@ -16,17 +17,20 @@
 
   let { data }: { data: PageData } = $props();
 
-  const billStatusColor: Record<string, string> = {
-    draft: 'bg-gray-100 text-gray-800',
-    pending_approval: 'bg-yellow-100 text-yellow-800',
-    approved: 'bg-blue-100 text-blue-800',
-    partially_paid: 'bg-orange-100 text-orange-800',
-    paid: 'bg-green-100 text-green-800',
-    voided: 'bg-red-100 text-red-800',
-  };
+  function billStatusVariant(status: string): 'secondary' | 'destructive' | 'default' | 'outline' {
+    switch (status) {
+      case 'draft': return 'outline';
+      case 'pending_approval': return 'outline';
+      case 'approved': return 'default';
+      case 'partially_paid': return 'outline';
+      case 'paid': return 'secondary';
+      case 'voided': return 'destructive';
+      default: return 'outline';
+    }
+  }
 </script>
 
-<div class="space-y-6">
+<div class="flex flex-col gap-6">
   <div>
     <h1 class="text-3xl font-bold text-foreground">Accounts Payable</h1>
     <p class="text-muted-foreground">Manage vendors, bills, and payments</p>
@@ -71,7 +75,7 @@
         {#if data.recentBills.length === 0}
           <p class="py-4 text-center text-sm text-muted-foreground">No bills yet.</p>
         {:else}
-          <div class="space-y-3">
+          <div class="flex flex-col gap-3">
             {#each data.recentBills as bill}
               <a
                 href="/ap/bills/{bill.id}"
@@ -83,12 +87,9 @@
                 </div>
                 <div class="text-right">
                   <p class="text-sm font-medium text-card-foreground">{formatCurrency(bill.total)}</p>
-                  <span
-                    class="inline-block rounded-full px-2 py-0.5 text-xs font-medium
-                      {billStatusColor[bill.status] || 'bg-gray-100 text-gray-800'}"
-                  >
+                  <Badge variant={billStatusVariant(bill.status)}>
                     {bill.status.replace('_', ' ')}
-                  </span>
+                  </Badge>
                 </div>
               </a>
             {/each}
@@ -108,7 +109,7 @@
         {#if data.recentPayments.length === 0}
           <p class="py-4 text-center text-sm text-muted-foreground">No payments yet.</p>
         {:else}
-          <div class="space-y-3">
+          <div class="flex flex-col gap-3">
             {#each data.recentPayments as payment}
               <div class="flex items-center justify-between rounded-md border p-3">
                 <div>
@@ -131,23 +132,23 @@
     <Card.Content>
       <div class="grid gap-3 md:grid-cols-2 lg:grid-cols-4">
         <Button variant="outline" class="justify-start gap-2" href="/ap/vendors">
-          <Building2 class="h-4 w-4" />
+          <Building2 data-icon="inline-start" />
           View Vendors
         </Button>
         <Button variant="outline" class="justify-start gap-2" href="/ap/vendors/new">
-          <Plus class="h-4 w-4" />
+          <Plus data-icon="inline-start" />
           Add Vendor
         </Button>
         <Button variant="outline" class="justify-start gap-2" href="/ap/bills/new">
-          <Receipt class="h-4 w-4" />
+          <Receipt data-icon="inline-start" />
           Record Bill
         </Button>
         <Button variant="outline" class="justify-start gap-2" href="/ap/payments/new">
-          <CreditCard class="h-4 w-4" />
+          <CreditCard data-icon="inline-start" />
           Record Payment
         </Button>
         <Button variant="outline" class="justify-start gap-2" href="/ap/bills">
-          <CheckCircle class="h-4 w-4" />
+          <CheckCircle data-icon="inline-start" />
           Review Bills
         </Button>
       </div>

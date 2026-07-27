@@ -1,6 +1,7 @@
 <script lang="ts">
 import type { BankAccount, Transfer } from '$lib/api/cash';
 import { formatCurrency, formatDate } from '$lib/utils/format';
+import { Badge } from '$lib/components/ui/badge';
 import type { PageData } from './$types';
 
 let { data }: { data: PageData } = $props();
@@ -8,16 +9,19 @@ let { data }: { data: PageData } = $props();
 const bankAccounts = $derived(data.bankAccounts as BankAccount[]);
 const recentTransfers = $derived(data.recentTransfers as Transfer[]);
 
-const transferStatusColor: Record<string, string> = {
-  pending: 'bg-gray-100 text-gray-800',
-  processing: 'bg-yellow-100 text-yellow-800',
-  completed: 'bg-green-100 text-green-800',
-  failed: 'bg-red-100 text-red-800',
-  cancelled: 'bg-gray-100 text-gray-800',
-};
+function transferStatusVariant(status: string): 'secondary' | 'destructive' | 'outline' {
+  switch (status) {
+    case 'pending': return 'outline';
+    case 'processing': return 'outline';
+    case 'completed': return 'secondary';
+    case 'failed': return 'destructive';
+    case 'cancelled': return 'outline';
+    default: return 'outline';
+  }
+}
 </script>
 
-<div class="space-y-6">
+<div class="flex flex-col gap-6">
   <div>
     <h1 class="text-3xl font-bold text-foreground">Cash & Treasury</h1>
     <p class="text-muted-foreground">Manage bank accounts, transfers, and reconciliation</p>
@@ -51,7 +55,7 @@ const transferStatusColor: Record<string, string> = {
       {#if bankAccounts.length === 0}
         <p class="text-sm text-muted-foreground">No bank accounts yet.</p>
       {:else}
-        <div class="space-y-3">
+        <div class="flex flex-col gap-3">
           {#each bankAccounts as account}
             <a href="/cash/bank-accounts/{account.id}" class="flex items-center justify-between rounded-md border p-3 hover:bg-accent transition-colors">
               <div>
@@ -60,9 +64,9 @@ const transferStatusColor: Record<string, string> = {
               </div>
               <div class="text-right">
                 <div class="text-sm font-medium">{formatCurrency(account.balance, account.currency)}</div>
-                <span class="inline-block rounded-full px-2 py-0.5 text-xs font-medium {account.status === 'active' ? 'bg-green-100 text-green-800' : 'bg-gray-100 text-gray-800'}">
+                <Badge variant={account.status === 'active' ? 'secondary' : 'outline'}>
                   {account.status}
-                </span>
+                </Badge>
               </div>
             </a>
           {/each}
@@ -78,7 +82,7 @@ const transferStatusColor: Record<string, string> = {
       {#if recentTransfers.length === 0}
         <p class="text-sm text-muted-foreground">No transfers yet.</p>
       {:else}
-        <div class="space-y-3">
+        <div class="flex flex-col gap-3">
           {#each recentTransfers as transfer}
             <div class="flex items-center justify-between rounded-md border p-3">
               <div>
@@ -87,9 +91,9 @@ const transferStatusColor: Record<string, string> = {
               </div>
               <div class="text-right">
                 <div class="text-sm font-medium">{formatCurrency(transfer.amount)}</div>
-                <span class="inline-block rounded-full px-2 py-0.5 text-xs font-medium {transferStatusColor[transfer.status] || 'bg-gray-100 text-gray-800'}">
+                <Badge variant={transferStatusVariant(transfer.status)}>
                   {transfer.status}
-                </span>
+                </Badge>
               </div>
             </div>
           {/each}

@@ -1,17 +1,18 @@
 <script lang="ts">
 import { superForm } from 'sveltekit-superforms';
+import * as Field from '$lib/components/ui/field';
 import { Button } from '$lib/components/ui/button';
+import { Spinner } from '$lib/components/ui/spinner';
+import { Input } from '$lib/components/ui/input';
 import { Label } from '$lib/components/ui/label';
 import { toast } from 'svelte-sonner';
 import { goto } from '$app/navigation';
 import * as Card from '$lib/components/ui/card';
-import { Input } from '$lib/components/ui/input';
+import * as Select from '$lib/components/ui/select';
 import DatePicker from '$lib/components/ui/date-picker.svelte';
 
 let { data } = $props();
 const { form, errors, enhance, submitting, message } = superForm(data.form);
-
-const inputClass = "w-full rounded-lg border border-input bg-transparent px-2.5 py-1 text-base md:text-sm placeholder:text-muted-foreground focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:outline-none focus-visible:ring-3 disabled:cursor-not-allowed disabled:opacity-50";
 
 $effect(() => {
 	if ($message) {
@@ -26,82 +27,101 @@ $effect(() => {
 });
 </script>
 
-<div class="mx-auto max-w-2xl space-y-6">
+<div class="flex flex-col mx-auto max-w-2xl gap-6">
 	<div>
 		<h1 class="text-3xl font-bold text-foreground">Add Employee</h1>
 		<p class="text-muted-foreground">Create a new employee record</p>
 	</div>
 
-	<form method="POST" use:enhance class="space-y-6">
-		<Card.Root class="shadow-sm"><Card.Content>
-			<h2 class="mb-4 text-lg font-semibold text-card-foreground">Personal Information</h2>
-			<div class="grid gap-4 md:grid-cols-2">
-				<div class="space-y-1.5">
-					<Label for="firstName">First Name *</Label>
-					<input id="firstName" type="text" value={$form.firstName} oninput={(e) => $form.firstName = e.currentTarget.value} class={inputClass} />
-					{#if $errors.firstName}<p class="text-sm text-destructive">{$errors.firstName}</p>{/if}
+	<form method="POST" use:enhance>
+		<Field.FieldGroup>
+			<Card.Root class="shadow-sm"><Card.Content>
+				<Card.Header>
+				<Card.Title>Personal Information</Card.Title>
+			</Card.Header>
+				<div class="grid gap-4 md:grid-cols-2">
+					<Field.Field>
+						<Field.FieldLabel for="firstName">First Name *</Field.FieldLabel>
+						<Input id="firstName" type="text" value={$form.firstName} oninput={(e) => $form.firstName = e.currentTarget.value} />
+						{#if $errors.firstName}<Field.FieldError errors={$errors.firstName.map(m => ({ message: m }))} />{/if}
+					</Field.Field>
+					<Field.Field>
+						<Field.FieldLabel for="lastName">Last Name *</Field.FieldLabel>
+						<Input id="lastName" type="text" value={$form.lastName} oninput={(e) => $form.lastName = e.currentTarget.value} />
+						{#if $errors.lastName}<Field.FieldError errors={$errors.lastName.map(m => ({ message: m }))} />{/if}
+					</Field.Field>
+					<Field.Field>
+						<Field.FieldLabel for="email">Email *</Field.FieldLabel>
+						<Input id="email" type="email" value={$form.email} oninput={(e) => $form.email = e.currentTarget.value} />
+						{#if $errors.email}<Field.FieldError errors={$errors.email.map(m => ({ message: m }))} />{/if}
+					</Field.Field>
+					<Field.Field>
+						<Field.FieldLabel for="phone">Phone</Field.FieldLabel>
+						<Input id="phone" type="tel" value={$form.phone ?? ''} oninput={(e) => $form.phone = e.currentTarget.value} />
+					</Field.Field>
 				</div>
-				<div class="space-y-1.5">
-					<Label for="lastName">Last Name *</Label>
-					<input id="lastName" type="text" value={$form.lastName} oninput={(e) => $form.lastName = e.currentTarget.value} class={inputClass} />
-					{#if $errors.lastName}<p class="text-sm text-destructive">{$errors.lastName}</p>{/if}
-				</div>
-				<div class="space-y-1.5">
-					<Label for="email">Email *</Label>
-					<input id="email" type="email" value={$form.email} oninput={(e) => $form.email = e.currentTarget.value} class={inputClass} />
-					{#if $errors.email}<p class="text-sm text-destructive">{$errors.email}</p>{/if}
-				</div>
-				<div class="space-y-1.5">
-					<Label for="phone">Phone</Label>
-					<input id="phone" type="tel" value={$form.phone ?? ''} oninput={(e) => $form.phone = e.currentTarget.value} class={inputClass} />
-				</div>
-			</div>
-		</Card.Content></Card.Root>
+			</Card.Content></Card.Root>
 
-		<Card.Root class="shadow-sm"><Card.Content>
-			<h2 class="mb-4 text-lg font-semibold text-card-foreground">Employment Details</h2>
-			<div class="grid gap-4 md:grid-cols-2">
-				<div class="space-y-1.5">
-					<Label for="departmentId">Department</Label>
-					<select id="departmentId" bind:value={$form.departmentId} class={inputClass}>
-						<option value="">Select department</option>
-						{#each data.departments as dept}
-							<option value={dept.id}>{dept.name}</option>
-						{/each}
-					</select>
+			<Card.Root class="shadow-sm"><Card.Content>
+				<Card.Header>
+				<Card.Title>Employment Details</Card.Title>
+			</Card.Header>
+				<div class="grid gap-4 md:grid-cols-2">
+					<div class="flex flex-col gap-1.5">
+						<Label for="departmentId">Department</Label>
+						<Select.Root bind:value={$form.departmentId}>
+							<Select.Trigger class="w-full">
+								<Select.Value placeholder="Select department" />
+							</Select.Trigger>
+							<Select.Content>
+								{#each data.departments as dept}
+									<Select.Item value={dept.id}>{dept.name}</Select.Item>
+								{/each}
+							</Select.Content>
+						</Select.Root>
+					</div>
+					<div class="flex flex-col gap-1.5">
+						<Label for="designationId">Designation</Label>
+						<Select.Root bind:value={$form.designationId}>
+							<Select.Trigger class="w-full">
+								<Select.Value placeholder="Select designation" />
+							</Select.Trigger>
+							<Select.Content>
+								{#each data.designations as desig}
+									<Select.Item value={desig.id}>{desig.title}</Select.Item>
+								{/each}
+							</Select.Content>
+						</Select.Root>
+					</div>
+					<div class="flex flex-col gap-1.5">
+						<Label for="employmentType">Employment Type</Label>
+						<Select.Root bind:value={$form.employmentType}>
+							<Select.Trigger class="w-full">
+								<Select.Value placeholder="Select type" />
+							</Select.Trigger>
+							<Select.Content>
+								<Select.Item value="full_time">Full Time</Select.Item>
+								<Select.Item value="part_time">Part Time</Select.Item>
+								<Select.Item value="contract">Contract</Select.Item>
+								<Select.Item value="intern">Intern</Select.Item>
+							</Select.Content>
+						</Select.Root>
+					</div>
+					<Field.Field>
+						<Field.FieldLabel for="dateOfJoining">Joining Date *</Field.FieldLabel>
+						<DatePicker bind:value={$form.dateOfJoining} />
+						{#if $errors.dateOfJoining}<Field.FieldError errors={$errors.dateOfJoining.map(m => ({ message: m }))} />{/if}
+					</Field.Field>
 				</div>
-				<div class="space-y-1.5">
-					<Label for="designationId">Designation</Label>
-					<select id="designationId" bind:value={$form.designationId} class={inputClass}>
-						<option value="">Select designation</option>
-						{#each data.designations as desig}
-							<option value={desig.id}>{desig.title}</option>
-						{/each}
-					</select>
-				</div>
-				<div class="space-y-1.5">
-					<Label for="employmentType">Employment Type</Label>
-					<select id="employmentType" bind:value={$form.employmentType} class={inputClass}>
-						<option value="full_time">Full Time</option>
-						<option value="part_time">Part Time</option>
-						<option value="contract">Contract</option>
-						<option value="intern">Intern</option>
-					</select>
-				</div>
-				<div class="space-y-1.5">
-					<Label for="dateOfJoining">Joining Date *</Label>
-					<DatePicker bind:value={$form.dateOfJoining} />
-					{#if $errors.dateOfJoining}<p class="text-sm text-destructive">{$errors.dateOfJoining}</p>{/if}
-				</div>
-			</div>
-		</Card.Content></Card.Root>
+			</Card.Content></Card.Root>
 
-		<div class="flex items-center justify-end gap-3">
-			<Button variant="outline" href="/hr/employees">Cancel</Button>
-			<Button type="submit" disabled={$submitting}>
-				{#if $submitting}<div class="mr-2 h-4 w-4 animate-spin rounded-full border-2 border-primary-foreground border-t-transparent"></div>{/if}
-				Add Employee
-			</Button>
-		</div>
+			<div class="flex items-center justify-end gap-3">
+				<Button variant="outline" href="/hr/employees">Cancel</Button>
+				<Button type="submit" disabled={$submitting}>
+					{#if $submitting}<Spinner data-icon="inline-start" class="text-primary-foreground" />{/if}
+					Add Employee
+				</Button>
+			</div>
+		</Field.FieldGroup>
 	</form>
 </div>

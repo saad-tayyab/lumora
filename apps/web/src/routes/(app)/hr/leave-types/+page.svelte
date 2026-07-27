@@ -3,7 +3,7 @@
   import * as Card from '$lib/components/ui/card';
 </script>
 
-<div class="space-y-6">
+<div class="flex flex-col gap-6">
   <div class="flex items-center justify-between">
     <div>
       <h1 class="text-3xl font-bold">Leave Types</h1>

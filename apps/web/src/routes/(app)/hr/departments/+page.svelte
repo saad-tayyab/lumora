@@ -3,6 +3,7 @@ import { toast } from 'svelte-sonner';
 import { type Department, hrApi } from '$lib/api/hr';
 import type { PageData } from './$types';
 import { Button } from '$lib/components/ui/button';
+import { Spinner } from '$lib/components/ui/spinner';
 import { Input } from '$lib/components/ui/input';
 import AppDataTable from '$lib/components/data/AppDataTable.svelte';
 import type { ColumnDef } from '@tanstack/svelte-table';
@@ -64,7 +65,7 @@ $effect(() => {
 });
 </script>
 
-<div class="space-y-6">
+<div class="flex flex-col gap-6">
   <div><h1 class="text-3xl font-bold text-foreground">Departments</h1><p class="text-muted-foreground">Manage organizational departments</p></div>
 
   <form onsubmit={handleCreate} class="rounded-lg border bg-card p-6 shadow-sm">
@@ -75,7 +76,7 @@ $effect(() => {
       <div><label for="desc" class="mb-1 block text-sm font-medium">Description</label><Input id="desc" type="text" bind:value={description} /></div>
     </div>
     <button type="submit" disabled={submitting} class="mt-4 inline-flex items-center rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground hover:bg-primary/90 disabled:opacity-50">
-      {#if submitting}<div class="mr-2 h-4 w-4 animate-spin rounded-full border-2 border-primary-foreground border-t-transparent"></div>{/if}Add
+      {#if submitting}<Spinner data-icon="inline-start" class="text-primary-foreground" />{/if}Add
     </button>
   </form>
 

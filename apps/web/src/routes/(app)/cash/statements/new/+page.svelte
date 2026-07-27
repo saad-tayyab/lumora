@@ -2,11 +2,12 @@
 import { superForm } from 'sveltekit-superforms';
 import { toast } from 'svelte-sonner';
 import { goto } from '$app/navigation';
-import { Button } from '$lib/components/ui/button';
+import * as Field from '$lib/components/ui/field';
 import { Input } from '$lib/components/ui/input';
-import { Label } from '$lib/components/ui/label';
 import { Textarea } from '$lib/components/ui/textarea';
-import { Card, CardContent } from '$lib/components/ui/card';
+import { Button } from '$lib/components/ui/button';
+import * as Card from '$lib/components/ui/card';
+import * as Select from '$lib/components/ui/select';
 import DatePicker from '$lib/components/ui/date-picker.svelte';
 
 let { data } = $props();
@@ -25,7 +26,7 @@ $effect(() => {
 });
 </script>
 
-<div class="mx-auto max-w-2xl space-y-6">
+<div class="mx-auto max-w-2xl flex flex-col gap-6">
 	<div>
 		<div class="flex items-center gap-2 text-sm text-muted-foreground">
 			<a href="/cash/statements" class="hover:underline">Statements</a>
@@ -35,51 +36,53 @@ $effect(() => {
 		<h1 class="mt-2 text-3xl font-bold text-foreground">New Bank Statement</h1>
 	</div>
 
-	<Card>
-		<CardContent>
-			<form method="POST" use:enhance class="space-y-6">
-				<div class="grid gap-4 md:grid-cols-2">
-					<div class="space-y-2">
-						<Label for="bankAccountId">Bank Account *</Label>
-						<select
-							id="bankAccountId"
-							bind:value={$form.bankAccountId}
-							class="h-8 w-full rounded-lg border border-input bg-transparent px-2.5 py-1 text-base transition-colors focus-visible:border-ring focus-visible:ring-3 focus-visible:ring-ring/50 md:text-sm"
-						>
-							<option value="">Select bank account</option>
-							{#each data.accounts as account}
-								<option value={account.id}>{account.name} ({account.currency})</option>
-							{/each}
-						</select>
-						{#if $errors.bankAccountId}<p class="text-xs text-destructive">{$errors.bankAccountId}</p>{/if}
+	<Card.Root>
+		<Card.Content>
+			<form method="POST" use:enhance>
+				<Field.FieldGroup>
+					<div class="grid gap-4 md:grid-cols-2">
+						<Field.Field>
+							<Field.FieldLabel for="bankAccountId">Bank Account *</Field.FieldLabel>
+						<Select.Root bind:value={$form.bankAccountId}>
+							<Select.Trigger class="w-full">
+								<Select.Value placeholder="Select bank account" />
+							</Select.Trigger>
+							<Select.Content>
+								{#each data.accounts as account}
+									<Select.Item value={account.id}>{account.name} ({account.currency})</Select.Item>
+								{/each}
+							</Select.Content>
+						</Select.Root>
+							{#if $errors.bankAccountId}<p class="text-xs text-destructive">{$errors.bankAccountId}</p>{/if}
+						</Field.Field>
+						<Field.Field>
+							<Field.FieldLabel for="statementDate">Statement Date *</Field.FieldLabel>
+							<DatePicker bind:value={$form.statementDate} />
+							{#if $errors.statementDate}<p class="text-xs text-destructive">{$errors.statementDate}</p>{/if}
+						</Field.Field>
+						<Field.Field>
+							<Field.FieldLabel for="openingBalance">Opening Balance</Field.FieldLabel>
+							<Input id="openingBalance" type="number" step="0.01" bind:value={$form.openingBalance} />
+						</Field.Field>
+						<Field.Field>
+							<Field.FieldLabel for="closingBalance">Closing Balance</Field.FieldLabel>
+							<Input id="closingBalance" type="number" step="0.01" bind:value={$form.closingBalance} />
+						</Field.Field>
 					</div>
-					<div class="space-y-2">
-						<Label for="statementDate">Statement Date *</Label>
-						<DatePicker bind:value={$form.statementDate} />
-						{#if $errors.statementDate}<p class="text-xs text-destructive">{$errors.statementDate}</p>{/if}
-					</div>
-					<div class="space-y-2">
-						<Label for="openingBalance">Opening Balance</Label>
-						<Input id="openingBalance" type="number" step="0.01" bind:value={$form.openingBalance} />
-					</div>
-					<div class="space-y-2">
-						<Label for="closingBalance">Closing Balance</Label>
-						<Input id="closingBalance" type="number" step="0.01" bind:value={$form.closingBalance} />
-					</div>
-				</div>
 
-				<div class="space-y-2">
-					<Label for="notes">Notes</Label>
-					<Textarea id="notes" bind:value={$form.notes} rows={3} />
-				</div>
+					<Field.Field>
+						<Field.FieldLabel for="notes">Notes</Field.FieldLabel>
+						<Textarea id="notes" bind:value={$form.notes} rows={3} />
+					</Field.Field>
 
-				<div class="flex justify-end gap-3">
-					<Button variant="outline" href="/cash/statements">Cancel</Button>
-					<Button type="submit" disabled={$submitting}>
-						{$submitting ? 'Creating...' : 'Create Statement'}
-					</Button>
-				</div>
+					<div class="flex justify-end gap-3">
+						<Button variant="outline" href="/cash/statements">Cancel</Button>
+						<Button type="submit" disabled={$submitting}>
+							{$submitting ? 'Creating...' : 'Create Statement'}
+						</Button>
+					</div>
+				</Field.FieldGroup>
 			</form>
-		</CardContent>
-	</Card>
+		</Card.Content>
+	</Card.Root>
 </div>

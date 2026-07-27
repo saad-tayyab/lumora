@@ -1,4 +1,7 @@
 <script lang="ts">
+import * as Select from '$lib/components/ui/select';
+import { Checkbox } from '$lib/components/ui/checkbox';
+
 let {
   taxCode,
   errors = {},
@@ -27,7 +30,7 @@ let isSubmitting = $state(false);
 </script>
 
 <div class="rounded-lg border bg-card p-6 shadow-sm">
-	<form method="POST" class="space-y-6">
+	<form method="POST" class="flex flex-col gap-6">
 		<div class="grid gap-4 md:grid-cols-2">
 			<div>
 				<label for="code" class="block text-sm font-medium text-card-foreground">Code *</label>
@@ -39,21 +42,31 @@ let isSubmitting = $state(false);
 			</div>
 			<div>
 				<label for="type" class="block text-sm font-medium text-card-foreground">Type *</label>
-				<select id="type" name="type" bind:value={type} class="mt-1 block w-full rounded-md border border-input bg-background px-3 py-2 text-sm text-foreground focus:border-ring focus:outline-none focus:ring-1 focus:ring-ring">
-					<option value="sales_tax">Sales Tax</option>
-					<option value="vat">VAT</option>
-					<option value="gst">GST</option>
-					<option value="excise">Excise</option>
-					<option value="withholding">Withholding</option>
-				</select>
+			<Select.Root bind:value={type}>
+				<Select.Trigger class="w-full">
+					<Select.Value placeholder="Select type" />
+				</Select.Trigger>
+				<Select.Content>
+					<Select.Item value="sales_tax">Sales Tax</Select.Item>
+					<Select.Item value="vat">VAT</Select.Item>
+					<Select.Item value="gst">GST</Select.Item>
+					<Select.Item value="excise">Excise</Select.Item>
+					<Select.Item value="withholding">Withholding</Select.Item>
+				</Select.Content>
+			</Select.Root>
 			</div>
 			<div>
 				<label for="postingRule" class="block text-sm font-medium text-card-foreground">Posting Rule</label>
-				<select id="postingRule" name="postingRule" bind:value={postingRule} class="mt-1 block w-full rounded-md border border-input bg-background px-3 py-2 text-sm text-foreground focus:border-ring focus:outline-none focus:ring-1 focus:ring-ring">
-					<option value="output_liability">Output Liability</option>
-					<option value="input_asset">Input Asset</option>
-					<option value="expense">Expense</option>
-				</select>
+			<Select.Root bind:value={postingRule}>
+				<Select.Trigger class="w-full">
+					<Select.Value placeholder="Select rule" />
+				</Select.Trigger>
+				<Select.Content>
+					<Select.Item value="output_liability">Output Liability</Select.Item>
+					<Select.Item value="input_asset">Input Asset</Select.Item>
+					<Select.Item value="expense">Expense</Select.Item>
+				</Select.Content>
+			</Select.Root>
 			</div>
 			<div>
 				<label for="glAccountId" class="block text-sm font-medium text-card-foreground">GL Account ID *</label>
@@ -67,7 +80,7 @@ let isSubmitting = $state(false);
 		</div>
 
 		<div class="flex items-center gap-2">
-			<input id="isClaimable" name="isClaimable" type="checkbox" bind:checked={isClaimable} class="h-4 w-4 rounded border-input" />
+			<Checkbox id="isClaimable" bind:checked={isClaimable} />
 			<label for="isClaimable" class="text-sm font-medium text-card-foreground">Is Claimable</label>
 		</div>
 

@@ -1,6 +1,8 @@
 <script lang="ts">
 import { toast } from 'svelte-sonner';
 import { enhance } from '$app/forms';
+import * as Field from '$lib/components/ui/field';
+import { Button } from '$lib/components/ui/button';
 import PaymentForm from '$lib/components/ar/PaymentForm.svelte';
 import type { ActionData, PageData } from './$types';
 
@@ -16,7 +18,7 @@ $effect(() => {
 });
 </script>
 
-<div class="space-y-6">
+<div class="flex flex-col gap-6">
 	<div>
 		<div class="flex items-center gap-2 text-sm text-muted-foreground">
 			<a href="/ar/payments" class="hover:underline">Payments</a>
@@ -41,23 +43,10 @@ $effect(() => {
 		<PaymentForm {customers} />
 
 		<div class="mt-4 flex items-center gap-3">
-			<button
-				type="submit"
-				disabled={isLoading}
-				class="rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground hover:bg-primary/90 disabled:cursor-not-allowed disabled:opacity-50"
-			>
-				{#if isLoading}
-					Saving...
-				{:else}
-					Update Payment
-				{/if}
-			</button>
-			<a
-				href="/ar/payments/{payment.id}"
-				class="rounded-md border px-4 py-2 text-sm font-medium text-card-foreground hover:bg-accent"
-			>
-				Cancel
-			</a>
+			<Button type="submit" disabled={isLoading}>
+				{#if isLoading}Saving...{:else}Update Payment{/if}
+			</Button>
+			<Button variant="outline" href="/ar/payments/{payment.id}">Cancel</Button>
 		</div>
 	</form>
 </div>

@@ -2,6 +2,7 @@
 import { toast } from 'svelte-sonner';
 import { type PurchaseOrder, procApi, type ReceivingReport } from '$lib/api/proc';
 import { formatCurrency, formatDate } from '$lib/utils/format';
+import { Spinner } from '$lib/components/ui/spinner';
 
 let purchaseOrders = $state<PurchaseOrder[]>([]);
 let receivingReports = $state<ReceivingReport[]>([]);
@@ -27,34 +28,32 @@ $effect(() => {
   loadData();
 });
 
-function poStatusColor(status: string): string {
-  const colors: Record<string, string> = {
-    draft: 'bg-gray-100 text-gray-800',
-    pending_approval: 'bg-yellow-100 text-yellow-800',
-    approved: 'bg-blue-100 text-blue-800',
-    partially_received: 'bg-orange-100 text-orange-800',
-    fully_received: 'bg-green-100 text-green-800',
-    closed: 'bg-gray-100 text-gray-800',
-    cancelled: 'bg-red-100 text-red-800',
-  };
-  return colors[status] || 'bg-gray-100 text-gray-800';
+function poStatusVariant(status: string): 'secondary' | 'destructive' | 'default' | 'outline' {
+  switch (status) {
+    case 'approved': return 'default';
+    case 'cancelled': return 'destructive';
+    case 'closed': return 'outline';
+    case 'draft': return 'outline';
+    case 'fully_received': return 'secondary';
+    case 'partially_received': return 'outline';
+    case 'pending_approval': return 'outline';
+    default: return 'outline';
+  }
 }
 
-function rrStatusColor(status: string): string {
-  const colors: Record<string, string> = {
-    draft: 'bg-gray-100 text-gray-800',
-    confirmed: 'bg-green-100 text-green-800',
-    rejected: 'bg-red-100 text-red-800',
-  };
-  return colors[status] || 'bg-gray-100 text-gray-800';
-}
-
-function formatStatus(status: string): string {
+function rrStatusVariant(status: sfunction rrStatusVariant(status: string): 'secondary' | 'destructive' | 'default' | 'outline' {
+  switch (status) {
+    case 'confirmed': return 'secondary';
+    case 'draft': return 'outline';
+    case 'rejected': return 'destructive';
+    default: return 'outline';
+  }
+}string): string {
   return status.replace(/_/g, ' ').replace(/\b\w/g, (l) => l.toUpperCase());
 }
 </script>
 
-<div class="space-y-6">
+<div class="flex flex-col gap-6">
   <div>
     <h1 class="text-3xl font-bold text-foreground">Procurement</h1>
     <p class="text-muted-foreground">Manage purchase orders, receiving, and vendor catalog</p>
@@ -102,12 +101,12 @@ function formatStatus(status: string): string {
       </div>
       {#if loading}
         <div class="flex justify-center py-8">
-          <div class="h-6 w-6 animate-spin rounded-full border-2 border-primary border-t-transparent"></div>
+          <Spinner class="size-6 text-primary" />
         </div>
       {:else if purchaseOrders.length === 0}
         <p class="py-4 text-center text-sm text-muted-foreground">No purchase orders yet</p>
       {:else}
-        <div class="space-y-3">
+        <div class="flex flex-col gap-3">
           {#each purchaseOrders as po}
             <a
               href="/proc/purchase-orders/{po.id}"
@@ -119,7 +118,7 @@ function formatStatus(status: string): string {
               </div>
               <div class="text-right">
                 <div class="font-medium text-card-foreground">{formatCurrency(po.totalAmount)}</div>
-                <span class="inline-block rounded-full px-2 py-0.5 text-xs font-medium {poStatusColor(po.status)}">
+                <span class="inline-block rounded-full px-2 py-0.5 text-xs font-medium {poStatusVariant(po.status)}">
                   {formatStatus(po.status)}
                 </span>
               </div>
@@ -136,12 +135,12 @@ function formatStatus(status: string): string {
       </div>
       {#if loading}
         <div class="flex justify-center py-8">
-          <div class="h-6 w-6 animate-spin rounded-full border-2 border-primary border-t-transparent"></div>
+          <Spinner class="size-6 text-primary" />
         </div>
       {:else if receivingReports.length === 0}
         <p class="py-4 text-center text-sm text-muted-foreground">No receiving reports yet</p>
       {:else}
-        <div class="space-y-3">
+        <div class="flex flex-col gap-3">
           {#each receivingReports as rr}
             <a
               href="/proc/receiving-reports/{rr.id}"
@@ -153,7 +152,7 @@ function formatStatus(status: string): string {
               </div>
               <div class="text-right">
                 <div class="text-sm text-muted-foreground">{formatDate(rr.receivedDate)}</div>
-                <span class="inline-block rounded-full px-2 py-0.5 text-xs font-medium {rrStatusColor(rr.status)}">
+                <span class="inline-block rounded-full px-2 py-0.5 text-xs font-medium {rrStatusVariant(rr.status)}">
                   {formatStatus(rr.status)}
                 </span>
               </div>

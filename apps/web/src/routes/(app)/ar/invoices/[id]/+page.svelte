@@ -3,7 +3,7 @@ import { toast } from 'svelte-sonner';
 import { updateInvoiceStatus } from '$lib/api/ar';
 import { formatCurrency, formatDate } from '$lib/utils/format';
 import { Button } from '$lib/components/ui/button';
-import { Card, CardContent } from '$lib/components/ui/card';
+import * as Card from '$lib/components/ui/card';
 import type { PageData } from './$types';
 
 let { data }: { data: PageData } = $props();
@@ -12,13 +12,16 @@ let lineItems = $derived(data.lineItems);
 let customer = $derived(data.customer);
 let updating = $state(false);
 
-const statusStyles: Record<string, string> = {
-  draft: 'bg-gray-100 text-gray-800 dark:bg-gray-800 dark:text-gray-300',
-  sent: 'bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-300',
-  paid: 'bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-300',
-  overdue: 'bg-red-100 text-red-800 dark:bg-red-900 dark:text-red-300',
-  voided: 'bg-gray-100 text-gray-800 dark:bg-gray-800 dark:text-gray-300',
-};
+function statusVariant(status: string): 'secondary' | 'destructive' | 'default' | 'outline' {
+  switch (status) {
+    case 'draft': return 'outline';
+    case 'overdue': return 'outline';
+    case 'paid': return 'secondary';
+    case 'sent': return 'default';
+    case 'voided': return 'destructive';
+    default: return 'outline';
+  }
+}
 
 async function handleStatusChange(newStatus: string) {
   if (!confirm(`Change invoice status to "${newStatus}"?`)) return;
@@ -34,7 +37,7 @@ async function handleStatusChange(newStatus: string) {
 }
 </script>
 
-<div class="mx-auto max-w-4xl space-y-6">
+<div class="flex flex-col mx-auto max-w-4xl gap-6">
 	<nav class="mb-4 text-sm text-muted-foreground">
 		<a href="/ar/invoices" class="hover:underline">Invoices</a>
 		<span class="mx-2">/</span>
@@ -67,9 +70,9 @@ async function handleStatusChange(newStatus: string) {
 	</div>
 
 	<div class="grid gap-6 lg:grid-cols-3">
-		<div class="space-y-6 lg:col-span-2">
-			<Card>
-				<CardContent>
+		<div class="flex flex-col gap-6 lg:col-span-2">
+			<Card.Root>
+				<Card.Content>
 				<div class="flex items-start justify-between">
 					<div>
 						<h2 class="text-lg font-semibold text-card-foreground">Invoice Details</h2>
@@ -103,12 +106,14 @@ async function handleStatusChange(newStatus: string) {
 						<dd class="mt-1 text-sm text-card-foreground">{invoice.currency}</dd>
 					</div>
 				</dl>
-			</CardContent>
-			</Card>
+			</Card.Content>
+			</Card.Root>
 
-			<Card>
-				<CardContent>
-					<h2 class="mb-4 text-lg font-semibold text-card-foreground">Line Items</h2>
+			<Card.Root>
+				<Card.Content>
+					<Card.Header>
+				<Card.Title>Line Items</Card.Title>
+			</Card.Header>
 				{#if lineItems.length === 0}
 					<p class="text-sm text-muted-foreground">No line items.</p>
 				{:else}
@@ -137,24 +142,26 @@ async function handleStatusChange(newStatus: string) {
 						</tbody>
 			</table>
 			{/if}
-			</CardContent>
-			</Card>
+			</Card.Content>
+			</Card.Root>
 
 			{#if invoice.notes}
-				<Card>
-					<CardContent>
+				<Card.Root>
+					<Card.Content>
 						<h2 class="mb-2 text-lg font-semibold text-card-foreground">Notes</h2>
 						<p class="text-sm text-muted-foreground">{invoice.notes}</p>
-					</CardContent>
-				</Card>
+					</Card.Content>
+				</Card.Root>
 			{/if}
 		</div>
 
-		<div class="space-y-6">
-			<Card>
-				<CardContent>
-					<h2 class="mb-4 text-lg font-semibold text-card-foreground">Summary</h2>
-					<dl class="space-y-3">
+		<div class="flex flex-col gap-6">
+			<Card.Root>
+				<Card.Content>
+					<Card.Header>
+				<Card.Title>Summary</Card.Title>
+			</Card.Header>
+					<dl class="flex flex-col gap-3">
 						<div class="flex items-center justify-between">
 							<dt class="text-sm text-muted-foreground">Subtotal</dt>
 							<dd class="text-sm text-card-foreground">{formatCurrency(invoice.subtotal)}</dd>
@@ -180,13 +187,15 @@ async function handleStatusChange(newStatus: string) {
 							</dd>
 						</div>
 					</dl>
-				</CardContent>
-			</Card>
+				</Card.Content>
+			</Card.Root>
 
-			<Card>
-				<CardContent>
-					<h2 class="mb-4 text-lg font-semibold text-card-foreground">Actions</h2>
-					<div class="space-y-2">
+			<Card.Root>
+				<Card.Content>
+					<Card.Header>
+				<Card.Title>Actions</Card.Title>
+			</Card.Header>
+					<div class="flex flex-col gap-2">
 						<Button
 							variant="outline"
 							class="w-full"
@@ -195,8 +204,8 @@ async function handleStatusChange(newStatus: string) {
 							Record Payment
 						</Button>
 					</div>
-				</CardContent>
-			</Card>
+				</Card.Content>
+			</Card.Root>
 		</div>
 	</div>
 </div>

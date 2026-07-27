@@ -1,17 +1,17 @@
 <script lang="ts">
 import { formatCurrency, formatDate } from '$lib/utils/format';
-import { Card, CardContent } from '$lib/components/ui/card';
+import { Badge } from '$lib/components/ui/badge';
+import * as Card from '$lib/components/ui/card';
 import type { PageData } from './$types';
 
 let { data }: { data: PageData } = $props();
 
-const statusStyles: Record<string, string> = {
-  draft: 'bg-gray-100 text-gray-800 dark:bg-gray-800 dark:text-gray-300',
-  reconciled: 'bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-300',
-};
+function statusVariant(status: string): 'secondary' | 'outline' {
+  return status === 'reconciled' ? 'secondary' : 'outline';
+}
 </script>
 
-<div class="mx-auto max-w-4xl space-y-6">
+<div class="mx-auto max-w-4xl flex flex-col gap-6">
 	<div>
 		<div class="flex items-center gap-2 text-sm text-muted-foreground">
 			<a href="/cash/statements" class="hover:underline">Statements</a>
@@ -23,10 +23,12 @@ const statusStyles: Record<string, string> = {
 
 	{#if data.statement}
 		<div class="grid gap-6 lg:grid-cols-2">
-			<Card>
-				<CardContent>
-					<h2 class="mb-4 text-lg font-semibold text-card-foreground">Statement Info</h2>
-					<dl class="space-y-3">
+			<Card.Root>
+				<Card.Content>
+					<Card.Header>
+				<Card.Title>Statement Info</Card.Title>
+			</Card.Header>
+					<dl class="flex flex-col gap-3">
 						<div class="flex justify-between">
 							<dt class="text-sm text-muted-foreground">Bank Account</dt>
 							<dd class="text-sm font-medium text-card-foreground">
@@ -42,19 +44,21 @@ const statusStyles: Record<string, string> = {
 						<div class="flex justify-between">
 							<dt class="text-sm text-muted-foreground">Status</dt>
 							<dd>
-								<span class="inline-flex items-center rounded-full px-3 py-1 text-sm font-medium {statusStyles[data.statement.status] || statusStyles.draft}">
-									{data.statement.status}
-								</span>
+							<Badge variant={statusVariant(data.statement.status)}>
+								{data.statement.status}
+							</Badge>
 							</dd>
 						</div>
 					</dl>
-				</CardContent>
-			</Card>
+				</Card.Content>
+			</Card.Root>
 
-			<Card>
-				<CardContent>
-					<h2 class="mb-4 text-lg font-semibold text-card-foreground">Balances</h2>
-					<dl class="space-y-3">
+			<Card.Root>
+				<Card.Content>
+					<Card.Header>
+				<Card.Title>Balances</Card.Title>
+			</Card.Header>
+					<dl class="flex flex-col gap-3">
 						<div class="flex justify-between">
 							<dt class="text-sm text-muted-foreground">Opening Balance</dt>
 							<dd class="text-sm font-medium text-card-foreground">
@@ -82,8 +86,8 @@ const statusStyles: Record<string, string> = {
 							<dd class="mt-1 text-sm text-card-foreground">{data.statement.notes}</dd>
 						</div>
 					{/if}
-				</CardContent>
-			</Card>
+				</Card.Content>
+			</Card.Root>
 		</div>
 	{:else}
 		<div class="flex items-center justify-center py-12">

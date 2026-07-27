@@ -2,7 +2,7 @@
 	import { goto } from '$app/navigation';
 	import { formatDate } from '$lib/utils/format';
 	import { Button } from '$lib/components/ui/button';
-	import { Card, CardContent } from '$lib/components/ui/card';
+	import * as Card from '$lib/components/ui/card';
 	import AppDataTable from '$lib/components/data/AppDataTable.svelte';
 	import type { ColumnDef } from '@tanstack/svelte-table';
 	import type { PageData } from './$types';
@@ -29,7 +29,7 @@
 	];
 </script>
 
-<div class="space-y-6">
+<div class="flex flex-col gap-6">
 	<div class="flex items-center justify-between">
 		<div>
 			<h1 class="text-3xl font-bold text-foreground">Item Categories</h1>
@@ -38,8 +38,8 @@
 		<Button href="/inv/categories/new">Add Category</Button>
 	</div>
 
-	<Card>
-		<CardContent>
+	<Card.Root>
+		<Card.Content>
 			<AppDataTable
 				{columns}
 				data={data.categories}
@@ -47,6 +47,6 @@
 				pageSize={20}
 				onRowClick={(row) => goto(`/inv/categories/${row.id}`)}
 			/>
-		</CardContent>
-	</Card>
+		</Card.Content>
+	</Card.Root>
 </div>

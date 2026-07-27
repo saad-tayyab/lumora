@@ -9,7 +9,7 @@ let { data }: { data: PageData } = $props();
 
 {#if data.entry}
   {@const entry = data.entry}
-  <div class="space-y-6">
+  <div class="flex flex-col gap-6">
     <div class="flex items-center justify-between">
       <div>
         <h1 class="text-3xl font-bold text-foreground">Audit Entry</h1>
@@ -21,7 +21,7 @@ let { data }: { data: PageData } = $props();
     <div class="grid gap-6 md:grid-cols-2">
       <Card.Root class="shadow-sm"><Card.Content>
         <h2 class="text-lg font-semibold text-card-foreground">Details</h2>
-        <dl class="space-y-2 text-sm">
+        <dl class="flex flex-col gap-2 text-sm">
           <div class="flex justify-between">
             <dt class="text-muted-foreground">ID</dt>
             <dd class="font-mono text-xs">{entry.id}</dd>
@@ -53,7 +53,7 @@ let { data }: { data: PageData } = $props();
         </dl>
       </Card.Content></Card.Root>
 
-      <div class="space-y-6">
+      <div class="flex flex-col gap-6">
         {#if entry.oldValues}
           <Card.Root class="shadow-sm"><Card.Content>
             <h2 class="text-lg font-semibold text-card-foreground">Old Values</h2>

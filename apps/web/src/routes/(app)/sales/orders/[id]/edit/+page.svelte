@@ -2,7 +2,10 @@
 import { enhance } from '$app/forms';
 import { toast } from 'svelte-sonner';
 import { Button } from '$lib/components/ui/button';
-import { Card, CardContent } from '$lib/components/ui/card';
+import { Input } from '$lib/components/ui/input';
+import { Textarea } from '$lib/components/ui/textarea';
+import * as Field from '$lib/components/ui/field';
+import * as Card from '$lib/components/ui/card';
 import DatePicker from '$lib/components/ui/date-picker.svelte';
 import type { PageData, ActionData } from './$types';
 
@@ -21,7 +24,7 @@ $effect(() => {
 });
 </script>
 
-<div class="mx-auto max-w-2xl space-y-6">
+<div class="mx-auto max-w-2xl flex flex-col gap-6">
 	<div>
 		<div class="flex items-center gap-2 text-sm text-muted-foreground">
 			<a href="/sales/orders" class="hover:underline">Sales Orders</a>
@@ -43,28 +46,30 @@ $effect(() => {
 				};
 			}}
 		>
-			<Card>
-				<CardContent class="space-y-4">
-					<div class="space-y-1.5">
-						<label for="customerId" class="text-sm font-medium text-foreground">Customer ID *</label>
-						<input id="customerId" name="customerId" bind:value={customerId} required class="w-full rounded-md border bg-background px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-ring" />
-					</div>
-					<div class="grid gap-4 md:grid-cols-2">
-						<div class="space-y-1.5">
-							<label for="orderDate" class="text-sm font-medium text-foreground">Order Date *</label>
-							<DatePicker bind:value={orderDate} />
-							<input type="hidden" name="orderDate" value={orderDate} />
+			<Card.Root>
+				<Card.Content>
+					<Field.FieldGroup>
+						<Field.Field>
+							<Field.FieldLabel for="customerId">Customer ID *</Field.FieldLabel>
+							<Input id="customerId" name="customerId" bind:value={customerId} required />
+						</Field.Field>
+						<div class="grid gap-4 md:grid-cols-2">
+							<Field.Field>
+								<Field.FieldLabel for="orderDate">Order Date *</Field.FieldLabel>
+								<DatePicker bind:value={orderDate} />
+								<input type="hidden" name="orderDate" value={orderDate} />
+							</Field.Field>
+							<Field.Field>
+								<Field.FieldLabel for="expectedDeliveryDate">Expected Delivery</Field.FieldLabel>
+								<DatePicker bind:value={expectedDeliveryDate} />
+								<input type="hidden" name="expectedDeliveryDate" value={expectedDeliveryDate} />
+							</Field.Field>
 						</div>
-						<div class="space-y-1.5">
-							<label for="expectedDeliveryDate" class="text-sm font-medium text-foreground">Expected Delivery</label>
-							<DatePicker bind:value={expectedDeliveryDate} />
-							<input type="hidden" name="expectedDeliveryDate" value={expectedDeliveryDate} />
-						</div>
-					</div>
-					<div class="space-y-1.5">
-						<label for="notes" class="text-sm font-medium text-foreground">Notes</label>
-						<textarea id="notes" name="notes" bind:value={notes} rows="3" class="w-full rounded-md border bg-background px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-ring"></textarea>
-					</div>
+						<Field.Field>
+							<Field.FieldLabel for="notes">Notes</Field.FieldLabel>
+							<Textarea id="notes" name="notes" bind:value={notes} rows="3"></Textarea>
+						</Field.Field>
+					</Field.FieldGroup>
 
 					<div class="flex justify-end gap-3 pt-4">
 						<Button href="/sales/orders/{data.order.id}" variant="outline">Cancel</Button>
@@ -72,8 +77,8 @@ $effect(() => {
 							{submitting ? 'Saving...' : 'Save Changes'}
 						</Button>
 					</div>
-				</CardContent>
-			</Card>
+				</Card.Content>
+			</Card.Root>
 		</form>
 	{:else}
 		<div class="py-12 text-center text-muted-foreground">Sales order not found</div>

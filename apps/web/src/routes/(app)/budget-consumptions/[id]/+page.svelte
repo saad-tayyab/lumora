@@ -6,7 +6,7 @@ import * as Card from '$lib/components/ui/card';
 let { data }: { data: PageData } = $props();
 </script>
 
-<div class="mx-auto max-w-4xl space-y-6">
+<div class="flex flex-col mx-auto max-w-4xl gap-6">
 	<div>
 		<div class="flex items-center gap-2 text-sm text-muted-foreground">
 			<a href="/budgets/consumptions" class="hover:underline">Budget Consumptions</a>
@@ -19,8 +19,10 @@ let { data }: { data: PageData } = $props();
 	{#if data.consumption}
 		<div class="grid gap-6 lg:grid-cols-2">
 			<Card.Root class="shadow-sm"><Card.Content>
-				<h2 class="mb-4 text-lg font-semibold text-card-foreground">Consumption Details</h2>
-				<dl class="space-y-3">
+				<Card.Header>
+				<Card.Title>Consumption Details</Card.Title>
+			</Card.Header>
+				<dl class="flex flex-col gap-3">
 					<div class="flex justify-between">
 						<dt class="text-sm text-muted-foreground">Budget Line</dt>
 						<dd class="text-sm font-medium">
@@ -49,9 +51,11 @@ let { data }: { data: PageData } = $props();
 			</Card.Content></Card.Root>
 
 			<Card.Root class="shadow-sm"><Card.Content>
-				<h2 class="mb-4 text-lg font-semibold text-card-foreground">Linked Journal Entry</h2>
+				<Card.Header>
+				<Card.Title>Linked Journal Entry</Card.Title>
+			</Card.Header>
 				{#if data.consumption.journalEntryId}
-					<dl class="space-y-3">
+					<dl class="flex flex-col gap-3">
 						<div class="flex justify-between">
 							<dt class="text-sm text-muted-foreground">Journal Entry</dt>
 							<dd class="text-sm font-medium">

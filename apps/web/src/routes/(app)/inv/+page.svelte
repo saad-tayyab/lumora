@@ -16,7 +16,7 @@
   let { data }: { data: PageData } = $props();
 </script>
 
-<div class="space-y-6">
+<div class="flex flex-col gap-6">
   <div>
     <h1 class="text-3xl font-bold text-foreground">Inventory</h1>
     <p class="text-muted-foreground">Manage items, warehouses, and stock</p>
@@ -61,7 +61,7 @@
         {#if data.recentItems.length === 0}
           <p class="py-4 text-center text-sm text-muted-foreground">No items yet.</p>
         {:else}
-          <div class="space-y-3">
+          <div class="flex flex-col gap-3">
             {#each data.recentItems as item}
               <a
                 href="/inv/items/{item.id}"
@@ -93,7 +93,7 @@
         {#if data.lowStockItems.length === 0}
           <p class="py-4 text-center text-sm text-muted-foreground">All items are well stocked.</p>
         {:else}
-          <div class="space-y-3">
+          <div class="flex flex-col gap-3">
             {#each data.lowStockItems as level}
               <div class="flex items-center justify-between rounded-md border border-yellow-200 bg-yellow-50 p-3">
                 <div>
@@ -116,19 +116,19 @@
     <Card.Content>
       <div class="grid gap-3 md:grid-cols-2 lg:grid-cols-4">
         <Button variant="outline" class="justify-start gap-2" href="/inv/items/new">
-          <Plus class="h-4 w-4" />
+          <Plus data-icon="inline-start" />
           Add Item
         </Button>
         <Button variant="outline" class="justify-start gap-2" href="/inv/warehouses/new">
-          <Warehouse class="h-4 w-4" />
+          <Warehouse data-icon="inline-start" />
           Add Warehouse
         </Button>
         <Button variant="outline" class="justify-start gap-2" href="/inv/categories/new">
-          <FolderOpen class="h-4 w-4" />
+          <FolderOpen data-icon="inline-start" />
           Add Category
         </Button>
         <Button variant="outline" class="justify-start gap-2" href="/inv/stock-movements/new">
-          <ArrowRightLeft class="h-4 w-4" />
+          <ArrowRightLeft data-icon="inline-start" />
           Record Movement
         </Button>
       </div>

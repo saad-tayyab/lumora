@@ -3,6 +3,7 @@ import { toast } from 'svelte-sonner';
 import { type Attendance, hrApi } from '$lib/api/hr';
 import { formatDate } from '$lib/utils/format';
 import type { PageData } from './$types';
+import { badgeVariants } from '$lib/components/ui/badge';
 import AppDataTable from '$lib/components/data/AppDataTable.svelte';
 import type { ColumnDef } from '@tanstack/svelte-table';
 
@@ -10,15 +11,15 @@ let { data }: { data: PageData } = $props();
 let records = $state<Attendance[]>(data.records);
 let total = $state(data.total);
 
-function attStatusColor(status: string): string {
-  const colors: Record<string, string> = {
-    present: 'bg-green-100 text-green-800',
-    absent: 'bg-red-100 text-red-800',
-    late: 'bg-yellow-100 text-yellow-800',
-    half_day: 'bg-orange-100 text-orange-800',
-    on_leave: 'bg-blue-100 text-blue-800',
-  };
-  return colors[status] || 'bg-gray-100 text-gray-800';
+function attStatusVariant(status: string): 'secondary' | 'destructive' | 'outline' | 'default' {
+  switch (status) {
+    case 'present': return 'secondary';
+    case 'absent': return 'destructive';
+    case 'late': return 'outline';
+    case 'half_day': return 'outline';
+    case 'on_leave': return 'default';
+    default: return 'outline';
+  }
 }
 
 function formatStatus(status: string): string {
@@ -45,7 +46,7 @@ const columns: ColumnDef<Attendance>[] = [
   {
     accessorKey: 'status',
     header: 'Status',
-    cell: (row) => `<span class="inline-block rounded-full px-2 py-0.5 text-xs font-medium ${attStatusColor((row as any).original.status)}">${formatStatus((row as any).original.status)}</span>`,
+    cell: (row) => `<span class="${badgeVariants({ variant: attStatusVariant((row as any).original.status) })}">${formatStatus((row as any).original.status)}</span>`,
   },
   {
     id: 'actions',
@@ -61,7 +62,7 @@ $effect(() => {
 });
 </script>
 
-<div class="space-y-6">
+<div class="flex flex-col gap-6">
   <div><h1 class="text-3xl font-bold text-foreground">Attendance</h1><p class="text-muted-foreground">Track employee attendance</p></div>
   <AppDataTable
     {columns}

@@ -2,6 +2,9 @@
 import { toast } from 'svelte-sonner';
 import { enhance } from '$app/forms';
 import type { ActionData } from './$types';
+import { Button } from '$lib/components/ui/button';
+import { Input } from '$lib/components/ui/input';
+import * as Field from '$lib/components/ui/field';
 
 let { form }: { form: ActionData } = $props();
 
@@ -31,49 +34,44 @@ $effect(() => {
         await update();
       };
     }}
-    class="space-y-4"
   >
-    <div>
-      <label for="email" class="block text-sm font-medium text-card-foreground">Email</label>
-      <input
-        id="email"
-        name="email"
-        type="email"
-        bind:value={email}
-        required
-        class="mt-1 block w-full rounded-md border border-input bg-background px-3 py-2 text-sm text-foreground placeholder:text-muted-foreground focus:border-ring focus:outline-none focus:ring-1 focus:ring-ring"
-        placeholder="you@example.com"
-      />
-    </div>
+    <Field.FieldGroup>
+      <Field.Field>
+        <Field.FieldLabel for="email">Email</Field.FieldLabel>
+        <Input
+          id="email"
+          name="email"
+          type="email"
+          bind:value={email}
+          required
+          placeholder="you@example.com"
+        />
+      </Field.Field>
 
-    <div>
-      <label for="password" class="block text-sm font-medium text-card-foreground">Password</label>
-      <input
-        id="password"
-        name="password"
-        type="password"
-        bind:value={password}
-        required
-        class="mt-1 block w-full rounded-md border border-input bg-background px-3 py-2 text-sm text-foreground placeholder:text-muted-foreground focus:border-ring focus:outline-none focus:ring-1 focus:ring-ring"
-        placeholder="••••••••"
-      />
-    </div>
+      <Field.Field>
+        <Field.FieldLabel for="password">Password</Field.FieldLabel>
+        <Input
+          id="password"
+          name="password"
+          type="password"
+          bind:value={password}
+          required
+          placeholder="••••••••"
+        />
+      </Field.Field>
 
-    <button
-      type="submit"
-      disabled={isLoading}
-      class="w-full rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground hover:bg-primary/90 disabled:cursor-not-allowed disabled:opacity-50"
-    >
-      {#if isLoading}
-        Signing in...
-      {:else}
-        Sign in
-      {/if}
-    </button>
+      <Button type="submit" disabled={isLoading} class="w-full">
+        {#if isLoading}
+          Signing in...
+        {:else}
+          Sign in
+        {/if}
+      </Button>
 
-    <p class="text-center text-sm text-muted-foreground">
-      Don't have an account?
-      <a href="/register" class="font-medium text-primary hover:underline">Sign up</a>
-    </p>
+      <p class="text-center text-sm text-muted-foreground">
+        Don't have an account?
+        <a href="/register" class="font-medium text-primary hover:underline">Sign up</a>
+      </p>
+    </Field.FieldGroup>
   </form>
 </div>

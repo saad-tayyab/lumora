@@ -1,13 +1,14 @@
 <script lang="ts">
 import { formatCurrency, formatDate } from '$lib/utils/format';
+import { badgeVariants } from '$lib/components/ui/badge';
 import AppDataTable from '$lib/components/data/AppDataTable.svelte';
 import type { ColumnDef } from '@tanstack/svelte-table';
 import type { PageData } from './$types';
 
 let { data }: { data: PageData } = $props();
 
-function getStatusColor(status: string): string {
-  return status === 'reconciled' ? 'bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-300' : 'bg-gray-100 text-gray-800 dark:bg-gray-800 dark:text-gray-300';
+function getStatusVariant(status: string): 'secondary' | 'outline' {
+  return status === 'reconciled' ? 'secondary' : 'outline';
 }
 
 const columns: ColumnDef<any, any>[] = [
@@ -34,7 +35,7 @@ const columns: ColumnDef<any, any>[] = [
   {
     accessorKey: 'status',
     header: 'Status',
-    cell: ({ row }) => `<span class="inline-flex items-center rounded-full px-2 py-0.5 text-xs font-medium ${getStatusColor((row as any).original.status)}">${(row as any).original.status}</span>`,
+    cell: ({ row }) => `<span class="${badgeVariants({ variant: getStatusVariant((row as any).original.status) })}">${(row as any).original.status}</span>`,
   },
   {
     accessorKey: 'id',
@@ -44,7 +45,7 @@ const columns: ColumnDef<any, any>[] = [
 ];
 </script>
 
-<div class="space-y-6">
+<div class="flex flex-col gap-6">
   <div>
     <h1 class="text-3xl font-bold text-foreground">Bank Statements</h1>
     <p class="text-muted-foreground">Manage bank statements for reconciliation</p>

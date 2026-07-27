@@ -5,19 +5,20 @@ import type { PageData } from './$types';
 import { Button } from '$lib/components/ui/button';
 import AppDataTable from '$lib/components/data/AppDataTable.svelte';
 import type { ColumnDef } from '@tanstack/svelte-table';
+import { badgeVariants } from '$lib/components/ui/badge';
 
 let { data }: { data: PageData } = $props();
 let deleting = $state<string | null>(null);
 
-function typeColor(type: string): string {
-  const colors: Record<string, string> = {
-    sales_tax: 'bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-300',
-    vat: 'bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-300',
-    gst: 'bg-purple-100 text-purple-800 dark:bg-purple-900 dark:text-purple-300',
-    excise: 'bg-orange-100 text-orange-800 dark:bg-orange-900 dark:text-orange-300',
-    withholding: 'bg-red-100 text-red-800 dark:bg-red-900 dark:text-red-300',
-  };
-  return colors[type] || 'bg-gray-100 text-gray-800';
+function typeVariant(type: string): 'secondary' | 'destructive' | 'default' | 'outline' {
+  switch (type) {
+    case 'sales_tax': return 'default';
+    case 'vat': return 'secondary';
+    case 'gst': return 'secondary';
+    case 'excise': return 'outline';
+    case 'withholding': return 'destructive';
+    default: return 'outline';
+  }
 }
 
 async function handleDelete(id: string) {
@@ -41,16 +42,14 @@ const columns: ColumnDef<any>[] = [
   {
     accessorKey: 'type',
     header: 'Type',
-    cell: (row) => `<span class="inline-flex items-center rounded-full px-2 py-0.5 text-xs font-medium ${typeColor((row as any).original.type)}">${(row as any).original.type.replace('_', ' ')}</span>`,
+    cell: (row) => `<span class="inline-flex items-center rounded-full px-2 py-0.5 text-xs font-medium ${typeVariant((row as any).original.type)}">${(row as any).original.type.replace('_', ' ')}</span>`,
   },
   { accessorKey: 'postingRule', header: 'Posting Rule', cell: (row) => (row as any).original.postingRule.replace('_', ' ') },
   { accessorKey: 'isClaimable', header: 'Claimable', cell: (row) => (row as any).original.isClaimable ? 'Yes' : 'No' },
   {
     accessorKey: 'isActive',
     header: 'Active',
-    cell: (row) => (row as any).original.isActive
-      ? '<span class="inline-flex items-center rounded-full px-2 py-0.5 text-xs font-medium bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-300">Active</span>'
-      : '<span class="inline-flex items-center rounded-full px-2 py-0.5 text-xs font-medium bg-gray-100 text-gray-800 dark:bg-gray-800 dark:text-gray-300">Inactive</span>',
+    cell: (row) => `<span class="${badgeVariants({ variant: (row as any).original.isActive ? 'secondary' : 'outline' })}">${(row as any).original.isActive ? 'Active' : 'Inactive'}</span>`,
   },
   {
     id: 'actions',
@@ -66,7 +65,7 @@ $effect(() => {
 });
 </script>
 
-<div class="space-y-6">
+<div class="flex flex-col gap-6">
   <div class="flex items-center justify-between">
     <div>
       <h1 class="text-3xl font-bold text-foreground">Tax Codes</h1>

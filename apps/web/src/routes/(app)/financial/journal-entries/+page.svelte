@@ -2,19 +2,24 @@
 	import { goto } from '$app/navigation';
 	import { formatCurrency, formatDate } from '$lib/utils/format';
 	import { Button } from '$lib/components/ui/button';
+	import { badgeVariants } from '$lib/components/ui/badge';
+	import * as Select from '$lib/components/ui/select';
 	import { Input } from '$lib/components/ui/input';
-	import { Card, CardContent } from '$lib/components/ui/card';
+	import * as Card from '$lib/components/ui/card';
 	import AppDataTable from '$lib/components/data/AppDataTable.svelte';
 	import type { ColumnDef } from '@tanstack/svelte-table';
 	import type { PageData } from './$types';
 
 	let { data }: { data: PageData } = $props();
 
-	const statusBadgeColors: Record<string, string> = {
-		draft: 'bg-gray-100 text-gray-800 dark:bg-gray-800 dark:text-gray-300',
-		posted: 'bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-300',
-		voided: 'bg-red-100 text-red-800 dark:bg-red-900 dark:text-red-300',
-	};
+	function statusBadgeVariants(status: string): 'secondary' | 'destructive' | 'default' | 'outline' {
+  switch (status) {
+    case 'draft': return 'outline';
+    case 'posted': return 'secondary';
+    case 'voided': return 'destructive';
+    default: return 'outline';
+  }
+}
 
 	let search = $state('');
 	let filterStatus = $state('');
@@ -49,14 +54,14 @@
 			accessorKey: 'status',
 			header: 'Status',
 			cell: ({ row }) => {
-				const cls = statusBadgeColors[(row as any).original.status] || '';
-				return `<span class="inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-medium ${cls}">${(row as any).original.status}</span>`;
+				const variant = statusBadgeVariants((row as any).original.status);
+				return `<span class="${badgeVariants({ variant })}">${(row as any).original.status}</span>`;
 			},
 		},
 	];
 </script>
 
-<div class="space-y-6">
+<div class="flex flex-col gap-6">
 	<div class="flex items-center justify-between">
 		<div>
 			<h1 class="text-3xl font-bold text-foreground">Journal Entries</h1>
@@ -72,19 +77,21 @@
 			bind:value={search}
 			class="flex-1"
 		/>
-		<select
-			bind:value={filterStatus}
-			class="rounded-md border bg-background px-3 py-2 text-sm text-foreground focus:outline-none focus:ring-2 focus:ring-ring"
-		>
-			<option value="">All Statuses</option>
-			<option value="draft">Draft</option>
-			<option value="posted">Posted</option>
-			<option value="voided">Voided</option>
-		</select>
+		<Select.Root bind:value={filterStatus}>
+			<Select.Trigger class="w-full">
+				<Select.Value placeholder="All Statuses" />
+			</Select.Trigger>
+			<Select.Content>
+				<Select.Item value="">All Statuses</Select.Item>
+				<Select.Item value="draft">Draft</Select.Item>
+				<Select.Item value="posted">Posted</Select.Item>
+				<Select.Item value="voided">Voided</Select.Item>
+			</Select.Content>
+		</Select.Root>
 	</div>
 
-	<Card>
-		<CardContent>
+	<Card.Root>
+		<Card.Content>
 			<AppDataTable
 				{columns}
 				data={filteredEntries}
@@ -93,8 +100,8 @@
 				totalItems={data.entries.length}
 				onRowClick={(row) => goto(`/financial/journal-entries/${row.id}`)}
 			/>
-		</CardContent>
-	</Card>
+		</Card.Content>
+	</Card.Root>
 
 	<div class="text-sm text-muted-foreground">
 		Showing {filteredEntries.length} of {data.entries.length} entries

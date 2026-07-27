@@ -1,6 +1,9 @@
 <script lang="ts">
+import { Button } from '$lib/components/ui/button';
+import * as Dialog from '$lib/components/ui/dialog';
+
 let {
-  open,
+  open = $bindable(),
   asset,
   onConfirm,
   onCancel,
@@ -21,57 +24,45 @@ function handleSubmit(e: Event) {
 }
 </script>
 
-{#if open}
-	<div class="fixed inset-0 z-50 flex items-center justify-center">
-		<div class="fixed inset-0 bg-black/50" role="presentation" onclick={onCancel}></div>
-		<div class="relative z-50 w-full max-w-md rounded-lg border bg-card p-6 shadow-lg">
-			<h2 class="text-lg font-semibold text-card-foreground">Dispose Asset</h2>
-			<p class="mt-1 text-sm text-muted-foreground">
+<Dialog.Root bind:open onOpenChange={(isOpen) => { if (!isOpen) onCancel(); }}>
+	<Dialog.Content>
+		<Dialog.Header>
+			<Dialog.Title>Dispose Asset</Dialog.Title>
+			<Dialog.Description>
 				You are about to dispose <span class="font-medium text-foreground">{asset.name}</span>
 				({asset.assetNumber}). Net book value: {asset.netBookValue}.
-			</p>
+			</Dialog.Description>
+		</Dialog.Header>
 
-			<form onsubmit={handleSubmit} class="mt-6 space-y-4">
-				<div class="space-y-1.5">
-					<label for="disposalDate" class="text-sm font-medium text-card-foreground">Disposal Date *</label>
-					<input
-						id="disposalDate"
-						type="date"
-						required
-						bind:value={disposalDate}
-						class="w-full rounded-md border bg-background px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-ring"
-					/>
-				</div>
+		<form onsubmit={handleSubmit} class="flex flex-col gap-4">
+			<div class="flex flex-col gap-1.5">
+				<label for="disposalDate" class="text-sm font-medium text-card-foreground">Disposal Date *</label>
+				<input
+					id="disposalDate"
+					type="date"
+					required
+					bind:value={disposalDate}
+					class="w-full rounded-md border bg-background px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-ring"
+				/>
+			</div>
 
-				<div class="space-y-1.5">
-					<label for="disposalProceeds" class="text-sm font-medium text-card-foreground">Disposal Proceeds *</label>
-					<input
-						id="disposalProceeds"
-						type="number"
-						step="0.01"
-						min="0"
-						required
-						bind:value={disposalProceeds}
-						class="w-full rounded-md border bg-background px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-ring"
-					/>
-				</div>
+			<div class="flex flex-col gap-1.5">
+				<label for="disposalProceeds" class="text-sm font-medium text-card-foreground">Disposal Proceeds *</label>
+				<input
+					id="disposalProceeds"
+					type="number"
+					step="0.01"
+					min="0"
+					required
+					bind:value={disposalProceeds}
+					class="w-full rounded-md border bg-background px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-ring"
+				/>
+			</div>
 
-				<div class="flex justify-end gap-3 pt-2">
-					<button
-						type="button"
-						onclick={onCancel}
-						class="rounded-md border px-4 py-2 text-sm font-medium text-card-foreground hover:bg-accent"
-					>
-						Cancel
-					</button>
-					<button
-						type="submit"
-						class="rounded-md bg-destructive px-4 py-2 text-sm font-medium text-destructive-foreground hover:bg-destructive/90"
-					>
-						Dispose Asset
-					</button>
-				</div>
-			</form>
-		</div>
-	</div>
-{/if}
+			<div class="flex justify-end gap-3 pt-2">
+				<Button type="button" variant="outline" onclick={onCancel}>Cancel</Button>
+				<Button type="submit" variant="destructive">Dispose Asset</Button>
+			</div>
+		</form>
+	</Dialog.Content>
+</Dialog.Root>

@@ -1,16 +1,16 @@
 <script lang="ts">
 import { superForm } from 'sveltekit-superforms';
 import { Button } from '$lib/components/ui/button';
-import { Label } from '$lib/components/ui/label';
+import { Spinner } from '$lib/components/ui/spinner';
+import { Input } from '$lib/components/ui/input';
+import * as Field from '$lib/components/ui/field';
+import * as Select from '$lib/components/ui/select';
 import { toast } from 'svelte-sonner';
 import { goto } from '$app/navigation';
-import { Input } from '$lib/components/ui/input';
 import DatePicker from '$lib/components/ui/date-picker.svelte';
 
 let { data } = $props();
 const { form, errors, enhance, submitting, message } = superForm(data.form);
-
-const inputClass = "w-full rounded-lg border border-input bg-transparent px-2.5 py-1 text-base md:text-sm placeholder:text-muted-foreground focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:outline-none focus-visible:ring-3 disabled:cursor-not-allowed disabled:opacity-50";
 
 $effect(() => {
 	if ($message) {
@@ -25,45 +25,51 @@ $effect(() => {
 });
 </script>
 
-<div class="mx-auto max-w-2xl space-y-6">
+<div class="flex flex-col mx-auto max-w-2xl gap-6">
 	<div>
 		<h1 class="text-3xl font-bold text-foreground">New Tax Rate</h1>
 		<p class="text-muted-foreground">Add a versioned tax rate</p>
 	</div>
 
-	<form method="POST" use:enhance class="space-y-4">
-		<div class="space-y-1.5">
-			<Label for="taxCodeId">Tax Code *</Label>
-			<select id="taxCodeId" bind:value={$form.taxCodeId} class={inputClass}>
-				<option value="">Select tax code</option>
-				{#each data.codes as code}
-					<option value={code.id}>{code.name} ({code.code})</option>
-				{/each}
-			</select>
-			{#if $errors.taxCodeId}<p class="text-sm text-destructive">{$errors.taxCodeId}</p>{/if}
-		</div>
+	<form method="POST" use:enhance>
+		<Field.FieldGroup>
+			<Field.Field>
+				<Field.FieldLabel for="taxCodeId">Tax Code *</Field.FieldLabel>
+			<Select.Root bind:value={$form.taxCodeId}>
+				<Select.Trigger class="w-full">
+					<Select.Value placeholder="Select tax code" />
+				</Select.Trigger>
+				<Select.Content>
+					{#each data.codes as code}
+						<Select.Item value={code.id}>{code.name} ({code.code})</Select.Item>
+					{/each}
+				</Select.Content>
+			</Select.Root>
+				{#if $errors.taxCodeId}<Field.FieldError>{$errors.taxCodeId}</Field.FieldError>{/if}
+			</Field.Field>
 
-		<div class="grid gap-4 md:grid-cols-3">
-			<div class="space-y-1.5">
-				<Label for="rate">Rate *</Label>
-				<input id="rate" type="number" value={$form.rate} oninput={(e) => $form.rate = Number(e.currentTarget.value)} class={inputClass} placeholder="e.g. 15" />
-				{#if $errors.rate}<p class="text-sm text-destructive">{$errors.rate}</p>{/if}
+			<div class="grid gap-4 md:grid-cols-3">
+				<Field.Field>
+					<Field.FieldLabel for="rate">Rate *</Field.FieldLabel>
+					<Input id="rate" type="number" value={$form.rate} oninput={(e) => $form.rate = Number(e.currentTarget.value)} placeholder="e.g. 15" />
+					{#if $errors.rate}<Field.FieldError>{$errors.rate}</Field.FieldError>{/if}
+				</Field.Field>
+				<Field.Field>
+					<Field.FieldLabel for="effectiveDate">Effective Date *</Field.FieldLabel>
+					<DatePicker bind:value={$form.effectiveDate} />
+					{#if $errors.effectiveDate}<Field.FieldError>{$errors.effectiveDate}</Field.FieldError>{/if}
+				</Field.Field>
+				<Field.Field>
+					<Field.FieldLabel for="expiryDate">Expiry Date</Field.FieldLabel>
+					<DatePicker bind:value={$form.expiryDate} />
+				</Field.Field>
 			</div>
-			<div class="space-y-1.5">
-				<Label for="effectiveDate">Effective Date *</Label>
-				<DatePicker bind:value={$form.effectiveDate} />
-				{#if $errors.effectiveDate}<p class="text-sm text-destructive">{$errors.effectiveDate}</p>{/if}
-			</div>
-			<div class="space-y-1.5">
-				<Label for="expiryDate">Expiry Date</Label>
-				<DatePicker bind:value={$form.expiryDate} />
-			</div>
-		</div>
+		</Field.FieldGroup>
 
 		<div class="flex justify-end gap-3 pt-4">
 			<Button variant="outline" href="/tax/rates">Cancel</Button>
 			<Button type="submit" disabled={$submitting}>
-				{#if $submitting}<div class="mr-2 h-4 w-4 animate-spin rounded-full border-2 border-primary-foreground border-t-transparent"></div>{/if}
+				{#if $submitting}<Spinner data-icon="inline-start" class="text-primary-foreground" />{/if}
 				Create Tax Rate
 			</Button>
 		</div>

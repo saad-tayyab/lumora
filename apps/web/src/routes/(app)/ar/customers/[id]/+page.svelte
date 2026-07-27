@@ -4,13 +4,24 @@ import { goto } from '$app/navigation';
 import { deleteCustomer } from '$lib/api/ar';
 import { formatCurrency, formatDate } from '$lib/utils/format';
 import { Button } from '$lib/components/ui/button';
-import { Card, CardContent } from '$lib/components/ui/card';
+import { Badge } from '$lib/components/ui/badge';
+import * as Card from '$lib/components/ui/card';
 import type { PageData } from './$types';
 
 let { data }: { data: PageData } = $props();
 let customer = $derived(data.customer);
 let invoices = $derived(data.invoices);
 let payments = $derived(data.payments);
+
+function invStatusVariant(status: string): 'secondary' | 'destructive' | 'default' | 'outline' {
+  switch (status) {
+    case 'draft': return 'outline';
+    case 'sent': return 'default';
+    case 'paid': return 'secondary';
+    case 'overdue': return 'destructive';
+    default: return 'outline';
+  }
+}
 
 const totalOutstanding = $derived(
   invoices
@@ -30,7 +41,7 @@ async function handleDelete() {
 }
 </script>
 
-<div class="space-y-6">
+<div class="flex flex-col gap-6">
 	<div class="flex items-center justify-between">
 		<div>
 			<div class="flex items-center gap-2 text-sm text-muted-foreground">
@@ -51,10 +62,12 @@ async function handleDelete() {
 	</div>
 
 	<div class="grid gap-6 lg:grid-cols-3">
-		<div class="space-y-6 lg:col-span-2">
-			<Card>
-				<CardContent>
-					<h2 class="mb-4 text-lg font-semibold text-card-foreground">Customer Details</h2>
+		<div class="flex flex-col gap-6 lg:col-span-2">
+			<Card.Root>
+				<Card.Content>
+					<Card.Header>
+				<Card.Title>Customer Details</Card.Title>
+			</Card.Header>
 					<dl class="grid gap-4 md:grid-cols-2">
 						<div>
 							<dt class="text-sm font-medium text-muted-foreground">Email</dt>
@@ -77,13 +90,9 @@ async function handleDelete() {
 						<div>
 							<dt class="text-sm font-medium text-muted-foreground">Status</dt>
 							<dd class="mt-1">
-								<span
-									class="inline-flex items-center rounded-full px-2 py-0.5 text-xs font-medium {customer.isActive
-										? 'bg-green-100 text-green-800'
-										: 'bg-gray-100 text-gray-800'}"
-								>
-									{customer.isActive ? 'Active' : 'Inactive'}
-								</span>
+							<Badge variant={customer.isActive ? 'secondary' : 'outline'}>
+								{customer.isActive ? 'Active' : 'Inactive'}
+							</Badge>
 							</dd>
 						</div>
 						<div>
@@ -106,11 +115,11 @@ async function handleDelete() {
 							</dd>
 						</div>
 					{/if}
-				</CardContent>
-			</Card>
+				</Card.Content>
+			</Card.Root>
 
-			<Card>
-				<CardContent>
+			<Card.Root>
+				<Card.Content>
 					<div class="mb-4 flex items-center justify-between">
 						<h2 class="text-lg font-semibold text-card-foreground">Invoices</h2>
 						<a
@@ -145,35 +154,26 @@ async function handleDelete() {
 										<td class="py-2">{formatCurrency(inv.totalAmount)}</td>
 										<td class="py-2">{formatCurrency(inv.balanceDue)}</td>
 										<td class="py-2">
-											<span
-												class="inline-flex items-center rounded-full px-2 py-0.5 text-xs font-medium
-													{inv.status === 'draft'
-														? 'bg-gray-100 text-gray-800'
-														: inv.status === 'sent'
-															? 'bg-blue-100 text-blue-800'
-															: inv.status === 'paid'
-																? 'bg-green-100 text-green-800'
-																: inv.status === 'overdue'
-																	? 'bg-red-100 text-red-800'
-																	: 'bg-gray-100 text-gray-800'}"
-											>
+											<Badge variant={invStatusVariant(inv.status)}>
 												{inv.status}
-											</span>
+											</Badge>
 										</td>
 									</tr>
 								{/each}
 							</tbody>
 						</table>
 					{/if}
-				</CardContent>
-			</Card>
+				</Card.Content>
+			</Card.Root>
 		</div>
 
-		<div class="space-y-6">
-			<Card>
-				<CardContent>
-					<h2 class="mb-4 text-lg font-semibold text-card-foreground">Summary</h2>
-					<dl class="space-y-3">
+		<div class="flex flex-col gap-6">
+			<Card.Root>
+				<Card.Content>
+					<Card.Header>
+				<Card.Title>Summary</Card.Title>
+			</Card.Header>
+					<dl class="flex flex-col gap-3">
 						<div class="flex items-center justify-between">
 							<dt class="text-sm text-muted-foreground">Outstanding</dt>
 							<dd class="text-sm font-medium text-card-foreground">
@@ -189,16 +189,18 @@ async function handleDelete() {
 							<dd class="text-sm font-medium text-card-foreground">{payments.length}</dd>
 						</div>
 					</dl>
-				</CardContent>
-			</Card>
+				</Card.Content>
+			</Card.Root>
 
-			<Card>
-				<CardContent>
-					<h2 class="mb-4 text-lg font-semibold text-card-foreground">Recent Payments</h2>
+			<Card.Root>
+				<Card.Content>
+					<Card.Header>
+				<Card.Title>Recent Payments</Card.Title>
+			</Card.Header>
 					{#if payments.length === 0}
 						<p class="text-sm text-muted-foreground">No payments.</p>
 					{:else}
-						<div class="space-y-3">
+						<div class="flex flex-col gap-3">
 							{#each payments.slice(0, 5) as pay}
 								<div class="flex items-center justify-between text-sm">
 									<div>
@@ -210,8 +212,8 @@ async function handleDelete() {
 							{/each}
 						</div>
 					{/if}
-				</CardContent>
-			</Card>
+				</Card.Content>
+			</Card.Root>
 		</div>
 	</div>
 </div>

@@ -12,17 +12,17 @@ let order = $state<SalesOrder | null>(data.order);
 let lineItems = $state<SalesOrderLineItem[]>(data.lineItems);
 let loading = $state(false);
 
-function orderStatusColor(status: string): string {
-  const colors: Record<string, string> = {
-    draft: 'bg-gray-100 text-gray-800',
-    confirmed: 'bg-blue-100 text-blue-800',
-    processing: 'bg-yellow-100 text-yellow-800',
-    shipped: 'bg-purple-100 text-purple-800',
-    delivered: 'bg-green-100 text-green-800',
-    cancelled: 'bg-red-100 text-red-800',
-    closed: 'bg-gray-100 text-gray-800',
-  };
-  return colors[status] || 'bg-gray-100 text-gray-800';
+function orderStatusVariant(status: string): 'secondary' | 'destructive' | 'default' | 'outline' {
+  switch (status) {
+    case 'cancelled': return 'destructive';
+    case 'closed': return 'outline';
+    case 'confirmed': return 'secondary';
+    case 'delivered': return 'secondary';
+    case 'draft': return 'outline';
+    case 'processing': return 'outline';
+    case 'shipped': return 'outline';
+    default: return 'outline';
+  }
 }
 
 function formatStatus(status: string): string {
@@ -87,7 +87,7 @@ async function deleteLineItem(lineItemId: string) {
 }
 </script>
 
-<div class="mx-auto max-w-4xl space-y-6">
+<div class="mx-auto max-w-4xl flex flex-col gap-6">
   <nav class="mb-4 text-sm text-muted-foreground">
     <a href="/sales/orders" class="hover:underline">Sales Orders</a>
     <span class="mx-2">/</span>
@@ -101,7 +101,7 @@ async function deleteLineItem(lineItemId: string) {
       <div>
         <div class="flex items-center gap-3">
           <h1 class="text-3xl font-bold text-foreground">{order.orderNumber}</h1>
-          <span class="inline-block rounded-full px-2 py-0.5 text-xs font-medium {orderStatusColor(order.status)}">
+          <span class="inline-block rounded-full px-2 py-0.5 text-xs font-medium {orderStatusVariant(order.status)}">
             {formatStatus(order.status)}
           </span>
         </div>
@@ -128,7 +128,9 @@ async function deleteLineItem(lineItemId: string) {
 
     <div class="grid gap-6 lg:grid-cols-3">
       <div class="rounded-lg border bg-card p-6 shadow-sm lg:col-span-2">
-        <h2 class="mb-4 text-lg font-semibold text-card-foreground">Order Details</h2>
+        <Card.Header>
+				<Card.Title>Order Details</Card.Title>
+			</Card.Header>
         <div class="grid gap-4 md:grid-cols-2">
           <div>
             <div class="text-sm text-muted-foreground">Customer</div>
@@ -158,8 +160,10 @@ async function deleteLineItem(lineItemId: string) {
       </div>
 
       <Card.Root class="shadow-sm"><Card.Content>
-        <h2 class="mb-4 text-lg font-semibold text-card-foreground">Timeline</h2>
-        <div class="space-y-3 text-sm">
+        <Card.Header>
+				<Card.Title>Timeline</Card.Title>
+			</Card.Header>
+        <div class="flex flex-col gap-3 text-sm">
           <div>
             <div class="text-muted-foreground">Created</div>
             <div class="text-card-foreground">{formatDate(order.createdAt)}</div>
@@ -173,7 +177,9 @@ async function deleteLineItem(lineItemId: string) {
     </div>
 
     <Card.Root class="shadow-sm"><Card.Content>
-      <h2 class="mb-4 text-lg font-semibold text-card-foreground">Line Items</h2>
+      <Card.Header>
+				<Card.Title>Line Items</Card.Title>
+			</Card.Header>
       {#if lineItems.length === 0}
         <p class="py-4 text-center text-sm text-muted-foreground">No line items</p>
       {:else}

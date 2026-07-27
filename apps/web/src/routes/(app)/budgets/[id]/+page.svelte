@@ -2,23 +2,24 @@
 import { formatCurrency, formatDate } from '$lib/utils/format';
 import type { PageData } from './$types';
 import { Button } from '$lib/components/ui/button';
+import { Badge } from '$lib/components/ui/badge';
 import * as Card from '$lib/components/ui/card';
 
 let { data }: { data: PageData } = $props();
 
-function statusColor(status: string): string {
-  const colors: Record<string, string> = {
-    draft: 'bg-gray-100 text-gray-800 dark:bg-gray-800 dark:text-gray-300',
-    active: 'bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-300',
-    closed: 'bg-gray-100 text-gray-800 dark:bg-gray-800 dark:text-gray-300',
-  };
-  return colors[status] || 'bg-gray-100 text-gray-800';
+function statusVariant(status: string): 'secondary' | 'outline' {
+  switch (status) {
+    case 'draft': return 'outline';
+    case 'active': return 'secondary';
+    case 'closed': return 'outline';
+    default: return 'outline';
+  }
 }
 </script>
 
 {#if data.budget}
   {@const budget = data.budget}
-  <div class="mx-auto max-w-4xl space-y-6">
+  <div class="mx-auto max-w-4xl flex flex-col gap-6">
     <nav class="mb-4 text-sm text-muted-foreground">
       <a href="/budgets" class="hover:underline">Budgets</a>
       <span class="mx-2">/</span>
@@ -29,7 +30,7 @@ function statusColor(status: string): string {
       <div>
         <div class="flex items-center gap-3">
           <h1 class="text-3xl font-bold text-foreground">{budget.name}</h1>
-          <span class="inline-flex items-center rounded-full px-2 py-0.5 text-xs font-medium {statusColor(budget.status)}">{budget.status}</span>
+          <Badge variant={statusVariant(budget.status)}>{budget.status}</Badge>
         </div>
         <p class="text-muted-foreground">{formatDate(budget.periodStart)} - {formatDate(budget.periodEnd)}</p>
       </div>

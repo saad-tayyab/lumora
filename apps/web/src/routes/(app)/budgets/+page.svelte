@@ -4,18 +4,19 @@ import { invalidateAll, goto } from '$app/navigation';
 import { formatCurrency, formatDate } from '$lib/utils/format';
 import type { PageData } from './$types';
 import { Button } from '$lib/components/ui/button';
+import { badgeVariants } from '$lib/components/ui/badge';
 import AppDataTable from '$lib/components/data/AppDataTable.svelte';
 
 let { data }: { data: PageData } = $props();
 let deleting = $state<string | null>(null);
 
-function statusColor(status: string): string {
-  const colors: Record<string, string> = {
-    draft: 'bg-gray-100 text-gray-800 dark:bg-gray-800 dark:text-gray-300',
-    active: 'bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-300',
-    closed: 'bg-gray-100 text-gray-800 dark:bg-gray-800 dark:text-gray-300',
-  };
-  return colors[status] || 'bg-gray-100 text-gray-800';
+function statusVariant(status: string): 'secondary' | 'outline' {
+  switch (status) {
+    case 'draft': return 'outline';
+    case 'active': return 'secondary';
+    case 'closed': return 'outline';
+    default: return 'outline';
+  }
 }
 
 async function handleDelete(id: string) {
@@ -40,7 +41,7 @@ const columns = [
   {
     accessorKey: 'status',
     header: 'Status',
-    cell: (row) => `<span class="inline-flex items-center rounded-full px-2 py-0.5 text-xs font-medium ${statusColor((row as any).original.status)}">${(row as any).original.status}</span>`,
+    cell: (row) => `<span class="${badgeVariants({ variant: statusVariant((row as any).original.status) })}">${(row as any).original.status}</span>`,
   },
   {
     id: 'actions',
@@ -56,7 +57,7 @@ $effect(() => {
 });
 </script>
 
-<div class="space-y-6">
+<div class="flex flex-col gap-6">
   <div class="flex items-center justify-between">
     <div>
       <h1 class="text-3xl font-bold text-foreground">Budgets</h1>

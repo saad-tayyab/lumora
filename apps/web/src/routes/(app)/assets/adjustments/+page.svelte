@@ -10,13 +10,13 @@ import type { ColumnDef } from '@tanstack/svelte-table';
 let { data }: { data: PageData } = $props();
 let posting = $state<string | null>(null);
 
-function statusColor(status: string): string {
-  const colors: Record<string, string> = {
-    draft: 'bg-gray-100 text-gray-800 dark:bg-gray-800 dark:text-gray-300',
-    posted: 'bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-300',
-    voided: 'bg-red-100 text-red-800 dark:bg-red-900 dark:text-red-300',
-  };
-  return colors[status] || 'bg-gray-100 text-gray-800';
+function statusVariant(status: string): 'secondary' | 'destructive' | 'default' | 'outline' {
+  switch (status) {
+    case 'draft': return 'outline';
+    case 'posted': return 'secondary';
+    case 'voided': return 'destructive';
+    default: return 'outline';
+  }
 }
 
 async function handlePost(id: string) {
@@ -47,7 +47,7 @@ const columns: ColumnDef<any>[] = [
   {
     accessorKey: 'status',
     header: 'Status',
-    cell: (row) => `<span class="inline-flex items-center rounded-full px-2 py-0.5 text-xs font-medium ${statusColor((row as any).original.status)}">${(row as any).original.status}</span>`,
+    cell: (row) => `<span class="inline-flex items-center rounded-full px-2 py-0.5 text-xs font-medium ${statusVariant((row as any).original.status)}">${(row as any).original.status}</span>`,
   },
   {
     id: 'actions',
@@ -66,7 +66,7 @@ $effect(() => {
 });
 </script>
 
-<div class="space-y-6">
+<div class="flex flex-col gap-6">
   <div class="flex items-center justify-between">
     <div>
       <h1 class="text-3xl font-bold text-foreground">Asset Adjustments</h1>

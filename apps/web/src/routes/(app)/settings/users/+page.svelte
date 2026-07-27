@@ -4,6 +4,7 @@ import { invalidateAll, goto } from '$app/navigation';
 import { formatDate } from '$lib/utils/format';
 import type { PageData } from './$types';
 import { Button } from '$lib/components/ui/button';
+import { badgeVariants } from '$lib/components/ui/badge';
 import AppDataTable from '$lib/components/data/AppDataTable.svelte';
 import type { ColumnDef } from '@tanstack/svelte-table';
 
@@ -32,9 +33,7 @@ const columns: ColumnDef<any>[] = [
   {
     accessorKey: 'status',
     header: 'Status',
-    cell: (row) => (row as any).original.status === 'active'
-      ? '<span class="inline-flex items-center rounded-full px-2 py-0.5 text-xs font-medium bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-300">active</span>'
-      : '<span class="inline-flex items-center rounded-full px-2 py-0.5 text-xs font-medium bg-red-100 text-red-800 dark:bg-red-900 dark:text-red-300">suspended</span>',
+    cell: (row) => `<span class="${badgeVariants({ variant: (row as any).original.status === 'active' ? 'secondary' : 'destructive' })}">${(row as any).original.status}</span>`,
   },
   { accessorKey: 'mfaEnabled', header: 'MFA', cell: (row) => (row as any).original.mfaEnabled ? 'Yes' : 'No' },
   { accessorKey: 'createdAt', header: 'Created', cell: (row) => formatDate((row as any).original.createdAt) },
@@ -52,7 +51,7 @@ $effect(() => {
 });
 </script>
 
-<div class="space-y-6">
+<div class="flex flex-col gap-6">
   <div class="flex items-center justify-between">
     <div>
       <h1 class="text-3xl font-bold text-foreground">Users</h1>

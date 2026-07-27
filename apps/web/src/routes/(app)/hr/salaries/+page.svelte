@@ -5,6 +5,7 @@ import { formatCurrency, formatDate } from '$lib/utils/format';
 import type { PageData } from './$types';
 import AppDataTable from '$lib/components/data/AppDataTable.svelte';
 import type { ColumnDef } from '@tanstack/svelte-table';
+import { Badge } from '$lib/components/ui/badge';
 
 let { data }: { data: PageData } = $props();
 let salaries = $state<Salary[]>(data.salaries);
@@ -32,8 +33,8 @@ const columns: ColumnDef<Salary>[] = [
     accessorKey: 'isActive',
     header: 'Active',
     cell: (row) => (row as any).original.isActive
-      ? '<span class="inline-block rounded-full bg-green-100 px-2 py-0.5 text-xs font-medium text-green-800">Active</span>'
-      : '<span class="inline-block rounded-full bg-gray-100 px-2 py-0.5 text-xs font-medium text-gray-800">Inactive</span>',
+      ? '<Badge variant="secondary">Active</Badge>'
+      : '<Badge variant="outline">Inactive</Badge>',
   },
   {
     id: 'actions',
@@ -49,7 +50,7 @@ $effect(() => {
 });
 </script>
 
-<div class="space-y-6">
+<div class="flex flex-col gap-6">
   <div><h1 class="text-3xl font-bold text-foreground">Salaries</h1><p class="text-muted-foreground">Manage employee salary records</p></div>
   <AppDataTable
     {columns}

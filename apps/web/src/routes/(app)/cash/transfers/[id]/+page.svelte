@@ -1,20 +1,23 @@
 <script lang="ts">
 import { formatCurrency, formatDate } from '$lib/utils/format';
-import { Card, CardContent } from '$lib/components/ui/card';
+import * as Card from '$lib/components/ui/card';
 import type { PageData } from './$types';
 
 let { data }: { data: PageData } = $props();
 
-const statusStyles: Record<string, string> = {
-  pending: 'bg-yellow-100 text-yellow-800 dark:bg-yellow-900 dark:text-yellow-300',
-  processing: 'bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-300',
-  completed: 'bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-300',
-  failed: 'bg-red-100 text-red-800 dark:bg-red-900 dark:text-red-300',
-  cancelled: 'bg-gray-100 text-gray-800 dark:bg-gray-800 dark:text-gray-300',
-};
+function statusVariant(status: string): 'secondary' | 'destructive' | 'default' | 'outline' {
+  switch (status) {
+    case 'cancelled': return 'destructive';
+    case 'completed': return 'secondary';
+    case 'failed': return 'destructive';
+    case 'pending': return 'outline';
+    case 'processing': return 'outline';
+    default: return 'outline';
+  }
+}
 </script>
 
-<div class="mx-auto max-w-4xl space-y-6">
+<div class="flex flex-col mx-auto max-w-4xl gap-6">
 	<div>
 		<div class="flex items-center gap-2 text-sm text-muted-foreground">
 			<a href="/cash/transfers" class="hover:underline">Transfers</a>
@@ -26,10 +29,12 @@ const statusStyles: Record<string, string> = {
 
 	{#if data.transfer}
 		<div class="grid gap-6 lg:grid-cols-2">
-			<Card>
-				<CardContent>
-					<h2 class="mb-4 text-lg font-semibold text-card-foreground">Transfer Info</h2>
-					<dl class="space-y-3">
+			<Card.Root>
+				<Card.Content>
+					<Card.Header>
+				<Card.Title>Transfer Info</Card.Title>
+			</Card.Header>
+					<dl class="flex flex-col gap-3">
 						<div class="flex justify-between">
 							<dt class="text-sm text-muted-foreground">Status</dt>
 							<dd>
@@ -61,13 +66,15 @@ const statusStyles: Record<string, string> = {
 							</div>
 						{/if}
 					</dl>
-				</CardContent>
-			</Card>
+				</Card.Content>
+			</Card.Root>
 
-			<Card>
-				<CardContent>
-					<h2 class="mb-4 text-lg font-semibold text-card-foreground">Accounts</h2>
-					<dl class="space-y-3">
+			<Card.Root>
+				<Card.Content>
+					<Card.Header>
+				<Card.Title>Accounts</Card.Title>
+			</Card.Header>
+					<dl class="flex flex-col gap-3">
 						<div class="flex justify-between">
 							<dt class="text-sm text-muted-foreground">From Account</dt>
 							<dd class="text-sm font-medium text-card-foreground">
@@ -91,8 +98,8 @@ const statusStyles: Record<string, string> = {
 							<dd class="mt-1 text-sm text-card-foreground">{data.transfer.notes}</dd>
 						</div>
 					{/if}
-				</CardContent>
-			</Card>
+				</Card.Content>
+			</Card.Root>
 		</div>
 	{:else}
 		<div class="flex items-center justify-center py-12">

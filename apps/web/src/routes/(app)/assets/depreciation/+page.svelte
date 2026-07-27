@@ -3,6 +3,7 @@ import { formatCurrency, formatDate } from '$lib/utils/format';
 import type { PageData } from './$types';
 import AppDataTable from '$lib/components/data/AppDataTable.svelte';
 import type { ColumnDef } from '@tanstack/svelte-table';
+import { Badge } from '$lib/components/ui/badge';
 
 let { data }: { data: PageData } = $props();
 
@@ -26,12 +27,12 @@ const columns: ColumnDef<any>[] = [
   {
     accessorKey: 'status',
     header: 'Status',
-    cell: (row) => `<span class="inline-flex items-center rounded-full px-2 py-0.5 text-xs font-medium bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-300">${(row as any).original.status}</span>`,
+    cell: (row) => `<Badge variant="secondary">${(row as any).original.status}</Badge>`,
   },
 ];
 </script>
 
-<div class="space-y-6">
+<div class="flex flex-col gap-6">
   <div>
     <h1 class="text-3xl font-bold text-foreground">Depreciation Schedules</h1>
     <p class="text-muted-foreground">{data.total} schedules</p>

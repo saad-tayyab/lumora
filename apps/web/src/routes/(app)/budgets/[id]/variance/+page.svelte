@@ -12,7 +12,7 @@ function varianceClass(amount: string): string {
 }
 </script>
 
-<div class="space-y-6">
+<div class="flex flex-col gap-6">
 	<div>
 		<div class="flex items-center gap-2 text-sm text-muted-foreground">
 			<a href="/budgets" class="hover:underline">Budgets</a>

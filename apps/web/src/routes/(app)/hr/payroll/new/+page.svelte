@@ -2,10 +2,12 @@
 import { superForm } from 'sveltekit-superforms';
 import { toast } from 'svelte-sonner';
 import { goto } from '$app/navigation';
+import * as Field from '$lib/components/ui/field';
+import * as Select from '$lib/components/ui/select';
 import { Button } from '$lib/components/ui/button';
 import { Input } from '$lib/components/ui/input';
 import { Label } from '$lib/components/ui/label';
-import { Card, CardContent } from '$lib/components/ui/card';
+import * as Card from '$lib/components/ui/card';
 
 let { data } = $props();
 const { form, errors, enhance, submitting, message } = superForm(data.form);
@@ -23,7 +25,7 @@ $effect(() => {
 });
 </script>
 
-<div class="mx-auto max-w-2xl space-y-6">
+<div class="flex flex-col mx-auto max-w-2xl gap-6">
 	<div>
 		<div class="flex items-center gap-2 text-sm text-muted-foreground">
 			<a href="/hr/payroll" class="hover:underline">Payroll</a>
@@ -33,35 +35,38 @@ $effect(() => {
 		<h1 class="mt-2 text-3xl font-bold text-foreground">New Payroll Run</h1>
 	</div>
 
-	<Card>
-		<CardContent>
-			<form method="POST" use:enhance class="space-y-6">
-				<div class="grid gap-4 md:grid-cols-2">
-					<div class="space-y-2">
-						<Label for="period">Period *</Label>
-						<Input id="period" type="month" bind:value={$form.period} />
-						{#if $errors.period}<p class="text-xs text-destructive">{$errors.period}</p>{/if}
+	<Card.Root>
+		<Card.Content>
+			<form method="POST" use:enhance>
+				<Field.FieldGroup>
+					<div class="grid gap-4 md:grid-cols-2">
+						<Field.Field>
+							<Field.FieldLabel for="period">Period *</Field.FieldLabel>
+							<Input id="period" type="month" bind:value={$form.period} />
+							{#if $errors.period}<Field.FieldError errors={$errors.period.map(m => ({ message: m }))} />{/if}
+						</Field.Field>
+						<div class="flex flex-col gap-2">
+							<Label for="status">Status</Label>
+						<Select.Root bind:value={$form.status}>
+							<Select.Trigger class="w-full">
+								<Select.Value placeholder="Select status" />
+							</Select.Trigger>
+							<Select.Content>
+								<Select.Item value="draft">Draft</Select.Item>
+								<Select.Item value="processed">Processed</Select.Item>
+							</Select.Content>
+						</Select.Root>
+						</div>
 					</div>
-					<div class="space-y-2">
-						<Label for="status">Status</Label>
-						<select
-							id="status"
-							bind:value={$form.status}
-							class="h-8 w-full rounded-lg border border-input bg-transparent px-2.5 py-1 text-base transition-colors focus-visible:border-ring focus-visible:ring-3 focus-visible:ring-ring/50 md:text-sm"
-						>
-							<option value="draft">Draft</option>
-							<option value="processed">Processed</option>
-						</select>
-					</div>
-				</div>
 
-				<div class="flex justify-end gap-3">
-					<Button variant="outline" href="/hr/payroll">Cancel</Button>
-					<Button type="submit" disabled={$submitting}>
-						{$submitting ? 'Creating...' : 'Create Payroll'}
-					</Button>
-				</div>
+					<div class="flex justify-end gap-3">
+						<Button variant="outline" href="/hr/payroll">Cancel</Button>
+						<Button type="submit" disabled={$submitting}>
+							{$submitting ? 'Creating...' : 'Create Payroll'}
+						</Button>
+					</div>
+				</Field.FieldGroup>
 			</form>
-		</CardContent>
-	</Card>
+		</Card.Content>
+	</Card.Root>
 </div>

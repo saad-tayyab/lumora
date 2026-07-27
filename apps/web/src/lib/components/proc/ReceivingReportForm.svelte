@@ -1,4 +1,5 @@
 <script lang="ts">
+import * as Select from '$lib/components/ui/select';
 let {
   vendors,
   items,
@@ -29,16 +30,20 @@ let isSubmitting = $state(false);
 </script>
 
 <div class="rounded-lg border bg-card p-6 shadow-sm">
-	<form method="POST" class="space-y-6">
+	<form method="POST" class="flex flex-col gap-6">
 		<div class="grid gap-4 md:grid-cols-3">
 			<div>
 				<label for="vendorId" class="block text-sm font-medium text-card-foreground">Vendor *</label>
-				<select id="vendorId" name="vendorId" required bind:value={vendorId} class="mt-1 block w-full rounded-md border border-input bg-background px-3 py-2 text-sm text-foreground focus:border-ring focus:outline-none focus:ring-1 focus:ring-ring">
-					<option value="">Select vendor</option>
+			<Select.Root bind:value={vendorId}>
+				<Select.Trigger class="w-full">
+					<Select.Value placeholder="Select vendor" />
+				</Select.Trigger>
+				<Select.Content>
 					{#each vendors as vendor}
-						<option value={vendor.id}>{vendor.name}</option>
+						<Select.Item value={vendor.id}>{vendor.name}</Select.Item>
 					{/each}
-				</select>
+				</Select.Content>
+			</Select.Root>
 			</div>
 			<div>
 				<label for="purchaseOrderId" class="block text-sm font-medium text-card-foreground">PO Reference</label>
@@ -55,17 +60,21 @@ let isSubmitting = $state(false);
 				<h3 class="text-sm font-medium text-card-foreground">Received Items</h3>
 				<button type="button" onclick={addItem} class="rounded-md border px-3 py-1 text-sm text-card-foreground hover:bg-accent">+ Add Item</button>
 			</div>
-			<div class="space-y-3">
+			<div class="flex flex-col gap-3">
 				{#each receivedItems as _, index}
 					<div class="grid items-end gap-3 rounded-md border p-3 md:grid-cols-[1fr_1fr_1fr_auto]">
 						<div>
 							{#if index === 0}<label class="block text-xs font-medium text-muted-foreground">Item *</label>{/if}
-							<select name="itemId_{index}" required class="mt-1 block w-full rounded-md border border-input bg-background px-3 py-2 text-sm text-foreground focus:border-ring focus:outline-none focus:ring-1 focus:ring-ring">
-								<option value="">Select item</option>
+						<Select.Root>
+							<Select.Trigger class="w-full">
+								<Select.Value placeholder="Select item" />
+							</Select.Trigger>
+							<Select.Content>
 								{#each items as item}
-									<option value={item.id}>{item.sku} - {item.name}</option>
+									<Select.Item value={item.id}>{item.sku} - {item.name}</Select.Item>
 								{/each}
-							</select>
+							</Select.Content>
+						</Select.Root>
 						</div>
 						<div>
 							{#if index === 0}<label class="block text-xs font-medium text-muted-foreground">Quantity *</label>{/if}
@@ -73,11 +82,16 @@ let isSubmitting = $state(false);
 						</div>
 						<div>
 							{#if index === 0}<label class="block text-xs font-medium text-muted-foreground">Condition</label>{/if}
-							<select name="condition_{index}" value={receivedItems[index].condition} oninput={(e) => { receivedItems[index].condition = (e.target as HTMLSelectElement).value; receivedItems = [...receivedItems]; }} class="mt-1 block w-full rounded-md border border-input bg-background px-3 py-2 text-sm text-foreground focus:border-ring focus:outline-none focus:ring-1 focus:ring-ring">
-								<option value="good">Good</option>
-								<option value="damaged">Damaged</option>
-								<option value="partial">Partial</option>
-							</select>
+						<Select.Root value={receivedItems[index].condition} onchange={(e: any) => { receivedItems[index].condition = e; receivedItems = [...receivedItems]; }}>
+							<Select.Trigger class="w-full">
+								<Select.Value placeholder="Select condition" />
+							</Select.Trigger>
+							<Select.Content>
+								<Select.Item value="good">Good</Select.Item>
+								<Select.Item value="damaged">Damaged</Select.Item>
+								<Select.Item value="partial">Partial</Select.Item>
+							</Select.Content>
+						</Select.Root>
 						</div>
 						{#if receivedItems.length > 1}
 							<button type="button" onclick={() => removeItem(index)} class="mb-1 rounded-md border border-destructive/50 px-2 py-2 text-destructive hover:bg-destructive/10">×</button>

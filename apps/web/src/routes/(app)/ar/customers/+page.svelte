@@ -5,6 +5,7 @@ import { deleteCustomer, listCustomers } from '$lib/api/ar';
 import type { Customer } from '$lib/types';
 import { formatCurrency } from '$lib/utils/format';
 import { Button } from '$lib/components/ui/button';
+import { badgeVariants } from '$lib/components/ui/badge';
 import AppDataTable from '$lib/components/data/AppDataTable.svelte';
 import type { ColumnDef } from '@tanstack/svelte-table';
 
@@ -44,8 +45,8 @@ $effect(() => {
   load();
 });
 
-function getStatusColor(isActive: boolean): string {
-  return isActive ? 'bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-300' : 'bg-gray-100 text-gray-800 dark:bg-gray-800 dark:text-gray-300';
+function getStatusVariant(isActive: boolean): 'secondary' | 'outline' {
+  return isActive ? 'secondary' : 'outline';
 }
 
 const columns: ColumnDef<Customer, any>[] = [
@@ -79,13 +80,13 @@ const columns: ColumnDef<Customer, any>[] = [
     header: 'Status',
     cell: ({ row }) => {
       const label = (row as any).original.isActive ? 'Active' : 'Inactive';
-      return `<span class="inline-flex items-center rounded-full px-2 py-0.5 text-xs font-medium ${getStatusColor((row as any).original.isActive)}">${label}</span>`;
+      return `<span class="${badgeVariants({ variant: getStatusVariant((row as any).original.isActive) })}">${label}</span>`;
     },
   },
 ];
 </script>
 
-<div class="space-y-6">
+<div class="flex flex-col gap-6">
 	<div class="flex items-center justify-between">
 		<div>
 			<h1 class="text-3xl font-bold text-foreground">Customers</h1>

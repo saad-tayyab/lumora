@@ -2,9 +2,12 @@
 import { toast } from 'svelte-sonner';
 import { enhance } from '$app/forms';
 import { Button } from '$lib/components/ui/button';
+import { Checkbox } from '$lib/components/ui/checkbox';
 import { Input } from '$lib/components/ui/input';
-import { Label } from '$lib/components/ui/label';
-import { Card, CardContent } from '$lib/components/ui/card';
+import { Textarea } from '$lib/components/ui/textarea';
+import * as Field from '$lib/components/ui/field';
+import * as Select from '$lib/components/ui/select';
+import * as Card from '$lib/components/ui/card';
 import type { ActionData, PageData } from './$types';
 
 let { data, form }: { data: PageData; form: any } = $props();
@@ -12,6 +15,7 @@ let { data, form }: { data: PageData; form: any } = $props();
 const { account } = data;
 
 let submitting = $state(false);
+let isActive = $state(form?.isActive !== undefined ? form.isActive === 'true' : account.isActive);
 
 $effect(() => {
   if (form?.error) {
@@ -20,7 +24,7 @@ $effect(() => {
 });
 </script>
 
-<div class="mx-auto max-w-2xl space-y-6">
+<div class="flex flex-col mx-auto max-w-2xl gap-6">
   <div>
     <a href="/financial/accounts/{account.id}" class="text-sm text-muted-foreground hover:text-foreground">
       ← Back to Account
@@ -39,70 +43,63 @@ $effect(() => {
       };
     }}
   >
-    <Card>
-      <CardContent class="space-y-4">
-        <div class="space-y-2">
-          <Label for="code">Account Code *</Label>
-          <Input
-            id="code"
-            name="code"
-            type="text"
-            required
-            value={form?.code ?? account.code}
-          />
-        </div>
-
-        <div class="space-y-2">
-          <Label for="name">Account Name *</Label>
-          <Input
-            id="name"
-            name="name"
-            type="text"
-            required
-            value={form?.name ?? account.name}
-          />
-        </div>
-
-        <div class="space-y-2">
-          <Label for="type">Account Type *</Label>
-          <select
-            id="type"
-            name="type"
-            required
-            class="w-full rounded-md border bg-background px-3 py-2 text-sm text-foreground focus:outline-none focus:ring-2 focus:ring-ring"
-          >
-            <option value="asset" selected={(form?.type ?? account.type) === 'asset'}>Asset</option>
-            <option value="liability" selected={(form?.type ?? account.type) === 'liability'}>Liability</option>
-            <option value="equity" selected={(form?.type ?? account.type) === 'equity'}>Equity</option>
-            <option value="revenue" selected={(form?.type ?? account.type) === 'revenue'}>Revenue</option>
-            <option value="expense" selected={(form?.type ?? account.type) === 'expense'}>Expense</option>
-          </select>
-        </div>
-
-        <div class="space-y-2">
-          <Label for="description">Description</Label>
-          <textarea
-            id="description"
-            name="description"
-            rows="3"
-            value={form?.description ?? account.description ?? ''}
-            class="w-full rounded-md border bg-background px-3 py-2 text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring"
-          ></textarea>
-        </div>
-
-        <div class="space-y-2">
-          <Label>Status</Label>
-          <div class="flex items-center gap-2">
-            <input
-              type="checkbox"
-              name="isActive"
-              value="true"
-              checked={form?.isActive !== undefined ? form.isActive === 'true' : account.isActive}
-              class="h-4 w-4 rounded border-input"
+    <Card.Root>
+      <Card.Content>
+        <Field.FieldGroup>
+          <Field.Field>
+            <Field.FieldLabel for="code">Account Code *</Field.FieldLabel>
+            <Input
+              id="code"
+              name="code"
+              type="text"
+              required
+              value={form?.code ?? account.code}
             />
-            <span class="text-sm text-foreground">Active</span>
-          </div>
-        </div>
+          </Field.Field>
+
+          <Field.Field>
+            <Field.FieldLabel for="name">Account Name *</Field.FieldLabel>
+            <Input
+              id="name"
+              name="name"
+              type="text"
+              required
+              value={form?.name ?? account.name}
+            />
+          </Field.Field>
+
+          <Field.Field>
+            <Field.FieldLabel for="type">Account Type *</Field.FieldLabel>
+            <Select.Root value={form?.type ?? account.type}>
+              <Select.Trigger class="w-full">
+                <Select.Value placeholder="Select type" />
+              </Select.Trigger>
+              <Select.Content>
+                <Select.Item value="asset">Asset</Select.Item>
+                <Select.Item value="liability">Liability</Select.Item>
+                <Select.Item value="equity">Equity</Select.Item>
+                <Select.Item value="revenue">Revenue</Select.Item>
+                <Select.Item value="expense">Expense</Select.Item>
+              </Select.Content>
+            </Select.Root>
+          </Field.Field>
+
+          <Field.Field>
+            <Field.FieldLabel for="description">Description</Field.FieldLabel>
+            <Textarea
+              id="description"
+              name="description"
+              rows="3"
+              value={form?.description ?? account.description ?? ''}
+            ></Textarea>
+          </Field.Field>
+
+          <Field.Field class="flex flex-row items-center gap-2">
+            <input type="hidden" name="isActive" value={isActive ? 'true' : 'false'} />
+            <Checkbox id="isActive" bind:checked={isActive} />
+            <Field.FieldLabel for="isActive">Active</Field.FieldLabel>
+          </Field.Field>
+        </Field.FieldGroup>
 
         <div class="flex justify-end gap-3 pt-2">
           <Button href="/financial/accounts/{account.id}" variant="outline">Cancel</Button>
@@ -110,7 +107,7 @@ $effect(() => {
             {submitting ? 'Saving...' : 'Save Changes'}
           </Button>
         </div>
-      </CardContent>
-    </Card>
+      </Card.Content>
+    </Card.Root>
   </form>
 </div>

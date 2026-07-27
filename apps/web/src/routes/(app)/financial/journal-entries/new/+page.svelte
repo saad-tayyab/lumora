@@ -4,9 +4,10 @@ import { toast } from 'svelte-sonner';
 import { goto } from '$app/navigation';
 import { Button } from '$lib/components/ui/button';
 import { Input } from '$lib/components/ui/input';
+import * as Field from '$lib/components/ui/field';
+import * as Select from '$lib/components/ui/select';
 import DatePicker from '$lib/components/ui/date-picker.svelte';
-import { Label } from '$lib/components/ui/label';
-import { Card, CardContent } from '$lib/components/ui/card';
+import * as Card from '$lib/components/ui/card';
 
 let { data } = $props();
 const { form, errors, enhance, submitting, message } = superForm(data.form);
@@ -37,7 +38,7 @@ $effect(() => {
 });
 </script>
 
-<div class="mx-auto max-w-3xl space-y-6">
+<div class="flex flex-col mx-auto max-w-3xl gap-6">
 	<div>
 		<a href="/financial/journal-entries" class="text-sm text-muted-foreground hover:text-foreground">
 			← Back to Journal Entries
@@ -46,58 +47,61 @@ $effect(() => {
 		<p class="mt-1 text-muted-foreground">Record a double-entry accounting transaction</p>
 	</div>
 
-	<form method="POST" use:enhance class="space-y-6">
-		<Card>
-			<CardContent class="space-y-4">
+	<form method="POST" use:enhance>
+		<Card.Root>
+			<Card.Content>
 				<h2 class="text-lg font-semibold text-card-foreground">Entry Details</h2>
-				<div class="grid gap-4 sm:grid-cols-2">
-					<div class="space-y-2">
-						<Label for="date">Date *</Label>
-						<DatePicker bind:value={$form.date} />
-						{#if $errors.date}<p class="text-xs text-destructive">{$errors.date}</p>{/if}
+				<Field.FieldGroup>
+					<div class="grid gap-4 sm:grid-cols-2">
+						<Field.Field>
+							<Field.FieldLabel for="date">Date *</Field.FieldLabel>
+							<DatePicker bind:value={$form.date} />
+							{#if $errors.date}<Field.FieldError>{$errors.date}</Field.FieldError>{/if}
+						</Field.Field>
+						<Field.Field>
+							<Field.FieldLabel for="description">Description *</Field.FieldLabel>
+							<Input id="description" bind:value={$form.description} placeholder="e.g. Record sales revenue" />
+							{#if $errors.description}<Field.FieldError>{$errors.description}</Field.FieldError>{/if}
+						</Field.Field>
 					</div>
-					<div class="space-y-2">
-						<Label for="description">Description *</Label>
-						<Input id="description" bind:value={$form.description} placeholder="e.g. Record sales revenue" />
-						{#if $errors.description}<p class="text-xs text-destructive">{$errors.description}</p>{/if}
-					</div>
-				</div>
-			</CardContent>
-		</Card>
+				</Field.FieldGroup>
+			</Card.Content>
+		</Card.Root>
 
-		<Card>
-			<CardContent>
+		<Card.Root>
+			<Card.Content>
 				<div class="mb-4 flex items-center justify-between">
 					<h2 class="text-lg font-semibold text-card-foreground">Lines</h2>
 					<Button type="button" variant="outline" size="sm" onclick={addLine}>+ Add Line</Button>
 				</div>
 
-				<div class="space-y-3">
+				<div class="flex flex-col gap-3">
 					{#each $form.lines as line, i}
 						<div class="flex items-start gap-2 rounded-md border p-3">
 							<div class="grid flex-1 grid-cols-1 gap-2 sm:grid-cols-12">
 								<div class="sm:col-span-4">
-									{#if i === 0}<label class="mb-1 block text-xs font-medium text-muted-foreground">Account *</label>{/if}
-									<select
-										bind:value={line.accountId}
-										class="w-full rounded-md border bg-background px-2 py-1.5 text-sm text-foreground focus:outline-none focus:ring-2 focus:ring-ring"
-									>
-										<option value="">Select account...</option>
-										{#each data.accounts as account (account.id)}
-											<option value={account.id}>{account.code} - {account.name}</option>
-										{/each}
-									</select>
+									{#if i === 0}<Field.FieldLabel class="text-xs">Account *</Field.FieldLabel>{/if}
+									<Select.Root bind:value={line.accountId}>
+										<Select.Trigger class="w-full">
+											<Select.Value placeholder="Select account..." />
+										</Select.Trigger>
+										<Select.Content>
+											{#each data.accounts as account (account.id)}
+												<Select.Item value={account.id}>{account.code} - {account.name}</Select.Item>
+											{/each}
+										</Select.Content>
+									</Select.Root>
 								</div>
 								<div class="sm:col-span-3">
-									{#if i === 0}<label class="mb-1 block text-xs font-medium text-muted-foreground">Description</label>{/if}
+									{#if i === 0}<Field.FieldLabel class="text-xs">Description</Field.FieldLabel>{/if}
 									<Input type="text" bind:value={line.description} placeholder="Line description" />
 								</div>
 								<div class="sm:col-span-2">
-									{#if i === 0}<label class="mb-1 block text-xs font-medium text-muted-foreground">Debit</label>{/if}
+									{#if i === 0}<Field.FieldLabel class="text-xs">Debit</Field.FieldLabel>{/if}
 									<Input type="number" bind:value={line.debit} min="0" step="0.01" placeholder="0.00" />
 								</div>
 								<div class="sm:col-span-2">
-									{#if i === 0}<label class="mb-1 block text-xs font-medium text-muted-foreground">Credit</label>{/if}
+									{#if i === 0}<Field.FieldLabel class="text-xs">Credit</Field.FieldLabel>{/if}
 									<Input type="number" bind:value={line.credit} min="0" step="0.01" placeholder="0.00" />
 								</div>
 								<div class="flex items-end sm:col-span-1">
@@ -126,8 +130,8 @@ $effect(() => {
 						{/if}
 					</div>
 				</div>
-			</CardContent>
-		</Card>
+			</Card.Content>
+		</Card.Root>
 
 		<div class="flex justify-end gap-3">
 			<Button href="/financial/journal-entries" variant="outline">Cancel</Button>

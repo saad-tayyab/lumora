@@ -2,9 +2,10 @@
 import { toast } from 'svelte-sonner';
 import { enhance } from '$app/forms';
 import { goto } from '$app/navigation';
-import { formatCurrency, formatDate } from '$lib/utils/format';
 import { Button } from '$lib/components/ui/button';
-import { Card, CardContent } from '$lib/components/ui/card';
+import * as Card from '$lib/components/ui/card';
+import * as Dialog from '$lib/components/ui/dialog';
+import { formatCurrency, formatDate } from '$lib/utils/format';
 import type { PageData } from './$types';
 
 let { data }: { data: PageData } = $props();
@@ -12,7 +13,7 @@ let showDeleteConfirm = $state(false);
 let deleting = $state(false);
 </script>
 
-<div class="mx-auto max-w-4xl space-y-6">
+<div class="flex flex-col mx-auto max-w-4xl gap-6">
 	<div class="flex items-center justify-between">
 		<div>
 			<div class="flex items-center gap-2 text-sm text-muted-foreground">
@@ -28,10 +29,12 @@ let deleting = $state(false);
 	</div>
 
 	<div class="grid gap-6 lg:grid-cols-2">
-		<Card>
-			<CardContent>
-				<h2 class="mb-4 text-lg font-semibold text-card-foreground">Payment Info</h2>
-				<dl class="space-y-3">
+		<Card.Root>
+			<Card.Content>
+				<Card.Header>
+				<Card.Title>Payment Info</Card.Title>
+			</Card.Header>
+				<dl class="flex flex-col gap-3">
 					<div class="flex justify-between">
 						<dt class="text-sm text-muted-foreground">Vendor</dt>
 						<dd class="text-sm font-medium">{data.payment.vendorName || '-'}</dd>
@@ -55,13 +58,15 @@ let deleting = $state(false);
 						<dd class="text-sm font-medium capitalize">{data.payment.paymentMethod.replace('_', ' ')}</dd>
 					</div>
 				</dl>
-			</CardContent>
-		</Card>
+			</Card.Content>
+		</Card.Root>
 
-		<Card>
-			<CardContent>
-				<h2 class="mb-4 text-lg font-semibold text-card-foreground">Amount</h2>
-				<dl class="space-y-3">
+		<Card.Root>
+			<Card.Content>
+				<Card.Header>
+				<Card.Title>Amount</Card.Title>
+			</Card.Header>
+				<dl class="flex flex-col gap-3">
 					<div class="flex justify-between">
 						<dt class="text-sm text-muted-foreground">Amount</dt>
 						<dd class="text-lg font-bold">{formatCurrency(data.payment.amount)}</dd>
@@ -75,30 +80,36 @@ let deleting = $state(false);
 						<dd class="text-sm font-medium">{formatDate(data.payment.createdAt)}</dd>
 					</div>
 				</dl>
-			</CardContent>
-		</Card>
+			</Card.Content>
+		</Card.Root>
 	</div>
 
 	{#if data.payment.notes}
-		<Card>
-			<CardContent>
-				<h2 class="mb-4 text-lg font-semibold text-card-foreground">Notes</h2>
+		<Card.Root>
+			<Card.Content>
+				<Card.Header>
+				<Card.Title>Notes</Card.Title>
+			</Card.Header>
 				<p class="text-sm text-muted-foreground">{data.payment.notes}</p>
-			</CardContent>
-		</Card>
+			</Card.Content>
+		</Card.Root>
 	{/if}
 </div>
 
-{#if showDeleteConfirm}
-	<div class="fixed inset-0 z-50 flex items-center justify-center bg-black/50">
-		<div class="mx-4 w-full max-w-sm rounded-lg bg-card p-6 shadow-lg">
-			<h3 class="text-lg font-semibold text-card-foreground">Delete Payment</h3>
-			<p class="mt-2 text-sm text-muted-foreground">
+<Dialog.Root bind:open={showDeleteConfirm}>
+	<Dialog.Content>
+		<Dialog.Header>
+			<Dialog.Title>Delete Payment</Dialog.Title>
+			<Dialog.Description>
 				Are you sure you want to delete this payment? This action cannot be undone.
-			</p>
-			<div class="mt-4 flex justify-end gap-3">
-				<Button variant="outline" onclick={() => (showDeleteConfirm = false)}>Cancel</Button>
-				<form method="POST" action="?/delete" use:enhance={() => {
+			</Dialog.Description>
+		</Dialog.Header>
+		<div class="flex justify-end gap-3">
+			<Button variant="outline" onclick={() => (showDeleteConfirm = false)}>Cancel</Button>
+			<form
+				method="POST"
+				action="?/delete"
+				use:enhance={() => {
 					deleting = true;
 					return async ({ result }) => {
 						deleting = false;
@@ -110,12 +121,12 @@ let deleting = $state(false);
 						}
 						showDeleteConfirm = false;
 					};
-				}}>
-					<Button type="submit" disabled={deleting} variant="destructive">
-						{deleting ? 'Deleting...' : 'Delete'}
-					</Button>
-				</form>
-			</div>
+				}}
+			>
+				<Button type="submit" disabled={deleting} variant="destructive">
+					{deleting ? 'Deleting...' : 'Delete'}
+				</Button>
+			</form>
 		</div>
-	</div>
-{/if}
+	</Dialog.Content>
+</Dialog.Root>

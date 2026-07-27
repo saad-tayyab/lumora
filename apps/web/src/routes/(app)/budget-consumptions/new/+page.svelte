@@ -3,6 +3,7 @@ import { toast } from 'svelte-sonner';
 import { enhance } from '$app/forms';
 import type { ActionData, PageData } from './$types';
 import { Button } from '$lib/components/ui/button';
+import * as Select from '$lib/components/ui/select';
 import { Input } from '$lib/components/ui/input';
 import DatePicker from '$lib/components/ui/date-picker.svelte';
 
@@ -20,7 +21,7 @@ $effect(() => {
 });
 </script>
 
-<div class="mx-auto max-w-2xl space-y-6">
+<div class="flex flex-col mx-auto max-w-2xl gap-6">
 	<div>
 		<div class="flex items-center gap-2 text-sm text-muted-foreground">
 			<a href="/budgets/consumptions" class="hover:underline">Budget Consumptions</a>
@@ -39,39 +40,37 @@ $effect(() => {
 				await update();
 			};
 		}}
-		class="space-y-6 rounded-lg border bg-card p-6 shadow-sm"
+		class="flex flex-col gap-6 rounded-lg border bg-card p-6 shadow-sm"
 	>
-		<div class="space-y-2">
+		<div class="flex flex-col gap-2">
 			<label for="budgetLineId" class="text-sm font-medium text-card-foreground">Budget Line *</label>
-			<select
-				id="budgetLineId"
-				name="budgetLineId"
-				bind:value={budgetLineId}
-				required
-				class="w-full rounded-md border border-input bg-background px-3 py-2 text-sm text-foreground focus:border-ring focus:outline-none focus:ring-1 focus:ring-ring"
-			>
-				<option value="">Select a budget line</option>
-				{#each data.budgetLines as line}
-					<option value={line.id}>{line.budgetName} - {line.description || line.id.slice(0, 8)}</option>
-				{/each}
-			</select>
+			<Select.Root bind:value={budgetLineId}>
+				<Select.Trigger class="w-full">
+					<Select.Value placeholder="Select a budget line" />
+				</Select.Trigger>
+				<Select.Content>
+					{#each data.budgetLines as line}
+						<Select.Item value={line.id}>{line.budgetName} - {line.description || line.id.slice(0, 8)}</Select.Item>
+					{/each}
+				</Select.Content>
+			</Select.Root>
 		</div>
 
 		<div class="grid gap-4 md:grid-cols-2">
-			<div class="space-y-2">
+			<div class="flex flex-col gap-2">
 				<label for="amount" class="text-sm font-medium text-card-foreground">Amount *</label>
 				<Input id="amount" name="amount" type="number" bind:value={amount}
 					placeholder="0.00"
 				/>
 			</div>
-			<div class="space-y-2">
+			<div class="flex flex-col gap-2">
 				<label for="consumptionDate" class="text-sm font-medium text-card-foreground">Consumption Date *</label>
 				<DatePicker bind:value={consumptionDate} />
 				<input type="hidden" name="consumptionDate" value={consumptionDate} />
 			</div>
 		</div>
 
-		<div class="space-y-2">
+		<div class="flex flex-col gap-2">
 			<label for="description" class="text-sm font-medium text-card-foreground">Description</label>
 			<textarea
 				id="description"

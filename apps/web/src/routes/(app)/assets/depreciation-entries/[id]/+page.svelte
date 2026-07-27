@@ -9,24 +9,24 @@ let { data }: { data: PageData } = $props();
 let posting = $state(false);
 let voiding = $state(false);
 
-function statusColor(status: string): string {
-  const colors: Record<string, string> = {
-    posted: 'bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-300',
-    draft: 'bg-yellow-100 text-yellow-800 dark:bg-yellow-900 dark:text-yellow-300',
-    voided: 'bg-gray-100 text-gray-800 dark:bg-gray-800 dark:text-gray-300',
-  };
-  return colors[status] || 'bg-gray-100 text-gray-800';
+function statusVariant(status: string): 'secondary' | 'destructive' | 'default' | 'outline' {
+  switch (status) {
+    case 'draft': return 'outline';
+    case 'posted': return 'secondary';
+    case 'voided': return 'destructive';
+    default: return 'outline';
+  }
 }
 </script>
 
 {#if data.entry}
   {@const entry = data.entry}
-  <div class="space-y-6">
+  <div class="flex flex-col gap-6">
     <div class="flex items-center justify-between">
       <div>
         <div class="flex items-center gap-3">
           <h1 class="text-3xl font-bold text-foreground">Depreciation Entry</h1>
-          <span class="inline-flex items-center rounded-full px-2 py-0.5 text-xs font-medium {statusColor(entry.status)}">
+          <span class="inline-flex items-center rounded-full px-2 py-0.5 text-xs font-medium {statusVariant(entry.status)}">
             {entry.status}
           </span>
         </div>
@@ -43,7 +43,7 @@ function statusColor(status: string): string {
     <div class="grid gap-6 md:grid-cols-2">
       <Card.Root class="shadow-sm"><Card.Content>
         <h2 class="text-lg font-semibold text-card-foreground">Entry Details</h2>
-        <dl class="space-y-2 text-sm">
+        <dl class="flex flex-col gap-2 text-sm">
           <div class="flex justify-between">
             <dt class="text-muted-foreground">Asset</dt>
             <dd class="font-medium">{entry.assetId}</dd>
@@ -65,7 +65,7 @@ function statusColor(status: string): string {
 
       <Card.Root class="shadow-sm"><Card.Content>
         <h2 class="text-lg font-semibold text-card-foreground">Financials</h2>
-        <dl class="space-y-2 text-sm">
+        <dl class="flex flex-col gap-2 text-sm">
           <div class="flex justify-between">
             <dt class="text-muted-foreground">Depreciation Amount</dt>
             <dd class="text-lg font-bold">{formatCurrency(entry.depreciationAmount)}</dd>

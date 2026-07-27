@@ -2,7 +2,9 @@
 import { toast } from 'svelte-sonner';
 import { enhance } from '$app/forms';
 import { Button } from '$lib/components/ui/button';
-import { Card, CardContent } from '$lib/components/ui/card';
+import { Input } from '$lib/components/ui/input';
+import * as Field from '$lib/components/ui/field';
+import * as Card from '$lib/components/ui/card';
 import DatePicker from '$lib/components/ui/date-picker.svelte';
 import type { PageData, ActionData } from './$types';
 
@@ -20,7 +22,7 @@ $effect(() => {
 });
 </script>
 
-<div class="mx-auto max-w-2xl space-y-6">
+<div class="flex flex-col mx-auto max-w-2xl gap-6">
 	<div>
 		<div class="flex items-center gap-2 text-sm text-muted-foreground">
 			<a href="/financial/fiscal-years" class="hover:underline">Fiscal Years</a>
@@ -41,24 +43,26 @@ $effect(() => {
 				};
 			}}
 		>
-			<Card>
-				<CardContent class="space-y-4">
-					<div class="space-y-1.5">
-						<label for="name" class="text-sm font-medium text-foreground">Name *</label>
-						<input id="name" name="name" bind:value={name} required class="w-full rounded-md border bg-background px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-ring" />
-					</div>
-					<div class="grid gap-4 md:grid-cols-2">
-						<div class="space-y-1.5">
-							<label for="startDate" class="text-sm font-medium text-foreground">Start Date *</label>
-							<DatePicker bind:value={startDate} />
-							<input type="hidden" name="startDate" value={startDate} />
+			<Card.Root>
+				<Card.Content>
+					<Field.FieldGroup>
+						<Field.Field>
+							<Field.FieldLabel for="name">Name *</Field.FieldLabel>
+							<Input id="name" name="name" bind:value={name} required />
+						</Field.Field>
+						<div class="grid gap-4 md:grid-cols-2">
+							<Field.Field>
+								<Field.FieldLabel for="startDate">Start Date *</Field.FieldLabel>
+								<DatePicker bind:value={startDate} />
+								<input type="hidden" name="startDate" value={startDate} />
+							</Field.Field>
+							<Field.Field>
+								<Field.FieldLabel for="endDate">End Date *</Field.FieldLabel>
+								<DatePicker bind:value={endDate} />
+								<input type="hidden" name="endDate" value={endDate} />
+							</Field.Field>
 						</div>
-						<div class="space-y-1.5">
-							<label for="endDate" class="text-sm font-medium text-foreground">End Date *</label>
-							<DatePicker bind:value={endDate} />
-							<input type="hidden" name="endDate" value={endDate} />
-						</div>
-					</div>
+					</Field.FieldGroup>
 
 					<div class="flex justify-end gap-3 pt-4">
 						<Button href="/financial/fiscal-years/{data.fiscalYear.id}" variant="outline">Cancel</Button>
@@ -66,8 +70,8 @@ $effect(() => {
 							{submitting ? 'Saving...' : 'Save Changes'}
 						</Button>
 					</div>
-				</CardContent>
-			</Card>
+				</Card.Content>
+			</Card.Root>
 		</form>
 	{:else}
 		<div class="py-12 text-center text-muted-foreground">Fiscal year not found</div>
