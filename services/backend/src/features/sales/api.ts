@@ -12,6 +12,7 @@
 
 import { APIError, api } from 'encore.dev/api';
 import { getAuthData } from 'encore.dev/internal/codegen/auth';
+import { ValidationError } from '../../lib/errors';
 import * as service from './service';
 import type {
   CreateDiscountPolicyRequest,
@@ -44,7 +45,14 @@ import {
 // ─── Validation Helper ─────────────────────────────────────────────────────────
 
 function validate<T>(schema: { parse: (data: unknown) => T }, data: unknown): T {
-  return schema.parse(data);
+  try {
+    return schema.parse(data);
+  } catch (error) {
+    if (error instanceof Error) {
+      throw new ValidationError(error.message);
+    }
+    throw new ValidationError('Validation failed');
+  }
 }
 
 // ═══════════════════════════════════════════════════════════════════════════════

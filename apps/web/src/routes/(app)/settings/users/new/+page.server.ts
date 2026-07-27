@@ -22,8 +22,9 @@ export const actions: Actions = {
 				username: form.data.username || form.data.name.toLowerCase().replace(/\s+/g, '.'),
 			});
 			return message(form, 'User created!');
-		} catch {
-			return fail(500, { form });
+		} catch (e) {
+			const msg = e instanceof Error ? e.message : 'Failed to create user';
+			return message(form, msg, { status: 400 });
 		}
 	},
 };

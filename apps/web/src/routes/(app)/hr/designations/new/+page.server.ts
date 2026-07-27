@@ -22,8 +22,9 @@ export const actions: Actions = {
 				level: form.data.level ? Number(form.data.level) : 0,
 			});
 			return message(form, 'Designation created!');
-		} catch {
-			return fail(500, { form });
+		} catch (e) {
+			const msg = e instanceof Error ? e.message : 'Failed to create designation';
+			return message(form, msg, { status: 400 });
 		}
 	},
 };

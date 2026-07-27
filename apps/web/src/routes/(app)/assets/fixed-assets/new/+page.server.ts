@@ -33,8 +33,9 @@ export const actions: Actions = {
 				depreciationMethod: form.data.depreciationMethod,
 			});
 			return message(form, 'Fixed asset created!');
-		} catch {
-			return fail(500, { form });
+		} catch (e) {
+			const msg = e instanceof Error ? e.message : 'Failed to create fixed asset';
+			return message(form, msg, { status: 400 });
 		}
 	},
 };

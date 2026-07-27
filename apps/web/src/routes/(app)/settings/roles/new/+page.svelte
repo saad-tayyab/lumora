@@ -13,8 +13,13 @@ const inputClass = "w-full rounded-lg border border-input bg-transparent px-2.5 
 
 $effect(() => {
 	if ($message) {
-		toast.success($message);
-		goto('/settings/roles');
+		const text = typeof $message === 'string' ? $message : $message.text;
+		if (typeof $message === 'object' && $message.type === 'error') {
+			toast.error(text);
+		} else {
+			toast.success(text);
+			goto('/settings/roles');
+		}
 	}
 });
 </script>

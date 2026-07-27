@@ -53,7 +53,7 @@
 		return sortedData;
 	});
 
-	const paged = $derived(() => {
+	const paged = $derived.by(() => {
 		const start = pageIndex * pageSize;
 		return sorted.slice(start, start + pageSize);
 	});
@@ -136,7 +136,7 @@
 						</td>
 					</tr>
 				{:else}
-					{#each paged() as row}
+					{#each paged as row}
 						<tr
 							class={cn(
 								'border-b transition-colors hover:bg-muted/50',

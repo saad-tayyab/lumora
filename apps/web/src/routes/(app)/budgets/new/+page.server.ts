@@ -34,7 +34,7 @@ export const actions: Actions = {
 			return message(form, 'Budget created successfully');
 		} catch (e) {
 			const msg = e instanceof Error ? e.message : 'Failed to create budget';
-			return fail(400, { form, error: msg });
+			return message(form, msg, { status: 400 });
 		}
 	},
 };

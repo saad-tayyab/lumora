@@ -27,8 +27,9 @@ export const actions: Actions = {
 				description: form.data.description || undefined,
 			});
 			return message(form, 'Tax code created!');
-		} catch {
-			return fail(500, { form });
+		} catch (e) {
+			const msg = e instanceof Error ? e.message : 'Failed to create tax code';
+			return message(form, msg, { status: 400 });
 		}
 	},
 };

@@ -22,8 +22,9 @@ export const actions: Actions = {
 				managerId: form.data.managerId || null,
 			});
 			return message(form, 'Department created!');
-		} catch {
-			return fail(500, { form });
+		} catch (e) {
+			const msg = e instanceof Error ? e.message : 'Failed to create department';
+			return message(form, msg, { status: 400 });
 		}
 	},
 };
