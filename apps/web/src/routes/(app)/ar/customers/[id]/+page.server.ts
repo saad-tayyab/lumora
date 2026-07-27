@@ -1,27 +1,22 @@
 import { error } from '@sveltejs/kit';
 import type { PageServerLoad } from './$types';
-import { BACKEND_URL } from '$lib/api';
-
+import { api } from '$lib/api';
 
 export const load: PageServerLoad = async ({ params }) => {
   try {
-    const res = await fetch(`${BACKEND_URL}/ar/customers/${params.id}`, {
-      credentials: 'include',
-    });
-    if (res.status === 404) throw error(404, { code: 'NOT_FOUND', message: 'Customer not found' });
-    if (!res.ok) throw new Error('Failed to fetch customer');
-    const customer = await res.json();
+    const customer = await api.get<Record<string, unknown>>(`/ar/customers/${params.id}`);
 
-    const invRes = await fetch(`${BACKEND_URL}/ar/invoices?customerId=${params.id}&limit=50`, {
-      credentials: 'include',
-    });
-    const invoices = invRes.ok ? await invRes.json() : { data: [], total: 0 };
+    const invoices = await api
+      .get<{ data: unknown[]; total: number }>(
+        `/ar/invoices?customerId=${params.id}&limit=50`,
+      )
+      .catch(() => ({ data: [], total: 0 }));
 
-    const payRes = await fetch(`${BACKEND_URL}/ar/payments?limit=50`, { credentials: 'include' });
-    const allPayments = payRes.ok ? await payRes.json() : { data: [] };
-    const customerPayments = allPayments.data.filter(
-      (p: { customerId: string }) => p.customerId === params.id,
-    );
+    const allPayments = await api
+      .get<{ data: { customerId: string }[] }>(`/ar/payments?limit=50`)
+      .catch(() => ({ data: [] }));
+
+    const customerPayments = allPayments.data.filter((p) => p.customerId === params.id);
 
     return {
       customer,
